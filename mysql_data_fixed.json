@@ -1,0 +1,1776 @@
+[
+{
+    "model": "sessions.session",
+    "pk": "4291shl08er1c97bcpltu48xcgs2ehrr",
+    "fields": {
+        "session_data": ".eJxVjM0OgjAQhN-lZ0MUSvk5evcZml12K9WmGFrUSHh3i3LQZJPd2W9mZqFhir2eAo_akmjFQex-fwjdlf0K6AL-PGTd4ONoMVst2UZDdhqI3XHz_hX0EPqUVrVCMIWSKDGvsMJCkiI0VVFXaBD3uVQ5pV0Sdo2UDZUNG5mmw9ocylT6sC8YSbvhbL2-W36IdhYh8k20fnJu97k1QYQElk0a6zh8NT_jCD_8Ds4mxaT_gsvyBojyX9A:1xByGT:HTVfbU9Cr0wrQK-W2dT-cJ3gcTL-Spwtg6NnrQYbG2k",
+        "expire_date": "2026-10-14T17:38:45.667Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "en8e2d8ruk9lvjwdl5s47gyvvri1lbyb",
+    "fields": {
+        "session_data": ".eJxVjEEOgjAQRe_StSGFtqAs3XuGZsoMUG2KoQWMhLsLykJ28_77f2Y22Tf0qF3XWK9HSxMrZxYiPVnpB-dO31sjRFjFsmNtHYUf0yv28OdHcHYlQn0YrkbDEFs9BOq1RVayjB0yA9WD_CbwDr7pkqrzsbcm2SrJbkNy65Dcde8eHrQQ2nUtuBIKQfK6SEHxQipKC2GUEogS1LkwKI0EQJFLvKQmIylEahTPATlwyZYPDWBeSw:1xByWD:frgDdctW2FkqIwvRCvoB-nnxmKFLWLRWE1T28uJWkMQ",
+        "expire_date": "2026-10-14T17:55:01.755Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "qsnpq9ef1ukgrosd0yr92fp3w05rl3qo",
+    "fields": {
+        "session_data": ".eJy1kE1uwyAQRu_CuqKNjfHPMvueATHMENMiiAx2okS5e3HtRX2ASmjg8WZm8T3ZzT30hMrHiwtqcXRjw5OlTFc2hNn7t9-3Qp11Ea8drfOUNqZ7nvQfv2jvChGqw2AxSs95VHOiSTlkAzuxwx9o801hFfilwyVyE0OeHPC1he828c-I5M9772HBqNNYpmUnQdtaChBQtdBCLVAi2LbuWrAAH5WQFZa7QTC9ED02PVlRjoHOnpqydM8kUZ6v_5tJzAVpcYa2TFbOpfC1bOK9Zq8fPOaVaA:1xCZ1l:mOzX5UmvmCuHwBXkHGVYRpfFtp5yAsjF387vwley3AI",
+        "expire_date": "2026-10-16T08:54:01.793Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "r9q4gfx3vxkpzfkve21qg37ugdhfeaj7",
+    "fields": {
+        "session_data": ".eJxVjk1uxCAMhe_CuqKdhJCfZfc9A7KxmdCiMAokU3U0dy9psmgky_bz92z5Ie7-B2YyIV79ZFbPdzE8RMp8E8O0hPDy1xuCDAU8D-l84LRr_s4z_OMrBF8UkzktFmJgyaNZEs_GkxjERZxmCPaLpw3QJ0zXKG2c8uxRbhZ50CQ_InF4P7ynAyOksWzrTiO4WitUWLXYYq1IE7q27lp0iG-V0hWV2hDaXqmemp6dKmGxc5emHI25PM6rt7x_uulcktzSDl5r8fwFYPpuTA:1xCwfZ:Is7ODIKZ7mszNz-0TAGR2uG8GK-2lCgj5txNRSO5pHI",
+        "expire_date": "2026-10-17T10:08:41.608Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "wso2ymlxw0qoapiu6zminlt0v6nhc17l",
+    "fields": {
+        "session_data": ".eJyrVirPrEosSonPyU_PzIsvy0wtV7KqViouSS1QslJKLC3JUNIB8-JTEksSgVK1UG5aZk5qMYSfWlFSlIgkX5aYkwnkpabEo2isrQUAhp8oDA:1xEr9u:1lmm9aHCfUAdjv69ril-jkxDiPIM6CaGdnAJrIJLYTI",
+        "expire_date": "2026-10-22T16:39:54.930Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "z9lljtlgkonxsn3dvla7m3bytuh6lu7z",
+    "fields": {
+        "session_data": ".eJxVjsFuhDAMRP8l5yqFJKULx977DZGJhyVtRCoS2Kqr_feGwqFcRh6_sTV3cfM_NLMN8eonu3rcRHcXKeNLdNMSwtPfbJkyFfA47OAD0u7xnWf6x1cKvjiwPR0WYmnJo10SZutZdMKI064n94lpA_xB0zVKF6c8-15uEXnQJN8jI7wd2dODkdJYrht3GTSqlxoaTIAh7VApNqrVbGp2pqna1tAFFelGKaaejR5qA671q1LlacylOFbvsDfdfC4iN9nBsxKPX0WcbZk:1xChZN:FMD-rKO_cLFHhCZz6YmPDUvDOoBOmpkb_mWpR8OoZHc",
+        "expire_date": "2026-10-16T18:01:17.718Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "zegic6mkxjhqx6quui4xakmuvpg0q6e8",
+    "fields": {
+        "session_data": ".eJxVjk1uxCAMhe_CuqKdhJCfZfc9A7KxmdCiMAokU3U0dy9psmgky_bz92z5Ie7-B2YyIV79ZFbPdzE8RMp8E8O0hPDy1xuCDAU8D-l84LRr_s4z_OMrBF8UkzktFmJgyaNZEs_GkxjERZxmCPaLpw3QJ0zXKG2c8uxRbhZ50CQ_InF4P7ynAyOksWzrTiO4WitUWLXYYq1IE7q27lp0iG-V0hWV2hDaXqmemp6dKmGxc5emHI25PM6rt7x_uulcktzSDl5r8fwFYPpuTA:1xD5fT:DKXfq44WKClelnhdwwncnvvwmhOnxIAyMIQc0NFYUv0",
+        "expire_date": "2026-10-17T19:45:11.163Z"
+    }
+},
+{
+    "model": "core.info",
+    "pk": 1,
+    "fields": {
+        "infos": "thi is academic notice section for naw testing .",
+        "infos_2": "my second and updated notices sections this is real and its fully workeed rght now on limit is 100 w",
+        "date": "2026-10-07",
+        "page": "campus"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 1,
+    "fields": {
+        "Department_name": "Computer Science & Engg.",
+        "Department_hod": "Mr. vinod sir",
+        "hod_photo": "hod_photos/logo1.jpg",
+        "hod_qualification": "cse",
+        "hod_experience": 5,
+        "Department_description": "thi si commputer science departmetn .",
+        "Department_crausal_image_1": "department_crausal/bg.png",
+        "Department_crausal_image_2": "department_crausal/1.jpg",
+        "Department_crausal_image_3": "department_crausal/clg1.jpeg",
+        "Course_name": "Computer_Science",
+        "Course_image": "course_images/Computer-Science.jpg",
+        "Course_code": "C04",
+        "Course_duration": "3",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 2,
+    "fields": {
+        "Department_name": "civil Engg.",
+        "Department_hod": "Mr. Shubham malviya",
+        "hod_photo": "hod_photos/civil.png",
+        "hod_qualification": "m tech",
+        "hod_experience": 10,
+        "Department_description": "my department is civil engg im working on buildings .",
+        "Department_crausal_image_1": "department_crausal/images_1.jpg",
+        "Department_crausal_image_2": "department_crausal/images.jpg",
+        "Department_crausal_image_3": "department_crausal/civilenggcrausal.jpg",
+        "Course_name": "Civil_Engineering",
+        "Course_image": "course_images/civil-engineering.png",
+        "Course_code": "C03",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 3,
+    "fields": {
+        "Department_name": "Mechanical Engineering",
+        "Department_hod": "Mr.",
+        "hod_photo": "",
+        "hod_qualification": "m tech",
+        "hod_experience": 1,
+        "Department_description": "this is mechanicals Department description .",
+        "Department_crausal_image_1": "department_crausal/images_3.jpg",
+        "Department_crausal_image_2": "department_crausal/machinery-photo.jpeg",
+        "Department_crausal_image_3": "department_crausal/premium_photo-1664910842853-0d643f6db30c.jpeg",
+        "Course_name": "Mechanical_Engineering",
+        "Course_image": "course_images/mechanical.png",
+        "Course_code": "M02",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 4,
+    "fields": {
+        "Department_name": "ET & TELECOMMUNICATION",
+        "Department_hod": "Mr.",
+        "hod_photo": "hod_photos/images_7.jpg",
+        "hod_qualification": "m tech",
+        "hod_experience": 0,
+        "Department_description": "• Laboratory & Hands-On Work: Instructors guiding students through soldering, circuit building, and hardware testing.\r\n• Robotics & STEM Education: Teachers explaining microcontrollers, robotics mechanics, or computer parts.\r\n• Modern Classrooms: Students collaborating with laptops and electronic components.",
+        "Department_crausal_image_1": "department_crausal/images_6.jpg",
+        "Department_crausal_image_2": "department_crausal/images_5.jpg",
+        "Department_crausal_image_3": "department_crausal/images_4.jpg",
+        "Course_name": "ET_&_TELECOMMUNICATION",
+        "Course_image": "course_images/EEE.jpg",
+        "Course_code": "E01",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Y06p3e7isN5m00vdDYDKxi$ul8+9Mj/qXIiSd2V28B0wvz6o1FeaachS0Ptmf8ohys=",
+        "last_login": "2026-10-03T19:45:11.157Z",
+        "is_superuser": true,
+        "username": "rajend_x7",
+        "first_name": "Rajendra",
+        "last_name": "sarathe",
+        "email": "rajend@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-30T12:34:37Z",
+        "slug": null,
+        "photo": "staticfiles/profile_pics/WhatsApp_Image_2026-05-20_at_2.19.24_AM.jpeg",
+        "phone": "9302707097",
+        "study": "diploma in cse",
+        "experience": 1,
+        "joining_date": "2024-01-01",
+        "deprtment": 1,
+        "category": "HOD",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$8QZ3Jq1l0j3P7hlY0Eok4N$LheEOWgF0AKS/CgPIcW3keOcQJvn54enc0LWz+Hb+rw=",
+        "last_login": "2026-10-02T08:46:54Z",
+        "is_superuser": true,
+        "username": "rajend",
+        "first_name": "",
+        "last_name": "",
+        "email": "rajendrasarathe7070@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-30T17:07:15Z",
+        "slug": null,
+        "photo": "",
+        "phone": "9302707097",
+        "study": "diploma in cse",
+        "experience": 1,
+        "joining_date": "2026-10-03",
+        "deprtment": 1,
+        "category": "HOD",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$L0NNmMlGPoF9MqZlVPEKz1$4NM5CfakL1Ns+RRheWO5sH97lubMZfKkEJHUW96suRo=",
+        "last_login": "2026-10-02T02:49:17.580Z",
+        "is_superuser": false,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-10-01T19:57:08Z",
+        "slug": null,
+        "photo": "",
+        "phone": "+9302707097",
+        "study": "be",
+        "experience": 1,
+        "joining_date": "2026-10-01",
+        "deprtment": 1,
+        "category": "TEACHING",
+        "groups": [],
+        "user_permissions": [
+            [
+                "view_course_department",
+                "core",
+                "course_department"
+            ]
+        ]
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$y6YAvVdBgNWdqg12wBmEI4$sjhNtz5UhiPQ7ovJmiKw3OmU3ymZB6YDFZ6byzYlsEM=",
+        "last_login": "2026-10-02T18:01:17.714Z",
+        "is_superuser": true,
+        "username": "admin144",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin144@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-10-02T02:34:17.390Z",
+        "slug": null,
+        "photo": "",
+        "phone": null,
+        "study": null,
+        "experience": 0,
+        "joining_date": null,
+        "deprtment": null,
+        "category": "TEACHING",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.responsibility",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "work_name": "ADMISSION",
+        "work_position": null,
+        "assigned_date": "2026-10-05"
+    }
+},
+{
+    "model": "core.responsibility",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "work_name": "ADMISSION",
+        "work_position": "sub incharge",
+        "assigned_date": "2026-10-05"
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 1,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 3,
+        "timetable_image_1": "timetables/images_6.jpg",
+        "timetable_image_2": "timetables/images_6_hOBZnfw.jpg",
+        "uploaded_at": "2026-10-02T18:21:33.991Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 2,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 1,
+        "timetable_image_1": "timetables/images_5.jpg",
+        "timetable_image_2": "timetables/images_5_nZU6TZK.jpg",
+        "uploaded_at": "2026-10-03T19:53:39.768Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 3,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 2,
+        "timetable_image_1": "timetables/images_4.jpg",
+        "timetable_image_2": "timetables/images_4_HUCyyVy.jpg",
+        "uploaded_at": "2026-10-03T19:53:56.020Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 4,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CE",
+        "year": 1,
+        "timetable_image_1": "timetables/images_1.jpg",
+        "timetable_image_2": "timetables/images.jpg",
+        "uploaded_at": "2026-10-04T08:52:28.638Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.academic_calendar",
+    "pk": 1,
+    "fields": {
+        "title": "Academic Calendar Year 2026 for Diploma First, third and Fifth Semesters.",
+        "calendar_pdf": "academic_calendars/academic20262027.pdf",
+        "created_at": "2026-10-03T18:24:10.112Z"
+    }
+},
+{
+    "model": "core.academic_calendar",
+    "pk": 2,
+    "fields": {
+        "title": "Academic Calendar for Even Semesters 2026.",
+        "calendar_pdf": "academic_calendars/Academic_Calander042026.pdf",
+        "created_at": "2026-10-03T18:27:44.039Z"
+    }
+},
+{
+    "model": "core.feecategory",
+    "pk": 1,
+    "fields": {
+        "name": "ACADEMIC / ANNUAL FEES (वार्षिक शिक्षण शुल्क)",
+        "order": 1
+    }
+},
+{
+    "model": "core.feecategory",
+    "pk": 2,
+    "fields": {
+        "name": "ONE-TIME FEES (केवल प्रथम वर्ष/एडमिशन के समय)",
+        "order": 2
+    }
+},
+{
+    "model": "core.feecategory",
+    "pk": 3,
+    "fields": {
+        "name": "EXAMINATION FEES (परीक्षा शुल्क)",
+        "order": 3
+    }
+},
+{
+    "model": "core.feecategory",
+    "pk": 4,
+    "fields": {
+        "name": "OTHER / MISCELLANEOUS FEES (अन्य शुल्क)",
+        "order": 4
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 1,
+    "fields": {
+        "category": 1,
+        "sub_no": "A",
+        "particular": "Tuition Fee (ट्यूशन फीस)",
+        "frequency": "annual",
+        "regular_amount": "₹ 10000",
+        "tfw_amount": "₹ 00",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "sub_no": "B",
+        "particular": "Laboratory / Computer Fee (प्रयोगशाला शुल्क)",
+        "frequency": "annual",
+        "regular_amount": "₹ 0.00",
+        "tfw_amount": "₹ 0.00",
+        "eklavya_amount": "₹ 0.00"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 3,
+    "fields": {
+        "category": 1,
+        "sub_no": "C",
+        "particular": "Library Fee (पुस्तकालय शुल्क)",
+        "frequency": "annual",
+        "regular_amount": "₹ 0.00",
+        "tfw_amount": "₹ 0.00",
+        "eklavya_amount": "₹ 0.00"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 4,
+    "fields": {
+        "category": 1,
+        "sub_no": "D",
+        "particular": "Eklavya Hostel / Room Rent Charges",
+        "frequency": "annual_semester",
+        "regular_amount": "₹ / As per Institute Norms *",
+        "tfw_amount": "₹ / As per Institute Norms *",
+        "eklavya_amount": "₹ 0 / Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 5,
+    "fields": {
+        "category": 2,
+        "sub_no": "A",
+        "particular": "Admission Fee (प्रवेश शुल्क)",
+        "frequency": "one_time",
+        "regular_amount": "₹ 370",
+        "tfw_amount": "₹ 370",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 6,
+    "fields": {
+        "category": 2,
+        "sub_no": "B",
+        "particular": "Enrollment/Registration Fee (नामांकन शुल्क)",
+        "frequency": "one_time",
+        "regular_amount": "₹ -/ As Per Institute / Portal",
+        "tfw_amount": "₹ -/ As Per Institute / Portal",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 7,
+    "fields": {
+        "category": 2,
+        "sub_no": "C",
+        "particular": "College Caution Money (रिफंडेबल)",
+        "frequency": "one_time",
+        "regular_amount": "₹ 0.00",
+        "tfw_amount": "₹ 0.00",
+        "eklavya_amount": "₹ 0.00"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 8,
+    "fields": {
+        "category": 2,
+        "sub_no": "D",
+        "particular": "Hostel Caution Money (केवल हॉस्टलर्स के लिए)",
+        "frequency": "one_time",
+        "regular_amount": "₹ -/ As Govt Norms",
+        "tfw_amount": "₹ -/ As Govt Norms",
+        "eklavya_amount": "₹ 0.00"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 9,
+    "fields": {
+        "category": 3,
+        "sub_no": "A",
+        "particular": "Semester Exam Fee (मुख्य परीक्षा शुल्क)",
+        "frequency": "semester",
+        "regular_amount": "₹ -/As Par Subjects (T&P",
+        "tfw_amount": "₹ -/As Par Subjects (T&P",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 10,
+    "fields": {
+        "category": 3,
+        "sub_no": "B",
+        "particular": "Practical Exam Fee (प्रायोगिक परीक्षा शुल्क)",
+        "frequency": "semester",
+        "regular_amount": "₹ -/As Par Institute Portal",
+        "tfw_amount": "₹ -/As Par Institute Portal",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 11,
+    "fields": {
+        "category": 4,
+        "sub_no": "A",
+        "particular": "Student Welfare & Development Fund",
+        "frequency": "annual",
+        "regular_amount": "₹ 00",
+        "tfw_amount": "₹ 00",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 12,
+    "fields": {
+        "category": 4,
+        "sub_no": "B",
+        "particular": "Sports, Cultural & Gymkhana Fee",
+        "frequency": "annual",
+        "regular_amount": "₹ 00",
+        "tfw_amount": "₹ 00",
+        "eklavya_amount": "₹ 00 /Govt Pay *"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 13,
+    "fields": {
+        "category": 4,
+        "sub_no": "C",
+        "particular": "Identity Card & Magazine Fee",
+        "frequency": "one_time",
+        "regular_amount": "₹ 0/As Govt Refund*",
+        "tfw_amount": "₹ 0/As Govt Refund*",
+        "eklavya_amount": "₹ 0 / Govt Pay*"
+    }
+},
+{
+    "model": "core.feestructure",
+    "pk": 14,
+    "fields": {
+        "category": 4,
+        "sub_no": "D",
+        "particular": "Hostel Mess Charges (भोजन शुल्क)",
+        "frequency": "monthly_semester",
+        "regular_amount": "₹ / As per Institute Norms *",
+        "tfw_amount": "₹ 0/As per Institute Norms *",
+        "eklavya_amount": "₹ 0 / Govt Pay *"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 1,
+    "fields": {
+        "text": "Online Registration Start Date",
+        "types": "IMPDATES",
+        "date": "2026-05-15"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 2,
+    "fields": {
+        "text": "Last Date for Online Application",
+        "types": "IMPDATES",
+        "date": "2026-06-15"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 3,
+    "fields": {
+        "text": "Document Verification Deadline",
+        "types": "IMPDATES",
+        "date": "2026-06-18"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 4,
+    "fields": {
+        "text": "First Round Merit List Display",
+        "types": "IMPDATES",
+        "date": "2026-06-22"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 5,
+    "fields": {
+        "text": "Reporting at Allotted College",
+        "types": "IMPDATES",
+        "date": "2026-06-26"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 6,
+    "fields": {
+        "text": "Second Round Choice Filling",
+        "types": "IMPDATES",
+        "date": "2026-07-02"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 7,
+    "fields": {
+        "text": "CLC Round (College Level Counseling)",
+        "types": "IMPDATES",
+        "date": "2026-07-10"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 8,
+    "fields": {
+        "text": "Commencement of New Classes",
+        "types": "IMPDATES",
+        "date": "2026-08-01"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 9,
+    "fields": {
+        "text": "10th Class Marksheet & Passing Certificate (Original + 3 Copies)",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 10,
+    "fields": {
+        "text": "12th Class Marksheet / ITI Certificate (If Applicable)",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 11,
+    "fields": {
+        "text": "PPT Score Card & Seat Allotment Letter (For PPT Students)",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 12,
+    "fields": {
+        "text": "Transfer Certificate (TC) & Migration Certificate",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 13,
+    "fields": {
+        "text": "Character Certificate from last attended School/College",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 14,
+    "fields": {
+        "text": "MP Domicile Certificate (निवास प्रमाण पत्र)",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 15,
+    "fields": {
+        "text": "Caste Certificate (SC/ST/OBC) issued by competent authority",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 16,
+    "fields": {
+        "text": "Income Certificate (आय प्रमाण पत्र) for Scholarship/TFW benefit",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.imp_date_and_document",
+    "pk": 17,
+    "fields": {
+        "text": "Aadhar Card & 4 Recent Passport Size Photographs",
+        "types": "DOCUMENTS",
+        "date": "2026-10-05"
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 1,
+    "fields": {
+        "catogry": "DTE",
+        "title": "Online Registration",
+        "dis": "Visit the DTE MP Online portal during the registration window. Register using your 10th standard scorecard details, identity proofs, and personal mobile number.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 2,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Check Vacant Seats",
+        "dis": "1. Visit the counselling portal (e.g., DTE) to see the list of remaining/vacant seats in your preferred colleges.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 3,
+    "fields": {
+        "catogry": "DTE",
+        "title": "Document Upload & Verification",
+        "dis": "Upload scanned copies of required certificates (Category, Income, Domicile). The online DTE system automatically verifies most certificates via government servers; manual confirmation is rarely needed.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 4,
+    "fields": {
+        "catogry": "DTE",
+        "title": "Choice Filling & Locking (Crucial Step)",
+        "dis": "Log in and select your preferred branch combinations. To secure a seat at our campus, prioritize our code in your allocation grid:",
+        "sub_dis": "College Choice Priority Code: Govt. Polytechnic College, Harsud"
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 5,
+    "fields": {
+        "catogry": "DTE",
+        "title": "Seat Allotment & Merit List",
+        "dis": "DTE releases round-wise allotment results based on your 10th Merit score/PPT ranking and your choice selections. Download your allotment letter immediately upon release.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 6,
+    "fields": {
+        "catogry": "DTE",
+        "title": "Reporting & Fee Submission",
+        "dis": "Physically report to the college campus with your original documents, allotment letter, and the prescribed admission fees to lock and confirm your seat status.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 7,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Online Registration",
+        "dis": "Register online for the CLC round on the official portal and pay the required registration fee.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 8,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Physical Reporting:",
+        "dis": "Go directly to the college campus on the scheduled date and time with all your Original Documents",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 9,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Merit List",
+        "dis": ": Submit your attendance at the college counter in the morning. The college will prepare an on-spot merit list of the students present.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 10,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Seat Allotment:",
+        "dis": "When your name is called according to your rank, select your preferred available branch and verify your documents.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.pro_dte_clc_admission",
+    "pk": 11,
+    "fields": {
+        "catogry": "CLC",
+        "title": "Fee Payment",
+        "dis": "Pay the admission fee instantly at the college counter to confirm and lock your seat.",
+        "sub_dis": ""
+    }
+},
+{
+    "model": "core.campuscategory",
+    "pk": 1,
+    "fields": {
+        "name": "main_entrance",
+        "category_img": "campus_photos/clg1.jpeg"
+    }
+},
+{
+    "model": "core.campusimage",
+    "pk": 1,
+    "fields": {
+        "category": 1,
+        "image": "campus_photos/clg1-4.jpeg",
+        "uploaded_at": "2026-10-06T18:28:55.190Z"
+    }
+},
+{
+    "model": "core.campusimage",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "image": "campus_photos/clg1-2.jpeg",
+        "uploaded_at": "2026-10-06T18:28:55.197Z"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 1,
+    "fields": {
+        "text": "Students must follow hostel timings.",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 2,
+    "fields": {
+        "text": "Students must maintain cleanliness.",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 3,
+    "fields": {
+        "text": "Visitors must follow hostel regulations.",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 4,
+    "fields": {
+        "text": "Students must follow discipline and safety guidelines.",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 5,
+    "fields": {
+        "text": "Hostel property must be used responsibly.",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 6,
+    "fields": {
+        "text": "Any violation of hostel rules may result in disciplinary action. 11",
+        "categorys": "HOSTELRULSE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 8,
+    "fields": {
+        "text": "12th Class Marksheet / ITI Certificate (If Applicable)",
+        "categorys": "HOSTELUPDATE",
+        "uploaded_at": "2026-10-07"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 9,
+    "fields": {
+        "text": "Indian Economy",
+        "categorys": "LIBRARYUPDATE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 10,
+    "fields": {
+        "text": "Maintain complete silence inside the reading hall",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 11,
+    "fields": {
+        "text": "Carry a valid library ID card at all times",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 12,
+    "fields": {
+        "text": "Return borrowed books within the prescribed period, else a fine of ₹2/day will be charged.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 13,
+    "fields": {
+        "text": "Handle books, journals and equipment with care.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 14,
+    "fields": {
+        "text": "Do not disturb other readers. Mobile phones must be on silent mode.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 15,
+    "fields": {
+        "text": "Follow the instructions given by the library staff.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 16,
+    "fields": {
+        "text": "Reference books and journals will not be issued outside.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 17,
+    "fields": {
+        "text": "Eating and drinking inside the library is strictly prohibited.",
+        "categorys": "LIBRARYRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 18,
+    "fields": {
+        "text": "Advanced Java Programming",
+        "categorys": "LIBRARYUPDATE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 19,
+    "fields": {
+        "text": "Quantitative Aptitude",
+        "categorys": "LIBRARYUPDATE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.rulseupdate_campus",
+    "pk": 20,
+    "fields": {
+        "text": "wdafegsrdbhtnfmyndhgsdvzbfxc",
+        "categorys": "LABRULSE",
+        "uploaded_at": "2026-10-08"
+    }
+},
+{
+    "model": "core.placementbatch",
+    "pk": 1,
+    "fields": {
+        "year": "2019-20",
+        "created_at": "2026-10-08T15:37:18.977Z"
+    }
+},
+{
+    "model": "core.placementbatch",
+    "pk": 2,
+    "fields": {
+        "year": "2020-21",
+        "created_at": "2026-10-08T15:38:21.815Z"
+    }
+},
+{
+    "model": "core.placementbatch",
+    "pk": 3,
+    "fields": {
+        "year": "2021-22",
+        "created_at": "2026-10-08T17:10:44.810Z"
+    }
+},
+{
+    "model": "core.placementbatch",
+    "pk": 4,
+    "fields": {
+        "year": "2022-23",
+        "created_at": "2026-10-08T17:14:40.042Z"
+    }
+},
+{
+    "model": "core.placementbatch",
+    "pk": 5,
+    "fields": {
+        "year": "2023-24",
+        "created_at": "2026-10-08T17:24:03.027Z"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 1,
+    "fields": {
+        "batch": 1,
+        "s_no": "2",
+        "branch_name": "Civil Engineering",
+        "final_year_students": 27,
+        "students_placed": 0,
+        "companies_visited": 0,
+        "highest_package": "0.00",
+        "lowest_package": "0.00",
+        "average_package": "0.00"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 2,
+    "fields": {
+        "batch": 2,
+        "s_no": "2",
+        "branch_name": "Civil Engg.",
+        "final_year_students": 22,
+        "students_placed": 0,
+        "companies_visited": 0,
+        "highest_package": "0.00",
+        "lowest_package": "0.00",
+        "average_package": "0.00"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 3,
+    "fields": {
+        "batch": 1,
+        "s_no": "3",
+        "branch_name": "Mechanical Engineering",
+        "final_year_students": 27,
+        "students_placed": 22,
+        "companies_visited": 2,
+        "highest_package": "1.56",
+        "lowest_package": "1.56",
+        "average_package": "1.56"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 4,
+    "fields": {
+        "batch": 1,
+        "s_no": "4",
+        "branch_name": "E. T. Engineering",
+        "final_year_students": 20,
+        "students_placed": 2,
+        "companies_visited": 1,
+        "highest_package": "1.20",
+        "lowest_package": "1.20",
+        "average_package": "1.20"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 5,
+    "fields": {
+        "batch": 1,
+        "s_no": "1",
+        "branch_name": "Computer Science & Engineering",
+        "final_year_students": 0,
+        "students_placed": 0,
+        "companies_visited": 0,
+        "highest_package": "0.00",
+        "lowest_package": "0.00",
+        "average_package": "0.00"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 6,
+    "fields": {
+        "batch": 2,
+        "s_no": "3",
+        "branch_name": "Mechanical Engineering",
+        "final_year_students": 36,
+        "students_placed": 27,
+        "companies_visited": 4,
+        "highest_package": "1.68",
+        "lowest_package": "1.22",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 7,
+    "fields": {
+        "batch": 2,
+        "s_no": "4",
+        "branch_name": "E. T. Engineering",
+        "final_year_students": 28,
+        "students_placed": 21,
+        "companies_visited": 2,
+        "highest_package": "1.44",
+        "lowest_package": "1.44",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 8,
+    "fields": {
+        "batch": 2,
+        "s_no": "1",
+        "branch_name": "Computer Science & Engineering",
+        "final_year_students": 32,
+        "students_placed": 3,
+        "companies_visited": 0,
+        "highest_package": "1.60",
+        "lowest_package": "1.60",
+        "average_package": "1.60"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 9,
+    "fields": {
+        "batch": 3,
+        "s_no": "1",
+        "branch_name": "Computer Science & Engineering",
+        "final_year_students": 42,
+        "students_placed": 12,
+        "companies_visited": 0,
+        "highest_package": "1.20",
+        "lowest_package": "1.20",
+        "average_package": "1.20"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 10,
+    "fields": {
+        "batch": 3,
+        "s_no": "2",
+        "branch_name": "Civil Engineering",
+        "final_year_students": 51,
+        "students_placed": 10,
+        "companies_visited": 0,
+        "highest_package": "1.44",
+        "lowest_package": "1.44",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 11,
+    "fields": {
+        "batch": 3,
+        "s_no": "3",
+        "branch_name": "Mechanical Engineering",
+        "final_year_students": 47,
+        "students_placed": 26,
+        "companies_visited": 3,
+        "highest_package": "1.68",
+        "lowest_package": "1.22",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 12,
+    "fields": {
+        "batch": 3,
+        "s_no": "4",
+        "branch_name": "E & T Engineering",
+        "final_year_students": 48,
+        "students_placed": 24,
+        "companies_visited": 3,
+        "highest_package": "1.62",
+        "lowest_package": "1.62",
+        "average_package": "1.62"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 13,
+    "fields": {
+        "batch": 4,
+        "s_no": "1",
+        "branch_name": "Computer Science & Engineering",
+        "final_year_students": 26,
+        "students_placed": 8,
+        "companies_visited": 0,
+        "highest_package": "1.20",
+        "lowest_package": "1.20",
+        "average_package": "1.20"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 14,
+    "fields": {
+        "batch": 4,
+        "s_no": "2",
+        "branch_name": "Civil Engineering",
+        "final_year_students": 28,
+        "students_placed": 9,
+        "companies_visited": 0,
+        "highest_package": "1.20",
+        "lowest_package": "1.20",
+        "average_package": "1.20"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 15,
+    "fields": {
+        "batch": 4,
+        "s_no": "3",
+        "branch_name": "Mechanical Engineering",
+        "final_year_students": 37,
+        "students_placed": 16,
+        "companies_visited": 3,
+        "highest_package": "1.68",
+        "lowest_package": "1.22",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 16,
+    "fields": {
+        "batch": 4,
+        "s_no": "4",
+        "branch_name": "E & T Engineering",
+        "final_year_students": 18,
+        "students_placed": 1,
+        "companies_visited": 2,
+        "highest_package": "1.44",
+        "lowest_package": "1.44",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 17,
+    "fields": {
+        "batch": 5,
+        "s_no": "1",
+        "branch_name": "Computer Science & Engineering",
+        "final_year_students": 34,
+        "students_placed": 12,
+        "companies_visited": 0,
+        "highest_package": "1.40",
+        "lowest_package": "1.40",
+        "average_package": "1.40"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 18,
+    "fields": {
+        "batch": 5,
+        "s_no": "2",
+        "branch_name": "Civil Engineering",
+        "final_year_students": 16,
+        "students_placed": 6,
+        "companies_visited": 0,
+        "highest_package": "1.42",
+        "lowest_package": "1.42",
+        "average_package": "1.42"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 19,
+    "fields": {
+        "batch": 5,
+        "s_no": "3",
+        "branch_name": "Mechanical Engineering",
+        "final_year_students": 22,
+        "students_placed": 18,
+        "companies_visited": 2,
+        "highest_package": "1.56",
+        "lowest_package": "1.56",
+        "average_package": "1.56"
+    }
+},
+{
+    "model": "core.branchplacement",
+    "pk": 20,
+    "fields": {
+        "batch": 5,
+        "s_no": "4",
+        "branch_name": "E & T Engineering",
+        "final_year_students": 19,
+        "students_placed": 6,
+        "companies_visited": 2,
+        "highest_package": "1.44",
+        "lowest_package": "1.44",
+        "average_package": "1.44"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 1,
+    "fields": {
+        "brach": "CSE",
+        "semester": "FIRST",
+        "syllabus": "syllabuss/ISEMGROUPA20252026.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:19:44.092Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 2,
+    "fields": {
+        "brach": "CSE",
+        "semester": "SECOND",
+        "syllabus": "syllabuss/IISEMESTERCSE2025.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:20:41.146Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 3,
+    "fields": {
+        "brach": "CIVIL",
+        "semester": "FIRST",
+        "syllabus": "syllabuss/ISEMGROUPA20252026_rIxIDYF.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:20:57.128Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 4,
+    "fields": {
+        "brach": "CIVIL",
+        "semester": "SECOND",
+        "syllabus": "syllabuss/IISEMESTERCSE2025_TxewuxA.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:21:06.249Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 5,
+    "fields": {
+        "brach": "ET",
+        "semester": "FIRST",
+        "syllabus": "syllabuss/ISEMGROUPA20252026_adFHg1Z.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:21:15.894Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 6,
+    "fields": {
+        "brach": "ET",
+        "semester": "SECOND",
+        "syllabus": "syllabuss/IISEMESTERCSE2025_8zrMo2g.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:21:27.191Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 7,
+    "fields": {
+        "brach": "ME",
+        "semester": "FIRST",
+        "syllabus": "syllabuss/ISEMGROUPA20252026_ZZnu6Uj.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:21:36.946Z"
+    }
+},
+{
+    "model": "core.syllabus",
+    "pk": 8,
+    "fields": {
+        "brach": "ME",
+        "semester": "SECOND",
+        "syllabus": "syllabuss/IISEMESTERCSE2025_0vjSJzr.pdf",
+        "syllabus_link": null,
+        "updated_at": "2026-10-13T07:21:48.365Z"
+    }
+},
+{
+    "model": "otp_static.staticdevice",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "admin144"
+        ],
+        "name": "backup",
+        "confirmed": true,
+        "throttling_failure_timestamp": null,
+        "throttling_failure_count": 0,
+        "created_at": "2026-10-02T02:52:00.760Z",
+        "last_used_at": null
+    }
+},
+{
+    "model": "otp_static.staticdevice",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "name": "backup",
+        "confirmed": true,
+        "throttling_failure_timestamp": null,
+        "throttling_failure_count": 0,
+        "created_at": "2026-10-02T08:54:08.663Z",
+        "last_used_at": null
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 1,
+    "fields": {
+        "device": 1,
+        "token": "geeo6m7u"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 2,
+    "fields": {
+        "device": 1,
+        "token": "se7sdryb"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 3,
+    "fields": {
+        "device": 1,
+        "token": "vbke4bcl"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 4,
+    "fields": {
+        "device": 1,
+        "token": "53yvzffd"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 5,
+    "fields": {
+        "device": 1,
+        "token": "b256fwqd"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 6,
+    "fields": {
+        "device": 1,
+        "token": "uqqed7by"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 7,
+    "fields": {
+        "device": 1,
+        "token": "5p356bhd"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 8,
+    "fields": {
+        "device": 1,
+        "token": "eetvlvew"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 9,
+    "fields": {
+        "device": 1,
+        "token": "zfgwr7oa"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 10,
+    "fields": {
+        "device": 1,
+        "token": "et2mwvy6"
+    }
+},
+{
+    "model": "otp_static.statictoken",
+    "pk": 11,
+    "fields": {
+        "device": 2,
+        "token": "Rajendra@7354368"
+    }
+},
+{
+    "model": "otp_totp.totpdevice",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "admin144"
+        ],
+        "name": "default",
+        "confirmed": true,
+        "throttling_failure_timestamp": null,
+        "throttling_failure_count": 0,
+        "created_at": "2026-10-02T02:51:50.276Z",
+        "last_used_at": "2026-10-02T18:01:17.692Z",
+        "key": "df5ee6e00480a26e4049afa970e3b28a3ce390ed",
+        "step": 30,
+        "t0": 0,
+        "digits": 6,
+        "tolerance": 1,
+        "drift": 0,
+        "last_t": 59698802
+    }
+},
+{
+    "model": "otp_totp.totpdevice",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "name": "default",
+        "confirmed": true,
+        "throttling_failure_timestamp": null,
+        "throttling_failure_count": 0,
+        "created_at": "2026-10-02T08:54:01.737Z",
+        "last_used_at": "2026-10-03T19:45:11.144Z",
+        "key": "a40627bee330cf71e0ee99635f3be7ac35729a0d",
+        "step": 30,
+        "t0": 0,
+        "digits": 6,
+        "tolerance": 1,
+        "drift": 0,
+        "last_t": 59701890
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 1,
+    "fields": {
+        "title": "the admission is start and contact on cld admin desk officers .",
+        "content": "thainkyou",
+        "notice_type": "GRAND",
+        "notice_pdf": "notices/2026-08-09_21-18-16_NHJuOYV.pdf",
+        "add_to_grand": true,
+        "slug": null,
+        "created_at": "2026-10-01T09:06:41Z",
+        "created_by": [
+            "rajend"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 2,
+    "fields": {
+        "title": "this is text notice in this inotice no pdf any no file only runs model or content .",
+        "content": "Mere Mehboob Qayamat Hogi\r\n\r\nAaj Rusva Teri Galiyon Mein Mohabbat Hogi\r\n\r\nMeri Nazrein To Gila Karti Hain\r\n\r\nTere Dil Ko Bhi Sanam Tujhse Shikayat Hogi\r\n\r\nMere Mehboob...\r\n\r\nTeri Gali Maein Aata Sanam\r\n\r\nNagma Wafa Ka Gaata Sanam\r\n\r\nTujhse Suna Na Jaata Sanam\r\n\r\nPhir Aaj Idhar Aaya Hoon Magar Yeh Kehne Maein Deewana\r\n\r\nKhatm Bas Aaj Yeh Vehshat Hogi\r\n\r\nAaj Rusva Teri Galiyon Mein Mohabbat Hogi\r\n\r\nMere Mehboob...\r\n\r\nMeri Tarah Tu Aahen Bhare\r\n\r\nTu Bhi Kisise Pyar Kare\r\n\r\nAur Rahe Voh Tujhse Parey\r\n\r\nToone O Sanam Dhaye Hain Sitam To Yeh Tu Bhool Na Jaana\r\n\r\nKi Na Tujhpe Bhi Inayat Hogi\r\n\r\nAaj Rusva Teri Galiyon Mein Mohabbat Hogi\r\n\r\nMere Mehboob...",
+        "notice_type": "GRAND",
+        "notice_pdf": "",
+        "add_to_grand": true,
+        "slug": null,
+        "created_at": "2026-10-02T16:25:52Z",
+        "created_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 3,
+    "fields": {
+        "title": "SADWEFDTHFYGH",
+        "content": "ACFSZDBFXNCGVADCBFX",
+        "notice_type": "GRAND",
+        "notice_pdf": "",
+        "add_to_grand": true,
+        "slug": null,
+        "created_at": "2026-10-02T18:37:25Z",
+        "created_by": [
+            "admin144"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 4,
+    "fields": {
+        "title": "this is notices is hide on  all only modes par",
+        "content": "this is model notics for model .",
+        "notice_type": "GRAND",
+        "notice_pdf": "",
+        "add_to_grand": true,
+        "slug": null,
+        "created_at": "2026-10-03T09:47:30Z",
+        "created_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 5,
+    "fields": {
+        "title": "new events .",
+        "content": "rhis is moddel of envet nformationns .",
+        "notice_type": "EVENTS",
+        "notice_pdf": "",
+        "add_to_grand": false,
+        "slug": null,
+        "created_at": "2026-10-03T09:50:37Z",
+        "created_by": [
+            "rajend"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 6,
+    "fields": {
+        "title": "eewdgrtf",
+        "content": "qDAWEFDGRTFG",
+        "notice_type": "EVENTS",
+        "notice_pdf": "",
+        "add_to_grand": false,
+        "slug": "12",
+        "created_at": "2026-10-03T10:09:21Z",
+        "created_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 7,
+    "fields": {
+        "title": "this is placement notices",
+        "content": "this is p",
+        "notice_type": "PLACEMENTS",
+        "notice_pdf": "",
+        "add_to_grand": false,
+        "slug": null,
+        "created_at": "2026-10-03T10:27:22Z",
+        "created_by": [
+            "rajend"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 8,
+    "fields": {
+        "title": "this is second pdf of placwment",
+        "content": "",
+        "notice_type": "PLACEMENTS",
+        "notice_pdf": "notices/WhatsApp_Image_2026-05-20_at_2.19.24_AM.jpeg",
+        "add_to_grand": false,
+        "slug": null,
+        "created_at": "2026-10-03T10:37:51Z",
+        "created_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.notice",
+    "pk": 9,
+    "fields": {
+        "title": "th is notice pls",
+        "content": "",
+        "notice_type": "PLACEMENTS",
+        "notice_pdf": "notices/WhatsApp_Image_2026-05-20_at_2_1nKJRz5.19.24_AM.jpeg",
+        "add_to_grand": false,
+        "slug": null,
+        "created_at": "2026-10-03T10:40:03Z",
+        "created_by": [
+            "admin144"
+        ]
+    }
+}
+]

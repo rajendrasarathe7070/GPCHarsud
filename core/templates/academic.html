@@ -1,0 +1,1232 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+
+    }
+    /* Webkit browsers (Chrome, Safari, Edge) ke liye scrollbar hide karne ka code */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Scrollbar hide rahega lekin page scroll hota rahega */
+html, body {
+    ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+    /* पूरे कैरोसेल को बैकग्राउंड में लॉक करने के लिए */
+    .fixed-carousel-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+
+      /* डिफ़ॉल्ट रूप से मोबाइल के लिए ऊंचाई */
+      height: 70vh;
+    }
+
+    /* लैपटॉप और बड़ी स्क्रीन्स के लिए ऊंचाई (Min-width: 768px) */
+    @media (min-width: 768px) {
+      .fixed-carousel-bg {
+        height: 80vh;
+        margin-top: 6vh;
+        /* लैपटॉप में फुल स्क्रीन */
+      }
+    }
+
+    /* कैरोसेल की हर इमेज को सही से फिट करने के लिए */
+    .fixed-carousel-bg .carousel-item {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+
+
+    /* टेक्स्ट को ओवरले के ऊपर लाने के लिए */
+    .fixed-carousel-bg .carousel-caption {
+
+      bottom: 0;
+      /* Bootstrap की डिफ़ॉल्ट बॉटम मार्जिन हटाने के लिए */
+    }
+
+    /* टेक्स्ट को और खूबसूरत लुक देने के लिए हल्की सी परछाई */
+    .text-shadow {
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* कवर करने वाले दूसरे div की स्टाइलिंग */
+    .content-cover-section {
+
+      /* यह कैरोसेल के ऊपर तैरने के लिए ज़रूरी है */
+
+      /* डिफ़ॉल्ट मोबाइल के लिए: कैरोसेल 70vh का है, इसलिए मार्जिन भी 70vh होगी */
+      margin-top: 00vh;
+
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    /* लैपटॉप के लिए मार्जिन एडजस्टमेंट */
+    @media (min-width: 768px) {
+      .content-cover-section {
+        margin-top: 00vh;
+        height: fit-content;
+        /* लैपटॉप में कैरोसेल 100vh का है, इसलिए मार्जिन 100vh */
+      }
+    }
+
+    #passivebr {
+
+      color: aliceblue;
+    }
+
+    #activebr {
+      color: brown;
+    }
+
+    .tab-pane:not(.active) {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'models.html' %}
+  <style>
+    #academictabs {
+      --bs-nav-link-color: #f8f9fa;
+      --bs-nav-link-hover-color: #9d1a27;
+      --bs-nav-link-disabled-color: #999999;
+    }
+
+    .containers {
+      max-width: 100%;
+
+    }
+  </style>
+
+  <nav class="navbar fixed-top navbar-expand-lg  bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+    {% include 'navbar.html' %}
+
+
+  </nav>
+
+
+  <style>
+    .overflow-x-scrolls {
+      /* width: 100%;
+      max-height: 5rem; */
+      margin-top: 50px;
+      /* background-color: rgb(38, 5, 138) !important ; */
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
+
+      transform: translateZ(0);
+      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
+      font-family: 'Times New Roman', Times, serif;
+      justify-self: centerc !important;
+      z-index: 1000 !important;
+    }
+
+    .nav-tabs {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+
+    }
+  </style>
+
+  <div class="overflow-x-scrolls fixed-top">
+
+    <div class="notices card rounded-0 mt-md-1 fixed-top ">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+        {% include 'info.html' %}
+        <!-- {% if infomsg %}
+      
+     <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos }} |
+      </a>
+      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos_2 }} |
+      </a>
+       |<span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos }} |
+      </a>
+      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos_2 }} |
+      </a>
+    {% else %}
+      <span class="text-white mx-2">अभी कोई नया नोटिस उपलब्ध नहीं है।</span>
+    {% endif %} -->
+
+
+      </marquee>
+    </div>
+    <style>
+      .notices {
+        margin-top: 5px;
+        max-width: 100%;
+        max-height: 2rem;
+        width: 100%;
+        height: 2rem;
+
+        justify-content: center !important;
+
+
+        background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+
+        color: #d10505;
+      }
+    </style>
+
+
+
+
+  </div>
+
+
+
+  <div class="card text-bg-dark mt-md-5" style="max-height: 455px;  ">
+
+    <img src="{% static 'images/ai1-1.jpg' %}" class="card-img" alt="wide image" style="margin-top: 1rem;">
+    <div class="card-img-overlay">
+
+      <!-- <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+          <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
+    </div>
+  </div>
+
+  <div class="container my-5 text-center">
+
+
+
+    <div class="tab-content" id="myTabContent">
+
+      <div class="tab-pane fade show active" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
+        tabindex="0">
+        <style>
+          .breadcrumb-item {
+            background-color: #a2cdf9;
+          }
+        </style>
+        <div class="containerss mt-3 mb-5">
+          <style>
+            .hding {
+              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+              margin-bottom: 10px;
+              border: 3px solid #861414;
+              text-transform: uppercase;
+              width: 100%;
+
+              /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+              padding: 6px 15px 6px 15px;
+              color: #f8f8fa;
+              text-align: left;
+
+              display: flex;
+              align-items: center;
+            }
+
+            /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+            .hding-text {
+              font-weight: bold;
+              white-space: nowrap;
+              /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+              font-size: 3.4vw;
+            }
+
+            /* ब्रेडक्रंब आइटम स्टाइल */
+            .breadcrumb-item {
+              background-color: #a2cdf9;
+              padding: 2px 6px;
+              border-radius: 3px;
+            }
+
+            .custom-breadcrumb {
+              font-size: 2.2vw !important;
+              margin-bottom: 0 !important;
+              padding: 0 !important;
+            }
+
+            /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+            @media (min-width: 576px) {
+              .hding-text {
+                font-size: 1.1rem;
+                /* टैबलेट पर साइज */
+              }
+
+              .custom-breadcrumb {
+                font-size: 0.85rem !important;
+              }
+            }
+
+            @media (min-width: 992px) {
+              .hding-text {
+                font-size: 1.35rem;
+                /* डेस्कटॉप पर साइज */
+              }
+
+              .hding {
+                padding-left: 30px;
+                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+              }
+            }
+          </style>
+
+          <div class="container-fluid mt-3 mb-5 px-0">
+            <nav class="hding rounded-1">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+
+                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                <div class="hding-text">
+                  course & department
+                </div>
+
+                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                <div class="d-none d-sm-block">
+                  <ol class="breadcrumb custom-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">c & d</li>
+                  </ol>
+                </div>
+
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        {% include 'coursehod.html' %}
+        {% include 'models.html' %}
+
+
+
+        <!-- THIS IS NEW   -->
+        <!-- /.col-lg-4 -->
+        <!-- /.row --> <!-- START THE FEATURETTES -->
+        {% for department in departments %}
+
+        <hr class="featurette-divider mt-5 mb-5">
+        <div class="row featurette ">
+
+          <div class="col-md-5 order-md-1 my-4"> <img aria-label="Placeholder: Computer Science & Engg."
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded-5" height="500"
+              role="img" width="500" src="{{ department.Course_image.url }}">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%"
+              fill="var(--bs-secondary-color)" dy=".3em"> Computer Science & Enginearring</text>
+            </img>
+          </div>
+          <div
+            class='col-md-7 order-md-{% if forloop.counter == 1 %}1{% endif %}{% if forloop.counter == 2 %}0{% endif %}{% if forloop.counter == 3 %}1{% endif %}{% if forloop.counter == 4 %}0{% endif %}{% if forloop.counter == 5 %}2{% endif %} '>
+
+            <h2 class="featurette-heading fw-normal lh-1 my-3 pb-3">Dipartment : <span class="text-body-secondary">
+                {{ department.Department_name }}</span></h2>
+
+            <table class="table table-hover ">
+              <!-- <thead style="text-align: left;">
+                </thead> -->
+              <tbody style="text-align: left;">
+                <tr>
+
+                  <td>Course name :</td>
+
+                  <td>{{ department.Course_name }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+
+                  <td>Course code</td>
+
+
+                  <td>{{ department.Course_code }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+
+                  <td>HOD Name</td>
+
+                  <td>{{ department.Department_hod }}</td>
+                  <td></td>
+
+                </tr>
+
+                <tr>
+
+                  <td>Duration</td>
+
+                  <td>{{ department.Course_duration }}</td>
+                  <td> </td>
+                </tr>
+                <tr>
+
+                  <td>Eligibility</td>
+
+                  <td>{{ department.Course_eligibility }}</td>
+                  <td> </td>
+                </tr>
+
+                <tr>
+
+                  <td> Intake / Seats</td>
+
+                  <td>60 Intake ( {{ department.Course_seats_aklavy }}-Aklavy Sheam, {{ department.Course_seats_ppt }}
+                    -PPt Sheam ) </td>
+                  <td> </td>
+                </tr>
+
+                <tr>
+
+                  <td> Mode of study</td>
+
+                  <td>{{ department.Mode_of_study }}</td>
+                  <td> </td>
+                </tr>
+                <tr>
+
+                  <td>Syllabus link</td>
+
+                  <td> <a href="http://">Click me</a> </td>
+                  <td> </td>
+                </tr>
+
+                <tr>
+
+                  <td> Admission Process link</td>
+                  <td> <a href="/admission#Process-tab-pane">Go to-</a> </td>
+                  <td> </td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="button" class="btn btn-outline-secondary w-100" data-bs-toggle="modal"
+              data-bs-target="#hodModal{{ department.Course_code }}">Head of department {{department.Course_name}}</button>
+          </div>
+        </div>
+
+        {% endfor %}
+
+
+        {% include 'footer.html' %}
+
+      </div>
+
+    </div>
+
+
+    <!-- thi is Departments  -->
+
+    <div class="tab-pane fade" id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab" tabindex="0">
+
+      {% include 'department.html' %}
+
+    </div>
+    <!-- this is syllabus section . -->
+
+    <div class="tab-pane fade" id="Syllabus-tab-pane" role="tabpanel" aria-labelledby="Syllabus-tab" tabindex="0">
+       {% include 'syllabus.html' %}
+    </div>
+
+    <!-- this is acadmic callender table  -->
+    <div class="tab-pane fade" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
+      tabindex="0">
+      <!-- As a heading -->
+
+      <style>
+        .breadcrumb-item {
+          background-color: #a2cdf9;
+        }
+      </style>
+      <div class="containerss mt-3 mb-5">
+        <style>
+          .hding {
+            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+            margin-bottom: 10px;
+            border: 3px solid #861414;
+            text-transform: uppercase;
+            width: 100%;
+
+            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+            padding: 6px 15px 6px 15px;
+            color: #f8f8fa;
+            text-align: left;
+
+            display: flex;
+            align-items: center;
+          }
+
+          /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+          .hding-text {
+            font-weight: bold;
+            white-space: nowrap;
+            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+            font-size: 3.4vw;
+          }
+
+          /* ब्रेडक्रंब आइटम स्टाइल */
+          .breadcrumb-item {
+            background-color: #a2cdf9;
+            padding: 2px 6px;
+            border-radius: 3px;
+          }
+
+          .custom-breadcrumb {
+            font-size: 2.2vw !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+          }
+
+          /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+          @media (min-width: 576px) {
+            .hding-text {
+              font-size: 1.1rem;
+              /* टैबलेट पर साइज */
+            }
+
+            .custom-breadcrumb {
+              font-size: 0.85rem !important;
+            }
+          }
+
+          @media (min-width: 992px) {
+            .hding-text {
+              font-size: 1.35rem;
+              /* डेस्कटॉप पर साइज */
+            }
+
+            .hding {
+              padding-left: 30px;
+              /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+            }
+          }
+        </style>
+
+        <div class="container-fluid mt-3 mb-5 px-0">
+          <nav class="hding rounded-1">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+
+              <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+              <div class="hding-text">
+                academic calender
+              </div>
+
+              <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+              <div class="d-none d-sm-block">
+                <ol class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">academic calender</li>
+                </ol>
+              </div>
+
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <style>
+        .college-table-wrapper {
+          font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* हेडर को कॉलेज थीम (Brown) देने के लिए */
+        .college-table-wrapper thead {
+          background-color: brown !important;
+          color: #ffffff !important;
+        }
+
+        .college-table-wrapper th,
+        .college-table-wrapper td {
+          padding: 12px 15px !important;
+          font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+          /* रिस्पॉन्सिव फॉन्ट */
+        }
+
+        .th-text {
+          font-weight: bold;
+          cursor: pointer;
+          padding: 1px 1px !important;
+        }
+      </style>
+
+      <div class="college-table-wrapper my-4">
+        <!-- table-responsive क्लास मोबाइल पर टेबल को टूटने से बचाती है -->
+        <div class="table-responsive shadow-sm rounded-3 overflow-hidden border">
+          <table class="table table-striped table-hover table-bordered mb-0" style="text-align: left;">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 4%;">S.No.</th>
+                <th scope="col" style="width: 96%;">Contents</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for calendar in academic_calendar %}
+              <tr>
+                <th scope="row" class="  th-text"> {{ forloop.counter }} </th>
+                <td class="th-text" onclick="window.location.href='{{ calendar.calendar_pdf.url }}'"> {{calendar.title}} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="TimeTable-tab-pane" role="tabpanel" aria-labelledby="TimeTable-tab" tabindex="0">
+
+      <style>
+        #timetable {
+          max-width: fit-content;
+          max-height: 40rem;
+        }
+      </style>
+      <div class="container">
+        <!-- <div class="overflow-auto" id="timetable"> 
+  </div> -->
+        <style>
+          .breadcrumb-item {
+            background-color: #a2cdf9;
+          }
+        </style>
+
+
+
+
+        <div class="container my-4">
+
+          <!-- 🗂️ हेडर और ब्रेडक्रंब सेक्शन -->
+          <div class="containerss mt-3 mb-5">
+            <style>
+              .hding {
+                background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+                margin-bottom: 10px;
+                border: 3px solid #861414;
+                text-transform: uppercase;
+                width: 100%;
+
+                /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+                padding: 6px 15px 6px 15px;
+                color: #f8f8fa;
+                text-align: left;
+
+                display: flex;
+                align-items: center;
+              }
+
+              /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+              .hding-text {
+                font-weight: bold;
+                white-space: nowrap;
+                /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+                font-size: 3.4vw;
+              }
+
+              /* ब्रेडक्रंब आइटम स्टाइल */
+              .breadcrumb-item {
+                background-color: #a2cdf9;
+                padding: 2px 6px;
+                border-radius: 3px;
+              }
+
+              .custom-breadcrumb {
+                font-size: 2.2vw !important;
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+              }
+
+              /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+              @media (min-width: 576px) {
+                .hding-text {
+                  font-size: 1.1rem;
+                  /* टैबलेट पर साइज */
+                }
+
+                .custom-breadcrumb {
+                  font-size: 0.85rem !important;
+                }
+              }
+
+              @media (min-width: 992px) {
+                .hding-text {
+                  font-size: 1.35rem;
+                  /* डेस्कटॉप पर साइज */
+                }
+
+                .hding {
+                  padding-left: 30px;
+                  /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+                }
+              }
+            </style>
+
+            <div class="container-fluid mt-3 mb-5 px-0">
+              <nav class="hding rounded-1">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                  <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                  <div class="hding-text">
+                    Time table
+                  </div>
+
+                  <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                  <div class="d-none d-sm-block">
+                    <ol class="breadcrumb custom-breadcrumb">
+                      <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Timetable</li>
+                    </ol>
+                  </div>
+
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <nav>
+            <div class="nav nav-tabs justify-content-center " id="nav-tab" role="tablist">
+              <button class="nav-link active " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Main Class Time Tables</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Lab & Workshop
+                Timings</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+              tabindex="0">
+              <div class="container my-5 	d-none d-sm-block ">
+                <!-- 4-कॉलम रिस्पॉन्सिव ग्रिड लेआउट (role="tablist" यहाँ जोड़ा गया है) -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center mb-5 	" role="tablist"
+                  id="deptCardTabs">
+                  <style>
+                    /* 🖱️ कार्ड इंटरैक्शन और लेआउट */
+                    .dept-interactive-card {
+                      height: 12rem !important;
+                      background-size: cover;
+                      background-position: center;
+                      cursor: pointer;
+                      transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .dept-interactive-card:hover {
+                      transform: translateY(-5px);
+                      box-shadow: 0 8px 25px rgba(165, 42, 42, 0.3);
+                    }
+
+                    /* एक्टिव कार्ड पर बॉर्डर हाइलाइट (ऑप्शनल) */
+                    .dept-interactive-card.active {
+                      border: 3px solid brown !important;
+                      transform: translateY(-5px);
+                    }
+                  </style>
+
+                  <!-- 💻 कार्ड 1: कंप्यूटर साइंस (शुरू में एक्टिव रहेगा) -->
+                  <div class="col" role="presentation">
+                    <div class="card h-100 border-0 rounded-1 text-white position-relative dept-interactive-card active"
+                      style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)), url({% static 'images/com.png' %});"
+                      data-bs-toggle="tab" data-bs-target="#nav-c" type="button" role="tab" aria-controls="nav-c"
+                      aria-selected="true">
+                      <div
+                        class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <svg width="48" height="48" fill="currentColor" class="bi bi-laptop mb-3" viewBox="0 0 16 16">
+                          <path
+                            d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5">
+                          </path>
+                        </svg>
+                        <p class="card-text fw-semibold tracking-wide m-0">Deprt : Computer Science &amp; Engg.</p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- 🏗️ कार्ड 2: सिविल इंजीनियरिंग -->
+                  <div class="col" role="presentation">
+                    <div class="card h-100 border-0 rounded-1 text-white position-relative dept-interactive-card"
+                      style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)), url({% static 'images/civil-engineering.png' %});"
+                      data-bs-toggle="tab" data-bs-target="#nav-l" type="button" role="tab" aria-controls="nav-l"
+                      aria-selected="false">
+                      <div
+                        class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <svg width="48" height="48" fill="currentColor" class="bi bi-buildings mb-3"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z">
+                          </path>
+                          <path
+                            d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z">
+                          </path>
+                        </svg>
+                        <p class="card-text fw-semibold tracking-wide m-0">Deprt : Civil Engineering</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ⚙️ कार्ड 3: मैकेनिकल इंजीनियरिंग -->
+                  <div class="col" role="presentation">
+                    <div class="card h-100 border-0 rounded-1 text-white position-relative dept-interactive-card"
+                      style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)), url({% static 'images/me.jpg' %});"
+                      data-bs-toggle="tab" data-bs-target="#nav-m" type="button" role="tab" aria-controls="nav-m"
+                      aria-selected="false">
+                      <div
+                        class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <svg width="48" height="48" fill="currentColor" class="bi bi-gear mb-3" viewBox="0 0 16 16">
+                          <path
+                            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0">
+                          </path>
+                          <path
+                            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z">
+                          </path>
+                        </svg>
+                        <p class="card-text fw-semibold tracking-wide m-0">Deprt : Mechanical Engineering</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ⚡ कार्ड 4: इलेक्ट्रॉनिक्स -->
+                  <div class="col" role="presentation">
+                    <div class="card h-100 border-0 rounded-1 text-white position-relative dept-interactive-card"
+                      style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)), url({% static 'images/ee.jpg' %});"
+                      data-bs-toggle="tab" data-bs-target="#nav-e" type="button" role="tab" aria-controls="nav-e"
+                      aria-selected="false">
+                      <div
+                        class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <svg width="48" height="48" fill="currentColor" class="bi bi-lightning-charge mb-3"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z">
+                          </path>
+                        </svg>
+                        <p class="card-text fw-semibold tracking-wide m-0">Deprt : Electronics &amp; Comm.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- model{{ all.branch }}-{{ all.year }} -->
+               
+              
+
+              
+              <div class="container">
+                <div class="row ">
+                  <div class="col-md-3 my-2 px-0 px-md-1">
+                    <div class="list-group">
+                      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        Computer Science & Engg
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCS-1">First year (1-sem, 2-sem )</button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCS-2">Second year (3-sem,
+                        4-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCS-3">Theard year (5-sem,
+                        6-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action opacity-50 " disabled
+                        style="text-align: right;"> <small>- {{ all.uploaded_at|date:"D M Y" }} update</small>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3 my-2  px-0 px-md-1">
+                    <div class="list-group">
+                      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        Civil Engineering </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCE-1">First year (1-sem, 2-sem )
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCE-2">Second year (3-sem,
+                        4-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelCE-3">Theard year (5-sem,
+                        6-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action opacity-50 " disabled
+                        style="text-align: right;"> <small>- {{ all.uploaded_at|date:"D M Y" }} update</small>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3 my-2  px-0 px-md-1">
+                    <div class="list-group">
+                      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        Mechanical Engineering
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelME-1">First year (1-sem, 2-sem )
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelME-2">Second year (3-sem,
+                        4-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelME-3">Theard year (5-sem,
+                        6-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action opacity-50 " disabled
+                        style="text-align: right;"> <small>- {{ all.uploaded_at|date:"D M Y" }} update</small>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3 my-2  px-0 px-md-1">
+                    <div class="list-group">
+                      <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        Electronics & Comm.
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelEC-1">First year (1-sem, 2-sem )
+                      </button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelEC-2">Second year (3-sem,
+                        4-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#modelEC-3">Theard year (5-sem,
+                        6-sem)</button>
+                      <button type="button" class="list-group-item list-group-item-action opacity-50 " disabled
+                        style="text-align: right;"> <small>- {{ all.uploaded_at|date:"D M Y" }} update</small>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               
+
+
+
+
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+            <div class="container my-5">
+              <!-- लैब टाइम टेबल के लिए अलग ID (id="labCardTabs") -->
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center mb-5" role="tablist"
+                id="labCardTabs">
+                <style>
+                  /* 🔬 लैब कार्ड्स के लिए विशिष्ट यूनीक क्लास नाम */
+                  .lab-interactive-card {
+                    height: 12rem !important;
+                    background-size: cover;
+                    background-position: center;
+                    cursor: pointer;
+                    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                  }
+
+                  .lab-interactive-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 25px rgba(20, 114, 144, 0.3);
+                    /* लैब के लिए अलग टील-ग्लो */
+                  }
+
+                  /* एक्टिव लैब कार्ड पर बॉर्डर हाइलाइट */
+                  .lab-interactive-card.active {
+                    border: 3px solid #147290 !important;
+                    transform: translateY(-5px);
+                  }
+                </style>
+
+                <!-- 💻 लैब कार्ड 1: कंप्यूटर लैब (शुरू में एक्टिव रहेगा) -->
+                <div class="col" role="presentation">
+                  <div class="card h-100 border-0 rounded-1 text-white position-relative lab-interactive-card active"
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url({% static 'images/com.png' %});"
+                    data-bs-toggle="tab" data-bs-target="#lab-cs" type="button" role="tab" aria-controls="lab-cs"
+                    aria-selected="true">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                      <svg width="48" height="48" fill="currentColor" class="bi bi-pc-display mb-3" viewBox="0 0 16 16">
+                        <path
+                          d="M8 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1zm1 1v12h5V2zm-9 3a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm1 1v4h4V6zm-1 7a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm1 1v1h4v-1z">
+                        </path>
+                      </svg>
+                      <p class="card-text fw-semibold tracking-wide m-0">Lab : Computer Science Labs</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 🏗️ लैब कार्ड 2: सिविल लैब -->
+                <div class="col" role="presentation">
+                  <div class="card h-100 border-0 rounded-1 text-white position-relative lab-interactive-card"
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url({% static 'images/civil-engineering.png' %});"
+                    data-bs-toggle="tab" data-bs-target="#lab-civil" type="button" role="tab" aria-controls="lab-civil"
+                    aria-selected="false">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                      <svg width="48" height="48" fill="currentColor" class="bi bi-compass mb-3" viewBox="0 0 16 16">
+                        <path
+                          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.5-14.5A.5.5 0 0 1 9 2v1.07a7 7 0 0 1 3.93 3.93H14a.5.5 0 0 1 0 1h-1.07A7 7 0 0 1 9 12.93V14a.5.5 0 0 1-1 0v-1.07A7 7 0 0 1 3.07 9H2a.5.5 0 0 1 0-1h1.07A7 7 0 0 1 7 3.07V2a.5.5 0 0 1 .5-.5M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8">
+                        </path>
+                      </svg>
+                      <p class="card-text fw-semibold tracking-wide m-0">Lab : Civil Engg. Laboratories</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ⚙️ लैब कार्ड 3: मैकेनिकल वर्कशॉप -->
+                <div class="col" role="presentation">
+                  <div class="card h-100 border-0 rounded-1 text-white position-relative lab-interactive-card"
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url({% static 'images/me.jpg' %}    );"
+                    data-bs-toggle="tab" data-bs-target="#lab-mech" type="button" role="tab" aria-controls="lab-mech"
+                    aria-selected="false">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                      <svg width="48" height="48" fill="currentColor" class="bi bi-tools mb-3" viewBox="0 0 16 16">
+                        <path
+                          d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968a3.99 3.99 0 0 0 .445.365l.052.028a1 1 0 0 1 .474.833l.019.53a1 1 0 0 0 .551.845l2.44 1.158a1 1 0 0 0 1.198-.24l1.414-1.414a1 1 0 0 0-.24-1.198l-1.158-2.44a1 1 0 0 0-.845-.551l-.53-.019a1 1 0 0 1-.833-.474l-.028-.052A3.99 3.99 0 0 0 11 11.233l-.968-.968 2.675-2.675a1 1 0 0 1 .708-.293h.07a1 1 0 0 0 .815-.419L16 1 15 0l-3.081 2.2a1 1 0 0 0-.419.815v.07a1 1 0 0 1-.293.708L8.53 6.468 5.857 3.795a1 1 0 0 1-.293-.708v-.07A1 1 0 0 0 5.145 2.2zM4 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0">
+                        </path>
+                      </svg>
+                      <p class="card-text fw-semibold tracking-wide m-0">Lab : Mechanical Workshops</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ⚡ लैब कार्ड 4: इलेक्ट्रॉनिक्स लैब -->
+                <div class="col" role="presentation">
+                  <div class="card h-100 border-0 rounded-1 text-white position-relative lab-interactive-card"
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url({% static 'images/ee.jpg' %});"
+                    data-bs-toggle="tab" data-bs-target="#lab-ece" type="button" role="tab" aria-controls="lab-ece"
+                    aria-selected="false">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center text-center p-4">
+                      <svg width="48" height="48" fill="currentColor" class="bi bi-cpu mb-3" viewBox="0 0 16 16">
+                        <path
+                          d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h.5a.5.5 0 0 1 .5.5v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v.5a.5.5 0 0 1-.5.5h-1v1h1.5a.5.5 0 0 1 0 1H12v1h1.5a.5.5 0 0 1 0 1H12v1h1.5a.5.5 0 0 1 0 1H12v1h-1.5a.5.5 0 0 1 0-1H10v1h-1.5a.5.5 0 0 1 0-1H8v1h-1.5a.5.5 0 0 1 0-1H6v1h-1.5a.5.5 0 0 1 0-1H4v.5a.5.5 0 0 1-.5.5h-1v1.5a.5.5 0 0 1-1 0V14H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2V5.5a.5.5 0 0 1 .5-.5H2V4H.5a.5.5 0 0 1 0-1H2V2h-1.5a.5.5 0 0 1 0-1H2V.5A.5.5 0 0 1 2.5 0zM2 12h12V4H2zm11-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0M7 10a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2">
+                        </path>
+                      </svg>
+                      <p class="card-text fw-semibold tracking-wide m-0">Lab : Electronics &amp; Comm. Labs</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- लैब टैब कंटेंट एरिया (id="lab-tabContent") -->
+              <div class="tab-content border p-4 bg-light rounded-3 shadow-sm" id="lab-tabContent">
+
+                <!-- 💻 1. कंप्यूटर साइंस लैब कंटेंट -->
+                <div class="tab-pane fade show active" id="lab-cs" role="tabpanel" tabindex="0">
+                  <h5 class="fw-bold text-info mb-3">💻 Computer Science & Engineering Lab Schedule</h5>
+
+                </div>
+
+                <!-- 🏗️ 2. सिविल लैब कंटेंट -->
+                <div class="tab-pane fade" id="lab-civil" role="tabpanel" tabindex="0">
+                  <h5 class="fw-bold text-success mb-3">🏗️ Civil Engineering Practical Schedule</h5>
+
+                </div>
+
+                <!-- ⚙️ 3. मैकेनिकल वर्कशॉप कंटेंट -->
+                <div class="tab-pane fade" id="lab-mech" role="tabpanel" tabindex="0">
+                  <h5 class="fw-bold text-warning mb-3">⚙️ Mechanical Engineering Workshop Timings</h5>
+
+                </div>
+
+                <!-- ⚡ 4. इलेक्ट्रॉनिक्स लैब कंटेंट -->
+                <div class="tab-pane fade" id="lab-ece" role="tabpanel" tabindex="0">
+                  <h5 class="fw-bold text-danger mb-3">⚡ Electronics & Communication Lab Schedule</h5>
+
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+      <style>
+        /* हेडर का प्रीमियम ब्राउन ग्रेडिएंट */
+        .academic-header {
+          background: linear-gradient(135deg, #3d1414 0%, #a52a2a 100%);
+          box-shadow: 0 4px 12px rgba(165, 42, 42, 0.1);
+        }
+
+        .tracking-wider {
+          letter-spacing: 0.5px;
+        }
+
+        /* ब्रेडक्रंब की क्लीन स्टाइलिंग */
+        .custom-breadcrumb {
+          background-color: rgba(255, 255, 255, 0.9);
+          font-size: 14px;
+          font-weight: 500;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-breadcrumb a:hover {
+          color: #a52a2a !important;
+        }
+
+        /* इमेज रैपर और स्क्रॉल सेटिंग ताकि बड़ी इमेज लेआउट से बाहर न भागे */
+        .table-img-wrapper {
+          max-height: 32rem;
+          border: 1px solid #f0e6e4;
+          background-color: #faf8f7;
+        }
+
+        .timetable-img {
+          min-width: 450px;
+          /* मोबाइल पर भी इमेज को पढ़ने लायक चौड़ाई देगी */
+          transition: transform 0.3s ease;
+        }
+
+        /* हल्का सा होवर इफ़ेक्ट इमेज पर */
+        .table-img-wrapper:hover .timetable-img {
+          transform: scale(1.01);
+        }
+      </style>
+      {% include 'footer.html' %}
+    </div>
+
+
+
+
+
+  </div>
+
+  <div class="tab-pane fade" id="Examination-tab-pane" role="tabpanel" aria-labelledby="Examination-tab" tabindex="0">
+    Examination
+  </div>
+
+
+  <div class="tab-pane fade" id="Results-tab-pane" role="tabpanel" aria-labelledby="Results-tab" tabindex="0">
+    Results
+  </div>
+
+  <div class="tab-pane fade" id="Faculty-tab-pane" role="tabpanel" aria-labelledby="Faculty-tab" tabindex="0">
+    <style>
+      .breadcrumb-item {
+        background-color: #a2cdf9;
+      }
+    </style>
+    <div class="container">
+      <style>
+        .hding {
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+          margin-bottom: 10px;
+          border: 3px solid #861414;
+          text-transform: uppercase;
+          width: 100%;
+
+          /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+          padding: 6px 15px 6px 15px;
+          color: #f8f8fa;
+          text-align: left;
+
+          display: flex;
+          align-items: center;
+        }
+
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+          font-weight: bold;
+          white-space: nowrap;
+          /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+          font-size: 3.4vw;
+        }
+
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+          background-color: #a2cdf9;
+          padding: 2px 6px;
+          border-radius: 3px;
+        }
+
+        .custom-breadcrumb {
+          font-size: 2.2vw !important;
+          margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+          .hding-text {
+            font-size: 1.1rem;
+            /* टैबलेट पर साइज */
+          }
+
+          .custom-breadcrumb {
+            font-size: 0.85rem !important;
+          }
+        }
+
+        @media (min-width: 992px) {
+          .hding-text {
+            font-size: 1.35rem;
+            /* डेस्कटॉप पर साइज */
+          }
+
+          .hding {
+            padding-left: 30px;
+            /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+          }
+        }
+      </style>
+
+      <div class="container-fluid mt-3 mb-5 px-0">
+        <nav class="hding rounded-1">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              academic Faculty
+            </div>
+
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Faculty</li>
+              </ol>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </div>
+    {% include 'faculty.html' %}
+  </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- 
+      <h2 class="mb-4 fw-semibold fs-3 fs-md-2">यहाँ से आपका अगला सेक्शन शुरू होता है</h2>
+      <p class="text-muted fs-6 fs-md-5 mx-auto" style="max-width: 700px;">
+        जैसे ही आप स्क्रॉल करेंगे, यह सफेद बैकग्राउंड वाला सेक्शन ऊपर आएगा और पीछे चल रहे कैरोसेल को पूरी तरह से ढक
+        लेगा।
+        यह लेआउट रिस्पॉन्सिव है, जिससे मोबाइल पर टेक्स्ट स्क्रीन से बाहर नहीं कटेगा।
+      </p>
+      <div style="height: 600px;"></div> सिर्फ स्क्रॉलिंग चेक करने के लिए dummy space -->
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

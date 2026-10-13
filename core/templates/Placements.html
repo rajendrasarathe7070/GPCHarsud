@@ -1,0 +1,1887 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>placements</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+  {% load static %}
+  <!doctype html>
+  <html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admissions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  </head>
+
+  <body>
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Scrollbar hide rahega lekin page scroll hota rahega */
+      html,
+      body {
+        ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+      }
+
+      #navbar {
+        z-index: 1060 !important;
+        /* Bootstrap के डिफॉल्ट z-index से ज्यादा */
+      }
+
+      .navbar {
+        background-color: rgb(230, 220, 195) !important;
+        padding: 5px;
+        padding-bottom: 5px;
+        padding-left: 0px;
+        padding-right: 0px;
+
+      }
+
+      #academictabs {
+        --bs-nav-link-color: #f8f9fa;
+        --bs-nav-link-hover-color: #9d1a27;
+        --bs-nav-link-disabled-color: #999999;
+      }
+
+      .containers {
+        max-width: 100%;
+
+      }
+
+      .overflow-x-scroll {
+        margin-top: 52px;
+        background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+
+        /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
+        z-index: 1040 !important;
+        transform: translateZ(0);
+        /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
+      }
+    </style>
+
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+      {% include 'navbar.html' %}
+
+      
+
+
+    </nav>
+
+    <style>
+      body {
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .overflow-x-scrolls {
+        /* width: 100%;
+      max-height: 5rem; */
+        margin-top: 52px;
+        /* background-color: rgb(38, 5, 138) !important ; */
+        background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+      }
+
+      .nav-tabs {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+      }
+
+      .tab-pane {
+        border-color: transparent;
+        border: none;
+        border-width: 0.1px;
+      }
+    </style>
+
+    <div class="overflow-x-scrolls fixed-top">
+      <style>
+        .notices {
+          max-width: 100%;
+          max-height: 2rem;
+          width: 100%;
+          height: 2rem;
+
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+
+          color: #d10505;
+          justify-content: center;
+        }
+      </style>
+
+      <div class="notices card rounded-0 mt-md-2">
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+          {% include 'info.html' %}
+
+        </marquee>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+
+    <div class="tab-content " id="myTabContent" style="margin-top: 6rem;">
+
+      <div class="card text-bg-dark campusimg" style="max-height: 350px;">
+
+        <img src="{% static 'images\pls.png' %}  " class="card-img" alt="wide image">
+        <div class="card-img-overlay" style="padding: 0px;">
+
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="card container buttons-1 ">
+          <style>
+            .buttons-1 {
+              background: transparent;
+              border: none;
+
+
+            }
+
+            .btn-primary {
+              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+            }
+
+            .btn-primary:hover {
+              transform: translateY(-2px);
+              background: linear-gradient(rgb(194, 74, 55) 0%, rgb(138, 42, 18) 100%) !important;
+            }
+
+            .statics-1 {
+              height: 8rem;
+              background: transparent;
+
+
+            }
+
+            @media (max-width:786px) {
+              .statics-1 {
+                display: grid;
+                flex-direction: row;
+                flex-wrap: nowrap;
+              }
+            }
+
+
+
+            .bi {
+              justify-self: left;
+              max-height: 10px;
+            }
+
+
+            .bi:hover {
+              color: #160788;
+            }
+          </style>
+          <div class="group ">
+            <button type="button" class="btn btn-primary rounded-5 ">statics</button>
+            <button type="button" class="btn btn-primary rounded-5">Recruiters</button>
+            <button type="button" class="btn btn-primary rounded-5 ">student verification</button>
+          </div>
+        </div>
+
+
+        <div class="card-group mx-md-5 my-md-5 ">
+          <style>
+            body {
+              background-color: ghostwhite;
+            }
+
+            .overview {
+              max-height: 10rem;
+              height: 10rem;
+              border: none !important;
+              border-radius: 16px !important;
+              /* मॉडर्न राउंडेड कॉर्नर्स */
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+              /* हल्का सा शैडो इफेक्ट */
+              transition: all 0.3s ease;
+              min-height: 140px;
+              margin-left: 2px;
+              margin-right: 2px;
+              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+              color: #f5f3f3;
+              transition: all 0.5s ease;
+            }
+
+            .overview:hover {
+
+              transform: translateY(-8px);
+              box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+              border-radius: 30px;
+              transition-duration: 300ms;
+              background: linear-gradient(rgba(193, 60, 39, 0.99) 0%, rgba(138, 42, 18, 0.968) 100%) !important;
+              color: rgb(10, 10, 144);
+
+            }
+
+            .card-body {
+              padding: 30px;
+              margin-left: 5px;
+              margin-right: 5px;
+              text-align: left;
+            }
+
+            /* परफेक्ट मैचिंग कलर्स (पेस्टल्स) */
+
+
+            /* सॉफ्ट ऑरेंज */
+          </style>
+          <div class="card overview card-1">
+
+            <div class="card-body">
+              <h5>Students Placed</h5>
+              <h1 class="bi bi-people"></h1>
+              <h1 style="text-align: right; font-size:40px;">{{grand_students_placed}}+</h1>
+            </div>
+          </div>
+          <div class="card overview card-2">
+
+            <div class="card-body ">
+              <h5>Companies Visited</h5>
+              <h1 class="bi bi-building"></h1>
+              <h1 style="text-align: right; font-size:40px;">{{grand_companies_visited}}</h1>
+            </div>
+          </div>
+          <div class="card overview card-3">
+
+            <div class="card-body">
+              <h5>Highest Package</h5>
+              <h1 class="bi bi-trophy"></h1>
+              <h1 style="text-align: right; font-size:40px;">₹{{grand_highest_package}} LPA</h1>
+            </div>
+          </div>
+          <div class="card overview card-4">
+
+            <div class="card-body">
+              <h5 class="card-title">Average Package</h5>
+              <h1 class="bi bi-star-fill"></h1>
+              <h1 style="text-align: right; font-size:40px;">₹{{grand_avg_package}} LPA</h1>
+            </div>
+          </div>
+          <div class="card overview card-5">
+
+            <div class="card-body">
+              <h5 class="card-title">Loast Package</h5>
+              <h1 class="bi bi-star-half"></h1>
+              <h1 style="text-align: right; font-size:40px;">₹{{grand_lowest_package}} LPA</h1>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+
+
+        <!-- sddfssff -->
+        <div class="text-center mb-5 my-5">
+          <h2 class="fw-bold" style="color: #0D47A1;">Training & Placement Cell</h2>
+
+          <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+        </div>
+
+        <style>
+          /* ===== यूनिक CSS: सिर्फ .plc-timeline-wrapper के अंदर लागू ===== */
+          .plc-timeline-wrapper {
+            background: transparent;
+            padding: 50px 20px;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+          }
+
+          .plc-timeline-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px 0;
+          }
+
+          /* हॉरिजॉन्टल कनेक्टिंग लाइन */
+          .plc-timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            right: 60px;
+            height: 2px;
+            background-color: #e5e7eb;
+            z-index: 0;
+          }
+
+          .plc-step {
+            flex: 1 1 0;
+            min-width: 180px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 12px;
+          }
+
+          /* आइकन बॉक्स */
+          .plc-icon-box {
+            width: 80px;
+            height: 80px;
+            background-color: #2563eb;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            position: relative;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+          }
+
+          .plc-icon-box i {
+            font-size: 2rem;
+            color: #ffffff;
+          }
+
+          /* नंबर बैज */
+          .plc-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: #f9f8f8;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1.4;
+          }
+
+          /* टाइटल */
+          .plc-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+            line-height: 1.3;
+          }
+
+          /* डिस्क्रिप्शन */
+          .plc-desc {
+            font-size: 0.85rem;
+            color: #4b5563;
+            line-height: 1.5;
+            margin: 0;
+          }
+
+          /* ===== मोबाइल रिस्पॉन्सिव ===== */
+          @media (max-width: 991px) {
+            .plc-timeline-container::before {
+              display: none;
+              /* छोटी स्क्रीन पर लाइन हटा दें */
+            }
+
+            .plc-step {
+              flex: 1 1 30%;
+              margin-bottom: 30px;
+            }
+          }
+
+          @media (max-width: 576px) {
+            .plc-step {
+              flex: 1 1 100%;
+            }
+          }
+        </style>
+
+
+        <!-- ===== एक ही डिव में पूरा सेक्शन ===== -->
+        <div class="plc-timeline-wrapper">
+          <div class="plc-timeline-container px-0">
+
+            <!-- 1. Training Programme -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">01</span>
+                <i class="bi bi-easel"></i>
+              </div>
+              <h5 class="plc-title">Training Programme</h5>
+              <p class="plc-desc">Conduct training Programme for students.</p>
+            </div>
+
+            <!-- 2. Companies Visit -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">02</span>
+                <i class="bi bi-building"></i>
+              </div>
+              <h5 class="plc-title">Companies Visit</h5>
+              <p class="plc-desc">Companies visit for placement of students.</p>
+            </div>
+
+            <!-- 3. Campus & Interview -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">03</span>
+                <i class="bi bi-person-check"></i>
+              </div>
+              <h5 class="plc-title">Campus & Interview</h5>
+              <p class="plc-desc">Arrange campus and interview.</p>
+            </div>
+
+            <!-- 4. Industrial Visit -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">04</span>
+                <i class="bi bi-airplane"></i>
+              </div>
+              <h5 class="plc-title">Industrial Visit</h5>
+              <p class="plc-desc">Conducting industrial visit.</p>
+            </div>
+
+            <!-- 5. Seminar & Presentation -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">05</span>
+                <i class="bi bi-mic"></i>
+              </div>
+              <h5 class="plc-title">Seminar & Presentation</h5>
+              <p class="plc-desc">Organizing Seminar and presentation for students.</p>
+            </div>
+
+            <!-- 6. Skill Development -->
+            <div class="plc-step">
+              <div class="plc-icon-box">
+                <span class="plc-badge">06</span>
+                <i class="bi bi-lightbulb"></i>
+              </div>
+              <h5 class="plc-title">Skill Development</h5>
+              <p class="plc-desc">Organizing Skill development classes.</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- ssdgsgsdgs -->
+
+        <div class="container-5">
+          <style>
+            .container-5 {
+              margin-left: 3rem;
+              margin-right: 2rem;
+
+            }
+
+            .notices-1 {
+              height: 25rem;
+              max-height: 25rem;
+              width: 100%;
+
+
+
+            }
+
+            .notice-h1,
+            .bi-pin {
+              color: rgb(25, 24, 122);
+
+            }
+
+            .ss {
+
+              width: 100%;
+              max-width: max-content;
+              padding: 9px;
+              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+              color: goldenrod;
+            }
+
+            .story {
+              font-size: 22px;
+              padding: 30px;
+            }
+
+            @media (max-width:400px) {
+              .story {
+                font-size: 15px;
+                padding: 10px;
+              }
+
+              th {
+                font-size: smaller;
+              }
+
+            }
+
+            .story-auth {
+
+              font-size: medium;
+              font-family: cursive;
+              text-align: right;
+            }
+
+            .rounded-pill {
+              max-width: max-content;
+              width: max-content;
+              margin-left: 8px;
+
+            }
+
+            .text-bg-primary {
+              background: linear-gradient(rgba(55, 55, 144, 0.941) 0%, rgba(17, 16, 96, 0.925) 100%) !important;
+              color: goldenrod !important;
+            }
+
+            .notrow>* {
+              padding-left: 0px !important;
+              padding-right: 0px !important;
+
+            }
+          </style>
+
+
+
+
+          <div class="card info-card p-4 mb-5 mt-5 shadow-sm border-0 bg-transparent"
+            style="border-radius: 10px; max-width: 1350px; align-self: center; justify-self: center; ">
+            <!-- row को सभी स्क्रीन्स पर सेंटर करने के लिए justify-content-center जोड़ा गया है -->
+            <div class="row g-4 align-items-center justify-content-center ">
+
+              <!-- T&P Head प्रोफाइल सेक्शन: सभी स्क्रीन्स पर सेंटर करने के लिए text-center और d-flex संरचना -->
+              <div class="col-lg-4 col-md-5 text-center border-end-md border-light bg-transparent">
+                <div class="d-flex flex-column align-items-center justify-content-center mx-auto rounded-3"
+                  style="background: linear-gradient(135deg,rgb(25, 135, 84), #096030);">
+                  <!-- फोटो कंटेनर (एकदम सेंटर में) -->
+                  <div class="mb-3 position-relative d-flex justify-content-center">
+                    <img src="https://placeholder.com" alt="T&P Head" class="rounded-circle img-thumbnail shadow-sm"
+                      style="width: 130px; height: 130px; object-fit: cover; border: 3px solid #0d6efd;">
+                  </div>
+                  <!-- नाम और पद -->
+                  <h5 class="fw-bold mb-1 text-light">Dr. Amit Sharma</h5>
+                  <p class="text-primary fw-semibold small mb-2 text-danger">Head, Training & Placement Cell</p>
+
+                  <!-- संपर्क जानकारी -->
+                  <div class="text-muted small ">
+                    <p class="mb-0 text-light"><i class="bi bi-envelope-fill me-1 "></i> tpo@college.edu</p>
+                    <p class="mb-0 text-light"><i class="bi bi-envelope-fill me-1 "></i> tpo@college.edu</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activities सेक्शन -->
+              <div class="col-lg-8 col-md-7 ps-lg-4">
+                <!-- हेडिंग मोबाइल पर सेंटर और डेस्कटॉप पर लेफ्ट करने के लिए text-center text-md-start लगाया है -->
+                <h5 class="fw-bold text-primary mb-3 text-center text-md-start">
+                  <i class="bi bi-activity me-2"></i>Head, Training & Placement Cell Description
+                </h5>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
+                          class="bi bi-check-circle-fill text-success me-2"></i>1. Conduct training Programme.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto saepe repellendus est laboriosam
+                        tempore facere maiores eos voluptatum rem eius porro, quam rerum sapiente, quo nulla, deserunt
+                        quasi sunt molestiae iste! Perferendis perspiciatis quae sequi nobis exercitationem possimus
+                        nemo dignissimos quisquam ab. Doloribus facilis laboriosam minus aspernatur, labore deleniti
+                        repudiandae?</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
+                          class="bi bi-check-circle-fill text-success me-2"></i>4. Conducting industrial visit.</li>
+                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
+                          class="bi bi-check-circle-fill text-success me-2"></i>5. Organizing Seminar and presentation
+                        for the students.</li>
+                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
+                          class="bi bi-check-circle-fill text-success me-2"></i>6. Organizing Skill development classes.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="text-center mb-5 my-5 ">
+            <h2 class="fw-bold mt-5" style="color: #0D47A1;"> Top Recruiters Companies</h2>
+
+            <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+          </div>
+
+
+          <style>
+            :root {
+              --slider-gap: 30px;
+              --slider-speed: 20s;
+              --card-width: 200px;
+              --card-height: 100px;
+            }
+
+            /* ===== मुख्य कंटेनर ===== */
+            .custom-slider-container {
+              width: 100%;
+              max-width: 1370px;
+              /* स्क्रीन बहुत चौड़ी हो तो भी ट्रैक कवर रहे */
+              margin: 0 auto;
+              overflow: hidden;
+              padding: 20px 0;
+              border-radius: 3rem;
+            }
+
+            /* ===== ट्रैक ===== */
+            .slider-track {
+              display: flex;
+              width: max-content;
+              will-change: transform;
+            }
+
+            /* ===== कार्ड ===== */
+            .logo-card {
+              flex: 0 0 auto;
+              width: var(--card-width);
+              height: var(--card-height);
+              margin-right: var(--slider-gap);
+              /* gap की जगह margin-right */
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #ffffff;
+              border: 1px solid rgba(0, 0, 0, 0.05);
+              border-radius: 12px;
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+              padding: 15px;
+              transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+
+            .logo-card:hover {
+              transform: translateY(-5px);
+              background-color: brown;
+            }
+
+            .logo-card img {
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+              mix-blend-mode: multiply;
+            }
+
+            /* ===== एनीमेशन ===== */
+            .track-ltr {
+              animation: scrollLTR var(--slider-speed) linear infinite;
+            }
+
+            .track-rtl {
+              animation: scrollRTL var(--slider-speed) linear infinite;
+            }
+
+            /* होवर पर रोकना चाहें तो (न चाहिए तो ये 3 लाइन हटा दें) */
+            .slider-track:hover {
+              animation-play-state: paused;
+            }
+
+            @keyframes scrollLTR {
+
+              /* दाएँ से बाएँ */
+              from {
+                transform: translateX(-50%);
+              }
+
+              to {
+                transform: translateX(0);
+              }
+            }
+
+            @keyframes scrollRTL {
+
+              /* बाएँ से दाएँ */
+              from {
+                transform: translateX(0);
+              }
+
+              to {
+                transform: translateX(-50%);
+              }
+            }
+          </style>
+
+          <!-- ================= स्लाइडर 1 : LTR ================= -->
+          <div class="custom-slider-container my-4 ">
+            <div class="slider-track track-ltr">
+
+              <!-- ग्रुप A -->
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+
+              <!-- ग्रुप B — ग्रुप A की हूबहू कॉपी (लूप के लिए ज़रूरी) -->
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+
+            </div>
+          </div>
+
+          <!-- ================= स्लाइडर 2 : RTL ================= -->
+          <div class="custom-slider-container my-4">
+            <div class="slider-track track-rtl">
+
+              <!-- ग्रुप A -->
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+
+              <!-- ग्रुप B — हूबहू कॉपी -->
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+                  alt="Logo"></div>
+              <div class="logo-card"><img
+                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
+
+            </div>
+          </div>
+
+
+
+
+
+
+          <style>
+            /* ===== स्कोप्ड CSS: सिर्फ .tpo-recruiters-section के अंदर लागू होगा ===== */
+            .tpo-recruiters-section {
+              background-color: #f8fafc;
+              padding: 2rem 0;
+            }
+
+            /* कंपनी कार्ड्स वाला कार्ड */
+            .tpo-company-card-wrapper {
+              background: #ffffff;
+              border-radius: 16px;
+              border: 1px solid rgba(0, 0, 0, 0.05);
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+              padding: 30px;
+              height: 100%;
+            }
+
+            .tpo-section-heading {
+              font-size: 1.1rem;
+              font-weight: 700;
+              color: #1e293b;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              margin-bottom: 25px;
+              border-left: 4px solid #2563eb;
+              padding-left: 10px;
+            }
+
+            /* कंपनी लोगो कार्ड */
+            .tpo-logo-card {
+              width: 100%;
+              min-height: 110px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              background: #f8fafc;
+              border-radius: 12px;
+              padding: 15px 10px;
+              border: 1px solid rgba(0, 0, 0, 0.04);
+              text-align: center;
+              transition: all 0.25s ease;
+              height: 100%;
+            }
+
+            .tpo-logo-card:hover {
+              transform: translateY(-3px);
+              background: #ffffff;
+              box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+            }
+
+            .tpo-logo-card img {
+              max-width: 100%;
+              max-height: 45px;
+              object-fit: contain;
+              mix-blend-mode: multiply;
+              margin-bottom: 6px;
+            }
+
+            .tpo-logo-card small {
+              font-size: 0.68rem;
+              font-weight: 600;
+              color: #64748b;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+
+            /* TPO स्टोरी कार्ड */
+            .tpo-story-wrapper {
+              background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+              border-radius: 16px;
+              padding: 30px;
+              color: #f8fafc;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              position: relative;
+              box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+            }
+
+            /* कोटेशन मार्क वाटरमार्क */
+            .tpo-story-wrapper::before {
+              content: "“";
+              position: absolute;
+              top: -20px;
+              left: 20px;
+              font-size: 8rem;
+              color: rgba(255, 255, 255, 0.05);
+              font-family: serif;
+              line-height: 1;
+            }
+
+            .tpo-heading {
+              font-size: 1.1rem;
+              font-weight: 700;
+              color: #38bdf8;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              margin-bottom: 15px;
+            }
+
+            .tpo-quote {
+              font-size: 0.95rem;
+              line-height: 1.7;
+              color: #cbd5e1;
+              font-style: italic;
+              margin-bottom: 25px;
+            }
+
+            .tpo-profile {
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              border-top: 1px solid rgba(255, 255, 255, 0.1);
+              padding-top: 15px;
+            }
+
+            .tpo-avatar {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              object-fit: cover;
+              border: 2px solid #38bdf8;
+            }
+
+            .tpo-info h6 {
+              font-size: 0.95rem;
+              font-weight: 700;
+              color: #ffffff;
+              margin: 0;
+            }
+
+            .tpo-info small {
+              font-size: 0.75rem;
+              color: #94a3b8;
+            }
+          </style>
+
+
+          <!-- ===== यूनिक रैपर: इससे बाहर की CSS इस सेक्शन को प्रभावित नहीं करेगी ===== -->
+          <div class="tpo-recruiters-section bg-transparent">
+            <div class="container-fluid px-md-5">
+              <div class="row g-4 align-items-stretch">
+
+                <!-- LEFT: कंपनी कार्ड्स ग्रिड (8 कॉलम) -->
+                <div class="col-lg-8 col-md-12">
+                  <div class="tpo-company-card-wrapper">
+                    <div class="tpo-section-heading">Our Top Recruiters</div>
+
+                    <!-- ग्रिड लेआउट: 2, 3 या 4 कॉलम रिस्पॉन्सिव -->
+                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="John Deere">
+                          <small>Dewas</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Vac Mate">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Volvo Eicher">
+                          <small>Dewas</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Eicher Tractor">
+                          <small>Bhopal</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="CEAT Tyre">
+                          <small>Halol</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Maruti Krishna">
+                          <small>Haryana</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Jay Hind">
+                          <small>Aurangabad</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>.
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RIGHT: TPO की सक्सेस स्टोरी (4 कॉलम) -->
+                <div class="col-lg-4 col-md-12">
+                  <div class="tpo-story-wrapper">
+                    <div>
+                      <div class="tpo-heading">Success Story by TPO</div>
+                      <p class="tpo-quote">
+                        "हमारे छात्रों ने निरंतर अपनी प्रतिभा और कड़े परिश्रम के बल पर देश की शीर्ष बहुराष्ट्रीय
+                        कंपनियों में अपनी जगह बनाई है। यह प्लेसमेंट रिकॉर्ड्स हमारे शैक्षणिक स्तर और इंडस्ट्री-रेडी
+                        ट्रेनिंग का प्रत्यक्ष प्रमाण हैं। हमें अपने छात्रों की इस सफलता पर अत्यंत गर्व है।"
+                      </p>
+                    </div>
+
+                    <div class="tpo-profile">
+                      <img src="https://unsplash.com" class="tpo-avatar" alt="TPO Profile">
+                      <div class="tpo-info">
+                        <h6>Dr. Rajesh Kumar</h6>
+                        <small>Training & Placement Officer (TPO)</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- कस्टम CSS: बड़ी स्क्रीन पर ही सिर्फ बीच की बॉर्डर लाइन दिखे, मोबाइल पर छुप जाए -->
+          <style>
+            @media (min-width: 768px) {
+              .border-end-md {
+                border-right: 1px solid #dee2e6 !important;
+              }
+            }
+          </style>
+
+
+
+          <div class="row yearspkg mx-md-5 mt-5">
+
+
+          </div>
+
+
+        </div>
+        <div class="containers my-5 mx-5 px-5 ">
+
+          <style>
+            /* इमेज की तरह फॉन्ट और बॉर्डर को सटीक रखने के लिए कुछ कस्टम स्टाइलिंग */
+            body {
+              font-family: Arial, sans-serif;
+            }
+
+            .table-custom {
+              border: 2px solid #333;
+            }
+
+            .table-custom th,
+            .table-custom td {
+              border: 1px solid #777;
+              vertical-align: middle;
+              text-align: center;
+            }
+
+            /* ब्रांच नाम को लेफ्ट-अलाइन रखने के लिए (जैसा कि इमेज में है) */
+            .table-custom td.branch-name {
+              text-align: left;
+              padding-left: 15px;
+            }
+          </style>
+
+
+          <!-- प्लेसमेंट सेल की गतिविधियाँ -->
+
+
+          <!-- रीयूसेबल टेबल मैक्रो फंक्शनलिटी शुरू -->
+
+          <!-- 1. ACADEMIC YEAR 2019-20 -->
+          <div class="card data-card overflow-hidden rounded-3  ">
+            <div class="card-header year-header py-3 px-4 d-flex justify-content-between align-items-center bg-light">
+              <span><i class="bi bi-calendar3 me-2"></i>Academic Year 2019-20</span>
+              <span class="badge bg-primary px-3"> New</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover table-custom m-0">
+                  <thead>
+                    <tr>
+
+                      <th scope="col"> Academic Year</th>
+
+                      <th scope="col">Students Placed</th>
+
+
+                      <th scope="col">Offers</th>
+                      <th scope="col">Highest (LPA)</th>
+                      <th scope="col">Average (LPA)</th>
+                      <th scope="col">Median (LPA)</th>
+
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+
+                    {% for batch in all_batches %}
+                    <tr>
+                      <td class="fw-bold text-secondary">{{ batch.year }}</td>
+                      <td><span class="badge bg-success fs-6">{{ batch.total_students_placed }}</span></td>
+                      <td>{{ batch.total_offers }}</td>
+                      <td class="fw-bold text-success">₹{{ batch.max_highest_package }}</td>
+                      <td>₹{{ batch.avg_package }}</td>
+                      <td>₹{{ batch.median_package }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="6" class="text-muted py-3">कोई समरी डेटा उपलब्ध नहीं है।</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="Statistics-tab-pane" role="tabpanel" aria-labelledby="Statistics-tab" tabindex="0">
+        <style>
+          /* कार्ड्स को और प्रीमियम लुक देने के लिए कस्टम शैडो और होवर इफ़ेक्ट */
+          .stat-card {
+            border: none;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+          }
+
+          .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+          }
+
+          .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+          }
+        </style>
+
+        <div class="container my-5">
+          <div class="row g-4">
+
+            <!-- कार्ड 1: Students Placed -->
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card stat-card h-100 bg-white p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="text-muted text-uppercase mb-2 fw-semibold">Students Placed</h6>
+                    <h3 class="fw-bold mb-0 text-dark">{{grand_students_placed}}+</h3>
+                  </div>
+                  <div class="icon-box bg-success-subtle text-success">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- कार्ड 2: Companies Visited -->
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card stat-card h-100 bg-white p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="text-muted text-uppercase mb-2 fw-semibold">Companies Visited</h6>
+                    <h3 class="fw-bold mb-0 text-dark">{{grand_companies_visited}}+</h3>
+                  </div>
+                  <div class="icon-box bg-primary-subtle text-primary">
+                    <i class="bi bi-building-fill"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- कार्ड 3: Highest Package -->
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card stat-card h-100 bg-white p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="text-muted text-uppercase mb-2 fw-semibold">Highest Package</h6>
+                    <h3 class="fw-bold mb-0 text-success">{{grand_highest_package}}+ LPA</h3>
+                  </div>
+                  <div class="icon-box bg-warning-subtle text-warning-emphasis">
+                    <i class="bi bi-trophy-fill"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- कार्ड 4: Average Package -->
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card stat-card h-100 bg-white p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="text-muted text-uppercase mb-2 fw-semibold">Average Package</h6>
+                    <h3 class="fw-bold mb-0 text-info-emphasis">{{grand_avg_package}}+ LPA</h3>
+                  </div>
+                  <div class="icon-box bg-info-subtle text-info">
+                    <i class="bi bi-graph-up-arrow"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+
+        <div class="container my-3">
+          <style>
+            .table-pkg {
+              width: 99%;
+
+              font-family: 'Times New Roman', Times, serif;
+              font-size: medium;
+
+            }
+
+            td {
+              text-align: left;
+            }
+          </style>
+
+          <div class="card rounded-2 mt-5" style="width: 100%;">
+            <div class="card-body px-0 px-md-3">
+              <h3 class="card-title bi-clipboard2-data">Year-wise Placement Data</h3>
+              <div class="overflow-scroll">
+                <table class="table table-pkg">
+                  <thead>
+                    <tr>
+
+                      <th scope="col"> Academic Year</th>
+
+                      <th scope="col">Students Placed</th>
+
+
+                      <th scope="col">Offers</th>
+                      <th scope="col">Highest (LPA)</th>
+                      <th scope="col">Average (LPA)</th>
+                      <th scope="col">Median (LPA)</th>
+
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+
+                    {% for batch in all_batches %}
+                    <tr>
+                      <td class="fw-bold text-secondary">{{ batch.year }}</td>
+                      <td><span class="badge bg-success fs-6">{{ batch.total_students_placed }}</span></td>
+                      <td>{{ batch.total_offers }}</td>
+                      <td class="fw-bold text-success">₹{{ batch.max_highest_package }}</td>
+                      <td>₹{{ batch.avg_package }}</td>
+                      <td>₹{{ batch.median_package }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="6" class="text-muted py-3">कोई समरी डेटा उपलब्ध नहीं है।</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="container table-pl">
+          <style>
+            body {}
+
+            .table-pl {
+              max-width: 1300px;
+              margin: 0 auto;
+              background: white;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              overflow: scroll;
+              overflow-x: scroll;
+            }
+
+            h2 {
+              color: #333;
+              text-align: center;
+            }
+
+            .filter-section {
+              margin-bottom: 20px;
+              text-align: right;
+            }
+
+            select {
+              padding: 8px 12px;
+              font-size: 16px;
+              border-radius: 4px;
+              border: 1px solid #ccc;
+            }
+
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-top: 10px;
+            }
+
+            th,
+            td {
+              border: 1px solid #ddd;
+              padding: 12px;
+              text-align: center;
+            }
+
+            th {
+              background-color: #4CAF50;
+              color: white;
+              font-weight: bold;
+            }
+
+            tr:nth-child(even) {
+              background-color: #f2f2f2;
+            }
+
+            tr:hover {
+              background-color: #ddd;
+            }
+
+            .no-data {
+              text-align: center;
+              padding: 20px;
+              color: #777;
+            }
+          </style>
+          <h2>Student Placement Record
+            {% if selected_batch %}(Batch: {{ selected_batch.year }}){% endif %}
+          </h2>
+
+          <!-- ड्रॉपडाउन फ़िल्टर -->
+          <div class="filter-section">
+            <form method="GET" action="">
+              <label for="batch_id">बैच चुनें: </label>
+              <select name="batch_id" id="batch_id" onchange="this.form.submit()">
+                {% for batch in all_batches %}
+                <option value="{{batch.id}}" {% if selected_batch and batch.id == selected_batch.id %}selected
+                  {%endif%}>
+                  {{ batch.year }}
+                </option>
+                {% empty %}
+                <option>कोई बैच उपलब्ध नहीं है</option>
+                {% endfor %}
+              </select>
+            </form>
+          </div>
+
+          <!-- 2. उसी सिलेक्टेड ऑब्जेक्ट के prefetch किए गए records को रेंडर करना -->
+          {% if selected_batch and selected_batch.branch_records.all %}
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Branch Name</th>
+                <th>Number of Students in Final Year</th>
+                <th>Number of Students Placed</th>
+                <th>Number of Companies Visited</th>
+                <th>Highest Package offered (LPA)</th>
+                <th>Lowest Package offered (LPA)</th>
+                <th>Average Package offered (LPA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- यहाँ branch_records.all बिना किसी एक्स्ट्रा DB हिट के सीधे रैम से डेटा ला रहा है -->
+              {% for record in selected_batch.branch_records.all %}
+              <tr>
+                <td>{{ record.s_no }}</td>
+                <td style="text-align: left; font-weight: bold;">{{ record.branch_name }}</td>
+                <td>{{ record.final_year_students }}</td>
+                <td>{{ record.students_placed }}</td>
+                <td>{{ record.companies_visited }}</td>
+                <td>{{ record.highest_package }}</td>
+                <td>{{ record.lowest_package }}</td>
+                <td>{{ record.average_package }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p class="no-data">इस बैच के लिए कोई प्लेसमेंट रिकॉर्ड नहीं मिला।</p>
+          {% endif %}
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+    <div class="tab-pane fade" id="Recruiters-Companies-tab-pane" role="tabpanel"
+      aria-labelledby="Recruiters-Companies-tab" tabindex="0"  >
+      
+      <div class="card bg-transparent border-0 mt-md-5" style="height:8rem !important;">
+        <div class="text-center mb-5 my-5" >
+        <h2 class="fw-bold" style="color: #0D47A1;"> Recruiters Companies</h2>
+
+        <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+      </div>
+      </div>
+
+      <div class="custom-slider-container mb-md-4 mt-0 ">
+        <div class="slider-track track-ltr">
+
+          <!-- ग्रुप A -->
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+
+          <!-- ग्रुप B — ग्रुप A की हूबहू कॉपी (लूप के लिए ज़रूरी) -->
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+
+        </div>
+      </div>
+
+      <!-- ================= स्लाइडर 2 : RTL ================= -->
+      <div class="custom-slider-container my-md-4">
+        <div class="slider-track track-rtl">
+
+          <!-- ग्रुप A -->
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+
+          <!-- ग्रुप B — हूबहू कॉपी -->
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+          <div class="logo-card"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
+              alt="Logo"></div>
+          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
+              alt="Logo"></div>
+
+        </div>
+      </div>
+<!-- end shcroll -->
+              <div class="col-lg-11 col-md-12 " style="justify-self: center;">
+                  <div class="tpo-company-card-wrapper">
+                    <div class="tpo-section-heading">Our Top Recruiters</div>
+
+                    <!-- ग्रिड लेआउट: 2, 3 या 4 कॉलम रिस्पॉन्सिव -->
+                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="John Deere">
+                          <small>Dewas</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Vac Mate">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Volvo Eicher">
+                          <small>Dewas</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Eicher Tractor">
+                          <small>Bhopal</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="CEAT Tyre">
+                          <small>Halol</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
+                            alt="Maruti Krishna">
+                          <small>Haryana</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Jay Hind">
+                          <small>Aurangabad</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>.
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="tpo-logo-card">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
+                            alt="Force Motors">
+                          <small>Pithampur</small>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="StudentsPlaced-tab-pane" role="tabpanel" aria-labelledby="StudentsPlaced-tab"
+      tabindex="0">
+
+       <div class="card bg-transparent border-0 mt-md-5 mb-3" style="height:8rem !important;">
+        <div class="text-center mb-5 my-5">
+        <h2 class="fw-bold" style="color: #0D47A1;">Student Placed & Verification</h2>
+
+        <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+      </div>
+      </div>
+
+        <!-- Card 6: Saanvi Gupta -->
+<style>
+        body {
+           font-family: 'Times New Roman', Times, serif !important;
+        }
+        .form-container, .list-container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+        .filter-section {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+    </style>
+ 
+    
+    <!-- Main Content Container -->
+    <div class="container mb-5">
+        <div class="row g-4">
+            
+            <!-- Left Side: Student Verification Form -->
+            <div class="col-lg-4 col-md-5">
+                <div class="form-container">
+                    <h3 class="mb-4 text-primary">Student Verification</h3>
+                    <form action="#" method="POST">
+                        
+                        <!-- Student ID -->
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label">Student ID / Roll No.</label>
+                            <input type="text" class="form-control" id="studentId" placeholder="उदा: STU12345" required>
+                        </div>
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">पूरा नाम (Full Name)</label>
+                            <input type="text" class="form-control" id="studentName" placeholder="अपना नाम दर्ज करें" required>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="mb-3">
+                            <label for="studentEmail" class="form-label">ईमेल आईडी (Email)</label>
+                            <input type="email" class="form-control" id="studentEmail" placeholder="name@example.com" required>
+                        </div>
+
+                        <!-- Course/Branch Selection -->
+                        <div class="mb-3">
+                            <label for="course" class="form-label">कोर्स / ब्रांच</label>
+                            <select class="form-select" id="course" required>
+                                <option value="" selected disabled>चुनें...</option>
+                                <option value="B.Tech CSE">B.Tech (CSE)</option>
+                                <option value="B.Tech ECE">B.Tech (ECE)</option>
+                                <option value="BCA">BCA</option>
+                                <option value="MCA">MCA</option>
+                            </select>
+                        </div>
+
+                        
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-100">Verify Student</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side: Placed Students List & Dynamic Filters -->
+            <div class="col-lg-8 col-md-7">
+                <div class="list-container">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-success mb-0">Placed Students List</h3>
+                        <!-- यहाँ कुल छात्रों की संख्या को भी डायनेमिक दिखाने के लिए Django का length फ़िल्टर उपयोग किया है -->
+                        <span class="badge bg-success fs-6">Total Placed: {{ placed_students|length }}</span>
+                    </div>
+
+                    <!-- Dynamic Filter Section (Django Ready) -->
+                    <div class="filter-section mb-4">
+                        <form method="GET" action="" class="row g-3 align-items-center">
+                            
+                            <!-- 1. Year / Batch Filter -->
+                            <div class="col-md-4">
+                                <label for="batch_id" class="form-label fw-bold small text-secondary">बैच चुनें (Year)</label>
+                                <select name="batch_id" id="batch_id" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    {% for batch in all_batches %}
+                                    <option value="{{batch.id}}" {% if selected_batch and batch.id == selected_batch.id %}selected{% endif %}>
+                                        {{ batch.year }}
+                                    </option>
+                                    {% empty %}
+                                    <option>कोई बैच उपलब्ध नहीं है</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- 2. Caste / Category Filter -->
+                            <div class="col-md-4">
+                                <label for="caste" class="form-label fw-bold small text-secondary">जाति/श्रेणी (Caste)</label>
+                                <select name="caste" id="caste" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    {% for cat in all_categories %}
+                                    <option value="{{cat.id}}" {% if selected_caste and cat.id == selected_caste.id %}selected{% endif %}>
+                                        {{ cat.name }}
+                                    </option>
+                                    {% empty %}
+                                    <option>General / OBC / SC / ST</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- 3. Branch Filter -->
+                            <div class="col-md-4">
+                                <label for="branch" class="form-label fw-bold small text-secondary">ब्रांच चुनें (Branch)</label>
+                                <select name="branch" id="branch" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    {% for br in all_branches %}
+                                    <option value="{{br.id}}" {% if selected_branch_filter and br.id == selected_branch_filter.id %}selected{% endif %}>
+                                        {{ br.name }}
+                                    </option>
+                                    {% empty %}
+                                    <option>CSE / ECE / ME / CE</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                    
+                    <!-- Corrected Responsive Table List (Perfect Alignment) -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Roll No</th>
+                                    <th scope="col">नाम (Name)</th>
+                                    <th scope="col">ब्रांच (Branch)</th>
+                                    <th scope="col">कंपनी (Company)</th>
+                                    <th scope="col">पैकेज (Package)</th>
+                                    <th scope="col">स्टेटस</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Django Dynamic Loop: यह आपके Backend Views से आ रहे सारे डेटा को एक-एक करके रेंडर करेगा -->
+                                {% for student in placed_students %}
+                                <tr>
+                                    <th scope="row">{{ student.roll_no }}</th>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.branch }}</td>
+                                    <td>{{ student.company }}</td>
+                                    <td>{{ student.package }} LPA</td>
+                                    <td>
+                                        {% if student.status == 'Verified' %}
+                                            <span class="badge bg-success">Verified</span>
+                                        {% else %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <!-- अगर फिल्टर के आधार पर डेटाबेस में कोई छात्र नहीं मिलता है तो यह दिखेगा -->
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">
+                                        चयनित फ़िल्टर के अनुसार कोई प्लेस्ड स्टूडेंट डेटा उपलब्ध नहीं है।
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                            </div> <!-- table-responsive का अंत -->
+                    
+                </div> <!-- list-container का अंत -->
+            </div> <!-- col-lg-8 का अंत -->
+
+        </div> <!-- row का अंत -->
+    </div> <!-- container का अंत -->
+
+  
+
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="dashbord-tab-pane" role="tabpanel" aria-labelledby="dashbord-tab" tabindex="0">
+
+
+
+
+    </div>
+ 
+
+
+
+
+
+
+    {% include 'footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"></script>
+
+  </body>
+
+  </html>

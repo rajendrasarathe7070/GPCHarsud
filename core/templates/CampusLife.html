@@ -1,0 +1,1799 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Life</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <style>
+    #navbar {
+      z-index: 1060 !important;
+      /* Bootstrap के डिफॉल्ट z-index से ज्यादा */
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Scrollbar hide rahega lekin page scroll hota rahega */
+    html,
+    body {
+      ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .navbar {
+      background-color: rgb(230, 220, 195) !important;
+      padding: 5px;
+      padding-bottom: 5px;
+      padding-left: 0px;
+      padding-right: 0px;
+
+    }
+
+    #academictabs {
+      --bs-nav-link-color: #f8f9fa;
+      --bs-nav-link-hover-color: #9d1a27;
+      --bs-nav-link-disabled-color: #999999;
+    }
+
+    .containers {
+      max-width: 100%;
+
+    }
+
+    .overflow-x-scroll {
+      margin-top: 52px;
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+
+      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
+      z-index: 1040 !important;
+      transform: translateZ(0);
+      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
+
+
+    }
+
+    /* डेस्कटॉप और बड़ी स्क्रीन पर होवर (Hover) चालू करने के लिए */
+    @media (min-width: 992px) {
+
+      /* जब माउस नेव-आइटम या ड्रॉपडाउन पर जाए */
+      .nav-item.dropdown:hover .dropdown-menu,
+      .dropdown:hover .dropdown-menu {
+        display: block !important;
+        margin-top: 0;
+        /* ड्रॉपडाउन और बटन के बीच का गैप खत्म करने के लिए */
+      }
+    }
+  </style>
+
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+    {% include 'navbar.html' %}
+
+     
+
+  </nav>
+
+  <style>
+    .overflow-x-scrolls {
+      /* width: 100%;
+      max-height: 5rem; */
+      margin-top: 50px !important;
+      /* background-color: rgb(38, 5, 138) !important ; */
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+    }
+ 
+
+    .nav-tabs {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+
+    }
+  </style>
+
+  <div class="overflow-x-scrolls fixed-top" style="    margin-top: 50px;">
+
+    <div class="notices card rounded-0  ">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+        {% include 'info.html' %}
+
+      </marquee>
+    </div>
+
+  </div>
+
+  <style>
+    .notices {
+      max-width: 100%;
+      max-height: 2rem;
+      width: 100%;
+      height: 2rem;
+
+      background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+
+      color: #d10505;
+    }
+  </style>
+
+
+
+  <div class="tab-content " id="myTabContent" style="margin-top: 4rem;">
+
+    <div class="card text-bg-dark campusimg" style="max-height: 350px;">
+
+      <img src="{% static 'images/image_df13ac79.jpg' %}" class="card-img" alt="wide image">
+      <div class="card-img-overlay" style="padding: 0px;">
+
+
+      </div>
+    </div>
+
+    <div class="tab-pane fade show active" id="Campus-tab-pane" role="tabpanel" aria-labelledby="Campus-tab"
+      tabindex="0">
+
+
+      <style>
+        body {
+          background-color: ghostwhite;
+        }
+
+        .overview {
+          max-height: 10rem;
+          height: 10rem;
+          border: none !important;
+          border-radius: 16px !important;
+          /* मॉडर्न राउंडेड कॉर्नर्स */
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+          /* हल्का सा शैडो इफेक्ट */
+          transition: all 0.3s ease;
+          min-height: 140px;
+          margin-left: 2px;
+          margin-right: 2px;
+
+        }
+
+        .overview:hover {
+          background-color: rgb(255, 255, 0);
+          transform: translateY(-8px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+          border-radius: 30px;
+          transition-duration: 300ms;
+
+
+
+        }
+
+        .card-body {
+          padding: 60px;
+          text-align: center;
+        }
+
+        /* परफेक्ट मैचिंग कलर्स (पेस्टल्स) */
+        .card-1 {
+          background-color: #FFF3C4 !important;
+          color: #7F5F00;
+        }
+
+        /* सॉफ्ट बैनर येलो */
+        .card-2 {
+          background-color: #E3F2FD !important;
+          color: #0D47A1;
+        }
+
+        /* ऊपरी नेवबार जैसा ब्लू */
+        .card-3 {
+          background-color: #F8BBD0 !important;
+          color: #880E4F;
+        }
+
+        /* सबसे ऊपरी नेवबार जैसा सॉफ्ट मैरून/ब्राउन */
+        .card-4 {
+          background-color: #FFFFFF !important;
+          color: #212121;
+          border: 1px solid #E0E0E0 !important;
+        }
+
+        /* क्लासिक वाइट */
+        .card-5 {
+          background-color: #FFE0B2 !important;
+          color: #E65100;
+        }
+
+        /* सॉफ्ट ऑरेंज */
+      </style>
+
+      <div class="card-group mx-md-5 my-md-5 ">
+        <div class="card overview card-1">
+
+          <div class="card-body">
+            <h5 class="card-title">Students 2,000+ </h5>
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card overview card-2">
+
+          <div class="card-body ">
+            <h5 class="card-title">Hostel 08+</h5>
+
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card overview card-3">
+
+          <div class="card-body">
+            <h5 class="card-title">Laboratories 15+</h5>
+            <small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card overview card-4">
+
+          <div class="card-body">
+            <h5 class="card-title">Library Books 25,000+</h5>
+
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card overview card-5">
+
+          <div class="card-body">
+            <h5 class="card-title">Campus Area XX Acres</h5>
+
+
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <style>
+        /* मुख्य गैलरी कार्ड */
+        .gallery-card {
+          border: none !important;
+          border-radius: 14px !important;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          background-color: #ffffff;
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /* इमेज कंटेनर और होवर ओवरले */
+        .gallery-img-wrapper {
+          position: relative;
+          overflow: hidden;
+          height: 190px;
+          background-color: #f5f5f5;
+        }
+
+        .gallery-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        /* "View Album" ब्लैक ओवरले इफेक्ट */
+        .gallery-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          /* हाफ ट्रांसपेरेंट ब्लैक */
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 1rem;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+          opacity: 1;
+          /* माउस ले जाने पर दिखेगा */
+        }
+
+        .gallery-card:hover .gallery-img {
+          transform: scale(1.05);
+        }
+
+        /* पॉप-अप (Modal) के अंदर की इमेजेस का साइज फिक्स करना */
+        .modal-slider-img {
+          height: 450px;
+          object-fit: contain;
+          /* इमेज बिना कटे पूरी दिखेगी */
+          background-color: #111;
+          /* खाली जगह पर ब्लैक बैकग्राउंड */
+        }
+
+        @media (max-width: 768px) {
+          .modal-slider-img {
+            height: 280px;
+            /* मोबाइल के लिए परफेक्ट हाइट */
+          }
+        }
+      </style>
+      <!-- सेक्शन हेडिंग -->
+      <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: #0D47A1;">Campus Life Gallery</h2>
+        <p class="text-muted">किसी भी केटेगरी पर क्लिक करके उसकी और भी फोटोज़ देखें</p>
+        <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+      </div>
+
+
+      <div class="container rounded-3" style="max-height: 29rem; max-width:85rem ;">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner rounded-3" style="max-height: 30rem;">
+
+            <!-- {% for img in categories %}
+             {% if img.category == 'main_entrance' %}
+             {% for img_obj in img.images.all %}
+            <div class="carousel-item active">
+             
+              <img src="{{ img.image.url }}"
+                class="d-block w-100"
+                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
+            </div>
+            {% endfor %}
+            {% else %}
+       { continue }
+             <div class="carousel-item active p-5 text-center">
+                  <p class="mb-0 text-muted">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
+                </div>
+            {% endif %}
+            {% endfor %} -->
+
+            <div class="carousel-item  rounded-3 active">
+              <img
+                src="https://img.magnific.com/free-vector/male-female-students-rest-study-campus-park-multiracial-teenagers-casual-clothes-watching-funny-video-laptop-reading-book-break-time-university-college_575670-2247.jpg?semt=ais_hybrid&w=740&q=80"
+                class="d-block w-100"
+                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
+            </div>
+            <div class="carousel-item  rounded-3">
+              <img
+                src="https://img.magnific.com/free-vector/male-female-students-rest-study-campus-park-multiracial-teenagers-casual-clothes-watching-funny-video-laptop-reading-book-break-time-university-college_575670-2247.jpg?semt=ais_hybrid&w=740&q=80"
+                class="d-block w-100"
+                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container my-5">
+        <!-- फोटोज़ की मुख्य ग्रिड -->
+        <div class="row g-3">
+
+          {% for category in categories %}
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <!-- data-bs-target को डायनेमिक बनाने के लिए #modal-{{ category.id }} का इस्तेमाल किया गया है -->
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#modal-{{ category.id }}">
+              <div class="gallery-img-wrapper">
+                <!-- अगर कैटेगरी में थंबनेल इमेज है, तो वो दिखेगी, वरना default इमेज -->
+                {% if category.image %}
+                <img src="{{ category.image.url }}" class="card-img-top gallery-img"
+                  alt="{{ category.get_name_display }}">
+                {% else %}
+                <img
+                  src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg"
+                  class="card-img-top gallery-img" alt="Default Image">
+                {% endif %}
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <!-- कैटेगरी का सही नाम (जैसे Main Entrance, Classroom आदि) यहाँ दिखेगा -->
+                <h6 class="card-title fw-bold mb-0">{{ category.get_name_display }}</h6>
+              </div>
+            </div>
+          </div>
+
+          <!-- हर कैटेगरी के लिए यूनिक ID (id="modal-{{ category.id }}") -->
+          <div class="modal fade" id="modal-{{ category.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                  <!-- डायनेमिक टाइटल -->
+                  <h5 class="modal-title fw-bold">{{ category.get_name_display }} Photos</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+
+                  <!-- कैरोसेल की ID भी डायनेमिक होनी चाहिए (id="carousel-{{ category.id }}") -->
+                  <div id="carousel-{{ category.id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                      <!-- इस कैटेगरी से जुड़ी सभी इमेजेस का लूप -->
+                      {% for img_obj in category.images.all %}
+                      <!-- पहली इमेज के लिए 'active' क्लास जोड़ना अनिवार्य है -->
+                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img_obj.image.url }}" class="d-block w-100 modal-slider-img"
+                          alt="Photo {{ forloop.counter }}">
+                      </div>
+                      {% empty %}
+                      <!-- अगर कोई भी फोटो न हो तो यह मैसेज दिखेगा -->
+                      <div class="carousel-item active p-5 text-center">
+                        <p class="mb-0 text-muted">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
+                      </div>
+                      {% endfor %}
+
+                    </div>
+
+                    <!-- कंट्रोल बटन केवल तभी दिखेंगे जब 1 से ज़्यादा इमेजेस हों -->
+                    {% if category.images.count > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ category.id }}"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ category.id }}"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+          <!-- 
+        
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#entranceModal">
+              <div class="gallery-img-wrapper">
+                <img
+                  src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg"
+                  class="card-img-top gallery-img" alt="Main Entrance">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+        
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#academicModal">
+              <div class="gallery-img-wrapper">
+                <img src="academic_main.jpg" class="card-img-top gallery-img" alt="Academic Building">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Academic Building</h6>
+              </div>
+            </div>
+          </div>
+
+         
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+ 
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
+              <div class="gallery-img-wrapper">
+                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
+                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+              </div>
+              <div class="card-body text-center py-3">
+                <h6 class="card-title fw-bold mb-0">Classroom</h6>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+
+      <!-- ==========================================
+     MODALS SECTION (क्लिक करने पर खुलने वाले एलबम)
+     ========================================== -->
+
+      <!-- 1. Main Entrance Album Modal -->
+      <div class="modal fade" id="entranceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-0">
+              <h5 class="modal-title fw-bold">Main Entrance Photos</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <!-- फोटो स्लाइडर (Carousel) -->
+              <div id="carouselEntrance" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="entrance_1.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="entrance_2.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="entrance_3.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 3">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselEntrance"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselEntrance"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Academic Building Album Modal -->
+      <div class="modal fade" id="academicModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-0">
+              <h5 class="modal-title fw-bold">Academic Building Photos</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <div id="carouselAcademic" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="academic_1.jpg" class="d-block w-100 modal-slider-img" alt="Academic 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="academic_2.jpg" class="d-block w-100 modal-slider-img" alt="Academic 2">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAcademic"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselAcademic"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Classroom Album Modal -->
+      <div class="modal fade" id="classroomModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-0">
+              <h5 class="modal-title fw-bold">Classroom Photos</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+              <div id="carouselClassroom" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="classroom_1.jpg" class="d-block w-100 modal-slider-img" alt="Classroom 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="classroom_2.jpg" class="d-block w-100 modal-slider-img" alt="Classroom 2">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselClassroom"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselClassroom"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="tab-pane fade" id="Hostel-tab-pane" role="tabpanel" aria-labelledby="Hostel-tab" tabindex="0">
+      <style>
+        @media (min-width:786px) {
+          .future {
+            margin-top: 0rem;
+            margin-left: 0rem;
+            margin-right: 0rem;
+
+
+          }
+        }
+
+        .future {
+          margin-top: 5rem;
+
+        }
+
+        .hostelform {
+          max-width: 100%;
+
+          height: 50rem;
+          background-color: white;
+
+        }
+
+        .faci {
+          background-color: #9d1a27;
+          color: white;
+        }
+      </style>
+
+
+      <!-- top notice -->
+
+
+      <div class="container">
+        <div class="row future ">
+          <div class="col-md-3">
+            <h2 class="h2 my-3 px-2">Hostel Updates</h2>
+            <ul class="overflow-y-scroll dropdown-menu d-block position-static mx-0 shadow w-220px"
+              data-bs-theme="light" style="max-height: 17rem;">
+
+              {% for hostelupdate in hostelupdates %}
+              <li> <a class="dropdown-item  gap-2 align-items-center">
+                  {{hostelupdate.text}}
+                </a> </li>
+              {% endfor %}
+
+
+            </ul>
+            <h2 class="h2 mt-3 px-2">Facilities</h2>
+            <ul class="dropdown-menu d-block position-static mx-0 shadow w-220px my-4" data-bs-theme="light">
+
+              <li>
+
+
+              </li>
+
+              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
+                  🛏 Comfortable Accommodation
+                </a> </li>
+              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
+                  📚 Study Area
+                </a> </li>
+              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
+                  🍽 Dining / Mess Facility
+                </a> </li>
+              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
+                  🚿 Basic Amenities
+                </a> </li>
+              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
+                  📶 Internet Facility
+                </a> </li>
+
+              <li> <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center">
+                  🛋 Common Room
+                </a> </li>
+            </ul>
+          </div>
+          <div class="col-md-9">
+            <style>
+              /* ⬅️ बायां साइडबार (Left Sidebar) */
+              .sidebar-menu {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                align-self: start;
+              }
+
+              .menu-list {
+                list-style: none;
+              }
+
+              .menu-list li {
+                padding: 12px 15px;
+                margin-bottom: 8px;
+                background: #f8fafc;
+                border-radius: 6px;
+                color: #334155;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+                transition: background 0.2s;
+              }
+
+              .menu-list:hover {
+                background: #f1f5f9;
+              }
+
+              /* ➡️ दायां मुख्य बॉक्स (Right Main Content) */
+              .hostel-content-box {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 30px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+              }
+
+              .h2 {
+                color: #1e293b;
+                margin-bottom: 20px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #0056b3;
+                /* आपके नेविगेशन बार से मैच करता रंग */
+                font-size: 22px;
+              }
+
+              /* हॉस्टल जानकारी के लिए अंदरूनी ग्रिड */
+              .info-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                margin-bottom: 35px;
+              }
+
+              @media (max-width: 600px) {
+                .info-grid {
+                  grid-template-columns: 1fr;
+                }
+              }
+
+              .info-item {
+                background: #f8fafc;
+                padding: 12px 15px;
+                border-left: 4px solid #0056b3;
+                border-radius: 4px;
+                font-size: 15px;
+              }
+
+              .info-item strong {
+                color: #1e293b;
+                display: inline-block;
+                margin-bottom: 2px;
+              }
+
+              /* नियम कानून का सेक्शन */
+              .rules-section {
+                margin-top: 25px;
+              }
+
+              .rules-list {
+                list-style-type: decimal;
+                padding-left: 20px;
+              }
+
+              .rules-list li {
+                margin-bottom: 10px;
+                color: #475569;
+                font-size: 15px;
+              }
+            </style>
+
+
+            <div class="hostel-content-box rounded-3 p-md-5 p-xs-1">
+
+              <h2 class="h2">Hostel Information</h2>
+              <div class="info-grid">
+                <div class="info-item">
+                  <strong>Hostel Type:</strong> Boys / Girls
+                </div>
+                <div class="info-item">
+                  <strong>Accommodation:</strong> Single / Double / Multiple Occupancy
+                </div>
+                <div class="info-item">
+                  <strong>Facilities:</strong> As per college hostel provisions
+                </div>
+                <div class="info-item">
+                  <strong>Hostel Timings:</strong> As per hostel rules
+                </div>
+                <div class="info-item">
+                  <strong>Warden:</strong> ________________
+                </div>
+                <div class="info-item">
+                  <strong>Contact:</strong> ________________
+                </div>
+              </div>
+
+
+              <div class="rules-section">
+                <h2 class="h2">Hostel Rules</h2>
+                <ul class="rules-list">
+                  {% for rulse in rulses %}
+                  <li> {{rulse.text}} </li>
+                  {% endfor %}
+
+                </ul>
+
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <style>
+      .lib-1 {
+        width: 100%;
+        height: 40rem;
+        max-height: 40rem;
+        background-color: transparent;
+      }
+
+      .lib-2 {
+        width: 100%;
+        height: 40rem;
+        max-height: 40rem;
+        background-color: transparent;
+      }
+
+      .intro {
+        max-width: 100%;
+        height: auto;
+        background-color: white;
+      }
+
+      .intro:hover {
+
+        transition-delay: 250ms;
+        color: #f7f7f7;
+        background: linear-gradient(rgba(248, 248, 248, 0.944) 0%, rgba(17, 15, 93, 0.916) 100%) !important;
+      }
+
+      .text-bg-dark {
+        margin-bottom: 15px;
+      }
+
+      .list-group-item {
+        background-color: whitesmoke;
+      }
+
+      .list-group-item:hover {
+        transform: translateY(-3px);
+        background-color: brown;
+        color: white;
+
+      }
+    </style>
+    <div class="tab-pane fade" id="library-tab-pane" role="tabpanel" aria-labelledby="library-tab" tabindex="0">
+
+
+      <style>
+        
+
+         
+
+        .notice-marquee {
+          background: #fff3cd;
+          border-top: 1px solid #ffe69c;
+          border-bottom: 1px solid #ffe69c;
+          padding: 6px 0;
+          font-size: 14px;
+        }
+
+        .page-head {
+          background: #003366;
+          color: #fff;
+          padding: 18px 0;
+        }
+
+        .page-head h2 {
+          margin: 0;
+          font-size: 22px;
+        }
+
+        .table thead {
+          background: #003366;
+          color: #fff;
+        }
+
+        .card-header {
+          font-weight: bold;
+        }
+
+        .list-group-item {
+          font-size: 14px;
+        }
+
+        .footer {
+          background: #003366;
+          color: #ccc;
+          padding: 15px 0;
+          font-size: 13px;
+          margin-top: 30px;
+        }
+
+        .footer a {
+          color: #ffc107;
+          text-decoration: none;
+        }
+
+        .carousel img {
+          height: 320px;
+          object-fit: cover;
+        }
+      </style>
+
+
+
+
+
+
+
+
+      <!-- ================= MAIN ================= -->
+      <div class="container my-4">
+
+        <!-- Info strip -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="card h-100 border-1 rounded-3 shadow-sm">
+              <div class="card-body text-start mx-md-5">
+                <h6 class="text-primary fw-bold mb-2">📚 Library Statistics</h6>
+                <ul class="list-unstyled mb-0 small">
+                  <li>Total Books : <b>25,000+</b></li>
+                  <li>Journals : <b>100+</b></li>
+                  <li>Digital Resources : <b>Available</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 border-1 rounded-3 shadow-sm">
+              <div class="card-body text-start mx-md-5">
+                <h6 class="text-primary fw-bold mb-2">🕘 Library Timings</h6>
+                <ul class="list-unstyled mb-0 small">
+                  <li>Mon – Sat : <b>09:00 AM – 05:00 PM</b></li>
+                  <li>Sunday / Holidays : <b>Closed</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 border-1 rounded-3 shadow-sm">
+              <div class="card-body text-start mx-md-5">
+                <h6 class="text-primary fw-bold mb-2">👤 Head of Library</h6>
+                <ul class="list-unstyled mb-0 small">
+                  <li>Name : <b>Rahul Paliwal</b></li>
+                  <li>Contact : <b>+91-XXXXX-XXXXX</b></li>
+                  <li>Email : <b>library@college.edu.in</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- ============ LEFT COLUMN ============ -->
+          <div class="col-lg-8">
+
+            <!-- Carousel 1 -->
+            <div id="carousel1" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOOPTZJ7XX3BFm5n4y3hxlWfmIGdzVXqTTRF444uoXTpoRMDITbKUqzlw&s=10"
+                    class="d-block w-100" alt="Library">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://mgrcollege.ac.in/wp-content/uploads/2024/03/5-2-1-2048x1035.jpg"
+                    class="d-block w-100" alt="Library">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://mgrcollege.ac.in/wp-content/uploads/2024/03/5-2-1-2048x1035.jpg"
+                    class="d-block w-100" alt="Library">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </button>
+            </div>
+
+            <!-- Photo grid -->
+
+
+
+
+            <!-- Rules -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white text-danger">Library Rules</div>
+              <div class="card-body px-4 py-3 text-start " style="font-size:large;">
+                <ol class="small mb-0 ps-3">
+                  {% for libraryrulse in libraryrulses %}
+                  <li>{{libraryrulse.text}}</li>
+                  {% endfor %}
+
+                </ol>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ============ RIGHT COLUMN ============ -->
+          <div class="col-lg-4">
+
+
+            <!-- New Arrivals -->
+            <div class="card mb-3 border-0 shadow-sm">
+              <div class="card-header bg-primary text-white"> Library Update's </div>
+              <div class="list-group list-group-flush small overflow-y-scroll" style="height: 35rem;">
+                {% for libraryupdate in libraryupdates %}
+                <div class="list-group-item">
+                  <b> {{libraryupdate.text}}</b><br>
+                  <span class="text-muted">{{libraryupdate.uploaded_at}} </span>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <!-- assssssssssssssssssssssssssssssssss -->
+
+    </div>
+
+  </div>
+  </div>
+  </div>
+
+
+
+  </div>
+
+
+  <div class="tab-pane fade" id="labsr-tab-pane" role="tabpanel" aria-labelledby="labsr-tab" tabindex="0">
+    <style>
+      .figure {
+        max-width: 10rem;
+        margin-top: 1rem;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hr1 {
+
+        color: #880E4F;
+        /* width:fit-content; */
+        max-width: 10rem;
+        padding: 0;
+        margin: 0rem;
+        margin-bottom: 8px;
+      }
+
+      .figure:hover,
+      .figure-caption:hover {
+        transform: translateY(-5PX);
+        color: #0056b3;
+
+
+      }
+
+      .libhead {
+        justify-content: center;
+
+
+      }
+    </style>
+
+
+
+
+    <div class="container">
+      <div class="row libhead gap-md-5 mt-5">
+        <div class="col-2">
+          <figure class="figure">
+            <img
+              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+              class="figure-img img-fluid rounded-circle"
+              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+            <figcaption class="figure-caption">
+              <h6><b>Mrs. Vinod Banse</b></h6>
+            </figcaption>
+          </figure>
+          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
+        </div>
+        <div class="col-2">
+          <figure class="figure">
+            <img
+              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+              class="figure-img img-fluid rounded-circle"
+              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+            <figcaption class="figure-caption">
+              <h6><b>Mrs. Vinod Banse</b></h6>
+
+            </figcaption>
+          </figure>
+          <hr class="hr1">
+          <button type="button" class="btn btn-outline-primary">Laboratorie view</button>
+        </div>
+        <div class="col-2">
+          <figure class="figure">
+            <img
+              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+              class="figure-img img-fluid rounded-circle"
+              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+            <figcaption class="figure-caption">
+              <h6><b>Mrs. Vinod Banse</b></h6>
+            </figcaption>
+          </figure>
+          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
+        </div>
+        <div class="col-2">
+          <figure class="figure">
+            <img
+              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+              class="figure-img img-fluid rounded-circle"
+              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+            <figcaption class="figure-caption">
+              <h6><b>Mrs. Vinod Banse</b></h6>
+            </figcaption>
+          </figure>
+          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
+        </div>
+
+      </div>
+    </div>
+    <style>
+      .libtabs {
+        justify-content: center;
+      }
+
+      .card-body-lib {
+        padding: 1%;
+      }
+
+      .rules {
+        max-height: 15rem;
+        height: 15rem;
+        text-align: start;
+        color: #000;
+      }
+
+      .rulsetext {
+        color: #8a1313;
+      }
+
+      .card-header {
+        background: linear-gradient(rgb(157, 50, 48) 0%, rgb(126, 31, 18) 100%) !important;
+      }
+
+      .card-libtab:hover {
+        background-color: white;
+      }
+
+      .rulsetext {
+        font-size: large;
+      }
+
+      body {
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .rulsetext:hover {
+        font-weight: bolder;
+
+        color: #000;
+        scroll-behavior: smooth;
+      }
+    </style>
+    <div class="container my-md-5">
+      <div class="row libtabs gap-md-3 ">
+        <div class="col-md-5">
+          <div class="card card-libtab">
+            <h5 class="card-header">Lab Information</h5>
+            <div class="card-body card-body-lib">
+              <div class="overflow-y-scroll rules">
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+              </div>
+
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="card card-libtab">
+            <h5 class="card-header">Lab Rules</h5>
+            <div class="card-body card-body-lib">
+              <div class="overflow-y-scroll rules">
+                {% for labrulse in labrulses %}
+                <p class="rulsetext"> {{labrulse.text}}</p>
+                <hr>
+                {%endfor%}
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+              </div>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="tab-pane fade" id="events-tab-pane" role="tabpanel" aria-labelledby="events-tab" tabindex="0">
+    <style>
+      .event-head {
+        justify-content: center;
+        justify-self: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        align-items: end;
+        background: transparent;
+        border: unset;
+      }
+
+      .figure-captions {
+
+        text-align: center;
+
+      }
+    </style>
+    <div class="row container event-head card">
+
+      <div class="col-md-2">
+        <figure class="figures head-1">
+          <img
+            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+            class="figure-img img-fluid rounded-circle"
+            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+          <figcaption class="figure-captions">
+            <h6><b>Mrs. Vinod Banse</b></h6>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-2">
+        <figure class="figures head-2">
+          <img
+            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+            class="figure-img img-fluid rounded-circle"
+            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+          <figcaption class="figure-captions">
+            <h6><b>Mrs. Vinod Banse</b></h6>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-3">
+        <figure class="figures head-3">
+          <img
+            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+            class="figure-img img-fluid rounded-circle"
+            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+          <figcaption class="figure-captions">
+            <h6><b>Mrs. Vinod Banse</b></h6>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-2">
+        <figure class="figures head-5">
+          <img
+            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+            class="figure-img img-fluid rounded-circle"
+            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+          <figcaption class="figure-captions">
+            <h6><b>Mrs. Vinod Banse</b></h6>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-md-2">
+        <figure class="figures head-6">
+          <img
+            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
+            class="figure-img img-fluid rounded-circle"
+            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
+          <figcaption class="figure-captions">
+            <h6><b>Mrs. Vinod Banse</b></h6>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="container my-md-5">
+      <div class="row libtabs gap-md-3 ">
+        <div class="col-md-4">
+          <div class="card card-libtab">
+            <h5 class="card-header">Event Categories</h5>
+            <div class="card-body card-body-lib">
+              <div class="overflow-y-scroll rules">
+
+
+
+
+                <p class="rulsetext"> 🎓 Academic Events </p>
+                <hr>
+                <p class="rulsetext"> 💻 Technical Events</p>
+                <hr>
+                <p class="rulsetext">🎭 Cultural Events </p>
+                <hr>
+                <p class="rulsetext"> 🏆 Sports Events </p>
+                <hr>
+                <p class="rulsetext">🎤 Seminars </p>
+                <hr>
+                <p class="rulsetext">🧑‍💻 Workshops</p>
+                <hr>
+                <p class="rulsetext">💡 Hackathons 🎉 Annual Functions 🌱 Social / Awareness Activities</p>
+                <hr>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <style>
+          .eventhead1 {
+            padding: 0%;
+            text-align: start;
+            padding-left: 5px;
+            padding-top: 5px;
+          }
+
+          .eventhead2 {
+            padding: 0%;
+            margin-bottom: 10px;
+          }
+
+          .card-header {
+            color: #f2f1f1;
+          }
+        </style>
+        <div class="col-md-3">
+
+          <div class="col">
+            <div class="row">
+              <div class="card eventhead2">
+                <div class="card-header">
+                  Head of Event -boy's
+                </div>
+                <div class="card-body eventhead1">
+                  <figure>
+
+                    <b>Name :</b> Rajendra Sarathe <br>
+                    <b> Whatsapp:</b> 9302707097 <br>
+                    <b>Email:</b> rajendrasarathe144@gmail.com
+
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card eventhead2">
+                <div class="card-header">
+                  Head of Event-girl's
+                </div>
+                <div class="card-body eventhead1">
+                  <figure>
+                    <b>Name :</b> Rajendra Sarathe <br>
+                    <b> Whatsapp:</b> 9302707097 <br>
+                    <b>Email:</b> rajendrasarathe144@gmail.com
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-libtab">
+            <h5 class="card-header">Upcoming Events</h5>
+            <div class="card-body card-body-lib">
+              <div class="overflow-y-scroll rules">
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
+                  animi, veritatis incidunt quis?</p>
+                <hr>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* मुख्य कंटेनर जो अतिरिक्त कार्ड्स को छुपाएगा */
+      .custom-slider {
+        max-height: max-content;
+        justify-self: center;
+        overflow: hidden;
+        width: 100%;
+        background: transparent;
+        /* आप चाहें तो यहाँ अपना linear-gradient डाल सकते हैं */
+      }
+
+      @media (min-width:400px) {
+        .custom-slider {
+          max-height: max-content;
+          justify-self: center;
+          overflow: hidden;
+          width: 80%;
+          background: transparent;
+          /* आप चाहें तो यहाँ अपना linear-gradient डाल सकते हैं */
+        }
+      }
+
+      /* कार्ड्स को एक लाइन में रखने और एनिमेट करने के लिए ट्रैक */
+      .slider-track {
+        display: flex;
+        width: max-content;
+        gap: 15px;
+        /* कार्ड्स के बीच की दूरी */
+        animation: scrollContinuous 20s linear infinite;
+      }
+
+      /* माउस ले जाने पर रुकने का फीचर (HTML में inline भी लिखा है, पर यह बैकअप है) */
+      .slider-track:hover {
+        animation-play-state: paused;
+      }
+
+      /* कार्ड्स की स्टाइलिंग में थोड़ा मार्जिन */
+      .event-4 {
+        flex-shrink: 0;
+      }
+
+      /* लगातार चलने वाला एनीमेशन */
+      @keyframes scrollContinuous {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+          /* आधे कार्ड्स क्रॉस होते ही लूप रीसेट हो जाएगा */
+        }
+      }
+
+      .evcard {
+        padding: 10px;
+        text-align: left;
+      }
+    </style>
+
+    <div class="card rounded-0 mt-md-2 mt-xs-0 ev custom-slider rounded-3">
+      <div class="slider-track" onmouseover="this.style.animationPlayState='paused';"
+        onmouseout="this.style.animationPlayState='running';">
+
+        <!-- पहला सेट (Original Cards) -->
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 1</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 2</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 3</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+
+        <!-- दूसरा सेट (Duplicate Cards - लूप को बिना रुके चलाने के लिए) -->
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 1</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 2</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card event-4" style="width: 18rem;">
+          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
+            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
+          <div class="card-body evcard">
+            <h5 class="card-title">Event Name 3</h5>
+            <p class="card-text">Some quick example text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+  </div>
+
+
+  </div>
+
+
+
+  {% include 'footer.html' %}
+
+  <div class="container my-5">
+
+    <!-- 1. गैलरी सेक्शन -->
+    <div id="campus" class="campus-tab-content">
+      <h2>Campus Life Gallery</h2>
+      <!-- गैलरी और फोटोज़ का सारा कोड यहाँ रखें -->
+    </div>
+
+    <!-- 2. हॉस्टल सेक्शन -->
+    <div id="hostel" class="campus-tab-content" style="display: none;">
+      <h2>Importance Notice`s Hostel</h2>
+      <!-- हॉस्टल के नियम और इन्फॉर्मेशन का सारा कोड यहाँ रखें -->
+    </div>
+
+    <!-- 3. लाइब्रेरी सेक्शन -->
+    <div id="library" class="campus-tab-content" style="display: none;">
+      <h4>Library Update`s</h4>
+      <!-- लाइब्रेरी बुक्स और टाइमिंग का सारा कोड यहाँ रखें -->
+    </div>
+
+    <!-- 4. लैब्स सेक्शन -->
+    <div id="labs" class="campus-tab-content" style="display: none;">
+      <h5>Lab Information</h5>
+      <!-- लैब्स और Mrs. Vinod Banse वाला सारा कोड यहाँ रखें -->
+    </div>
+
+    <!-- 5. इवेंट्स सेक्शन -->
+    <div id="events" class="campus-tab-content" style="display: none;">
+      <h5>Upcoming Events</h5>
+      <!-- इवेंट्स और Rajendra Sarathe वाला सारा कोड यहाँ रखें -->
+    </div>
+
+  </div>
+
+  <!-- इसे campuslife.html में सबसे नीचे पेस्ट करें -->
+  <script>
+    function switchCampusTabByPane() {
+      // 1. URL से हैश (#campus-tab-pane आदि) प्राप्त करें
+      const hash = window.location.hash;
+
+      // 2. उन सभी divs को ढूंढें जिनकी ID में -tab-pane आता है
+      const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
+
+      if (allPanes.length > 0) {
+        // पहले सभी सेक्शन्स को पूरी तरह से छुपा दें
+        allPanes.forEach(function (pane) {
+          pane.classList.remove('show', 'active');
+          pane.style.setProperty('display', 'none', 'important');
+        });
+
+        let targetPane = null;
+
+        // 3. अगर URL में हैश है, तो उस वाले सेक्शन को चुनें
+        if (hash) {
+          targetPane = document.querySelector(hash);
+        }
+
+        // 4. अगर कोई सीधे पेज पर आया है (बिना हैश के), तो पहले वाले (Gallery) सेक्शन को चुनें
+        if (!targetPane) {
+          targetPane = allPanes[0];
+        }
+
+        // 5. चुने हुए सेक्शन को बूटस्ट्रैप क्लास के साथ स्क्रीन पर दिखाएं
+        if (targetPane) {
+          targetPane.classList.add('show', 'active');
+          targetPane.style.setProperty('display', 'block', 'important');
+
+          // अगर ड्रॉपडाउन से क्लिक करके आए हैं, तो पेज को टॉप पर ले जाएं
+          if (hash) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
+      }
+    }
+
+    // पेज लोड होने पर और लिंक बदलने पर तुरंत रन करें
+    document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
+    window.addEventListener("hashchange", switchCampusTabByPane);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

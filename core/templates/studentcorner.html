@@ -1,0 +1,317 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admissions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <style>
+    /* #navbar {
+      z-index: 1060 !important;
+       
+    }
+
+    .navbar {
+      background-color: rgb(230, 220, 195) !important;
+      padding: 5px;
+      padding-bottom: 5px;
+      padding-left: 0px;
+      padding-right: 0px;
+
+    } */
+
+    #academictabs {
+      --bs-nav-link-color: #f8f9fa;
+      --bs-nav-link-hover-color: #9d1a27;
+      --bs-nav-link-disabled-color: #999999;
+    }
+
+    .containers {
+      max-width: 100%;
+
+    }
+
+    .overflow-x-scroll {
+      margin-top: 52px;
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+
+      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
+      z-index: 1040 !important;
+      transform: translateZ(0);
+      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
+    }
+  </style>
+
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+    {% include 'navbar.html' %}
+
+
+  </nav>
+
+  <style>
+    .overflow-x-scroll {
+      /* width: 100%;
+      max-height: 5rem; */
+      margin-top: 52px;
+      /* background-color: rgb(38, 5, 138) !important ; */
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+    }
+
+    .nav-tabs {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+
+    }
+  </style>
+
+  <!-- <div class="overflow-x-scroll fixed-top">
+    <ul class="nav nav-tabs mx-md-5 " id="academictabs" role="tablist"
+      style="flex-direction: row; flex-wrap: nowrap; align-items: center; ">
+      <li class="nav-item" role="presentation">
+
+        <button class="nav-link active" id="Courses-tab" data-bs-toggle="tab" data-bs-target="#Courses-tab-pane"
+          type="button" role="tab" aria-controls="Courses-tab-pane" aria-selected="true">Courses /
+          Programs</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Departments-tab" data-bs-toggle="tab" data-bs-target="#Departments-tab-pane"
+          type="button" role="tab" aria-controls="Departments-tab-pane" aria-selected="false">Departments</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Syllabus-tab" data-bs-toggle="tab" data-bs-target="#Syllabus-tab-pane"
+          type="button" role="tab" aria-controls="Syllabus-tab-pane" aria-selected="false">Syllabus</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="AcademicCalendar-tab" data-bs-toggle="tab"
+          data-bs-target="#AcademicCalendar-tab-pane" type="button" role="tab" aria-controls="AcademicCalendar-tab-pane"
+          aria-selected="false">Academic Calendar</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="TimeTable-tab" data-bs-toggle="tab" data-bs-target="#TimeTable-tab-pane"
+          type="button" role="tab" aria-controls="TimeTable-tab-pane" aria-selected="false">Time Table</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Examination-tab" data-bs-toggle="tab" data-bs-target="#Examination-tab-pane"
+          type="button" role="tab" aria-controls="Examination-tab-pane" aria-selected="false">Examination</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Results-tab" data-bs-toggle="tab" data-bs-target="#Results-tab-pane" type="button"
+          role="tab" aria-controls="Results-tab-pane" aria-selected="false">Results</button>
+
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Faculty-tab" data-bs-toggle="tab" data-bs-target="#Faculty-tab-pane" type="button"
+          role="tab" aria-controls="Faculty-tab-pane" aria-selected="false">Faculty & Staff</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Library-tab" data-bs-toggle="tab" data-bs-target="#Library-tab-pane" type="button"
+          role="tab" aria-controls="Library-tab-pane" aria-selected="false">Library</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="DownloadCenter-tab" data-bs-toggle="tab" data-bs-target="#DownloadCenter-tab-pane"
+          type="button" role="tab" aria-controls="DownloadCenter-tab-pane" aria-selected="false" disabled>Download
+          Center</button>
+      </li>
+    </ul>
+
+
+
+  </div>
+
+
+
+
+
+  <div class="tab-content " id="myTabContent" style="margin-top: 7rem;">
+
+    <div class="tab-pane fade show active" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
+      tabindex="0">
+      this is Coursestab panal
+
+       
+      <style>
+.dropdown-menu:hover {
+  
+}
+      </style>
+
+
+
+
+
+
+    </div>
+
+    <div class="tab-pane fade" id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab" tabindex="0">
+      ...
+      thi is Departments</div>
+
+    <div class="tab-pane fade" id="Syllabus-tab-pane" role="tabpanel" aria-labelledby="Syllabus-tab" tabindex="0">thi
+      is
+      Syllabus
+    </div>
+
+
+    <div class="tab-pane fade" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
+      tabindex="0">Academic Calendar
+    </div>
+    <div class="tab-pane fade" id="TimeTable-tab-pane" role="tabpanel" aria-labelledby="TimeTable-tab" tabindex="0">
+      .TimeTable
+    </div>
+
+    <div class="tab-pane fade" id="Examination-tab-pane" role="tabpanel" aria-labelledby="Examination-tab" tabindex="0">
+      Examination
+    </div>
+    <div class="tab-pane fade" id="Results-tab-pane" role="tabpanel" aria-labelledby="Results-tab" tabindex="0">
+      Results
+    </div>
+
+    <div class="tab-pane fade" id="Faculty-tab-pane" role="tabpanel" aria-labelledby="Faculty-tab" tabindex="0">
+      Faculty
+    </div>
+    <div class="tab-pane fade" id="Library-tab-pane" role="tabpanel" aria-labelledby="Library-tab" tabindex="0">
+      Library
+    </div>
+
+
+    <div class="tab-pane fade" id="DownloadCenter-tab-pane" role="tabpanel" aria-labelledby="DownloadCenter-tab"
+      tabindex="0">...Download Center
+    </div>
+  </div> -->
+
+ 
+ 
+<!-- आपका हेडर कोड यहाँ रहेगा -->
+
+<div class="container my-5">
+    <!-- बूटस्ट्रैप का मुख्य टैब कंटेनर -->
+    <div class="tab-content" id="placementTabContent">
+      
+      <!-- 1. Statistics Section (डिफ़ॉल्ट रूप से खुला रहेगा) -->
+      <div class="tab-pane fade show active" id="statistics" role="tabpanel">
+           <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Brand Logo / Name -->
+            <a class="navbar-brand fw-bold" href="#">MyBrand</a>
+
+            <!-- Toggle Button for Mobile (Triggers Offcanvas) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Offcanvas Component -->
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <!-- Offcanvas Header (Visible only on mobile/tablet) -->
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MyBrand</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <!-- Offcanvas Body (Contains Navigation Links) -->
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <!-- Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-menu-item dropdown-item" href="#">Blog</a></li>
+                                <li><a class="dropdown-menu-item dropdown-item" href="#">Gallery</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-menu-item dropdown-item" href="#">Contact Us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <!-- Search Bar inside Navbar/Offcanvas -->
+                    <form class="d-flex mt-3 mt-lg-0" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+         <h2>Placement Statistics</h2>
+         <!-- सांख्यिकी (Statistics) का सारा कंटेंट यहाँ डालें -->
+      </div>
+      
+      <!-- 2. Recruiters Section -->
+      <div class="tab-pane fade" id="recruiters" role="tabpanel">
+         <h2>Recruiters & Companies</h2>
+         <!-- कंपनियों (Companies) का सारा कंटेंट यहाँ डालें -->
+      </div>
+      
+      <!-- 3. Academic Calendar Section -->
+      <div class="tab-pane fade" id="calendar" role="tabpanel">
+         <h2>Academic Calendar</h2>
+         <!-- कैलेंडर का सारा कंटेंट यहाँ डालें -->
+      </div>
+
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+<!-- शुद्ध जावास्क्रिप्ट कोड (Pure JS - बिना किसी एरर के काम करेगा) -->
+<script>
+function switchTabByHash() {
+    const hash = window.location.hash; // URL से #id निकालेगा
+    
+    if (hash) {
+        const targetPane = document.querySelector(hash);
+        
+        if (targetPane) {
+            // 1. पहले से खुले हुए सभी सेक्शन्स को छुपाएं
+            document.querySelectorAll('.tab-content .tab-pane').forEach(function(pane) {
+                pane.classList.remove('show', 'active');
+            });
+            
+            // 2. जिस सेक्शन की ID मैच हुई है, उसे स्क्रीन पर दिखाएं
+            targetPane.classList.add('show', 'active');
+        }
+    }
+}
+
+// जब पेज पहली बार लोड हो (दूसरे पेज से आने पर)
+document.addEventListener("DOMContentLoaded", switchTabByHash);
+
+// यदि यूजर उसी पेज पर है और दोबारा ड्रॉपडाउन से दूसरा ऑप्शन चुनता है
+window.addEventListener("hashchange", switchTabByHash);
+</script>
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

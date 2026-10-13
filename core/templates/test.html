@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Tree Structure | Shri Vidya Institute of Technology</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --line: #c9d2e3;
+      --line-w: 2px;
+      --gap: 26px;
+    }
+    body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #e8edff 0%, transparent 60%),
+        radial-gradient(1000px 600px at 110% 10%, #ffe9ef 0%, transparent 55%),
+        #f5f7fb;
+      min-height: 100vh;
+    }
+
+    /* ===== Scroll wrapper ===== */
+    .tree-scroll { overflow-x: auto; overflow-y: visible; padding: 10px 6px 40px; -webkit-overflow-scrolling: touch; }
+    .tree-scroll::-webkit-scrollbar { height: 8px; }
+    .tree-scroll::-webkit-scrollbar-thumb { background: #b9c3d6; border-radius: 10px; }
+
+    /* ===== Tree core (desktop) ===== */
+    .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+    .tree { display: inline-block; min-width: 100%; text-align: center; }
+    .tree ul { display: flex; justify-content: center; padding-top: var(--gap); position: relative; }
+    .tree li { position: relative; padding: var(--gap) 10px 0 10px; text-align: center; flex: 0 0 auto; }
+
+    /* horizontal connectors */
+    .tree li::before, .tree li::after {
+      content: ""; position: absolute; top: 0; right: 50%;
+      border-top: var(--line-w) solid var(--line); width: 50%; height: var(--gap);
+    }
+    .tree li::after { right: auto; left: 50%; border-left: var(--line-w) solid var(--line); }
+    .tree li:only-child::after, .tree li:only-child::before { display: none; }
+    .tree li:only-child { padding-top: 0; }
+    .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+    .tree li:last-child::before { border-right: var(--line-w) solid var(--line); border-radius: 0 8px 0 0; }
+    .tree li:first-child::after { border-radius: 8px 0 0 0; }
+    /* vertical line down from a parent */
+    .tree ul::before {
+      content: ""; position: absolute; top: 0; left: 50%;
+      border-left: var(--line-w) solid var(--line); width: 0; height: var(--gap);
+    }
+    .tree > ul::before { display: none; } /* root has no parent line */
+
+    /* ===== Node card ===== */
+    .node { position: relative; display: inline-block; vertical-align: top; }
+    .node-btn {
+      --accent: #4f46e5; position: relative; display: flex; align-items: center; gap: 10px;
+      width: 190px; padding: 10px 12px; border: 1px solid #e3e8f2; border-top: 3px solid var(--accent);
+      border-radius: 14px; background: #fff; box-shadow: 0 6px 18px rgba(23,37,84,.07);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      text-align: left; cursor: pointer;
+    }
+    .node-btn:hover, .node-btn:focus-visible, .node.is-active .node-btn {
+      transform: translateY(-4px); box-shadow: 0 14px 30px rgba(23,37,84,.16);
+      outline: none; border-color: var(--accent);
+    }
+    .node-btn.size-lg { width: 250px; padding: 14px 16px; }
+    .node-btn.size-md { width: 210px; }
+    .node-avatar {
+      flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+      font-weight: 700; font-size: .85rem; color: #fff; letter-spacing: .5px;
+    }
+    .size-lg .node-avatar { width: 52px; height: 52px; font-size: 1rem; }
+    .node-name { font-weight: 600; font-size: .86rem; line-height: 1.2; color: #131c35; margin: 0; }
+    .size-lg .node-name { font-size: 1rem; }
+    .node-role { font-size: .72rem; color: #6b7694; margin: 2px 0 0; }
+    .node-dim { opacity: .35; filter: grayscale(.7); }
+
+    /* ===== Hover info card ===== */
+    .info-card {
+      position: absolute; top: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%) translateY(6px); width: 290px; background: #fff;
+      border: 1px solid #e6eaf3; border-radius: 16px; box-shadow: 0 22px 45px rgba(15,23,42,.22);
+      padding: 14px; text-align: left; z-index: 60; opacity: 0; visibility: hidden;
+      transition: opacity .16s ease, transform .16s ease; pointer-events: none;
+    }
+    .node.is-active .info-card {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto;
+    }
+    .info-card::before {
+      content: ""; position: absolute; top: -7px; left: 50%; margin-left: -7px; width: 13px; height: 13px;
+      background: #fff; border-left: 1px solid #e6eaf3; border-top: 1px solid #e6eaf3; transform: rotate(45deg);
+    }
+    .info-card .desc { font-size: .8rem; color: #4a5570; line-height: 1.45; margin: 8px 0 10px; }
+    .info-meta { font-size: .75rem; color: #56607a; }
+    .info-meta i { width: 16px; }
+    .chip { display: inline-block; font-size: .68rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin: 3px 4px 0 0; }
+
+    /* edge flipping (auto via JS) */
+    .info-card.flip-left { left: auto; right: 0; transform: translateX(0) translateY(6px); }
+    .node.is-active .info-card.flip-left { transform: translateX(0) translateY(0); }
+    .info-card.flip-left::before { left: auto; right: 26px; }
+    .info-card.flip-right { left: 0; transform: translateX(0) translateY(6px); }
+    .node.is-active .info-card.flip-right { transform: translateX(0) translateY(0); }
+    .info-card.flip-right::before { left: 26px; }
+
+    /* ===== Mobile: vertical tree ===== */
+    @media (max-width: 767.98px) {
+      .tree-scroll { overflow-x: hidden; padding: 6px 2px 30px; }
+      .tree { display: block; text-align: left; }
+      .tree ul { display: block; padding-top: 0; padding-left: 22px; }
+      .tree > li > ul { margin-top: 6px; }
+      .tree li { padding: 10px 0 0 22px; text-align: left; }
+      .tree li::before, .tree li::after { border-radius: 0 !important; }
+      .tree li::before {
+        top: 0; left: 0; right: auto; width: 0; height: 100%;
+        border-top: 0; border-left: var(--line-w) solid var(--line); display: block !important;
+      }
+      .tree li::after {
+        top: 32px; left: 0; right: auto; width: 22px; height: 0;
+        border-left: 0; border-top: var(--line-w) solid var(--line); display: block !important;
+      }
+      .tree li:last-child::before { height: 32px; border-right: 0; }
+      .tree > li:only-child, .tree > li { padding-left: 0; padding-top: 0; }
+      .tree > li::before, .tree > li::after { display: none !important; }
+      .tree ul::before { display: none; }
+
+      .node, .node-btn, .node-btn.size-lg, .node-btn.size-md { width: 100%; max-width: 100%; }
+      .node { display: block; }
+      .info-card, .info-card.flip-left, .info-card.flip-right {
+        position: relative; top: 0; left: 0; right: auto; width: 100%; transform: none;
+        margin-top: 10px; display: none; box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      }
+      .node.is-active .info-card { display: block; transform: none; }
+      .info-card::before { display: none; }
+    }
+
+    /* legend + header bits */
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .glass-head { background: linear-gradient(135deg,#1e1b4b 0%,#312e81 45%,#4f46e5 100%); color:#fff; }
+    .stat-box { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 14px; backdrop-filter: blur(6px); }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+        <i class="bi bi-mortarboard-fill text-warning fs-4"></i>
+        <span>Shri Vidya Institute of Technology</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Departments</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#tree">Faculty</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="glass-head py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge rounded-pill bg-warning text-dark mb-2">Academic Year 2025-26</span>
+          <h1 class="fw-bold display-6 mb-2">Faculty Organisation Tree</h1>
+          <p class="mb-0 opacity-75">
+            Hierarchy: Principal → 4 HODs → 15 Faculty members. Kisi bhi node par
+            <strong>hover</strong> karein (laptop) ya <strong>tap</strong> karein (mobile) —
+            naam, description aur contact details card me dikhengi.
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-2 text-center">
+            <div class="col-4"><div class="stat-box py-3"><div class="fs-4 fw-bold">01</div><div class="small opacity-75">Principal</div></div></div>
+            <div class="col-4"><div class="stat-box py-3"><div class="fs-4 fw-bold">04</div><div class="small opacity-75">HODs</div></div></div>
+            <div class="col-4"><div class="stat-box py-3"><div class="fs-4 fw-bold">15</div><div class="small opacity-75">Faculty</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tree section -->
+  <main class="container my-4" id="tree">
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+      <div class="card-header bg-white border-0 pt-4 px-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+          <div>
+            <h2 class="h5 fw-bold mb-1"><i class="bi bi-diagram-3-fill text-primary me-2"></i>Organisation Structure</h2>
+            <p class="text-secondary small mb-0">Department filter se sirf us department ka staff highlight hoga.</p>
+          </div>
+          <div class="btn-group btn-group-sm flex-wrap" role="group" id="filterGroup">
+            <button class="btn btn-dark" data-dept="all">All</button>
+            <button class="btn" data-dept="cse" style="color:#4f46e5;border:1px solid #4f46e5;"><i class="bi bi-cpu me-1"></i>CSE</button>
+            <button class="btn" data-dept="me"  style="color:#e11d48;border:1px solid #e11d48;"><i class="bi bi-gear-wide-connected me-1"></i>ME</button>
+            <button class="btn" data-dept="ee"  style="color:#f59e0b;border:1px solid #f59e0b;"><i class="bi bi-lightning-charge me-1"></i>EE</button>
+            <button class="btn" data-dept="ce"  style="color:#0d9488;border:1px solid #0d9488;"><i class="bi bi-building me-1"></i>CE</button>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="d-flex flex-wrap gap-3 mt-3 pb-2 small text-secondary">
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-dot" style="background:#1e1b4b"></span> Principal</span>
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-dot" style="background:#4f46e5"></span> Computer Science &amp; Engineering</span>
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-dot" style="background:#e11d48"></span> Mechanical Engineering</span>
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-dot" style="background:#f59e0b"></span> Electrical Engineering</span>
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-dot" style="background:#0d9488"></span> Civil Engineering</span>
+        </div>
+      </div>
+
+      <div class="card-body pt-0 px-2 px-md-3">
+        <div class="alert alert-light border small d-flex align-items-center gap-2 mx-2 mb-2">
+          <i class="bi bi-hand-index-thumb-fill text-primary"></i>
+          <span class="d-none d-md-inline">Tip: Tree wide hone par side me scroll karein. Node par hover = details card.</span>
+          <span class="d-md-none">Tip: Mobile par kisi bhi name par tap karein — details khul jayengi.</span>
+        </div>
+
+        <!-- ============ TREE ============ -->
+        <div class="tree-scroll">
+          <ul class="tree">
+            <!-- Principal -->
+            <li>
+              <div class="node">
+                <button class="node-btn size-lg" style="--accent:#1e1b4b">
+                  <span class="node-avatar" style="background:#1e1b4b">RS</span>
+                  <span class="flex-grow-1">
+                    <span class="node-name d-block">Dr. Rajendra Prasad Sharma</span>
+                    <span class="node-role d-block">Principal</span>
+                  </span>
+                  <i class="bi bi-info-circle text-secondary d-none d-md-inline small"></i>
+                </button>
+                <div class="info-card">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="node-avatar" style="background:#1e1b4b;width:38px;height:38px">RS</span>
+                    <div><div class="fw-semibold" style="font-size:.9rem">Dr. Rajendra Prasad Sharma</div>
+                    <div style="font-size:.74rem;color:#1e1b4b;font-weight:600">Principal</div></div>
+                  </div>
+                  <p class="desc">Institute ke academic aur administrative head. 28 saal ka teaching + research experience, NAAC A+ accreditation aur industry-institute partnership programs ko lead karte hain.</p>
+                  <div class="info-meta d-grid gap-1">
+                    <span><i class="bi bi-mortarboard-fill me-1" style="color:#1e1b4b"></i>Ph.D. (Engineering Management), M.Tech</span>
+                    <span><i class="bi bi-briefcase-fill me-1" style="color:#1e1b4b"></i>Experience: 28 Years</span>
+                    <span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#1e1b4b"></i>principal@college.edu.in</span>
+                    <span><i class="bi bi-telephone-fill me-1" style="color:#1e1b4b"></i>+91 98100 11001</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="chip" style="background:#1e1b4b18;color:#1e1b4b">Academic Leadership</span>
+                    <span class="chip" style="background:#1e1b4b18;color:#1e1b4b">Research Policy</span>
+                    <span class="chip" style="background:#1e1b4b18;color:#1e1b4b">Accreditation</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HODs -->
+              <ul>
+                <!-- ===== CSE ===== -->
+                <li data-dept="cse">
+                  <div class="node">
+                    <button class="node-btn size-md" style="--accent:#4f46e5">
+                      <span class="node-avatar" style="background:#4f46e5">AV</span>
+                      <span class="flex-grow-1"><span class="node-name d-block">Dr. Anjali Verma</span><span class="node-role d-block">HOD — CSE</span></span>
+                      <i class="bi bi-info-circle text-secondary d-none d-md-inline small"></i>
+                    </button>
+                    <div class="info-card">
+                      <div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#4f46e5;width:38px;height:38px">AV</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Anjali Verma</div><div style="font-size:.74rem;color:#4f46e5;font-weight:600">HOD — CSE</div></div></div>
+                      <p class="desc">AI, Machine Learning aur Data Science department ki head. 32 research papers publish kar chuki hain aur college ke AI Lab ki in-charge hain.</p>
+                      <div class="info-meta d-grid gap-1">
+                        <span><i class="bi bi-mortarboard-fill me-1" style="color:#4f46e5"></i>Ph.D. (AI &amp; ML), M.Tech (CSE)</span>
+                        <span><i class="bi bi-briefcase-fill me-1" style="color:#4f46e5"></i>Experience: 19 Years</span>
+                        <span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#4f46e5"></i>hod.cse@college.edu.in</span>
+                        <span><i class="bi bi-telephone-fill me-1" style="color:#4f46e5"></i>+91 98100 11002</span>
+                      </div>
+                      <div class="mt-2"><span class="chip" style="background:#4f46e518;color:#4f46e5">Machine Learning</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Data Structures</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Neural Networks</span></div>
+                    </div>
+                  </div>
+                  <ul>
+                    <li data-dept="cse"><div class="node"><button class="node-btn" style="--accent:#4f46e5"><span class="node-avatar" style="background:#4f46e5">RM</span><span class="flex-grow-1"><span class="node-name d-block">Prof. Rahul Mehta</span><span class="node-role d-block">Associate Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#4f46e5;width:38px;height:38px">RM</span><div><div class="fw-semibold" style="font-size:.9rem">Prof. Rahul Mehta</div><div style="font-size:.74rem;color:#4f46e5;font-weight:600">Associate Professor</div></div></div><p class="desc">Full-stack development aur software architecture padhate hain. Final year capstone projects ke coordinator.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#4f46e5"></i>M.Tech (Software Engg.)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#4f46e5"></i>Experience: 11 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#4f46e5"></i>rahul.mehta@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#4f46e5"></i>+91 98100 22001</span></div><div class="mt-2"><span class="chip" style="background:#4f46e518;color:#4f46e5">Web Technologies</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Software Engineering</span></div></div></div></li>
+                    <li data-dept="cse"><div class="node"><button class="node-btn" style="--accent:#4f46e5"><span class="node-avatar" style="background:#4f46e5">SI</span><span class="flex-grow-1"><span class="node-name d-block">Ms. Sneha Iyer</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#4f46e5;width:38px;height:38px">SI</span><div><div class="fw-semibold" style="font-size:.9rem">Ms. Sneha Iyer</div><div style="font-size:.74rem;color:#4f46e5;font-weight:600">Assistant Professor</div></div></div><p class="desc">Python, Data Analytics aur Visualization ki faculty. Kaggle competitions ke liye students ko mentor karti hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#4f46e5"></i>M.Tech (Data Science)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#4f46e5"></i>Experience: 7 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#4f46e5"></i>sneha.iyer@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#4f46e5"></i>+91 98100 22002</span></div><div class="mt-2"><span class="chip" style="background:#4f46e518;color:#4f46e5">Python</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Data Mining</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Statistics</span></div></div></div></li>
+                    <li data-dept="cse"><div class="node"><button class="node-btn" style="--accent:#4f46e5"><span class="node-avatar" style="background:#4f46e5">AD</span><span class="flex-grow-1"><span class="node-name d-block">Mr. Arjun Deshmukh</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#4f46e5;width:38px;height:38px">AD</span><div><div class="fw-semibold" style="font-size:.9rem">Mr. Arjun Deshmukh</div><div style="font-size:.74rem;color:#4f46e5;font-weight:600">Assistant Professor</div></div></div><p class="desc">Networking aur Cyber Security lab in-charge. CCNA aur ethical hacking workshops conduct karte hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#4f46e5"></i>M.E. (Computer Networks)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#4f46e5"></i>Experience: 6 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#4f46e5"></i>arjun.d@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#4f46e5"></i>+91 98100 22003</span></div><div class="mt-2"><span class="chip" style="background:#4f46e518;color:#4f46e5">Computer Networks</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Cyber Security</span></div></div></div></li>
+                    <li data-dept="cse"><div class="node"><button class="node-btn" style="--accent:#4f46e5"><span class="node-avatar" style="background:#4f46e5">PR</span><span class="flex-grow-1"><span class="node-name d-block">Dr. Priya Ranjan</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#4f46e5;width:38px;height:38px">PR</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Priya Ranjan</div><div style="font-size:.74rem;color:#4f46e5;font-weight:600">Assistant Professor</div></div></div><p class="desc">Computer Vision aur Deep Learning research group ki member. 14 SCI-indexed papers publish kiye hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#4f46e5"></i>Ph.D. (Computer Vision)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#4f46e5"></i>Experience: 9 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#4f46e5"></i>priya.ranjan@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#4f46e5"></i>+91 98100 22004</span></div><div class="mt-2"><span class="chip" style="background:#4f46e518;color:#4f46e5">Computer Vision</span><span class="chip" style="background:#4f46e518;color:#4f46e5">Deep Learning</span></div></div></div></li>
+                  </ul>
+                </li>
+
+                <!-- ===== ME ===== -->
+                <li data-dept="me">
+                  <div class="node">
+                    <button class="node-btn size-md" style="--accent:#e11d48"><span class="node-avatar" style="background:#e11d48">SN</span><span class="flex-grow-1"><span class="node-name d-block">Dr. Suresh Nair</span><span class="node-role d-block">HOD — Mechanical</span></span><i class="bi bi-info-circle text-secondary d-none d-md-inline small"></i></button>
+                    <div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#e11d48;width:38px;height:38px">SN</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Suresh Nair</div><div style="font-size:.74rem;color:#e11d48;font-weight:600">HOD — Mechanical</div></div></div><p class="desc">Thermal aur Manufacturing systems ke expert. CNC &amp; Robotics lab setup kiya aur 12 industry-sponsored projects guide kar chuke hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#e11d48"></i>Ph.D. (Thermal Engg.), M.E.</span><span><i class="bi bi-briefcase-fill me-1" style="color:#e11d48"></i>Experience: 22 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#e11d48"></i>hod.me@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#e11d48"></i>+91 98100 11003</span></div><div class="mt-2"><span class="chip" style="background:#e11d4818;color:#e11d48">Thermodynamics</span><span class="chip" style="background:#e11d4818;color:#e11d48">CAD/CAM</span><span class="chip" style="background:#e11d4818;color:#e11d48">Fluid Mechanics</span></div></div>
+                  </div>
+                  <ul>
+                    <li data-dept="me"><div class="node"><button class="node-btn" style="--accent:#e11d48"><span class="node-avatar" style="background:#e11d48">VS</span><span class="flex-grow-1"><span class="node-name d-block">Prof. Vikram Singh</span><span class="node-role d-block">Associate Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#e11d48;width:38px;height:38px">VS</span><div><div class="fw-semibold" style="font-size:.9rem">Prof. Vikram Singh</div><div style="font-size:.74rem;color:#e11d48;font-weight:600">Associate Professor</div></div></div><p class="desc">Machine Design aur SolidWorks training ke faculty. SAE Baja team ke faculty advisor.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#e11d48"></i>M.Tech (Design Engg.)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#e11d48"></i>Experience: 13 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#e11d48"></i>vikram.singh@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#e11d48"></i>+91 98100 22005</span></div><div class="mt-2"><span class="chip" style="background:#e11d4818;color:#e11d48">Machine Design</span><span class="chip" style="background:#e11d4818;color:#e11d48">Strength of Materials</span></div></div></div></li>
+                    <li data-dept="me"><div class="node"><button class="node-btn" style="--accent:#e11d48"><span class="node-avatar" style="background:#e11d48">AT</span><span class="flex-grow-1"><span class="node-name d-block">Mr. Alok Tiwari</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#e11d48;width:38px;height:38px">AT</span><div><div class="fw-semibold" style="font-size:.9rem">Mr. Alok Tiwari</div><div style="font-size:.74rem;color:#e11d48;font-weight:600">Assistant Professor</div></div></div><p class="desc">Production aur Industrial Engineering padhate hain. Workshop practice lab ke supervisor.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#e11d48"></i>M.E. (Production)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#e11d48"></i>Experience: 8 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#e11d48"></i>alok.tiwari@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#e11d48"></i>+91 98100 22006</span></div><div class="mt-2"><span class="chip" style="background:#e11d4818;color:#e11d48">Manufacturing</span><span class="chip" style="background:#e11d4818;color:#e11d48">Industrial Engg.</span></div></div></div></li>
+                    <li data-dept="me"><div class="node"><button class="node-btn" style="--accent:#e11d48"><span class="node-avatar" style="background:#e11d48">KJ</span><span class="flex-grow-1"><span class="node-name d-block">Ms. Kavita Joshi</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#e11d48;width:38px;height:38px">KJ</span><div><div class="fw-semibold" style="font-size:.9rem">Ms. Kavita Joshi</div><div style="font-size:.74rem;color:#e11d48;font-weight:600">Assistant Professor</div></div></div><p class="desc">Heat Transfer aur Refrigeration ki faculty. Energy audit projects par students ke saath kaam karti hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#e11d48"></i>M.Tech (Thermal)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#e11d48"></i>Experience: 6 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#e11d48"></i>kavita.joshi@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#e11d48"></i>+91 98100 22007</span></div><div class="mt-2"><span class="chip" style="background:#e11d4818;color:#e11d48">Heat Transfer</span><span class="chip" style="background:#e11d4818;color:#e11d48">RAC</span></div></div></div></li>
+                    <li data-dept="me"><div class="node"><button class="node-btn" style="--accent:#e11d48"><span class="node-avatar" style="background:#e11d48">DC</span><span class="flex-grow-1"><span class="node-name d-block">Mr. Deepak Chauhan</span><span class="node-role d-block">Lab Instructor / Faculty</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#e11d48;width:38px;height:38px">DC</span><div><div class="fw-semibold" style="font-size:.9rem">Mr. Deepak Chauhan</div><div style="font-size:.74rem;color:#e11d48;font-weight:600">Lab Instructor / Faculty</div></div></div><p class="desc">Robotics aur Automation lab handle karte hain. 3D printing aur CNC training dete hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#e11d48"></i>M.Tech (Robotics)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#e11d48"></i>Experience: 5 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#e11d48"></i>deepak.c@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#e11d48"></i>+91 98100 22008</span></div><div class="mt-2"><span class="chip" style="background:#e11d4818;color:#e11d48">Robotics</span><span class="chip" style="background:#e11d4818;color:#e11d48">Automation</span><span class="chip" style="background:#e11d4818;color:#e11d48">3D Printing</span></div></div></div></li>
+                  </ul>
+                </li>
+
+                <!-- ===== EE ===== -->
+                <li data-dept="ee">
+                  <div class="node">
+                    <button class="node-btn size-md" style="--accent:#f59e0b"><span class="node-avatar" style="background:#f59e0b">NK</span><span class="flex-grow-1"><span class="node-name d-block">Dr. Neha Kulkarni</span><span class="node-role d-block">HOD — Electrical</span></span><i class="bi bi-info-circle text-secondary d-none d-md-inline small"></i></button>
+                    <div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#f59e0b;width:38px;height:38px">NK</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Neha Kulkarni</div><div style="font-size:.74rem;color:#f59e0b;font-weight:600">HOD — Electrical</div></div></div><p class="desc">Smart Grid aur Renewable Energy par kaam karti hain. Campus solar rooftop project ki technical head aur IEEE student chapter mentor.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#f59e0b"></i>Ph.D. (Power Systems), M.Tech</span><span><i class="bi bi-briefcase-fill me-1" style="color:#f59e0b"></i>Experience: 17 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#f59e0b"></i>hod.ee@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#f59e0b"></i>+91 98100 11004</span></div><div class="mt-2"><span class="chip" style="background:#f59e0b18;color:#f59e0b">Power Systems</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">Control Systems</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">Smart Grid</span></div></div>
+                  </div>
+                  <ul>
+                    <li data-dept="ee"><div class="node"><button class="node-btn" style="--accent:#f59e0b"><span class="node-avatar" style="background:#f59e0b">MA</span><span class="flex-grow-1"><span class="node-name d-block">Prof. Manish Agarwal</span><span class="node-role d-block">Associate Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#f59e0b;width:38px;height:38px">MA</span><div><div class="fw-semibold" style="font-size:.9rem">Prof. Manish Agarwal</div><div style="font-size:.74rem;color:#f59e0b;font-weight:600">Associate Professor</div></div></div><p class="desc">Power Electronics aur Drives ke faculty. EV charging infrastructure par consultancy karte hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#f59e0b"></i>M.Tech (Power Electronics)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#f59e0b"></i>Experience: 14 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#f59e0b"></i>manish.a@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#f59e0b"></i>+91 98100 22009</span></div><div class="mt-2"><span class="chip" style="background:#f59e0b18;color:#f59e0b">Power Electronics</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">Electric Drives</span></div></div></div></li>
+                    <li data-dept="ee"><div class="node"><button class="node-btn" style="--accent:#f59e0b"><span class="node-avatar" style="background:#f59e0b">RB</span><span class="flex-grow-1"><span class="node-name d-block">Ms. Ritu Bansal</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#f59e0b;width:38px;height:38px">RB</span><div><div class="fw-semibold" style="font-size:.9rem">Ms. Ritu Bansal</div><div style="font-size:.74rem;color:#f59e0b;font-weight:600">Assistant Professor</div></div></div><p class="desc">Measurement aur Instrumentation lab ki in-charge. PLC &amp; SCADA certification course chalati hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#f59e0b"></i>M.E. (Instrumentation)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#f59e0b"></i>Experience: 7 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#f59e0b"></i>ritu.bansal@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#f59e0b"></i>+91 98100 22010</span></div><div class="mt-2"><span class="chip" style="background:#f59e0b18;color:#f59e0b">Instrumentation</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">PLC &amp; SCADA</span></div></div></div></li>
+                    <li data-dept="ee"><div class="node"><button class="node-btn" style="--accent:#f59e0b"><span class="node-avatar" style="background:#f59e0b">SY</span><span class="flex-grow-1"><span class="node-name d-block">Mr. Sandeep Yadav</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#f59e0b;width:38px;height:38px">SY</span><div><div class="fw-semibold" style="font-size:.9rem">Mr. Sandeep Yadav</div><div style="font-size:.74rem;color:#f59e0b;font-weight:600">Assistant Professor</div></div></div><p class="desc">Electrical Machines aur Transmission lines padhate hain. Solar energy student club ke coordinator.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#f59e0b"></i>M.Tech (Power Systems)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#f59e0b"></i>Experience: 5 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#f59e0b"></i>sandeep.y@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#f59e0b"></i>+91 98100 22011</span></div><div class="mt-2"><span class="chip" style="background:#f59e0b18;color:#f59e0b">Electrical Machines</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">Transmission</span></div></div></div></li>
+                    <li data-dept="ee"><div class="node"><button class="node-btn" style="--accent:#f59e0b"><span class="node-avatar" style="background:#f59e0b">FK</span><span class="flex-grow-1"><span class="node-name d-block">Dr. Farah Khan</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#f59e0b;width:38px;height:38px">FK</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Farah Khan</div><div style="font-size:.74rem;color:#f59e0b;font-weight:600">Assistant Professor</div></div></div><p class="desc">Renewable energy integration par research karti hain. 2 funded projects (DST) ki principal investigator.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#f59e0b"></i>Ph.D. (Renewable Energy)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#f59e0b"></i>Experience: 10 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#f59e0b"></i>farah.khan@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#f59e0b"></i>+91 98100 22012</span></div><div class="mt-2"><span class="chip" style="background:#f59e0b18;color:#f59e0b">Renewable Energy</span><span class="chip" style="background:#f59e0b18;color:#f59e0b">Energy Storage</span></div></div></div></li>
+                  </ul>
+                </li>
+
+                <!-- ===== CE ===== -->
+                <li data-dept="ce">
+                  <div class="node">
+                    <button class="node-btn size-md" style="--accent:#0d9488"><span class="node-avatar" style="background:#0d9488">IQ</span><span class="flex-grow-1"><span class="node-name d-block">Dr. Imran Qureshi</span><span class="node-role d-block">HOD — Civil</span></span><i class="bi bi-info-circle text-secondary d-none d-md-inline small"></i></button>
+                    <div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#0d9488;width:38px;height:38px">IQ</span><div><div class="fw-semibold" style="font-size:.9rem">Dr. Imran Qureshi</div><div style="font-size:.74rem;color:#0d9488;font-weight:600">HOD — Civil</div></div></div><p class="desc">Earthquake resistant design aur green building certification ke specialist. State PWD ke consultant panel me shaamil hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#0d9488"></i>Ph.D. (Structural Engg.), M.Tech</span><span><i class="bi bi-briefcase-fill me-1" style="color:#0d9488"></i>Experience: 20 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#0d9488"></i>hod.ce@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#0d9488"></i>+91 98100 11005</span></div><div class="mt-2"><span class="chip" style="background:#0d948818;color:#0d9488">Structural Analysis</span><span class="chip" style="background:#0d948818;color:#0d9488">Concrete Technology</span><span class="chip" style="background:#0d948818;color:#0d9488">Surveying</span></div></div>
+                  </div>
+                  <ul>
+                    <li data-dept="ce"><div class="node"><button class="node-btn" style="--accent:#0d9488"><span class="node-avatar" style="background:#0d9488">HP</span><span class="flex-grow-1"><span class="node-name d-block">Prof. Harish Patil</span><span class="node-role d-block">Associate Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#0d9488;width:38px;height:38px">HP</span><div><div class="fw-semibold" style="font-size:.9rem">Prof. Harish Patil</div><div style="font-size:.74rem;color:#0d9488;font-weight:600">Associate Professor</div></div></div><p class="desc">Soil Mechanics aur Foundation Engineering ke faculty. Site investigation projects supervise karte hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#0d9488"></i>M.Tech (Geotechnical)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#0d9488"></i>Experience: 12 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#0d9488"></i>harish.patil@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#0d9488"></i>+91 98100 22013</span></div><div class="mt-2"><span class="chip" style="background:#0d948818;color:#0d9488">Soil Mechanics</span><span class="chip" style="background:#0d948818;color:#0d9488">Foundation Engg.</span></div></div></div></li>
+                    <li data-dept="ce"><div class="node"><button class="node-btn" style="--accent:#0d9488"><span class="node-avatar" style="background:#0d9488">AG</span><span class="flex-grow-1"><span class="node-name d-block">Ms. Ananya Ghosh</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#0d9488;width:38px;height:38px">AG</span><div><div class="fw-semibold" style="font-size:.9rem">Ms. Ananya Ghosh</div><div style="font-size:.74rem;color:#0d9488;font-weight:600">Assistant Professor</div></div></div><p class="desc">Water treatment aur waste management ki faculty. Campus rainwater harvesting project ki head.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#0d9488"></i>M.E. (Environmental Engg.)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#0d9488"></i>Experience: 6 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#0d9488"></i>ananya.ghosh@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#0d9488"></i>+91 98100 22014</span></div><div class="mt-2"><span class="chip" style="background:#0d948818;color:#0d9488">Environmental Engg.</span><span class="chip" style="background:#0d948818;color:#0d9488">Water Resources</span></div></div></div></li>
+                    <li data-dept="ce"><div class="node"><button class="node-btn" style="--accent:#0d9488"><span class="node-avatar" style="background:#0d9488">GM</span><span class="flex-grow-1"><span class="node-name d-block">Mr. Gaurav Malhotra</span><span class="node-role d-block">Assistant Professor</span></span></button><div class="info-card"><div class="d-flex align-items-center gap-2"><span class="node-avatar" style="background:#0d9488;width:38px;height:38px">GM</span><div><div class="fw-semibold" style="font-size:.9rem">Mr. Gaurav Malhotra</div><div style="font-size:.74rem;color:#0d9488;font-weight:600">Assistant Professor</div></div></div><p class="desc">Highway aur Transportation Engineering padhate hain. AutoCAD &amp; STAAD Pro workshops conduct karte hain.</p><div class="info-meta d-grid gap-1"><span><i class="bi bi-mortarboard-fill me-1" style="color:#0d9488"></i>M.Tech (Transportation)</span><span><i class="bi bi-briefcase-fill me-1" style="color:#0d9488"></i>Experience: 5 Years</span><span class="text-truncate"><i class="bi bi-envelope-fill me-1" style="color:#0d9488"></i>gaurav.m@college.edu.in</span><span><i class="bi bi-telephone-fill me-1" style="color:#0d9488"></i>+91 98100 22015</span></div><div class="mt-2"><span class="chip" style="background:#0d948818;color:#0d9488">Transportation</span><span class="chip" style="background:#0d948818;color:#0d9488">AutoCAD / STAAD</span></div></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- ============ /TREE ============ -->
+      </div>
+    </div>
+
+    <!-- Department summary cards -->
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-sm-6 col-lg-3"><div class="card h-100 border-0 shadow-sm rounded-4" style="border-top:4px solid #4f46e5"><div class="card-body"><div class="rounded-3 d-inline-grid mb-2" style="background:#4f46e518;color:#4f46e5;width:42px;height:42px;place-items:center"><i class="bi bi-cpu fs-5"></i></div><h3 class="h6 fw-bold mb-1">Computer Science &amp; Engineering</h3><p class="small text-secondary mb-2">HOD: Dr. Anjali Verma · 19 Years exp.</p><span class="chip" style="background:#4f46e518;color:#4f46e5">4 Faculty Members</span></div></div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="card h-100 border-0 shadow-sm rounded-4" style="border-top:4px solid #e11d48"><div class="card-body"><div class="rounded-3 d-inline-grid mb-2" style="background:#e11d4818;color:#e11d48;width:42px;height:42px;place-items:center"><i class="bi bi-gear-wide-connected fs-5"></i></div><h3 class="h6 fw-bold mb-1">Mechanical Engineering</h3><p class="small text-secondary mb-2">HOD: Dr. Suresh Nair · 22 Years exp.</p><span class="chip" style="background:#e11d4818;color:#e11d48">4 Faculty Members</span></div></div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="card h-100 border-0 shadow-sm rounded-4" style="border-top:4px solid #f59e0b"><div class="card-body"><div class="rounded-3 d-inline-grid mb-2" style="background:#f59e0b18;color:#f59e0b;width:42px;height:42px;place-items:center"><i class="bi bi-lightning-charge fs-5"></i></div><h3 class="h6 fw-bold mb-1">Electrical Engineering</h3><p class="small text-secondary mb-2">HOD: Dr. Neha Kulkarni · 17 Years exp.</p><span class="chip" style="background:#f59e0b18;color:#f59e0b">4 Faculty Members</span></div></div></div>
+      <div class="col-12 col-sm-6 col-lg-3"><div class="card h-100 border-0 shadow-sm rounded-4" style="border-top:4px solid #0d9488"><div class="card-body"><div class="rounded-3 d-inline-grid mb-2" style="background:#0d948818;color:#0d9488;width:42px;height:42px;place-items:center"><i class="bi bi-building fs-5"></i></div><h3 class="h6 fw-bold mb-1">Civil Engineering</h3><p class="small text-secondary mb-2">HOD: Dr. Imran Qureshi · 20 Years exp.</p><span class="chip" style="background:#0d948818;color:#0d9488">3 Faculty Members</span></div></div></div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white-50 py-4 mt-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 small">
+      <span>© 2026 Shri Vidya Institute of Technology — Faculty Directory</span>
+      <span>Built with <span class="text-warning">Bootstrap 5</span> · Fully responsive</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ===== Tap-to-open (mobile) + edge flip (desktop) =====
+    document.querySelectorAll('.node').forEach(function (node) {
+      var btn = node.querySelector('.node-btn');
+      var card = node.querySelector('.info-card');
+
+      // Click / tap toggles active
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var wasActive = node.classList.contains('is-active');
+        document.querySelectorAll('.node.is-active').forEach(function (n) { n.classList.remove('is-active'); });
+        if (!wasActive) { node.classList.add('is-active'); positionCard(node, card); }
+      });
+
+      // Desktop hover
+      node.addEventListener('mouseenter', function () {
+        if (window.innerWidth >= 768) { node.classList.add('is-active'); positionCard(node, card); }
+      });
+      node.addEventListener('mouseleave', function () {
+        if (window.innerWidth >= 768) { node.classList.remove('is-active'); }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.node.is-active').forEach(function (n) { n.classList.remove('is-active'); });
+    });
+
+    // Flip card if it would overflow the viewport
+    function positionCard(node, card) {
+      if (window.innerWidth < 768) return;
+      card.classList.remove('flip-left', 'flip-right');
+      var r = node.getBoundingClientRect();
+      var center = r.left + r.width / 2;
+      var half = 150;
+      if (center - half < 8) card.classList.add('flip-right');
+      else if (center + half > window.innerWidth - 8) card.classList.add('flip-left');
+    }
+
+    // ===== Department filter =====
+    var group = document.getElementById('filterGroup');
+    var colors = { cse:'#4f46e5', me:'#e11d48', ee:'#f59e0b', ce:'#0d9488' };
+    group.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var dept = b.getAttribute('data-dept');
+
+        // reset button styles
+        group.querySelectorAll('button').forEach(function (x) {
+          var d = x.getAttribute('data-dept');
+          if (d === 'all') { x.className = 'btn btn-outline-dark'; x.style = ''; }
+          else { x.className = 'btn'; x.style.background = 'transparent'; x.style.color = colors[d]; x.style.border = '1px solid ' + colors[d]; }
+        });
+        // active button style
+        if (dept === 'all') { b.className = 'btn btn-dark'; b.style = ''; }
+        else { b.style.background = colors[dept]; b.style.color = '#fff'; b.style.border = '1px solid ' + colors[dept]; }
+
+        // dim non-matching department branches
+        document.querySelectorAll('.tree li[data-dept]').forEach(function (li) {
+          var d = li.getAttribute('data-dept');
+          if (dept === 'all' || d === dept) li.classList.remove('node-dim');
+          else li.classList.add('node-dim');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

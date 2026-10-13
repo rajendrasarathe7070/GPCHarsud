@@ -1,0 +1,21 @@
+   {% if infomsg %}
+      
+     <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos }} |
+      </a>
+      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos_2 }} |
+      </a>
+       |<span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos }} |
+      </a>
+      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
+      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
+        {{ infomsg.infos_2 }} |
+      </a>
+    {% else %}
+      <span class="text-white mx-2">अभी कोई नया नोटिस उपलब्ध नहीं है। you can add your information alerts by pages .</span>
+    {% endif %}

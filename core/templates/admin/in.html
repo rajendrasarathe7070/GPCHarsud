@@ -1,0 +1,218 @@
+
+
+{% extends "admin/base_site.html" %}
+{% load i18n static custom_admin_tags %}
+
+{% block extrastyle %}
+{{ block.super }}
+ 
+<link rel="stylesheet" href="https://cloudflare.com">
+<style>
+    .dashboard-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        font-family: 'Roboto', 'Segoe UI', sans-serif;
+    }
+    .custom-model-card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+    }
+    .card-header-custom {
+        background-color: #1e293b;
+        color: #ffffff;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #334155;
+    }
+    .card-title-text {
+        margin: 0; 
+        font-size: 1.15rem; 
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+    .custom-table th {
+        background-color: #f8fafc;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 14px 20px;
+        border-bottom: 2px solid #e2e8f0;
+        text-align: left;
+    }
+    .custom-table td {
+        padding: 14px 20px;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 0.875rem;
+        color: #334155;
+    }
+    .custom-table tr:hover { background-color: #f8fafc; }
+    
+    /* Action Buttons */
+    .btn-action {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        text-decoration: none !important;
+        font-weight: 600;
+        margin-left: 6px;
+        display: inline-block;
+        transition: all 0.2s ease;
+    }
+    .btn-edit { background-color: #0ea5e9; color: #ffffff !important; }
+    .btn-edit:hover { background-color: #0284c7; }
+    .btn-delete { background-color: #ef4444; color: #ffffff !important; }
+    .btn-delete:hover { background-color: #dc2626; }
+    .btn-add { background-color: #10b981; color: #ffffff !important; padding: 8px 16px; border-radius: 6px; }
+    .btn-add:hover { background-color: #059669; }
+    
+    /* Show Full / Collapse Feature */
+    .hidden-row { display: none; }
+    .toggle-btn-container {
+        padding: 12px;
+        text-align: center;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+    .btn-toggle {
+        background: #64748b;
+        color: #ffffff !important;
+        border: none;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+    .btn-toggle:hover { background: #475569; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="content-main" style="width: 100%;">
+    <div class="dashboard-grid">
+        
+      
+        {% if app_list %}
+            {% for app in app_list %}
+                {% for model in app.models %}
+                    
+                   
+                    {% get_model_rows app.app_label model.object_name as row_list %}
+                    
+                  
+                    <div class="custom-model-card">
+                        
+                     
+                        <div class="card-header-custom">
+                            <h3 class="card-title-text">
+                                <i class="fa-solid fa-folder text-warning me-2"></i> {{ model.name }}
+                            </h3>
+                            {% if model.add_url %}
+                                <a href="{{ model.add_url }}" class="btn-action btn-add">
+                                    <i class="fa-solid fa-plus me-1"></i> Add {{ model.name }}
+                                </a>
+                            {% endif %}
+                        </div>
+ 
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">S.No.</th>
+                                        <th style="width: 60%;">Record / Information Name</th>
+                                        <th style="width: 30%; text-align: right;">Quick Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if row_list %}
+                                        {% for row in row_list %}
+                                            
+                                            <tr class="model-row-{{ model.object_name }} {% if forloop.counter > 7 %}hidden-row{% endif %}">
+                                                <td style="font-weight: bold; color: #94a3b8;">{{ forloop.counter }}</td>
+                                                <td style="font-weight: 500;">
+                                                 
+                                                    {{ row }}
+                                                </td>
+                                                <td style="text-align: right;">
+                                                  
+                                                    <a href="{{ model.admin_url }}{{ row.id }}/change/" class="btn-action btn-edit">
+                                                        <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                                                    </a>
+                                                    <a href="{{ model.admin_url }}{{ row.id }}/delete/" class="btn-action btn-delete">
+                                                        <i class="fa-solid fa-trash me-1"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3" style="text-align: center; padding: 30px; color: #94a3b8;">
+                                                <i class="fa-solid fa-inbox fa-2x mb-2 d-block"></i> No records found inside {{ model.name }}.
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                      
+                        {% if row_list|length > 7 %}
+                        <div class="toggle-btn-container">
+                            <button class="btn-toggle" data-model="{{ model.object_name }}" data-count="{{ row_list|length }}" onclick="toggleModelRows(this)">
+                                <i class="fa-solid fa-chevron-down me-1"></i> Show Full ({{ row_list|length }} Rows)
+                            </button>
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p>{% translate "You don’t have permission to view or edit anything." %}</p>
+        {% endif %}
+
+    </div>
+</div>
+
+ 
+<script>
+    function toggleModelRows(button) {
+        var modelName = button.getAttribute('data-model');
+        var totalCount = button.getAttribute('data-count');
+        // Sirf isi specific model ke chhupe huye rows ko target karega
+        var hiddenRows = document.querySelectorAll('.model-row-' + modelName + '.hidden-row');
+        
+        if (button.classList.contains('expanded')) {
+            // Collapse (Wapas sirf 7 dikhayein)
+            hiddenRows.forEach(function(row) {
+                row.style.display = 'none';
+            });
+            button.innerHTML = '<i class="fa-solid fa-chevron-down me-1"></i> Show Full (' + totalCount + ' Rows)';
+            button.classList.remove('expanded');
+        } else {
+            // Expand (Saari rows show karein)
+            hiddenRows.forEach(function(row) {
+                row.style.display = 'table-row';
+            });
+            button.innerHTML = '<i class="fa-solid fa-chevron-up me-1"></i> Show Less';
+            button.classList.add('expanded');
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,372 @@
+[
+{
+    "model": "sessions.session",
+    "pk": "4291shl08er1c97bcpltu48xcgs2ehrr",
+    "fields": {
+        "session_data": ".eJxVjM0OgjAQhN-lZ0MUSvk5evcZml12K9WmGFrUSHh3i3LQZJPd2W9mZqFhir2eAo_akmjFQex-fwjdlf0K6AL-PGTd4ONoMVst2UZDdhqI3XHz_hX0EPqUVrVCMIWSKDGvsMJCkiI0VVFXaBD3uVQ5pV0Sdo2UDZUNG5mmw9ocylT6sC8YSbvhbL2-W36IdhYh8k20fnJu97k1QYQElk0a6zh8NT_jCD_8Ds4mxaT_gsvyBojyX9A:1xByGT:HTVfbU9Cr0wrQK-W2dT-cJ3gcTL-Spwtg6NnrQYbG2k",
+        "expire_date": "2026-10-14T17:38:45.667Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "en8e2d8ruk9lvjwdl5s47gyvvri1lbyb",
+    "fields": {
+        "session_data": ".eJxVjEEOgjAQRe_StSGFtqAs3XuGZsoMUG2KoQWMhLsLykJ28_77f2Y22Tf0qF3XWK9HSxMrZxYiPVnpB-dO31sjRFjFsmNtHYUf0yv28OdHcHYlQn0YrkbDEFs9BOq1RVayjB0yA9WD_CbwDr7pkqrzsbcm2SrJbkNy65Dcde8eHrQQ2nUtuBIKQfK6SEHxQipKC2GUEogS1LkwKI0EQJFLvKQmIylEahTPATlwyZYPDWBeSw:1xByWD:frgDdctW2FkqIwvRCvoB-nnxmKFLWLRWE1T28uJWkMQ",
+        "expire_date": "2026-10-14T17:55:01.755Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "qsnpq9ef1ukgrosd0yr92fp3w05rl3qo",
+    "fields": {
+        "session_data": ".eJy1kE1uwyAQRu_CuqKNjfHPMvueATHMENMiiAx2okS5e3HtRX2ASmjg8WZm8T3ZzT30hMrHiwtqcXRjw5OlTFc2hNn7t9-3Qp11Ea8drfOUNqZ7nvQfv2jvChGqw2AxSs95VHOiSTlkAzuxwx9o801hFfilwyVyE0OeHPC1he828c-I5M9772HBqNNYpmUnQdtaChBQtdBCLVAi2LbuWrAAH5WQFZa7QTC9ED02PVlRjoHOnpqydM8kUZ6v_5tJzAVpcYa2TFbOpfC1bOK9Zq8fPOaVaA:1xCZ1l:mOzX5UmvmCuHwBXkHGVYRpfFtp5yAsjF387vwley3AI",
+        "expire_date": "2026-10-16T08:54:01.793Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "r9q4gfx3vxkpzfkve21qg37ugdhfeaj7",
+    "fields": {
+        "session_data": ".eJxVjk1uxCAMhe_CuqKdhJCfZfc9A7KxmdCiMAokU3U0dy9psmgky_bz92z5Ie7-B2YyIV79ZFbPdzE8RMp8E8O0hPDy1xuCDAU8D-l84LRr_s4z_OMrBF8UkzktFmJgyaNZEs_GkxjERZxmCPaLpw3QJ0zXKG2c8uxRbhZ50CQ_InF4P7ynAyOksWzrTiO4WitUWLXYYq1IE7q27lp0iG-V0hWV2hDaXqmemp6dKmGxc5emHI25PM6rt7x_uulcktzSDl5r8fwFYPpuTA:1xCwfZ:Is7ODIKZ7mszNz-0TAGR2uG8GK-2lCgj5txNRSO5pHI",
+        "expire_date": "2026-10-17T10:08:41.608Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "wso2ymlxw0qoapiu6zminlt0v6nhc17l",
+    "fields": {
+        "session_data": ".eJyrVirPrEosSonPyU_PzIsvy0wtV7KqViouSS1QslJKLC3JUNIB8-JTEksSgVK1UG5aZk5qMYSfWlFSlIgkX5aYkwnkpabEo2isrQUAhp8oDA:1xEr9u:1lmm9aHCfUAdjv69ril-jkxDiPIM6CaGdnAJrIJLYTI",
+        "expire_date": "2026-10-22T16:39:54.930Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "z9lljtlgkonxsn3dvla7m3bytuh6lu7z",
+    "fields": {
+        "session_data": ".eJxVjsFuhDAMRP8l5yqFJKULx977DZGJhyVtRCoS2Kqr_feGwqFcRh6_sTV3cfM_NLMN8eonu3rcRHcXKeNLdNMSwtPfbJkyFfA47OAD0u7xnWf6x1cKvjiwPR0WYmnJo10SZutZdMKI064n94lpA_xB0zVKF6c8-15uEXnQJN8jI7wd2dODkdJYrht3GTSqlxoaTIAh7VApNqrVbGp2pqna1tAFFelGKaaejR5qA671q1LlacylOFbvsDfdfC4iN9nBsxKPX0WcbZk:1xChZN:FMD-rKO_cLFHhCZz6YmPDUvDOoBOmpkb_mWpR8OoZHc",
+        "expire_date": "2026-10-16T18:01:17.718Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "zegic6mkxjhqx6quui4xakmuvpg0q6e8",
+    "fields": {
+        "session_data": ".eJxVjk1uxCAMhe_CuqKdhJCfZfc9A7KxmdCiMAokU3U0dy9psmgky_bz92z5Ie7-B2YyIV79ZFbPdzE8RMp8E8O0hPDy1xuCDAU8D-l84LRr_s4z_OMrBF8UkzktFmJgyaNZEs_GkxjERZxmCPaLpw3QJ0zXKG2c8uxRbhZ50CQ_InF4P7ynAyOksWzrTiO4WitUWLXYYq1IE7q27lp0iG-V0hWV2hDaXqmemp6dKmGxc5emHI25PM6rt7x_uulcktzSDl5r8fwFYPpuTA:1xD5fT:DKXfq44WKClelnhdwwncnvvwmhOnxIAyMIQc0NFYUv0",
+        "expire_date": "2026-10-17T19:45:11.163Z"
+    }
+},
+{
+    "model": "core.info",
+    "pk": 1,
+    "fields": {
+        "infos": "thi is academic notice section for naw testing .",
+        "infos_2": "my second and updated notices sections this is real and its fully workeed rght now on limit is 100 w",
+        "date": "2026-10-07",
+        "page": "campus"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 1,
+    "fields": {
+        "Department_name": "Computer Science & Engg.",
+        "Department_hod": "Mr. vinod sir",
+        "hod_photo": "hod_photos/logo1.jpg",
+        "hod_qualification": "cse",
+        "hod_experience": 5,
+        "Department_description": "thi si commputer science departmetn .",
+        "Department_crausal_image_1": "department_crausal/bg.png",
+        "Department_crausal_image_2": "department_crausal/1.jpg",
+        "Department_crausal_image_3": "department_crausal/clg1.jpeg",
+        "Course_name": "Computer_Science",
+        "Course_image": "course_images/Computer-Science.jpg",
+        "Course_code": "C04",
+        "Course_duration": "3",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 2,
+    "fields": {
+        "Department_name": "civil Engg.",
+        "Department_hod": "Mr. Shubham malviya",
+        "hod_photo": "hod_photos/civil.png",
+        "hod_qualification": "m tech",
+        "hod_experience": 10,
+        "Department_description": "my department is civil engg im working on buildings .",
+        "Department_crausal_image_1": "department_crausal/images_1.jpg",
+        "Department_crausal_image_2": "department_crausal/images.jpg",
+        "Department_crausal_image_3": "department_crausal/civilenggcrausal.jpg",
+        "Course_name": "Civil_Engineering",
+        "Course_image": "course_images/civil-engineering.png",
+        "Course_code": "C03",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 3,
+    "fields": {
+        "Department_name": "Mechanical Engineering",
+        "Department_hod": "Mr.",
+        "hod_photo": "",
+        "hod_qualification": "m tech",
+        "hod_experience": 1,
+        "Department_description": "this is mechanicals Department description .",
+        "Department_crausal_image_1": "department_crausal/images_3.jpg",
+        "Department_crausal_image_2": "department_crausal/machinery-photo.jpeg",
+        "Department_crausal_image_3": "department_crausal/premium_photo-1664910842853-0d643f6db30c.jpeg",
+        "Course_name": "Mechanical_Engineering",
+        "Course_image": "course_images/mechanical.png",
+        "Course_code": "M02",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.course_department",
+    "pk": 4,
+    "fields": {
+        "Department_name": "ET & TELECOMMUNICATION",
+        "Department_hod": "Mr.",
+        "hod_photo": "hod_photos/images_7.jpg",
+        "hod_qualification": "m tech",
+        "hod_experience": 0,
+        "Department_description": "• Laboratory & Hands-On Work: Instructors guiding students through soldering, circuit building, and hardware testing.\r\n• Robotics & STEM Education: Teachers explaining microcontrollers, robotics mechanics, or computer parts.\r\n• Modern Classrooms: Students collaborating with laptops and electronic components.",
+        "Department_crausal_image_1": "department_crausal/images_6.jpg",
+        "Department_crausal_image_2": "department_crausal/images_5.jpg",
+        "Department_crausal_image_3": "department_crausal/images_4.jpg",
+        "Course_name": "ET_&_TELECOMMUNICATION",
+        "Course_image": "course_images/EEE.jpg",
+        "Course_code": "E01",
+        "Course_duration": "3 years",
+        "Course_eligibility": "10Th Pass",
+        "Course_seats_ppt": 30,
+        "Course_seats_eklavya": 30,
+        "Mode_of_study": "Hindi and English Medium"
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$Y06p3e7isN5m00vdDYDKxi$ul8+9Mj/qXIiSd2V28B0wvz6o1FeaachS0Ptmf8ohys=",
+        "last_login": "2026-10-03T19:45:11.157Z",
+        "is_superuser": true,
+        "username": "rajend_x7",
+        "first_name": "Rajendra",
+        "last_name": "sarathe",
+        "email": "rajend@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-30T12:34:37Z",
+        "slug": null,
+        "photo": "staticfiles/profile_pics/WhatsApp_Image_2026-05-20_at_2.19.24_AM.jpeg",
+        "phone": "9302707097",
+        "study": "diploma in cse",
+        "experience": 1,
+        "joining_date": "2024-01-01",
+        "deprtment": 1,
+        "category": "HOD",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$8QZ3Jq1l0j3P7hlY0Eok4N$LheEOWgF0AKS/CgPIcW3keOcQJvn54enc0LWz+Hb+rw=",
+        "last_login": "2026-10-02T08:46:54Z",
+        "is_superuser": true,
+        "username": "rajend",
+        "first_name": "",
+        "last_name": "",
+        "email": "rajendrasarathe7070@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-30T17:07:15Z",
+        "slug": null,
+        "photo": "",
+        "phone": "9302707097",
+        "study": "diploma in cse",
+        "experience": 1,
+        "joining_date": "2026-10-03",
+        "deprtment": 1,
+        "category": "HOD",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$L0NNmMlGPoF9MqZlVPEKz1$4NM5CfakL1Ns+RRheWO5sH97lubMZfKkEJHUW96suRo=",
+        "last_login": "2026-10-02T02:49:17.580Z",
+        "is_superuser": false,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-10-01T19:57:08Z",
+        "slug": null,
+        "photo": "",
+        "phone": "+9302707097",
+        "study": "be",
+        "experience": 1,
+        "joining_date": "2026-10-01",
+        "deprtment": 1,
+        "category": "TEACHING",
+        "groups": [],
+        "user_permissions": [
+            [
+                "view_course_department",
+                "core",
+                "course_department"
+            ]
+        ]
+    }
+},
+{
+    "model": "core.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$y6YAvVdBgNWdqg12wBmEI4$sjhNtz5UhiPQ7ovJmiKw3OmU3ymZB6YDFZ6byzYlsEM=",
+        "last_login": "2026-10-02T18:01:17.714Z",
+        "is_superuser": true,
+        "username": "admin144",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin144@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-10-02T02:34:17.390Z",
+        "slug": null,
+        "photo": "",
+        "phone": null,
+        "study": null,
+        "experience": 0,
+        "joining_date": null,
+        "deprtment": null,
+        "category": "TEACHING",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.responsibility",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "work_name": "ADMISSION",
+        "work_position": null,
+        "assigned_date": "2026-10-05"
+    }
+},
+{
+    "model": "core.responsibility",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "rajend_x7"
+        ],
+        "work_name": "ADMISSION",
+        "work_position": "sub incharge",
+        "assigned_date": "2026-10-05"
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 1,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 3,
+        "timetable_image_1": "timetables/images_6.jpg",
+        "timetable_image_2": "timetables/images_6_hOBZnfw.jpg",
+        "uploaded_at": "2026-10-02T18:21:33.991Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 2,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 1,
+        "timetable_image_1": "timetables/images_5.jpg",
+        "timetable_image_2": "timetables/images_5_nZU6TZK.jpg",
+        "uploaded_at": "2026-10-03T19:53:39.768Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 3,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CS",
+        "year": 2,
+        "timetable_image_1": "timetables/images_4.jpg",
+        "timetable_image_2": "timetables/images_4_HUCyyVy.jpg",
+        "uploaded_at": "2026-10-03T19:53:56.020Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.timetable",
+    "pk": 4,
+    "fields": {
+        "types": "CLASS",
+        "branch": "CE",
+        "year": 1,
+        "timetable_image_1": "timetables/images_1.jpg",
+        "timetable_image_2": "timetables/images.jpg",
+        "uploaded_at": "2026-10-04T08:52:28.638Z",
+        "uploaded_by": [
+            "rajend_x7"
+        ]
+    }
+},
+{
+    "model": "core.academic_calendar",
+    "pk": 1,
+    "fields": {
+        "title": "Academic Calendar Year 2026 for Diploma First, third and Fifth Semesters.",
+        "calendar_pdf": "academic_calendars/academic20262027.pdf",
+        "created_at": "2026-10-03T18:24:10.112Z"
+    }
+},
+{
+    "model": "core.academic_calendar",
+    "pk": 2,
+    "fields": {
+        "title": "Academic Calendar for Even Semesters 2026.",
+        "calendar_pdf": "academic_calendars/Academic_Calander042026.pdf",
+        "created_at": "2026-10-03T18:27:44.039Z"
+    }
+},
+{
+    "model": "core.feecategory",
+    "pk": 1,
+    "fields": {
+        "name": 

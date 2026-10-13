@@ -1,0 +1,787 @@
+{% load static %}
+
+
+{% for notice in impnotices %}
+{% if not notice.notice_pdf %}
+<div class="modal fade" id="noticeModalLabel{{ notice.id }}" tabindex="1000"
+    aria-labelledby="noticeModalLabel{{ notice.id }}" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light " id="exampleModalLabel">{{ notice.title }}</h1>
+              <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill mx-2 "> {{ notice.notice_type }}</span>
+
+            </div>
+            <div class="modal-body">
+                {{ notice.content|safe }}
+
+
+            </div>
+            <div class="flex-start px-3 py-3 mx-3 " style="text-align:center;">
+                <hr>
+                <div class="float-start ">
+                     {% if notice.created_by.photo %}
+                    <span
+                   
+                        class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
+                        <img src="{{ notice.created_by.photo.url }}" class="rounded float-start rounded-circle me-3"
+                            alt="img" width="40" height="40"> {{ notice.created_by }}
+                        <span class="vr mx-2"></span>
+                        <t class="alert-date">Posted on: {{ notice.created_at|date:"d M Y" }}</t>
+ 
+                    </span>
+                    {% else %}
+                    <span
+                        class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
+                        <i class="bi bi-person-circle fs-4 me-2"></i> {{ notice.created_by }}
+                        <span class="vr mx-2"></span>
+                        <t class="alert-date">Posted on: {{ notice.created_at|date:"d M Y" }}</t>
+                    </span>
+                    {% endif %}
+                </div>
+               <button type="button" class="btn bi-house-dash" data-bs-dismiss="modal" style="font-size: x-large;"></button></span>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<!--   -->
+
+<!-- ===================================================
+     📦 मोडल 1: कंप्यूटर साइंस (CS) विभाग का विवरण
+     =================================================== -->
+
+<style>
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+    /* 🎨 आपके सिग्नेचर ब्राउन ग्रेडिएंट के साथ मोडल हेडर */
+    .modal-header {
+        background: linear-gradient(135deg, #3d1414 0%, #a52a2a 100%);
+    }
+
+    /* मोडल में HOD फोटो का सटीक साइज */
+    .hod-avatar {
+        width: 100%;
+        max-width: 260px;
+        height: 260px;
+        object-fit: cover;
+    }
+
+    /* मॉडर्न कैरोसेल इंडिकेटर्स */
+    .carousel-indicators [data-bs-target] {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin: 0 4px;
+    }
+
+    .carousel-indicators .active {
+        background-color: #a52a2a !important;
+        width: 18px;
+        border-radius: 4px;
+    }
+
+    /* डेस्कटॉप और बड़ी स्क्रीन पर दाएँ-बाएँ कॉलम के बीच की लाइन */
+    @media (min-width: 992px) {
+        .border-end-lg {
+            border-right: 1px solid var(--bs-border-color) !important;
+        }
+    }
+</style>
+{% for department in departments %}
+
+
+<div class="modal fade" id="hodModal{{ department.Course_code }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content rounded-1 border-0 shadow-lg">
+            <div class="modal-header text-white rounded-top-1 px-4 py-3">
+                <h5 class="modal-title fw-bold">{{ department.Department_name }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 bg-light-subtle">
+                <div class="row g-4">
+                    <!-- H.O.D. प्रोफाइल -->
+                    <div class="col-lg-5 text-center text-lg-start border-end-lg border-light-subtle pe-lg-4">
+                        <img src="{% if department.hod_photo %}{{ department.hod_photo.url }}{% else %}{% static 'images/default_hod.jpg' %}{% endif %}"
+                            class="img-fluid rounded-1 mb-3 hod-avatar border shadow-sm rounded-circle" style="width: 200px; height: 200px;"
+                            alt="HOD CS">
+                        <span
+                            class="badge bg-danger rounded-1 mb-2 px-3 py-1 text-uppercase font-monospace tracking-wide">H.O.D.
+                            - {{ department.Course_name | capfirst }}</span>
+                        <h3 class="fw-bold text-dark m-0"> {{ department.Department_hod }} </h3>
+                        <p class="text-secondary small mb-3"> {{ department.hod_qualification }},  {{ department.hod_experience }} Years Experience</p>
+                        <p class="text-muted small lh-base mb-0">" {{ department.Department_description | capfirst }} "</p>
+                    </div>
+                    <!-- कोर्सेज कैरोसेल -->
+                    <div class="col-lg-7 d-flex flex-column justify-content-between">
+                        <h5 class="fw-bold text-dark-emphasis mb-3">📚 Available Programs</h5>
+                        <div class="carousel-item active">
+                                    <div id="carouselExampleInterval{{ department.Course_code }}" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" data-bs-interval="10000">
+                                                <img src="{% if department.Department_crausal_image_1 %}{{ department.Department_crausal_image_1.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                                    class="d-block w-100"
+                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
+                                            </div>
+                                            <div class="carousel-item" data-bs-interval="2000">
+                                                <img src="{% if department.Department_crausal_image_2 %}{{ department.Department_crausal_image_2.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                                    class="d-block w-100"
+                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="{% if department.Department_crausal_image_3 %}{{ department.Department_crausal_image_3.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                                    class="d-block w-100"
+                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+{% endfor %}
+ 
+
+<!-- ===================================================
+     📦 model academic time table computer science
+     =================================================== -->
+
+<div class="modal fade" id="firstcs" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">First Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">1st sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">2nd sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="secondcs" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">second Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">3rd sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">4th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="theardcs" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Theard Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">5th sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">6th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <!-- =================================================== -->
+     📦 model academic time table civil
+
+<!-- 1. सबसे पहले डेटा को Branch और Year के हिसाब से ग्रुप करने के लिए लूप चलाएंगे -->
+ 
+
+ 
+    <!-- हर ब्रांच के अंदर साल (Year) का ग्रुपिंग लॉजिक लगाने के लिए -->
+   
+    
+    
+
+     <!-- ===================================================   -->
+{% for all in all_timetables %}
+<div class="modal fade" id="model{{ all.branch }}-{{ all.year }}" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel"> {{ all.branch }} - {{ all.year }} </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">1/2-sem {{ all.year }}-year Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{{ all.timetable_image_1.url }}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">2/2-sem {{ all.year }}-year Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{{ all.timetable_image_2.url }}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:-  {{ all.uploaded_at|date:"D M Y" }} update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>  
+
+{% endfor %}
+
+<div class="modal fade" id="secondcivil" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">second Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">3rd sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">4th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="theardcivil" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Theard Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">5th sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">6th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ===================================================
+     📦 model academic time table me
+     =================================================== -->
+
+<div class="modal fade" id="firstme" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">First Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">1st sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">2nd sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="secondme" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">second Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">3rd sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">4th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="theardme" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">ME Theard Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">5th sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">6th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ===================================================
+     📦 model academic time table ee
+     =================================================== -->
+
+<div class="modal fade" id="firstee" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">First Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">1st sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">2nd sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="secondee" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">second Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">3rd sem Class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">4th sem class Timetable</h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="theardee" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">EE Theard Year class time table</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">EE 5th sem Class Timetable
+                                </h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Class Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card h-100 border-light-subtle shadow-sm rounded-1">
+                            <div class="card-header bg-body-secondary py-3 rounded-top-1">
+                                <h5 class="card-title m-0 text-danger-emphasis fw-semibold">EE 6th sem class Timetable
+                                </h5>
+                            </div>
+                            <div class="card-body p-3 text-center bg-white">
+                                <div class="table-img-wrapper rounded-1 overflow-auto">
+                                    <img src="{% static 'images/timetable.png' %}" class="img-fluid timetable-img"
+                                        alt="Lab Timetable">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <p class="text-secondary ">Note:- July2026 update
+                </p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Timetable</button>
+
+            </div>
+        </div>
+    </div>
+</div>

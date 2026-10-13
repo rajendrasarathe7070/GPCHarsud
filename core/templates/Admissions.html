@@ -1,0 +1,1009 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admissions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+  <style>
+    div {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Scrollbar hide rahega lekin page scroll hota rahega */
+    html,
+    body {
+      ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    #navbar {
+      z-index: 1060 !important;
+      /* Bootstrap के डिफॉल्ट z-index से ज्यादा */
+    }
+
+    .navbar {
+      background-color: rgb(230, 220, 195) !important;
+      padding: 5px;
+      padding-bottom: 5px;
+      padding-left: 0px;
+      padding-right: 0px;
+
+    }
+
+    #academictabs {
+      --bs-nav-link-color: #f8f9fa;
+      --bs-nav-link-hover-color: #9d1a27;
+      --bs-nav-link-disabled-color: #999999;
+    }
+
+    .containers {
+      max-width: 100%;
+
+    }
+
+    .overflow-x-scroll {
+      margin-top: 52px;
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+
+      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
+      z-index: 1040 !important;
+      transform: translateZ(0);
+      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
+    }
+  </style>
+
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+    {% include 'navbar.html' %}
+
+
+
+  </nav>
+
+  <style>
+    .overflow-x-scrolls {
+      /* width: 100%;
+      max-height: 5rem; */
+      margin-top: 52px;
+      /* background-color: rgb(38, 5, 138) !important ; */
+      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
+    }
+
+    .nav-tabs {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+
+    }
+
+    .tab-pane:not(.active) {
+      display: none !important;
+    }
+  </style>
+  <nav>
+    <div class="overflow-x-scrolls fixed-top">
+
+      <div class="notices  card rounded-0 mt-md-1">
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+          {% include 'info.html' %}
+
+        </marquee>
+      </div>
+      <style>
+        .notices {
+          max-width: 100%;
+          max-height: 2rem;
+          width: 100%;
+          height: 2rem;
+
+          justify-content: center;
+
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+
+          color: #d10505;
+        }
+      </style>
+
+    </div>
+
+  </nav>
+  <div class="card text-bg-dark mt-md-5" style="max-height: 455px;  ">
+
+    <img src="{% static 'images/ai5.jpg' %}" class="card-img mt-md-1 mt-5 pt-5 pt-md-0" alt="wide image" style="">
+    <div class="card-img-overlay">
+
+      <!-- <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+          <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="tab-pane fade show active " id="Process-tab-pane" role="tabpanel" aria-labelledby="Process-tab"
+    tabindex="0">
+    <style>
+      :root {
+        --primary-color: #0a2d65;
+        /* Classic Government/Educational Navy Blue */
+        --secondary-color: #671818;
+        /* Warm Accent Orange */
+        --bg-light: #f8f9fa;
+      }
+
+      .step-box {
+        background: white;
+        border-left: 4px solid var(--primary-color);
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.9s;
+
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .step-box:hover {
+        transform: translateY(-0px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .step-number {
+        background-color: var(--primary-color);
+        color: white;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .info-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        background: white;
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .important-note {
+        background-color: #fff3e0;
+        border-left: 4px solid var(--secondary-color);
+        font-family: 'Times New Roman', Times, serif;
+
+      }
+    </style>
+    <style>
+      .hding {
+        background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+        margin-bottom: 10px;
+        border: 3px solid #861414;
+        text-transform: uppercase;
+        width: 100%;
+
+        /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+        padding: 6px 15px 6px 15px;
+        color: #f8f8fa;
+        text-align: left;
+
+        display: flex;
+        align-items: center;
+      }
+
+      /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+      .hding-text {
+        font-weight: bold;
+        white-space: nowrap;
+        /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+        font-size: 3.4vw;
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      /* ब्रेडक्रंब आइटम स्टाइल */
+      .breadcrumb-item {
+        background-color: #a2cdf9;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+
+      .custom-breadcrumb {
+        font-size: 2.2vw !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+      @media (min-width: 576px) {
+        .hding-text {
+          font-size: 1.1rem;
+          /* टैबलेट पर साइज */
+        }
+
+        .custom-breadcrumb {
+          font-size: 0.85rem !important;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .hding-text {
+          font-size: 1.35rem;
+          /* डेस्कटॉप पर साइज */
+        }
+
+        .hding {
+          padding-left: 30px;
+          /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+        }
+      }
+    </style>
+
+
+
+
+
+    <div class="container my-5">
+      <div class="container-fluid mt-3 mb-5 px-0">
+        <nav class="hding rounded-1 py-2 py-md-0">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Admission Process / Guidelines
+            </div>
+
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> Admission Process & G.</li>
+              </ol>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+      <div class="row g-4">
+
+
+        <div class="col-lg-7">
+
+
+          <div class="important-note p-4 mb-4 rounded shadow-sm shadow-sm">
+            <h5 class="text-warning-dark fw-bold mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i>
+              Mandatary Notice for Applicants</h5>
+            <p class="mb-0 text-muted small">All diploma admissions are strictly routed through the Directorate of
+              Technical Education (DTE), Madhya Pradesh centralized online counseling portal. Direct or offline
+              admissions are not permissible under Department rules.
+            </p>
+            <a href="https://mponline.gov.in" target="_blank" class="btn btn-sm btn-outline-dark mt-3 fw-semibold">
+              Visit MP Online DTE Portal <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+            </a>
+          </div>
+
+          <h3 class="fw-bold mb-4 text-dark border-bottom pb-2">Centralized Counseling Steps (DTE)</h3>
+
+          {% for dte in DTES %}
+          <div class="step-box p-4 mb-3 d-flex align-items-start">
+            <div class="step-number me-3 flex-shrink-0">{{ forloop.counter }}</div>
+            <div>
+              <h5 class="fw-bold text-primary mb-1">{{dte.title}}</h5>
+              <p class="text-muted mb-0 small"> {{dte.dis}}
+              </p>
+              {% if dte.sub_dis %}
+              <div class="bg-light p-2 rounded border font-monospace small px-3 d-inline-block">
+                <strong> {{dte.sub_dis}} </strong>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+
+
+        <div class="col-lg-5">
+
+          <div class="important-note p-4 mb-4 rounded shadow-sm shadow-sm">
+            <h5 class="text-warning-dark fw-bold mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i>
+              College Level Counseling (CLC)</h5>
+            <p class="mb-0 text-muted small">
+              If seats remain vacant in the college after the completion of all rounds of centralized online
+              counseling, <strong> College Level Counseling (CLC) is conducted in accordance with DTE
+                guidelines.</strong>
+              Admissions for these seats are granted directly based on merit.
+              <a class="btn btn-outline-dark btn-sm mx-2" href="#" role="button"> Admission Helpdesk </a>
+            </p>
+
+
+          </div>
+
+          <div class="mt-5 pt-3" style="font-family: 'Times New Roman', Times, serif;">
+
+            <div class="card border-danger mb-4 shadow-sm">
+              <div class="card-header bg-danger text-white fw-bold py-3">
+                <i class="fa-solid fa-building-columns me-2"></i>
+                Information regarding the CLC round admission process
+              </div>
+
+              <div class="alert alert-secondary mb-0 py-3 small">
+                <ol class="mb-0 ps-3 text-muted">
+                  {% for clc in CLCS %}
+                  <li class="mb-1"><strong>{{ clc.title }}</strong>{{ clc.dis }}</li>
+                  {% endfor %}
+
+                </ol>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="info-card p-4 mb-4 shadow-sm">
+            <h5 class="fw-bold text-dark mb-3 border-bottom pb-2"><i
+                class="fa-solid fa-folder-open text-primary me-2"></i> Documents Required</h5>
+            <p class="text-muted small mb-3">Bring 3 sets of self-attested photocopies along with the original files
+              during physical verification:</p>
+
+            <ul class="list-unstyled mb-0 text-muted small">
+              {% for doc in Imp_doc %}
+              <li class="mb-2"><i class="fa-regular fa-square-check text-success me-2"></i> {{doc.text}}</li>
+              {% endfor %}
+              <!--   -->
+            </ul>
+          </div>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="Eligibility-tab-pane" role="tabpanel" aria-labelledby="Eligibility-tab" tabindex="0">
+
+
+<div class="container mt-3 mb-5 px-0">
+        <nav class="hding rounded-1 py-md-0 py-2">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Important Dates & Required Documents
+            </div>
+
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Documents</li>
+              </ol>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+
+    <div class="row gap-5 mx-md-5 justify-content-center">
+      
+
+
+      <style>
+        .ac {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          background-color: #ffffff;
+          color: #212529;
+          /* डार्क ग्रे टेक्स्ट */
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 1px;
+          transition: all 0.8s ease;
+          /* स्मूथ इफ़ेक्ट के लिए */
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+        }
+
+        .rounded-4:hover {
+          transform: translateY(-10px);
+
+
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.423);
+          /* शैडो गहरी होगी */
+          border-top: 4px solid #1a237e;
+
+        }
+
+        .container-001:hover {
+          transform: translateY(-5px);
+          color: #151c6b78;
+
+        }
+
+        .container-001 {
+          color: #1a227e50;
+          transition: all 0.3s ease;
+        }
+
+        .card:hover {
+          pre {
+            color: brown;
+            text-decoration: bold;
+          }
+        }
+      </style>
+      {% for dept in departments %}
+      {% if dept.Course_code == "C04" %}
+      <div class="card rounded-4 ac" style="max-width: 40rem;">
+        <div class="card-body" style="height: 25rem; padding-right: 50px;">
+
+          <h4 class="card-title bi-pc-display"> Computer Science </h4>
+          <hr>
+
+          <div class="container-001" style=" max-height: 1px; text-align: right;"> <i class="bi bi-laptop "
+              style="font-size: 10rem;"></i> </div>
+
+          <div class="card-body">
+
+            <ul class="list-unstyled lh-lg">
+              <li><strong>Course Name:</strong> {{ dept.Course_name }}</li>
+              <li><strong>Course Code:</strong> {{ dept.Course_code }}</li>
+              <li><strong>Duration:</strong> {{ dept.Course_duration }}</li>
+              <li><strong>Eligibility:</strong> {{ dept.Course_eligibility }}</li>
+              <li><strong>Intake / Seats:</strong> {{ dept.Course_seats_eklavya }}-Aklavy Sheam,
+                {{ dept.Course_seats_ppt }}-PPt Sheam </li>
+              <li><strong>Mode of Study:</strong> {{ dept.Mode_of_study }}</li>
+
+
+
+
+            </ul>
+
+          </div>
+        </div>
+      </div>{% endif %}
+      {% if dept.Course_code == "C03" %}
+      <div class="card rounded-4 ac" style="max-width: 40rem;">
+        <div class="card-body" style="height: 25rem; padding-right: 50px;">
+          <h4 class="card-title bi-building-gear"> civil Engineering</h4>
+          <hr>
+
+
+          <div class="container-001" style="text-align: center; max-height: 1px; text-align: right;"> <i
+              class="bi bi-buildings " style="font-size: 10rem;"></i></div>
+
+          <div class="card-body">
+            <ul class="list-unstyled lh-lg">
+              <li><strong>Course Name:</strong> {{ dept.Course_name }}</li>
+
+              <li><strong>Course Code:</strong> {{ dept.Course_code }}</li>
+              <li><strong>Duration:</strong> {{ dept.Course_duration }}</li>
+              <li><strong>Eligibility:</strong> {{ dept.Course_eligibility }}</li>
+              <li><strong>Intake / Seats:</strong> {{ dept.Course_seats_eklavya }}-Aklavy Sheam,
+                {{dept.Course_seats_ppt }}-PPt Sheam </li>
+              <li><strong>Mode of Study:</strong> {{ dept.Mode_of_study }}</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
+      {% if dept.Course_code == "M02" %}
+      <div class="card rounded-4 ac" style="max-width: 40rem; ">
+        <div class="card-body" style="height: 25rem; padding-right: 50px;">
+          <h4 class="card-title bi-gear-wide-connected"> Mechanical Engineering</h4>
+          <hr>
+
+
+          <div class="container-001" style="text-align: center; max-height: 1px; text-align: right;"> <i
+              class="bi bi-gear " style="font-size: 10rem;"></i></div>
+
+          <div class="card-body">
+            <ul class="list-unstyled lh-lg">
+              <li><strong>Course Name:</strong> {{ dept.Course_name }}</li>
+
+              <li><strong>Course Code:</strong> {{ dept.Course_code }}</li>
+              <li><strong>Duration:</strong> {{ dept.Course_duration }}</li>
+              <li><strong>Eligibility:</strong> {{ dept.Course_eligibility }}</li>
+              <li><strong>Intake / Seats:</strong> {{ dept.Course_seats_eklavya }}-Aklavy Sheam,
+                {{ dept.Course_seats_ppt }}-PPt Sheam </li>
+              <li><strong>Mode of Study:</strong> {{ dept.Mode_of_study }}</li>
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if dept.Course_code == "E01" %}
+      <div class="card rounded-4 ac" style="max-width: 40rem; ">
+        <div class="card-body" style="height: 25rem;  padding-right: 50px; ">
+
+          <h4 class="card-title bi-lightning-charge "> Electronic and communication Engineering</h4>
+          <hr>
+
+          <div class="container-001" style="text-align: center; max-height: 1px; text-align: right;"> <i
+              class="bi  bi-ev-front " style="font-size: 10rem; "></i></div>
+
+          <div class="card-body">
+            <ul class="list-unstyled lh-lg">
+              <li><strong>Course Name:</strong> {{ dept.Course_name }}</li>
+
+              <li><strong>Course Code:</strong> {{ dept.Course_code }}</li>
+              <li><strong>Duration:</strong> {{ dept.Course_duration }}</li>
+              <li><strong>Eligibility:</strong> {{ dept.Course_eligibility }}</li>
+              <li><strong>Intake / Seats:</strong> {{ dept.Course_seats_eklavya }}-Aklavy Sheam,
+                {{dept.Course_seats_ppt }}-PPt Sheam </li>
+              <li><strong>Mode of Study:</strong> {{ dept.Mode_of_study }}</li>
+
+            </ul>
+
+          </div>
+        </div>
+      </div> {% endif %}
+      {% endfor %}
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <!-- Required doc -->
+  <div class="tab-pane fade" id="Required-tab-pane" role="tabpanel" aria-labelledby="Required-tab" tabindex="0">
+
+
+    <div class="container">
+
+      <style>
+        .hding {
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+          margin-bottom: 10px;
+          border: 3px solid #861414;
+          text-transform: uppercase;
+          width: 100%;
+
+          /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+          padding: 6px 15px 6px 15px;
+          color: #f8f8fa;
+          text-align: left;
+
+          display: flex;
+          align-items: center;
+        }
+
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+          font-weight: bold;
+          white-space: nowrap;
+          /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+          font-size: 3.4vw;
+        }
+
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+          background-color: #a2cdf9;
+          padding: 2px 6px;
+          border-radius: 3px;
+        }
+
+        .custom-breadcrumb {
+          font-size: 2.2vw !important;
+          margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+          .hding-text {
+            font-size: 1.1rem;
+            /* टैबलेट पर साइज */
+          }
+
+          .custom-breadcrumb {
+            font-size: 0.85rem !important;
+          }
+        }
+
+        @media (min-width: 992px) {
+          .hding-text {
+            font-size: 1.35rem;
+            /* डेस्कटॉप पर साइज */
+          }
+
+          .hding {
+            padding-left: 30px;
+            /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+          }
+        }
+      </style>
+
+      <div class="container-fluid mt-3 mb-5 px-0">
+        <nav class="hding rounded-1 py-md-0 py-2">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Important Dates & Required Documents
+            </div>
+
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Documents</li>
+              </ol>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+
+
+
+      <!-- <div class="container">
+          <div class="row"> -->
+
+
+      <style>
+        /* कॉलेज की थीम के अनुसार सिंपल फ़ॉन्ट और स्टाइल */
+        .info-list-section {
+          font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* डेट ब्लॉक को हाइलाइट करने के लिए */
+        .date-badge {
+          background-color: rgba(144, 37, 37, 0.1);
+          color: brown;
+          font-weight: bold;
+          min-width: 110px;
+          display: inline-block;
+          text-center: center;
+          /* border: 1px solid rgba(144, 37, 37, 0.2); */
+        }
+
+        /* डॉक्यूमेंट लिस्ट के लिए कस्टम बुलेट */
+        .doc-list li {
+          position: relative;
+          padding-left: 25px;
+          margin-bottom: 12px;
+          font-size: 1.05rem;
+          color: #333333;
+        }
+
+        .doc-list li::before {
+          content: "▪";
+          position: absolute;
+          left: 5px;
+          color: brown;
+          font-size: 1.2rem;
+          top: -2px;
+        }
+      </style>
+
+      <div class="container my-5 info-list-section">
+        <div class="row g-5">
+
+          <!-- LEFT COLUMN: Important Dates (7-8 Items) -->
+
+          <div class="col-12 col-md-6 px-0 px-md-3">
+            <div class="p-4 rounded-3 border bg-white shadow-sm">
+              <h4 class="fw-bold mb-4" style="color: brown;">
+                Important Dates & Deadlines
+              </h4>
+
+              <!-- बिना एनीमेशन की साफ लिस्ट -->
+              <ul class="list-group list-group-flush">
+                {% for date in Imp_date %}
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-0">
+                  <span class="text-secondary fw-semibold">{{ date.text }}</span>
+                  <span class="badge date-badge p-2">{{ date.date | date:"d M Y" }}</span>
+                </li>
+                {% endfor %}
+
+              </ul>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Required Documents (8-9 Items) -->
+          <div class="col-12 col-md-6 px-0 px-md-3">
+            <div class="p-4 rounded-3 border bg-white shadow-sm">
+              <h4 class="fw-bold mb-4" style="color: #333333;">
+                Required Documents for Admission
+              </h4>
+
+              <!-- सिंपल बुलेटेड लिस्ट बिना किसी एनीमेशन के -->
+              <ul class="doc-list list-unstyled m-0 p-0">
+                {% for doc in Imp_doc %}
+                <li>{{ doc.text }}</li>
+                {% endfor %}
+              </ul>
+
+              <!-- अतिरिक्त निर्देश -->
+              <div class="mt-4 p-3 bg-light rounded border-start border-3 border-secondary">
+                <p class="small text-muted mb-0"><strong>Note:</strong> Students must bring all original
+                  documents
+                  along with 3 sets of self-attested photocopies during the reporting time.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- 222222222222222222222222222222222222222222
+          </div>
+        </div>
+         -->
+    </div>
+  </div>
+
+  <!-- fee -->
+  <div class="tab-pane fade" id="FeeStructure-tab-pane" role="tabpanel" aria-labelledby="FeeStructure-tab" tabindex="0">
+    <div class="containers px-md-3">
+      <style>
+        .hding {
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+          margin-bottom: 5px;
+          border: 3px solid #861414;
+          text-transform: uppercase;
+          width: 100%;
+
+          /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+          padding: 6px 15px 6px 15px;
+          color: #f8f8fa;
+          text-align: left;
+
+          display: flex;
+          align-items: center;
+        }
+
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+          font-weight: bold;
+          white-space: nowrap;
+          /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+          font-size: 3.4vw;
+        }
+
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+          background-color: #a2cdf9;
+          padding: 2px 6px;
+          border-radius: 3px;
+        }
+
+        .custom-breadcrumb {
+          font-size: 2.2vw !important;
+          margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+          .hding-text {
+            font-size: 1.1rem;
+            /* टैबलेट पर साइज */
+          }
+
+          .custom-breadcrumb {
+            font-size: 0.85rem !important;
+          }
+        }
+
+        @media (min-width: 992px) {
+          .hding-text {
+            font-size: 1.35rem;
+            /* डेस्कटॉप पर साइज */
+          }
+
+          .hding {
+            padding-left: 30px;
+            /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+          }
+        }
+      </style>
+
+      <div class="container-fluid mt-3 mb-5 px-0">
+        <nav class="hding rounded-1 py-1 py-md-0">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Fee Structure
+            </div>
+
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">fees</li>
+              </ol>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </div>
+
+
+    <style>
+      .sticky-card {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+        z-index: 1020;
+      }
+    </style>
+    </head>
+
+    <body class="bg-light p-0 p-md-0">
+
+      <div class="container-fluid">
+        <div class="row">
+
+          <!-- col-md-8: Fee Structure Table (Dynamic) -->
+          <div class="col-md-8 mb-4 px-md-3 px-0">
+            <div class="card shadow-sm">
+
+              <div class="card-body px-md-0 px-0">
+
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped align-middle text-center">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>S.No.</th>
+                        <th class="text-start">Fee Component (फीस का प्रकार)</th>
+                        <th>Frequency (कब ली जाएगी)</th>
+                        <th>Regular Students (सामान्य छात्र)</th>
+                        <th>TFW Students (टी.एफ.डब्ल्यू)</th>
+                        <th>Eklavya Hostel Students</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for category in feecategories %}
+                      <!-- मुख्य फ़ीस श्रेणी की हेडिंग (जैसे: 1. ONE-TIME FEES) -->
+                      <tr class="table-secondary text-start fw-bold">
+                        <td colspan="6">{{ category.name }}</td>
+                      </tr>
+
+                      <!-- उस श्रेणी के अंतर्गत आने वाले सभी फ़ीस कंपोनेंट्स का लूप -->
+                      {% for component in category.components.all %}
+                      <tr>
+                        <td>{{ component.sub_no }}</td>
+                        <td class="text-start">{{ component.particular }}</td>
+                        <td>{{ component.get_frequency_display }}</td>
+                        <!-- Django human-readable choice text -->
+                        <td>{{ component.regular_amount }}</td>
+
+                        <!-- TFW वाले कॉलम में यदि 0 है तो हरा रंग दिखेगा -->
+                        <td class="{% if '0' in component.tfw_amount %}text-success fw-bold{% endif %}">
+                          {{ component.tfw_amount }}
+                        </td>
+
+                        <!-- एकलव्य हॉस्टल वाले कॉलम में यदि Govt Pay है तो नीला रंग दिखेगा -->
+                        <td class="{% if 'Govt Pay' in component.eklavya_amount %}text-primary fw-bold{% endif %}">
+                          {{ component.eklavya_amount }}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      {% empty %}
+                      <tr>
+                        <td colspan="6" class="text-center text-muted">कोई फ़ीस रिकॉर्ड नहीं मिला।</td>
+                      </tr>
+                      {% endfor %}
+
+                      <!-- TOTAL ESTIMATED FEES (यह स्थिर या हार्डकोडेड रख सकते हैं या अलग से व्यू से भेज सकते हैं) -->
+                      <tr class="table-dark fw-bold">
+                        <td colspan="3" class="text-end">TOTAL ESTIMATED FEES (कुल वार्षिक शुल्क):</td>
+                        <td>₹ 10370.00 </td>
+                        <td class="text-warning">₹ 370.00 </td>
+                        <td class="text-info">₹ 0.00 (हॉस्टल सहित)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mt-3 text-muted small">
+                  <p class="mb-1"><strong>महत्वपूर्ण नोट:</strong></p>
+                  <ul>
+                    <li>
+                      * 'Mian' (Exempted) / Govt Pay means that this fee is fully waived in accordance
+                      with the rules
+                      or will be borne by the government.</li>
+                    <li>
+                      Hostel mess charges will be payable separately on a monthly basis, in accordance
+                      with government
+                      norms.
+                      x
+                    </li>
+                    <li>
+                      Caution money will be charged only once and is refundable upon completion of the
+                      course.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- col-md-4: Scholarship Card (Dynamic & Fixed) -->
+          <div class="col-md-4">
+            <div class="card shadow-sm border-warning sticky-card">
+              <div class="card-header bg-warning text-dark py-3">
+                <h5 class="mb-0 fw-bold">🎓 Scholarship Information</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush mb-3">
+                  {% for scholarship in scholarships %}
+                  <li class="list-group-item px-0">
+                    <strong>{{ forloop.counter }}. {{ scholarship.title }}:</strong> {{
+                    scholarship.description }}
+                    {% if scholarship.link %}
+                    <br><a href="{{ scholarship.link }}" class="small" target="_blank">अधिक जानकारी
+                      ↗</a>
+                    {% endif %}
+                  </li>
+                  {% empty %}
+                  <li class="list-group-item px-0 text-muted">वर्तमान में कोई सक्रिय योजना उपलब्ध नहीं
+                    है।</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="card-footer text-muted text-center small">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <div class="tab-pane fade" id="Haw-to-apply-tab-pane" role="tabpanel" aria-labelledby="Eligibility-tab" tabindex="0">
+    {% include 'formate.html' %}
+  </div>
+
+
+
+  <!-- future section  -->
+  {% include 'footer.html' %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

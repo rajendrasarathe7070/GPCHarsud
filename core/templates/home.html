@@ -1,0 +1,1051 @@
+
+{% load static %}
+
+{% url 'admition.html' as admition %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+  <style>
+    #navbar {
+      --bs-bg-opacity: 1;
+      background-color: rgb(251, 233, 221) !important;
+    }
+
+    #notic {
+      --bs-bg-opacity: 1;
+      background-color: rgb(255, 251, 242) !important;
+    }
+
+    .tab-pane:not(.active) {
+      display: none !important;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar">
+    <div class="container-fluid py-0" style="background-color: brown; color: #f7f7f7;">
+      <a class="navbar-brand" href="#" style="color: rgb(230, 220, 195);">
+        <h5 style="align-items: center;">Govt. Polytechnic collage harsud</h5>
+      </a>
+      <!-- <div class="d-block d-sm-none">
+        <button class="btn btn-outline-danger  mx-1" data-bs-toggle="modal" data-bs-target="#loginform">Log-In</button>
+        <button class="btn btn-outline-primary mx-1" data-bs-toggle="modal"
+          data-bs-target="#singupform">Sing-In</button>
+      </div> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Academic</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Admission</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Campus life</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Students Corner</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/">Placements</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              U's </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item " href="#">About U's</a></li>
+              <li><a class="dropdown-item" href="#">Contact U's</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item " href="#">Something else here for more improvment .</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <!-- Button trigger modal -->
+        <div class="d-inline-flex mx-1 d-none d-sm-block " style="background-color:transparent; " data-bs-toggle="modal"
+          data-bs-target="#loginform"><button class="btn btn-outline-danger">Log-In</button>
+        </div>
+        <div class="d-inline-flex mx-1 d-none d-sm-block" style="background-color:transparent;" data-bs-toggle="modal"
+          data-bs-target="#singupform"><button class="btn btn-outline-primary">Sing-In</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- this is model for from register and login user  -->
+  <div class="container">
+
+    <!-- Modal login -->
+    <div class="modal fade" id="loginform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="loginformLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B modal sing up  -->
+
+    <div class="modal fade" id="singupform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="singupLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3 needs-validation" novalidate>
+              <div class="col-md-4 position-relative">
+                <label for="validationTooltip01" class="form-label">First name</label>
+                <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
+                <div class="valid-tooltip">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4 position-relative">
+                <label for="validationTooltip02" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
+                <div class="valid-tooltip">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4 position-relative">
+                <label for="validationTooltipUsername" class="form-label">Username</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                  <input type="text" class="form-control" id="validationTooltipUsername"
+                    aria-describedby="validationTooltipUsernamePrepend" required>
+                  <div class="invalid-tooltip">
+                    Please choose a unique and valid username.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 position-relative">
+                <label for="validationTooltip03" class="form-label">City</label>
+                <input type="text" class="form-control" id="validationTooltip03" required>
+                <div class="invalid-tooltip">
+                  Please provide a valid city.
+                </div>
+              </div>
+              <div class="col-md-3 position-relative">
+                <label for="validationTooltip04" class="form-label">State</label>
+                <select class="form-select" id="validationTooltip04" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>...</option>
+                </select>
+                <div class="invalid-tooltip">
+                  Please select a valid state.
+                </div>
+              </div>
+              <div class="col-md-3 position-relative">
+                <label for="validationTooltip05" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="validationTooltip05" required>
+                <div class="invalid-tooltip">
+                  Please provide a valid zip.
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- its crausel showing images -->
+
+  <style>
+    .fixed-image-section {
+      height: 60vh;
+      /* पूरी स्क्रीन की ऊंचाई */
+      background-image: url(https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlXwRmpYWI6ogbm3h5aogmxRd5ZUIuCwOox6-03e8ikk6kcmVyLTTJ_jvmrrBm9DUGETe8IIshcdvk7nGoF_Khe_VUwtlfdNTqvlkOr01mnWE-17fOAKfKMtsOcgP-Qbi5RzIFO4A=s1360-w1360-h1020-rw);
+      /* अपनी इमेज का पाथ डालें */
+      background-size: cover;
+      /* इमेज बिना स्ट्रेच हुए फिट होगी */
+      background-position: center;
+      /* इमेज सेंटर में रहेगी */
+      background-attachment: fixed;
+      /* सबसे मुख्य: यह इमेज को स्क्रॉल होने से रोकता है */
+
+     
+    }
+
+    /* लैपटॉप और बड़ी स्क्रीन्स के लिए (Min-width: 768px) */
+    @media (min-width: 768px) {
+      .fixed-image-section {
+        height: 100vh;
+        /* लैपटॉप में पूरी स्क्रीन (100%) */
+        background-attachment: fixed;
+        /* लैपटॉप में शानदार फिक्स इफेक्ट दिखेगा */
+      }
+    }
+    .content-section {
+      z-index: 2;
+      /* यह सुनिश्चित करता है कि यह div इमेज के ऊपर तैरता हुआ आए */
+    }
+  </style>
+   
+ 
+    <div class="fixed-image-section d-flex align-items-center justify-content-center text-white text-center ">
+      <div class="d-none d-sm-block">
+
+        <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto" height="100px">
+
+        <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+
+        <pre style="text-align: center;">this is most usefull services for this collage , 
+            they are link's for many services this container is use for gadring many usefull services .</pre>
+
+        <button type="button" class="btn btn-outline-danger"><a href="/index/admission" style="color: #f7f7f7; ">A/O
+            base CURRICULUM</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+            style="color: #f7f7f7;">Academic Calendar</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission" style="color: #f7f7f7;">Student
+            Registration</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission" style="color: #f7f7f7;">Time
+            Table</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+            style="color: #f7f7f7;">Download Forms</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+            style="color: #f7f7f7;">Employer Registration</a></button>
+        <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+            style="color: #f7f7f7;">Result</a></button>
+
+
+      </div>
+    </div>
+
+    <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade my-5" data-bs-ride="true">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/2.png' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block my-3">
+          <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto" height="100px">
+
+          <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+
+          <pre style="text-align: center;">this is most usefull services for this collage , 
+            they are link's for many services this container is use for gadring many usefull services .</pre>
+
+          <button type="button" class="btn btn-outline-danger"><a href="/index/admission" style="color: #f7f7f7; ">A/O
+              base CURRICULUM</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Academic Calendar</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Student Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission" style="color: #f7f7f7;">Time
+              Table</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Download Forms</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Employer Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Result</a></button>
+
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/1.jpg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block my-3">
+          <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto" height="100px">
+          <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+          <pre style="text-align: center;">this is most usefull services for this collage , 
+            they are link's for many services this container is use for gadring many usefull services .</pre>
+
+          <button type="button" class="btn btn-outline-danger"><a href="/index/admission" style="color: #f7f7f7; ">A/O
+              base CURRICULUM</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Academic Calendar</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Student Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission" style="color: #f7f7f7;">Time
+              Table</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Download Forms</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Employer Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Result</a></button>
+
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/3.png' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block my-3">
+          <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto" height="100px">
+          <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+          <pre style="text-align: center;">this is most usefull services for this collage , 
+            they are link's for many services this container is use for gadring many usefull services .</pre>
+
+          <button type="button" class="btn btn-outline-danger"><a href="/index/admission" style="color: #f7f7f7; ">A/O
+              base CURRICULUM</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Academic Calendar</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Student Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission" style="color: #f7f7f7;">Time
+              Table</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Download Forms</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Employer Registration</a></button>
+          <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+              style="color: #f7f7f7;">Result</a></button>
+
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div> -->
+
+  <!-- <button id="alert" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+
+  <!-- Scrollable modal alert  --> <!-- Modal alert-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore sapiente sed nemo id ipsum laboriosam,
+          eligendi ex vero natus pariatur nostrum reiciendis? Repellat ut voluptate, molestias id tenetur corporis
+          sapiente. Dolorum doloribus necessitatibus architecto consectetur error eligendi, fugiat quod quae. Ut tempora
+          hic necessitatibus, iusto at incidunt. Maiores blanditiis in totam velit repudiandae. Labore alias a nulla
+          quae laboriosam reiciendis vero asperiores, rem aliquam porro sed iste minima earum corrupti eius voluptas
+          ere maxime assumenda cumque, minus magnam quia, rerum beatae animi tenetur aperiam consequatur optio
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- this is importance services  -->
+  </div>
+  </div>
+  <!-- ############################## -->
+  <div class="px-4 py-2 my-2 text-center 	d-block d-sm-none"> <img class="d-block mx-auto mb-1"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNjbz0zl-0fv2c8ukAIVN9Ei3nI-vEJgCdOMZORkk2ldBvj27eB_W-wg6&s=10"
+      alt="" width="auto" height="100px">
+    <h3 class="display-7 fw-bold text-body-emphasis">Important Service's</h3>
+    <div class="col-lg-10 mx-auto">
+      <p class="lead mb-4">this is most usefull services for this collage , they are link's for many services this
+        container is use for gadring many usefull services
+        .</p>
+      <div class="d-flex flex-column flex-md-row p-2 gap-5 py-md-5 align-items-center justify-content-center">
+
+        <div class="row">
+          <div class="row">
+            <div class="col-md-4 mx-5">
+              <a href="/index/admission" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">AICTE Based OCBC 2023 CURRICULUM</h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Academic Calendar</h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Student Registration</h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-md-4 mx-5"> <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Time table & Result </h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Dawnload form </h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
+                <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                  class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-1 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">Employer Registration</h6>
+                    <p class="mb-0 opacity-75"></p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- THIS IS FOR IMPORTANCE NOTICES  -->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-1" style="background-color:brown !important">
+      <div class="container-fluid" style="background-color: rgb(251, 233, 221) !important">
+        <img class="d-block mx-3 mb-1 " src="{% static 'images/logo2.png' %}" alt="" width="40" height="40">
+        <a class="navbar-brand" href="#" style="font: size 5px; ">Important Notice's</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " style="margin-left: 20%;" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <div class="container">
+              <div class="d-flex justify-content-center text-white bg-purple rounded shadow-sm">
+                <div class="lh-1">
+                  <nav>
+                    <div class="nav nav-tabs  justify-content-center" id="nav-tab" role="tablist">
+                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Notic</button>
+                      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Student's</button>
+                      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Events</button>
+                      <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab"
+                        type="button" role="tab" aria-controls="nav-disabled"
+                        aria-selected="false">Argument/Objection</button>
+                    </div>
+                  </nav>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- this is older notice sectyion  -->
+  <div class=" p-5 rounded ">
+
+
+
+
+
+    <!-- Scrollable modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta id tenetur deleniti ut, porro ad cumque
+            recusandae sit quis modi? Natus molestiae in alias enim. Culpa, aut repudiandae? Nobis, cumque?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- this is tabs of notices -->
+    <div class="tab-content mx-5 " id="nav-tabContent">
+      <div class="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+          <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some representative placeholder content, with some information about this user. Imagine this being some
+              sort
+              of status update, perhaps?
+            </p>
+
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some more representative placeholder content, related to this other user. Another status update, perhaps.
+            </p>
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              This user also gets some representative placeholder content. Maybe they did something interesting, and you
+              really want to highlight this in the recent updates.
+            </p>
+          </div> <small class="d-block text-end mt-3"> <a><!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                show all
+              </button>
+
+          </small>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpane1" aria-labelledby="nav-profile-tab" tabindex="0">
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+          <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some representative placeholder content, with some information about this user. Imagine this being some
+              sort
+              of status update, perhaps?
+            </p>
+
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some more representative placeholder content, related to this other user. Another status update, perhaps.
+            </p>
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              This user also gets some representative placeholder content. Maybe they did something interesting, and you
+              really want to highlight this in the recent updates.
+            </p>
+          </div> <small class="d-block text-end mt-3"> <a><!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                show all
+              </button>
+
+          </small>
+        </div>
+
+
+      </div>
+
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+          <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some representative placeholder content, with some information about this user. Imagine this being some
+              sort
+              of status update, perhaps?
+            </p>
+
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              Some more representative placeholder content, related to this other user. Another status update, perhaps.
+            </p>
+          </div>
+          <div class="d-flex text-body-secondary pt-3"> <svg aria-label="Placeholder: 32x32"
+              class="bd-placeholder-img flex-shrink-0 me-2 rounded" height="32" preserveAspectRatio="xMidYMid slice"
+              role="img" width="32" xmlns="http://www.w3.org/2000/svg">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1"
+                dy=".3em">32x32</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm border-bottom">
+              This user also gets some representative placeholder content. Maybe they did something interesting, and you
+              really want to highlight this in the recent updates.
+            </p>
+          </div> <small class="d-block text-end mt-3"> <a><!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                show all
+              </button>
+
+          </small>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="disabled-tab" role="tabpanel" aria-labelledby="disable-tab" tabindex="0">
+        <div class="container mx-5 my-5">
+
+          <form class="row g-3">
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Email</label>
+              <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Password</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label">Address 2</label>
+              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">State</label>
+              <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Check me out
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+    <br><br> <br><br>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-1" style="background-color:brown !important">
+      <div class="container-fluid" style="background-color: rgb(251, 233, 221) !important">
+        <img class="d-block mx-3 mb-1 "
+          src="https://www.shutterstock.com/image-vector/logo-helping-hand-on-round-260nw-2542743799.jpg" alt=""
+          width="40" height="40">
+        <a class="navbar-brand" href="#" style="font: size 5px; ">Student Servise's</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " style="margin-left: 20%;" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <ul class="nav nav-tabs" style="justify-content: center; flex-direction: row; align-items: center;">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/accadmic">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+
+    </div>
+
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+
+        <div class="h-80 p-4 my-5  rounded-3" style="background-color: rgba(144, 37, 37, 0.63);">
+          <div class="overflow-y-auto">
+            <h3> Service</h3>
+            <p style="font-family: 'Times New Roman', Times, serif; color:#f7f7f7;"> Swap the background-color utility
+              and add a `.text-*` color utility to mix up the jumbotron look. Then,
+              mix
+              and match with additional component themes and more.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores nulla, fuga ipsa doloremque eaque
+              perferendis nostrum, odio nihil impedit at corporis non. Ratione molestias vero nostrum ullam, libero
+              nisi
+              rerum.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptate, hic nesciunt dolorum
+              repudiandae quam incidunt qui corrupti labore voluptas natus atque eaque illum cupiditate laudantium
+              officia quidem voluptatem numquam.
+            </p>
+          </div>
+          <button class="btn btn-outline-light" type="button">Example button</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-80 my-5 p-4 bg-body-tertiary border rounded-3">
+          <h3>Student service's</h3>
+          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sur
+            and match with additional component themes and more.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores nulla, fuga ipsa doloremque eaque
+            perferendis nostrum, odio
+
+            nihil impedit at corporis non. Ratione molestias vero nostrum ullam, libero nisi
+            rerum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptate, hic nesciunt dolorum
+            repudiandae quam incidunt qui corrupti labore voluptas natus atque eaque illum cupiditate laudantium
+            officia quidem voluptatem numquam.</p> <button class="btn btn-outline-secondary" type="button">Example
+            button</button>
+        </div>
+      </div>
+    </div>
+    <!-- <footer class="pt-3 mt-4 text-body-secondary border-top">
+      © 2025 </footer> -->
+
+  </div>
+
+  <!-- this is cource section  -->
+  <div class="container row col-md-12" style="justify-content: center;">
+
+    <div class="card col-md-2 mx-3" style="width: 17rem;">
+      <img src="{% static 'images/com.png' %}" class="card-img-top" alt="" style="height: 180px; width: 250px;">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+          content.</p>
+      </div>
+    </div>
+    <div class="card col-md-2 mx-3" style="width: 17rem;">
+      <img src="{% static 'images/civil.png' %}" class="card-img-top" alt="..." style="height: 180px; width: 250px;">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+          content.</p>
+      </div>
+    </div>
+    <div class="card col-md-2 mx-3" style="width: 17rem;">
+      <img src="{% static 'images/me.jpg' %}" class="card-img-top" alt="..." style="height: 180px; width: 250px;">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+          content.</p>
+      </div>
+    </div>
+    <div class="card col-md-2 mx-3" style="width: 17rem;">
+      <img src="{% static 'images/ee.jpg' %}" class="card-img-top" alt="..." style="height: 180px; width: 250px;">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s
+          content.</p>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <!-- THIS IS MSSAGES SECTION FOR PRINCIPLE AND FACULTY  -->
+
+
+  <br><br>
+  <div class="container">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary px-0 py-1" style="background-color:brown !important">
+      <div class="container-fluid"
+        style="background-color: rgb(251, 233, 221) !important;     display: flex;  flex-wrap: nowrap;  align-items: center; justify-content: flex-start; align-content: center; flex-direction: row;">
+        <img class="d-block mx-3 mb-1 "
+          src="https://static.vecteezy.com/system/resources/previews/013/405/958/non_2x/education-talk-logo-graduation-cap-and-bubble-chat-logo-concept-online-school-logo-design-education-mobile-app-icon-vector.jpg"
+          alt="" width="40" height="40">
+        <a class="navbar-brand" href="#" style="font: size 5px; ">Accadmic Message's</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <ul class="nav nav-pills " id="pills-tab" role="tablist"
+          style="justify-content: center; flex-direction: row; align-items: center; ">
+          <li class="nav-item" role="presentation  ">
+            <button class="nav-link active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+              type="button" role="tab" aria-controls="pills-home" aria-selected="true">Principal & V.
+              Principal</button>
+          </li>
+          <li class="nav-item" role="presentation ">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+              type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Head Of Department</button>
+          </li>
+          <li class="nav-item" role="presentation ">
+            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+              type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Faculty's</button>
+          </li>
+          <!-- <li class="nav-item" role="presentation ">
+        <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled"
+          type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" disabled>Disabled</button>
+      </li> -->
+        </ul>
+      </div>
+    </nav>
+
+
+  </div>
+
+
+
+
+
+
+
+
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+      tabindex="0">
+
+      <div class="row gap-5 py-5" style="justify-content: center; flex-direction: row; align-items: center; ">
+
+        <div class="card mb-3" style="max-width: 625px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="..." class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3" style="max-width: 625px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="..." class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus assumenda nesciunt, delectus quo aliquam
+      iusto rem fugiat voluptate odit similique magni asperiores laudantium magnam ut molestias, inventore ratione ea
+      soluta. Ratione eius labore debitis. Vitae, reprehenderit expedita! Quos, blanditiis? Expedita temporibus
+      voluptates sint harum quam, voluptatem quia earum dolor soluta fugit dolores quo voluptas nesciunt mollitia
+      magni, quos sequi ducimus sed similique qui exercitationem vero debitis odio possimus. Quas eveniet recusandae
+      sint accusantium laboriosam veniam aliquid, nobis architecto cum quaerat nulla quis molestiae voluptatum quam
+      nostrum! Id necessitatibus, quis harum culpa animi cumque perferendis nobis assumenda reprehenderit dolore a
+      quas tenetur voluptatum voluptate sunt. Neque, aut illum officia dignissimos doloribus aperiam temporibus
+      nesciunt dolorum tempore id repudiandae. Consectetur, sequi, non aspernatur aliquam quasi perspiciatis est
+      repellat qui omnis nulla consequuntur libero sint ea nihil itaque hic quo cumque accusantium molestiae nemo
+      magni? Asperiores minima doloremque natus consequatur eius, officiis impedit ullam est sequi dolorum accusantium
+      aut soluta unde nesciunt deserunt cum eum alias quidem atque earum? Doloremque, voluptates rem corrupti soluta
+      exercitationem officiis, vero ea, tempore nostrum ratione provident cupiditate maiores ex eaque accusamus.
+      Deleniti officiis harum asperiores vel quam magni, earum ducimus dolorem blanditiis atque? Error incidunt eos
+      adipisci amet, quidem dolorem reprehenderit hic repellendus recusandae modi, voluptate iusto deserunt unde
+      aperiam officiis molestiae in. Quia, provident fugiat in blanditiis, cupiditate ea earum, quasi reprehenderit
+      molestia.</div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...
+    </div>
+    <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+      ...</div>
+  </div>
+
+
+
+
+  <!-- this is foter section  -->
+  <footer class="py-5">
+    <div class="row rounded-3 p-5" style="background-color: antiquewhite;">
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+      <div class="col-md-5 offset-md-1 mb-3">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2"> <label for="newsletter1"
+              class="visually-hidden">Email address</label> <input id="newsletter1" type="email" class="form-control"
+              placeholder="Email address" fdprocessedid="5vwz2" disabled> <button class="btn btn-primary" type="button"
+              fdprocessedid="b4w5r9" disabled>Subscribe</button> </div>
+        </form>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>© 2025 Company, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-body-emphasis" href="#" aria-label="Instagram"><svg class="bi" width="24"
+              height="24">
+              <use xlink:href="#instagram"></use>
+            </svg></a></li>
+        <li class="ms-3"><a class="link-body-emphasis" href="#" aria-label="Facebook"><svg class="bi" width="24"
+              height="24" aria-hidden="true">
+              <use xlink:href="#facebook"></use>
+            </svg></a></li>
+      </ul>
+    </div>
+  </footer>
+
+
+
+
+
+
+  <!-- this is script area of this templates -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    let vari = document.getElementById('alear');
+    console.log(vari);
+
+  </script>
+</body>
+
+</html>

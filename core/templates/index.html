@@ -1,0 +1,1063 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{% static 'images/logo2.png' %}" type="image/x-icon">
+
+
+    <style>
+        .tab-pane:not(.active) {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Webkit browsers (Chrome, Safari, Edge) ke liye scrollbar hide karne ka code */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Scrollbar hide rahega lekin page scroll hota rahega */
+        html,
+        body {
+            ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        hr {
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'notices.html' %}
+    {% include 'models.html' %}
+
+
+    <nav class="navbar fixed-top navbar-expand-lg  py-1  " id="navbar" style="background: rgb(249, 248, 247);">
+        {% include 'navbar.html' %}
+
+    </nav>
+
+    </nav>
+
+
+    <!-- this is singup model  -->
+    <div class="modal fade" id="singupform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="singupLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/singup" method="post">{% csrf_token %}
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingFName" placeholder="First name"
+                                name="fname">
+                            <label for="floatingFirstName">First Name</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingLastName" placeholder="LastName"
+                                name="lname">
+                            <label for="floatingLastName">Last Name</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <!-- <input name="email" type="email"  placeholder="name@example.com"> -->
+                            <input type="email" name="email" placeholder="Enter Email" class="form-control"
+                                id="floatingInput">
+                            <label for="floatingInput" name="email">Email address</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input name="passwd" type="password" class="form-control" id="floatingPassword"
+                                placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input name="passwd2" type="password" class="form-control" id="floatingConformPassword"
+                                placeholder="ConformPassword">
+                            <label for="floatingConformPassword">Conform Password</label>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline-primary">SingUp</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="loginform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="loginLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/login" method="post">{% csrf_token %}
+
+
+
+                        <div class="form-floating mb-3">
+                            <!-- <input name="email" type="email"  placeholder="name@example.com"> -->
+                            <input type="email" name="email" placeholder="Enter Email" class="form-control"
+                                id="floatingInput">
+                            <label for="floatingInput" name="email">Email address</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input name="passwd" type="password" class="form-control" id="floatingPassword"
+                                placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline-primary">SingUp</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 1. फिक्स इमेज वाला सेक्शन (Carousel की जगह) -->
+    <style>
+        /* पूरे कैरोसेल को बैकग्राउंड में लॉक करने के लिए */
+        .fixed-carousel-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+
+            /* डिफ़ॉल्ट रूप से मोबाइल के लिए ऊंचाई */
+            height: 70vh;
+        }
+
+        /* लैपटॉप और बड़ी स्क्रीन्स के लिए ऊंचाई (Min-width: 768px) */
+        @media (min-width: 768px) {
+            .fixed-carousel-bg {
+                height: 100vh;
+                /* लैपटॉप में फुल स्क्रीन */
+            }
+        }
+
+        /* कैरोसेल की हर इमेज को सही से फिट करने के लिए */
+        .fixed-carousel-bg .carousel-item {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* इमेज के ऊपर हल्का सा काला पर्दा (Overlay) ताकि टेक्स्ट एकदम साफ दिखे */
+        .fixed-carousel-bg .carousel-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* कालेपन को कम या ज्यादा करने के लिए 0.4 को बदलें */
+            z-index: 1;
+        }
+
+        /* टेक्स्ट को ओवरले के ऊपर लाने के लिए */
+        .fixed-carousel-bg .carousel-caption {
+            z-index: 2;
+            bottom: 0;
+            /* Bootstrap की डिफ़ॉल्ट बॉटम मार्जिन हटाने के लिए */
+        }
+
+        /* टेक्स्ट को और खूबसूरत लुक देने के लिए हल्की सी परछाई */
+        .text-shadow {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* कवर करने वाले दूसरे div की स्टाइलिंग */
+        .content-cover-section {
+            z-index: 2;
+            /* यह कैरोसेल के ऊपर तैरने के लिए ज़रूरी है */
+
+            /* डिफ़ॉल्ट मोबाइल के लिए: कैरोसेल 70vh का है, इसलिए मार्जिन भी 70vh होगी */
+            margin-top: 70vh;
+        }
+
+        /* लैपटॉप के लिए मार्जिन एडजस्टमेंट */
+        @media (min-width: 768px) {
+            .content-cover-section {
+                margin-top: 100vh;
+                /* लैपटॉप में कैरोसेल 100vh का है, इसलिए मार्जिन 100vh */
+            }
+        }
+    </style>
+
+    <!-- 1. फिक्स कैरोसेल कंटेनर -->
+    <!-- 'carousel-fade' क्लास से इमेजेस झटके से बदलने के बजाय स्मूथली फेड (गायब-प्रकट) होंगी -->
+    <div id="responsiveFixedCarousel" class="carousel slide carousel-fade fixed-carousel-bg" data-bs-ride="carousel"
+        data-bs-interval="4000">
+        <div class="carousel-inner h-100">
+
+            <!-- पहली स्लाइड -->
+            <div class="carousel-item active h-100" style="background-image: url({% static 'images/clg1-2.jpeg' %});">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 px-3">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>Message : </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    <p class="lead fs-5 fs-md-4"> </p>
+                    <div>
+                        <div class="d-none d-sm-block">
+
+                            <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto"
+                                height="100px">
+
+                            <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+
+                            <pre style="text-align: center;">this is most usefull services for this collage , 
+            they are link's for many services this container is use for gadring many usefull services .</pre>
+
+                            <button type="button" class="btn btn-outline-danger"><a href="/index/admission"
+                                    style="color: #f7f7f7; ">A/O
+                                    base CURRICULUM</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Academic Calendar</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Student
+                                    Registration</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Time
+                                    Table</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Download Forms</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Employer Registration</a></button>
+                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Result</a></button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- दूसरी स्लाइड -->
+            <div class="carousel-item h-100" style="background-image: url('{% static 'images/clg1-4.jpeg' %}') ;">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 px-3">
+                    <h1 class="display-4 display-md-2 fw-bold text-shadow"> </h1>
+                    <p class="lead fs-5 fs-md-4"> Hellow </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 2. कवर करने वाला अगला DIV (कंटेंट सेक्शन) -->
+    <style>
+        /* Pure website ka background aur styling */
+        .content-cover-section {
+
+
+            background-color: #f6f3eb;
+
+            /* Asli paper texture ka online link */
+            background-image: url('https://img.magnific.com/free-photo/cement-abstract-copy-space-texture-background_1194-600543.jpg');
+
+            /* Texture ko pure div par repeat karne ke liye */
+            background-repeat: repeat;
+            background-attachment: fixed;
+
+        }
+    </style>
+    <div class="content-cover-section bg-white position-relative shadow-lg py-5">
+
+
+
+
+
+
+
+
+        <!-- this is tost message -->
+        <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <!-- Position it: -->
+            <!-- - `.toast-container` for spacing between toasts -->
+            <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
+            <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+            <div class="toast-container top-0 end-0 p-3">
+
+                <!-- Then put toasts within -->
+                {% for message in messages %}
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">{{user.username}}</strong>
+                        <small class="text-body-secondary">just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{message}}
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+        <!-- this is second images -->
+
+        <div class="px-4 py-2 my-2 text-center 	d-block d-sm-none"> <img class="d-block mx-auto mb-1"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNjbz0zl-0fv2c8ukAIVN9Ei3nI-vEJgCdOMZORkk2ldBvj27eB_W-wg6&s=10"
+                alt="" width="auto" height="100px">
+            <h3 class="display-7 fw-bold text-body-emphasis">Important Service's</h3>
+            <div class="col-lg-10 mx-auto">
+                <p class="lead mb-4">this is most usefull services for this collage , they are link's for many services
+                    this
+                    container is use for gadring many usefull services
+                    .</p>
+                <div class="d-flex flex-column flex-md-row p-2 gap-5 py-md-5 align-items-center justify-content-center">
+
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-4 mx-5">
+                                <a href="/index/admission"
+                                    class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">AICTE Based OCBC 2023 CURRICULUM</h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">Academic Calendar</h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">Student Registration</h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="col-md-4 mx-5"> <a href="#"
+                                    class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">Time table & Result </h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">Dawnload form </h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3"
+                                    aria-current="true">
+                                    <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32"
+                                        class="rounded-circle flex-shrink-0">
+                                    <div class="d-flex gap-1 w-100 justify-content-between">
+                                        <div>
+                                            <h6 class="mb-0">Employer Registration</h6>
+                                            <p class="mb-0 opacity-75"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- this is notices -->
+        <div class="text-center mb-5 my-2">
+            <h2 class="fw-bold" style="color: #0D47A1;">Important Notice's</h2>
+            <p class="text-muted"> 📌 Latest from the Campus: Your daily dose of official updates and academic notices
+                <br>🔔 Stay Informed: Keep track of all important announcements, exam schedules, and campus events right
+                here.
+            </p>
+            <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px; ">
+            </div>
+        </div>
+        <!-- 4444444444444444444444444444444444444 -->
+
+
+        <!-- 4444444444444444444444444444444444444 -->
+
+        <style>
+            .libtabs {
+                justify-content: center;
+
+            }
+
+            .card-body-lib {
+                padding-left: 10px;
+            }
+
+
+
+            .rules {
+                max-height: 15rem;
+                height: 15rem;
+                text-align: start;
+                color: #000;
+            }
+
+            .rulsetext {
+                color: #8a1313;
+                font-size: medium;
+                cursor: pointer;
+            }
+
+            .card-header {
+                background: linear-gradient(rgb(17, 20, 113) 0%, rgb(56, 51, 137) 100%) !important;
+                color: #f8f6f6;
+            }
+
+            .cheader-1 {
+                background: linear-gradient(rgb(184, 68, 57) 0%, rgb(139, 41, 19) 100%) !important;
+                color: #f8f6f6;
+            }
+
+
+            .card-libtab {
+                margin-bottom: 10px;
+                transition: all 0.5s ease;
+
+
+            }
+
+            .card-libtab:hover {
+                background-color: white;
+
+                transform: translateY(-3px);
+
+            }
+
+
+
+            body {
+                font-family: 'Times New Roman', Times, serif;
+            }
+
+            .rulsetext:hover {
+
+                transition: all 0.3s ease;
+                color: #000;
+                scroll-behavior: smooth;
+            }
+        </style>
+        <div class="container my-md-5  " style=" backdrop-filter: blur(0px) !important;
+            -webkit-backdrop-filter: blur(1px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;">
+            <div class="row libtabs ">
+                <div class="col-md-4 ">
+                    <div class="card card-libtab ">
+                        <h5 class="card-header cheader-1">Important Notice's</h5>
+                        <div class="card-body card-body-lib">
+                            <div class="overflow-y-scroll rules">
+                                {% for notice in impnotices %}
+
+                                {% if notice.notice_type == 'GRAND' %}
+                                {% if notice.notice_pdf %}
+                                <span class="rulsetext mb-0 py-0"
+                                    onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                    {{ notice.title }}</span> <small class="text-muted">Posted on:
+                                    {{ notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% else %}
+                                <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}"
+                                    class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
+                                <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% endif %}
+                                {% endif %}
+
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-libtab">
+                        <h5 class="card-header">Event Notice's</h5>
+                        <div class="card-body card-body-lib">
+                            <div class="overflow-y-scroll rules">
+
+                                {% for notice in impnotices %}
+
+                                {% if notice.notice_type == 'EVENTS' %}
+                                {% if notice.notice_pdf %}
+                                <span class="rulsetext mb-0 py-0"
+                                    onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                    {{ notice.title }}</span> <small class="text-muted">Posted on: {{
+                                    notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% else %}
+                                <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}"
+                                    class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
+                                <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% endif %}
+                                {% endif %}
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-libtab">
+                        <h5 class="card-header">Placement Notice's</h5>
+                        <div class="card-body card-body-lib">
+                            <div class="overflow-y-scroll rules">
+                                {% for notice in impnotices %}
+
+                                {% if notice.notice_type == 'PLACEMENTS' %}
+                                {% if notice.notice_pdf %}
+                                <span class="rulsetext mb-0 py-0"
+                                    onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                    {{ notice.title }}</span> <small class="text-muted">Posted on:
+                                    {{ notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% else %}
+                                <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}"
+                                    class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
+                                <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
+                                <hr>
+                                {% endif %}
+                                {% endif %}
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- this is messag -->
+        <br><br>
+        <div class="container">
+
+            <section class="py-1" style="background-color:transparent; font-family: 'Times New Roman', Times, serif;" >
+                <div class="container py-1 rounded-5" style=" backdrop-filter: blur(0px) !important;
+            -webkit-backdrop-filter: blur(5px) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;">
+
+
+                    <div class="text-center mb-1">
+                        <h2 class="fw-bold" style="color: #0D47A1;">Accademic Massage's</h2>
+                        <!-- <p class="text-muted"> 📌 Latest from the Campus: Your daily dose of official updates and academic notices
+                    <br>🔔 Stay Informed: Keep track of all important announcements, exam schedules, and campus events right
+                    here.
+                  </p> -->
+                        <div
+                            style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;">
+                        </div>
+                    </div>
+
+                    <!-- 1. Principal Section (Big Left Image, Right Text) -->
+                    <div class="row align-items-center g-5 mb-1 pb-4">
+                        <!-- बड़ी फोटो (Desktop पर बाईं तरफ) -->
+                        <div class="col-12 col-lg-5 text-center">
+                            <div class="position-relative d-inline-block">
+                                <!-- बैकग्राउंड अट्रैक्टिव शेडो ब्लॉक -->
+                                <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3"
+                                    style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;">
+                                </div>
+                                <!-- मुख्य बड़ी इमेज -->
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDR8pcVqpMdiwF59dMd4fLBkcUjT1qODBG-8LYckGdQ&s=10"
+                                    alt="Principal"
+                                    class="img-fluid position-relative shadow border border-4 border-white"
+                                    style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
+                            </div>
+                        </div>
+                        <!-- संदेश (Desktop पर दाईं तरफ) -->
+                        <div class="col-12 col-lg-7">
+                            <div class="ps-lg-4">
+                                <!-- <span class="badge px-3 py-2 mb-2 text-uppercase fw-bold"
+                                    style="background-color: rgb(230, 220, 195); color: brown; letter-spacing: 1px; font-size: 0.75rem;">Leader
+                                    & Guide</span> -->
+                                <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;">Dr. R. K. Sharma</h3>
+                                <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">
+                                    Principal, Govt. Polytechnic College Harsud</p>
+
+                                <div class="position-relative">
+                                    <!-- बड़े कोट्स मार्क -->
+                                    <span class="position-absolute start-0 top-0 lh-1 opacity-25"
+                                        style="font-size: 5rem; font-family: serif; color: brown; margin-top: -2.5rem; margin-left: -1rem;">“</span>
+                                    <p class="text-secondary ps-4 position-relative"
+                                        style="font-size: 1.05rem; line-height: 1.8; text-align: justify; z-index: 3;">
+                                        Welcome to Govt. Polytechnic College Harsud. Our mission is to provide
+                                        high-quality technical education that empowers students to innovate and succeed.
+                                        We focus deeply on practical skills and academic excellence to prepare our
+                                        students for global challenges and industry requirements. We believe in building
+                                        a future where engineering meets real-world solutions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-1 opacity-25" style="border-color: brown;">
+
+                    <!-- 2. Vice Principal Section (Big Right Image, Left Text) -->
+                    <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+                        <!-- संदेश (Desktop पर बाईं तरफ) -->
+                        <div class="col-12 col-lg-7">
+                            <div class="pe-lg-4">
+                                <!-- <span class="badge px-3 py-2 mb-2 text-uppercase fw-bold"
+                                    style="background-color: rgb(230, 220, 195); color: brown; letter-spacing: 1px; font-size: 0.75rem;">Administration
+                                    Head</span> -->
+                                <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;">Prof. S. K. Verma</h3>
+                                <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">Vice
+                                    Principal, Govt. Polytechnic College Harsud</p>
+
+                                <div class="position-relative">
+                                    <span class="position-absolute start-0 top-0 lh-1 opacity-25"
+                                        style="font-size: 5rem; font-family: serif; color: brown; margin-top: -2.5rem; margin-left: -1rem;">“</span>
+                                    <p class="text-secondary ps-4 position-relative"
+                                        style="font-size: 1.05rem; line-height: 1.8; text-align: justify; z-index: 3;">
+                                        Education is not just training for a career but a complete transformation of
+                                        mind. We ensure a disciplined, safe, and highly motivating learning environment.
+                                        Through our advanced technical labs, skilled faculty, and active campus life, we
+                                        help every single student realize their full potential and excel in their tech
+                                        journey.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- बड़ी फोटो (Desktop पर दाईं तरफ) -->
+                        <div class="col-12 col-lg-5 text-center">
+                            <div class="position-relative d-inline-block">
+                                <!-- बैकग्राउंड अट्रैक्टिव शेडो ब्लॉक -->
+                                <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3"
+                                    style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;">
+                                </div>
+                                <!-- मुख्य बड़ी इमेज -->
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDR8pcVqpMdiwF59dMd4fLBkcUjT1qODBG-8LYckGdQ&s=10"
+                                    alt="Vice Principal"
+                                    class="img-fluid position-relative shadow border border-4 border-white"
+                                    style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 222222222222222222222222222222222222222222222222 -->
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+        <!-- THIS IS FOR IMPORTANCE NOTICES  -->
+        <br> <br>
+        <div class="container">
+
+        </div>
+
+
+        <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+
+
+
+
+
+        <!-- student services -->
+
+        <div class="container">
+
+            <br>
+
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" style="color: #0D47A1;">Student service's</h2>
+                <p class="text-muted"> ⚡ Services & Support: Tailored assistance for your academic journey.
+                    <!-- <br>🎯 Student Hub: Your go-to place for support, resources, and welfare services. <br>🚀 Unlock Your Potential: Explore the services and support available for every student.</p> -->
+                <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;">
+                </div>
+            </div>
+
+
+            <style>
+                /* सिंपल फॉन्ट और क्लीन लेआउट */
+                .scheme-section {
+                    font-family: 'Times New Roman', Times, serif;
+                }
+
+                /* कार्ड्स पर हल्का सा होवर इफ़ेक्ट */
+                .scheme-card {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    background-color: #ffffff;
+                }
+
+                .scheme-card:hover {
+                    transform: translateY(-0px);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+                }
+
+                /* लिस्ट आइटम्स को सुंदर बनाने के लिए */
+                .scheme-list li {
+                    margin-bottom: 10px;
+                    font-size: 1.05rem;
+                    color: #495057;
+                    list-style: none;
+                    position: relative;
+                    padding-left: 25px;
+                }
+
+                /* कस्टमाइज्ड बुलेट पॉइंट */
+                .scheme-list li::before {
+                    content: "✓";
+                    position: absolute;
+                    left: 0;
+                    color: brown;
+                    font-weight: bold;
+                }
+
+                .ppt-card li::before {
+                    color: #6c757d;
+                    /* पीपीटी कार्ड के लिए ग्रे टिक मार्क */
+                }
+            </style>
+
+            <div class="container my-5 scheme-section">
+
+
+                <!-- दो कार्ड्स की रो (Row) -->
+                <div class="row g-4 justify-content-center">
+
+                    <!-- CARD 1: Eklavya Scheme Services (Left Side) -->
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card scheme-card h-100 p-4 rounded-4 shadow-sm border border-light d-flex flex-column justify-content-between"
+                            style="border-top: 5px solid brown !important;">
+
+                            <div>
+                                <!-- हेडिंग एरिया -->
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white"
+                                        style="width: 50px; height: 50px; background-color: rgba(144, 37, 37, 0.1); color: brown !important;">
+                                        <span style="font-size: 1.5rem;">🏹</span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="fw-bold mb-0" style="color: brown;">Eklavya Scheme</h4>
+                                        <span class="text-muted small fw-semibold text-uppercase"
+                                            style="letter-spacing: 0.5px;">ST/SC Welfare Support</span>
+                                    </div>
+                                </div>
+
+                                <!-- दी जाने वाली सेवाएं (List) -->
+                                <ul class="scheme-list p-0">
+                                    <li>Free textbooks and stationery assistance (Free Books)</li>
+                                    <li>Special scholarship and financial aid (Special Scholarships)</li>
+                                    <li>Free coaching for exams and competitive examinations</li>
+                                    <li>Skill development and additional technical training (Skill Training)</li>
+                                    <li>Special priority in hostel allotment (Hostel Priority)</li>
+                                </ul>
+
+                            </div>
+
+                            <!-- बटन -->
+
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: PPT Students Services (Right Side) -->
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="card scheme-card h-100 p-4 rounded-4 shadow-sm border border-light d-flex flex-column justify-content-between"
+                            style="border-top: 5px solid #6c757d !important;">
+
+                            <div>
+                                <!-- हेडिंग एरिया -->
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; background-color: rgba(108, 117, 125, 0.1); color: #6c757d;">
+                                        <span style="font-size: 1.5rem;">🎓</span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="fw-bold mb-0 text-dark">PPT Scheme</h4>
+                                        <span class="text-muted small fw-semibold text-uppercase"
+                                            style="letter-spacing: 0.5px;">Pre-Polytechnic Entry Support</span>
+                                    </div>
+                                </div>
+
+                                <!-- दी जाने वाली सेवाएं (List) -->
+                                <ul class="scheme-list ppt-card p-0">
+                                    <li>Counseling and document verification assistance (Counseling Desk)</li>
+                                    <li>Merit-based tuition fee waiver (TFW Scheme)</li>
+                                    <li>Special foundation classes for the introductory semester</li>
+                                    <li>Branch upgradation assistance as per rules (Branch Change)</li>
+                                    <li>Industry orientation and campus tour program</li>
+                                </ul>
+
+                            </div>
+
+                            <!-- बटन -->
+
+                        </div>
+                    </div>
+
+                </div> <!-- Row End -->
+            </div>
+
+
+
+
+
+        </div>
+        <br><br>
+
+        <!-- this is cource section  -->
+        <div class="text-center   my-5">
+            <h2 class="fw-bold" style="color: #0D47A1;">Our Program's</h2>
+            <p class="text-muted"> ⚡ Services & Support: Tailored assistance for your academic journey.
+                <!-- <br>🎯 Student Hub: Your go-to place for support, resources, and welfare services. <br>🚀 Unlock Your Potential: Explore the services and support available for every student.</p> -->
+            <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;">
+            </div>
+        </div>
+        <style>
+
+        </style>
+
+
+
+        <div class="container my-5">
+            <!-- फोटोज़ की मुख्य ग्रिड -->
+            <style>
+                /* मुख्य गैलरी कार्ड */
+                .gallery-card {
+                    border: none !important;
+                    border-radius: 14px !important;
+                    overflow: hidden;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                    background-color: #ffffff;
+                    cursor: pointer;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .gallery-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+                }
+
+                /* इमेज कंटेनर और होवर ओवरले */
+                .gallery-img-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                    height: 190px;
+                    background-color: #f5f5f5;
+                }
+
+                .gallery-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.4s ease;
+                }
+
+                /* "View Album" ब्लैक ओवरले इफेक्ट */
+                .gallery-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    /* हाफ ट्रांसपेरेंट ब्लैक */
+                    color: #ffffff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .gallery-card:hover .gallery-overlay {
+                    opacity: 1;
+                    /* माउस ले जाने पर दिखेगा */
+                }
+
+                .gallery-card:hover .gallery-img {
+                    transform: scale(1.05);
+                }
+
+                /* पॉप-अप (Modal) के अंदर की इमेजेस का साइज फिक्स करना */
+                .modal-slider-img {
+                    height: 450px;
+                    object-fit: contain;
+                    /* इमेज बिना कटे पूरी दिखेगी */
+                    background-color: #111;
+                    /* खाली जगह पर ब्लैक बैकग्राउंड */
+                }
+
+                @media (max-width: 768px) {
+                    .modal-slider-img {
+                        height: 280px;
+                        /* मोबाइल के लिए परफेक्ट हाइट */
+                    }
+                }
+            </style>
+
+            <div class="row g-3">
+
+                <!-- 1. Main Entrance -->
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalC04">
+                        <div class="gallery-img-wrapper">
+                            <img src="{% static 'images/com.png' %}" class="card-img-top gallery-img"
+                                alt="Main Entrance">
+                            <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+                        </div>
+                        <div class="card-body text-center py-3">
+                            <h6 class="card-title fw-bold mb-0">Computer Science</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalC03">
+                        <div class="gallery-img-wrapper">
+                            <img src="{% static 'images/civil.png' %}" class="card-img-top gallery-img"
+                                alt="Main Entrance">
+                            <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+                        </div>
+                        <div class="card-body text-center py-3">
+                            <h6 class="card-title fw-bold mb-0">Civil Engineering</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalM02">
+                        <div class="gallery-img-wrapper">
+                            <img src="{% static 'images/me.jpg' %}" class="card-img-top gallery-img"
+                                alt="Main Entrance">
+                            <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+                        </div>
+                        <div class="card-body text-center py-3">
+                            <h6 class="card-title fw-bold mb-0">Mechanical Engineering</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalE01">
+                        <div class="gallery-img-wrapper">
+                            <img src="{% static 'images/ee.jpg' %}" class="card-img-top gallery-img"
+                                alt="Main Entrance">
+                            <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
+                        </div>
+                        <div class="card-body text-center py-3">
+                            <h6 class="card-title fw-bold mb-0">Electronics and Communication Engineering</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- future section  -->
+        {% include 'footer.html' %}
+
+
+
+    </div>
+    <!-- student services  -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

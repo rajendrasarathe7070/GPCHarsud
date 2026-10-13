@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Success Story</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+ 
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* 🔵 आपके द्वारा दिया गया नया कस्टम बैकग्राउंड */
+            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+            min-height: 100vh;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        /* ✨ सिंगल ग्लास कार्ड स्टाइल ✨ */
+        .single-glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 850px;
+            width: 100%;
+        }
+
+        /* स्टूडेंट प्रोफाइल इमेज */
+        .student-profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .student-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .student-branch {
+            font-size: 0.95rem;
+            color: #cbd5e1; /* सॉफ्ट लाइट ग्रे */
+            margin-bottom: 15px;
+        }
+
+        /* हाइलाइट टैग्स (कंपनी और पैकेज) */
+        .badge-glass-info {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        .badge-glass-success {
+            background: rgba(52, 211, 153, 0.15);
+            color: #a7f3d0;
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        /* स्टोरी का टाइटल */
+        .story-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #60a5fa; /* नए बैकग्राउंड के साथ मैच होता हुआ स्काई ब्लू टोन */
+            border-left: 3px solid #60a5fa;
+            padding-left: 10px;
+        }
+
+        /* सक्सेस स्टोरी टेक्स्ट पैराग्राफ */
+        .full-story-text {
+            font-size: 0.95rem;
+            color: #f1f5f9;
+            line-height: 1.7;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    {% include 'navbar.html' %}
+</nav>
+<div class="container d-flex justify-content-center">
+    <!-- सिंगल स्टूडेंट सक्सेस स्टोरी कार्ड -->
+    <div class="single-glass-card">
+        <div class="row align-items-center g-4">
+            
+            <!-- लेफ्ट साइड: स्टूडेंट की फोटो -->
+            <div class="col-12 col-md-3 text-center text-md-start">
+                <img src="" alt="Student Profile" class="student-profile-img">
+            </div>
+
+            <!-- राइट side: स्टूडेंट इन्फो और पूरी कहानी -->
+            <div class="col-12 col-md-9">
+                <!-- स्टूडेंट का नाम और बैच -->
+                <div class="text-center text-md-start">
+                    <h1 class="student-name mb-1">अमित शर्मा</h1>
+                    <p class="student-branch">B.Tech (Computer Science) • Batch of 2024</p>
+                    
+                    <!-- इन्फो टैग्स -->
+                    <div class="d-flex gap-2 flex-wrap justify-content-center justify-content-md-start mb-4">
+                        <span class="badge-glass-info">Placing Company: Google</span>
+                        <span class="badge-glass-success">Package: ₹ 42.5 LPA</span>
+                    </div>
+                </div>
+
+                <hr style="border-color: rgba(255,255,255,0.15); margin: 20px 0;">
+
+                <!-- सक्सेस स्टोरी टेक्स्ट -->
+                <div class="mt-3">
+                    <h2 class="story-title mb-3">मेरी सफलता का सफर (My Journey)</h2>
+                    <p class="full-story-text">
+                        "एक छोटे शहर से आने और शुरुआत में कोडिंग का कोई पूर्व अनुभव न होने के कारण, मेरे लिए यह सफर काफी चुनौतीपूर्ण था। लेकिन कॉलेज के सही मार्गदर्शन, मेंटर्स के सपोर्ट और रोजाना की 4-5 घंटे की कंसिस्टेंट कोडिंग प्रैक्टिस ने सब कुछ बदल दिया। मैंने डेटा स्ट्रक्चर्स और एल्गोरिदम (DSA) पर मजबूत पकड़ बनाई और कॉलेज के लाइव प्रोजेक्ट्स में बढ़-चढ़कर हिस्सा लिया। इसी मेहनत और सही दिशा का नतीजा है कि आज मुझे गूगल जैसी प्रतिष्ठित कंपनी में सॉफ्टवेयर इंजीनियर के रूप में चुना गया है। मेरा मानना है कि निरंतरता और खुद पर भरोसा ही सफलता की असली चाबी है।"
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS Bundle CDN -->
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+</html>
+
+<!-- Bootstrap 5 JS Bundle CDN -->
+
+ 
+ 

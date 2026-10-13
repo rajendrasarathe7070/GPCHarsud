@@ -1,0 +1,111 @@
+ 
+<div class="container-fluid mt-3 mb-5 px-0">
+              <nav class="hding rounded-1">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                  <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                  <div class="hding-text">
+                 Syllabus
+                  </div>
+
+                  <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                  <div class="d-none d-sm-block">
+                    <ol class="breadcrumb custom-breadcrumb">
+                      <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Timetable</li>
+                    </ol>
+                  </div>
+
+                </div>
+              </nav>
+            </div>
+
+    <div class="container my-5">
+       
+        <!-- Department Grid -->
+        <div class="row g-4">
+            
+            <!-- 1. Computer Science & Engg. -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-primary">
+                    <div class="card-header bg-primary-subtle text-primary text-center py-3">
+                        <i class="bi bi-laptop fs-2"></i>
+                        <h5 class="card-title mb-0 mt-2">Computer Science</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                         {% for syllabus in CSE %}
+                        <a href="{{syllabus.syllabus.url}}" class="btn btn-outline-primary w-100 mt-3"  >
+                            <i class="bi bi-filetype-pdf me-2"></i> {{syllabus.brach}} - {{syllabus.semester}}
+                        </a>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Civil Engineering -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-warning">
+                    <div class="card-header bg-warning-subtle text-warning text-center py-3">
+                        <i class="bi bi-building fs-2"></i>
+                        <h5 class="card-title mb-0 mt-2">Civil Engg.</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                          {% for syllabus in CIVIL %}
+                        <a href="{{syllabus.syllabus.url}}" class="btn btn btn-outline-warning text-dark w-100 mt-3"  >
+                            <i class="bi bi-filetype-pdf me-2"></i> {{syllabus.brach}} - {{syllabus.semester}}
+                        </a>
+                        {% endfor %}
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Mechanical Engineering -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-danger">
+                    <div class="card-header bg-danger-subtle text-danger text-center py-3">
+                        <i class="bi bi-gear-wide-connected fs-2"></i>
+                        <h5 class="card-title mb-0 mt-2">Mechanical Engg.</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        
+                          {% for syllabus in ME %}
+                        <a href="{{syllabus.syllabus.url}}" class="btn btn btn-outline-danger text-dark w-100 mt-3"  >
+                            <i class="bi bi-filetype-pdf me-2"></i> {{syllabus.brach}} - {{syllabus.semester}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Electronics & Comm. -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-info">
+                    <div class="card-header bg-info-subtle text-info text-center py-3">
+                        <i class="bi bi-broadcast-pin fs-2"></i>
+                        <h5 class="card-title mb-0 mt-2">Electronics & Comm.</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                         
+                        {% for syllabus in ET %}
+                        <a href="{{syllabus.syllabus.url}}" class="btn btn btn-outline-info text-dark w-100 mt-3"  >
+                            <i class="bi bi-filetype-pdf me-2"></i> {{syllabus.brach}} - {{syllabus.semester}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Year & Semester Timeline Footnote -->
+        <!-- <div class="row mt-5">
+            <div class="col-12 text-center text-muted">
+                <p>प्रोग्राम संरचना: वर्ष 1 (Sem 1 & 2) • वर्ष 2 (Sem 3 & 4) • <strong>वर्ष 3 (Sem 5 & 6)</strong></p>
+            </div>
+        </div> -->
+    </div>
+
+    {% include 'footer.html' %}

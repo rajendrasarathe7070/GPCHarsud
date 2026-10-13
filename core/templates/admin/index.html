@@ -1,0 +1,226 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static custom_admin_tags %}
+
+{% block coltype %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  body { font-family:times new roman !important; }
+  :root { --dx-dark:#1e293b; --dx-accent:#4f46e5; --dx-bg:#f1f5f9; --dx-line:#e2e8f0; --dx-mute:#64748b;  font-family:times new roman !important; }
+  #content { padding:16px !important; background:var(--dx-bg); }
+  .dx { display:block; padding-right:316px; transition:padding .25s ease; font-family:times new roman; }
+  .dx.dx-closed { padding-right:0; }
+  .dx * { box-sizing:border-box; }
+
+  /* ---------- Center cards ---------- */
+  .dx-center { display:flex; flex-direction:column; gap:20px; min-width:0; }
+  .dx-card { background:#fff; border:1px solid var(--dx-line); border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.05); overflow:hidden; font-family:times new roman !important; }
+  .dx-card-head { background:var(--dx-dark); color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; font-family:times new roman !important; }
+  .dx-card-head h3 { margin:0; font-size:1rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#fff; }
+  .dx-scroll { overflow-x:auto; }
+  .dx-table { width:100%; border-collapse:collapse; margin:0; }
+  .dx-table th { background:#f8fafc; color:var(--dx-mute); text-transform:uppercase; font-size:.72rem; font-weight:700; padding:12px 16px; border-bottom:2px solid var(--dx-line); text-align:left; }
+  .dx-table td { padding:12px 16px; border-bottom:1px solid #f1f5f9; font-size:.875rem; color:#334155; }
+  .dx-table tr:hover td { background:#f8fafc; }
+  .dx-empty { text-align:center; padding:28px !important; color:#94a3b8 !important; }
+  .hidden-row { display:none; }
+
+  .btn-action { padding:6px 12px; border-radius:6px; font-size:.75rem; text-decoration:none !important; font-weight:600; margin-left:6px; display:inline-block; transition:.2s; }
+  .btn-edit { background:#0ea5e9; color:#fff !important; } .btn-edit:hover { background:#0284c7; }
+  .btn-delete { background:#ef4444; color:#fff !important; } .btn-delete:hover { background:#dc2626; }
+  .btn-add { background:#10b981; color:#fff !important; padding:8px 14px; } .btn-add:hover { background:#059669; }
+  .dx-toggle-wrap { padding:10px; text-align:center; background:#f8fafc; border-top:1px solid var(--dx-line); }
+  .btn-toggle { background:var(--dx-mute); color:#fff; border:0; padding:6px 18px; border-radius:20px; font-size:.8rem; cursor:pointer; font-weight:600; }
+  .btn-toggle:hover { background:#475569; }
+
+  /* ---------- Right history sidebar (fixed / offcanvas) ---------- */
+  .dx-right { position:fixed; right:12px; top:var(--dx-top,12px); bottom:12px; width:300px; background:#fff; border:1px solid var(--dx-line); border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.08); display:flex; flex-direction:column; overflow:hidden; z-index:900; transition:transform .25s ease; }
+  .dx.dx-closed .dx-right { transform:translateX(125%); }
+  .dx-right-top { padding:14px 14px 0; flex:0 0 auto; }
+  .dx-right-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .dx-right h4 { margin:0; font-size:.95rem; color:var(--dx-dark); }
+  .dx-loglist { flex:1 1 auto; overflow-y:auto; padding:0 14px 14px; }
+  .dx-dots { border:0; background:none; cursor:pointer; font-size:1.05rem; color:var(--dx-mute); width:34px; height:34px; border-radius:50%; }
+  .dx-dots:hover { background:#f1f5f9; color:var(--dx-dark); }
+  .dx-open-btn { display:none; position:fixed; right:12px; top:var(--dx-top,12px); z-index:899; width:42px; height:42px; border-radius:50%; border:1px solid var(--dx-line); background:#fff; color:var(--dx-dark); box-shadow:0 4px 12px rgba(0,0,0,.12); cursor:pointer; font-size:1.05rem; }
+  .dx.dx-closed .dx-open-btn { display:block; }
+  .dx-backdrop { display:none; }
+  .dx-filters { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .dx-filter { border:1px solid var(--dx-line); background:#f8fafc; color:var(--dx-mute); border-radius:20px; padding:4px 12px; font-size:.75rem; cursor:pointer; }
+  .dx-filter.active { background:var(--dx-accent); border-color:var(--dx-accent); color:#fff; }
+  .dx-log { border-left:3px solid var(--dx-line); padding:2px 0 2px 10px; margin-bottom:14px; font-size:.82rem; }
+  .dx-log[data-action=add] { border-color:#22c55e; } .dx-log[data-action=change] { border-color:#f59e0b; } .dx-log[data-action=delete] { border-color:#ef4444; }
+  .dx-user { font-weight:700; color:var(--dx-dark); }
+  .dx-badge { font-size:.65rem; padding:2px 7px; border-radius:10px; color:#fff; font-weight:700; margin-left:4px; }
+  .b-add { background:#22c55e; } .b-change { background:#f59e0b; } .b-delete { background:#ef4444; }
+  .dx-meta { color:var(--dx-mute); font-size:.75rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1199px) {
+    .dx, .dx.dx-closed { padding-right:0; }
+    .dx-right { top:0 !important; bottom:0; right:0; width:min(320px,90vw); border-radius:12px 0 0 12px; z-index:1050; box-shadow:-8px 0 24px rgba(0,0,0,.25); }
+    .dx:not(.dx-closed) .dx-backdrop { display:block; position:fixed; inset:0; background:rgba(15,23,42,.45); z-index:1040; }
+  }
+  @media (max-width:767px) {
+    .dx-table th:first-child, .dx-table td:first-child { display:none; }
+    .btn-action { margin:2px 0 0 4px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% get_history 20 as history %}
+<div class="dx" id="content-main">
+
+  <!-- ============ CENTER: cards + tables ============ -->
+  <section class="dx-center" style="font-family:times new roman !important;">
+    {% if app_list %}
+      {% for app in app_list %}
+        {% for model in app.models %}
+          {% get_model_rows app.app_label model.object_name as row_list %}
+          <div class="dx-card" data-key="{{ app.app_label }}-{{ model.object_name }}">
+            <div class="dx-card-head">
+              <h3><i class="fa-solid fa-folder" style="color:#fbbf24"></i> {{ model.name }}</h3>
+              {% if model.add_url %}
+                <a href="{{ model.add_url }}" class="btn-action btn-add"><i class="fa-solid fa-plus"></i> Add {{ model.name }}</a>
+              {% endif %}
+            </div>
+
+            <div class="dx-scroll">
+              <table class="dx-table">
+                <thead>
+                  <tr><th style="width:8%">S.No.</th><th>Record / Information</th><th style="text-align:right">Quick Actions</th></tr>
+                </thead>
+                <tbody>
+                  {% for row in row_list %}
+                    <tr class="{% if forloop.counter > 7 %}hidden-row{% endif %}">
+                      <td style="font-weight:bold;color:#94a3b8">{{ forloop.counter }}</td>
+                      <td style="font-weight:500">{{ row }}</td>
+                      <td style="text-align:right;white-space:nowrap">
+                        <a href="{{ model.admin_url }}{{ row.pk }}/change/" class="btn-action btn-edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="{{ model.admin_url }}{{ row.pk }}/delete/" class="btn-action btn-delete"><i class="fa-solid fa-trash"></i> Delete</a>
+                      </td>
+                    </tr>
+                  {% empty %}
+                    <tr><td colspan="3" class="dx-empty"><i class="fa-solid fa-inbox fa-2x"></i><br>{{ model.name }} me abhi koi record nahi hai.</td></tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            {% if row_list|length > 7 %}
+              <div class="dx-toggle-wrap">
+                <button class="btn-toggle" data-total="{{ row_list|length }}"><i class="fa-solid fa-chevron-down"></i> Show Full ({{ row_list|length }} Rows)</button>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    {% else %}
+      <p>{% translate "You don’t have permission to view or edit anything." %}</p>
+    {% endif %}
+  </section>
+
+  <!-- ============ RIGHT: history tab ============ -->
+  <aside class="dx-right" id="dxRight" style="font-family:times new roman !important;">
+    <div class="dx-right-top">
+      <div class="dx-right-head">
+        <h4><i class="fa-solid fa-clock-rotate-left"></i> Changes History</h4>
+        <button type="button" class="dx-dots" id="dxClose" title="Hide"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      </div>
+      <div class="dx-filters">
+        <button class="dx-filter active" data-f="all">All</button>
+        <button class="dx-filter" data-f="add">Added</button>
+        <button class="dx-filter" data-f="change">Changed</button>
+        <button class="dx-filter" data-f="delete">Deleted</button>
+      </div>
+    </div>
+
+    <div class="dx-loglist">
+    {% for log in history %}
+      <div class="dx-log" data-action="{% if log.is_addition %}add{% elif log.is_change %}change{% else %}delete{% endif %}">
+        <div>
+          <span class="dx-user"><i class="fa-solid fa-user"></i> {% firstof log.user.get_full_name log.user.get_username %}</span>
+          {% if log.is_addition %}<span class="dx-badge b-add">ADDED</span>
+          {% elif log.is_change %}<span class="dx-badge b-change">CHANGED</span>
+          {% else %}<span class="dx-badge b-delete">DELETED</span>{% endif %}
+        </div>
+        <div>
+          {% if log.get_admin_url %}<a href="{{ log.get_admin_url }}">{{ log.object_repr|truncatechars:34 }}</a>{% else %}{{ log.object_repr|truncatechars:34 }}{% endif %}
+          <span class="dx-meta">· {{ log.content_type.name|capfirst }}</span>
+        </div>
+        {% if log.get_change_message %}<div class="dx-meta">{{ log.get_change_message|truncatechars:70 }}</div>{% endif %}
+        <div class="dx-meta"><i class="fa-regular fa-clock"></i> {{ log.action_time|timesince }} pehle</div>
+      </div>
+    {% empty %}
+      <p class="dx-meta">Abhi tak koi change nahi hua.</p>
+    {% endfor %}
+    </div>
+  </aside>
+
+  <button type="button" class="dx-open-btn" id="dxOpen" title="Show history"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+  <div class="dx-backdrop" id="dxBackdrop"></div>
+</div>
+
+<script>
+(function () {
+  // ---- Right history: fixed panel + 3-dots toggle ----
+  var dx = document.querySelector('.dx');
+  var KEY = 'dxHistoryOpen';
+  var mq = window.matchMedia('(max-width:1199px)');
+
+  function setTop() {           // panel center ke top se align, scroll par 12px pe ruk jaye
+    var t = Math.max(12, dx.getBoundingClientRect().top);
+    dx.style.setProperty('--dx-top', t + 'px');
+  }
+  function setOpen(open) {
+    dx.classList.toggle('dx-closed', !open);
+    if (!mq.matches) { try { localStorage.setItem(KEY, open ? '1' : '0'); } catch (e) {} }
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (mq.matches || saved === '0') dx.classList.add('dx-closed');
+
+  document.getElementById('dxClose').addEventListener('click', function () { setOpen(false); });
+  document.getElementById('dxOpen').addEventListener('click', function () { setOpen(true); });
+  document.getElementById('dxBackdrop').addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mq.matches) setOpen(false); });
+  mq.addEventListener('change', function (e) { if (e.matches) dx.classList.add('dx-closed'); });
+
+  window.addEventListener('scroll', setTop, { passive: true });
+  window.addEventListener('resize', setTop);
+  setTop();
+
+  // Show Full / Show Less (har card ka apna)
+  document.querySelectorAll('.btn-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var rows = btn.closest('.dx-card').querySelectorAll('.hidden-row');
+      var open = btn.classList.toggle('expanded');
+      rows.forEach(function (r) { r.style.display = open ? 'table-row' : 'none'; });
+      btn.innerHTML = open
+        ? '<i class="fa-solid fa-chevron-up"></i> Show Less'
+        : '<i class="fa-solid fa-chevron-down"></i> Show Full (' + btn.dataset.total + ' Rows)';
+    });
+  });
+
+  
+
+  // Right history filter
+  var fbtns = document.querySelectorAll('.dx-filter');
+  fbtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      fbtns.forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      document.querySelectorAll('.dx-log').forEach(function (l) {
+        l.style.display = (b.dataset.f === 'all' || l.dataset.action === b.dataset.f) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+{% endblock %}

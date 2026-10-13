@@ -1,0 +1,79 @@
+{% extends "index.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Auto-Resize Navbar</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://jsdelivr.net" rel="stylesheet">
+</head>
+<body style="padding-top: 70px; background-color: #f8f9fa;">
+
+  <!-- Responsive Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> 
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="#">My Website</a> 
+      
+      <!-- हैमबर्गर बटन: यह सिर्फ छोटी स्क्रीन पर दिखेगा -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon"></span> 
+      </button> 
+      
+      <!-- Offcanvas Main Area: बड़ी स्क्रीन पर नॉर्मल रहेगा, छोटी स्क्रीन पर Slide बनेगा -->
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel"> 
+        <div class="offcanvas-header"> 
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Main Menu</h5> 
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button> 
+        </div> 
+        
+        <div class="offcanvas-body"> 
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3"> 
+            <li class="nav-item"> 
+              <a class="nav-link active" aria-current="page" href="#">Home</a> 
+            </li> 
+            <li class="nav-item"> 
+              <a class="nav-link" href="#">About</a> 
+            </li> 
+            <li class="nav-item dropdown"> 
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                Services 
+              </a> 
+              <ul class="dropdown-menu dropdown-menu-dark"> 
+                <li><a class="dropdown-item" href="#">Web Design</a></li> 
+                <li><a class="dropdown-item" href="#">SEO</a></li> 
+                <li> <hr class="dropdown-divider"> </li> 
+                <li><a class="dropdown-item" href="#">Marketing</a></li> 
+              </ul> 
+            </li> 
+          </ul> 
+          
+          <form class="d-flex mt-3 mt-lg-0" role="search"> 
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> 
+            <button class="btn btn-success" type="submit">Search</button> 
+          </form> 
+        </div> 
+      </div> 
+    </div> 
+  </nav>
+
+  <div class="container mt-5">
+    <h1>चेक करने के लिए ब्राउज़र विंडो को छोटा करें!</h1>
+    <p>जैसे ही आप स्क्रीन साइज छोटा करेंगे, ऊपर के सारे लिंक गायब होकर दाईं तरफ एक ३-लाइन वाले बटन (hamburger icon) में छुप जाएंगे, जिसपर क्लिक करने से पूरा मेनू स्लाइड होकर बाहर आएगा।</p>
+  </div>
+
+  <!-- Bootstrap JS (स्लाइडर और ड्रॉपडाउन चलाने के लिए सबसे ज़रूरी) -->
+  <script src="https://jsdelivr.net"></script>
+</body>
+</html>
+
+</body> 
+</html>

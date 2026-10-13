@@ -1,0 +1,298 @@
+<style>
+        .hding {
+          background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+          margin-bottom: 10px;
+          border: 3px solid #861414;
+          text-transform: uppercase;
+          width: 100%;
+
+          /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+          padding: 6px 15px 6px 15px;
+          color: #f8f8fa;
+          text-align: left;
+
+          display: flex;
+          align-items: center;
+        }
+
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+          font-weight: bold;
+          white-space: nowrap;
+          /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+          font-size: 3.4vw;
+        }
+
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+          background-color: #a2cdf9;
+          padding: 2px 6px;
+          border-radius: 3px;
+        }
+
+        .custom-breadcrumb {
+          font-size: 2.2vw !important;
+          margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+          .hding-text {
+            font-size: 1.1rem;
+            /* टैबलेट पर साइज */
+          }
+
+          .custom-breadcrumb {
+            font-size: 0.85rem !important;
+          }
+        }
+
+        @media (min-width: 992px) {
+          .hding-text {
+            font-size: 1.35rem;
+            /* डेस्कटॉप पर साइज */
+          }
+
+          .hding {
+            padding-left: 30px;
+            /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+          }
+        }
+      </style>
+
+
+
+
+
+      <div class="container my-5">
+        <div class="container-fluid mt-3 mb-5 px-0">
+          <nav class="hding rounded-1 py-2 py-md-0">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+
+              <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+              <div class="hding-text">
+                 Haw To Apply
+              </div>
+
+              <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+              <div class="d-none d-sm-block">
+                <ol class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page"> Admission Apply</li>
+                </ol>
+              </div>
+
+            </div>
+          </nav>
+        </div>
+      </div>
+
+
+
+ 
+    <style>
+        :root {
+            --navy-blue: #0B3C5D;
+            --border-light: #E2E8F0;
+            --text-main: #2D3748;
+            --bg-canvas: #F8FAFC;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+        }
+        .support-header {
+            background-color: var(--navy-blue);
+            border-bottom: 4px solid #F5A623;
+            padding: 50px 0;
+            color: #FFFFFF;
+        }
+        .info-widget {
+            border: 1px solid var(--border-light);
+            background: #FFFFFF;
+            border-radius: 6px;
+        }
+        .contact-row {
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border-light);
+        }
+        .contact-row:last-child {
+            border-bottom: none;
+        }
+        /* Custom Accordion override to look human-coded */
+        .faq-accordion .accordion-item {
+            border: 1px solid var(--border-light) !important;
+            border-radius: 6px !important;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: #FFFFFF;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .faq-accordion .accordion-button {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            padding: 16px 20px;
+            box-shadow: none !important;
+        }
+        .faq-accordion .accordion-button:not(.collapsed) {
+            background-color: #F8FAFC !important;
+            color: var(--navy-blue) !important;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .faq-accordion .accordion-body {
+            padding: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #4A5568;
+            background-color: #FFFFFF;
+        }
+        @media (max-width: 991.98px) {
+            .support-sidebar {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+ 
+
+    
+
+    <!-- Main Container Grid -->
+    <div class="container my-5">
+        <div class="row g-4">
+            
+            <!-- LEFT COLUMN: Help Desk Contact Widgets (col-lg-4) -->
+            <div class="col-lg-4 order-lg-1 support-sidebar">
+                
+                <!-- Main Help Desk Card -->
+                <div class="info-widget p-4 shadow-sm mb-4">
+                    <h5 class="fw-bold text-dark h6 mb-3 pb-2 border-bottom">
+                        <i class="fa-solid fa-headset text-primary me-2"></i> Admission HelpDesk
+                    </h5>
+                    {% for desk in admission_desk %}
+                    
+                    <div class="contact-row row">
+                        <div class="col-3"><img src="{{ desk.user.photo.url }}" class="img-fluid object-fit-contain" alt="..."  height="60" width="70"></div>
+                        <div class="col-9"> <strong class="text-dark small"><i class="fa-solid fa-phone text-muted me-1.5"></i> {{ desk.user.get_full_name }}</strong>
+                        
+                        <span class="text-muted d-block small"> {{desk.work_position}}</span>
+                        <strong class="text-dark small"><i class="fa-solid fa-phone text-muted me-1.5"></i> {{desk.user.phone}}</strong>
+                    </div>
+                       </div>
+                    {% endfor %}
+                    
+                </div>
+
+                <!-- Campus Location Details Widget -->
+                <div class="info-widget p-4 shadow-sm bg-light">
+                    <h5 class="fw-bold text-dark h6 mb-2">
+                        <i class="fa-solid fa-location-dot text-danger me-2"></i>Campus Location
+                    </h5>
+                    <p class="text-muted m-0 small mb-3" style="line-height: 1.5;">
+                        Government Polytechnic College Harsud,<br>
+                        New Harsud, Dist. Khandwa,<br>
+                        Madhya Pradesh, Pincode: 450116
+                    </p>
+                    <a href="https://www.google.com/maps/place/Eklavya+Government+Polytechnic+College+Harsud/@21.9533304,76.7057443,954m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bd7e47baaaaaaab:0x5b5d8307118a8a72!8m2!3d21.9533304!4d76.7083246!16s%2Fg%2F11g9tbh4r1?entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-outline-secondary btn-sm w-100 fw-medium bg-white">
+                        <i class="fa-solid fa-map-location-dot me-2"></i>Navigate via Google Maps
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Professional FAQ Accordion List (col-lg-8) -->
+            <div class="col-lg-8 order-lg-2">
+                <div class="info-widget p-4 shadow-sm">
+                    <div class="d-flex align-items-center border-bottom pb-3 mb-4">
+                        <div class="bg-light p-2 rounded me-3 d-inline-flex text-dark">
+                            <i class="fa-solid fa-circle-question fa-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold m-0 text-dark h5">General & Technical FAQs</h4>
+                            <p class="text-muted m-0 small">Frequently asked operational doubts by applicants and enrolled students.</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Stack -->
+                    <div class="accordion faq-accordion" id="portalFAQ">
+                        
+                        <!-- FAQ Item 1 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Q1. Kya admission milne ke baad hostel facility available hai?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#portalFAQ">
+                                <div class="accordion-body">
+                                    Haan, college campus me students ke liye hostel facility available hai. Seats limited hoti hain, isliye admission process poora hone ke turant baad hi aapko hostel allotment ke liye alag se office me application form submit karna hoga.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 2 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Q2. Polytechnic Diploma ke baad Lateral Entry (Direct 2nd year B.Tech) kaise milta hai?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#portalFAQ">
+                                <div class="accordion-body">
+                                    Diploma 3rd year pass karne ke baad, Madhya Pradesh DTE portal ke madhyam se specialized counseling aayojit hoti hai. Iske throw aapko kisi bhi engineering college me **Direct B.E. / B.Tech ke Second Year (3rd Semester)** me lateral entry pradan ki jaati hai.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Q3. Portal par profile verify na hone par kya karna chahiye?
+                                </button>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#portalFAQ">
+                                <div class="accordion-body">
+                                    Yadi online documentation check ke dauran aapka digital certificate status error dikha raha hai, toh ghabraiye nahi. Aap hamare <strong>Campus Help Desk Office</strong> me subah 10 se shaam 5 ke beech aakar manually verification sheet clear karwa sakte hain.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Q4. Semester exams ka routine aur time-table kahan se milega?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#portalFAQ">
+                                <div class="accordion-body">
+                                    Sabhi semester exams Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV) dwara control kiye jaate hain. Aap hamari website ke <strong>"Academic Notice Board"</strong> section ya RGPV ke official diploma portal par jaakar latest time-table PDF download kar sakte hain.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 5 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Q5. Kya college me anti-ragging cell active hai aur shikayat kaise karein?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#portalFAQ">
+                                <div class="accordion-body">
+                                    Haan, campus me AICTE guidelines ke mutabik ek sakriya Anti-Ragging Committee kaam karti hai. Kisi bhi aisi gatividhi ki shikayat aap seedhe hamare Help Desk block me physically aakar ya fir website par diye gaye grievance mail par gumnam tarike se bhi darj kara sakte hain. Immediate action liya jayega.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End Accordion Stack -->
+                </div> <!-- End info-widget Card -->
+            </div> <!-- End RIGHT COLUMN (col-lg-8) -->
+
+        </div> <!-- End Row Container -->
+    </div> <!-- End Main Container Grid -->
+
+  
