@@ -1,4 +1,4 @@
-Django==6.1.2
+ 
 Requests==2.34.2
 accelerate==1.14.0
 aiofiles==24.1.0
