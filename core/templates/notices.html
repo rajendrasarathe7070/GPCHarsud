@@ -104,8 +104,8 @@
       <!-- मोडल बॉडी (स्क्रॉल होने वाली लिस्ट) -->
       <div class="modal-body alert-modal-body bg-white">
         <ul class="alert-list">
-          {% for notice in impnotices %}
-        {% if notice.add_to_grand == True %}
+          {%for notice in impnotices%}
+        {%if notice.add_to_grand == True%}
           <li class="mb-0">
             
             {% if notice.notice_pdf %}
