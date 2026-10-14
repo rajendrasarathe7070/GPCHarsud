@@ -17,5 +17,5 @@ urlpatterns = [
     
     path('campus.html',views.campuslife,name='campuslife'),
     
-
+    path('googled61072f71b08753c.html',views.verification, name='googled61072f71b08753c'),
 ]

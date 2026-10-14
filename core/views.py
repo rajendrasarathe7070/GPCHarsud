@@ -12,6 +12,9 @@ from django.contrib.auth.decorators import login_required
 from . import models
 from .models import PlacementBatch
  
+def verification(request):
+    return render(request,'googled61072f71b08753c.html') 
+ 
 def singup(request):
     if request.method=='POST':
     

@@ -35,7 +35,7 @@ urlpatterns = [
     # path('' ,views.home ,name="home"),
     path('', include(tf_urls)),
     path('',include('core.urls')),
-    # path('admission/',include('core.urls'),name="admission"),
+    
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
