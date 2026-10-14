@@ -147,7 +147,7 @@ def campuslife(request):
                         'labrulses':labrulse,
                         
                         }
-    return render(request,'CampusLife.html ',campusdictionary)
+    return render(request,'CampusLife.html',campusdictionary)
 
 def placements(request):
     all_batches = models.PlacementBatch.objects.prefetch_related('branch_records').order_by('-year')
