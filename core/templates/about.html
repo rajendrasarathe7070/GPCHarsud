@@ -1,218 +1,475 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>about page </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    
-  <nav class="navbar fixed-top navbar-expand-lg  bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
-    {% include 'navbar.html' %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 
-  </nav>
- 
-<div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-<style>
-        .hero-section {
-            background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('https://unsplash.com') no-repeat center center;
-            background-size: cover;
-            color: white;
-            padding: 80px 0;
-        }
-        .vision-mission-card {
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        .vision-mission-card:hover {
-            transform: translateY(-5px);
-        }
-        .icon-box {
-            font-size: 2.5rem;
-            color: #002855;
+    <style>
+        .tab-pane {
+            margin-top: 5rem;
         }
     </style>
- 
+</head>
 
-    <!-- 1. Hero / Header Section -->
-    <header class="hero-section text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold">हमारे कॉलेज के बारे में</h1>
-            <p class="lead">शिक्षा, नवाचार और चरित्र निर्माण का एक अग्रणी केंद्र।</p>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">होम</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">हमारे बारे में</li>
-                </ol>
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg  bg-body-tertiary " id="navbar"
+        style="padding-top: 5px; padding-bottom: 5px;">
+        {% include 'navbar.html' %}
+
+
+    </nav>
+
+    <!-- <div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <style>
+            .hero-section {
+                background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.85)), url('https://unsplash.com') no-repeat center center;
+                background-size: cover;
+                color: white;
+                padding: 80px 0;
+            }
+
+            .vision-mission-card {
+                border: none;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s;
+            }
+
+            .vision-mission-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .icon-box {
+                font-size: 2.5rem;
+                color: #002855;
+            }
+        </style>
+
+
+        
+        <header class="hero-section text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold">हमारे कॉलेज के बारे में</h1>
+                <p class="lead">शिक्षा, नवाचार और चरित्र निर्माण का एक अग्रणी केंद्र।</p>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">होम</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">हमारे बारे में</li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+
+      
+        <section class="py-5" id="profile">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold text-dark">कॉलेज प्रोफ़ाइल और इतिहास</h2>
+                        <div class="heading-line bg-primary mb-3" style="width: 60px; height: 3px;"></div>
+                        <p class="text-muted">स्थापना वर्ष से ही हमारा संस्थान छात्रों को उच्च गुणवत्ता वाली शिक्षा
+                            प्रदान करने के लिए प्रतिबद्ध है। हमारी मान्यताएं और संबद्धता (Accreditation & Affiliation)
+                            राष्ट्रीय मानकों के अनुरूप हैं।</p>
+                        <p class="text-muted">हम अकादमिक उत्कृष्टता के साथ-साथ छात्रों के समग्र विकास (Objectives & Core
+                            Values) पर ध्यान केंद्रित करते हैं ताकि वे भविष्य की चुनौतियों का सामना कर सकें।</p>
+                        <div class="row g-3 pt-2">
+                            <div class="col-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h3 class="fw-bold text-primary mb-0">25+</h3>
+                                    <small class="text-muted">वर्षों का अनुभव</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h3 class="fw-bold text-primary mb-0">A+</h3>
+                                    <small class="text-muted">NAAC ग्रेड मान्यता</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="https://unsplash.com" class="img-fluid rounded shadow" alt="College Campus">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         
+        <section class="py-5 bg-light" id="principal">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-4 text-center">
+                        <img src="https://unsplash.com"
+                            class="img-fluid rounded-circle shadow-sm border border-4 border-white"
+                            style="max-width: 250px;" alt="Principal">
+                        <h4 class="mt-3 mb-0 fw-bold">डॉ. आनंद शर्मा</h4>
+                        <small class="text-primary fw-semibold">प्रिंसिपल का संदेश</small>
+                    </div>
+                    <div class="col-lg-8">
+                        <i class="fa fa-quote-left text-primary display-6 mb-3 d-block"></i>
+                        <p class="lead italic text-muted">"शिक्षा केवल ज्ञान प्राप्त करना नहीं है, बल्कि जीवन के मूल्यों
+                            को सीखना और समाज के प्रति अपनी ज़िम्मेदारी को समझना है। हमारे कॉलेज में हम प्रत्येक छात्र की
+                            अनूठी प्रतिभा को निखारने का प्रयास करते हैं।"</p>
+                        <hr class="my-4">
+                        <p class="text-muted">हमारा प्रशासन और संकाय (Administration & Faculty) मिलकर एक ऐसा वातावरण
+                            तैयार करते हैं जहाँ नवाचार और अनुसंधान को बढ़ावा मिले।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="py-5" id="vision-mission">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">विज़न और मिशन</h2>
+                    <p class="text-muted">हमारे लक्ष्य और मुख्य मूल्य जो हमें आगे बढ़ने की प्रेरणा देते हैं।</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 vision-mission-card p-4 text-center">
+                            <div class="card-body">
+                                <div class="icon-box mb-3"><i class="fa fa-eye"></i></div>
+                                <h4 class="card-title fw-bold">हमारा विज़न (Vision)</h4>
+                                <p class="card-text text-muted">एक ऐसा वैश्विक शैक्षणिक संस्थान बनना जो समाज के
+                                    सकारात्मक बदलाव के लिए तकनीकी और नैतिक रूप से सुदृढ़ लीडर्स तैयार करे।</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 vision-mission-card p-4 text-center">
+                            <div class="card-body">
+                                <div class="icon-box mb-3"><i class="fa fa-bullseye"></i></div>
+                                <h4 class="card-title fw-bold">हमारा मिशन (Mission)</h4>
+                                <p class="card-text text-muted">अत्याधुनिक बुनियादी ढांचा (Infrastructure) प्रदान करना,
+                                    उच्च गुणवत्ता वाले विभागों (Departments) को बढ़ावा देना और व्यावहारिक शिक्षा
+                                    सुनिश्चित करना।</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">संस्थान की मुख्य विशेषताएं</h2>
+                </div>
+                <div class="row g-4">
+                    
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body p-4 text-center">
+                                <i class="fa fa-users-toggle text-success display-5 mb-3"></i>
+                                <h5 class="fw-bold">अनुभवी फैकल्टी</h5>
+                                <p class="text-muted small">हमारे पास उच्च योग्य और अनुभवी प्रोफेसरों की टीम है।</p>
+                                <a href="/about/faculty" class="btn btn-sm btn-outline-primary">फैकल्टी देखें</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body p-4 text-center">
+                                <i class="fa fa-building-columns text-warning display-5 mb-3"></i>
+                                <h5 class="fw-bold">आधुनिक इंफ्रास्ट्रक्चर</h5>
+                                <p class="text-muted small">स्मार्ट क्लासरूम, आधुनिक लैब और समृद्ध लाइब्रेरी।</p>
+                                <a href="/about/infrastructure" class="btn btn-sm btn-outline-primary">इंफ्रास्ट्रक्चर
+                                    जानें</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body p-4 text-center">
+                                <i class="fa fa-trophy text-danger display-5 mb-3"></i>
+                                <h5 class="fw-bold">उपलब्धियां (Achievements)</h5>
+                                <p class="text-muted small">खेल, शिक्षा और अनुसंधान में हमारे छात्रों के कीर्तिमान।</p>
+                                <a href="/about/achievements" class="btn btn-sm btn-outline-primary">उपलब्धियां
+                                    देखें</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     
+        <footer class="bg-dark text-white pt-5 pb-3">
+            <div class="container">
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4">
+                        <h5 class="fw-bold text-uppercase text-warning mb-3">मान्यता और मंजूरी</h5>
+                        <p class="small text-white-50">हमारा कॉलेज AICTE/UGC द्वारा मान्यता प्राप्त (Recognition &
+                            Approvals) है और राज्य विश्वविद्यालय से संबद्ध है।</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="fw-bold text-uppercase text-warning mb-3">त्वरित लिंक्स (URLs)</h5>
+                        <ul class="list-unstyled small">
+                           
+                            <li><a href="/about" class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>कॉलेज प्रोफाइल</a></li>
+                            <li><a href="/about/principal" class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>प्रिंसिपल का संदेश</a></li>
+                            <li><a href="/about/vision-mission"
+                                    class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>विज़न और मिशन</a></li>
+                            <li><a href="/about/faculty" class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>फैकल्टी और स्टाफ</a></li>
+                            <li><a href="/about/infrastructure"
+                                    class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>इंफ्रास्ट्रक्चर</a></li>
+                            <li><a href="/about/achievements" class="text-white-50 text-decoration-none d-block mb-2"><i
+                                        class="fa fa-angle-right me-2"></i>उपलब्धियां</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4" id="contact">
+                        <h5 class="fw-bold text-uppercase text-warning mb-3">संपर्क और स्थान</h5>
+                        <p class="small text-white-50 mb-2"><i class="fa fa-map-marker-alt me-2"></i> मुख्य कैंपस,
+                            शिक्षा विहार, भारत</p>
+                        <p class="small text-white-50 mb-2"><i class="fa fa-phone me-2"></i> +91 12345 67890</p>
+                        <p class="small text-white-50"><i class="fa fa-envelope me-2"></i> info@college.edu</p>
+                    </div>
+                </div>
+                <hr class="border-secondary">
+                <div class="text-center small text-white-50">
+                    <p class="mb-0">&copy; 2026 आपका कॉलेज। सर्वाधिकार सुरक्षित।</p>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+    </div> -->
+<div>
+    <div class="tab-pane fade " id="Messages-tab-pane" role="tabpanel" aria-labelledby="Messages-tab" tabindex="0">
+
+        <div class="container ">
+            <style>
+                .hding {
+                    background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+                    margin-bottom: 10px;
+                    /* border: 3px solid #861414; */
+                    text-transform: uppercase;
+                    width: 100%;
+
+                    /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+                    padding: 6px 15px 6px 15px;
+                    color: #f8f8fa;
+                    text-align: left;
+
+                    display: flex;
+                    align-items: center;
+                }
+
+                /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+                .hding-text {
+                    font-weight: bold;
+                    white-space: nowrap;
+                    /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+                    font-size: 3.4vw;
+                    font-family: 'Times New Roman', Times, serif;
+                }
+
+                /* ब्रेडक्रंब आइटम स्टाइल */
+                .breadcrumb-item {
+                    background-color: #a2cdf9;
+                    padding: 2px 6px;
+                    border-radius: 3px;
+                }
+
+                .custom-breadcrumb {
+                    font-size: 2.2vw !important;
+                    margin-bottom: 0 !important;
+                    padding: 0 !important;
+                }
+
+                /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+                @media (min-width: 576px) {
+                    .hding-text {
+                        font-size: 1.1rem;
+                        /* टैबलेट पर साइज */
+                    }
+
+                    .custom-breadcrumb {
+                        font-size: 0.85rem !important;
+                    }
+                }
+
+                @media (min-width: 992px) {
+                    .hding-text {
+                        font-size: 1.35rem;
+                        /* डेस्कटॉप पर साइज */
+                    }
+
+                    .hding {
+                        padding-left: 30px;
+                        /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+                    }
+                }
+            </style>
+            <div class="container-fluid mt-3 mb-5 px-0">
+                <nav class="hding rounded-1 py-2 py-md-0">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+
+                        <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                        <div class="hding-text">
+                            Principal Message
+                        </div>
+
+                        <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                        <div class="d-none d-sm-block">
+                            <ol class="breadcrumb custom-breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page"> Principal Message</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><img src="https://www.rgpv.ac.in/Images/VC-Alok-Sharma.jpg" class="img-fluid"
+                        alt="...">
+                    <div class="text-center">
+                        <h3>Mr. Rajendra</h3>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6>From the Desk of the Principal</h6>
+                    <b class="text-success">Dear Students, Faculty Members, Staff, Alumni, Industry Partners, and all
+                        Stakeholders of Government Polytechnic College,</b>
+                    <p class="my-2">It is a matter of great honour and deep responsibility for me to address you as the
+                        Principal of Government Polytechnic College. I assume this role with humility, gratitude, and a
+                        strong commitment to fostering excellence in technical and diploma education.</p>
+                    <p class="my-2">Our college is not merely an educational institution; it is a vibrant academic
+                        family, a center of skill development, and a stepping stone for thousands of students aspiring
+                        to build a successful technical career.</p>
+                    <p class="my-2">At this important stage, our responsibility is to move forward with clarity,
+                        confidence, and collective purpose. Technical education today must go beyond textbooks and
+                        traditional practicals; it must align with real-world industry requirements, promote hands-on
+                        skills, and empower students to solve practical engineering and technological challenges.</p>
+                    <p class="my-2">Our vision is to make this college a hub for skilled professionals and technicians
+                        who can drive regional growth. We are actively working toward strengthening the quality of
+                        teaching, upgrading our laboratories, enhancing campus discipline, and building strong ties with
+                        local industries to improve training and placement opportunities.</p>
+                    <p class="my-2">Students will always remain at the heart of all our efforts. Our goal is to nurture
+                        not only competent technicians and engineers but also responsible citizens and ethical
+                        professionals who can contribute meaningfully to the progress of our state and nation.</p>
+                    <p class="my-2">I seek the trust, cooperation, and active participation of all students, parents,
+                        faculty, and staff members in this journey. Together, with sincerity, discipline, and
+                        dedication, we can take Government Polytechnic College to new heights of success.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="tab-pane fade" id="Location-tab-pane" role="tabpanel" aria-labelledby="Location-tab" tabindex="0">
+
+        <div class="container mt-3 mb-2 px-0">
+            <nav class="hding rounded-1 py-2 py-md-0">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                    <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                    <div class="hding-text">
+                        Location
+                    </div>
+
+                    <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                    <div class="d-none d-sm-block">
+                        <ol class="breadcrumb custom-breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page"> Location</li>
+                        </ol>
+                    </div>
+
+                </div>
             </nav>
         </div>
-    </header>
+        <style>
+            /* बॉडी और एचटीएमएल से एक्स्ट्रा स्पेस हटाने के लिए */
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                /* ताकि एक्स्ट्रा स्क्रॉल बार न आए */
+            }
 
-    <!-- 2. College Profile & History -->
-    <section class="py-5" id="profile">
-        <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold text-dark">कॉलेज प्रोफ़ाइल और इतिहास</h2>
-                    <div class="heading-line bg-primary mb-3" style="width: 60px; height: 3px;"></div>
-                    <p class="text-muted">स्थापना वर्ष से ही हमारा संस्थान छात्रों को उच्च गुणवत्ता वाली शिक्षा प्रदान करने के लिए प्रतिबद्ध है। हमारी मान्यताएं और संबद्धता (Accreditation & Affiliation) राष्ट्रीय मानकों के अनुरूप हैं।</p>
-                    <p class="text-muted">हम अकादमिक उत्कृष्टता के साथ-साथ छात्रों के समग्र विकास (Objectives & Core Values) पर ध्यान केंद्रित करते हैं ताकि वे भविष्य की चुनौतियों का सामना कर सकें।</p>
-                    <div class="row g-3 pt-2">
-                        <div class="col-6">
-                            <div class="p-3 border rounded bg-light">
-                                <h3 class="fw-bold text-primary mb-0">25+</h3>
-                                <small class="text-muted">वर्षों का अनुभव</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-3 border rounded bg-light">
-                                <h3 class="fw-bold text-primary mb-0">A+</h3>
-                                <small class="text-muted">NAAC ग्रेड मान्यता</small>
-                            </div>
-                        </div>
+            /* मैप को पूरी ऊंचाई (Height) देने के लिए */
+            .full-screen-map {
+                width: 100%;
+                height: 100vh;
+            }
+        </style>
+
+
+        <!-- मैप कंटेनर (Bootstrap Classes के साथ) -->
+        <div class="container  px-0">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4153.438488138949!2d76.70574431130656!3d21.95333037985384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd7e47baaaaaaab%3A0x5b5d8307118a8a72!2sEklavya%20Government%20Polytechnic%20College%20Harsud!5e1!3m2!1sen!2sin!4v1792171850574!5m2!1sen!2sin"
+                class="full-screen-map border-0" allowfullscreen="" loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
+                </h1>
+        </div>
+    </div>
+ 
+<div class="tab-pane fade" id="Visions-tab-pane" role="tabpanel" aria-labelledby="Visions-tab" tabindex="0">
+
+     
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://unsplash.com" class="img-fluid rounded shadow" alt="College Campus">
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- 3. Principal's Message -->
-    <section class="py-5 bg-light" id="principal">
-        <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-4 text-center">
-                    <img src="https://unsplash.com" class="img-fluid rounded-circle shadow-sm border border-4 border-white" style="max-width: 250px;" alt="Principal">
-                    <h4 class="mt-3 mb-0 fw-bold">डॉ. आनंद शर्मा</h4>
-                    <small class="text-primary fw-semibold">प्रिंसिपल का संदेश</small>
-                </div>
-                <div class="col-lg-8">
-                    <i class="fa fa-quote-left text-primary display-6 mb-3 d-block"></i>
-                    <p class="lead italic text-muted">"शिक्षा केवल ज्ञान प्राप्त करना नहीं है, बल्कि जीवन के मूल्यों को सीखना और समाज के प्रति अपनी ज़िम्मेदारी को समझना है। हमारे कॉलेज में हम प्रत्येक छात्र की अनूठी प्रतिभा को निखारने का प्रयास करते हैं।"</p>
-                    <hr class="my-4">
-                    <p class="text-muted">हमारा प्रशासन और संकाय (Administration & Faculty) मिलकर एक ऐसा वातावरण तैयार करते हैं जहाँ नवाचार और अनुसंधान को बढ़ावा मिले।</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Vision, Mission & Core Values -->
-    <section class="py-5" id="vision-mission">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">विज़न और मिशन</h2>
-                <p class="text-muted">हमारे लक्ष्य और मुख्य मूल्य जो हमें आगे बढ़ने की प्रेरणा देते हैं।</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card h-100 vision-mission-card p-4 text-center">
-                        <div class="card-body">
-                            <div class="icon-box mb-3"><i class="fa fa-eye"></i></div>
-                            <h4 class="card-title fw-bold">हमारा विज़न (Vision)</h4>
-                            <p class="card-text text-muted">एक ऐसा वैश्विक शैक्षणिक संस्थान बनना जो समाज के सकारात्मक बदलाव के लिए तकनीकी और नैतिक रूप से सुदृढ़ लीडर्स तैयार करे।</p>
-                        </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Featured
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 vision-mission-card p-4 text-center">
-                        <div class="card-body">
-                            <div class="icon-box mb-3"><i class="fa fa-bullseye"></i></div>
-                            <h4 class="card-title fw-bold">हमारा मिशन (Mission)</h4>
-                            <p class="card-text text-muted">अत्याधुनिक बुनियादी ढांचा (Infrastructure) प्रदान करना, उच्च गुणवत्ता वाले विभागों (Departments) को बढ़ावा देना और व्यावहारिक शिक्षा सुनिश्चित करना।</p>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- 5. Key Highlights / Grid (Faculty, Infrastructure, Gallery) -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">संस्थान की मुख्य विशेषताएं</h2>
-            </div>
-            <div class="row g-4">
-                <!-- Faculty Link Card -->
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4 text-center">
-                            <i class="fa fa-users-toggle text-success display-5 mb-3"></i>
-                            <h5 class="fw-bold">अनुभवी फैकल्टी</h5>
-                            <p class="text-muted small">हमारे पास उच्च योग्य और अनुभवी प्रोफेसरों की टीम है।</p>
-                            <a href="/about/faculty" class="btn btn-sm btn-outline-primary">फैकल्टी देखें</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Infrastructure Link Card -->
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4 text-center">
-                            <i class="fa fa-building-columns text-warning display-5 mb-3"></i>
-                            <h5 class="fw-bold">आधुनिक इंफ्रास्ट्रक्चर</h5>
-                            <p class="text-muted small">स्मार्ट क्लासरूम, आधुनिक लैब और समृद्ध लाइब्रेरी।</p>
-                            <a href="/about/infrastructure" class="btn btn-sm btn-outline-primary">इंफ्रास्ट्रक्चर जानें</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Achievements Link Card -->
-                <div class="col-md-4">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4 text-center">
-                            <i class="fa fa-trophy text-danger display-5 mb-3"></i>
-                            <h5 class="fw-bold">उपलब्धियां (Achievements)</h5>
-                            <p class="text-muted small">खेल, शिक्षा और अनुसंधान में हमारे छात्रों के कीर्तिमान।</p>
-                            <a href="/about/achievements" class="btn btn-sm btn-outline-primary">उपलब्धियां देखें</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- <div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
-    <!-- 6. Footer / Contact Location / Approvals -->
-    <footer class="bg-dark text-white pt-5 pb-3">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <div class="col-lg-4">
-                    <h5 class="fw-bold text-uppercase text-warning mb-3">मान्यता और मंजूरी</h5>
-                    <p class="small text-white-50">हमारा कॉलेज AICTE/UGC द्वारा मान्यता प्राप्त (Recognition & Approvals) है और राज्य विश्वविद्यालय से संबद्ध है।</p>
-                </div>
-                <div class="col-lg-4">
-                    <h5 class="fw-bold text-uppercase text-warning mb-3">त्वरित लिंक्स (URLs)</h5>
-                    <ul class="list-unstyled small">
-                        <!-- त्वरित लिंक्स (URLs) सूची का अगला भाग -->
-                        <li><a href="/about" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>कॉलेज प्रोफाइल</a></li>
-                        <li><a href="/about/principal" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>प्रिंसिपल का संदेश</a></li>
-                        <li><a href="/about/vision-mission" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>विज़न और मिशन</a></li>
-                        <li><a href="/about/faculty" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>फैकल्टी और स्टाफ</a></li>
-                        <li><a href="/about/infrastructure" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>इंफ्रास्ट्रक्चर</a></li>
-                        <li><a href="/about/achievements" class="text-white-50 text-decoration-none d-block mb-2"><i class="fa fa-angle-right me-2"></i>उपलब्धियां</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4" id="contact">
-                    <h5 class="fw-bold text-uppercase text-warning mb-3">संपर्क और स्थान</h5>
-                    <p class="small text-white-50 mb-2"><i class="fa fa-map-marker-alt me-2"></i> मुख्य कैंपस, शिक्षा विहार, भारत</p>
-                    <p class="small text-white-50 mb-2"><i class="fa fa-phone me-2"></i> +91 12345 67890</p>
-                    <p class="small text-white-50"><i class="fa fa-envelope me-2"></i> info@college.edu</p>
-                </div>
-            </div>
-            <hr class="border-secondary">
-            <div class="text-center small text-white-50">
-                <p class="mb-0">&copy; 2026 आपका कॉलेज। सर्वाधिकार सुरक्षित।</p>
-            </div>
-        </div>
-    </footer>
+    </div>
+    <div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
+    </div> -->
+</div>
+    {% include 'footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
 
-
-
-                      </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
 </html>
