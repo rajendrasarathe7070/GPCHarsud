@@ -5,9 +5,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="uX9dmJO37GXV90cpuG_sA8rXjIxSiG0dXhVFDojXx2s" />
-    <title>index</title>
+    <meta name="description" content="Welcome to Government Polytechnic College (GPC) Harsud. Explore our diploma courses, admission process, faculty details, and campus facilities in Harsud, Madhya Pradesh.">
+<meta name="keywords" content="GPC Harsud, Government Polytechnic College Harsud, Polytechnic Harsud, Diploma Engineering Harsud, GPC Harsud admission, Harsud college">
+<link rel="canonical" href="https://gpcharsud.onrender.com"> 
+    <title>Govt. Polytechnic Collage Harsud</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -237,18 +240,11 @@
 
             <!-- पहली स्लाइड -->
             <div class="carousel-item active h-100" style="background-image: url({% static 'images/clg1-2.jpeg' %});">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 px-3">
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        <strong>Message : </strong> {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% endfor %}
-                    <p class="lead fs-5 fs-md-4"> </p>
-                    <div>
-                        <div class="d-none d-sm-block">
+                <div class="carousel-caption d-flex flex-column  h-100 px-3  ">
+                     
+                    
+                    <div class="p-5">
+                        <div class="d-none  d-sm-block" style="margin-top: 21rem;">
 
                             <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto"
                                 height="100px">
@@ -256,37 +252,59 @@
                             <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
 
                             <pre style="text-align: center;">this is most usefull services for this collage , 
-            they are link's for many services this container is use for gadring many usefull services .</pre>
+                                                     they are link's for many services this container is use for gadring many usefull services .</pre>
 
-                            <button type="button" class="btn btn-outline-danger"><a href="/index/admission"
-                                    style="color: #f7f7f7; ">A/O
-                                    base CURRICULUM</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
-                                    style="color: #f7f7f7;">Academic Calendar</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
-                                    style="color: #f7f7f7;">Student
-                                    Registration</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
-                                    style="color: #f7f7f7;">Time
-                                    Table</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='/academic#Syllabus-tab-pane' ">A/O
+                                    Base CURRICULUM  </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#AcademicCalendar-tab-pane' ">  Academic Calendar</button>
+
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx' ">Student
+                                    Registration </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#TimeTable-tab-pane' ">Time
+                                    Table </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#AcademicCalendar-tab-pane' "> <a href="/index/admission"
                                     style="color: #f7f7f7;">Download Forms</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
-                                    style="color: #f7f7f7;">Employer Registration</a></button>
-                            <button type="button" class="btn btn-outline-danger"> <a href="/index/admission"
-                                    style="color: #f7f7f7;">Result</a></button>
+                       
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx' ">Result</button>
 
 
                         </div>
                     </div>
                 </div>
             </div>
+            
 
             <!-- दूसरी स्लाइड -->
-            <div class="carousel-item h-100" style="background-image: url('{% static 'images/clg1-4.jpeg' %}') ;">
+            <div class="carousel-item h-100 " style="background-image: url('{% static 'images/clg1-4.jpeg' %}') ;">
                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 px-3">
                     <h1 class="display-4 display-md-2 fw-bold text-shadow"> </h1>
-                    <p class="lead fs-5 fs-md-4"> Hellow </p>
+                     <div class="p-5">
+                        <div class="d-none  d-sm-block" style="margin-top: 21rem;">
+
+                            <img class="d-block mx-auto mb-1" src="{% static 'images/logo2.png' %}" alt="" width="auto"
+                                height="100px">
+
+                            <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
+
+                            <pre style="text-align: center;">this is most usefull services for this collage , 
+                                                     they are link's for many services this container is use for gadring many usefull services .</pre>
+
+                            <button type="button" class="btn btn-danger" onclick="window.location.href='/academic#Syllabus-tab-pane' ">A/O
+                                    Base CURRICULUM  </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#AcademicCalendar-tab-pane' ">  Academic Calendar</button>
+
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx' ">Student
+                                    Registration </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#TimeTable-tab-pane' ">Time
+                                    Table </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#AcademicCalendar-tab-pane' "> <a href="/index/admission"
+                                    style="color: #f7f7f7;">Download Forms</a></button>
+                       
+                            <button type="button" class="btn btn-outline-danger" onclick="window.location.href='https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx' ">Result</button>
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
 

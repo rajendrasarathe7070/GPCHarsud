@@ -261,13 +261,12 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="academicDropdown" role="button"
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="aboutDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         About Us
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="academicDropdown">
-                        <li><a class="dropdown-item" href="{% url 'academic' %}#Courses-tab-pane">Courses &
-                                Department</a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="{% url 'about' %}#home-tab-pane"> about</a>
                         </li>
 
 
@@ -394,21 +393,7 @@
                     </ul>
                 </li>
 
-                <!-- About Us Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        U's
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">About U's</a></li>
-                        <li><a class="dropdown-item" href="#">Contact U's</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here for more improvment .</a></li>
-                    </ul>
-                </li>
+                 
             </ul>
 
             <!-- User Authentication Section (Login / Logout) -->
@@ -424,8 +409,7 @@
                         <li>
                             <form action="/logout" method="post" class="px-3 py-1">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm w-100">logout {{ user.username
-                                    }}</button>
+                                <button type="submit" class="btn btn-danger btn-sm w-100">logout {{user.username}}</button>
                             </form>
                         </li>
                         <li>

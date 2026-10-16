@@ -14,7 +14,7 @@ urlpatterns = [
     path('singup',views.singup,name='singup'),
     path('login',views.login,name='login'),
     path('logout',views.logout,name='logout'),
-    
+    path('about',views.about,name='about'),
     path('campus.html',views.campuslife,name='campuslife'),
     
     path('googled61072f71b08753c.html',views.verification, name='googled61072f71b08753c'),

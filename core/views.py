@@ -185,7 +185,7 @@ def placements(request):
 def student(request):
     return render(request,'studentcorner.html')
 
-def aboutu(request):
+def about(request):
     return render(request,'about.html')
 
 def contact(request):
