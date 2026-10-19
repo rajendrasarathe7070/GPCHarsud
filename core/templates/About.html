@@ -36,7 +36,8 @@
         }
     </style>
 
-   <nav class="navbar fixed-top navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+    <nav class="navbar fixed-top navbar-expand-lg  " id="navbar"
+        style="background:transparent; padding: 0% !important;">
         {% include 'navbar.html' %}
 
     </nav>
@@ -55,6 +56,408 @@
     <div class="container my-5">
         <!-- बूटस्ट्रैप का मुख्य टैब कंटेनर -->
         <div class="tab-content" id="placementTabContent" style="margin-top: 9rem;">
+
+
+ 
+<div class="tab-pane fade" id="Offered" role="tabpanel">
+
+   
+     <div class="container mt-3 mb-5 px-0">
+                        <nav class="hding rounded-1 py-2 py-md-0">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                                <div class="hding-text">
+                                  Courses Offered Overview
+                                </div>
+
+                                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                                <div class="d-none d-sm-block">
+                                    <ol class="breadcrumb custom-breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#"
+                                                class="text-decoration-none text-dark">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">  Courses Offered Overview </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+<div class="courses-section px-0">
+  
+  
+
+  <!-- सरकारी वेबसाइट स्टाइल क्लीन टेबल -->
+  <div class="table-responsive">
+    <table class="courses-table">
+      <thead>
+        <tr>
+          <th style="width: 10%;">क्र. (S.No.)</th>
+          <th style="width: 50%;">ब्रांच का नाम (Course / Branch Name)</th>
+          <th style="width: 20%;">अवधि (Duration)</th>
+          <th style="width: 20%;">सीटें (Intake Capacity)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="branch-name">Civil Engineering </td>
+          <td>3 वर्ष (6 सेमेस्टर)</td>
+          <td class="seats-count">60 सीटें</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="branch-name">Computer Science & Engineering  </td>
+          <td>3 वर्ष (6 सेमेस्टर)</td>
+          <td class="seats-count">60 सीटें</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="branch-name">Mechanical Engineering </td>
+          <td>3 वर्ष (6 सेमेस्टर)</td>
+          <td class="seats-count">60 सीटें</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="branch-name">Electronics & Telecommunication Engineering  </td>
+          <td>3 वर्ष (6 सेमेस्टर)</td>
+          <td class="seats-count">60 सीटें</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="table-note">* * Note: Please visit the 'Academics' page for detailed syllabus and academic calendar information. The admission process is conducted through centralized counseling by the DTE (Directorate of Technical Education) of the Government of Madhya Pradesh. For further information, please visit the 'Admission' page.</p>
+
+</div>
+
+<!-- पूरी तरह से नेचुरल और क्लीन सीएसएस -->
+<style>
+  .courses-section {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2d3748;
+  }
+
+  .courses-header {
+    margin-bottom: 25px;
+  }
+
+  .courses-header h2 {
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  /* हेडिंग के नीचे साधारण और ऑफिशियल अंडरलाइन */
+  .courses-header h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #1d4ed8;
+    margin-top: 6px;
+  }
+
+  .courses-header p {
+    color: #475569;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* रिस्पॉन्सिव टेबल कंटेनर ताकि मोबाइल पर स्क्रॉल हो सके */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  /* क्लासिक गवर्नमेंट टेबल स्टाइल */
+  .courses-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    background-color: #ffffff;
+  }
+
+  /* टेबल हेडर - गहरा नीला/ग्रे लुक जो गंभीर और ऑफिशियल लगता है */
+  .courses-table th {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-weight: 700;
+    padding: 14px 16px;
+    border-bottom: 2px solid #cbd5e1;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  /* टेबल डेटा रोज़ */
+  .courses-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+  }
+
+  /* जब माउस रो के ऊपर जाए तो हल्का सा ग्रे इफ़ेक्ट */
+  .courses-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+
+  .branch-name {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .seats-count {
+    font-weight: bold;
+    color: #1d4ed8;
+  }
+
+  .table-note {
+    font-size: 13px;
+    color: #64748b;
+    font-style: italic;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+
+  /* 📱 मोबाइल स्क्रीन के लिए छोटे फ़ॉन्ट्स */
+  @media (max-width: 600px) {
+    .courses-header h2 { font-size: 20px; }
+    .courses-table th, .courses-table td { padding: 10px 12px; font-size: 13px; }
+  }
+</style>
+
+</div>
+
+
+             
+             <div class="tab-pane fade" id="Approvals" role="tabpanel">
+                <div class="container mt-3 mb-5 px-0">
+                        <nav class="hding rounded-1 py-2 py-md-0">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                                <div class="hding-text">
+                                  Approvals , Affiliations & GOVERNED BY
+                                </div>
+
+                                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                                <div class="d-none d-sm-block">
+                                    <ol class="breadcrumb custom-breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#"
+                                                class="text-decoration-none text-dark">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page"> Approvals & Affiliations </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+ 
+<!-- 📜 Approvals & Affiliations Section -->
+<section class="accreditation-section px-0 px-lg-1 py-lg-3">
+   
+    
+    
+
+    <!-- ग्रिड लेआउट (कार्ड्स) -->
+    <div class="accreditation-grid">
+      
+      <!-- 1. AICTE Approval Card -->
+      <div class="accreditation-card aicte-card rounded-2">
+        
+        <div class="card-badge gov-badge">APPROVED</div>
+        <h3>AICTE Recognition</h3>
+        <p class="org-name">All India Council for Technical Education, New Delhi</p>
+        <p class="card-desc">
+          संस्थान को **AICTE** द्वारा पूरी तरह मान्यता प्राप्त है। इसके तहत सभी तकनीकी कोर्सेज (Diploma Engineering) भारत सरकार के राष्ट्रीय मानकों के अनुरूप आधुनिक लैब, इंफ्रास्ट्रक्चर और क्वालिफाइड फैकल्टी गाइडलाइंस को पूरा करते हैं।
+        </p>
+      </div>
+
+      <!-- 2. RGPV Affiliation Card -->
+      <div class="accreditation-card rgpv-card rounded-2">
+        
+        <div class="card-badge univ-badge">AFFILIATED</div>
+        <h3>University Affiliation</h3>
+        <p class="org-name">Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</p>
+        <p class="card-desc">
+          यह कॉलेज मध्य प्रदेश की एकमात्र तकनीकी यूनिवर्सिटी **RGPV** (State Technological University of M.P.) से स्थाई रूप से संबद्ध है। कॉलेज का पूरा पाठ्यक्रम, परीक्षाएं और डिग्री/डिप्लोमा RGPV यूनिवर्सिटी के अनुसार ही संचालित होते हैं।
+        </p>
+      </div>
+
+      <!-- 3. DTE MP Governance Card -->
+      <div class="accreditation-card dte-card rounded-2" >
+        
+        <div class="card-badge state-badge">GOVERNED BY</div>
+        <h3>DTE MP Administration</h3>
+        <p class="org-name">Directorate of Technical Education, Madhya Pradesh</p>
+        <p class="card-desc">
+          संस्थान का संपूर्ण प्रशासनिक संचालन और काउंसलिंग प्रक्रिया **तकनीकी शिक्षा संचालनालय (DTE), मध्य प्रदेश सरकार** के दिशा-निर्देशों के अधीन किया जाता है, जो पारदर्शी और गुणवत्तापूर्ण शिक्षा सुनिश्चित करता है।
+        </p>
+      </div>
+
+    </div>
+
+    <!-- महत्वपूर्ण सूचना पट्टी -->
+    <div class="mandatory-disclosure">
+      <p>📌 <strong>छात्रों के लिए महत्वपूर्ण:</strong> AICTE और RGPV से मान्यता प्राप्त होने के कारण, यहाँ के उत्तीर्ण छात्र सभी प्रकार की सरकारी तकनीकी नौकरियों (Government Technical Jobs) और उच्च शिक्षा (जैसे BE/B.Tech Lateral Entry) के लिए देश-विदेश में पूरी तरह पात्र हैं।</p>
+    </div>
+
+   
+</section>
+
+<!-- 🎨 CSS स्टाइल्स (इसे अपनी CSS फ़ाइल या <style> टैग में जोड़ें) -->
+<style>
+  .accreditation-section {
+    
+    /* padding: 60px 20px; */
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .accreditation-container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* हेडर डिज़ाइन */
+  .accreditation-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .accreditation-header .sub-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2a5298;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .accreditation-header h2 {
+    font-size: 32px;
+    color: #1e3c72;
+    margin: 10px 0;
+    font-weight: 700;
+  }
+
+  .accreditation-header p {
+    color: #64748b;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .accreditation-header .header-line {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    margin: 15px auto 0 auto;
+    border-radius: 2px;
+  }
+
+  /* ग्रिड लेआउट */
+  .accreditation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  /* कार्ड डिज़ाइन */
+  .accreditation-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 35px 25px 25px 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .accreditation-card:hover {
+    transform: translateY(-0px);
+    box-shadow: 0 12px 30px rgba(30, 60, 114, 0.12);
+    border-color: #cbd5e1;
+  }
+
+  .card-icon {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+
+  /* अलग-अलग बैज स्टाइल्स */
+  .card-badge {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .gov-badge { background-color: #dcfce7; color: #166534; }
+  .univ-badge { background-color: #dbeafe; color: #1e40af; }
+  .state-badge { background-color: #fef3c7; color: #92400e; }
+
+  .accreditation-card h3 {
+    font-size: 20px;
+    color: #1e3c72;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .org-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* नोटिस बॉक्स */
+  .mandatory-disclosure {
+    background: #edf2f7;
+    border-left: 4px solid #2a5298;
+    padding: 15px 20px;
+    border-radius: 4px 8px 8px 4px;
+    font-size: 14px;
+    color: #2d3748;
+  }
+
+  .mandatory-disclosure p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* 📱 मोबाइल रिस्पॉन्सिव सेटिंग्स */
+  @media (max-width: 768px) {
+    .accreditation-header h2 { font-size: 26px; }
+    .accreditation-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+
+             </div>
 
             <!-- 1. Statistics Section (डिफ़ॉल्ट रूप से खुला रहेगा) -->
             <div class="tab-pane fade show active" id="Messages" role="tabpanel">
@@ -205,66 +608,467 @@
             </div>
 
             <!-- 2. Recruiters Section -->
-            <div class="tab-pane fade" id="recruiters" role="tabpanel">
+            <div class="tab-pane fade" id="visions" role="tabpanel">
                 <div class="container-fluid mt-3 mb-5 px-0">
-                        <nav class="hding rounded-1 py-2 py-md-0">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
+                    <nav class="hding rounded-1 py-2 py-md-0">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
 
-                                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
-                                <div class="hding-text">
-                                    Principal Message
-                                </div>
+                            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                            <div class="hding-text">
+                                Our Vision & Mision
+                            </div>
 
-                                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
-                                <div class="d-none d-sm-block">
-                                    <ol class="breadcrumb custom-breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#"
-                                                class="text-decoration-none text-dark">Home</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page"> Principal Message</li>
-                                    </ol>
-                                </div>
+                            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                            <div class="d-none d-sm-block">
+                                <ol class="breadcrumb custom-breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#"
+                                            class="text-decoration-none text-dark">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page"> Vision & Mission</li>
+                                </ol>
+                            </div>
 
-                            </div>
-                        </nav>
-                    </div>
-                <h2>Recruiters & Companies</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                Featured
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                Featured
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    </nav>
                 </div>
+
+
+                <!-- मुख्य कंटेनर जो दोनों सेक्शन्स को होल्ड करेगा -->
+                <div class="college-info-container">
+
+
+                    <div class="info-card vision-card">
+                        <div class="card-badge">VISION</div>
+                        <div class="card-content">
+                            <h3>Our Vision</h3>
+                            <p>"To emerge as a premier technical institution that nurtures innovation, fosters
+                                excellence in technical education, and empowers rural youth with industry-ready skills
+                                to contribute meaningfully to regional and national development."</p>
+                        </div>
+                    </div>
+
+
+                    <div class="info-card mission-card">
+                        <div class="card-badge">MISSION</div>
+                        <div class="card-content">
+                            <h3> Our Mission</h3>
+                            <ul>
+                                <li><strong>Quality Education:</strong> To provide high-quality, practical-oriented
+                                    technical education through modern laboratories and effective teaching
+                                    methodologies.</li>
+                                <li><strong>Skill Development:</strong> To bridge the gap between academia and industry
+                                    by equipping students with core technical skills and ethical values.</li>
+                                <li><strong>Rural Empowerment:</strong> To uplift the youth of the region, especially
+                                    from rural backgrounds, by providing accessible and affordable technical training.
+                                </li>
+                                <li><strong>Employability:</strong> To foster entrepreneurship and enhance employability
+                                    through strong industry-institute collaborations.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- सीएसएस स्टाइल्स (इसे अपनी स्टाइल शीट में जोड़ें) -->
+                <style>
+                    /* मुख्य ग्रिड सेटअप */
+                    .college-info-container {
+                        display: flex;
+                        gap: 25px;
+                        max-width: 1350px;
+                        margin: 40px auto;
+                        padding: 0 20px;
+                        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                        box-sizing: border-box;
+                    }
+
+                    /* सामान्य कार्ड डिज़ाइन */
+                    .info-card {
+                        flex: 1;
+                        background: #ffffff;
+                        border-radius: 16px;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                        position: relative;
+                        border: 1px solid #eaeaea;
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    /* होवर इफेक्ट (जब माउस ऊपर जाए) */
+                    .info-card:hover {
+
+                        box-shadow: 0 15px 35px rgba(30, 60, 114, 0.15);
+                    }
+
+                    /* टॉप रिबन/बैज */
+                    .card-badge {
+                        position: absolute;
+                        top: -15px;
+                        left: 30px;
+                        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                        color: #ffffff;
+                        padding: 6px 20px;
+                        font-size: 12px;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                        border-radius: 20px;
+                        box-shadow: 0 4px 10px rgba(30, 60, 114, 0.3);
+                    }
+
+                    /* अंदरूनी कंटेंट */
+                    .card-content {
+                        padding: 40px 30px 30px 30px;
+                        height: 100%;
+                    }
+
+                    .card-content h3 {
+                        color: #1e3c72;
+                        margin-top: 0;
+                        margin-bottom: 20px;
+                        font-size: 22px;
+                        font-weight: 700;
+                        border-bottom: 2px solid #f0f0f0;
+                        padding-bottom: 10px;
+                    }
+
+                    /* विज़न पैराग्राफ स्टाइल */
+                    .vision-card p {
+                        color: #4a5568;
+                        font-size: 16px;
+                        line-height: 1.8;
+                        font-style: italic;
+                        margin: 0;
+                    }
+
+                    /* मिशन लिस्ट स्टाइल */
+                    .mission-card ul {
+                        list-style-type: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    .mission-card li {
+                        color: #4a5568;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        margin-bottom: 15px;
+                        position: relative;
+                        padding-left: 25px;
+                    }
+
+                    /* लिस्ट के सामने तीर (Arrow) का निशान */
+                    .mission-card li::before {
+                        content: "➔";
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        color: #2a5298;
+                        font-weight: bold;
+                    }
+
+                    .mission-card li:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    .mission-card strong {
+                        color: #1e3c72;
+                        display: inline-block;
+                        margin-right: 5px;
+                    }
+
+                    /* 📱 मोबाइल रिस्पॉन्सिव (Responsive) सेटिंग्स */
+                    @media (max-width: 768px) {
+                        .college-info-container {
+                            flex-direction: column;
+                            gap: 40px;
+                            /* मोबाइल पर कार्ड्स के बीच स्पेस */
+                        }
+
+                        .card-content {
+                            padding: 35px 20px 25px 20px;
+                        }
+
+                        .card-content h3 {
+                            font-size: 19px;
+                        }
+                    }
+                </style>
+
             </div>
 
             <!-- 3. Academic Calendar Section -->
             <div class="tab-pane fade" id="calendar" role="tabpanel">
-                <h2>Academic Calendar</h2>
-                <!-- कैलेंडर का सारा कंटेंट यहाँ डालें -->
+               
+                <div class="container">
+                    <nav class="hding rounded-1 py-2 py-md-0">
+                        <div class="d-flex w-100  justify-content-between align-items-center">
+                            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                            <div class="hding-text">
+                               College Organizational Structure
+                            </div>
+
+                            <!-- ब्रेडक्रंब -->
+                            <div class="d-none d-sm-block">
+                                <ol class="breadcrumb custom-breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#"
+                                            class="text-decoration-none text-dark">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"> College Organizational Structure</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                 <style>
+        /* टकराव से बचने के लिए बिलकुल यूनीक और स्कोप्ड वेरिएबल */
+        :root {
+            --ut-bg-color: #ffff;
+            --ut-line-color: #e67e22; /* इमेज की तरह ऑरेंज/ब्राउनिश लाइन्स */
+            --ut-box-bg-start: #ffeaa7; /* ग्रेडिएंट बॉक्स */
+            --ut-box-bg-end: #f1c40f;
+            --ut-box-border: #d35400;
+            --ut-text-color: #2c3e50;
+        }
+
+        /* मुख्य रैपर ताकि पुरानी वेबसाइट की बॉडी पर असर न पड़े */
+        .uni-tree-flow-wrapper {
+            width: 100%;
+            overflow-x: auto; /* बड़े चार्ट को मोबाइल पर स्क्रॉल करने की अनुमति देता है */
+            background-color: var(--ut-bg-color);
+            padding: 40px 20px;
+            font-family: 'Times New Roman', Times, serif;
+            box-sizing: border-box;
+        }
+
+        .uni-tree-flow-wrapper * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ट्री चार्ट का मुख्य ढांचा */
+        .uni-tree-org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 1000px; /* फ्लोचार्ट का आकार सही रखने के लिए न्यूनतम चौड़ाई */
+            margin: 0 auto;
+        }
+
+        /* हर एक रो (Row) के लिए कंटेनर */
+        .uni-tree-row {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        /* बॉक्स स्टाइलिंग (इमेज की तरह ग्रेडिएंट और शैडो के साथ) */
+        .uni-tree-node-box {
+            background: linear-gradient(to bottom, #ffffff 0%, #fff2cc 100%);
+            border: 2px solid var(--ut-line-color);
+            border-radius: 4px;
+            padding: 12px 18px;
+            text-align: center;
+            min-width: 160px;
+            max-width: 220px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+        }
+
+        .uni-tree-node-box .uni-tree-title-hi {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--ut-text-color);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .uni-tree-node-box .uni-tree-title-en {
+            font-size: 11px;
+            color: #7f8c8d;
+            display: block;
+        }
+
+        /* वर्टिकल कनेक्टिंग लाइन्स */
+        .uni-tree-v-line {
+            width: 3px;
+            background-color: var(--ut-line-color);
+            height: 30px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* मल्टी-कॉलम हॉरिजॉन्टल कनेक्टिंग लाइन्स की व्यवस्था */
+        .uni-tree-multi-branches {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+            padding-top: 20px;
+        }
+
+        /* हॉरिजॉन्टल बार जो सभी ब्रांच को जोड़ता है */
+        .uni-tree-multi-branches::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 7.5%;
+            right: 7.5%;
+            height: 3px;
+            background-color: var(--ut-line-color);
+            z-index: 1;
+        }
+
+        /* व्यक्तिगत कॉलम और उसकी आंतरिक लाइन */
+        .uni-tree-branch-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        /* हर ब्रांच के ऊपर की छोटी वर्टिकल लाइन */
+        .uni-tree-branch-col::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 3px;
+            height: 20px;
+            background-color: var(--ut-line-color);
+            z-index: 1;
+        }
+
+        /* एडजस्टमेंट: आखिरी और पहले कॉलम की अतिरिक्त हॉरिजॉन्टल लाइन को छिपाने की जरूरत नहीं क्योंकि पैरेंट ने चौड़ाई को संभाला हुआ है */
+
+        /* विशेष चौड़ाई वाली रो के लिए कस्टमाइजेशन (जैसे डिप्टी सेक्रेटरी वाली लाइन) */
+        .uni-tree-row-gap-modifier {
+            gap: 15px;
+        }
+    </style>
+ 
+
+<div class="uni-tree-flow-wrapper">
+    <div class="uni-tree-org-chart">
+        
+        <!-- लेवल 1: वाइस चांसलर (प्रिंसिपल) -->
+        <div class="uni-tree-row">
+            <div class="uni-tree-node-box">
+                <span class="uni-tree-title-hi">प्रिंसिपल / डायरेक्टर</span>
+                <span class="uni-tree-title-en">Principal / Director</span>
+            </div>
+        </div>
+
+        <div class="uni-tree-v-line"></div>
+
+        <!-- लेवल 2: वाइस प्रिंसिपल -->
+        <div class="uni-tree-row">
+            <div class="uni-tree-node-box">
+                <span class="uni-tree-title-hi">वाइस प्रिंसिपल</span>
+                <span class="uni-tree-title-en">Vice Principal / Deputy Director</span>
+            </div>
+        </div>
+
+        <div class="uni-tree-v-line"></div>
+
+        <!-- लेवल 3: 3 मुख्य कोऑर्डिनेटर (एकेडमिक, परीक्षा, डेवलपमेंट) -->
+        <div class="uni-tree-multi-branches">
+            <!-- लेफ्ट विंग -->
+            <div class="uni-tree-branch-col">
+                <div class="uni-tree-node-box">
+                    <span class="uni-tree-title-hi">परीक्षा नियंत्रक</span>
+                    <span class="uni-tree-title-en">Examination Controller</span>
+                </div>
+            </div>
+            
+            <!-- सेन्ट्रल विंग -->
+            <div class="uni-tree-branch-col">
+                <div class="uni-tree-node-box">
+                    <span class="uni-tree-title-hi">एकेडमिक समन्वयक</span>
+                    <span class="uni-tree-title-en">Coordinator Academic</span>
+                </div>
+                
+                <!-- एकेडमिक के नीचे जाने वाली लाइन जो अन्य स्टाफ को जोड़ेगी -->
+                <div class="uni-tree-v-line" style="height: 35px;"></div>
+            </div>
+
+            <!-- राइट विंग -->
+            <div class="uni-tree-branch-col">
+                <div class="uni-tree-node-box">
+                    <span class="uni-tree-title-hi">विकास समन्वयक</span>
+                    <span class="uni-tree-title-en">Coordinator Curriculum Dev.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- लेवल 4: विस्तृत स्टाफ रो (इमेज के 7 पैरेलल बॉक्स की तरह) -->
+        <div class="uni-tree-multi-branches" style="padding-top: 0; margin-top: -3px;">
+            <!-- क्षैतिज रेखा को रीसेट करने के लिए पैरेंट से जोड़ा गया है -->
+            <div class="uni-tree-row uni-tree-row-gap-modifier" style="padding-top: 20px; border-top: 3px solid var(--ut-line-color); width: 90%;">
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">रजिस्ट्रार</span><span class="uni-tree-title-en">Registrar / Admin</span></div></div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">डीन एकेडमिक्स</span><span class="uni-tree-title-en">Dean Academics</span></div></div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">एडमिशन सेल</span><span class="uni-tree-title-en">Admission Cell</span></div></div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">एच.ओ.डी.</span><span class="uni-tree-title-en">Head of Dept (HOD)</span></div>
+                    <!-- इसके नीचे अगला लेवल निकलेगा -->
+                    <div class="uni-tree-v-line" style="height: 30px;"></div>
+                </div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">चीफ वार्डन</span><span class="uni-tree-title-en">Chief Warden</span></div></div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">डीन छात्र कल्याण</span><span class="uni-tree-title-en">Dean Student Welfare</span></div></div>
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;"><div class="uni-tree-node-box"><span class="uni-tree-title-hi">सिस्टम एनालिस्ट</span><span class="uni-tree-title-en">System Analyst</span></div></div>
+
+            </div>
+        </div>
+
+        <!-- लेवल 5: फैकल्टी और रिसर्च ऑफिसर्स (HOD के ठीक नीचे) -->
+        <div class="uni-tree-multi-branches" style="width: 60%; margin-top: -3px;">
+            <div class="uni-tree-row uni-tree-row-gap-modifier" style="padding-top: 20px; border-top: 3px solid var(--ut-line-color); width: 100%;">
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">प्रोफेसर / फैकल्टी</span><span class="uni-tree-title-en">Professors / Faculty</span></div>
+                    <div class="uni-tree-v-line" style="height: 30px;"></div>
+                </div>
+
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">अकाउंट्स ऑफिसर</span><span class="uni-tree-title-en">Accounts Officer</span></div>
+                </div>
+
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">प्लेसमेंट ऑफिसर</span><span class="uni-tree-title-en">Placement Officer</span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- लेवल 6: असिस्टेंट और लैब तकनीशियन (सबसे नीचे का स्तर) -->
+          <!-- लेवल 6: असिस्टेंट और लैब तकनीशियन (सबसे नीचे का स्तर) -->
+        <div class="uni-tree-multi-branches" style="width: 30%; margin-top: -3px;">
+            <div class="uni-tree-row uni-tree-row-gap-modifier" style="padding-top: 20px; border-top: 3px solid var(--ut-line-color); width: 100%;">
+                
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">लैब असिस्टेंट</span><span class="uni-tree-title-en">Lab Assistant</span></div>
+                </div>
+
+                <div class="uni-tree-branch-col" style="padding-top: 20px;">
+                    <div class="uni-tree-node-box"><span class="uni-tree-title-hi">हॉस्टल वार्डन</span><span class="uni-tree-title-en">Hostel Warden</span></div>
+                </div>
+
+            </div>
+        </div> <!-- लेवल 6 की मल्टी-ब्रांच का अंत -->
+
+    </div> <!-- .uni-tree-org-chart का अंत -->
+</div> <!-- .uni-tree-flow-wrapper का अंत -->
+
             </div>
 
             <div class="tab-pane fade" id="location" role="tabpanel">
@@ -295,15 +1099,15 @@
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4153.438488138949!2d76.70574431130656!3d21.95333037985384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd7e47baaaaaaab%3A0x5b5d8307118a8a72!2sEklavya%20Government%20Polytechnic%20College%20Harsud!5e1!3m2!1sen!2sin!4v1792171850574!5m2!1sen!2sin"
                         style="
-        width: 100%; 
-        height: 500px;
-        border: 0; 
-        border-radius: 8px; 
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-        display: block; 
-        contain: content;
-        aspect-ratio: clamp(4/3, 5vw + 1rem, 21/9);
-    " allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+                    width: 100%; 
+                    height: 500px;
+                    border: 0; 
+                    border-radius: 8px; 
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+                    display: block; 
+                    contain: content;
+                    aspect-ratio: clamp(4/3, 5vw + 1rem, 21/9);
+                    " allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
                     </iframe>
 
 
@@ -311,6 +1115,192 @@
 
 
 
+            </div>
+            <div class="tab-pane fade" id="campusinfo" role="tabpanel">
+
+                <div class="container mt-3 mb-5 px-0">
+                    <nav class="hding rounded-1 py-2 py-md-0">
+                        <div class="d-flex w-100  justify-content-between align-items-center">
+                            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                            <div class="hding-text">
+                               Campus Information
+                            </div>
+
+                            <!-- ब्रेडक्रंब -->
+                            <div class="d-none d-sm-block">
+                                <ol class="breadcrumb custom-breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#"
+                                            class="text-decoration-none text-dark">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"> Campus Information</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+  <style>
+        /* CSS कनविक्शन रोकने के लिए यूनिक नेमस्पेस 'gpc-card-' */
+        .gpc-card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .gpc-card-wrapper * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gpc-card-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1300px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        /* बाईं तरफ का विवरण ब्लॉक */
+        .gpc-card-info-pane {
+            flex: 1.2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gpc-card-info-pane h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .gpc-card-subtitle {
+            font-size: 14px;
+            color: #4b5563;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .gpc-card-details-list {
+            list-style: none;
+        }
+
+        .gpc-card-details-list li {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .gpc-card-details-list strong {
+            color: #111827;
+        }
+
+        .gpc-card-details-list a {
+            color: #2563eb;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .gpc-card-details-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* दाईं तरफ का लाइव या स्टेटिक मैप ब्लॉक */
+        .gpc-card-map-pane {
+            flex: 1;
+            position: relative;
+            background-color: #e5e7eb;
+            min-height: 280px;
+        }
+
+        .gpc-card-map-pane iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .gpc-card-map-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ffffff;
+            color: #2563eb;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            border: 1px solid #d1d5db;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .gpc-card-map-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        /* मोबाइल रेस्पॉन्सिव लेआउट */
+        @media (max-width: 768px) {
+            .gpc-card-container {
+                flex-direction: column;
+            }
+            .gpc-card-info-pane {
+                padding: 25px;
+            }
+            .gpc-card-map-pane {
+                height: 250px;
+                min-height: 250px;
+            }
+        }
+    </style>
+ 
+
+<div class="gpc-card-wrapper">
+    <div class="gpc-card-container">
+        
+        <!-- कॉलेज की जानकारी (Left Pane) -->
+        <div class="gpc-card-info-pane">
+            <h1>GOVT. POLYTECHNIC COLLEGE</h1>
+            <div class="gpc-card-subtitle">HARSUD (DIST. KHANDWA) M.P. - 450116</div>
+            
+            <ul class="gpc-card-details-list">
+                <li>(Eklavya Government Polytechnic College)</li>
+                <li><strong>पता:</strong> Harda Road, Old Harsud, District Khandwa, Madhya Pradesh - 450116</li>
+                <li><strong>सम्बद्धता:</strong> Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</li>
+                <li><strong>ई-मेल:</strong> <a href="mailto:prinpoly.harkhd@mp.gov.in">prinpoly.harkhd@mp.gov.in</a></li>
+                <li><strong>आधिकारिक पोर्टल:</strong> <a href="https://www.dte.mp.gov.in" target="_blank">dte.mp.gov.in</a></li>
+            </ul>
+        </div>
+
+        <!-- लाइव मैप सेक्शन (Right Pane) -->
+        <div class="gpc-card-map-pane">
+            <!-- ओपन इन मैप्स बटन जो डायरेक्ट गूगल मैप्स ऐप पर ले जाएगा -->
+             
+            <!-- लाइव गूगल मैप एम्बेड ताकि यूजर पेज पर ही मैप देख सके -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4153.438488138949!2d76.70574431130656!3d21.95333037985384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd7e47baaaaaaab%3A0x5b5d8307118a8a72!2sEklavya%20Government%20Polytechnic%20College%20Harsud!5e1!3m2!1sen!2sin!4v1792171850574!5m2!1sen!2sin" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </div>
+</div>
             </div>
 
         </div>

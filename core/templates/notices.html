@@ -5,7 +5,7 @@
     /* इमेज जैसा गहरा लाल रंग */
     color: #ffffff !important;
     border-bottom: none;
-    padding: 12px 20px;
+    padding: 3px 20px;
   }
 
   .alert-modal-title {
@@ -94,7 +94,7 @@
     <div class="modal-content border-0 shadow-lg rounded-2">
 
       <!-- मोडल हेडर (लाल पट्टी) -->
-      <div class="modal-header alert-modal-header align-items-center">
+      <div class="modal-header alert-modal-header align-items-center " style="background: #d9383a !important;">
         <h5 class="modal-title alert-modal-title mb-0" id="importantAlertsModalLabel">
           Important Alerts
         </h5>
@@ -124,41 +124,7 @@
           </li>
           {% endif %}
           {% endfor %}
-          <!-- <li>
-            <a href="#" class="text-decoration-none fw-bold" style="color: #1a5ca8;">Revised List of College transfer in the year 2026-27.</a>
-          </li>
           
-          <li>
-            <strong>Exam form lines of Diploma Pharmacy April 2026 main Exams are open.</strong> Last date without late fees is <span class="alert-date">10 September 2026</span>. Last date with late fees of Rs 100 is <span class="alert-date">30 September 2026</span>.
-          </li>
-          
-          <li>
-            <span class="alert-success-text">Revaluation Result of Diploma Pharmacy Supplementary Exams 2025 Declared</span>, Last Date to Apply for Challenge is <span class="alert-date">16-09-2026</span>.
-          </li>
-          
-          <li>
-            <span class="alert-success-text">Revaluation Result of Diploma Engineering Final Year May-June 2026 Exams Declared</span>, Last Date to Apply for Challenge is <span class="alert-date">15-09-2026</span>.
-          </li>
-          
-          <li>
-            Regarding Branch and College transfer Year 2026.
-          </li>
-          
-          <li>
-            Results of First and Second Year Diploma Engineering May-June 2026 Declared, Last date to apply Revaluation is <span class="alert-date">20-08-2026</span>.
-          </li>
-          
-          <li>
-            Few more Results of Final Year Diploma Engineering May-June 2026 Declared, Last date to apply Revaluation is <span class="alert-date">01-08-2026</span>.
-          </li>
-          
-          <li>
-            Second year Diploma Pharmacy supplementary exam- 2025 results declared. Last date to apply for revaluation is <span class="alert-date">28/07/2026</span>. Marksheets and Diploma certificates will be released after the successful submission of training completion certificate in proper format online to RGPV by respective Colleges.
-          </li>
-          
-          <li>
-            Academic Calendar Year 2026 for Diploma First, Third and Fifth Semesters.
-          </li> -->
 
         </ul>
       </div>
@@ -177,6 +143,6 @@
     // पेज लोड होते ही 800 मिलीसेकंड के बाद पॉपअप खोलें (स्मूथ एंट्री के लिए)
     setTimeout(function () {
       myModal.show();
-    }, 800);
+    }, 1);
   });
 </script>
