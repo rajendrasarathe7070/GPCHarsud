@@ -4,6 +4,9 @@
 <html lang="en">
 
 <head>
+     <meta name="theme-color" content="#111060" >
+ 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="uX9dmJO37GXV90cpuG_sA8rXjIxSiG0dXhVFDojXx2s" />
@@ -54,12 +57,12 @@
     {% include 'models.html' %}
 
 
-    <nav class="navbar fixed-top navbar-expand-lg  py-1  " id="navbar" style="background: rgb(249, 248, 247);">
+    <nav class="navbar fixed-top navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
         {% include 'navbar.html' %}
 
     </nav>
 
-    </nav>
+    
 
 
     <!-- this is singup model  -->
@@ -197,7 +200,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.1);
             /* कालेपन को कम या ज्यादा करने के लिए 0.4 को बदलें */
             z-index: 1;
         }
@@ -251,9 +254,7 @@
 
                             <h3 style="text-align: center; color: rgb(236, 98, 98);">Important Service's</h3>
 
-                            <pre style="text-align: center;">this is most usefull services for this collage , 
-                                                     they are link's for many services this container is use for gadring many usefull services .</pre>
-
+                             
                             <button type="button" class="btn btn-danger" onclick="window.location.href='/academic#Syllabus-tab-pane' ">A/O
                                     Base CURRICULUM  </button>
                             <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/academic#AcademicCalendar-tab-pane' ">  Academic Calendar</button>
@@ -275,7 +276,7 @@
             
 
             <!-- दूसरी स्लाइड -->
-            <div class="carousel-item h-100 " style="background-image: url('{% static 'images/clg1-4.jpeg' %}') ;">
+            <!-- <div class="carousel-item h-100 " style="background-image: url('{% static 'images/clg1-4.jpeg' %}') ;">
                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 px-3">
                     <h1 class="display-4 display-md-2 fw-bold text-shadow"> </h1>
                      <div class="p-5">
@@ -306,7 +307,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

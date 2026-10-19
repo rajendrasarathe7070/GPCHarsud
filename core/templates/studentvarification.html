@@ -1,0 +1,41 @@
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 " id="exampleModalLabel"> Student Varification</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form method="POST" action="{% url 'company_student_verification' %}">
+                {% csrf_token %}
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">छात्र का रिकॉर्ड देखने के लिए कृपया दोनों आवश्यक फ़ील्ड्स को सही-सही भरें।</p>
+                    
+                    <!-- 1. Student Email Input -->
+                    <div class="mb-3">
+                        <label for="modal_student_email" class="form-label fw-bold text-secondary">छात्र का पंजीकृत ईमेल (Student Email) *</label>
+                        <input type="email" name="student_email" id="modal_student_email" class="form-control" placeholder="उदा. student@email.com" required>
+                    </div>
+                    
+                    <!-- 2. Student Roll No Input -->
+                    <div class="mb-3">
+                        <label for="modal_roll_no" class="form-label fw-bold text-secondary">छात्र का रोल नंबर (Student Roll No.) *</label>
+                        <input type="text" name="roll_no" id="modal_roll_no" class="form-control" placeholder="उदा. 0123CS211001" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">बंद करें</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-shield-alt"></i> रिकॉर्ड सत्यापित करें
+                    </button>
+                </div>
+            </form>
+      </div>
+       
+    </div>
+  </div>
+</div>

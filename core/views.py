@@ -12,6 +12,9 @@ from django.contrib.auth.decorators import login_required
 from . import models
 from .models import PlacementBatch
  
+from django.contrib import messages
+from .models import StudentEngagement 
+
 def verification(request):
     return render(request,'googled61072f71b08753c.html') 
  
@@ -155,6 +158,28 @@ def campuslife(request):
 def placements(request):
     all_batches = models.PlacementBatch.objects.prefetch_related('branch_records').order_by('-year')
     
+     
+    placement_students = models.CustomUser.objects.filter(
+        category='STUDENT', 
+        engagement_details__isnull=False
+    ).select_related('engagement_details').filter(engagement_details__got_placement=True)
+
+    # 2. ड्रॉपडाउन फ़िल्टर के लिए वेरिएबल्स के नाम पूरी तरह यूनीक (Unique) रखें
+    filter_batches = models.StudentEngagement.objects.filter(got_placement=True).values_list('passout_year', flat=True).distinct()
+    filter_branches = models.StudentEngagement.objects.filter(got_placement=True).values_list('branch_of_student', flat=True).distinct()
+
+    # 3. रिक्वेस्ट से फ़िल्टर वैल्यूज़ प्राप्त करना
+    selected_filter_batch = request.GET.get('batch_id')     
+    selected_filter_branch = request.GET.get('branch')       
+
+    # 4. यदि यूज़र ने फ़िल्टर चुना है, तो केवल छात्रों की लिस्ट को फ़िल्टर करें
+    if selected_filter_batch:
+        placement_students = placement_students.filter(engagement_details__passout_year=selected_filter_batch)
+    
+    if selected_filter_branch:
+        placement_students = placement_students.filter(engagement_details__branch_of_student=selected_filter_branch)
+
+    # 5. कॉन्टेक्स्ट (Context) डिक्शनरी - इसमें आपके पुराने वेरिएबल्स को बिना छेड़े नए फ़िल्टर जोड़े गए हैं
     
     
     selected_batch_id = request.GET.get('batch_id')
@@ -170,15 +195,21 @@ def placements(request):
             
             
     context = {
+        # पुराने वेरिएबल्स (जिन्हें आपने बताया, इन्हें बिल्कुल नहीं बदला गया है)
         'all_batches': all_batches,       
         'selected_batch': selected_batch, 
-          
-          'grand_students_placed': PlacementBatch.grand_students_placed(),
+        'grand_students_placed': PlacementBatch.grand_students_placed(),
         'grand_companies_visited': PlacementBatch.grand_companies_visited(),
         'grand_highest_package': PlacementBatch.grand_highest_package(),
         'grand_avg_package': PlacementBatch.grand_avg_package(),
-        'grand_lowest_package':PlacementBatch.grand_lowest_package(),
-          
+        'grand_lowest_package': PlacementBatch.grand_lowest_package(),
+        
+        # नए यूनिक वेरिएबल्स (टेबल और ड्रॉपडाउन फ़िल्टर के लिए)
+        'placed_students': placement_students,
+        'filter_batches': filter_batches,
+        'filter_branches': filter_branches,
+        'selected_filter_batch': selected_filter_batch,
+        'selected_filter_branch': selected_filter_branch,
     }
     return render(request,'Placements.html',context)
 
@@ -186,7 +217,7 @@ def student(request):
     return render(request,'studentcorner.html')
 
 def about(request):
-    return render(request,'about.html')
+    return render(request,'About.html')
 
 def contact(request):
     return render(request,'Contact.html')
@@ -194,3 +225,46 @@ def contact(request):
 
     
     
+  # अपने सही मॉडल पाथ से इम्पोर्ट करें
+
+def company_student_verification(request):
+    student_data = None
+    searched = False
+
+    if request.method == "POST":
+        student_email = request.POST.get('student_email', '').strip()
+        roll_no = request.POST.get('roll_no', '').strip()
+        searched = True
+
+        # दोनों फ़ील्ड्स अनिवार्य हैं
+        if not student_email or not roll_no:
+            messages.error(request, "कृपया छात्र का ईमेल और रोल नंबर दोनों दर्ज करें।")
+        else:
+            try:
+                # 1. पहले User मॉडल में STUDENT कैटेगरी और दिए गए ईमेल के आधार पर छात्र को ढूँढें
+                # select_related का उपयोग करके engagement_details को एक साथ फ़ेच कर रहे हैं
+                student_user = models.CustomUser.objects.select_related('engagement_details').get(
+                    email__iexact=student_email,
+                    category='STUDENT'
+                )
+
+                # 2. सुरक्षा जाँच: क्या इस यूजर के वन-टू-वन रिकॉर्ड का रोल नंबर फ़ॉर्म के रोल नंबर से मैच करता है?
+                if (hasattr(student_user, 'engagement_details') and 
+                    student_user.engagement_details and 
+                    student_user.engagement_details.roll_no == roll_no):
+                    
+                    student_data = student_user
+                    messages.success(request, "छात्र का रिकॉर्ड सफलतापूर्वक सत्यापित (Verified) हो गया है!")
+                else:
+                    messages.error(request, "दर्ज किया गया रोल नंबर इस ईमेल आईडी से मेल नहीं खाता है।")
+                    return redirect('placements')
+            except User.DoesNotExist:
+                messages.error(request, "दिए गए विवरण (Email/Roll No) के अनुसार कोई छात्र रिकॉर्ड नहीं मिला।")
+                return redirect('placements')
+                
+
+    context = {
+        'student': student_data,
+        'searched': searched
+    }
+    return render(request, 'company_verify.html', context)

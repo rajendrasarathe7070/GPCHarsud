@@ -128,12 +128,14 @@ class StudentEngagement(models.Model):
         on_delete=models.CASCADE, 
         related_name="engagement_details",
         verbose_name="Student User"
+        ,blank=True, null=True
     )
     
     # --- Remaining Student Details ---
     # नाम, मोबाइल, ईमेल, डिपार्टमेंट और जॉइनिंग डेट यूजर मॉडल से ही एक्सेस होंगे
     roll_no = models.CharField(max_length=50, unique=True, verbose_name="Roll No.")
-    passout_year = models.IntegerField(verbose_name="Passout Year")
+    branch_of_student= models.CharField(max_length=50, blank=True, null=True)
+    passout_year = models.CharField(verbose_name="Passout Year" , max_length=50 , blank=True, null=True)
 
     # --- Placement Details ---
     got_placement = models.BooleanField(default=False, verbose_name="Got Placement (Yes/No)")
@@ -157,7 +159,7 @@ class StudentEngagement(models.Model):
 
     def __str__(self):
         # यहाँ हम सीधे यूजर मॉडल से छात्र का नाम और डिपार्टमेंट एक्सेस कर रहे हैं
-        return f"{self.user.first_name} ({self.roll_no}) - Dept: {self.user.department}"
+        return f"{self.user.first_name} ({self.roll_no} "
 
 # --- Master Responsibility Table (Pehle ki tarah hi single table) ---
 class Responsibility(models.Model):

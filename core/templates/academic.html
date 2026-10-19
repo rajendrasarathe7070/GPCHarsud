@@ -117,29 +117,43 @@ html, body {
 
     }
   </style>
+<nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+        {% include 'navbar.html' %}
+<div class="overflow-x-scrolls  ">
 
-  <nav class="navbar fixed-top navbar-expand-lg  bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
-    {% include 'navbar.html' %}
+  <div class="notices fixed-top card rounded-0 bg-danger">
+    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+      {% include 'info.html' %}
+
+    </marquee>
+  </div>
+  <style>
+    .overflow-x-scrolls {
+      background: #800000 !important;
+    }
+
+    .notices {
+      max-width: 100%;
+      max-height: 1.7rem;
+      width: 100%;
+      height: 1.7rem;
+
+      justify-content: center;
+
+      /* background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important; */
 
 
-  </nav>
+      color: #313871;
+    }
+  </style>
+
+</div>
+    </nav>
+
 
 
   <style>
-    .overflow-x-scrolls {
-      /* width: 100%;
-      max-height: 5rem; */
-      margin-top: 50px;
-      /* background-color: rgb(38, 5, 138) !important ; */
-      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
-      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
-
-      transform: translateZ(0);
-      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
-      font-family: 'Times New Roman', Times, serif;
-      justify-self: centerc !important;
-      z-index: 1000 !important;
-    }
+     
 
     .nav-tabs {
       flex-direction: row;
@@ -149,63 +163,13 @@ html, body {
     }
   </style>
 
-  <div class="overflow-x-scrolls fixed-top">
-
-    <div class="notices card rounded-0 mt-md-1 fixed-top ">
-      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-        {% include 'info.html' %}
-        <!-- {% if infomsg %}
-      
-     <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
-      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
-        {{ infomsg.infos }} |
-      </a>
-      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
-      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
-        {{ infomsg.infos_2 }} |
-      </a>
-       |<span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
-      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
-        {{ infomsg.infos }} |
-      </a>
-      | <span class="text-danger fw-bold mx-2">{{ infomsg.date }}|:</span> 
-      <a href="#" class="text-decoration-none text-white fw-bold mx-2">
-        {{ infomsg.infos_2 }} |
-      </a>
-    {% else %}
-      <span class="text-white mx-2">अभी कोई नया नोटिस उपलब्ध नहीं है।</span>
-    {% endif %} -->
-
-
-      </marquee>
-    </div>
-    <style>
-      .notices {
-        margin-top: 5px;
-        max-width: 100%;
-        max-height: 2rem;
-        width: 100%;
-        height: 2rem;
-
-        justify-content: center !important;
-
-
-        background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-
-        color: #d10505;
-      }
-    </style>
+   
 
 
 
+  <div class="card text-bg-dark  " style="max-height: 200px;  ">
 
-  </div>
-
-
-
-  <div class="card text-bg-dark mt-md-5" style="max-height: 455px;  ">
-
-    <img src="{% static 'images/ai1-1.jpg' %}" class="card-img" alt="wide image" style="margin-top: 1rem;">
+    <img src="{% static 'images/ai1-1.jpg' %}" class="card-img" alt="wide image" style="margin-top: 0rem;">
     <div class="card-img-overlay">
 
       <!-- <h5 class="card-title">Card title</h5>
@@ -433,7 +397,7 @@ html, body {
 
     <!-- thi is Departments  -->
 
-    <div class="tab-pane fade" id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab" tabindex="0">
+    <div class="tab-pane fade " id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab" tabindex="0">
 
       {% include 'department.html' %}
 

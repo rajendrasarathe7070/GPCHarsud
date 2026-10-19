@@ -35,7 +35,7 @@ class StudentEngagementAdmin(admin.ModelAdmin):
     list_display = (
         'get_student_name', 
         'roll_no', 
-        'get_department', 
+        
         'passout_year', 
         'got_placement', 
         'opted_for_higher_studies', 
@@ -84,7 +84,7 @@ class StudentEngagementAdmin(admin.ModelAdmin):
 
     @admin.display(ordering='user__department', description='Department')
     def get_department(self, obj):
-        return obj.user.department
+        return obj.passout_year
     
     
     

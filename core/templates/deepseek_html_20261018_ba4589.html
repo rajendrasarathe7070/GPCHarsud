@@ -1,0 +1,392 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Colors Academy</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= TOP BAR ================= */
+        .top-bar {
+            background-color: #222;
+            padding: 0px 0px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= HEADER SECTION ================= */
+        .header-section {
+            background-color: #fff;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-title {
+            color: #003399;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            font-size: 26px;
+            margin-bottom: 2px;
+        }
+
+        .header-address {
+            color: #8B0000;
+            font-size: 14px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .header-affiliation {
+            color: #006400;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .school-logo {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* ================= CUSTOM NAVBAR ================= */
+        .custom-navbar {
+            background-color: #333;
+            /* Dark Grey/Black as per screenshot */
+            padding: 0;
+        }
+
+        /* Desktop Link Styling */
+        .custom-navbar .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 1px;
+            border-right: 1px solid #555;
+            /* Vertical Separators */
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .custom-navbar .nav-link:last-child {
+            border-right: none;
+        }
+
+        .custom-navbar .nav-link:hover {
+            background-color: #444;
+        }
+
+        /* Dropdown Menu Styling (Hover effect for Desktop) */
+        .dropdown-menu {
+            border-radius: 0;
+            margin-top: 0;
+        }
+
+        @media (min-width: 992px) {
+            .nav-item.dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+        }
+
+        /* ================= MOBILE VIEW STYLING ================= */
+        @media (max-width: 991.98px) {
+            .header-title {
+                font-size: 20px;
+            }
+
+            .header-address,
+            .header-affiliation {
+                font-size: 12px;
+            }
+
+            .school-logo {
+                max-height: 65px;
+                margin-bottom: 10px;
+            }
+
+            /* Mobile Navbar Layout */
+            .mobile-nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #333;
+                padding: 10px 15px;
+            }
+
+            .navbar-toggler {
+                border: none;
+                padding: 0;
+            }
+
+            .navbar-toggler:focus {
+                box-shadow: none;
+            }
+
+            .mobile-home-text {
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            /* Dropdowns inside Mobile Menu */
+            .custom-navbar .nav-link {
+                border-right: none;
+                border-bottom: 1px solid #444;
+                text-align: left;
+                padding: 0px 0px !important;
+            }
+
+            .dropdown-menu {
+                background-color: #444;
+                border: none;
+            }
+
+            .dropdown-item {
+                color: #fff;
+                border-bottom: 1px solid #555;
+                padding: 10px 20px;
+            }
+
+            .dropdown-item:hover {
+                background-color: #555;
+                color: #fff;
+            }
+        }
+        a {
+            padding: 0px 0px 0px 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. TOP BAR (User Login Only) -->
+    <div class="top-bar">
+        <div class="container-fluid d-flex justify-content-end align-items-center">
+            <a href="/login" class="me-3">User Login</a>
+            <span class="me-3 text-white">|</span>
+            <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
+        </div>
+    </div>
+
+    <!-- 2. HEADER SECTION (Logo & Text) -->
+    <div class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Logo & Text -->
+                <div
+                    class="col-12 col-lg-9 d-flex flex-column flex-md-row align-items-center text-center text-md-start">
+                    <img src="/static/logo/gpc.ico" alt="School Logo" class="school-logo me-md-3">
+                    <div>
+                        <h2 class="header-title">Govt. Polytechnic collage
+                           </h2>
+                        <p class="header-address">HARDA BYPASS ROAD, HARSUD, DIST. KHANDWA, MP</p>
+                         
+                    </div>
+                </div>
+                <!-- Right Logo (Desktop Only) -->
+                <div class="col-lg-3 d-none d-lg-flex justify-content-end">
+                    <img src="/staticfiles/images/logo2.png" alt="Right Logo"
+                        class="school-logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MAIN NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <div class="container-fluid p-0">
+
+            <!-- Mobile Header (Hamburger Left, Home Right) -->
+            <div class="d-lg-none w-100 mobile-nav-header py-0">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="mobile-home-text" href="/">Home</a>
+            </div>
+
+            <!-- Navbar Links (Collapsible on Mobile) -->
+            <div class="collapse navbar-collapse w-100" id="mainNavbar">
+                <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row gap-5">
+
+                    <!-- Desktop Home (Hidden on mobile to prevent duplication) -->
+                    <li class="nav-item ">
+                    <a class="nav-link active text-white " aria-current="page" href="/">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="aboutDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        About Us
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                         
+                        
+                        <li><a class="dropdown-item" href="{% url 'about' %}#Messages">Messages  </a></li>
+                        <li><a class="dropdown-item" href="{% url 'about' %}#recruiters">Recruiters about &
+                                Companies</a></li>
+                        <li><a class="dropdown-item" href="{% url 'about' %}#calendar">Academic about Calendar</a>
+                        </li>
+
+                        <li><a class="dropdown-item" href="{% url 'about' %}#location">Location</a>
+                        </li>
+
+
+                         
+                    
+                    </ul>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="academicDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Academic
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="academicDropdown">
+                        <li><a class="dropdown-item" href="{% url 'academic' %}#Courses-tab-pane">Courses </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'academic' %}#Departments-tab-pane">
+                                Department</a>
+                        </li>
+
+                        <li><a class="dropdown-item" href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic
+                                Calendar</a></li>
+
+
+                        <li><a class="dropdown-item " href="{% url 'academic' %}#Syllabus-tab-pane"> Syllabus </a>
+                        </li>
+                        <li><a class="dropdown-item " href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
+
+
+                        <li><a class="dropdown-item " href="{% url 'academic' %}#Faculty-tab-pane"> Faculty & Staff</a>
+                        </li>
+
+
+
+
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="campusDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Admission
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="campusDropdown">
+                        <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission Process
+                            </a>
+                        </li>
+
+                        <li><a class="dropdown-item" href="{% url 'admission' %}#Eligibility-tab-pane">Course &
+                                Eligibility
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'admission' %}#Required-tab-pane">Important Dates &
+                                Required Documents</a></li>
+                        <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees Structure &
+                                Scholarship</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission
+                                HelpDesk</a></li>
+
+
+                    </ul>
+                </li>
+
+                      <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="campusDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Campus Life
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="campusDropdown">
+                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus Gallery</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel Life</a></li>
+                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
+                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
+                        <li><a class="dropdown-item " href="{% url 'campuslife' %}#events-tab-pane">Events</a></li>
+                    </ul>
+                </li>
+ 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="studentDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Student Corner
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="studentDropdown">
+                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#statistics">Placement
+                                Statistics</a></li>
+                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#recruiters">Recruiters &
+                                Companies</a></li>
+                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic Calendar</a>
+                        </li>
+                    </ul>
+                </li>
+
+              
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="academicDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Placements
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="academicDropdown">
+                        <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement Overview
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'placements' %}#Statistics-tab-pane">Detiled
+                                Statistics</a>
+                        </li>
+                        <li><a class="dropdown-item "
+                                href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters Companies</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'placements' %}#StudentsPlaced-tab-pane">Student
+                                Placed & Verification</a></li>
+                        <li><a class="dropdown-item disabled" href="{% url 'placements' %}#dashbord-tab-pane">Placement
+                                Dashboard</a>
+                        </li>
+
+
+
+
+                    </ul>
+                </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

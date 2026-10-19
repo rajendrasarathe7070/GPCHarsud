@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Verification Portal</title>
+    <!-- Bootstrap 5 CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .verification-card { border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .profile-header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; border-radius: 12px 12px 0 0; }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            
+            <!-- 1. Verification Request Form -->
+            <div class="card verification-card mb-4">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0">कंपनी छात्र सत्यापन पोर्टल (Company Verification Portal)</h4>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <!-- Django Messages System -->
+                   <!-- Live Toast Container (स्क्रीन के टॉप-राइट कोने में फिक्स रहेगा) -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+    {% if messages %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // पेज पर मौजूद सभी Toast एलिमेंट्स को ढूंढना
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+        
+        // एक-एक करके सभी Toasts को लाइव स्क्रीन पर दिखाना (Initialize and Show)
+        var toastList = toastElList.map(function (toastEl) {
+            var bootstrapToast = new bootstrap.Toast(toastEl);
+            bootstrapToast.show();
+            return bootstrapToast;
+        });
+    });
+</script>
+
+        {% for message in messages %}
+            <!-- dynamic id के साथ प्रत्येक मेसेज के लिए अलग Toast बनेगा -->
+            <div id="toast-{{ forloop.counter }}" class="toast align-items-center text-white bg-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning text-dark{% else %}primary{% endif %} border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="d-flex">
+                    <div class="toast-body d-flex align-items-center">
+                        <!-- मेसेज के टाइप के अनुसार आइकॉन -->
+                        {% if message.tags == 'error' %}
+                            <i class="fas fa-exclamation-circle me-2 fs-5"></i>
+                        {% elif message.tags == 'success' %}
+                            <i class="fas fa-check-circle me-2 fs-5"></i>
+                        {% else %}
+                            <i class="fas fa-info-circle me-2 fs-5"></i>
+                        {% endif %}
+                        
+                        <!-- मुख्य मेसेज टेक्स्ट -->
+                        <span class="fw-medium">{{ message }}</span>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white m-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
+
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="student_email" class="form-label fw-bold text-secondary"> Student Email *</label>
+                                <input type="email" name="student_email" id="student_email" class="form-control" placeholder="उदा. student@email.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="roll_no" class="form-label fw-bold text-secondary"> Student Roll No. *</label>
+                                <input type="text" name="roll_no" id="roll_no" class="form-control" placeholder="उदा. 0123CS211001" required>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary px-5 py-2">
+                                    <i class="fas fa-shield-alt"></i> Continue Verification
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 2. Student Complete Details Template (यह केवल दोनों फ़ील्ड्स मैच होने पर ही दिखेगा) -->
+            {% if student %}
+            <div class="card verification-card">
+                <div class="profile-header p-4 text-center">
+                    <h3 class="mb-1">{{ student.first_name }} {{ student.last_name }}</h3>
+                    <p class="mb-0 badge bg-light text-dark fs-6">रोल नंबर: {{ student.engagement_details.roll_no }}</p>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <h5 class="text-primary border-bottom pb-2 mb-3">1. Academic Details</h5>
+                    <table class="table table-bordered align-middle">
+                        <tbody>
+                            <tr>
+                                <th class="table-light" style="width: 30%;">ब्रांच (Branch)</th>
+                                <td>{{ student.engagement_details.branch_of_student|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <th class="table-light">पासआउट वर्ष (Passout Year)</th>
+                                <td>{{ student.engagement_details.passout_year|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <th class="table-light">Student Email ID</th>
+                                <td>{{ student.email }}</td>
+                            </tr>
+                             <tr>
+                                <th class="table-light">Student Phone Numbar</th>
+                                <td>{{ student.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="text-success border-bottom pb-2 mt-4 mb-3">2.  Placement Status</h5>
+                    <table class="table table-bordered align-middle">
+                        <tbody>
+                            <tr>
+                                <th class="table-light" style="width: 30%;">चयनित कंपनी (Placed Company)</th>
+                                <td class="fw-bold text-success">
+                                    {% if student.engagement_details.got_placement %}
+                                        {{ student.engagement_details.company_name }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="table-light">पैकेज (Package Offered)</th>
+                                <td>
+                                    {% if student.engagement_details.got_placement %}
+                                        <strong>{{ student.engagement_details.package_lpa }} LPA</strong>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="table-light">ऑफ़र लेटर डिटेल्स</th>
+                                <td>{{ student.engagement_details.offer_letter_details|default:"उपलब्ध नहीं है" }}</td>
+                            </tr>
+                            <tr>
+                                <th class="table-light">सत्यापन स्थिति (Status)</th>
+                                <td>
+                                    {% if student.engagement_details.not_engaged_till_now %}
+                                        <span class="badge bg-danger">Not Engaged Till Now</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Verified Placed Record ( Engaged Till Now ) </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer text-center bg-light py-3">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="window.print()">
+                        <i class="fas fa-print"></i>  Print Report
+                    </button>
+                </div>
+
+                 
+<div class="mb-3 d-flex justify-content-between align-items-center">
+    <a href="/" class="btn btn-sm btn-secondary">
+        <i class="fas fa-arrow-left"></i> Go to Home
+    </a>
+</div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

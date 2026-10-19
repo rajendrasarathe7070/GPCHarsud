@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Colors Academy</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            overflow-x: hidden; 
+        }
+
+        /* ================= TOP HEADER ANIMATION ================= */
+        /* एनिमेशन सिर्फ टॉप बार और लोगो पर लगेगा */
+        .animated-top {
+            animation: expandHeaderDiagonal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            position: relative;
+            z-index: 1000;
+        }
+
+        @keyframes expandHeaderDiagonal {
+            0% {
+                clip-path: inset(0 100% 100% 0); 
+                opacity: 0;
+                transform: translate(-30px, -30px); 
+            }
+            100% {
+                clip-path: inset(-10px -10px -10px -10px); 
+                opacity: 1;
+                transform: translate(0, 0); 
+            }
+        }
+
+        /* ================= TOP BAR ================= */
+        .top-bar {
+            background-color: #333;
+            padding: 0px 0px;
+            font-size: 11px;
+            font-family: Arial, sans-serif;
+        }
+        .top-bar a { color: #fff; text-decoration: none; }
+        .top-bar a:hover { text-decoration: underline; }
+
+        /* ================= HEADER SECTION ================= */
+        .header-section {
+            background-color: #fff;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .header-title {
+            color: #003399;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            font-size: 26px;
+            margin-bottom: 2px;
+        }
+        .header-address {
+            color: #da1212;
+            font-size: 14px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .header-affiliation {
+            color: #006400;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        .school-logo {
+            max-height: 75px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* ================= STICKY WRAPPER (Navbar + Info Bar) ================= */
+        /* यह अब एनिमेशन वाले div से बाहर है, इसलिए स्क्रॉल पर फिक्स रहेगा */
+        .sticky-wrapper {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            
+            /* Navbar के लिए हल्का सा स्लाइड-डाउन एनिमेशन */
+            animation: slideDownFade 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        @keyframes slideDownFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= CUSTOM NAVBAR ================= */
+        .custom-navbar {
+            background: linear-gradient(to bottom, #2c2b95 0%, #111060 100%);
+            padding: 0;
+        }
+        .custom-navbar .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 7px 12px;
+            border-right: 1px solid #555;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .custom-navbar .nav-link:last-child { border-right: none; }
+        .custom-navbar .nav-link:hover { background-color: #444; }
+
+        /* Dropdown Menu Styling */
+        .dropdown-menu {
+            border-radius: 0;
+            margin-top: 0;
+        }
+        @media (min-width: 992px) {
+            .nav-item.dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+        }
+
+        /* ================= INFO BAR STYLING ================= */
+        .overflow-x-scrolls {
+            width: 100%;
+            background:#e9ecef !important;  
+            padding-bottom: 2px;
+        }
+        .notices {
+            max-width: 100%;
+            max-height: 2rem;
+            width: 100%;
+            height: 2rem;
+           background: #dee2e6 !important; 
+            color: #d10505;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .info-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 1.5rem;
+            font-size: 13px;
+            overflow: hidden;
+           background: #e9ecef; /* मैचिंग बैकग्राउंड */
+    color: #333; /* डार्क टेक्स्ट */
+    border-top: 1px solid #ccc;
+        }
+
+        /* ================= MOBILE VIEW STYLING ================= */
+        @media (max-width: 991.98px) {
+            .header-title { font-size: 17px; }
+            .header-address, .header-affiliation { font-size: 10.5px; line-height: 1.3; }
+            .school-logo { max-height: 55px; margin-bottom: 0; margin-right: 10px; }
+
+            /* Mobile Navbar Layout */
+            .mobile-nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #333;
+                padding: 8px 15px;
+            }
+            .navbar-toggler { border: none; padding: 0; }
+            .navbar-toggler:focus { box-shadow: none; }
+            .mobile-home-text { color: #fff; text-decoration: none; font-size: 16px; font-weight: 500; }
+
+            /* Dropdowns inside Mobile Menu */
+            .custom-navbar .nav-link {
+                border-right: none;
+                border-bottom: 1px solid #444;
+                text-align: left;
+                padding: 12px 15px !important;
+            }
+            .dropdown-menu { background-color: #444; border: none; }
+            .dropdown-item { color: #fff; border-bottom: 1px solid #555; padding: 10px 20px; white-space: normal; }
+            .dropdown-item:hover { background-color: #555; color: #fff; }
+
+            .info-content { font-size: 11px; padding: 0 10px; text-align: center; }
+        }
+        /* Webkit browsers (Chrome, Safari, Edge) ke liye scrollbar hide karne ka code */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Scrollbar hide rahega lekin page scroll hota rahega */
+        html,
+        body {
+            ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. ANIMATED TOP SECTION (सिर्फ Top Bar और Logo यहाँ रहेंगे) -->
+    <div class="animated-top">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container-fluid d-flex justify-content-end align-items-center">
+                <a href="/login" class="me-3">User Login</a>
+                <span class="me-3 text-white">|</span>
+                <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
+            </div>
+        </div>
+
+        <!-- Header Section (Logo & Text) -->
+        <div class="header-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-9 d-flex flex-row align-items-center text-start">
+                        <img src="/static/logo/gpc.ico" alt="School Logo" class="school-logo me-2 me-md-3">
+                        <div>
+                            <h2 class="header-title">Govt. Polytechnic collage</h2>
+                            <p class="header-address mb-0">HARDA BYPASS ROAD, HARSUD, DIST. KHANDWA, MP</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-none d-lg-flex justify-content-end">
+                        <img src="/staticfiles/images/logo2.png" alt="Right Logo" class="school-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Animated Top -->
+
+    <!-- 2. STICKY WRAPPER (Navbar + Info Bar) - यह स्क्रॉल पर फिक्स रहेगा -->
+    <div class="sticky-wrapper">
+        
+        <!-- MAIN NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+            <div class="container-fluid p-0">
+                <!-- Mobile Header -->
+                <div class="d-lg-none w-100 mobile-nav-header py-0">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="mobile-home-text" href="/">Home</a>
+                </div>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse w-100" id="mainNavbar">
+                    <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row gap-2 gap-lg-5 ms-lg-5 ">
+                        <li class="nav-item"><a class="nav-link active text-white" href="/">Home</a></li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">About Us</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'about' %}#Messages">Messages</a></li>
+                                <li><a class="dropdown-item" href="{% url 'about' %}#recruiters">Recruiters about & Companies</a></li>
+                                <li><a class="dropdown-item" href="{% url 'about' %}#calendar">Academic about Calendar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'about' %}#location">Location</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Academic</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#Courses-tab-pane">Courses</a></li>
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#Departments-tab-pane">Department</a></li>
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic Calendar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#Syllabus-tab-pane">Syllabus</a></li>
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
+                                <li><a class="dropdown-item" href="{% url 'academic' %}#Faculty-tab-pane">Faculty & Staff</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Admission</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission Process</a></li>
+                                <li><a class="dropdown-item" href="{% url 'admission' %}#Eligibility-tab-pane">Course & Eligibility</a></li>
+                                <li><a class="dropdown-item" href="{% url 'admission' %}#Required-tab-pane">Important Dates & Required Documents</a></li>
+                                <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees Structure & Scholarship</a></li>
+                                <li><a class="dropdown-item" href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission HelpDesk</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Campus Life</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus Gallery</a></li>
+                                <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel Life</a></li>
+                                <li><a class="dropdown-item" href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
+                                <li><a class="dropdown-item" href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
+                                <li><a class="dropdown-item" href="{% url 'campuslife' %}#events-tab-pane">Events</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Student Corner</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'studentcorner' %}#statistics">Placement Statistics</a></li>
+                                <li><a class="dropdown-item" href="{% url 'studentcorner' %}#recruiters">Recruiters & Companies</a></li>
+                                <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic Calendar</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Placements</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement Overview</a></li>
+                                <li><a class="dropdown-item" href="{% url 'placements' %}#Statistics-tab-pane">Detiled Statistics</a></li>
+                                <li><a class="dropdown-item" href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters Companies</a></li>
+                                <li><a class="dropdown-item" href="{% url 'placements' %}#StudentsPlaced-tab-pane">Student Placed & Verification</a></li>
+                                <li><a class="dropdown-item disabled" href="{% url 'placements' %}#dashbord-tab-pane">Placement Dashboard</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- INFO BAR (Notices / Marquee) -->
+        <div class="overflow-x-scrolls">
+            <div class="notices card rounded-0 mt-0">
+                <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                    {% include 'info.html' %}
+                </marquee>
+            </div>
+
+            
+        </div>
+
+    </div> <!-- End Sticky Wrapper -->
+<div class="container">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, similique repellendus sed ea mollitia voluptatum. Quia ipsa officiis ad quasi, numquam, consequuntur sunt rerum facilis temporibus aut, quam ut. Quo quis fuga ut, distinctio esse totam eveniet sapiente rerum placeat modi amet voluptas accusantium ad provident, nostrum labore nesciunt quia obcaecati blanditiis repellendus dolorum eligendi et? Exercitationem maiores provident saepe quisquam reiciendis deleniti omnis tenetur et architecto sequi vero labore, esse non error, expedita reprehenderit facilis? Aspernatur, illum ea dolores eos perspiciatis accusamus voluptate, officiis odio facilis, ab commodi eum ad beatae quas repellendus corrupti iste adipisci optio? Delectus impedit vero tenetur accusamus quibusdam ex eaque. Vitae ea accusantium porro in debitis, maiores dolor nam ullam expedita eum quam natus a consequatur saepe pariatur voluptatem quidem! Magnam aliquam delectus possimus culpa consequatur consectetur in! Quibusdam, quisquam ea! Facere, in eius aliquam neque fugit corrupti minima? Ratione esse amet blanditiis facere, nobis nemo consectetur quidem officiis minima nam ipsa voluptatum exercitationem vel. Error magni adipisci quod quidem quasi impedit mollitia aut dolorem nihil! Quisquam eum debitis cupiditate minima. Modi delectus consequuntur corporis! Sit hic libero iste assumenda, eaque iure odio enim qui impedit eos minima. Quasi eum ad deserunt, laudantium soluta adipisci modi nesciunt ab incidunt, repellat perspiciatis? Explicabo eum provident sunt eius odio ea. Quod ex magnam beatae alias ut commodi sunt animi iste pariatur, fuga nostrum dicta. Temporibus recusandae pariatur ducimus. Ad ullam earum, iusto illo totam voluptatibus maiores voluptatem soluta libero dolores quod beatae magnam at minus! Architecto minus, necessitatibus, porro a enim mollitia tempora, laudantium sunt totam assumenda accusamus molestiae culpa cum modi sed labore? Molestias minima consequuntur excepturi atque quis earum dolorum optio eos aperiam fugiat expedita quas ab illo odit cupiditate aspernatur unde, vero tempora, est quod libero perferendis. Amet expedita esse cumque dolor velit reprehenderit magnam veniam sunt enim cupiditate incidunt neque, ex numquam doloremque accusamus, obcaecati laboriosam repudiandae officiis non labore. Illo nesciunt esse debitis deserunt possimus modi. Harum nihil officia beatae amet. Ea aliquam, expedita quidem nisi fugiat laboriosam laudantium enim. Quidem incidunt, fugit quod distinctio libero omnis nesciunt corrupti quaerat dolor facilis sed illo impedit nisi dolorum animi. Voluptates est harum nihil quae earum repudiandae nisi itaque, optio animi ipsam atque fugiat quidem laboriosam, voluptatum corrupti suscipit laborum velit enim veniam minima. Recusandae unde molestiae, sed libero magnam inventore eos atque veritatis animi totam suscipit ratione, illo a molestias, pariatur dolores. Asperiores neque voluptas placeat illum nisi. Consequuntur, inventore. Eligendi, impedit cum adipisci delectus officiis tenetur iste similique, pariatur cupiditate repellendus, consequatur ad rem eos! Adipisci, ea. Officia quaerat accusantium, tenetur nesciunt laboriosam suscipit aliquam totam magnam ea ipsam fuga libero minus odit laudantium doloribus ducimus? Accusantium, eos libero reprehenderit error modi ducimus beatae exercitationem enim eum quis earum necessitatibus rem in itaque corrupti aspernatur quae? Distinctio ipsa deserunt sunt suscipit, omnis assumenda eveniet cum. Animi eum totam atque voluptatum ut debitis? Voluptatibus dolor rem aut, odit magnam ab consequuntur expedita aliquam minus facilis esse inventore quos ipsa sed alias eius. Dolores quod animi cumque temporibus! Facere dolores consectetur ullam, a vero exercitationem quis saepe earum impedit omnis ducimus enim? Recusandae dolorum, officia ducimus dignissimos illo corrupti ullam deserunt incidunt impedit facere, ex illum optio labore, neque eius maiores tenetur nihil. Iste sit placeat qui iure itaque eveniet maiores ducimus vitae perspiciatis provident, ipsam tempora inventore omnis facere architecto ipsa fugit impedit nobis! Ipsam at provident impedit a, earum velit ad reprehenderit, illum cum, ipsum exercitationem nostrum labore cumque quae voluptate molestiae soluta rem necessitatibus voluptatem voluptas error ut vitae corrupti magnam. Ipsa molestiae, omnis harum minus iusto excepturi, placeat aliquid, reiciendis repudiandae reprehenderit eveniet dicta repellat in laudantium voluptas iste hic dolor nihil inventore temporibus mollitia aliquam fugiat explicabo? Repellendus non voluptatem repellat reiciendis eveniet corrupti, voluptatum, eos odit similique dignissimos possimus commodi, explicabo nulla! Adipisci ratione molestias voluptatibus, mollitia modi ipsum laborum illum veniam quibusdam totam minima laudantium. Voluptas mollitia libero repellendus dignissimos asperiores ad, placeat vel ab commodi soluta consequuntur architecto aperiam incidunt optio cumque beatae eaque aut laudantium laborum expedita nisi. Nulla, tempora provident optio velit, libero odit cupiditate voluptatum perferendis nesciunt nihil, aspernatur dolore eaque? Magnam doloribus voluptas repellat ipsam recusandae minus necessitatibus officia blanditiis impedit officiis eligendi ipsa velit unde deleniti, temporibus in veritatis dolorum esse architecto veniam modi sapiente. Quis, voluptatum enim. Molestias nihil doloremque ratione nesciunt distinctio perferendis ad nostrum reiciendis quas, accusamus, amet aliquam voluptate ea mollitia eos debitis libero odio nam! Ipsa cum culpa eius voluptatum molestias assumenda magnam cumque, odit eligendi sint sunt distinctio. Consequatur itaque tempore nulla a recusandae, assumenda reprehenderit? Cum reprehenderit, neque unde eaque reiciendis commodi labore vel, doloribus, inventore amet soluta? Cumque, ea! Doloribus molestias ad assumenda incidunt exercitationem ex possimus id voluptatem. Quibusdam, ut quo. Voluptate non excepturi molestias, quia rerum laborum numquam minima hic molestiae iusto sapiente fugiat ducimus porro. Ut consequuntur blanditiis at doloribus quidem velit necessitatibus voluptatum assumenda alias ab rerum id aliquam maiores minus quaerat, commodi possimus officiis. Quod commodi magnam vero! Natus minus placeat excepturi officia quos quae tempore quis optio ea in? Iste dolore perspiciatis quidem quam deserunt earum dolorem magni nesciunt magnam, libero recusandae corporis. Deleniti obcaecati ea voluptate. Voluptatum aperiam, voluptas natus quos corporis debitis dignissimos neque doloremque assumenda, optio laborum similique recusandae quas suscipit vel ipsam eum. Officia nulla delectus eos quas? Pariatur quisquam sit tempora voluptatum, harum voluptates totam, nam a quam tenetur consequuntur quia asperiores sequi necessitatibus fugiat culpa sed dolorem libero nostrum. Facere atque unde inventore, a doloribus expedita? Repudiandae dolorum cupiditate dolores. Veniam qui, cum incidunt consequatur, at suscipit accusamus totam unde doloribus commodi rerum, culpa deleniti voluptas perspiciatis rem possimus et. Quis asperiores nostrum quae dolor commodi, atque labore sint nesciunt. Aliquid voluptatibus modi optio nisi eos perspiciatis aspernatur consequuntur soluta numquam sed molestias possimus ut repudiandae doloremque, nam necessitatibus. Vero porro vel vitae ullam numquam accusantium. Et, dolores! Numquam dolore voluptates, labore eaque voluptas hic est necessitatibus esse alias consequuntur quis quidem quae laudantium tempore aut odio rem, nostrum aliquid.
+</div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,489 +1,467 @@
-<!-- <style>
-    @media (min-width: 992px) {
-
-        
-        .nav-item.dropdown:hover .dropdown-menu,
-        .dropdown:hover .dropdown-menu {
-            display: block !important;
-            margin-top: 0;
-          
-        }
-    }
-
-    .name {
-        font-size: medium;
-    }
-
-    @media (min-width: 768px) {
-        .name {
-            font-size: x-large;
-        }
-    }
-   
-</style>
-<div class="container-fluid py-0" style="background-color: brown; color: #f7f7f7;   font-family: 'Times New Roman', Times, serif;">
-    <a class="navbar-brand" href="#" style="color: rgb(230, 220, 195);">
-        <label class="name" style="align-items: center;">Govt. Polytechnic collage harsud</label>
-    </a>
-
-    <button class="navbar-toggler navbar-toggler-icon" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/academic ">Academic</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admission">Admission</a>
-            </li>
-             
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="campusDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Campus Life
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="campusDropdown">
-                    
-                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus
-                            Gallery</a></li>
-                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel Life</a>
-                    </li>
-                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
-                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a>
-                    </li>
-                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#events-tab-pane">Events</a></li>
-                </ul>
-            </li>
-          
-            <div class="dropdown">
-                <button class="btn btn-outline-none dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Student Corner
-                </button>
-                <ul class="dropdown-menu">
-               
-                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#statistics">Placement
-                            Statistics</a></li>
-                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#recruiters">Recruiters &
-                            Companies</a></li>
-                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic Calendar</a>
-                    </li>
-
-                </ul>
-            </div>
-
-
-            <li class="nav-item">
-                <a class="nav-link " href="/placements">Placements</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    U's </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item " href="#">About U's</a></li>
-                    <li><a class="dropdown-item" href="#">Contact U's</a></li>
-
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item " href="#">Something else here for more improvment .</a></li>
-                </ul>
-            </li>
-
-        </ul>
-        {% if user.is_authenticated %}
-
-
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary"> {{ user.username }}</button>
-            <button type="button" class="btn btn btn-primary dropdown-toggle dropdown-toggle-split"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <form action="/logout" method="post">
-                        {% csrf_token %}
-                        <button type="submit">logout {{ user.username }}</button>
-                    </form>
-
-
-                </li>
-
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#"> Welcome {{ user.username }} ! </a></li>
-            </ul>
-        </div>
-
-
-
-        {% else %}
-       
-        <div class="d-inline-flex mx-1 d-none d-sm-block " style="background-color:transparent; " data-bs-toggle="modal"
-            data-bs-target="#loginform"><button class="btn btn-outline-danger">Log-In</button>
-        </div>
-        <div class="d-inline-flex mx-1 d-none d-sm-block" style="background-color:transparent;" data-bs-toggle="modal"
-            data-bs-target="#singupform"><button class="btn btn-outline-primary">Sing-In</button>
-        </div>
-        {% endif %}
-
-
-
-
-    </div>
-</div> -->
 {% load static %}
 <style>
-    .dropdown {
-        transition: all 0.5s ease;
+    html {
+        scroll-behavior: smooth;
     }
 
-    .nav-link {
-        transition: all 0.5 ease;
+    .nav-link:focus,
+    .nav-link:active,
+    .tab-pane:focus {
+        outline: none !important;
+        box-shadow: none !important;
     }
 
-    @media (min-width: 992px) {
+    /* =========================================================
+       UNIQUE NAVBAR FIX (No Conflict with Parent Theme)
+       ========================================================= */
 
-        .nav-item.dropdown:hover .dropdown-menu,
-        .dropdown:hover .dropdown-menu {
-            display: block !important;
-            margin-top: 0;
-            transform: translateY(-1px);
+    /* 1. सबसे बाहरी रैपर (यह पैरेंट के flex/row को तोड़ देगा) */
+    #unique-main-wrapper {
+        display: block !important;
+        width: 100% !important;
+        clear: both !important;
+        float: none !important;
+        position: relative;
+        z-index: 1050;
+    }
 
+    /* 2. एनिमेशन वाला टॉप सेक्शन */
+    #unique-main-wrapper .animated-top {
+        animation: expandHeaderDiagonal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        position: relative;
+        z-index: 1000;
+    }
+
+    @keyframes expandHeaderDiagonal {
+        0% {
+            clip-path: inset(0 100% 100% 0);
+            opacity: 0;
+            transform: translate(-30px, -30px);
         }
 
+        100% {
+            clip-path: inset(-10px -10px -10px -10px);
+            opacity: 1;
+            transform: translate(0, 0);
+        }
     }
 
+    /* 3. स्टिकी रैपर (Navbar जो स्क्रॉल पर चिपकेगा) */
+    #unique-sticky-navbar {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 1040;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        animation: slideDownFade 0.8s ease-out forwards;
+        opacity: 0;
+        transform: translateY(-20px);
+        background-color: #111060;
+        /* Fallback color */
+    }
 
-    .dropdown-item {
+    @keyframes slideDownFade {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ================= TOP BAR ================= */
+    .top-bar {
+        /* background-color: #333; */
+        padding: 0px 0px;
+        font-size: 11px;
+        font-family: Arial, sans-serif;
+    }
+
+    .top-bar a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .top-bar a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================= HEADER SECTION ================= */
+    .header-section {
+        background-color: #fff;
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .header-title {
+        color: #003399;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 2px;
+    }
+
+    .header-address {
+        color: #da1212;
+        font-size: 14px;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .header-affiliation {
+        color: #006400;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .school-logo {
+        max-height: 75px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* ================= CUSTOM NAVBAR ================= */
+    .custom-navbar {
+        background: linear-gradient(to bottom, #2c2b95 0%, #111060 100%) !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .custom-navbar .nav-link {
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 7px 10px !important;
+        border-right: 1px solid #555;
+        text-align: center;
         transition: all 0.3s ease;
     }
 
-    .name {
-        font-size: large;
-        align-items: baseline;
+    .custom-navbar .nav-link:last-child {
+        border-right: none;
     }
 
-    /* .logo-1 {
-        display: none !important;
-    } */
+    .custom-navbar .nav-link:hover {
+        background-color: #444;
+    }
 
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+        border-radius: 0;
+        margin-top: 0;
+        background-color: #111060;
+        /* Dropdown ka background dark */
+    }
 
+    .dropdown-item {
+        color: #fff;
+        transition: all 0.3s ease;
+    }
 
-    @media (min-width: 768px) {}
-
+    /* Hover effect fix (Brown color hatakar white kiya hai) */
     .dropdown-item:hover {
-        background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
-        color: brown !important;
+        background: #2c2b95 !important;
+        color: #ffffff !important;
     }
 
-
-    /* जिन divs की ID में -tab-pane आता है, उनका फोकस आउटलाइन हटाएं */
-    div[id*="-tab-pane"]:focus,
-    div[id*="-tab-pane"]:active,
-    .campus-tab-content:focus,
-    .campus-tab-content:active {
-        outline: none !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    /* सुरक्षित रहने के लिए सामान्य tab-pane का भी आउटलाइन ब्लॉक करें */
-    .tab-pane:focus {
-        outline: none !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
-</style>
-
-<!-- मुख्य नेविगेशन बार (navbar-expand-lg बड़ी स्क्रीन के लिए) -->
-
-<div class="container-fluid py-0 "
-    style="background-color: brown; color: #f7f7f7; font-family: 'Times New Roman', Times, serif; height: 45px !important;">
-
-    <!-- कॉलेज का नाम / ब्रैंड -->
-    <a class="navbar-brand" href="#" style="color: rgb(230, 220, 195);">
-        <div class="row">
-            <div class="col-2"> <img src="{% static 'logo/gpc.ico' %}" alt="Logo" width="auto" height="40"
-                    class="d-inline-block align-top me-2 logo-1" style="max-height: 40px; object-fit: contain;"
-                    onclick="window.location.href='/admin' "></div>
-            <div class="col-10 p-2">
-                <label class="name text-center d-block d-sm-none m-0 p-0"
-                    style="align-items: center; margin-bottom: 0; cursor: pointer;">G.P.C.
-                    Harsud</label><label class="names d-none d-sm-block m-0 p-0"
-                    style="align-items: center; margin-bottom: 0; cursor: pointer; font-family: 'Times New Roman', Times, serif !important;">Govt.
-                    Polytechnic collage
-                    harsud</label>
-            </div>
-
-
-        </div>
-
-
-
-    </a>
-
-    <!-- मोबाइल के लिए हैमबर्गर बटन (जो Offcanvas को ट्रिगर करेगा) -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#collegeNavbarOffcanvas"
-        aria-controls="collegeNavbarOffcanvas" aria-label="Toggle navigation"
-        style="border-color: rgba(255,255,255,0.5);">
-        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-    </button>
-
-    <!-- Offcanvas कंपोनेंट स्टार्ट -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="collegeNavbarOffcanvas"
-        aria-labelledby="collegeNavbarOffcanvasLabel" style="background-color: brown; color: #f7f7f7;">
-
-        <!-- Offcanvas हेडर (यह केवल मोबाइल/टैबलेट स्क्रीन पर दिखेगा) -->
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="collegeNavbarOffcanvasLabel" style="color: rgb(230, 220, 195);">GPC Harsud
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-        </div>
-
-        <!-- Offcanvas बॉडी (इसके अंदर आपके सारे लिंक्स और बटन्स हैं) -->
-        <div class="offcanvas-body">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item ">
-                    <a class="nav-link active text-white " aria-current="page" href="/">Home</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="aboutDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        About Us
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                         <li><a class="dropdown-item" href="{% url 'about' %}#Messages-tab-pane">Principal Message</a>
-                        </li>
-
-
-                        <li><a class="dropdown-item" href="{% url 'about' %}#home-tab-pane"> about</a> 
-                        </li>
-                       
-
-<li><a class="dropdown-item" href="{% url 'about' %}#Location-tab-pane"> Location</a>
-                        </li>
-
-                        <li><a class="dropdown-item" href="/about#Visions-tab-pane">Our Vision & Mission</a>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="academicDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Academic
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="academicDropdown">
-                        <li><a class="dropdown-item" href="{% url 'academic' %}#Courses-tab-pane">Courses </a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'academic' %}#Departments-tab-pane"> 
-                                Department</a>
-                        </li>
-
-                        <li><a class="dropdown-item" href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic
-                                Calendar</a></li>
-
-                                                        
- <li><a class="dropdown-item " href="{% url 'academic' %}#Syllabus-tab-pane"> Syllabus </a>
-                        </li>
-                        <li><a class="dropdown-item " href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
-
-
-                        <li><a class="dropdown-item " href="{% url 'academic' %}#Faculty-tab-pane"> Faculty & Staff</a>
-                        </li>
-
-
-
-
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="campusDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Admission
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="campusDropdown">
-                        <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission Process
-                            </a>
-                        </li>
-
-                        <li><a class="dropdown-item" href="{% url 'admission' %}#Eligibility-tab-pane">Course &
-                                Eligibility
-                            </a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'admission' %}#Required-tab-pane">Important Dates &
-                                Required Documents</a></li>
-                        <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees Structure &
-                                Scholarship</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission
-                                HelpDesk</a></li>
-
-
-                    </ul>
-                </li>
-
-                <!-- Campus Life Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="campusDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Campus Life
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="campusDropdown">
-                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus Gallery</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel Life</a></li>
-                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
-                        <li><a class="dropdown-item" href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
-                        <li><a class="dropdown-item " href="{% url 'campuslife' %}#events-tab-pane">Events</a></li>
-                    </ul>
-                </li>
-
-                <!-- Student Corner Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="studentDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Student Corner
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="studentDropdown">
-                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#statistics">Placement
-                                Statistics</a></li>
-                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#recruiters">Recruiters &
-                                Companies</a></li>
-                        <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic Calendar</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- <li class="nav-item">
-                    <a class="nav-link text-white" href="/placements">Placements</a>
-                </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="academicDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Placements
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="academicDropdown">
-                        <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement Overview
-                            </a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'placements' %}#Statistics-tab-pane">Detiled
-                                Statistics</a>
-                        </li>
-                        <li><a class="dropdown-item "
-                                href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters Companies</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'placements' %}#StudentsPlaced-tab-pane">Student
-                                Placed & Verification</a></li>
-                        <li><a class="dropdown-item disabled" href="{% url 'placements' %}#dashbord-tab-pane">Placement
-                                Dashboard</a>
-                        </li>
-
-
-
-
-                    </ul>
-                </li>
-
-                 
-            </ul>
-
-            <!-- User Authentication Section (Login / Logout) -->
-            <div class="d-flex align-items-center mt-3 mt-lg-0">
-                {% if user.is_authenticated %}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-light"> {{ user.username }}</button>
-                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <form action="/logout" method="post" class="px-3 py-1">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm w-100">logout {{user.username}}</button>
-                            </form>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#"> Welcome {{ user.username }} ! </a></li>
-                    </ul>
-                </div>
-                {% else %}
-                <!-- Buttons for Login/Signup -->
-                <div class="mx-1" data-bs-toggle="modal" data-bs-target="#loginform">
-                    <button class="btn btn-outline-danger text-white border-white">Log-In</button>
-                </div>
-                <div class="mx-1" data-bs-toggle="modal" data-bs-target="#singupform">
-                    <button class="btn btn-light">Sing-In</button>
-                </div>
-                {% endif %}
-            </div>
-
-        </div>
-    </div>
-    <!-- Offcanvas कंपोनेंट एंड -->
-
-</div>
-
-<script>
-    function switchCampusTabByPane() {
-        // 1. URL से हैश (#campus-tab-pane आदि) प्राप्त करें
-        const hash = window.location.hash;
-
-        // 2. उन सभी divs को ढूंढें जिनकी ID में -tab-pane आता है
-        const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
-
-        if (allPanes.length > 0) {
-            // पहले सभी सेक्शन्स को पूरी तरह से छुपा दें
-            allPanes.forEach(function (pane) {
-                pane.classList.remove('show', 'active');
-                pane.style.setProperty('display', 'none', 'important');
-            });
-
-            let targetPane = null;
-
-            // 3. अगर URL में हैश है, तो उस वाले सेक्शन को चुनें
-            if (hash) {
-                targetPane = document.querySelector(hash);
-            }
-
-            // 4. अगर कोई सीधे पेज पर आया है (बिना हैश के), तो पहले वाले (Gallery) सेक्शन को चुनें
-            if (!targetPane) {
-                targetPane = allPanes[0];
-            }
-
-            // 5. चुने हुए सेक्शन को बूटस्ट्रैप क्लास के साथ स्क्रीन पर दिखाएं
-            if (targetPane) {
-                targetPane.classList.add('show', 'active');
-                targetPane.style.setProperty('display', 'block', 'important');
-
-                // अगर ड्रॉपडाउन से क्लिक करके आए हैं, तो पेज को टॉप पर ले जाएं
-                if (hash) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
+    @media (min-width: 992px) {
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block !important;
+            margin-top: 0;
         }
     }
 
-    // पेज लोड होने पर और लिंक बदलने पर तुरंत रन करें
-    document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
-    window.addEventListener("hashchange", switchCampusTabByPane);
-</script>
+    /* ================= MOBILE VIEW STYLING ================= */
+    @media (max-width: 991.98px) {
+        .header-title {
+            font-size: 17px;
+        }
+
+        .header-address,
+        .header-affiliation {
+            font-size: 10.5px;
+            line-height: 1.3;
+        }
+
+        .school-logo {
+            max-height: 55px;
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 8px 15px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .mobile-home-text {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .custom-navbar .nav-link {
+            border-right: none;
+            border-bottom: 1px solid #444;
+            text-align: left;
+            padding: 12px 15px !important;
+        }
+
+        .dropdown-menu {
+            background-color: #222;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #fff;
+            border-bottom: 1px solid #555;
+            padding: 10px 20px;
+            white-space: normal;
+        }
+
+        .dropdown-item:hover {
+            background-color: #444;
+            color: #fff;
+        }
+    }
+
+    /* Scrollbar Hide */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    html,
+    body {
+        ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <!-- पूरे हेडर और नेवबार को इस यूनिक रैपर के अंदर डाल दिया है -->
+    <div id="unique-main-wrapper">
+
+        <!-- 1. ANIMATED TOP SECTION (Top Bar और Logo) -->
+        <div class="animated-top">
+            <!-- Top Bar -->
+            <div class="top-bar bg-danger">
+                <div class="container-fluid d-flex justify-content-end align-items-center">
+                    <a href="/login" class="me-3">User Login</a>
+                    <span class="me-3 text-white">|</span>
+                    <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
+                </div>
+            </div>
+
+            <!-- Header Section (Logo & Text) -->
+            <div class="header-section py-0">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-9 d-flex flex-row align-items-center text-start">
+                            <img src="/static/logo/gpc.ico" alt="School Logo" class="school-logo me-2 me-md-3">
+                            <div>
+                                <h2 class="header-title">Govt. Polytechnic Collage</h2>
+                                <p class="header-address mb-0">HARDA BYPASS ROAD, HARSUD, DIST. KHANDWA, MP</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 d-none d-lg-flex justify-content-end">
+                            <img src="/static/images/logo2.png" alt="Right Logo" class="school-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. STICKY WRAPPER (Navbar) - इसे यूनिक ID दे दी है -->
+        <div id="unique-sticky-navbar">
+
+            <!-- MAIN NAVBAR -->
+            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar ">
+                <div class="container-fluid p-0">
+                    <!-- Mobile Header -->
+                    <div class="d-lg-none w-100 mobile-nav-header py-0">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#mainNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="mobile-home-text" href="/">Home</a>
+                    </div>
+
+                    <!-- Navbar Links -->
+                    <div class="collapse navbar-collapse w-100" id="mainNavbar">
+                        <!-- लिंक्स को बराबर फैलाने के लिए justify-content-lg-around लगाया है -->
+                        <ul
+                            class="navbar-nav w-100 d-flex flex-column flex-lg-row  gap-lg-5  ms-lg-5 align-items-lg-center">
+
+                            <li class="nav-item"><a class="nav-link active text-white" href="/">Home</a></li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">About
+                                    Us</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#Messages">Messages</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#recruiters">Recruiters about &
+                                            Companies</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#calendar">Academic about
+                                            Calendar</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#location">Location</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                    data-bs-toggle="dropdown">Academic</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'academic' %}#Courses-tab-pane">Courses</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'academic' %}#Departments-tab-pane">Department</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic Calendar</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'academic' %}#Syllabus-tab-pane">Syllabus</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Faculty-tab-pane">Faculty &
+                                            Staff</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                    data-bs-toggle="dropdown">Admission</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission
+                                            Process</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'admission' %}#Eligibility-tab-pane">Course & Eligibility</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'admission' %}#Required-tab-pane">Important Dates & Required
+                                            Documents</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees
+                                            Structure & Scholarship</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission HelpDesk</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Campus
+                                    Life</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus
+                                            Gallery</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel
+                                            Life</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'campuslife' %}#events-tab-pane">Events</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                    data-bs-toggle="dropdown">Student Corner</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#statistics">Placement
+                                            Statistics</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#recruiters">Recruiters
+                                            & Companies</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic
+                                            Calendar</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                    data-bs-toggle="dropdown">Placements</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement
+                                            Overview</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'placements' %}#Statistics-tab-pane">Detiled Statistics</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters
+                                            Companies</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'placements' %}#StudentsPlaced-tab-pane">Student Placed &
+                                            Verification</a></li>
+                                    <li class="dropdown-item disabled" href="{% url 'placements' %}#dashbord-tab-pane">
+                                        Placement Dashboard</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+           
+
+        </div> <!-- End Unique Sticky Navbar -->
+
+    </div> <!-- End Unique Main Wrapper -->
+    <script>
+        function switchCampusTabByPane() {
+            // 1. URL से हैश (#campus-tab-pane आदि) प्राप्त करें
+            const hash = window.location.hash;
+
+            // 2. उन सभी divs को ढूंढें जिनकी ID में -tab-pane आता है
+            const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
+
+            if (allPanes.length > 0) {
+                // पहले सभी सेक्शन्स को पूरी तरह से छुपा दें
+                allPanes.forEach(function (pane) {
+                    pane.classList.remove('show', 'active');
+                    pane.style.setProperty('display', 'none', 'important');
+                });
+
+                let targetPane = null;
+
+                // 3. अगर URL में हैश है, तो उस वाले सेक्शन को चुनें
+                if (hash) {
+                    targetPane = document.querySelector(hash);
+                }
+
+                // 4. अगर कोई सीधे पेज पर आया है (बिना हैश के), तो पहले वाले (Gallery) सेक्शन को चुनें
+                if (!targetPane) {
+                    targetPane = allPanes[0];
+                }
+
+                // 5. चुने हुए सेक्शन को बूटस्ट्रैप क्लास के साथ स्क्रीन पर दिखाएं
+                if (targetPane) {
+                    targetPane.classList.add('show', 'active');
+                    targetPane.style.setProperty('display', 'block', 'important');
+
+                    // अगर ड्रॉपडाउन से क्लिक करके आए हैं, तो पेज को टॉप पर ले जाएं
+                    if (hash) {
+                        window.scrollTo({ top: 0, behavior: 'auto' });
+                    }
+                }
+            }
+        }
+
+        // पेज लोड होने पर और लिंक बदलने पर तुरंत रन करें
+        document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
+        window.addEventListener("hashchange", switchCampusTabByPane);
+    </script>

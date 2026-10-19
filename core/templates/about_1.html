@@ -1,0 +1,307 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{% static 'logo/gpc.ico' %}">
+    <title>Student Corrner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <style>
+        #academictabs {
+            --bs-nav-link-color: #f8f9fa;
+            --bs-nav-link-hover-color: #9d1a27;
+            --bs-nav-link-disabled-color: #999999;
+        }
+
+        .tab-pane:not(.active) {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar"
+        style="padding-top: 5px; padding-bottom: 5px;">
+        {% include 'navbar.html' %}
+
+
+    </nav>
+
+
+
+    <!-- <div class="tab-content " id="myTabContent" style="margin-top: 7rem;">
+
+        <div class="tab-pane fade show active" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
+            tabindex="0">
+            this is Coursestab panal
+
+
+
+
+
+        </div>
+
+        <div class="tab-pane fade" id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab"
+            tabindex="0">
+            ...
+            thi is Departments</div>
+
+        <div class="tab-pane fade" id="Syllabus-tab-pane" role="tabpanel" aria-labelledby="Syllabus-tab" tabindex="0">
+            thi
+            is
+            Syllabus
+        </div>
+
+
+        <div class="tab-pane fade" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
+            tabindex="0">Academic Calendar
+        </div>
+        <div class="tab-pane fade" id="TimeTable-tab-pane" role="tabpanel" aria-labelledby="TimeTable-tab" tabindex="0">
+            .TimeTable
+        </div>
+
+        <div class="tab-pane fade" id="Examination-tab-pane" role="tabpanel" aria-labelledby="Examination-tab"
+            tabindex="0">
+            Examination
+        </div>
+        <div class="tab-pane fade" id="Results-tab-pane" role="tabpanel" aria-labelledby="Results-tab" tabindex="0">
+            Results
+        </div>
+
+        <div class="tab-pane fade" id="Faculty-tab-pane" role="tabpanel" aria-labelledby="Faculty-tab" tabindex="0">
+            Faculty
+        </div>
+        <div class="tab-pane fade" id="Library-tab-pane" role="tabpanel" aria-labelledby="Library-tab" tabindex="0">
+            Library
+        </div>
+
+
+        <div class="tab-pane fade" id="DownloadCenter-tab-pane" role="tabpanel" aria-labelledby="DownloadCenter-tab"
+            tabindex="0">...Download Center
+        </div>
+    </div> -->
+
+
+
+    <!-- आपका हेडर कोड यहाँ रहेगा -->
+
+    <div class="container my-5">
+        <!-- बूटस्ट्रैप का मुख्य टैब कंटेनर -->
+        <div class="tab-content" id="placementTabContent">
+
+            <!-- 1. Statistics Section (डिफ़ॉल्ट रूप से खुला रहेगा) -->
+            <div class="tab-pane fade  " id="statistics-tap-pane" role="tabpanel">
+
+
+                <!-- Navbar End -->
+                <h2>Placement Statistics</h2>
+                <div class="container ">
+                    <style>
+                        .hding {
+                            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+                            margin-bottom: 10px;
+                            /* border: 3px solid #861414; */
+                            text-transform: uppercase;
+                            width: 100%;
+
+                            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+                            padding: 6px 15px 6px 15px;
+                            color: #f8f8fa;
+                            text-align: left;
+
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+                        .hding-text {
+                            font-weight: bold;
+                            white-space: nowrap;
+                            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+                            font-size: 3.4vw;
+                            font-family: 'Times New Roman', Times, serif;
+                        }
+
+                        /* ब्रेडक्रंब आइटम स्टाइल */
+                        .breadcrumb-item {
+                            background-color: #a2cdf9;
+                            padding: 2px 6px;
+                            border-radius: 3px;
+                        }
+
+                        .custom-breadcrumb {
+                            font-size: 2.2vw !important;
+                            margin-bottom: 0 !important;
+                            padding: 0 !important;
+                        }
+
+                        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+                        @media (min-width: 576px) {
+                            .hding-text {
+                                font-size: 1.1rem;
+                                /* टैबलेट पर साइज */
+                            }
+
+                            .custom-breadcrumb {
+                                font-size: 0.85rem !important;
+                            }
+                        }
+
+                        @media (min-width: 992px) {
+                            .hding-text {
+                                font-size: 1.35rem;
+                                /* डेस्कटॉप पर साइज */
+                            }
+
+                            .hding {
+                                padding-left: 30px;
+                                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+                            }
+                        }
+                    </style>
+                    <div class="container-fluid mt-3 mb-5 px-0">
+                        <nav class="hding rounded-1 py-2 py-md-0">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                                <div class="hding-text">
+                                    Principal Message
+                                </div>
+
+                                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+                                <div class="d-none d-sm-block">
+                                    <ol class="breadcrumb custom-breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#"
+                                                class="text-decoration-none text-dark">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page"> Principal Message</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><img src="https://www.rgpv.ac.in/Images/VC-Alok-Sharma.jpg"
+                                class="img-fluid" alt="...">
+                            <div class="text-center">
+                                <h3>Mr. Rajendra</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6>From the Desk of the Principal</h6>
+                            <b class="text-success">Dear Students, Faculty Members, Staff, Alumni, Industry Partners,
+                                and
+                                all
+                                Stakeholders of Government Polytechnic College,</b>
+                            <p class="my-2">It is a matter of great honour and deep responsibility for me to address you
+                                as
+                                the
+                                Principal of Government Polytechnic College. I assume this role with humility,
+                                gratitude,
+                                and a
+                                strong commitment to fostering excellence in technical and diploma education.</p>
+                            <p class="my-2">Our college is not merely an educational institution; it is a vibrant
+                                academic
+                                family, a center of skill development, and a stepping stone for thousands of students
+                                aspiring
+                                to build a successful technical career.</p>
+                            <p class="my-2">At this important stage, our responsibility is to move forward with clarity,
+                                confidence, and collective purpose. Technical education today must go beyond textbooks
+                                and
+                                traditional practicals; it must align with real-world industry requirements, promote
+                                hands-on
+                                skills, and empower students to solve practical engineering and technological
+                                challenges.
+                            </p>
+                            <p class="my-2">Our vision is to make this college a hub for skilled professionals and
+                                technicians
+                                who can drive regional growth. We are actively working toward strengthening the quality
+                                of
+                                teaching, upgrading our laboratories, enhancing campus discipline, and building strong
+                                ties
+                                with
+                                local industries to improve training and placement opportunities.</p>
+                            <p class="my-2">Students will always remain at the heart of all our efforts. Our goal is to
+                                nurture
+                                not only competent technicians and engineers but also responsible citizens and ethical
+                                professionals who can contribute meaningfully to the progress of our state and nation.
+                            </p>
+                            <p class="my-2">I seek the trust, cooperation, and active participation of all students,
+                                parents,
+                                faculty, and staff members in this journey. Together, with sincerity, discipline, and
+                                dedication, we can take Government Polytechnic College to new heights of success.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 2. Recruiters Section -->
+            <div class="tab-pane fade" id="recruiters-tab-pane" role="tabpanel">
+                <h2>Recruiters & Companies</h2>
+                
+            </div>
+
+            <!-- 3. Academic Calendar Section -->
+            <div class="tab-pane fade" id="calendar" role="tabpanel">
+                <h2>Academic Calendar</h2>
+               
+            </div>
+
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- शुद्ध जावास्क्रिप्ट कोड (Pure JS - बिना किसी एरर के काम करेगा) -->
+    <script>
+        function switchTabByHash() {
+            const hash = window.location.hash; // URL से #id निकालेगा
+
+            if (hash) {
+                const targetPane = document.querySelector(hash);
+
+                if (targetPane) {
+                    // 1. पहले से खुले हुए सभी सेक्शन्स को छुपाएं
+                    document.querySelectorAll('.tab-content .tab-pane').forEach(function (pane) {
+                        pane.classList.remove('show', 'active');
+                    });
+
+                    // 2. जिस सेक्शन की ID मैच हुई है, उसे स्क्रीन पर दिखाएं
+                    targetPane.classList.add('show', 'active');
+                }
+            }
+        }
+
+        // जब पेज पहली बार लोड हो (दूसरे पेज से आने पर)
+        document.addEventListener("DOMContentLoaded", switchTabByHash);
+
+        // यदि यूजर उसी पेज पर है और दोबारा ड्रॉपडाउन से दूसरा ऑप्शन चुनता है
+        window.addEventListener("hashchange", switchTabByHash);
+    </script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

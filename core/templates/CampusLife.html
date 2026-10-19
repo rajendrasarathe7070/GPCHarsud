@@ -53,17 +53,7 @@
 
     }
 
-    .overflow-x-scroll {
-      margin-top: 52px;
-      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
-
-      /* मोबाइल में यह पहली div (Navbar) के नीचे रहे, इसलिए इसका z-index कम कर दिया */
-      z-index: 1040 !important;
-      transform: translateZ(0);
-      /* मोबाइल ब्राउज़र्स में लेयर फिक्स करने के लिए */
-
-
-    }
+     
 
     /* डेस्कटॉप और बड़ी स्क्रीन पर होवर (Hover) चालू करने के लिए */
     @media (min-width: 992px) {
@@ -78,22 +68,43 @@
     }
   </style>
 
-  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary " id="navbar" style="padding-top: 5px; padding-bottom: 5px;">
+  <nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
     {% include 'navbar.html' %}
+<div class="overflow-x-scrolls  ">
 
+  <div class="notices fixed-top card rounded-0 bg-danger">
+    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+      {% include 'info.html' %}
+
+    </marquee>
+  </div>
+  <style>
+    .overflow-x-scrolls {
+      background: #800000 !important;
+    }
+
+    .notices {
+      max-width: 100%;
+      max-height: 1.7rem;
+      width: 100%;
+      height: 1.7rem;
+
+      justify-content: center;
+
+      /* background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important; */
+
+
+      color: #313871;
+    }
+  </style>
+
+</div>
      
 
   </nav>
 
   <style>
-    .overflow-x-scrolls {
-      /* width: 100%;
-      max-height: 5rem; */
-      margin-top: 50px !important;
-      /* background-color: rgb(38, 5, 138) !important ; */
-      background: linear-gradient(rgb(44, 43, 149) 0%, rgb(17, 16, 96) 100%) !important;
-    }
- 
+   
 
     .nav-tabs {
       flex-direction: row;
@@ -102,34 +113,8 @@
 
     }
   </style>
-
-  <div class="overflow-x-scrolls fixed-top" style="    margin-top: 50px;">
-
-    <div class="notices card rounded-0  ">
-      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-        {% include 'info.html' %}
-
-      </marquee>
-    </div>
-
-  </div>
-
-  <style>
-    .notices {
-      max-width: 100%;
-      max-height: 2rem;
-      width: 100%;
-      height: 2rem;
-
-      background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-
-      color: #d10505;
-    }
-  </style>
-
-
-
-  <div class="tab-content " id="myTabContent" style="margin-top: 4rem;">
+ 
+  <div class="tab-content " id="myTabContent" style="margin-top: 0rem;">
 
     <div class="card text-bg-dark campusimg" style="max-height: 350px;">
 
