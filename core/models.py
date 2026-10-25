@@ -86,6 +86,14 @@ class Course_Department(models.Model):
     Course_seats_ppt= models.PositiveIntegerField(default=30, null=True, verbose_name='PPT Seats')
     Course_seats_eklavya= models.PositiveIntegerField(default=30, null=True , verbose_name='Eklavya Seats')
     Mode_of_study = models.CharField(max_length=50, default=None, null=True, verbose_name='Mode of Study')
+    
+        # डिपार्टमेंट में एक से ज़्यादा Teaching Faculty जोड़ने के लिए
+    faculties = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, 
+        blank=True, 
+        related_name='faculty_departments',
+        verbose_name='Teaching Faculty'
+    )
  
     def __str__(self):
         return f"{self.Department_name} - {self.Course_name}"

@@ -9,7 +9,18 @@ from two_factor.admin import AdminSiteOTPRequired
 from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement
 from django.contrib import admin
 
+class CustomUserInline(admin.TabularInline):
+    model = models.CustomUser
+    extra = 1  # नए स्टाफ/फैकल्टी जोड़ने के लिए कितने खाली रो (Rows) दिखाने हैं
+    fields = ('username', 'email', 'category', 'phone') # जो फ़ील्ड्स आप दिखाना चाहते हैं
 
+# 2. डिपार्टमेंट एडमिन को रजिस्टर करें
+@admin.register(models.Course_Department)
+class Course_DepartmentAdmin(admin.ModelAdmin):
+    list_display = ('Department_name', 'Course_name', 'Department_hod')
+    
+    # यह जादुई लाइन डिपार्टमेंट के अंदर ही यूजर्स की लिस्ट दिखा देगी
+    inlines = [CustomUserInline]
 
 class DepartmentListFilter(admin.SimpleListFilter):
     title = 'Department' # एडमिन पैनल में दिखने वाला नाम
@@ -186,9 +197,9 @@ class TimetableAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+# admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Responsibility)
-admin.site.register(models.Course_Department)
+# admin.site.register(models.Course_Department)
 admin.site.register(models.Timetable, TimetableAdmin)
 
 admin.site.register(models.Notice)

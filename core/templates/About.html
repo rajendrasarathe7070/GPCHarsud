@@ -552,13 +552,30 @@
                         </nav>
                     </div>
                     <div class="row">
-                        <div class="col-md-4"><img src="https://www.rgpv.ac.in/Images/VC-Alok-Sharma.jpg"
-                                class="img-fluid" alt="...">
-                            <div class="text-center">
-                                <h3>Mr. Rajendra</h3>
+                        {% if principal %}
+                        <div class="col-md-3"><img src="
+                                            {% if principal.photo %}
+                                                {{ principal.photo.url }}
+                                            {% else %}
+                                                
+                                            {% endif %}
+                                                " class="img-fluid" alt="...">
+                    
+                            <div class="text-center col">
+                    
+                                <h3 class="text-bg-success">Prof. {{ principal.get_full_name }}</h3>
+                                <div class="text-danger-emphasis ">
+                                    {{ principal.category }}
+                                </div>
+                                <div class="text-danger">GOVT. POLYTECHNIC COLLEGE
+                                    HARSUD  </div>
                             </div>
-                        </div>
-                        <div class="col-md-8">
+                    
+                    
+                           
+                    
+                        </div> {% endif %}
+                        <div class="col-md-9">
                             <h6>From the Desk of the Principal</h6>
                             <b class="text-success">Dear Students, Faculty Members, Staff, Alumni, Industry Partners,
                                 and

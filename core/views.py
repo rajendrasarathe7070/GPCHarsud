@@ -97,7 +97,8 @@ def academic(request):
                'departments': department_model, 
                'academic_calendar': academic_calendar,
                'all_timetables': all_timetables}
-    
+     
+
     for sylabus in syllabuses:
         if sylabus.brach == 'CSE':
             Context.setdefault('CSE',[]).append(sylabus)
@@ -217,7 +218,13 @@ def student(request):
     return render(request,'studentcorner.html')
 
 def about(request):
-    return render(request,'About.html')
+    principal = models.CustomUser.objects.filter(category='PRINCIPAL').first()
+    
+    context = {
+        'principal':principal,
+    }
+     
+    return render(request,'About.html',context)
 
 def contact(request):
     return render(request,'Contact.html')
