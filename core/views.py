@@ -65,8 +65,8 @@ def login(request):
 def logout(request):
     if request.method=='POST':
         django_logout(request)
-        return redirect(home)
-    return redirect(home)
+        return redirect('/')
+    return redirect('/')
 
 def home(request):
     
@@ -275,3 +275,24 @@ def company_student_verification(request):
         'searched': searched
     }
     return render(request, 'company_verify.html', context)
+
+
+from rest_framework import viewsets, filters
+from rest_framework.permissions import AllowAny
+from django.shortcuts import render
+from .models import pyq
+from .serializers import PYQSerializer
+from .permissions import IsAdminOrReadOnly
+
+class PYQViewSet(viewsets.ModelViewSet):
+    queryset = pyq.objects.all().order_by("-id")
+    serializer_class = PYQSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["paper_name", "paper_code", "year", "session"]
+    ordering_fields = ["id", "year", "created_at"]
+
+
+def pyq_page(request):
+    # Public page — staff-only buttons JS me hide honge
+    return render(request, "pyqs.html", {"is_staff": request.user.is_staff})

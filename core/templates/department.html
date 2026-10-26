@@ -1,62 +1,94 @@
-<style>
-  .hding {
-    /* background-color: #28f5ff14;
-      */
-    background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-    margin-bottom: 10px;
-    border: 3px solid #861414;
-    text-transform: uppercase;
-    width: 100%;
-    max-width: 100%;
-    max-height: 40px;
-    /* font-size: 25px; */
-    color: #f8f8fa;
-    font-size: 1.5rem;
-    text-decoration: wavy;
-    text-align: left;
-    padding-left: 30px;
-    align-items: flex-start;
+<div class="container mt-3 mb-5">
+  <style>
+    .hding {
+      background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+      margin-bottom: 10px;
 
-  }
-  body , html {
-    overflow-x: hidden;
-  }
-</style>
+      text-transform: uppercase;
+      width: 100%;
 
+      /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+      padding: 6px 15px 6px 15px;
+      color: #f8f8fa;
+      text-align: left;
 
-<style>
-  .breadcrumb-item {
-    background-color: #a2cdf9;
-  }
-</style>
-<div class="container-fluid mt-3 mb-5">
-  <nav class="hding rounded-1 ">
-    <div class="hstack gap-3 p-0" style="  display: flex;
-              flex-direction: row;
-              align-items: center;
-              align-self: stretch;">
-      <div class="p-0">Department</div>
-      <div class="p-0 ms-auto" style="margin-left: 800px !important ;">
-        <ol class="breadcrumb" style="font-size:medium; padding: 3px !important;">
+      display: flex;
+      align-items: center;
+    }
 
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">facility</li>
-        </ol>
+    /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+    .hding-text {
+      font-weight: bold;
+      white-space: nowrap;
+      /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+      font-size: 3.4vw;
+    }
+
+    /* ब्रेडक्रंब आइटम स्टाइल */
+    .breadcrumb-item {
+      background-color: #a2cdf9;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .custom-breadcrumb {
+      font-size: 2.2vw !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+    @media (min-width: 576px) {
+      .hding-text {
+        font-size: 1.1rem;
+        /* टैबलेट पर साइज */
+      }
+
+      .custom-breadcrumb {
+        font-size: 0.85rem !important;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .hding-text {
+        font-size: 1.35rem;
+        /* डेस्कटॉप पर साइज */
+      }
+
+      .hding {
+        padding-left: 30px;
+        /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+      }
+    }
+  </style>
+
+  <div class="container-fluid mt-3 mb-5 px-0">
+    <nav class="hding rounded-1 py-0">
+      <div class="d-flex w-100 justify-content-between align-items-center">
+
+        <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+        <div class="hding-text">
+          Department
+        </div>
+
+        <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+        <div class="d-none d-sm-block">
+          <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Department</li>
+          </ol>
+        </div>
+
       </div>
-      <div class="p-0"></div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </div>
 
 
 
 <style>
   /* Custom clean styling that real developers write - No AI bloat */
-  body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: #333;
-  }
+   
 
   .dept-tab-nav {
     border-bottom: 2px solid #dee2e6;

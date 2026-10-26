@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PYQs</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+    {% include 'navbar.html' %}
+    
+  </nav>
+
+<div class="container py-4" id="PYQs">
+    <h3 class="mb-3">Previous Year Question Papers</h3>
+
+    <!-- Search + Add -->
+    <div class="d-flex gap-2 mb-3">
+        <input id="search" type="text" class="form-control" placeholder="Search by paper name / code / year / session...">
+        {% if is_staff %}
+        <button class="btn btn-success" onclick="openAdd()">+ Add PYQ</button>
+        {% endif %}
+    </div>
+
+    <!-- Table -->
+    <div class="card shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Paper Code</th>
+                        <th>Paper Name</th>
+                        <th>Year</th>
+                        <th>Session</th>
+                        <th>File / Link</th>
+                        {% if is_staff %}<th style="width:160px">Actions</th>{% endif %}
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <tr><td colspan="7" class="text-center py-4">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-3">
+        <ul id="pagination" class="pagination justify-content-center"></ul>
+    </nav>
+</div>
+
+<!-- Add/Edit Modal -->
+{% if is_staff %}
+<div class="modal fade" id="pyqModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">{% csrf_token %}
+      <form id="pyqForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add PYQ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="pyqId">
+          <div class="mb-2">
+            <label class="form-label">Paper Code</label>
+            <input type="text" class="form-control" id="paper_code" maxlength="10">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Paper Name</label>
+            <input type="text" class="form-control" id="paper_name" maxlength="100">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Year</label>
+            <input type="text" class="form-control" id="year" maxlength="10">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Session (F/S)</label>
+            <select class="form-select" id="session">
+              <option value="">-- Select --</option>
+              <option value="F">F</option>
+              <option value="S">S</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">PDF Link (Drive)</label>
+            <input type="url" class="form-control" id="pdf_link">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Or Upload PDF</label>
+            <input type="file" class="form-control" id="pdf_file" accept="application/pdf">
+          </div>
+          <div id="formError" class="text-danger small"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ============================================================
+   API base — trailing slash COMPULSORY (Django APPEND_SLASH)
+   ============================================================ */
+const API = "/api/pyqs/";
+const IS_STAFF = {{ is_staff|yesno:"true,false" }};
+
+let currentPage = 1;
+let searchTerm = "";
+let cache = {};   // id -> item (for edit)
+
+/* ---------- Helpers ---------- */
+function getCookie(name) {
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : "";
+}
+
+function apiUrl(path = "") {
+    // API already ends with "/", path bhi "/" pe end hota hai
+    return `${API}${path}`;
+}
+
+/* ---------- Normalize paginated / non-paginated response ---------- */
+function normalize(data) {
+    if (data && Array.isArray(data.results)) {
+        return { results: data.results, count: data.count || 0 };
+    }
+    if (Array.isArray(data)) {
+        return { results: data, count: data.length };
+    }
+    return { results: [], count: 0 };
+}
+
+/* ---------- Load list ---------- */
+async function loadPYQs(page = 1, search = "") {
+    currentPage = page;
+    searchTerm = search;
+
+    const params = new URLSearchParams({ page: String(page) });
+    if (search) params.append("search", search);
+
+    try {
+        const res = await fetch(apiUrl(`?${params.toString()}`), {
+            headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderTable(data);
+        renderPagination(data);
+    } catch (err) {
+        document.getElementById("tbody").innerHTML =
+            `<tr><td colspan="7" class="text-center py-4 text-danger">
+                Load failed: ${err.message}
+             </td></tr>`;
+    }
+}
+
+/* ---------- Render table ---------- */
+function renderTable(data) {
+    const { results: rows } = normalize(data);
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+
+    if (!rows.length) {
+        tbody.innerHTML =
+            `<tr><td colspan="7" class="text-center py-4 text-muted">No records found</td></tr>`;
+        return;
+    }
+
+    rows.forEach((p) => {
+        cache[p.id] = p;
+
+        const fileCell = p.pdf_file
+            ? `<a href="${p.pdf_file}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">PDF</a>`
+            : p.pdf_link
+              ? `<a href="${p.pdf_link}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">Link</a>`
+              : `<span class="text-muted">-</span>`;
+
+        const actionCell = IS_STAFF
+            ? `<button class="btn btn-sm btn-warning me-1" onclick="openEdit(${p.id})">Edit</button>
+               <button class="btn btn-sm btn-danger" onclick="deleteItem(${p.id})">Delete</button>`
+            : "";
+
+        tbody.insertAdjacentHTML(
+            "beforeend",
+            `<tr>
+                <td>${p.id}</td>
+                <td>${p.paper_code || "-"}</td>
+                <td>${p.paper_name || "-"}</td>
+                <td>${p.year || "-"}</td>
+                <td>${p.session || "-"}</td>
+                <td>${fileCell}</td>
+                ${IS_STAFF ? `<td>${actionCell}</td>` : ""}
+            </tr>`
+        );
+    });
+}
+
+/* ---------- Pagination ---------- */
+function renderPagination(data) {
+    const { count } = normalize(data);
+    const ul = document.getElementById("pagination");
+    ul.innerHTML = "";
+    if (!count) return;
+
+    const perPage = 10;
+    const totalPages = Math.ceil(count / perPage);
+
+    const mk = (label, page, disabled, active) => {
+        const li = document.createElement("li");
+        li.className = `page-item ${disabled ? "disabled" : ""} ${active ? "active" : ""}`;
+        li.innerHTML = `<a class="page-link" href="#">${label}</a>`;
+        li.onclick = (e) => {
+            e.preventDefault();
+            if (!disabled) loadPYQs(page, searchTerm);
+        };
+        return li;
+    };
+
+    ul.appendChild(mk("«", currentPage - 1, currentPage === 1, false));
+
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 2) {
+            ul.appendChild(mk(i, i, false, i === currentPage));
+        } else if (Math.abs(i - currentPage) === 3) {
+            const li = document.createElement("li");
+            li.className = "page-item disabled";
+            li.innerHTML = `<span class="page-link">…</span>`;
+            ul.appendChild(li);
+        }
+    }
+
+    ul.appendChild(mk("»", currentPage + 1, currentPage === totalPages, false));
+}
+
+/* ---------- Search (debounced) ---------- */
+let timer;
+const searchInput = document.getElementById("search");
+if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => loadPYQs(1, e.target.value.trim()), 350);
+    });
+}
+
+/* ============================================================
+   Staff-only: Add / Edit / Delete
+   ============================================================ */
+let modal;
+if (IS_STAFF) {
+    modal = new bootstrap.Modal(document.getElementById("pyqModal"));
+
+    window.openAdd = () => {
+        document.getElementById("pyqForm").reset();
+        document.getElementById("pyqId").value = "";
+        document.getElementById("modalTitle").textContent = "Add PYQ";
+        document.getElementById("formError").textContent = "";
+        modal.show();
+    };
+
+    window.openEdit = (id) => {
+        const p = cache[id];
+        if (!p) return;
+        document.getElementById("pyqForm").reset();
+        document.getElementById("pyqId").value = p.id;
+        document.getElementById("paper_code").value = p.paper_code || "";
+        document.getElementById("paper_name").value = p.paper_name || "";
+        document.getElementById("year").value = p.year || "";
+        document.getElementById("session").value = p.session || "";
+        document.getElementById("pdf_link").value = p.pdf_link || "";
+        document.getElementById("modalTitle").textContent = "Edit PYQ #" + p.id;
+        document.getElementById("formError").textContent = "";
+        modal.show();
+    };
+
+    window.deleteItem = async (id) => {
+        if (!confirm("Delete this PYQ?")) return;
+        try {
+            const res = await fetch(apiUrl(`${id}/`), {
+                method: "DELETE",
+                headers: { "X-CSRFToken": getCookie("csrftoken") },
+                credentials: "same-origin",
+            });
+            if (res.ok) {
+                loadPYQs(currentPage, searchTerm);
+            } else if (res.status === 403) {
+                alert("Permission denied. Sirf staff user delete kar sakta hai.");
+            } else {
+                alert(`Delete failed (HTTP ${res.status})`);
+            }
+        } catch (err) {
+            alert("Delete error: " + err.message);
+        }
+    };
+
+    document.getElementById("pyqForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const id = document.getElementById("pyqId").value;
+        const fd = new FormData();
+        fd.append("paper_code", document.getElementById("paper_code").value);
+        fd.append("paper_name", document.getElementById("paper_name").value);
+        fd.append("year", document.getElementById("year").value);
+        fd.append("session", document.getElementById("session").value);
+        fd.append("pdf_link", document.getElementById("pdf_link").value);
+
+        const fileInput = document.getElementById("pdf_file");
+        const file = fileInput.files[0];
+        if (file) fd.append("pdf_file", file);
+
+        const method = id ? "PATCH" : "POST";
+        const url = id ? apiUrl(`${id}/`) : apiUrl();   // ✅ hamesha slash ke saath
+
+        console.log(`[PYQ] ${method} → ${url}`);         // debug
+
+        try {
+            const res = await fetch(url, {
+                method,
+                body: fd,
+                headers: { "X-CSRFToken": getCookie("csrftoken") },
+                credentials: "same-origin",
+            });
+
+            if (res.ok) {
+                modal.hide();
+                loadPYQs(currentPage, searchTerm);
+            } else {
+                const err = await res.json().catch(() => ({}));
+                document.getElementById("formError").textContent =
+                    typeof err === "object" ? JSON.stringify(err) : String(err);
+            }
+        } catch (err) {
+            document.getElementById("formError").textContent =
+                "Network error: " + err.message;
+        }
+    });
+}
+
+/* ---------- Initial load ---------- */
+loadPYQs();
+</script>
+ 
+</body>
+</html>

@@ -511,3 +511,17 @@ class syllabus(models.Model):
         return f"{self.brach} , {self.semester}"
     
     
+class pyq(models.Model):
+    id=models.AutoField(primary_key=True)
+    paper_code = models.CharField(blank=True, null=True , max_length=10 , verbose_name="PAPER CODE")
+    paper_name = models.CharField(max_length=100 , blank=True, null=True , verbose_name="PAPER NAME")
+    year = models.CharField(max_length=10 , blank=True, null=True , verbose_name="PAPER YEAR ")
+    session = models.CharField(max_length=10 , blank=True, null=True , verbose_name="PAPER SESSION TYPES (F/S)")
+    pdf_link = models.URLField(blank=True, null=True , verbose_name="PASTE PAPER LINK GOOGLE DRIVE PUBLIC SHERE LINK -")
+    pdf_file = models.FileField(upload_to="pyqs",blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.id} - {self.paper_name} - {self.paper_code} - {self.session}"
+    
+    

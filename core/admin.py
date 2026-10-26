@@ -9,6 +9,8 @@ from two_factor.admin import AdminSiteOTPRequired
 from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement
 from django.contrib import admin
 
+
+
 class CustomUserInline(admin.TabularInline):
     model = models.CustomUser
     extra = 1  # नए स्टाफ/फैकल्टी जोड़ने के लिए कितने खाली रो (Rows) दिखाने हैं
@@ -212,5 +214,8 @@ admin.site.register(models.RulseUpdate_Campus)
 
 
 admin.site.register(models.syllabus)
- 
+
+
+admin.site.register(models.pyq)
+  
 
