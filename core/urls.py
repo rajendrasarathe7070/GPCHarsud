@@ -2,11 +2,14 @@ from django.urls import path
 from . import views
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import PYQViewSet
+from .views import PYQViewSet ,CheatSheetViewSet, CategoryViewSet,cheatsheet_page
+
 
  
 router = DefaultRouter()
 router.register(r'pyqs', PYQViewSet, basename='pyq')
+router.register("sheets", CheatSheetViewSet, basename="sheet")
+router.register("categories", CategoryViewSet, basename="category")
 
 
 urlpatterns = [
@@ -24,7 +27,8 @@ urlpatterns = [
     path('About',views.about,name='about'),
     path('campus.html',views.campuslife,name='campuslife'),
     
-    path("pyqs/", views.pyq_page, name="pyq-page"),
+    path("pyqs/", views.pyq_page, name="pyqs"),
+    path("cheatsheets/", cheatsheet_page, name='cheatsheets'),
     
     path('googled61072f71b08753c.html',views.verification, name='googled61072f71b08753c'),
     path('verify-student/', views.company_student_verification, name='company_student_verification'),

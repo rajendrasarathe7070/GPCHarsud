@@ -11,9 +11,11 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from . import models
 from .models import PlacementBatch
- 
+from rest_framework import serializers
+from django.db.models import Q                # (agar Q chahiye)
+from .models import Notice, CheatSheet, Category
 from django.contrib import messages
-from .models import StudentEngagement 
+from .models import StudentEngagement , Course_Department
 
 def verification(request):
     return render(request,'googled61072f71b08753c.html') 
@@ -73,11 +75,9 @@ def home(request):
     return render(request,"index.html")
 
 def index(request):
-    # impnotices = models.Notice.objects.all().order_by('-created_at')
-     
-    impnotices = models.Notice.objects.select_related('created_by').all().order_by('-created_at')
+    impnotices =  Notice.objects.select_related('created_by').all().order_by('-created_at')
 
-    department_model = models.Course_Department.objects.all()
+    department_model = Course_Department.objects.all()
     # सिर्फ उन यूज़र्स को गेट करेगा जिनकी केटेगरी HOD है
   
    
@@ -295,4 +295,52 @@ class PYQViewSet(viewsets.ModelViewSet):
 
 def pyq_page(request):
     # Public page — staff-only buttons JS me hide honge
-    return render(request, "pyqs.html", {"is_staff": request.user.is_staff})
+    return render(request, "pyq/pyqs.html", {"is_staff": request.user.is_staff})
+
+from rest_framework import viewsets, filters, parsers
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from django.shortcuts import render
+ 
+from .models import CheatSheet, Category
+from .serializers import CheatSheetSerializer, CategorySerializer
+from .permissions import IsOwnerOrAdminOrReadOnly
+from .pagination import StandardPagination
+
+
+class CheatSheetViewSet(viewsets.ModelViewSet):
+    serializer_class   = CheatSheetSerializer
+    permission_classes = [IsOwnerOrAdminOrReadOnly]
+    pagination_class   = StandardPagination
+
+    # 🆕 file upload + JSON dono accept
+    parser_classes = [parsers.MultiPartParser, parsers.FormParser, parsers.JSONParser]
+
+    filter_backends  = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ["category", "is_public", "owner"]
+    search_fields    = ["title", "content", "category__name"]
+    ordering_fields  = ["created_at", "updated_at", "title"]
+    ordering         = ["-created_at"]
+
+    def get_queryset(self):
+        qs = CheatSheet.objects.select_related("owner", "category")
+        user = self.request.user
+        if user.is_authenticated and user.is_staff:
+            return qs
+        if user.is_authenticated:
+            return qs.filter(Q(is_public=True) | Q(owner=user))   # ✅
+        return qs.filter(is_public=True)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = None
+
+
+def cheatsheet_page(request):
+    return render(request, "cheatsheets/list.html")

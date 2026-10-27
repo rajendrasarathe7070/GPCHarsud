@@ -6,7 +6,7 @@ import time
 from django.utils import timezone
 from decimal import Decimal
 from django.conf import settings
- 
+from django.db.models import Q   
 
 class info(models.Model):
     choices_page=[
@@ -107,7 +107,7 @@ class CustomUser(AbstractUser):
         ('STAFFS', 'Academic Staff'),
          ('STUDENT', 'Student'),
     ]
-    slug=models.SlugField(unique=True, null=True, blank=True)
+    
     photo=models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     
     phone = models.CharField(max_length=15, null=True,default=None, verbose_name='Phone Number')
@@ -524,4 +524,66 @@ class pyq(models.Model):
     def __str__(self):
         return f"{self.id} - {self.paper_name} - {self.paper_code} - {self.session}"
     
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class CheatSheet(models.Model):
+    title       = models.CharField(max_length=200)
+    content     = models.TextField()
+    category    = models.ForeignKey(Category, on_delete=models.SET_NULL,
+                                    null=True, blank=True, related_name="sheets")
+    owner       = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="sheets")
+    is_public   = models.BooleanField(default=True)
     
+    file         = models.FileField(upload_to='notes_cheatsheet', null=True, blank=True,
+                                    help_text="PDF upload karo")
+    google_link  = models.URLField(null=True, blank=True,
+                                   help_text="Google Drive / Docs ka public link")
+    
+    created_at  = models.DateTimeField(auto_now_add=True)
+    updated_at  = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title
+    
+    def clean(self):
+        if not self.file and not self.google_link:
+            raise ValidationError("File ya Google link me se ek zaroor do.")
+
+    # 🎯 helper: PDF viewable URL
+    def pdf_view_url(self):
+        if self.file:
+            try:
+                return self.file.url
+            except ValueError:
+                pass
+        if self.google_link:
+            return _gdrive_preview(self.google_link)
+        return None
+
+
+def _gdrive_preview(url: str) -> str:
+    """Google Drive share link ko preview link me convert karo."""
+    import re
+    if not url:
+        return url
+    # https://drive.google.com/file/d/<ID>/view?usp=sharing
+    m = re.search(r"/d/([a-zA-Z0-9_-]+)", url)
+    if m:
+        return f"https://drive.google.com/file/d/{m.group(1)}/preview"
+    # https://docs.google.com/document/d/<ID>/edit
+    m = re.search(r"/document/d/([a-zA-Z0-9_-]+)", url)
+    if m:
+        return f"https://docs.google.com/document/d/{m.group(1)}/preview"
+    return url

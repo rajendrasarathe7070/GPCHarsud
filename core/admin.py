@@ -3,13 +3,64 @@ from . import models
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Responsibility
 from django.contrib import admin
- 
+from django.utils.html import format_html
  
 from two_factor.admin import AdminSiteOTPRequired
-from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement
+from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement ,pyq
 from django.contrib import admin
 
+@admin.register(pyq)
+class PYQAdmin(admin.ModelAdmin):
+    # 1. Admin Panel की मुख्य लिस्ट में कौन-कौन से कॉलम्स दिखाई देंगे
+    list_display = (
+        'id', 
+        'paper_code', 
+        'paper_name', 
+        'year', 
+        'session', 
+        'display_pdf_link',  # कस्टम क्लिक करने योग्य लिंक
+        'display_pdf_file',  # कस्टम फाइल स्टेटस
+        'created_at'
+    )
 
+    # 2. किन-किन फील्ड्स पर क्लिक करके मॉडल के अंदर एडिट करने जा सकते हैं
+    list_display_links = ('id', 'paper_name')
+
+    # 3. दाहिने हाथ (Right side) पर फिल्टर लगाने के लिए विकल्प
+    list_filter = ('year', 'session', 'created_at')
+
+    # 4. सर्च बार में किन-किन फील्ड्स से डेटा खोजा जा सकता है
+    search_fields = ('paper_code', 'paper_name', 'year')
+
+    # 5. लिस्ट पेज पर ही सीधे एडिट करने की अनुमति देने के लिए फील्ड्स
+    list_editable = ('session', 'year')
+
+    # 6. डेटा को दिखाने का क्रम (नया पेपर सबसे ऊपर दिखेगा)
+    ordering = ('-created_at',)
+
+    # 7. प्रति पेज कितने पेपर्स दिखाई देंगे (Pagination)
+    list_per_page = 20
+
+    # ---- कस्टम मेथड्स (Custom Methods for Better UI) ----
+
+    # गूगल ड्राइव लिंक को एडमिन पैनल में ही क्लिक करने योग्य (Clickable) बनाने के लिए
+    def display_pdf_link(self, obj):
+        if obj.pdf_link:
+            return format_html('<a href="{}" target="_blank" style="color: #0d6efd; font-weight: bold;">🔗 Open Drive</a>', obj.pdf_link)
+        return "-"
+    display_pdf_link.short_description = "Google Drive Link"
+
+    # अपलोडेड PDF फाइल को एडमिन पैनल में देखने और उसका साइज/स्टेटस जानने के लिए
+    def display_pdf_file(self, obj):
+        if obj.pdf_file:
+            try:
+                # फाइल का साइज केबी (KB) में दिखाने के लिए
+                size = obj.pdf_file.size / 1024
+                return format_html('<a href="{}" target="_blank" style="color: #198754;">📄 View ({:.1f} KB)</a>', obj.pdf_file.url, size)
+            except:
+                return format_html('<a href="{}" target="_blank" style="color: #198754;">📄 View File</a>', obj.pdf_file.url)
+        return "-"
+    display_pdf_file.short_description = "Uploaded PDF"
 
 class CustomUserInline(admin.TabularInline):
     model = models.CustomUser
@@ -199,7 +250,7 @@ class TimetableAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-# admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Responsibility)
 # admin.site.register(models.Course_Department)
 admin.site.register(models.Timetable, TimetableAdmin)
@@ -214,8 +265,4 @@ admin.site.register(models.RulseUpdate_Campus)
 
 
 admin.site.register(models.syllabus)
-
-
-admin.site.register(models.pyq)
-  
-
+ 
