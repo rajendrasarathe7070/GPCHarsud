@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('About',views.about,name='about'),
     path('campus.html',views.campuslife,name='campuslife'),
+    path('contact_us',views.contact_us , name='contact_us'),
     
     path("pyqs/", views.pyq_page, name="pyqs"),
     path("cheatsheets/", cheatsheet_page, name='cheatsheets'),

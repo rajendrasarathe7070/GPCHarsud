@@ -344,3 +344,13 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 def cheatsheet_page(request):
     return render(request, "cheatsheets/list.html")
+
+
+def contact_us(request):
+ 
+    users_with_duties = models.CustomUser.objects.filter(duties__isnull=False).distinct()
+    
+    context = {
+        'users': users_with_duties
+    }
+    return render(request, 'contact/contact_us.html', context)

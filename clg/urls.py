@@ -31,10 +31,12 @@ admin.site.site_header = "Govt. Polytechnic Collage Harsud "
  
 urlpatterns = [
     
-    path("admin-rajend-administrator/", admin.site.urls),
+    path("admin-rajend-administrator/", admin.site.urls   ),
     # path('' ,views.home ,name="home"),
     path('', include(tf_urls)),
     path('',include('core.urls')),
+    path("dashboard/", include("dashboard.urls")),
+
     
 
 

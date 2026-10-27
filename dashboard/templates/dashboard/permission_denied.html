@@ -1,0 +1,11 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Access Denied{% endblock %}
+{% block content %}
+<div class="alert alert-danger shadow p-4">
+  <h4><i class="bi bi-shield-x"></i> Access Denied (403)</h4>
+  <p class="mb-0">
+    {{ reason|default:"Aapko is page ka access nahi hai. Admin se permission maangein." }}
+  </p>
+  <a href="{% url 'dashboard:router' %}" class="btn btn-sm btn-outline-dark mt-3">Go to Dashboard</a>
+</div>
+{% endblock %}

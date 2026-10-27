@@ -139,6 +139,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     
+     "dashboard.middleware.AdminTwoFactorEnforceMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -156,9 +157,6 @@ AXES_LOCKOUT_PARAMETERS = [
 AXES_LOCKOUT_TEMPLATE = 'axes/lockout.html' 
 
 
-LOGIN_URL = 'two_factor:login'
-LOGIN_REDIRECT_URL = '/'
-ROOT_URLCONF = "clg.urls"
 
 TEMPLATES = [
     {
@@ -258,4 +256,18 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_ROOT= os.path.join(BASE_DIR, "media")
 MEDIA_URL="/media/"
 
+LOGIN_URL = 'two_factor:login'
+LOGIN_REDIRECT_URL = '/'
+ROOT_URLCONF = "clg.urls"
+
  
+DASHBOARD_APP_LABEL = "core"
+
+DASHBOARD_TOTP_ISSUER = "My Institute Dashboard"
+DASHBOARD_LOGIN_URL  = "/dashboard/login/"  
+
+# (Optional) Student dashboard ke extra quick-link cards
+STUDENT_EXTRA_CARDS = [
+    # {"label": "Notices",   "url": "/notices/",   "icon": "bi-bell"},
+    # {"label": "Timetable", "url": "/timetable/", "icon": "bi-calendar3"},
+]

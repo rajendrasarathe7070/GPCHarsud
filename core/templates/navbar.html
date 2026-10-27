@@ -262,7 +262,7 @@
             <!-- Top Bar -->
             <div class="top-bar bg-danger">
                 <div class="container-fluid d-flex justify-content-end align-items-center">
-                    <a href="{% url 'login' %}" class="me-3">User Login</a>
+                    <a href="{% url 'dashboard:login' %}" class="me-3">User Login</a>
                     <span class="me-3 text-white">|</span>
                     <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
                 </div>
@@ -282,6 +282,7 @@
                         <div class="col-lg-3 d-none d-lg-flex justify-content-end">
                             <img src="/static/images/logo2.png" alt="Right Logo" class="school-logo">
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -416,15 +417,133 @@
                                         Placement Dashboard</li>
                                 </ul>
                             </li>
+
+                            <li class="nav-item dropdown"><a class="nav-link  dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Contact Us</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'contact_us' %}">Contact Page</a></li>
+                                </ul>
+                            </li>
+
+                             {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"> <span><i
+                                            class="bi bi-person-circle"></i> {{ user.get_full_name|default:user.username }}</span></a>
+                                <ul class="dropdown-menu">
+                            
+                                    <li class="dropdown-item active" onclick="window.location.href='dashboard' "> Profile
+                                    </li>
+                            
+                                    <li><a class="dropdown-item">
+                                            <form method="post" action="{% url 'dashboard:logout' %}" class="d-inline">
+                                                {% csrf_token %}
+                                                <button class="btn btn-sm btn-outline-light" type="submit">Logout</button>
+                                            </form>
+                                        </a></li>
+                            
+                                </ul>
+                            </li>
+                            
+                            {% endif %}
+
+                          
+
                         </ul>
+                       
                     </div>
                 </div>
+
+              
+               
             </nav>
            
 
         </div> <!-- End Unique Sticky Navbar -->
 
-    </div> <!-- End Unique Main Wrapper -->
+    </div>
+
+    
+    {% if not user.is_authenticated %}
+        <div class="sidebar-login-container">
+  <style>.sidebar-login-container {
+  position: fixed;
+  right: 0;
+  top: 35%; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  z-index: 9999;
+}
+
+.student-btn , .institute-btn , .admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: white;
+  padding: 12px;
+  font-family: sans-serif;
+  font-weight: bold;
+  border-radius: 5px 0 0 5px;
+  box-shadow: -2px 2px 8px rgba(0,0,0,0.2);
+  
+ 
+  width: 45px; 
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  white-space: nowrap;
+}
+ 
+
+.btn-text {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+.btn-icon {
+  font-size: 20px;
+  width: 25px;
+  text-align: center;
+}
+
+/* 🎯 मुख्य लॉजिक: जिस सिंगल बटन पर होवर होगा, सिर्फ उसकी विड्थ बढ़ेगी */
+.slide-btn:hover {
+  width: 180px; 
+}
+
+.slide-btn:hover .btn-text {
+  opacity: 1;
+}
+
+/* बटनों के रंग */
+.student-btn { background-color: #2196F3; }
+.institute-btn { background-color: #4CAF50; }
+.admin-btn { background-color: #a30046; }
+</style>
+  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
+  <a href=" {% url 'dashboard:student' %}" class="slide-btn student-btn">
+    <span class="btn-text">Student Login</span>
+    <span class="btn-icon bi-person-fill-check"></span>
+  </a>
+
+  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
+  <a href=" {% url 'dashboard:staff' %}" class="slide-btn institute-btn">
+    <span class="btn-text">Institute Login</span>
+    <span class="btn-icon bi-person-fill-lock"></span>
+  </a>
+
+  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
+  <a href="/admin-rajend-administrator/" class="slide-btn admin-btn">
+    <span class="btn-text">Admin Login</span>
+    <span class="btn-icon bi-person-fill-gear"></span>
+  </a>
+
+</div>
+    {% endif %}
+        
+
+ <!-- End Unique Main Wrapper -->
     <script>
         function switchCampusTabByPane() {
             // 1. URL से हैश (#campus-tab-pane आदि) प्राप्त करें

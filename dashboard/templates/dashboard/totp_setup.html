@@ -1,0 +1,46 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Setup 2FA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-3"><i class="bi bi-phone"></i> Setup 2FA</h4>
+
+        <ol class="mb-3 small text-muted">
+          <li>Google Authenticator / Authy / Microsoft Authenticator install karein.</li>
+          <li>Neeche QR scan karein <strong>ya</strong> manual secret enter karein.</li>
+          <li>App se 6-digit code daalein.</li>
+        </ol>
+
+        {% if qr_data_url %}
+          <div class="text-center mb-3">
+            <img src="{{ qr_data_url }}" alt="QR Code" class="img-fluid" style="max-width:220px;">
+          </div>
+        {% endif %}
+
+        <div class="alert alert-secondary small">
+          <strong>Manual secret:</strong>
+          <code class="ms-2">{{ secret }}</code>
+        </div>
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger small">{{ form.non_field_errors.0 }}</div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <label class="form-label">6-digit code</label>
+          {{ form.code }}
+          {% if form.code.errors %}<div class="text-danger small">{{ form.code.errors.0 }}</div>{% endif %}
+
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-success flex-fill"><i class="bi bi-check2-circle"></i> Enable 2FA</button>
+            <a href="{% url 'dashboard:totp_setup_prompt' %}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

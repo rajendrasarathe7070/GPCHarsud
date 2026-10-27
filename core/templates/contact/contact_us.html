@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family:'Times New Roman', Times, serif;
+        }
+         
+        .info-box {
+            background: #fff;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            height: 100%;
+        }
+        .table th {
+            background-color: #f1f1f1;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .table td {
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+        .email-link {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        .email-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+    {% include 'navbar.html' %}
+    
+  </nav>
+<div class="container mt-4 mb-5">
+    
+    
+
+  <div class="container mt-3 mb-5 px-0">
+     <style>
+                        .hding {
+                            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+                            margin-bottom: 10px;
+
+                            /* border: 3px solid #861414; */
+                            text-transform: uppercase;
+                            width: 100%;
+
+                            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+                            padding: 6px 15px 6px 15px;
+                            color: #f8f8fa;
+                            text-align: left;
+
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+                        .hding-text {
+                            font-weight: bold;
+                            white-space: nowrap;
+                            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+                            font-size: 3.4vw;
+                            font-family: 'Times New Roman', Times, serif;
+                        }
+
+                        /* ब्रेडक्रंब आइटम स्टाइल */
+                        .breadcrumb-item {
+                            background-color: #a2cdf9;
+                            padding: 2px 6px;
+                            border-radius: 3px;
+                        }
+
+                        .custom-breadcrumb {
+                            font-size: 2.2vw !important;
+                            margin-bottom: 0 !important;
+                            padding: 0 !important;
+                        }
+
+                        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+                        @media (min-width: 576px) {
+                            .hding-text {
+                                font-size: 1.1rem;
+                                /* टैबलेट पर साइज */
+                            }
+
+                            .custom-breadcrumb {
+                                font-size: 0.85rem !important;
+                            }
+                        }
+
+                        @media (min-width: 992px) {
+                            .hding-text {
+                                font-size: 1.35rem;
+                                /* डेस्कटॉप पर साइज */
+                            }
+
+                            .hding {
+                                padding-left: 30px;
+                                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+                            }
+                        }
+                    </style>
+                    <nav class="hding rounded-1 py-2 py-md-0">
+                        <div class="d-flex w-100  justify-content-between align-items-center">
+                            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+                            <div class="hding-text">
+                             CONTACT US
+                            </div>
+
+                            <!-- ब्रेडक्रंब -->
+                            <div class="d-none d-sm-block">
+                                <ol class="breadcrumb custom-breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#"
+                                            class="text-decoration-none text-dark">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"> contact us</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+  <style>
+        /* CSS कनविक्शन रोकने के लिए यूनिक नेमस्पेस 'gpc-card-' */
+        .gpc-card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .gpc-card-wrapper * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gpc-card-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1300px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        /* बाईं तरफ का विवरण ब्लॉक */
+        .gpc-card-info-pane {
+            flex: 1.2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gpc-card-info-pane h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .gpc-card-subtitle {
+            font-size: 14px;
+            color: #4b5563;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .gpc-card-details-list {
+            list-style: none;
+        }
+
+        .gpc-card-details-list li {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .gpc-card-details-list strong {
+            color: #111827;
+        }
+
+        .gpc-card-details-list a {
+            color: #2563eb;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .gpc-card-details-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* दाईं तरफ का लाइव या स्टेटिक मैप ब्लॉक */
+        .gpc-card-map-pane {
+            flex: 1;
+            position: relative;
+            background-color: #e5e7eb;
+            min-height: 280px;
+        }
+
+        .gpc-card-map-pane iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .gpc-card-map-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ffffff;
+            color: #2563eb;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            border: 1px solid #d1d5db;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .gpc-card-map-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        /* मोबाइल रेस्पॉन्सिव लेआउट */
+        @media (max-width: 768px) {
+            .gpc-card-container {
+                flex-direction: column;
+            }
+            .gpc-card-info-pane {
+                padding: 25px;
+            }
+            .gpc-card-map-pane {
+                height: 250px;
+                min-height: 250px;
+            }
+        }
+    </style>
+ 
+
+<div class="gpc-card-wrapper">
+    <div class="gpc-card-container">
+
+        <!-- कॉलेज की जानकारी (Left Pane) -->
+        <div class="gpc-card-info-pane">
+            <h1>GOVT. POLYTECHNIC COLLEGE</h1>
+            <div class="gpc-card-subtitle">HARSUD (DIST. KHANDWA) M.P. - 450116</div>
+
+            <ul class="gpc-card-details-list">
+                <li>(Eklavya Government Polytechnic College)</li>
+                <li><strong>पता:</strong> Harda Road, Old Harsud, District Khandwa, Madhya Pradesh - 450116</li>
+                <li><strong>सम्बद्धता:</strong> Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</li>
+                <li><strong>ई-मेल:</strong> <a href="mailto:prinpoly.harkhd@mp.gov.in">prinpoly.harkhd@mp.gov.in</a>
+                </li>
+                <li><strong>आधिकारिक पोर्टल:</strong> <a href="https://www.dte.mp.gov.in"
+                        target="_blank">dte.mp.gov.in</a></li>
+            </ul>
+        </div>
+
+        <!-- लाइव मैप सेक्शन (Right Pane) -->
+        <div class="gpc-card-map-pane">
+            <!-- ओपन इन मैप्स बटन जो डायरेक्ट गूगल मैप्स ऐप पर ले जाएगा -->
+
+            <!-- लाइव गूगल मैप एम्बेड ताकि यूजर पेज पर ही मैप देख सके -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4153.438488138949!2d76.70574431130656!3d21.95333037985384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd7e47baaaaaaab%3A0x5b5d8307118a8a72!2sEklavya%20Government%20Polytechnic%20College%20Harsud!5e1!3m2!1sen!2sin!4v1792171850574!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </div>
+</div>
+    
+
+    <!-- Table Section -->
+    <div class="table-responsive bg-white shadow-sm rounded mt-5">
+        <table class="table table-bordered table-striped table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>DESIGNATION</th>
+                    <th>DEPARTMENT</th>
+                    <th>TELEPHONE NO.</th>
+                    <th>EMAIL ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <!-- Name -->
+                    <td>{{ user.get_full_name|default:user.username }}</td>
+                    
+                    <!-- Designation (Category + Responsibility) -->
+                    <td>
+                        {{ user.get_category_display }}
+                        {% if user.duties.all %}
+                            <br>
+                            <small class="text-muted">
+                                {% for duty in user.duties.all %}
+                                    {{ duty.get_work_name_display }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </small>
+                        {% endif %}
+                    </td>
+                    
+                    <!-- Department -->
+                    <td>{{ user.deprtment|default:"-" }}</td>
+                    
+                    <!-- Phone -->
+                    <td>{{ user.phone|default:"-" }}</td>
+                    
+                    <!-- Email (Exactly as in Database) -->
+                    <td>
+                        {% if user.email %}
+                            <a href="mailto:{{ user.email }}" class="email-link">{{ user.email }}</a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-4">No contacts found with assigned responsibilities.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS (Optional, for tooltips/dropdowns if added later) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

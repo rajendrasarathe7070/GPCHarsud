@@ -1,0 +1,61 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Verify 2FA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="text-center mb-1"><i class="bi bi-shield-lock"></i> Verify 2FA</h4>
+        <p class="text-center text-muted small mb-4">
+          Authenticator app ka 6-digit code daalein.
+        </p>
+
+        {% if has_two_factor and has_dashboard %}
+          <div class="alert alert-info small py-2">
+            <i class="bi bi-info-circle"></i>
+            Aapka 2FA <strong>admin aur dashboard dono</strong> me set hai. Kisi bhi code se verify ho sakta hai.
+          </div>
+        {% elif has_two_factor %}
+          <div class="alert alert-info small py-2">
+            <i class="bi bi-info-circle"></i>
+            Aapka <strong>admin 2FA</strong> active hai — wahi authenticator app use karein.
+          </div>
+        {% elif has_dashboard %}
+          <div class="alert alert-info small py-2">
+            <i class="bi bi-info-circle"></i>
+            Dashboard ka TOTP use karein.
+          </div>
+        {% endif %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger small">{{ form.non_field_errors.0 }}</div>
+        {% endif %}
+        {% if messages %}
+          {% for m in messages %}
+            <div class="alert alert-{{ m.tags|default:'info' }} small">{{ m }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form.code }}
+          {% if form.code.errors %}<div class="text-danger small">{{ form.code.errors.0 }}</div>{% endif %}
+          <button class="btn btn-primary w-100 mt-3">
+            <i class="bi bi-check2"></i> Verify
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <a href="{% url 'dashboard:logout' %}" class="small text-muted"
+             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+          <form id="logout-form" method="post" action="{% url 'dashboard:logout' %}" class="d-none">
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

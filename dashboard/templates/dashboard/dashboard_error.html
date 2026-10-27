@@ -1,0 +1,9 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Error{% endblock %}
+{% block content %}
+<div class="alert alert-warning shadow p-4">
+  <h4><i class="bi bi-exclamation-octagon"></i> Kuch galat ho gaya</h4>
+  <p class="mb-0">Dashboard load karte waqt ek error aaya. Dobara try karein ya admin se contact karein.</p>
+  <a href="{% url 'dashboard:router' %}" class="btn btn-sm btn-outline-dark mt-3">Retry</a>
+</div>
+{% endblock %}

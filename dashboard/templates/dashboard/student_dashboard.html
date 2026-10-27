@@ -1,0 +1,113 @@
+{% extends "dashboard/base.html" %}
+{% block title %}My Dashboard{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0"><i class="bi bi-mortarboard-fill text-primary"></i> My Dashboard</h4>
+  <a href="{% url 'dashboard:student_profile_edit' %}" class="btn btn-sm btn-primary">
+    <i class="bi bi-pencil-square"></i> Edit Profile
+  </a>
+</div>
+
+<div class="row g-4">
+
+  <!-- Profile Card -->
+  <div class="col-md-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body text-center">
+        {% if user.photo %}
+          <img src="{{ user.photo.url }}" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+        {% else %}
+          <i class="bi bi-person-circle text-secondary" style="font-size:120px;"></i>
+        {% endif %}
+        <h5 class="mb-1">{{ user.get_full_name|default:user.username }}</h5>
+        <small class="text-muted d-block">{{ user.email }}</small>
+        <span class="badge bg-info text-dark mt-2">{{ user.get_category_display }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personal Details -->
+  <div class="col-md-8">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-white"><strong><i class="bi bi-person-vcard"></i> Personal Details</strong></div>
+      <div class="card-body">
+        <table class="table table-sm mb-0">
+          <tr><th style="width:35%">Username</th><td>{{ user.username }}</td></tr>
+          <tr><th>Full Name</th><td>{{ user.get_full_name|default:"—" }}</td></tr>
+          <tr><th>Email</th><td>{{ user.email|default:"—" }}</td></tr>
+          <tr><th>Phone</th><td>{{ user.phone|default:"—" }}</td></tr>
+          <tr><th>Education</th><td>{{ user.study|default:"—" }}</td></tr>
+          <tr><th>Experience (Years)</th><td>{{ user.experience|default:"—" }}</td></tr>
+          <tr><th>Joining Date</th><td>{{ user.joining_date|date:"d M Y"|default:"—" }}</td></tr>
+          <tr><th>Department</th><td>{{ user.deprtment|default:"—" }}</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Engagement Details -->
+    <div class="card shadow-sm">
+      <div class="card-header bg-white"><strong><i class="bi bi-briefcase"></i> Placement / Higher Studies / Other</strong></div>
+      <div class="card-body">
+        {% if engagement %}
+          <table class="table table-sm mb-0">
+            <tr><th style="width:35%">Roll No.</th><td>{{ engagement.roll_no }}</td></tr>
+            <tr><th>Branch</th><td>{{ engagement.branch_of_student|default:"—" }}</td></tr>
+            <tr><th>Passout Year</th><td>{{ engagement.passout_year|default:"—" }}</td></tr>
+
+            <tr class="table-light"><th colspan="2" class="text-primary">Placement</th></tr>
+            <tr><th>Got Placement</th><td>{% if engagement.got_placement %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
+            {% if engagement.got_placement %}
+              <tr><th>Company</th><td>{{ engagement.company_name|default:"—" }}</td></tr>
+              <tr><th>Package (LPA)</th><td>{{ engagement.package_lpa|default:"—" }}</td></tr>
+              <tr><th>Offer Details</th><td>{{ engagement.offer_letter_details|default:"—" }}</td></tr>
+            {% endif %}
+
+            <tr class="table-light"><th colspan="2" class="text-primary">Higher Studies</th></tr>
+            <tr><th>Opted</th><td>{% if engagement.opted_for_higher_studies %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
+            {% if engagement.opted_for_higher_studies %}
+              <tr><th>Institute</th><td>{{ engagement.higher_studies_institute|default:"—" }}</td></tr>
+              <tr><th>Entrance Exam</th><td>{{ engagement.entrance_exam_details|default:"—" }}</td></tr>
+            {% endif %}
+
+            <tr class="table-light"><th colspan="2" class="text-primary">Entrepreneurship</th></tr>
+            <tr><th>Opted</th><td>{% if engagement.opted_for_entrepreneurship %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
+            {% if engagement.opted_for_entrepreneurship %}
+              <tr><th>Nature of Work</th><td>{{ engagement.nature_of_work|default:"—" }}</td></tr>
+              <tr><th>Annual Turnover (LPA)</th><td>{{ engagement.annual_turnover_lpa|default:"—" }}</td></tr>
+            {% endif %}
+
+            <tr class="table-light"><th colspan="2" class="text-primary">Other</th></tr>
+            <tr><th>Preparing for Exams</th><td>{% if engagement.preparing_for_competitive_exams %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
+            <tr><th>Not Engaged</th><td>{% if engagement.not_engaged_till_now %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
+          </table>
+        {% else %}
+          <div class="alert alert-warning mb-0">
+            <i class="bi bi-info-circle"></i> Aapka engagement record abhi set nahi hua. Admin se contact karein.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Extra Cards (extensible) -->
+  {% if extra_cards %}
+    <div class="col-12">
+      <h6 class="mt-2 text-muted">Quick Links</h6>
+      <div class="row g-3">
+        {% for c in extra_cards %}
+          <div class="col-md-3">
+            <a href="{{ c.url }}" class="text-decoration-none">
+              <div class="card shadow-sm card-hover p-3 text-center">
+                <i class="bi {{ c.icon }} fs-3 text-primary"></i>
+                <div class="mt-2">{{ c.label }}</div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}
