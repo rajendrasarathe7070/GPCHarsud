@@ -260,13 +260,89 @@
         <!-- 1. ANIMATED TOP SECTION (Top Bar और Logo) -->
         <div class="animated-top">
             <!-- Top Bar -->
-            <div class="top-bar bg-danger">
+             <!-- Top Bar -->
+<div class="top-bar bg-danger d-flex align-items-center" style="height: 18px; max-height: 22px; font-family: 'Times New Roman', Times, serif; font-size: 16px; overflow: hidden;">
+    <div class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2 line-height-1">
+        
+        <!-- 1. Live Date & Time -->
+        <div id="live-clock" style="font-size: 14px; white-space: nowrap;">
+            Loading Date & Time...
+        </div>
+
+        <!-- Right Side Controls -->
+        <div class="d-flex align-items-center gap-2" style="font-size: 14px;">
+            
+            <!-- 2. Font Size Controller -->
+            <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1" style="height: 18px; line-height: 1;">
+                <span class="me-1 fw-bold" style="font-size: 11px;">FONT:</span>
+                <button onclick="changeFontSize(-1)" class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Decrease Font">A-</button>
+                <button onclick="changeFontSize(0)" class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Normal Font">A</button>
+                <button onclick="changeFontSize(1)" class="btn btn-sm btn-link text-white p-0 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Increase Font">A+</button>
+            </div>
+
+            <span style="opacity: 0.5;">|</span>
+
+            <!-- 3. Logins & Sitemap -->
+            <div class="d-flex align-items-center gap-2" style="font-size: 13px; white-space: nowrap;">
+                 
+              
+              {% if user.is_authenticated %}
+                     <a href="#" class="text-white text-decoration-none">Welcome ! {{user.get_full_name |default:user.username}}</a>
+              {% else %}
+                  <a href="#" class="text-white text-decoration-none">Student Login</a>
+                <a href="#" class="text-white text-decoration-none">Institute Login</a>
+              {% endif %}
+                
+                <span style="opacity: 0.5;">|</span>
+                <a href="#" class="text-white" title="Sitemap"><i class="fas fa-sitemap" style="font-size: 13px;"></i></a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Live Clock and Global Font Size -->
+<script>
+    // 1. Live Date and Time Script
+    function updateClock() {
+        const now = new Date();
+        const options = { 
+            weekday: 'short', 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            hour12: true 
+        };
+        // 22px की कम जगह में फिट होने के लिए सेकंड्स हटा दिए हैं
+        document.getElementById('live-clock').innerText = now.toLocaleString('en-US', options);
+    }
+    setInterval(updateClock, 60000); // हर मिनट अपडेट होगा
+    updateClock();
+
+    // 2. Font Size Changer Script (पूरे पेज के सभी टेक्स्ट पर असर करेगा)
+    let currentScale = 100; // Percentage
+    function changeFontSize(action) {
+        if (action === 1 && currentScale < 120) {
+            currentScale += 5; // Increase
+        } else if (action === -1 && currentScale > 85) {
+            currentScale -= 5; // Decrease
+        } else if (action === 0) {
+            currentScale = 100; // Reset to Default
+        }
+        // पूरे HTML / Body के बेस साइज को बदलकर सारे टेक्स्ट को इफेक्ट करेगा
+        document.documentElement.style.fontSize = currentScale + '%';
+    }
+</script>
+
+            <!-- <div class="top-bar bg-danger">
                 <div class="container-fluid d-flex justify-content-end align-items-center">
                     <a href="{% url 'dashboard:login' %}" class="me-3">User Login</a>
                     <span class="me-3 text-white">|</span>
                     <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Header Section (Logo & Text) -->
             <div class="header-section py-0">
@@ -424,7 +500,7 @@
                                 </ul>
                             </li>
 
-                             {% if user.is_authenticated %}
+                             <!-- {% if user.is_authenticated %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"> <span><i
                                             class="bi bi-person-circle"></i> {{ user.get_full_name|default:user.username }}</span></a>
@@ -443,7 +519,7 @@
                                 </ul>
                             </li>
                             
-                            {% endif %}
+                            {% endif %} -->
 
                           
 
@@ -462,9 +538,163 @@
     </div>
 
     
-    {% if not user.is_authenticated %}
+    {% if  user.is_authenticated %}
+  <div class="diary-container">
+  <!-- मुख्य वर्टिकल बटन -->
+   <style>
+    /* मुख्य कंटेनर की सेटिंग */
+.diary-container {
+  position: fixed; /* स्क्रीन पर एक जगह फिक्स रखने के लिए */
+  right: 0;        /* स्क्रीन के दाईं तरफ चिपकाने के लिए */
+  top: 50%;        /* ऊपर से दूरी */
+  display: inline-block;
+  z-index: 9999;
+}
+
+/* इमेज जैसा वर्टिकल बटन */
+.diary-button {
+  background-color: #a30046; /* मैरून/गहरा गुलाबी रंग */
+  color: white;
+  padding: 10px 5px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  writing-mode: vertical-lr; /* टेक्स्ट को खड़ा करने के लिए */
+  text-transform: uppercase;
+  border-radius: 5px 0 0 5px; /* बाएं कोने गोल करने के लिए */
+  box-shadow: -2px 2px 10px rgba(0,0,0,0.3);
+}
+
+/* लॉगिन ड्रॉपडाउन बॉक्स (शुरुआत में छुपा रहेगा) */
+.login-dropdown {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 30px; /* बटन के ठीक बगल में खुलेगा */
+  background-color: #ffffff;
+  width: 250px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.2);
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+/* बटन पर HOVER करने पर लॉगिन बॉक्स का दिखना */
+.diary-container:hover .login-dropdown {
+  display: block;
+}
+
+/* बॉक्स का हेडर */
+.login-header {
+  background-color: #f5f5f5;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* तीनों लॉगिन ऑप्शंस की स्टाइल */
+.login-option {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.login-option:last-child {
+  border-bottom: none; /* आखिरी वाले का बॉर्डर हटाना */
+}
+
+/* माउस ले जाने पर ऑप्शन का रंग बदलना */
+.login-option:hover {
+  background-color: #f9f9f9;
+}
+
+/* अलग-अलग ऑप्शंस पर हल्का सा बॉर्डर इफेक्ट (वैकल्पिक) */
+.login-option.student:hover { border-left: 4px solid #2196F3; }   /* Blue */
+.login-option.institute:hover { border-left: 4px solid #4CAF50; } /* Green */
+.login-option.admin:hover { border-left: 4px solid #f44336; }     /* Red */
+
+/* आइकॉन की स्टाइल */
+.opt-icon {
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+/* टेक्स्ट की स्टाइल */
+.opt-text strong {
+  display: block;
+  font-size: 15px;
+  color: #222;
+}
+
+.opt-text p {
+  margin: 2px 0 0 0;
+  font-size: 11px;
+  color: #777;
+}
+
+   </style>
+  <button class="diary-button">
+    <span class="icon bi-person-circle"></span>  {{ user.username}}
+  </button>
+
+  <!-- होवर करने पर खुलने वाला लॉगिन पैनल -->
+  <div class="login-dropdown">
+    <div class="login-header row"> <div class="col-4"><img height="30" class="rounded-circle" src="{% if user.photo %} {{user.photo.url }} {% else %} class='icon bi-person-circle ' {% endif %}" alt=""></div>
+    <div class="col-8 text-start">{{user.get_full_name |default:user.username}}</div> </div>
+    
+    <!-- Student Login Option -->
+   {% if not user.is_staff %}
+    <a href="{% url 'dashboard:student' %}" class="login-option student">
+      <span class="opt-icon bi-menu-app-fill"></span>
+      <div class="opt-text">
+        <strong>Student DashBoard</strong>
+      
+      </div>
+    </a>
+    {% else %}
+     <a href="{% url 'dashboard:staff' %}" class="login-option student">
+      <span class="opt-icon bi-menu-app-fill"></span>
+      <div class="opt-text">
+        <strong>Staff DashBoard</strong>
+      
+      </div>
+    </a>
+    {%endif%}
+
+    <!-- Institute Login Option -->
+     <form method="post" action="{% url 'dashboard:logout' %}" id="logoutForm">
+    {% csrf_token %}
+    <!-- इस <a> टैग को बटन की तरह काम कराने के लिए onclick जोड़ा गया है -->
+    <a class="slide-btn logout-btn login-option " onclick="document.getElementById('logoutForm').submit(); return false;" style="cursor: pointer;">
+      <span class="opt-icon bi-door-open"> </span>
+        <span class="btn-text">Logout</span>
+      
+    </a>
+</form>
+
+    <!-- Administrator Login Option -->
+    <!-- <a href="admin-login.html" class="login-option admin">
+      <span class="opt-icon">⚙️</span>
+      <div class="opt-text">
+        <strong>Administrator</strong>
+        <p>System control panel</p>
+      </div>
+    </a> -->
+  </div>
+</div>
+
+{% else %}
         <div class="sidebar-login-container">
-  <style>.sidebar-login-container {
+  <style>
+  .sidebar-login-container {
   position: fixed;
   right: 0;
   top: 35%; 
