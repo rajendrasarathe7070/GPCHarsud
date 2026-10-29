@@ -158,6 +158,7 @@ def campuslife(request):
 
 def placements(request):
     all_batches = models.PlacementBatch.objects.prefetch_related('branch_records').order_by('-year')
+    placement_officer = models.Responsibility.objects.select_related().filter(work_name='PLACEMENT').first()
     
      
     placement_students = models.CustomUser.objects.filter(
@@ -211,6 +212,8 @@ def placements(request):
         'filter_branches': filter_branches,
         'selected_filter_batch': selected_filter_batch,
         'selected_filter_branch': selected_filter_branch,
+        
+        'tpo':placement_officer,
     }
     return render(request,'Placements.html',context)
 

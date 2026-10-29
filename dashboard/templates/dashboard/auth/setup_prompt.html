@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"><title>Setup 2FA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
+  <style>
+    body { background: linear-gradient(135deg, #072b1e 0%, #0f3d2b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .auth-card { background: #fff; border-radius: 1.5rem; padding: 3rem; max-width: 520px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; }
+    .shield { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #a3f307, #10b981); display: inline-flex; align-items: center; justify-content: center; color: #072b1e; font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .btn-lime { background: #a3f307; color: #052e20; border-radius: 0.75rem; padding: 1rem; font-weight: 700; border: none; }
+    .btn-lime:hover { background: #8fd604; color: #052e20; }
+    .btn-cancel { background: #fef2f2; color: #991b1b; border-radius: 0.75rem; padding: 0.85rem; font-weight: 600; border: 1px solid #fecaca; }
+    .btn-cancel:hover { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="shield"><i class="bi bi-shield-check"></i></div>
+    <h3 class="fw-bold mb-2">2FA is Mandatory</h3>
+    <p class="text-muted mb-1"><strong>{{ username }}</strong>, you must set up 2FA to access the dashboard.</p>
+    <p class="text-danger small mb-4"><i class="bi bi-exclamation-triangle"></i> Skipping is not allowed for security.</p>
+
+    <div class="d-grid gap-3">
+      <a href="{% url 'dashboard:totp_setup' %}" class="btn btn-lime"><i class="bi bi-phone me-2"></i> Setup 2FA Now</a>
+      <form method="post" action="{% url 'dashboard:totp_cancel' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-cancel w-100"><i class="bi bi-x-circle me-2"></i> Cancel & Logout</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

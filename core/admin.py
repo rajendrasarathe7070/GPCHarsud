@@ -225,11 +225,11 @@ class CustomUserAdmin(UserAdmin):
     
     # User edit page par humari extra fields ko jodne ke liye
     fieldsets = UserAdmin.fieldsets + (
-        ('College Staff Info', {'fields': ('photo',  'phone', 'study',   'deprtment' ,'category','experience','joining_date')}),
+        ('College Staff Info', {'fields': ('photo',  'phone','cast_Categories','sex','date_of_birth', 'study',   'deprtment' ,'category','experience','joining_date')}),
     )
     # User create page par extra fields dikhane ke liye
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ('User Info', {'fields': ('photo', 'phone','study' , 'deprtment','category','experience','joining_date')}),
+        ('User Info', {'fields': ('photo', 'phone','cast_Categories','sex','date_of_birth','study' , 'deprtment','category','experience','joining_date')}),
     )
     
 

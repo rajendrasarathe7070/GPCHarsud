@@ -107,16 +107,30 @@ class CustomUser(AbstractUser):
         ('STAFFS', 'Academic Staff'),
          ('STUDENT', 'Student'),
     ]
+    cast_Categories_choices = [('ST','ST'),
+                               ('SC','SC'),
+                               ('OBC','OBC'),
+                               ('UR','UR'),
+                               ('OTHER','OTHER'),
+                               ]
     
+    sex_categories = [('M','MALE')
+                      ,('F','FEMALE'),
+                      ('OTHER','OTHER'),
+                      ]
     photo=models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     
     phone = models.CharField(max_length=15, null=True,default=None, verbose_name='Phone Number')
+    cast_Categories = models.CharField(max_length=10,blank=True, null=True  ,choices=cast_Categories_choices )
+    sex = models.CharField(max_length=10 , blank=True, null=True , default='OTHER' , choices=sex_categories )
+    date_of_birth = models.DateField(blank=True, null=True)
+    joining_date = models.DateField(null=True,  blank=True )
     study = models.CharField(max_length=100,verbose_name='Your Educations',null=True)
     experience = models.PositiveIntegerField(default=0, verbose_name='Experience in Years', null=True)
-    joining_date = models.DateField(  null=True,  blank=True )
-    deprtment = models.ForeignKey(Course_Department, on_delete=models.SET_NULL, null=True, default=None, verbose_name='Department', related_name='users')
+    
+    deprtment = models.ForeignKey(Course_Department, on_delete=models.SET_NULL, null=True,blank=True , default=None, verbose_name='Department', related_name='users')
 
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='TEACHING')
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='TEACHING' , blank=True, null=True)
     
 
     def __str__(self):

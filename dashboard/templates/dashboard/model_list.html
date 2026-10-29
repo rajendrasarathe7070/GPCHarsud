@@ -1,89 +1,47 @@
 {% extends "dashboard/base.html" %}
 {% block title %}{{ cfg.label }}{% endblock %}
 {% block content %}
-
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2 flex-wrap gap-2">
   <div>
-    <a href="{% url 'dashboard:staff_dashboard' %}" class="btn btn-sm btn-outline-secondary mb-2">
-      <i class="bi bi-arrow-left"></i> Back
-    </a>
-    <h4 class="mb-0"><i class="bi {{ cfg.icon }} text-primary"></i> {{ cfg.label }}</h4>
-    <small class="text-muted">{{ total }} total records</small>
+    <a href="{% url 'dashboard:router' %}" class="text-muted text-decoration-none small mb-2 d-inline-block"><i class="bi bi-arrow-left"></i> Back</a>
+    <h3 class="fw-bold mb-1">{{ cfg.label }}</h3>
+    <p class="text-muted mb-0 small">{{ total }} records</p>
   </div>
-  <div class="d-flex gap-2">
-    {% if can_add %}
-      <a href="{% url 'dashboard:model_add' model_key=model_key %}" class="btn btn-sm btn-success">
-        <i class="bi bi-plus-lg"></i> Add New
-      </a>
-    {% endif %}
-    {% if admin_url %}
-      <a href="{{ admin_url }}" class="btn btn-sm btn-outline-dark">
-        <i class="bi bi-gear"></i> Admin
-      </a>
-    {% endif %}
-  </div>
+  {% if can_add %}
+    <a href="{% url 'dashboard:model_add' model_key=model_key %}" class="btn btn-dark-green rounded-pill px-4"><i class="bi bi-plus-lg"></i> Add New</a>
+  {% endif %}
 </div>
 
 {% for g in groups %}
-  {% if g.label or not is_grouped %}
-    <div class="mb-4">
-      {% if g.label %}
-        <h6 class="text-uppercase text-primary mb-2">
-          <i class="bi bi-folder2-open"></i> {{ g.label }}
-          <span class="badge bg-secondary">{{ g.count }}</span>
-        </h6>
-      {% endif %}
-
-      {% if g.rows %}
-        <div class="table-responsive shadow-sm bg-white rounded">
-          <table class="table table-hover table-sm mb-0 align-middle">
-            <thead class="table-light">
-              <tr>
-                {% for h in g.headers %}<th>{{ h }}</th>{% endfor %}
-                {% if can_change or can_delete %}
-                  <th class="text-end" style="width:140px;">Actions</th>
-                {% endif %}
-              </tr>
-            </thead>
-            <tbody>
-              {% for row in g.rows %}
-                <tr>
-                  {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
-                  {% if can_change or can_delete %}
-                    <td class="text-end text-nowrap">
-                      {% if can_change %}
-                        <a href="{% url 'dashboard:model_edit' model_key=model_key pk=row.pk %}"
-                           class="btn btn-sm btn-outline-primary" title="Edit">
-                          <i class="bi bi-pencil-square"></i>
-                        </a>
-                      {% endif %}
-                      {% if can_delete %}
-                        <a href="{% url 'dashboard:model_delete' model_key=model_key pk=row.pk %}"
-                           class="btn btn-sm btn-outline-danger" title="Delete">
-                          <i class="bi bi-trash"></i>
-                        </a>
-                      {% endif %}
-                    </td>
-                  {% endif %}
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% if g.truncated %}
-          <small class="text-muted d-block mt-1">
-            ⚠ Sirf pehle {{ g.rows|length }} records dikh rahe hain (total {{ g.count }}).
-          </small>
-        {% endif %}
-      {% else %}
-        <div class="alert alert-light border mb-0">
-          <small class="text-muted">Is category me koi record nahi.</small>
-        </div>
-      {% endif %}
-    </div>
+<div class="custom-table mb-4">
+  {% if g.label %}
+    <h5 class="fw-bold mb-3 border-bottom pb-2">{{ g.label }} <span class="badge bg-secondary ms-2 rounded-pill">{{ g.count }}</span></h5>
   {% endif %}
-{% empty %}
-  <div class="alert alert-info">Koi data available nahi.</div>
+  {% if g.rows %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead><tr>
+          {% for h in g.headers %}<th class="text-nowrap">{{ h }}</th>{% endfor %}
+          {% if can_change or can_delete %}<th class="text-end">Actions</th>{% endif %}
+        </tr></thead>
+        <tbody>
+          {% for row in g.rows %}
+          <tr>
+            {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
+            {% if can_change or can_delete %}
+              <td class="text-end text-nowrap">
+                {% if can_change %}<a href="{% url 'dashboard:model_edit' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-primary"><i class="bi bi-pencil-square"></i></a>{% endif %}
+                {% if can_delete %}<a href="{% url 'dashboard:model_delete' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-danger"><i class="bi bi-trash"></i></a>{% endif %}
+              </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted text-center py-4">No records.</p>
+  {% endif %}
+</div>
 {% endfor %}
-
 {% endblock %}

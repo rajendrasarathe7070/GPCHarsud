@@ -1,113 +1,73 @@
 {% extends "dashboard/base.html" %}
-{% block title %}My Dashboard{% endblock %}
+{% block title %}My Profile{% endblock %}
 {% block content %}
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h4 class="mb-0"><i class="bi bi-mortarboard-fill text-primary"></i> My Dashboard</h4>
-  <a href="{% url 'dashboard:student_profile_edit' %}" class="btn btn-sm btn-primary">
-    <i class="bi bi-pencil-square"></i> Edit Profile
-  </a>
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+  <div><h2 class="fw-bold mb-1">Student Profile</h2><p class="text-muted mb-0">Your personal and academic details.</p></div>
+  <a href="{% url 'dashboard:student_profile_edit' %}" class="btn btn-dark-green rounded-pill px-4 shadow-sm"><i class="bi bi-pencil-square"></i> Edit Profile</a>
 </div>
 
 <div class="row g-4">
-
-  <!-- Profile Card -->
   <div class="col-md-4">
-    <div class="card shadow-sm h-100">
-      <div class="card-body text-center">
-        {% if user.photo %}
-          <img src="{{ user.photo.url }}" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
-        {% else %}
-          <i class="bi bi-person-circle text-secondary" style="font-size:120px;"></i>
-        {% endif %}
-        <h5 class="mb-1">{{ user.get_full_name|default:user.username }}</h5>
-        <small class="text-muted d-block">{{ user.email }}</small>
-        <span class="badge bg-info text-dark mt-2">{{ user.get_category_display }}</span>
+    <div class="stat-card text-center align-items-center justify-content-center h-100">
+      {% if user.photo %}
+        <img src="{{ user.photo.url }}" class="rounded-circle mb-3" width="140" height="140" style="object-fit:cover; border:4px solid #a3f307;">
+      {% else %}
+        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3 text-secondary" style="width:140px;height:140px;font-size:4rem;border:4px solid #e5e7eb;"><i class="bi bi-person"></i></div>
+      {% endif %}
+      <h4 class="fw-bold mb-1">{{ user.get_full_name|default:user.username }}</h4>
+      <p class="text-muted small mb-3">{{ user.email }}</p>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <span class="badge bg-success px-3 py-2 rounded-pill">{{ user.get_category_display }}</span>
+        {% if user.deprtment %}<span class="badge bg-secondary px-3 py-2 rounded-pill">{{ user.deprtment.Department_name }}</span>{% endif %}
+      </div>
+      <div class="mt-4 w-100 text-start bg-light p-3 rounded">
+        <div class="mb-2"><i class="bi bi-telephone text-muted me-2"></i><strong>{{ user.phone|default:"Not provided" }}</strong></div>
+        <div><i class="bi bi-calendar text-muted me-2"></i>Joined: <strong>{{ user.joining_date|date:"d M Y"|default:"N/A" }}</strong></div>
       </div>
     </div>
   </div>
 
-  <!-- Personal Details -->
   <div class="col-md-8">
-    <div class="card shadow-sm mb-4">
-      <div class="card-header bg-white"><strong><i class="bi bi-person-vcard"></i> Personal Details</strong></div>
-      <div class="card-body">
-        <table class="table table-sm mb-0">
-          <tr><th style="width:35%">Username</th><td>{{ user.username }}</td></tr>
-          <tr><th>Full Name</th><td>{{ user.get_full_name|default:"—" }}</td></tr>
-          <tr><th>Email</th><td>{{ user.email|default:"—" }}</td></tr>
-          <tr><th>Phone</th><td>{{ user.phone|default:"—" }}</td></tr>
-          <tr><th>Education</th><td>{{ user.study|default:"—" }}</td></tr>
-          <tr><th>Experience (Years)</th><td>{{ user.experience|default:"—" }}</td></tr>
-          <tr><th>Joining Date</th><td>{{ user.joining_date|date:"d M Y"|default:"—" }}</td></tr>
-          <tr><th>Department</th><td>{{ user.deprtment|default:"—" }}</td></tr>
-        </table>
+    <div class="custom-table mb-4">
+      <h5 class="fw-bold mb-4 border-bottom pb-2">Personal Details</h5>
+      <div class="row g-3">
+        <div class="col-sm-6"><span class="text-muted small fw-semibold d-block">Date of Birth</span><span class="fw-medium">{{ user.date_of_birth|date:"d M Y"|default:"N/A" }}</span></div>
+        <div class="col-sm-6"><span class="text-muted small fw-semibold d-block">Gender</span><span class="fw-medium">{{ user.get_sex_display|default:"N/A" }}</span></div>
+        <div class="col-sm-6"><span class="text-muted small fw-semibold d-block">Category</span><span class="fw-medium">{{ user.get_cast_Categories_display|default:"N/A" }}</span></div>
+        <div class="col-sm-6"><span class="text-muted small fw-semibold d-block">Education</span><span class="fw-medium">{{ user.study|default:"N/A" }}</span></div>
       </div>
     </div>
 
-    <!-- Engagement Details -->
-    <div class="card shadow-sm">
-      <div class="card-header bg-white"><strong><i class="bi bi-briefcase"></i> Placement / Higher Studies / Other</strong></div>
-      <div class="card-body">
-        {% if engagement %}
-          <table class="table table-sm mb-0">
-            <tr><th style="width:35%">Roll No.</th><td>{{ engagement.roll_no }}</td></tr>
-            <tr><th>Branch</th><td>{{ engagement.branch_of_student|default:"—" }}</td></tr>
-            <tr><th>Passout Year</th><td>{{ engagement.passout_year|default:"—" }}</td></tr>
-
-            <tr class="table-light"><th colspan="2" class="text-primary">Placement</th></tr>
-            <tr><th>Got Placement</th><td>{% if engagement.got_placement %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
-            {% if engagement.got_placement %}
-              <tr><th>Company</th><td>{{ engagement.company_name|default:"—" }}</td></tr>
-              <tr><th>Package (LPA)</th><td>{{ engagement.package_lpa|default:"—" }}</td></tr>
-              <tr><th>Offer Details</th><td>{{ engagement.offer_letter_details|default:"—" }}</td></tr>
-            {% endif %}
-
-            <tr class="table-light"><th colspan="2" class="text-primary">Higher Studies</th></tr>
-            <tr><th>Opted</th><td>{% if engagement.opted_for_higher_studies %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
-            {% if engagement.opted_for_higher_studies %}
-              <tr><th>Institute</th><td>{{ engagement.higher_studies_institute|default:"—" }}</td></tr>
-              <tr><th>Entrance Exam</th><td>{{ engagement.entrance_exam_details|default:"—" }}</td></tr>
-            {% endif %}
-
-            <tr class="table-light"><th colspan="2" class="text-primary">Entrepreneurship</th></tr>
-            <tr><th>Opted</th><td>{% if engagement.opted_for_entrepreneurship %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
-            {% if engagement.opted_for_entrepreneurship %}
-              <tr><th>Nature of Work</th><td>{{ engagement.nature_of_work|default:"—" }}</td></tr>
-              <tr><th>Annual Turnover (LPA)</th><td>{{ engagement.annual_turnover_lpa|default:"—" }}</td></tr>
-            {% endif %}
-
-            <tr class="table-light"><th colspan="2" class="text-primary">Other</th></tr>
-            <tr><th>Preparing for Exams</th><td>{% if engagement.preparing_for_competitive_exams %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
-            <tr><th>Not Engaged</th><td>{% if engagement.not_engaged_till_now %}✅ Yes{% else %}❌ No{% endif %}</td></tr>
-          </table>
-        {% else %}
-          <div class="alert alert-warning mb-0">
-            <i class="bi bi-info-circle"></i> Aapka engagement record abhi set nahi hua. Admin se contact karein.
+    <div class="custom-table">
+      <h5 class="fw-bold mb-4 border-bottom pb-2">Academic & Placement</h5>
+      {% if engagement %}
+        <div class="row g-3">
+          <div class="col-sm-4"><span class="text-muted small fw-semibold d-block">Roll No.</span><span class="fw-bold fs-5">{{ engagement.roll_no }}</span></div>
+          <div class="col-sm-4"><span class="text-muted small fw-semibold d-block">Branch</span><span class="fw-medium">{{ engagement.branch_of_student|default:"N/A" }}</span></div>
+          <div class="col-sm-4"><span class="text-muted small fw-semibold d-block">Passout Year</span><span class="fw-medium">{{ engagement.passout_year|default:"N/A" }}</span></div>
+          <div class="col-12 mt-3">
+            <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+              <div><h6 class="fw-bold mb-1">Placement</h6>
+                {% if engagement.got_placement %}<p class="text-muted small mb-0">Placed at <strong>{{ engagement.company_name }}</strong> ({{ engagement.package_lpa }} LPA)</p>
+                {% else %}<p class="text-muted small mb-0">Not placed yet.</p>{% endif %}
+              </div>
+              {% if engagement.got_placement %}<i class="bi bi-check-circle-fill text-success fs-3"></i>{% else %}<i class="bi bi-x-circle-fill text-secondary fs-3"></i>{% endif %}
+            </div>
           </div>
-        {% endif %}
-      </div>
+          <div class="col-12">
+            <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+              <div><h6 class="fw-bold mb-1">Higher Studies</h6>
+                {% if engagement.opted_for_higher_studies %}<p class="text-muted small mb-0">At <strong>{{ engagement.higher_studies_institute }}</strong>.</p>
+                {% else %}<p class="text-muted small mb-0">Not opted.</p>{% endif %}
+              </div>
+              {% if engagement.opted_for_higher_studies %}<i class="bi bi-check-circle-fill text-success fs-3"></i>{% else %}<i class="bi bi-x-circle-fill text-secondary fs-3"></i>{% endif %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="alert alert-warning mb-0 border-0 shadow-sm"><i class="bi bi-info-circle"></i> Engagement details not set up. Contact admin.</div>
+      {% endif %}
     </div>
   </div>
-
-  <!-- Extra Cards (extensible) -->
-  {% if extra_cards %}
-    <div class="col-12">
-      <h6 class="mt-2 text-muted">Quick Links</h6>
-      <div class="row g-3">
-        {% for c in extra_cards %}
-          <div class="col-md-3">
-            <a href="{{ c.url }}" class="text-decoration-none">
-              <div class="card shadow-sm card-hover p-3 text-center">
-                <i class="bi {{ c.icon }} fs-3 text-primary"></i>
-                <div class="mt-2">{{ c.label }}</div>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
-
 </div>
 {% endblock %}

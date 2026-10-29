@@ -139,7 +139,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     
-     "dashboard.middleware.AdminTwoFactorEnforceMiddleware",
+    #  "dashboard.middleware.AdminTwoFactorEnforceMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -256,11 +256,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_ROOT= os.path.join(BASE_DIR, "media")
 MEDIA_URL="/media/"
 
-LOGIN_URL = 'two_factor:login'
-LOGIN_REDIRECT_URL = '/'
+
+# LOGIN_REDIRECT_URL = '/'
 ROOT_URLCONF = "clg.urls"
 
- 
+
 DASHBOARD_APP_LABEL = "core"
 
 DASHBOARD_TOTP_ISSUER = "My Institute Dashboard"
@@ -270,4 +270,24 @@ DASHBOARD_LOGIN_URL  = "/dashboard/login/"
 STUDENT_EXTRA_CARDS = [
     # {"label": "Notices",   "url": "/notices/",   "icon": "bi-bell"},
     # {"label": "Timetable", "url": "/timetable/", "icon": "bi-calendar3"},
+]
+
+#dshboard 
+ 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1            # hours
+AXES_RESET_ON_SUCCESS = True
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_LOCKOUT_CALLABLE = None
+AXES_ENABLE_ADMIN = True
+AXES_LOCKOUT_PARAMETERS = ["username", "ip_address"]
+# LOGIN_URL = "/dashboard/login/"
+LOGIN_URL = 'two_factor:login'
+# LOGIN_REDIRECT_URL = "/dashboard/"
+DASHBOARD_APP_LABEL = "core"
+DASHBOARD_TOTP_ISSUER = "Institute Admin"
+
+TEMPLATES[0]["OPTIONS"]["context_processors"] += [
+    "dashboard.context_processors.sidebar_menus",
 ]

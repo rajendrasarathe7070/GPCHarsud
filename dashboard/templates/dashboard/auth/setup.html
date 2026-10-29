@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"><title>Setup 2FA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
+  <style>
+    body { background: linear-gradient(135deg, #072b1e 0%, #0f3d2b 100%); min-height: 100vh; padding: 2rem; display: flex; align-items: center; justify-content: center; }
+    .auth-card { background: #fff; border-radius: 1.5rem; padding: 2.5rem; max-width: 620px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+    .step { display: flex; gap: 1rem; padding: 1rem; border-radius: 0.75rem; background: #f9fafb; margin-bottom: 0.75rem; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; background: #a3f307; color: #052e20; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+    .qr-img { max-width: 220px; border-radius: 1rem; padding: 0.5rem; background: #fff; border: 2px solid #e5e7eb; }
+    .secret-box { background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 0.5rem; font-family: monospace; letter-spacing: 0.1rem; }
+    .btn-lime { background: #a3f307; color: #052e20; border-radius: 0.75rem; padding: 0.9rem; font-weight: 700; border: none; }
+    .btn-lime:hover { background: #8fd604; color: #052e20; }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <h3 class="fw-bold mb-1"><i class="bi bi-phone text-success me-2"></i> Setup 2FA</h3>
+    <p class="text-muted small mb-4">Scan the QR code with Google Authenticator, Authy, or similar.</p>
+
+    <div class="step"><div class="step-num">1</div><div><strong>Install</strong> an authenticator app.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Scan</strong> the QR code.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Enter</strong> the 6-digit code.</div></div>
+
+    {% if qr_data_url %}
+      <div class="text-center my-4"><img src="{{ qr_data_url }}" class="qr-img"></div>
+    {% endif %}
+
+    <div class="text-center mb-4">
+      <small class="text-muted">Or enter manually:</small>
+      <div class="secret-box mt-1">{{ secret }}</div>
+    </div>
+
+    {% if messages %}
+      {% for m in messages %}<div class="alert alert-{{ m.tags }} small">{{ m }}</div>{% endfor %}
+    {% endif %}
+    {% if form.non_field_errors %}<div class="alert alert-danger small">{{ form.non_field_errors.0 }}</div>{% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <label class="form-label small fw-semibold text-muted">ENTER 6-DIGIT CODE</label>
+      {{ form.code }}
+      {% if form.code.errors %}<div class="text-danger small mt-1">{{ form.code.errors.0 }}</div>{% endif %}
+      <button type="submit" class="btn btn-lime w-100 mt-3"><i class="bi bi-check2-circle me-1"></i> Enable 2FA</button>
+    </form>
+  </div>
+</body>
+</html>

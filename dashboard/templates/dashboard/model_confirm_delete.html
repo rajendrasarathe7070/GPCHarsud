@@ -1,36 +1,13 @@
 {% extends "dashboard/base.html" %}
-{% block title %}Delete — {{ cfg.label }}{% endblock %}
 {% block content %}
-
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card border-danger shadow-sm">
-      <div class="card-header bg-danger text-white">
-        <i class="bi bi-exclamation-triangle"></i> Confirm Delete
-      </div>
-      <div class="card-body">
-        <p class="mb-2">Kya aap sach me yeh record delete karna chahte hain?</p>
-        <div class="alert alert-warning">
-          <strong>{{ object }}</strong>
-        </div>
-        <p class="text-muted small mb-3">
-          ⚠ Yeh action undo nahi ho sakta. Related data (agar cascade hai) bhi delete ho sakta hai.
-        </p>
-
-        <form method="post">
-          {% csrf_token %}
-          <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-danger">
-              <i class="bi bi-trash"></i> Yes, Delete
-            </button>
-            <a href="{% url 'dashboard:model_list' model_key=model_key %}" class="btn btn-outline-secondary">
-              Cancel
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+<div class="custom-table text-center mt-5 mx-auto" style="max-width:600px;">
+  <i class="bi bi-exclamation-triangle text-danger display-4 mb-3 d-block"></i>
+  <h4 class="fw-bold mb-3">Confirm Deletion</h4>
+  <p class="text-muted mb-4">Delete <strong>"{{ object }}"</strong>? This cannot be undone.</p>
+  <form method="post" class="d-flex justify-content-center gap-2">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger rounded-pill px-4"><i class="bi bi-trash"></i> Delete</button>
+    <a href="{% url 'dashboard:model_list' model_key=model_key %}" class="btn btn-outline-secondary rounded-pill px-4">Cancel</a>
+  </form>
 </div>
-
 {% endblock %}

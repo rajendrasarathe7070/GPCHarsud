@@ -538,239 +538,242 @@
     </div>
 
     
-    {% if  user.is_authenticated %}
-  <div class="diary-container">
-  <!-- मुख्य वर्टिकल बटन -->
-   <style>
-    /* मुख्य कंटेनर की सेटिंग */
-.diary-container {
-  position: fixed; /* स्क्रीन पर एक जगह फिक्स रखने के लिए */
-  right: 0;        /* स्क्रीन के दाईं तरफ चिपकाने के लिए */
-  top: 50%;        /* ऊपर से दूरी */
-  display: inline-block;
-  z-index: 9999;
-}
+   {% if user.is_authenticated %}
+    <div class="diary-container">
+        <style>
+            /* --- LOGGED IN BUTTON STYLES --- */
+            .diary-container {
+                position: fixed;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%); /* Center vertically */
+                display: inline-block;
+                z-index: 9999;
+            }
+            .diary-button {
+                background: linear-gradient(135deg, #a30046, #7a0034); /* Premium Maroon Gradient */
+                color: white;
+                padding: 12px 8px;
+                border: none;
+                font-weight: 600;
+                font-size: 14px;
+                cursor: pointer;
+                writing-mode: vertical-lr;
+                text-transform: uppercase;
+                border-radius: 8px 0 0 8px;
+                box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.25);
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+            }
+            .diary-button:hover {
+                padding-right: 12px; /* Slight push effect */
+            }
+            .login-dropdown {
+                display: none;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 35px; /* Position beside the button */
+                background-color: #ffffff;
+                width: 260px;
+                border-radius: 12px;
+                box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+                overflow: hidden;
+                border: 1px solid #eaeaea;
+                animation: fadeIn 0.2s ease-in-out;
+            }
+            /* Show dropdown on hover of the container */
+            .diary-container:hover .login-dropdown {
+                display: block;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-45%); }
+                to { opacity: 1; transform: translateY(-50%); }
+            }
+            .login-header {
+                background-color: #f8f9fa;
+                padding: 12px;
+                font-weight: 600;
+                font-size: 15px;
+                color: #333;
+                border-bottom: 1px solid #eaeaea;
+            }
+            .login-option {
+                display: flex;
+                align-items: center;
+                padding: 12px 15px;
+                text-decoration: none;
+                color: #333;
+                transition: background 0.2s;
+                border-bottom: 1px solid #f4f4f4;
+            }
+            .login-option:hover {
+                background-color: #f0f7ff;
+            }
+            .login-option.student:hover { border-left: 4px solid #2196F3; }
+            .opt-icon {
+                font-size: 22px;
+                margin-right: 12px;
+            }
+            .opt-text strong {
+                display: block;
+                font-size: 14px;
+                color: #222;
+            }
+        </style>
 
-/* इमेज जैसा वर्टिकल बटन */
-.diary-button {
-  background-color: #a30046; /* मैरून/गहरा गुलाबी रंग */
-  color: white;
-  padding: 10px 5px;
-  border: none;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  writing-mode: vertical-lr; /* टेक्स्ट को खड़ा करने के लिए */
-  text-transform: uppercase;
-  border-radius: 5px 0 0 5px; /* बाएं कोने गोल करने के लिए */
-  box-shadow: -2px 2px 10px rgba(0,0,0,0.3);
-}
-
-/* लॉगिन ड्रॉपडाउन बॉक्स (शुरुआत में छुपा रहेगा) */
-.login-dropdown {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 30px; /* बटन के ठीक बगल में खुलेगा */
-  background-color: #ffffff;
-  width: 250px;
-  border-radius: 8px;
-  box-shadow: 0px 8px 24px rgba(0,0,0,0.2);
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-}
-
-/* बटन पर HOVER करने पर लॉगिन बॉक्स का दिखना */
-.diary-container:hover .login-dropdown {
-  display: block;
-}
-
-/* बॉक्स का हेडर */
-.login-header {
-  background-color: #f5f5f5;
-  padding: 5px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #333;
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* तीनों लॉगिन ऑप्शंस की स्टाइल */
-.login-option {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  text-decoration: none;
-  color: #333;
-  transition: background 0.2s;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.login-option:last-child {
-  border-bottom: none; /* आखिरी वाले का बॉर्डर हटाना */
-}
-
-/* माउस ले जाने पर ऑप्शन का रंग बदलना */
-.login-option:hover {
-  background-color: #f9f9f9;
-}
-
-/* अलग-अलग ऑप्शंस पर हल्का सा बॉर्डर इफेक्ट (वैकल्पिक) */
-.login-option.student:hover { border-left: 4px solid #2196F3; }   /* Blue */
-.login-option.institute:hover { border-left: 4px solid #4CAF50; } /* Green */
-.login-option.admin:hover { border-left: 4px solid #f44336; }     /* Red */
-
-/* आइकॉन की स्टाइल */
-.opt-icon {
-  font-size: 24px;
-  margin-right: 15px;
-}
-
-/* टेक्स्ट की स्टाइल */
-.opt-text strong {
-  display: block;
-  font-size: 15px;
-  color: #222;
-}
-
-.opt-text p {
-  margin: 2px 0 0 0;
-  font-size: 11px;
-  color: #777;
-}
-
-   </style>
-  <button class="diary-button">
-    <span class="icon bi-person-circle"></span>  {{ user.username}}
-  </button>
-
-  <!-- होवर करने पर खुलने वाला लॉगिन पैनल -->
-  <div class="login-dropdown">
-    <div class="login-header row"> <div class="col-4"><img height="30" class="rounded-circle" src="{% if user.photo %} {{user.photo.url }} {% else %} class='icon bi-person-circle ' {% endif %}" alt=""></div>
-    <div class="col-8 text-start">{{user.get_full_name |default:user.username}}</div> </div>
+        <button class="diary-button">
+            <span class="icon bi-person-circle"></span> {{ user.username }}
+        </button>
     
-    <!-- Student Login Option -->
-   {% if not user.is_staff %}
-    <a href="{% url 'dashboard:student' %}" class="login-option student">
-      <span class="opt-icon bi-menu-app-fill"></span>
-      <div class="opt-text">
-        <strong>Student DashBoard</strong>
-      
-      </div>
-    </a>
-    {% else %}
-     <a href="{% url 'dashboard:staff' %}" class="login-option student">
-      <span class="opt-icon bi-menu-app-fill"></span>
-      <div class="opt-text">
-        <strong>Staff DashBoard</strong>
-      
-      </div>
-    </a>
-    {%endif%}
+        <div class="login-dropdown">
+            <div class="login-header row align-items-center m-0">
+                <div class="col-3 p-0">
+                    {% if user.photo %}
+                        <img height="35" width="35" class="rounded-circle shadow-sm" src="{{ user.photo.url }}" style="object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary text-white rounded-circle d-flex justify-content-center align-items-center shadow-sm" style="height:35px; width:35px;">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-9 text-start p-0 text-truncate">{{ user.get_full_name|default:user.username }}</div>
+            </div>
 
-    <!-- Institute Login Option -->
-     <form method="post" action="{% url 'dashboard:logout' %}" id="logoutForm">
-    {% csrf_token %}
-    <!-- इस <a> टैग को बटन की तरह काम कराने के लिए onclick जोड़ा गया है -->
-    <a class="slide-btn logout-btn login-option " onclick="document.getElementById('logoutForm').submit(); return false;" style="cursor: pointer;">
-      <span class="opt-icon bi-door-open"> </span>
-        <span class="btn-text">Logout</span>
-      
-    </a>
-</form>
-
-    <!-- Administrator Login Option -->
-    <!-- <a href="admin-login.html" class="login-option admin">
-      <span class="opt-icon">⚙️</span>
-      <div class="opt-text">
-        <strong>Administrator</strong>
-        <p>System control panel</p>
-      </div>
-    </a> -->
-  </div>
-</div>
+            {% if user.is_staff or user.is_superuser %}
+                <a href="{% url 'dashboard:staff_dashboard' %}" class="login-option student">
+                    <span class="opt-icon bi-grid-fill text-success"></span>
+                    <div class="opt-text"><strong>Staff Dashboard</strong></div>
+                </a>
+            {% else %}
+                <a href="{% url 'dashboard:student_dashboard' %}" class="login-option student">
+                    <span class="opt-icon bi-mortarboard-fill text-primary"></span>
+                    <div class="opt-text"><strong>Student Dashboard</strong></div>
+                </a>
+            {% endif %}
+    
+            <form method="post" action="{% url 'dashboard:logout' %}" id="logoutForm" class="m-0">
+                {% csrf_token %}
+                <a class="login-option" onclick="document.getElementById('logoutForm').submit(); return false;" style="cursor: pointer;">
+                    <span class="opt-icon bi-box-arrow-right text-danger"></span>
+                    <div class="opt-text"><strong class="text-danger">Logout</strong></div>
+                </a>
+            </form>
+        </div>
+    </div>
 
 {% else %}
-        <div class="sidebar-login-container">
-  <style>
-  .sidebar-login-container {
-  position: fixed;
-  right: 0;
-  top: 35%; 
-  display: flex;
-  flex-direction: column;
-  gap: 10px; 
-  z-index: 9999;
-}
+    <!-- --- NOT LOGGED IN BUTTONS --- -->
+    <div class="sidebar-login-container" id="loginContainer">
+        <style>
+            .sidebar-login-container {
+                position: fixed;
+                right: 0;
+                top: 35%; 
+                display: flex;
+                flex-direction: column;
+                gap: 15px; /* Space between buttons */
+                z-index: 9999;
+            }
+            .slide-btn {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start; /* Align items to left */
+                text-decoration: none;
+                color: white;
+                padding: 0 12px; /* Padding for height */
+                height: 50px; /* Fixed height */
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                font-weight: 600;
+                border-radius: 10px 0 0 10px;
+                box-shadow: -5px 5px 15px rgba(0,0,0,0.25);
+                width: 50px; 
+                transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth width transition */
+                overflow: hidden;
+                white-space: nowrap;
+                border: 1px solid rgba(255,255,255,0.2);
+                border-right: none;
+                cursor: pointer;
+            }
+            
+            /* Hover state controlled by JavaScript */
+            .slide-btn.active {
+                width: 190px; 
+                box-shadow: -8px 8px 25px rgba(0,0,0,0.35);
+            }
 
-.student-btn , .institute-btn , .admin-btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  text-decoration: none;
-  color: white;
-  padding: 12px;
-  font-family: sans-serif;
-  font-weight: bold;
-  border-radius: 5px 0 0 5px;
-  box-shadow: -2px 2px 8px rgba(0,0,0,0.2);
-  
- 
-  width: 45px; 
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
-  white-space: nowrap;
-}
- 
+            .btn-text {
+                opacity: 0;
+                transform: translateX(-10px);
+                transition: all 0.3s ease;
+                margin-left: 15px; /* Space from icon */
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
 
-.btn-text {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  margin-right: 15px;
-  font-size: 14px;
-}
+            .slide-btn.active .btn-text {
+                opacity: 1;
+                transform: translateX(0);
+            }
 
-.btn-icon {
-  font-size: 20px;
-  width: 25px;
-  text-align: center;
-}
+            .btn-icon {
+                font-size: 22px;
+                min-width: 25px;
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+            
+            .slide-btn.active .btn-icon {
+                transform: scale(1.1);
+            }
 
-/* 🎯 मुख्य लॉजिक: जिस सिंगल बटन पर होवर होगा, सिर्फ उसकी विड्थ बढ़ेगी */
-.slide-btn:hover {
-  width: 180px; 
-}
+            /* Vibrant Gradients */
+            .student-btn { background: linear-gradient(135deg, #2196F3, #1565C0); }
+            .institute-btn { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+            .admin-btn { background: linear-gradient(135deg, #a30046, #7a0034); }
+        </style>
 
-.slide-btn:hover .btn-text {
-  opacity: 1;
-}
+        <a href="{% url 'dashboard:login' %}" class="slide-btn student-btn">
+            <span class="btn-icon bi-person-fill-check"></span>
+            <span class="btn-text">Student Login</span>
+        </a>
 
-/* बटनों के रंग */
-.student-btn { background-color: #2196F3; }
-.institute-btn { background-color: #4CAF50; }
-.admin-btn { background-color: #a30046; }
-</style>
-  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
-  <a href=" {% url 'dashboard:student' %}" class="slide-btn student-btn">
-    <span class="btn-text">Student Login</span>
-    <span class="btn-icon bi-person-fill-check"></span>
-  </a>
+        <a href="{% url 'dashboard:login' %}" class="slide-btn institute-btn">
+            <span class="btn-icon bi-person-fill-lock"></span>
+            <span class="btn-text">Institute Login</span>
+        </a>
 
-  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
-  <a href=" {% url 'dashboard:staff' %}" class="slide-btn institute-btn">
-    <span class="btn-text">Institute Login</span>
-    <span class="btn-icon bi-person-fill-lock"></span>
-  </a>
+        <a href="/admin-rajend-administrator/" class="slide-btn admin-btn">
+            <span class="btn-icon bi-person-fill-gear"></span>
+            <span class="btn-text">Admin Login</span>
+        </a>
+    </div>
 
-  <!-- केवल इसपर माउस जाएगा तो यही बाहर आएगा -->
-  <a href="/admin-rajend-administrator/" class="slide-btn admin-btn">
-    <span class="btn-text">Admin Login</span>
-    <span class="btn-icon bi-person-fill-gear"></span>
-  </a>
+    <!-- JAVASCRIPT FOR HOVER EFFECT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select all the buttons
+            const buttons = document.querySelectorAll('.slide-btn');
 
-</div>
-    {% endif %}
+            buttons.forEach(button => {
+                // Jab mouse enter ho (hover)
+                button.addEventListener('mouseenter', function() {
+                    // Pehle sabhi buttons se 'active' class hatao
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    // Sirf current button me 'active' class add karo
+                    this.classList.add('active');
+                });
+
+                // Jab mouse button se bahar nikle
+                button.addEventListener('mouseleave', function() {
+                    // Current button se 'active' class hata do (iski width wapas choti ho jayegi)
+                    this.classList.remove('active');
+                });
+            });
+        });
+    </script>
+{% endif %}
         
 
  <!-- End Unique Main Wrapper -->

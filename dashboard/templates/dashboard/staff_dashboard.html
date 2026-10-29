@@ -1,55 +1,214 @@
 {% extends "dashboard/base.html" %}
 {% block title %}Staff Dashboard{% endblock %}
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h4 class="mb-0">Aapke Accessible Modules</h4>
-  <span class="badge bg-primary">{{ total }} modules</span>
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2 flex-wrap gap-2">
+  <div>
+    <h3 class="fw-bold mb-1">Dashboard</h3>
+    <p class="text-muted mb-0 small">Institutional overview & analytics.</p>
+  </div>
+  <div class="d-flex align-items-center gap-2 bg-white px-3 py-2 rounded-pill shadow-sm">
+    <i class="bi bi-calendar3"></i><span class="fw-medium small">{% now "F j, Y" %}</span>
+  </div>
 </div>
 
-{% if user_groups %}
-  <div class="mb-3">
-    <small class="text-muted">Aapke groups:</small>
-    {% for g in user_groups %}
-      <span class="badge bg-secondary">{{ g }}</span>
-    {% endfor %}
+<!-- TOP ROW -->
+<div class="row g-3 g-lg-4 mb-4">
+  <div class="col-12 col-lg-4">
+    <div class="promo-card">
+      <div>
+        <span class="badge bg-danger text-white rounded-pill px-3 py-1 mb-3">Update</span>
+        <p class="text-white-50 small mb-2">{{ user.get_full_name }}</p>
+        <h4 class="fw-bold mb-3 lh-sm">{{ total_records }} total records across tables</h4>
+        <a href="#tables-section" class="text-lime text-decoration-none fw-bold small">See Statistics &rarr;</a>
+      </div>
+      <i class="bi bi-asterisk star-graphic"></i>
+    </div>
   </div>
-{% endif %}
 
-{% if cards %}
-  <div class="row g-4">
-    {% for c in cards %}
-      <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm card-hover">
-          <div class="card-body">
-            <div class="d-flex justify-content-between mb-2">
-              <h6 class="card-title mb-0"><i class="bi {{ c.icon }} text-primary"></i> {{ c.label }}</h6>
-              <span class="badge bg-secondary">{{ c.count|default_if_none:"?" }}</span>
-            </div>
-            {% if c.preview %}
-              <ul class="list-group list-group-flush mb-2">
-                {% for obj in c.preview %}
-                  <li class="list-group-item px-0 py-1 preview-item text-truncate">
-                    <i class="bi bi-dot"></i> {{ obj }}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <small class="text-muted">No records yet.</small>
-            {% endif %}
-          </div>
-          <div class="card-footer bg-white border-0">
-            <a href="{{ c.url }}" class="btn btn-sm btn-outline-primary w-100">
-              <i class="bi bi-table"></i> Open Table
-            </a>
-          </div>
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div class="stat-card">
+      <div class="d-flex justify-content-between"><span class="stat-label">Total Students</span><i class="bi bi-three-dots text-muted"></i></div>
+      <div>
+        <div class="stat-value">{{ total_students }}</div>
+        <div class="mt-1 text-success trend-up"><i class="bi bi-arrow-up-right"></i> Registered</div>
+      </div>
+      <div class="chart-box-sm"><canvas id="spark1"></canvas></div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div class="stat-card">
+      <div class="d-flex justify-content-between"><span class="stat-label">Students Placed</span><i class="bi bi-three-dots text-muted"></i></div>
+      <div>
+        <div class="stat-value">{{ total_placed }}</div>
+        <div class="mt-1 text-danger trend-down"><i class="bi bi-arrow-down-right"></i> Placement records</div>
+      </div>
+      <div class="chart-box-sm"><canvas id="spark2"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHARTS ROW 1 (Placement) -->
+<div class="row g-3 g-lg-4 mb-4">
+  <div class="col-12 col-lg-8">
+    <div class="custom-table h-100">
+      <div class="d-flex justify-content-between mb-3">
+        <h5 class="fw-bold mb-0">Placement Statistics</h5>
+        <div class="d-flex gap-3">
+          <span class="small fw-semibold"><span class="badge bg-dark rounded-circle p-1"> </span> Placed</span>
+          <span class="small fw-semibold"><span class="badge bg-success rounded-circle p-1"> </span> Total</span>
         </div>
       </div>
-    {% endfor %}
+      <div class="chart-box-md"><canvas id="barChart"></canvas></div>
+    </div>
   </div>
-{% else %}
-  <div class="alert alert-warning">
-    <i class="bi bi-exclamation-triangle"></i> Aapke paas kisi bhi module ka access nahi hai. Admin se group/permission maangein.
+
+  <div class="col-12 col-lg-4">
+    <div class="custom-table h-100">
+      <h5 class="fw-bold mb-3">Engagement</h5>
+      <div class="chart-box-md" style="height: 200px;"><canvas id="donutChart"></canvas></div>
+      <div class="mt-3">
+        <div class="d-flex justify-content-between mb-1 small"><span><i class="bi bi-circle-fill text-success me-2"></i>Placed</span><strong>{{ total_placed }}</strong></div>
+        <div class="d-flex justify-content-between mb-1 small"><span><i class="bi bi-circle-fill text-info me-2"></i>Higher Studies</span><strong>{{ higher_studies }}</strong></div>
+        <div class="d-flex justify-content-between mb-1 small"><span><i class="bi bi-circle-fill text-warning me-2"></i>Entrepreneurship</span><strong>{{ entrepreneurship }}</strong></div>
+      </div>
+    </div>
   </div>
-{% endif %}
+</div>
+
+<!-- CHARTS ROW 2 (Table Insights) -->
+<div class="row g-3 g-lg-4 mb-4">
+  <div class="col-12 col-md-6">
+    <div class="custom-table h-100">
+      <h5 class="fw-bold mb-3">Users by Category</h5>
+      <div class="chart-box-md"><canvas id="usersChart"></canvas></div>
+    </div>
+  </div>
+  
+  <div class="col-12 col-md-6">
+    <div class="custom-table h-100">
+      <h5 class="fw-bold mb-3">Notices by Type</h5>
+      <div class="chart-box-md"><canvas id="noticeChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="custom-table h-100">
+      <h5 class="fw-bold mb-3">Fee Components by Frequency</h5>
+      <div class="chart-box-md"><canvas id="feeChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="custom-table h-100">
+      <h5 class="fw-bold mb-3">Syllabus by Branch</h5>
+      <div class="chart-box-md"><canvas id="sylChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLES LIST -->
+<div class="custom-table" id="tables-section">
+  <h5 class="fw-bold mb-4">Manage Data Tables</h5>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead><tr><th>Module</th><th class="text-center">Records</th><th class="text-end">Action</th></tr></thead>
+      <tbody>
+        {% for c in cards %}
+        <tr>
+          <td><div class="d-flex align-items-center gap-3"><div class="bg-light rounded p-2 text-primary"><i class="bi {{ c.icon }}"></i></div><span class="fw-semibold">{{ c.label }}</span></div></td>
+          <td class="text-center"><span class="badge bg-secondary rounded-pill">{{ c.count }}</span></td>
+          <td class="text-end"><a href="{{ c.url }}" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-medium">Open</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="text-center text-muted py-5">No tables assigned.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  Chart.defaults.font.family = "'Segoe UI', sans-serif";
+  Chart.defaults.color = '#6b7280';
+  
+  const commonOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { grid: { display: false } }, y: { grid: { borderDash: [5, 5] } } }
+  };
+
+  // 1. Placement Bar Chart
+  new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ chart_bar_labels|safe }},
+      datasets: [
+        { label: 'Total', data: {{ chart_bar_total|safe }}, backgroundColor: '#e5e7eb', borderRadius: 4, barPercentage: 0.6 },
+        { label: 'Placed', data: {{ chart_bar_placed|safe }}, backgroundColor: '#052e20', borderRadius: 4, barPercentage: 0.6 }
+      ]
+    },
+    options: { ...commonOptions, plugins: { legend: { display: true, position: 'top', align: 'end' } } }
+  });
+
+  // 2. Engagement Donut Chart
+  new Chart(document.getElementById('donutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Placed', 'Higher Studies', 'Entrepreneurship', 'Exam Prep'],
+      datasets: [{ data: {{ chart_donut_data|safe }}, backgroundColor: ['#10b981', '#0dcaf0', '#ffc107', '#ef4444'], borderWidth: 0, cutout: '70%' }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  });
+
+  // 3. Users By Category (Pie)
+  new Chart(document.getElementById('usersChart'), {
+    type: 'pie',
+    data: {
+      labels: {{ users_labels|safe }},
+      datasets: [{ data: {{ users_data|safe }}, backgroundColor: ['#052e20', '#10b981', '#a3f307', '#0dcaf0', '#ffc107', '#ef4444'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+  });
+
+  // 4. Notices By Type (Bar)
+  new Chart(document.getElementById('noticeChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ notice_labels|safe }},
+      datasets: [{ label: 'Notices', data: {{ notice_data|safe }}, backgroundColor: '#0dcaf0', borderRadius: 4 }]
+    },
+    options: { ...commonOptions }
+  });
+
+  // 5. Fee Structures (Bar)
+  new Chart(document.getElementById('feeChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ fee_labels|safe }},
+      datasets: [{ label: 'Components', data: {{ fee_data|safe }}, backgroundColor: '#a3f307', borderRadius: 4 }]
+    },
+    options: { ...commonOptions }
+  });
+
+  // 6. Syllabus by Branch (Bar)
+  new Chart(document.getElementById('sylChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ syl_labels|safe }},
+      datasets: [{ label: 'Subjects', data: {{ syl_data|safe }}, backgroundColor: '#ffc107', borderRadius: 4 }]
+    },
+    options: { ...commonOptions }
+  });
+
+  // 7. Sparklines (Visual only)
+  const sparkOpt = { responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}}, scales: {x: {display: false}, y: {display: false}} };
+  new Chart(document.getElementById('spark1'), { type: 'line', data: { labels: [1,2,3,4,5,6], datasets: [{ data: [5,10,8,15,12,20], borderColor: '#10b981', tension: 0.4, borderWidth: 2, pointRadius: 0, fill: true, backgroundColor: 'rgba(16,185,129,0.1)' }] }, options: sparkOpt });
+  new Chart(document.getElementById('spark2'), { type: 'line', data: { labels: [1,2,3,4,5,6], datasets: [{ data: [20,15,18,10,12,5], borderColor: '#ef4444', tension: 0.4, borderWidth: 2, pointRadius: 0, fill: true, backgroundColor: 'rgba(239,68,68,0.1)' }] }, options: sparkOpt });
+});
+</script>
 {% endblock %}

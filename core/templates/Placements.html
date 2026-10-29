@@ -208,95 +208,190 @@
         {% include 'studentvarification.html' %}
 
 
-        <div class="card-group mx-md-5 my-md-5 ">
-          <style>
-            body {
-              background-color: ghostwhite;
-            }
+        <!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-            .overview {
-              max-height: 10rem;
-              height: 10rem;
-              border: none !important;
-              border-radius: 16px !important;
-              /* मॉडर्न राउंडेड कॉर्नर्स */
-              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-              /* हल्का सा शैडो इफेक्ट */
-              transition: all 0.3s ease;
-              min-height: 140px;
-              margin-left: 2px;
-              margin-right: 2px;
-              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-              color: #f5f3f3;
-              transition: all 0.5s ease;
-            }
+<style>
+  body {
+    background: ghostwhite;
+  }
 
-            .overview:hover {
+  /* ================= GRID WRAPPER ================= */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.1rem;
+    margin: 3rem 3rem;
+    position: relative;
+    z-index: 1;
+  }
 
-              transform: translateY(-8px);
-              box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  /* ================= CARD ================= */
+  .stat-card {
+    position: relative;                 /* z-index kaam karne ke liye */
+    z-index: 1;                         /* base layer */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+    padding: 1.3rem 1.3rem 1.1rem;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #37378f 0%, #111060 100%);
+    color: #f5f3f3;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.4s cubic-bezier(.2,.9,.3,1.2),
+                box-shadow 0.4s ease,
+                border-radius 0.4s ease,
+                background 0.4s ease,
+                z-index 0s;
+    will-change: transform;
+  }
 
-              border-radius: 30px;
-              transition-duration: 300ms;
-              background: linear-gradient(rgba(193, 60, 39, 0.99) 0%, rgba(138, 42, 18, 0.968) 100%) !important;
-              color: rgb(10, 10, 144);
+  /* soft glow ring inside card */
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at top right, rgba(255,255,255,.14), transparent 55%);
+    z-index: -1;
+    pointer-events: none;
+  }
 
-            }
+  /* hover */
+  .stat-card:hover {
+    z-index: 50;                        /* hover par sabse upar */
+    transform: translateY(-10px) scale(1.03);
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(193,60,39,.99) 0%, rgba(138,42,18,.97) 100%);
+    box-shadow: 0 18px 38px rgba(138, 42, 18, 0.35),
+                0 6px 14px rgba(0, 0, 0, 0.15);
+  }
 
-            .card-body {
-              padding: 30px;
-              margin-left: 5px;
-              margin-right: 5px;
-              text-align: left;
-            }
+  /* ================= CONTENT ================= */
+  .stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    opacity: 0.92;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-            /* परफेक्ट मैचिंग कलर्स (पेस्टल्स) */
+  .stat-icon {
+    font-size: 1.7rem;
+    opacity: 0.85;
+    margin: 0.55rem 0 0.3rem;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
 
+  .stat-card:hover .stat-icon {
+    transform: scale(1.15) rotate(-6deg);
+    opacity: 1;
+  }
 
-            /* सॉफ्ट ऑरेंज */
-          </style>
-          <div class="card overview card-1">
+  .stat-value {
+    font-size: clamp(1.3rem, 1.9vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: right;
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: 0.4px;
+  }
 
-            <div class="card-body">
-              <h5>Students Placed</h5>
-              <h1 class="bi bi-people"></h1>
-              <h1 style="text-align: right; font-size:40px;">{{grand_students_placed}}+</h1>
-            </div>
-          </div>
-          <div class="card overview card-2">
+  /* ================= TABLET: 3 per row ================= */
+  @media (max-width: 992px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 2rem 1.5rem;
+    }
+    .stat-card {
+      min-height: 145px;
+      padding: 1rem 1rem 0.9rem;
+    }
+    .stat-icon { font-size: 1.5rem; }
+  }
 
-            <div class="card-body ">
-              <h5>Companies Visited</h5>
-              <h1 class="bi bi-building"></h1>
-              <h1 style="text-align: right; font-size:40px;">{{grand_companies_visited}}</h1>
-            </div>
-          </div>
-          <div class="card overview card-3">
+  /* ================= MOBILE: 2 per row ================= */
+  @media (max-width: 576px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin: 1.25rem 0.9rem;
+    }
+    .stat-card {
+      min-height: 125px;
+      padding: 0.9rem 0.9rem 0.75rem;
+      border-radius: 14px;
+      cursor:pointer !important;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      white-space: normal;              /* lamba label wrap ho jaye */
+      line-height: 1.2;
+      min-height: 2.4em;
+    }
+    .stat-icon {
+      font-size: 1.3rem;
+      margin: 0.35rem 0 0.2rem;
+    }
+    .stat-value { font-size: 1.3rem; }
 
-            <div class="card-body">
-              <h5>Highest Package</h5>
-              <h1 class="bi bi-trophy"></h1>
-              <h1 style="text-align: right; font-size:40px;">₹{{grand_highest_package}} LPA</h1>
-            </div>
-          </div>
-          <div class="card overview card-4">
+    /* 5th card full width — mobile par odd card acha lagta hai */
+    .stats-grid > .stat-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
 
-            <div class="card-body">
-              <h5 class="card-title">Average Package</h5>
-              <h1 class="bi bi-star-fill"></h1>
-              <h1 style="text-align: right; font-size:40px;">₹{{grand_avg_package}} LPA</h1>
-            </div>
-          </div>
-          <div class="card overview card-5">
+  /* ================= VERY SMALL SCREENS ================= */
+  @media (max-width: 360px) {
+    .stat-value { font-size: 1.1rem; }
+    .stat-label { font-size: 0.7rem; }
+    .stat-icon  { font-size: 1.15rem; }
+  }
+</style>
 
-            <div class="card-body">
-              <h5 class="card-title">Loast Package</h5>
-              <h1 class="bi bi-star-half"></h1>
-              <h1 style="text-align: right; font-size:40px;">₹{{grand_lowest_package}} LPA</h1>
-            </div>
-          </div>
+<!-- ================= CARDS ================= -->
+<div class="stats-grid">
 
-        </div>
+  <div class="stat-card" onclick="window.location.href='/placements#StudentsPlaced-tab-pane' " >
+    <p class="stat-label">Students Placed</p>
+    <i class="stat-icon bi bi-people"></i>
+    <p class="stat-value">{{grand_students_placed}}+</p>
+  </div>
+
+  <div class="stat-card" onclick="window.location.href='/placements#Recruiters-Companies-tab-pane' " >
+    <p class="stat-label">Companies Visited</p>
+    <i class="stat-icon bi bi-building"></i>
+    <p class="stat-value">{{grand_companies_visited}}</p>
+  </div>
+
+  <div class="stat-card"  onclick="window.location.href='/placements#Statistics-tab-pane' " >
+    <p class="stat-label">Highest Package</p>
+    <i class="stat-icon bi bi-trophy"></i>
+    <p class="stat-value">₹{{grand_highest_package}} LPA</p>
+  </div>
+
+  <div class="stat-card"  onclick="window.location.href='/placements#Statistics-tab-pane' " >
+    <p class="stat-label">Average Package</p>
+    <i class="stat-icon bi bi-star-fill"></i>
+    <p class="stat-value">₹{{grand_avg_package}} LPA</p>
+  </div>
+
+  <div class="stat-card"  onclick="window.location.href='/placements#Statistics-tab-pane' " >
+    <p class="stat-label">Lowest Package</p>
+    <i class="stat-icon bi bi-star-half"></i>
+    <p class="stat-value">₹{{grand_lowest_package}} LPA</p>
+  </div>
+
+</div>
 
 
 
@@ -305,787 +400,1085 @@
 
 
         <!-- sddfssff -->
-        <div class="text-center mb-5 my-5">
-          <h2 class="fw-bold" style="color: #0D47A1;">Training & Placement Cell</h2>
-
-          <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
-        </div>
-
-        <style>
-          /* ===== यूनिक CSS: सिर्फ .plc-timeline-wrapper के अंदर लागू ===== */
-          .plc-timeline-wrapper {
-            background: transparent;
-            padding: 50px 20px;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-          }
-
-          .plc-timeline-container {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            max-width: 1300px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 20px 0;
-          }
-
-          /* हॉरिजॉन्टल कनेक्टिंग लाइन */
-          .plc-timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 60px;
-            right: 60px;
-            height: 2px;
-            background-color: #e5e7eb;
-            z-index: 0;
-          }
-
-          .plc-step {
-            flex: 1 1 0;
-            min-width: 180px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            padding: 0 12px;
-          }
-
-          /* आइकन बॉक्स */
-          .plc-icon-box {
-            width: 80px;
-            height: 80px;
-            background-color: #2563eb;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 18px;
-            position: relative;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
-          }
-
-          .plc-icon-box i {
-            font-size: 2rem;
-            color: #ffffff;
-          }
-
-          /* नंबर बैज */
-          .plc-badge {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: #f9f8f8;
-            color: #2563eb;
-            border: 2px solid #2563eb;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            line-height: 1.4;
-          }
-
-          /* टाइटल */
-          .plc-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 8px;
-            line-height: 1.3;
-          }
-
-          /* डिस्क्रिप्शन */
-          .plc-desc {
-            font-size: 0.85rem;
-            color: #4b5563;
-            line-height: 1.5;
-            margin: 0;
-          }
-
-          /* ===== मोबाइल रिस्पॉन्सिव ===== */
-          @media (max-width: 991px) {
-            .plc-timeline-container::before {
-              display: none;
-              /* छोटी स्क्रीन पर लाइन हटा दें */
-            }
-
-            .plc-step {
-              flex: 1 1 30%;
-              margin-bottom: 30px;
-            }
-          }
-
-          @media (max-width: 576px) {
-            .plc-step {
-              flex: 1 1 100%;
-            }
-          }
-        </style>
-
-
-        <!-- ===== एक ही डिव में पूरा सेक्शन ===== -->
-        <div class="plc-timeline-wrapper">
-          <div class="plc-timeline-container px-0">
-
-            <!-- 1. Training Programme -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">01</span>
-                <i class="bi bi-easel"></i>
-              </div>
-              <h5 class="plc-title">Training Programme</h5>
-              <p class="plc-desc">Conduct training Programme for students.</p>
-            </div>
-
-            <!-- 2. Companies Visit -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">02</span>
-                <i class="bi bi-building"></i>
-              </div>
-              <h5 class="plc-title">Companies Visit</h5>
-              <p class="plc-desc">Companies visit for placement of students.</p>
-            </div>
-
-            <!-- 3. Campus & Interview -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">03</span>
-                <i class="bi bi-person-check"></i>
-              </div>
-              <h5 class="plc-title">Campus & Interview</h5>
-              <p class="plc-desc">Arrange campus and interview.</p>
-            </div>
-
-            <!-- 4. Industrial Visit -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">04</span>
-                <i class="bi bi-airplane"></i>
-              </div>
-              <h5 class="plc-title">Industrial Visit</h5>
-              <p class="plc-desc">Conducting industrial visit.</p>
-            </div>
-
-            <!-- 5. Seminar & Presentation -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">05</span>
-                <i class="bi bi-mic"></i>
-              </div>
-              <h5 class="plc-title">Seminar & Presentation</h5>
-              <p class="plc-desc">Organizing Seminar and presentation for students.</p>
-            </div>
-
-            <!-- 6. Skill Development -->
-            <div class="plc-step">
-              <div class="plc-icon-box">
-                <span class="plc-badge">06</span>
-                <i class="bi bi-lightbulb"></i>
-              </div>
-              <h5 class="plc-title">Skill Development</h5>
-              <p class="plc-desc">Organizing Skill development classes.</p>
-            </div>
-
-          </div>
-        </div>
-        <!-- ssdgsgsdgs -->
-
-        <div class="container-5">
-          <style>
-            .container-5 {
-              margin-left: 3rem;
-              margin-right: 2rem;
-
-            }
-
-            .notices-1 {
-              height: 25rem;
-              max-height: 25rem;
-              width: 100%;
-
-
-
-            }
-
-            .notice-h1,
-            .bi-pin {
-              color: rgb(25, 24, 122);
-
-            }
-
-            .ss {
-
-              width: 100%;
-              max-width: max-content;
-              padding: 9px;
-              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-              color: goldenrod;
-            }
-
-            .story {
-              font-size: 22px;
-              padding: 30px;
-            }
-
-            @media (max-width:400px) {
-              .story {
-                font-size: 15px;
-                padding: 10px;
-              }
-
-              th {
-                font-size: smaller;
-              }
-
-            }
-
-            .story-auth {
-
-              font-size: medium;
-              font-family: cursive;
-              text-align: right;
-            }
-
-            .rounded-pill {
-              max-width: max-content;
-              width: max-content;
-              margin-left: 8px;
-
-            }
-
-            .text-bg-primary {
-              background: linear-gradient(rgba(55, 55, 144, 0.941) 0%, rgba(17, 16, 96, 0.925) 100%) !important;
-              color: goldenrod !important;
-            }
-
-            .notrow>* {
-              padding-left: 0px !important;
-              padding-right: 0px !important;
-
-            }
-          </style>
-
-
-
-
-          <div class="card info-card p-4 mb-5 mt-5 shadow-sm border-0 bg-transparent"
-            style="border-radius: 10px; max-width: 1350px; align-self: center; justify-self: center; ">
-            <!-- row को सभी स्क्रीन्स पर सेंटर करने के लिए justify-content-center जोड़ा गया है -->
-            <div class="row g-4 align-items-center justify-content-center ">
-
-              <!-- T&P Head प्रोफाइल सेक्शन: सभी स्क्रीन्स पर सेंटर करने के लिए text-center और d-flex संरचना -->
-              <div class="col-lg-4 col-md-5 text-center border-end-md border-light bg-transparent">
-                <div class="d-flex flex-column align-items-center justify-content-center mx-auto rounded-3"
-                  style="background: linear-gradient(135deg,rgb(25, 135, 84), #096030);">
-                  <!-- फोटो कंटेनर (एकदम सेंटर में) -->
-                  <div class="mb-3 position-relative d-flex justify-content-center">
-                    <img src="https://placeholder.com" alt="T&P Head" class="rounded-circle img-thumbnail shadow-sm"
-                      style="width: 130px; height: 130px; object-fit: cover; border: 3px solid #0d6efd;">
-                  </div>
-                  <!-- नाम और पद -->
-                  <h5 class="fw-bold mb-1 text-light">Dr. Amit Sharma</h5>
-                  <p class="text-primary fw-semibold small mb-2 text-danger">Head, Training & Placement Cell</p>
-
-                  <!-- संपर्क जानकारी -->
-                  <div class="text-muted small ">
-                    <p class="mb-0 text-light"><i class="bi bi-envelope-fill me-1 "></i> tpo@college.edu</p>
-                    <p class="mb-0 text-light"><i class="bi bi-envelope-fill me-1 "></i> tpo@college.edu</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Activities सेक्शन -->
-              <div class="col-lg-8 col-md-7 ps-lg-4">
-                <!-- हेडिंग मोबाइल पर सेंटर और डेस्कटॉप पर लेफ्ट करने के लिए text-center text-md-start लगाया है -->
-                <h5 class="fw-bold text-primary mb-3 text-center text-md-start">
-                  <i class="bi bi-activity me-2"></i>Head, Training & Placement Cell Description
-                </h5>
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
-                          class="bi bi-check-circle-fill text-success me-2"></i>1. Conduct training Programme.
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto saepe repellendus est laboriosam
-                        tempore facere maiores eos voluptatum rem eius porro, quam rerum sapiente, quo nulla, deserunt
-                        quasi sunt molestiae iste! Perferendis perspiciatis quae sequi nobis exercitationem possimus
-                        nemo dignissimos quisquam ab. Doloribus facilis laboriosam minus aspernatur, labore deleniti
-                        repudiandae?</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
-                          class="bi bi-check-circle-fill text-success me-2"></i>4. Conducting industrial visit.</li>
-                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
-                          class="bi bi-check-circle-fill text-success me-2"></i>5. Organizing Seminar and presentation
-                        for the students.</li>
-                      <li class="list-group-item bg-transparent ps-0 py-2 text-center text-md-start"><i
-                          class="bi bi-check-circle-fill text-success me-2"></i>6. Organizing Skill development classes.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="text-center mb-5 my-5 ">
-            <h2 class="fw-bold mt-5" style="color: #0D47A1;"> Top Recruiters Companies</h2>
-
-            <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
-          </div>
-
-
-          <style>
-            :root {
-              --slider-gap: 30px;
-              --slider-speed: 20s;
-              --card-width: 200px;
-              --card-height: 100px;
-            }
-
-            /* ===== मुख्य कंटेनर ===== */
-            .custom-slider-container {
-              width: 100%;
-              max-width: 1370px;
-              /* स्क्रीन बहुत चौड़ी हो तो भी ट्रैक कवर रहे */
-              margin: 0 auto;
-              overflow: hidden;
-              padding: 20px 0;
-              border-radius: 3rem;
-            }
-
-            /* ===== ट्रैक ===== */
-            .slider-track {
-              display: flex;
-              width: max-content;
-              will-change: transform;
-            }
-
-            /* ===== कार्ड ===== */
-            .logo-card {
-              flex: 0 0 auto;
-              width: var(--card-width);
-              height: var(--card-height);
-              margin-right: var(--slider-gap);
-              /* gap की जगह margin-right */
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background: #ffffff;
-              border: 1px solid rgba(0, 0, 0, 0.05);
-              border-radius: 12px;
-              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-              padding: 15px;
-              transition: transform 0.3s ease, background-color 0.3s ease;
-            }
-
-            .logo-card:hover {
-              transform: translateY(-5px);
-              background-color: brown;
-            }
-
-            .logo-card img {
-              max-width: 100%;
-              max-height: 100%;
-              object-fit: contain;
-              mix-blend-mode: multiply;
-            }
-
-            /* ===== एनीमेशन ===== */
-            .track-ltr {
-              animation: scrollLTR var(--slider-speed) linear infinite;
-            }
-
-            .track-rtl {
-              animation: scrollRTL var(--slider-speed) linear infinite;
-            }
-
-            /* होवर पर रोकना चाहें तो (न चाहिए तो ये 3 लाइन हटा दें) */
-            .slider-track:hover {
-              animation-play-state: paused;
-            }
-
-            @keyframes scrollLTR {
-
-              /* दाएँ से बाएँ */
-              from {
-                transform: translateX(-50%);
-              }
-
-              to {
-                transform: translateX(0);
-              }
-            }
-
-            @keyframes scrollRTL {
-
-              /* बाएँ से दाएँ */
-              from {
-                transform: translateX(0);
-              }
-
-              to {
-                transform: translateX(-50%);
-              }
-            }
-          </style>
-
-          <!-- ================= स्लाइडर 1 : LTR ================= -->
-          <div class="custom-slider-container my-4 ">
-            <div class="slider-track track-ltr">
-
-              <!-- ग्रुप A -->
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-
-              <!-- ग्रुप B — ग्रुप A की हूबहू कॉपी (लूप के लिए ज़रूरी) -->
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-
-            </div>
-          </div>
-
-          <!-- ================= स्लाइडर 2 : RTL ================= -->
-          <div class="custom-slider-container my-4">
-            <div class="slider-track track-rtl">
-
-              <!-- ग्रुप A -->
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-
-              <!-- ग्रुप B — हूबहू कॉपी -->
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-                  alt="Logo"></div>
-              <div class="logo-card"><img
-                  src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png" alt="Logo"></div>
-
-            </div>
-          </div>
-
-
-
-
-
-
-          <style>
-            /* ===== स्कोप्ड CSS: सिर्फ .tpo-recruiters-section के अंदर लागू होगा ===== */
-            .tpo-recruiters-section {
-              background-color: #f8fafc;
-              padding: 2rem 0;
-            }
-
-            /* कंपनी कार्ड्स वाला कार्ड */
-            .tpo-company-card-wrapper {
-              background: #ffffff;
-              border-radius: 16px;
-              border: 1px solid rgba(0, 0, 0, 0.05);
-              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-              padding: 30px;
-              height: 100%;
-            }
-
-            .tpo-section-heading {
-              font-size: 1.1rem;
-              font-weight: 700;
-              color: #1e293b;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              margin-bottom: 25px;
-              border-left: 4px solid #2563eb;
-              padding-left: 10px;
-            }
-
-            /* कंपनी लोगो कार्ड */
-            .tpo-logo-card {
-              width: 100%;
-              min-height: 110px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              background: #f8fafc;
-              border-radius: 12px;
-              padding: 15px 10px;
-              border: 1px solid rgba(0, 0, 0, 0.04);
-              text-align: center;
-              transition: all 0.25s ease;
-              height: 100%;
-            }
-
-            .tpo-logo-card:hover {
-              transform: translateY(-3px);
-              background: #ffffff;
-              box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
-            }
-
-            .tpo-logo-card img {
-              max-width: 100%;
-              max-height: 45px;
-              object-fit: contain;
-              mix-blend-mode: multiply;
-              margin-bottom: 6px;
-            }
-
-            .tpo-logo-card small {
-              font-size: 0.68rem;
-              font-weight: 600;
-              color: #64748b;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-            }
-
-            /* TPO स्टोरी कार्ड */
-            .tpo-story-wrapper {
-              background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-              border-radius: 16px;
-              padding: 30px;
-              color: #f8fafc;
-              height: 100%;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-              position: relative;
-              box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-            }
-
-            /* कोटेशन मार्क वाटरमार्क */
-            .tpo-story-wrapper::before {
-              content: "“";
-              position: absolute;
-              top: -20px;
-              left: 20px;
-              font-size: 8rem;
-              color: rgba(255, 255, 255, 0.05);
-              font-family: serif;
-              line-height: 1;
-            }
-
-            .tpo-heading {
-              font-size: 1.1rem;
-              font-weight: 700;
-              color: #38bdf8;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              margin-bottom: 15px;
-            }
-
-            .tpo-quote {
-              font-size: 0.95rem;
-              line-height: 1.7;
-              color: #cbd5e1;
-              font-style: italic;
-              margin-bottom: 25px;
-            }
-
-            .tpo-profile {
-              display: flex;
-              align-items: center;
-              gap: 15px;
-              border-top: 1px solid rgba(255, 255, 255, 0.1);
-              padding-top: 15px;
-            }
-
-            .tpo-avatar {
-              width: 50px;
-              height: 50px;
-              border-radius: 50%;
-              object-fit: cover;
-              border: 2px solid #38bdf8;
-            }
-
-            .tpo-info h6 {
-              font-size: 0.95rem;
-              font-weight: 700;
-              color: #ffffff;
-              margin: 0;
-            }
-
-            .tpo-info small {
-              font-size: 0.75rem;
-              color: #94a3b8;
-            }
-          </style>
-
-
-          <!-- ===== यूनिक रैपर: इससे बाहर की CSS इस सेक्शन को प्रभावित नहीं करेगी ===== -->
-          <div class="tpo-recruiters-section bg-transparent">
-            <div class="container-fluid px-md-5">
-              <div class="row g-4 align-items-stretch">
-
-                <!-- LEFT: कंपनी कार्ड्स ग्रिड (8 कॉलम) -->
-                <div class="col-lg-8 col-md-12">
-                  <div class="tpo-company-card-wrapper">
-                    <div class="tpo-section-heading">Our Top Recruiters</div>
-
-                    <!-- ग्रिड लेआउट: 2, 3 या 4 कॉलम रिस्पॉन्सिव -->
-                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                            alt="John Deere">
-                          <small>Dewas</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Vac Mate">
-                          <small>Pithampur</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                            alt="Volvo Eicher">
-                          <small>Dewas</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                            alt="Eicher Tractor">
-                          <small>Bhopal</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                            alt="CEAT Tyre">
-                          <small>Halol</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                            alt="Maruti Krishna">
-                          <small>Haryana</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Jay Hind">
-                          <small>Aurangabad</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Force Motors">
-                          <small>Pithampur</small>
-                        </div>
-                      </div>.
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Force Motors">
-                          <small>Pithampur</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Force Motors">
-                          <small>Pithampur</small>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="tpo-logo-card">
-                          <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                            alt="Force Motors">
-                          <small>Pithampur</small>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-                <!-- RIGHT: TPO की सक्सेस स्टोरी (4 कॉलम) -->
-                <div class="col-lg-4 col-md-12">
-                  <div class="tpo-story-wrapper">
-                    <div>
-                      <div class="tpo-heading">Success Story by TPO</div>
-                      <p class="tpo-quote">
-                        "हमारे छात्रों ने निरंतर अपनी प्रतिभा और कड़े परिश्रम के बल पर देश की शीर्ष बहुराष्ट्रीय
-                        कंपनियों में अपनी जगह बनाई है। यह प्लेसमेंट रिकॉर्ड्स हमारे शैक्षणिक स्तर और इंडस्ट्री-रेडी
-                        ट्रेनिंग का प्रत्यक्ष प्रमाण हैं। हमें अपने छात्रों की इस सफलता पर अत्यंत गर्व है।"
-                      </p>
-                    </div>
-
-                    <div class="tpo-profile">
-                      <img src="https://unsplash.com" class="tpo-avatar" alt="TPO Profile">
-                      <div class="tpo-info">
-                        <h6>Dr. Rajesh Kumar</h6>
-                        <small>Training & Placement Officer (TPO)</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+        
+
+        <!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+/* ============================================================
+   PART 1 — HORIZONTAL GRAPH TIMELINE
+   ============================================================ */
+
+   .hg-section{
+  background: transparent !important;
+}
+/* .hg-card{
+  background: transparent;
+  box-shadow: none;
+} */
+/* .hg-card:hover{
+  box-shadow: none;   /
+  transform: none;
+} */
+
+.hg-section{
+  padding: 72px 20px 44px;
+  font-family: 'Times New Roman', Times, serif;
+  background:
+    radial-gradient(900px 480px at 50% -180px,#eff6ff 0%,transparent 70%),
+    #ffffff;
+  overflow: hidden;
+}
+
+/* --- heading --- */
+.hg-head{
+  max-width: 680px;
+  margin: 0 auto 54px;
+  text-align: center;
+}
+ 
+.hg-head h2{
+  margin:0 0 10px;
+  font-size:clamp(1.45rem,3vw,2rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:#0f172a;
+}
+.hg-head p{
+  margin:0;
+  color:#64748b;
+  font-size:.92rem;
+  line-height:1.7;
+}
+
+/* --- chart area --- */
+.hg-chart-wrap{
+  position:relative;
+  max-width:1240px;
+  height:260px;
+  margin:0 auto;
+}
+
+.hg-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.hg-gridline{
+  stroke:#eef2f7;
+  stroke-width:1;
+  stroke-dasharray:4 6;
+}
+
+.hg-area{
+  fill:url(#hgAreaGrad);
+  opacity:1;
+  animation:hgFade .8s ease backwards;
+  animation-delay:1.15s;
+}
+@keyframes hgFade{ from{opacity:0;} }
+
+.hg-line{
+  fill:none;
+  stroke:url(#hgLineGrad);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:1200;
+  stroke-dashoffset:0;
+  animation:hgDraw 1.8s cubic-bezier(.5,.1,.2,1) backwards;
+  animation-delay:.3s;
+}
+@keyframes hgDraw{ from{stroke-dashoffset:1200;} }
+
+/* --- nodes on the graph --- */
+.hg-node{
+  position:absolute;
+  width:56px;
+  height:56px;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  background:transparent;
+  border:3px solid #2563eb;
+  border-radius:50%;
+  color:#1d4ed8;
+  box-shadow:
+      0 10px 22px -8px rgba(37,99,235,.55),
+      0 0 0 6px #ffffff;
+  z-index:3;
+  cursor:default;
+  opacity:1;
+  scale:1;
+  animation:hgNodeIn .6s cubic-bezier(.2,.9,.3,1.4) backwards;
+  animation-delay:var(--d,0s);
+  transition:scale .3s cubic-bezier(.2,.8,.2,1),
+             border-color .3s,
+             box-shadow .3s;
+}
+@keyframes hgNodeIn{
+  from{ opacity:0; scale:.35; }
+}
+.hg-node i{
+  font-size:1.3rem;
+  line-height:1;
+  pointer-events:none;
+}
+.hg-node-num{
+  position:absolute;
+  top:-9px;
+  right:-9px;
+  background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+  color:#fff;
+  font-size:.6rem;
+  font-weight:800;
+  letter-spacing:.03em;
+  line-height:1.2;
+  padding:3px 7px;
+  border-radius:999px;
+  border:2px solid #ffffff;
+  box-shadow:0 3px 8px rgba(29,78,216,.35);
+  pointer-events:none;
+}
+.hg-node:hover{
+  scale:1.1;
+  border-color:#1d4ed8;
+  box-shadow:
+      0 18px 34px -10px rgba(37,99,235,.7),
+      0 0 0 6px #ffffff;
+}
+
+/* --- cards below the graph --- */
+.hg-cards{
+  position:relative;
+  max-width:1240px;
+  margin:26px auto 0;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:16px;
+  z-index:1;
+}
+
+.hg-card{
+  position:relative;
+  background:transparent;
+  border-radius:16px;
+  padding:20px 15px 22px;
+  text-align:center;
+  box-shadow:
+      0 14px 34px -22px rgba(15,23,42,.40),
+      0 0 0 1px rgba(15,23,42,.05);
+  opacity:1;
+  animation:hgCardIn .55s cubic-bezier(.2,.8,.2,1) backwards;
+  transition:box-shadow .3s, transform .3s;
+}
+@keyframes hgCardIn{
+  from{ opacity:0; transform:translateY(14px); }
+}
+.hg-cards .hg-card:nth-child(1){ animation-delay:.35s; }
+.hg-cards .hg-card:nth-child(2){ animation-delay:.42s; }
+.hg-cards .hg-card:nth-child(3){ animation-delay:.49s; }
+.hg-cards .hg-card:nth-child(4){ animation-delay:.56s; }
+.hg-cards .hg-card:nth-child(5){ animation-delay:.63s; }
+.hg-cards .hg-card:nth-child(6){ animation-delay:.70s; }
+
+/* subtle upward stem */
+.hg-card::before{
+  content:'';
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  height:12px;
+  border-radius:2px;
+  background:linear-gradient(180deg,rgba(37,99,235,0),rgba(37,99,235,.5));
+}
+
+.hg-card:hover{
+  transform:translateY(-5px);
+  box-shadow:
+      0 22px 42px -22px rgba(15,23,42,.5),
+      0 0 0 1px rgba(37,99,235,.18);
+}
+
+.hg-card-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:32px;
+  height:22px;
+  padding:0 9px;
+  margin-bottom:10px;
+  border-radius:999px;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  transition:background .3s, color .3s;
+}
+.hg-card:hover .hg-card-num{
+  background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+  color:#fff;
+}
+
+.hg-card-title{
+  margin:0 0 7px;
+  font-size:.95rem;
+  font-weight:800;
+  color:#0f172a;
+  line-height:1.35;
+  letter-spacing:-.01em;
+}
+.hg-card-desc{
+  margin:0;
+  font-size:.8rem;
+  line-height:1.6;
+  color:#64748b;
+}
+
+/* ============================================================
+   RESPONSIVE — compact horizontal (tablet)
+   ============================================================ */
+@media (max-width:1024px){
+  .hg-chart-wrap{ height:220px; }
+  .hg-node{
+    width:48px;
+    height:48px;
+    border-width:2.5px;
+    box-shadow:
+        0 8px 18px -8px rgba(37,99,235,.55),
+        0 0 0 5px #ffffff;
+  }
+  .hg-node i{ font-size:1.1rem; }
+  .hg-node-num{ font-size:.55rem; padding:2px 6px; top:-7px; right:-7px; }
+
+  .hg-cards{ gap:12px; margin-top:22px; }
+  .hg-card{ padding:16px 11px 18px; border-radius:14px; }
+  .hg-card-title{ font-size:.86rem; }
+  .hg-card-desc{ font-size:.74rem; }
+}
+
+/* ============================================================
+   RESPONSIVE — vertical stack (mobile)
+   ============================================================ */
+@media (max-width:767.98px){
+  .hg-section{ padding:52px 16px 30px; }
+  .hg-head{ margin-bottom:38px; }
+  .hg-head p{ font-size:.86rem; }
+
+  /* hide the graph, show a clean vertical timeline */
+  .hg-chart-wrap{ display:none; }
+
+  .hg-cards{
+    grid-template-columns:1fr;
+    gap:0;
+    max-width:560px;
+    margin:0 auto;
+    padding-left:0;
+  }
+  /* vertical rail */
+  .hg-cards::before{
+    content:'';
+    position:absolute;
+    left:22px;
+    top:32px;
+    bottom:32px;
+    width:2px;
+    border-radius:2px;
+    background:linear-gradient(180deg,
+        transparent 0%,
+        #bfdbfe 8%,
+        #2563eb 50%,
+        #bfdbfe 92%,
+        transparent 100%);
+    z-index:0;
+  }
+
+  .hg-card{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    background:transparent;
+    border-radius:0;
+    box-shadow:none;
+    padding:14px 0;
+    text-align:left;
+    position:relative;
+    z-index:1;
+    animation-delay:.15s;
+  }
+  .hg-cards .hg-card:nth-child(n){ animation-delay:calc(.1s + (var(--n,0) * .06s)); }
+  .hg-card::before{ display:none; }
+  .hg-card:hover{ transform:none; box-shadow:none; }
+
+  .hg-card-num{
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    margin:0;
+    padding:0;
+    border-radius:12px;
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+    color:#ffffff;
+    font-size:.78rem;
+    border:3px solid #ffffff;
+    box-shadow:0 8px 18px -6px rgba(37,99,235,.55);
+    position:relative;
+    z-index:2;
+    transition:none;
+  }
+  .hg-card:hover .hg-card-num{
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+    color:#ffffff;
+  }
+
+  .hg-card-body{
+    flex:1;
+    background:#ffffff;
+    padding:16px 18px;
+    border-radius:14px;
+    box-shadow:
+        0 12px 28px -20px rgba(15,23,42,.4),
+        0 0 0 1px rgba(15,23,42,.05);
+  }
+  .hg-card-title{ font-size:.92rem; margin-bottom:5px; text-align:left; }
+  .hg-card-desc{ font-size:.8rem; text-align:left; }
+}
+
+@media (max-width:400px){
+  .hg-card-body{ padding:14px 14px; }
+  .hg-card-title{ font-size:.88rem; }
+  .hg-card-desc{ font-size:.76rem; }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .hg-area, .hg-line, .hg-node, .hg-card{
+    animation:none !important;
+  }
+  .hg-node{ opacity:1; scale:1; }
+  .hg-card{ opacity:1; transform:none; }
+  .hg-line{ stroke-dashoffset:0; }
+}
+
+/* ============================================================
+   PART 2 — T&P HEAD PROFILE CARD
+   ============================================================ */
+.tpo-wrap{
+  max-width:1300px;
+  margin:10px auto 76px;
+  padding:0 20px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+.tpo-card{
+  display:grid;
+  grid-template-columns:330px 1fr;
+  background:#ffffff;
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:
+      0 32px 72px -34px rgba(15,23,42,.32),
+      0 0 0 1px rgba(15,23,42,.05);
+}
+
+/* --- left profile panel --- */
+.tpo-left{
+  position:relative;
+  overflow:hidden;
+  padding:44px 30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#ffffff;
+  background:linear-gradient(160deg,#1e3a8a 0%,#1d4ed8 55%,#2563eb 100%);
+}
+.tpo-left::before,
+.tpo-left::after{
+  content:'';
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
+.tpo-left::before{
+  width:260px;height:260px;
+  top:-110px;right:-90px;
+  background:radial-gradient(circle,rgba(255,255,255,.22),transparent 68%);
+}
+.tpo-left::after{
+  width:220px;height:220px;
+  bottom:-100px;left:-80px;
+  background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%);
+}
+
+.tpo-avatar{
+  width:132px;
+  height:132px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,.92);
+  box-shadow:0 0 0 7px rgba(255,255,255,.16),0 16px 32px rgba(0,0,0,.28);
+  margin-bottom:20px;
+  position:relative;
+  z-index:1;
+}
+.tpo-name{
+  font-size:1.15rem;
+  font-weight:800;
+  margin:0 0 6px;
+  letter-spacing:-.01em;
+  position:relative;
+  z-index:1;
+}
+.tpo-role{
+  font-size:.8rem;
+  font-weight:600;
+  line-height:1.5;
+  color:#fde68a;
+  margin:0 0 22px;
+  position:relative;
+  z-index:1;
+}
+
+.tpo-contacts{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  position:relative;
+  z-index:1;
+}
+.tpo-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:9px 16px;
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:600;
+  text-decoration:none;
+  color:#ffffff;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.26);
+  backdrop-filter:blur(6px);
+  transition:background .25s,color .25s,transform .25s;
+  word-break:break-word;
+}
+.tpo-chip:hover{
+  background:#ffffff;
+  color:#1d4ed8;
+  transform:translateY(-2px);
+}
+.tpo-chip i{ font-size:.9rem; }
+
+/* --- right description panel --- */
+.tpo-right{
+  padding:44px 44px 48px;
+}
+.tpo-right-head{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#0f172a;
+  margin:0 0 8px;
+  letter-spacing:-.01em;
+}
+.tpo-right-head i{
+  color:#2563eb;
+  font-size:1.15rem;
+}
+.tpo-rule{
+  width:52px;
+  height:4px;
+  border-radius:4px;
+  background:linear-gradient(90deg,#2563eb,#60a5fa);
+  margin:0 0 26px;
+}
+
+.tpo-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px 30px;
+}
+.tpo-list li{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  font-size:.9rem;
+  line-height:1.65;
+  color:#334155;
+}
+.tpo-check{
+  flex:0 0 26px;
+  width:26px;
+  height:26px;
+  margin-top:1px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#ecfdf5;
+  color:#059669;
+  font-size:.78rem;
+  box-shadow:inset 0 0 0 1px #d1fae5;
+}
+
+@media (max-width:991.98px){
+  .tpo-card{ grid-template-columns:1fr; }
+  .tpo-left{ padding:38px 26px; }
+  .tpo-contacts{ max-width:340px; }
+  .tpo-right{ padding:34px 28px 40px; }
+}
+@media (max-width:767.98px){
+  .tpo-list{ grid-template-columns:1fr; }
+}
+@media (max-width:575.98px){
+  .tpo-wrap{ padding:0 12px; }
+  .tpo-right{ padding:28px 20px 34px; }
+  .tpo-avatar{ width:110px; height:110px; }
+}
+</style>
+
+
+<!-- ============================================================
+     SECTION 1 — HORIZONTAL GRAPH TIMELINE
+     ============================================================ -->
+<section class="hg-section">
+
+  <div class="hg-head">
+     
+    <h2>Training &amp; Placement Journey</h2>
+    <p>छह सोपानों में छात्रों को industry-ready बनाने की पूरी यात्रा — हर कदम ऊँचाई की ओर।</p>
+  </div>
+
+  <!-- ---------- GRAPH ---------- -->
+  <div class="hg-chart-wrap">
+
+    <svg class="hg-svg" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true" role="presentation">
+      <defs>
+        <linearGradient id="hgAreaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="rgba(37,99,235,.30)"/>
+          <stop offset="100%" stop-color="rgba(37,99,235,0)"/>
+        </linearGradient>
+        <linearGradient id="hgLineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#93c5fd"/>
+          <stop offset="50%"  stop-color="#3b82f6"/>
+          <stop offset="100%" stop-color="#1d4ed8"/>
+        </linearGradient>
+      </defs>
+
+      <!-- grid lines -->
+      <g stroke="#eef2f7" stroke-width="1" stroke-dasharray="4 6">
+        <line x1="0" y1="40"  x2="1000" y2="40"/>
+        <line x1="0" y1="80"  x2="1000" y2="80"/>
+        <line x1="0" y1="120" x2="1000" y2="120"/>
+        <line x1="0" y1="160" x2="1000" y2="160"/>
+      </g>
+
+      <!-- area -->
+      <path class="hg-area"
+            d="M 0,170 L 83,164 L 250,140 L 417,128 L 583,96 L 750,62 L 917,34 L 1000,24 L 1000,200 L 0,200 Z"
+            fill="url(#hgAreaGrad)"/>
+
+      <!-- line -->
+      <path class="hg-line"
+            d="M 0,170 L 83,164 L 250,140 L 417,128 L 583,96 L 750,62 L 917,34 L 1000,24"
+            stroke="url(#hgLineGrad)"/>
+    </svg>
+
+    <!-- nodes -->
+    <div class="hg-node" style="left:8.33%;top:82%;--d:.55s">
+      <span class="hg-node-num">01</span>
+      <i class="bi bi-easel"></i>
+    </div>
+
+    <div class="hg-node" style="left:25%;top:70%;--d:.75s">
+      <span class="hg-node-num">02</span>
+      <i class="bi bi-building"></i>
+    </div>
+
+    <div class="hg-node" style="left:41.67%;top:64%;--d:.95s">
+      <span class="hg-node-num">03</span>
+      <i class="bi bi-person-check"></i>
+    </div>
+
+    <div class="hg-node" style="left:58.33%;top:48%;--d:1.15s">
+      <span class="hg-node-num">04</span>
+      <i class="bi bi-airplane"></i>
+    </div>
+
+    <div class="hg-node" style="left:75%;top:31%;--d:1.35s">
+      <span class="hg-node-num">05</span>
+      <i class="bi bi-mic"></i>
+    </div>
+
+    <div class="hg-node" style="left:91.67%;top:17%;--d:1.55s">
+      <span class="hg-node-num">06</span>
+      <i class="bi bi-lightbulb"></i>
+    </div>
+
+  </div>
+
+  <!-- ---------- CARDS ---------- -->
+  <div class="hg-cards">
+
+    <article class="hg-card" style="--n:0">
+      <span class="hg-card-num">01</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Training Programme</h5>
+        <p class="hg-card-desc">Conduct training programme for students.</p>
+      </div>
+    </article>
+
+    <article class="hg-card" style="--n:1">
+      <span class="hg-card-num">02</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Companies Visit</h5>
+        <p class="hg-card-desc">Companies visit for placement of students.</p>
+      </div>
+    </article>
+
+    <article class="hg-card" style="--n:2">
+      <span class="hg-card-num">03</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Campus &amp; Interview</h5>
+        <p class="hg-card-desc">Arrange campus and interview sessions.</p>
+      </div>
+    </article>
+
+    <article class="hg-card" style="--n:3">
+      <span class="hg-card-num">04</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Industrial Visit</h5>
+        <p class="hg-card-desc">Conducting industrial visits.</p>
+      </div>
+    </article>
+
+    <article class="hg-card" style="--n:4">
+      <span class="hg-card-num">05</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Seminar &amp; Presentation</h5>
+        <p class="hg-card-desc">Organizing seminars and presentations for students.</p>
+      </div>
+    </article>
+
+    <article class="hg-card" style="--n:5">
+      <span class="hg-card-num">06</span>
+      <div class="hg-card-body">
+        <h5 class="hg-card-title">Skill Development</h5>
+        <p class="hg-card-desc">Organizing skill development classes.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2 — T&P HEAD PROFILE
+     ============================================================ -->
+<div class="tpo-wrap ">
+  <div class="tpo-card rounded-3">
+
+    <!-- LEFT -->
+   
+   {% if tpo %}
+    <div class="tpo-left">
+      <img src="
+      {% if tpo.user.photo %}
+        {{ tpo.user.photo.url }}
+      {% else %}
+      https://placehold.co/260x260/e2e8f0/1d4ed8?text=Photo
+      {% endif %}
+        "
+           alt="Head, Training &amp; Placement Cell"
+           class="tpo-avatar">
+
+      <h5 class="tpo-name"> {{tpo.user.get_full_name}}</h5>
+      <p class="tpo-role"> {{tpo.work_position}}</p>
+
+      <div class="tpo-contacts">
+        <a href="mailto:tpo@college.edu" class="tpo-chip">
+          <i class="bi bi-envelope-fill"></i>  {{tpo.user.email}}
+        </a>
+        <a href="tel:+911234567890" class="tpo-chip">
+          <i class="bi bi-telephone-fill"></i>  {{tpo.user.phone}}
+        </a>
+      </div>
+    </div>
+    
+   {% endif %}
+    
+
+    <!-- RIGHT -->
+    <div class="tpo-right">
+      <h5 class="tpo-right-head">
+        <i class="bi bi-activity"></i>
+        Head, Training &amp; Placement Cell — Responsibilities
+      </h5>
+      <div class="tpo-rule"></div>
+
+      <ul class="tpo-list">
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Conduct training programmes focused on aptitude, communication and technical skills.
+        </li>
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Invite companies for campus drives and manage the complete placement process.
+        </li>
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Arrange campus interviews, group discussions and pre-placement talks.
+        </li>
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Conduct industrial visits to bridge the gap between academics and industry.
+        </li>
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Organize seminars, workshops and presentations for the students.
+        </li>
+        <li>
+          <span class="tpo-check"><i class="bi bi-check-lg"></i></span>
+          Run skill development classes and career-guidance sessions.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+           
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+/* ============================================================
+   RECRUITER CARDS — UNIQUE GRID
+   ============================================================ */
+.rc-section{
+  --rc-blue:#0D47A1;
+  --rc-blue-2:#2563eb;
+  --rc-gold:#FFD200;
+  --rc-ink:#0f172a;
+  --rc-muted:#64748b;
+
+  max-width:1300px;
+  margin:0 auto;
+  padding:56px 20px 40px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+
+/* --- Section head --- */
+.rc-head{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto 46px;
+}
+.rc-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 18px 7px 14px;
+  margin-bottom:18px;
+  background:rgba(13,71,161,.06);
+  border:1px solid rgba(13,71,161,.14);
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--rc-blue);
+}
+.rc-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--rc-gold);
+  box-shadow:0 0 0 4px rgba(255,210,0,.28);
+  animation:rcPulse 2.2s ease-in-out infinite;
+}
+@keyframes rcPulse{
+  0%,100%{ box-shadow:0 0 0 4px rgba(255,210,0,.28); }
+  50%    { box-shadow:0 0 0 9px rgba(255,210,0,.05); }
+}
+.rc-head h2{
+  margin:0 0 12px;
+  font-size:clamp(1.5rem,3vw,2.1rem);
+  font-weight:900;
+  letter-spacing:-.025em;
+  color:var(--rc-ink);
+}
+.rc-head h2 span{
+  background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#FFB300 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.rc-head p{
+  margin:0 auto;
+  max-width:480px;
+  font-size:.92rem;
+  color:var(--rc-muted);
+  line-height:1.65;
+}
+
+/* --- Grid --- */
+.rc-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:22px;
+}
+
+/* --- Card --- */
+.rc-logo-box{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  min-height:170px;
+  padding:26px 18px 22px;
+  background:linear-gradient(180deg,#ffffff 0%,#fafbfd 100%);
+  border:1px solid #e8edf5;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:
+      0 4px 14px -6px rgba(15,23,42,.08),
+      0 1px 3px rgba(15,23,42,.04);
+  transition:
+      transform .4s cubic-bezier(.2,.8,.2,1),
+      box-shadow .4s,
+      border-color .4s;
+}
+
+/* top gradient accent line — slides in on hover */
+.rc-logo-box::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--rc-blue) 0%,var(--rc-blue-2) 55%,var(--rc-gold) 100%);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+/* soft glow corner */
+.rc-logo-box::after{
+  content:'';
+  position:absolute;
+  width:160px;height:160px;
+  top:-70px;right:-70px;
+  background:radial-gradient(circle,rgba(37,99,235,.10),transparent 65%);
+  border-radius:50%;
+  opacity:0;
+  transition:opacity .45s;
+  pointer-events:none;
+}
+
+.rc-logo-box:hover{
+  transform:translateY(-6px);
+  border-color:rgba(37,99,235,.24);
+  box-shadow:
+      0 24px 42px -20px rgba(13,71,161,.32),
+      0 4px 12px rgba(15,23,42,.05);
+}
+.rc-logo-box:hover::before{ transform:scaleX(1); }
+.rc-logo-box:hover::after{ opacity:1; }
+
+/* --- Logo image --- */
+.rc-logo-box img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:130px;
+  max-height:70px;
+  object-fit:contain;
+  mix-blend-mode:multiply;
+  filter:grayscale(100%) opacity(.75);
+  transition:filter .45s ease, transform .45s ease;
+}
+.rc-logo-box:hover img{
+  filter:grayscale(0%) opacity(1);
+  transform:scale(1.06);
+}
+
+/* --- Company name --- */
+.rc-name{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-size:.85rem;
+  font-weight:800;
+  color:var(--rc-ink);
+  line-height:1.3;
+  letter-spacing:-.005em;
+  padding-top:12px;
+  border-top:1px solid #eef2f7;
+  width:100%;
+  transition:color .3s;
+}
+.rc-logo-box:hover .rc-name{ color:var(--rc-blue-2); }
+
+/* small floating "verified" style dot */
+.rc-name::before{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;
+  margin-right:7px;
+  border-radius:50%;
+  background:var(--rc-gold);
+  box-shadow:0 0 0 3px rgba(255,210,0,.18);
+  vertical-align:middle;
+  transition:box-shadow .3s;
+}
+.rc-logo-box:hover .rc-name::before{
+  box-shadow:0 0 0 5px rgba(255,210,0,.10);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .rc-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+  .rc-logo-box{ min-height:158px; padding:22px 16px 20px; }
+  .rc-logo-box img{ max-width:115px; max-height:62px; }
+  .rc-name{ font-size:.8rem; }
+}
+
+@media (max-width:767.98px){
+  .rc-section{ padding:40px 14px 30px; }
+  .rc-head{ margin-bottom:34px; }
+  .rc-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .rc-logo-box{
+    min-height:140px;
+    padding:18px 12px 16px;
+    border-radius:14px;
+    gap:12px;
+  }
+  .rc-logo-box img{ max-width:100px; max-height:54px; }
+  .rc-name{ font-size:.74rem; padding-top:10px; }
+}
+
+@media (max-width:400px){
+  .rc-grid{ gap:10px; }
+  .rc-logo-box{ padding:16px 10px 14px; }
+  .rc-logo-box img{ max-width:88px; max-height:48px; }
+  .rc-name{ font-size:.7rem; }
+  .rc-name::before{ width:5px;height:5px; margin-right:5px; }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .rc-dot{ animation:none; }
+  .rc-logo-box, .rc-logo-box img, .rc-name{ transition:none; }
+  .rc-logo-box:hover{ transform:none; }
+}
+</style>
+
+
+<!-- ============================================================
+     SECTION MARKUP
+     ============================================================ -->
+<section class="rc-section">
+
+  <div class="rc-head">
+     
+    <h2>Top <span>Recruiters</span> Companies</h2>
+    <p>Industry leaders who consistently hire from our campus — year after year.</p>
+  </div>
+
+  <div class="rc-grid">
+
+    <!-- John Deere -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/jd1.jpg"
+           alt="John Deere"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">John Deere</p>
+    </div>
+
+    <!-- Vacmet India -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/vacmetindialtd_logo.jpg"
+           alt="Vacmet India"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Vacmet India</p>
+    </div>
+
+    <!-- Volvo Eicher -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/720x570_mobile-version-1593005415.png"
+           alt="Volvo Eicher"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Volvo Eicher</p>
+    </div>
+
+    <!-- Eicher Tractor -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/EICHER.png"
+           alt="Eicher Tractor"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Eicher Tractor</p>
+    </div>
+
+    <!-- CEAT Tyre -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/ceat.png"
+           alt="CEAT Tyre"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">CEAT Tyre</p>
+    </div>
+
+    <!-- Krishna Maruti -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/Krishna-Maruti-Limited.png"
+           alt="Krishna Maruti"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=KM&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Krishna Maruti</p>
+    </div>
+
+    <!-- Jaya Hind Industries -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/jay-hind-group.jpg"
+           alt="Jaya Hind Industries"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Jaya Hind Industries</p>
+    </div>
+
+    <!-- Force Motors -->
+    <div class="rc-logo-box">
+      <img loading="lazy"
+           src="/static/images/force.jpg"
+           alt="Force Motors"
+           onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';">
+      <p class="rc-name">Force Motors</p>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -1098,99 +1491,476 @@
               }
             }
           </style>
+<div class="container">
+  <style>
+/* ============================================================
+   PLACEMENT DATA TABLE — PREMIUM CARD
+   ============================================================ */
+.data-card{
+  --dc-blue:#0D47A1;
+  --dc-blue-2:#2563eb;
+  --dc-gold:#FFD200;
+  --dc-ink:#0f172a;
+  --dc-muted:#64748b;
+  --dc-line:#eef2f7;
+
+  position:relative;
+  overflow:hidden;
+  background:#ffffff;
+  border:1px solid #e8edf5;
+  border-radius:22px;
+  box-shadow:
+      0 20px 44px -28px rgba(15,23,42,.24),
+      0 3px 8px rgba(15,23,42,.04);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+
+/* top gradient accent line */
+.data-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,
+      var(--dc-blue) 0%,
+      var(--dc-blue-2) 55%,
+      var(--dc-gold) 100%);
+  z-index:2;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.data-card .year-header{
+  position:relative;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:14px;
+  flex-wrap:wrap;
+  padding:20px 24px !important;
+  background:
+      radial-gradient(circle at 100% 0%,rgba(37,99,235,.08),transparent 55%),
+      linear-gradient(180deg,#ffffff 0%,#fafbfd 100%) !important;
+  border-bottom:1px solid var(--dc-line) !important;
+}
+
+.data-card .year-header > span:first-child{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:1rem;
+  font-weight:800;
+  letter-spacing:-.01em;
+  color:var(--dc-ink);
+}
+.data-card .year-header > span:first-child i{
+  display:inline-grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  font-size:.9rem;
+  box-shadow:0 6px 14px -6px rgba(37,99,235,.55);
+}
+
+/* LIVE "NEW" BADGE */
+.data-card .year-header .badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px 6px 12px !important;
+  border-radius:999px !important;
+  font-size:.66rem !important;
+  font-weight:800 !important;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%) !important;
+  color:#ffffff !important;
+  box-shadow:0 8px 18px -8px rgba(37,99,235,.65);
+  position:relative;
+  overflow:hidden;
+}
+.data-card .year-header .badge::before{
+  content:'';
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#FFD200;
+  box-shadow:0 0 0 3px rgba(255,210,0,.35);
+  animation:dcPulse 2s ease-in-out infinite;
+}
+.data-card .year-header .badge::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(105deg,
+      transparent 0%,
+      rgba(255,255,255,.4) 50%,
+      transparent 100%);
+  animation:dcShine 3s ease-in-out infinite;
+}
+@keyframes dcPulse{
+  0%,100%{ box-shadow:0 0 0 3px rgba(255,210,0,.35); }
+  50%    { box-shadow:0 0 0 6px rgba(255,210,0,.1); }
+}
+@keyframes dcShine{
+  0%      { left:-100%; }
+  50%     { left:100%; }
+  100%    { left:100%; }
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.data-card .table-responsive{
+  -webkit-overflow-scrolling:touch;
+}
+
+.data-card .table-custom{
+  border:none !important;
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+  margin:0 !important;
+  width:100%;
+  min-width:820px;
+}
+
+.data-card .table-custom thead th{
+  position:relative;
+  padding:16px 18px !important;
+  font-size:.72rem !important;
+  font-weight:800 !important;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  text-align:center !important;
+  vertical-align:middle !important;
+  color:#ffffff !important;
+  border:none !important;
+  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 55%,#2563eb 100%);
+  white-space:nowrap;
+  border-right:1px solid rgba(255,255,255,.08) !important;
+}
+.data-card .table-custom thead th:first-child{
+  border-top-left-radius:0;
+}
+.data-card .table-custom thead th:last-child{
+  border-right:none !important;
+}
+
+/* Column-specific header icon hint (optional — subtle) */
+.data-card .table-custom thead th::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:2px;
+  background:var(--dc-gold);
+  transition:width .4s ease;
+}
+.data-card .table-custom thead th:hover::after{ width:60%; }
+
+.data-card .table-custom tbody td{
+  padding:16px 18px !important;
+  font-size:.88rem;
+  text-align:center !important;
+  vertical-align:middle !important;
+  color:#334155;
+  border:none !important;
+  border-bottom:1px solid var(--dc-line) !important;
+  border-right:1px solid rgba(238,242,247,.7) !important;
+  transition:background .25s ease, color .25s ease;
+}
+.data-card .table-custom tbody td:last-child{
+  border-right:none !important;
+}
+
+/* Row striping */
+.data-card .table-custom tbody tr:nth-child(even) td{
+  background:#fbfcfe;
+}
+.data-card .table-custom tbody tr:last-child td{
+  border-bottom:none !important;
+}
+
+/* Hover row */
+.data-card .table-custom tbody tr{
+  position:relative;
+  transition:box-shadow .3s;
+}
+.data-card .table-custom tbody tr:hover td{
+  background:#f0f7ff !important;
+  color:#0f172a;
+}
+
+/* Year column — bold & tinted */
+.data-card .table-custom tbody td:first-child{
+  font-weight:800 !important;
+  color:#1d4ed8 !important;
+  font-size:.9rem !important;
+  letter-spacing:.01em;
+  background:rgba(239,246,255,.4);
+}
+.data-card .table-custom tbody tr:hover td:first-child{
+  background:linear-gradient(90deg,#eff6ff 0%,#dbeafe 100%) !important;
+}
+
+/* ============================================================
+   CELL STYLES — badges & packages
+   ============================================================ */
+
+/* Students placed badge */
+.data-card .table-custom .badge.bg-success{
+  display:inline-flex !important;
+  align-items:center;
+  gap:6px;
+  padding:7px 14px !important;
+  font-size:.78rem !important;
+  font-weight:800 !important;
+  letter-spacing:.02em;
+  border-radius:999px !important;
+  background:linear-gradient(135deg,#10b981 0%,#059669 100%) !important;
+  color:#ffffff !important;
+  box-shadow:0 6px 14px -6px rgba(16,185,129,.55);
+  transition:transform .25s, box-shadow .25s;
+}
+.data-card .table-custom .badge.bg-success::before{
+  content:'✓';
+  display:inline-grid;
+  place-items:center;
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  background:rgba(255,255,255,.25);
+  font-size:.65rem;
+  font-weight:900;
+  line-height:1;
+}
+.data-card .table-custom tbody tr:hover .badge.bg-success{
+  transform:scale(1.04);
+  box-shadow:0 10px 20px -8px rgba(16,185,129,.7);
+}
+
+/* Offers column — plain but emphasized */
+.data-card .table-custom tbody td:nth-child(3){
+  font-weight:700;
+  color:#0f172a;
+  font-size:.95rem !important;
+}
+
+/* Highest package — star of the show */
+.data-card .table-custom tbody td.fw-bold.text-success{
+  color:#059669 !important;
+  font-size:.95rem !important;
+  position:relative;
+}
+.data-card .table-custom tbody td.fw-bold.text-success::before{
+  content:'★';
+  display:inline-block;
+  margin-right:5px;
+  font-size:.72rem;
+  color:#f59e0b;
+  vertical-align:middle;
+}
+
+/* Average + median packages — chip look */
+.data-card .table-custom tbody td:nth-child(5),
+.data-card .table-custom tbody td:nth-child(6){
+  font-weight:600;
+  color:#1d4ed8;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Empty state */
+.data-card .table-custom tbody tr td[colspan]{
+  padding:36px 20px !important;
+  color:#94a3b8 !important;
+  font-style:italic;
+  font-size:.9rem;
+  background:#fbfcfe !important;
+  border-bottom:none !important;
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile card view
+   ============================================================ */
+@media (max-width:820px){
+  .data-card .year-header{
+    padding:16px 18px !important;
+  }
+  .data-card .year-header > span:first-child{
+    font-size:.9rem;
+  }
+  .data-card .year-header > span:first-child i{
+    width:28px;
+    height:28px;
+    font-size:.8rem;
+  }
+
+  /* turn table rows into stacked cards */
+  .data-card .table-responsive{
+    overflow:visible;
+  }
+  .data-card .table-custom{
+    min-width:0;
+    display:block;
+  }
+  .data-card .table-custom thead{
+    display:none;
+  }
+  .data-card .table-custom tbody,
+  .data-card .table-custom tr,
+  .data-card .table-custom td{
+    display:block;
+    width:100%;
+  }
+
+  .data-card .table-custom tbody tr{
+    position:relative;
+    padding:18px 18px 16px;
+    margin:14px 14px;
+    background:#ffffff;
+    border:1px solid #e8edf5 !important;
+    border-radius:14px;
+    box-shadow:0 6px 18px -12px rgba(15,23,42,.25);
+    transition:border-color .3s, box-shadow .3s;
+  }
+  .data-card .table-custom tbody tr:hover{
+    border-color:rgba(37,99,235,.24) !important;
+    box-shadow:0 14px 26px -14px rgba(37,99,235,.3);
+  }
+
+  .data-card .table-custom tbody td{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:9px 0 !important;
+    text-align:right !important;
+    border:none !important;
+    border-bottom:1px dashed #eef2f7 !important;
+    font-size:.85rem !important;
+    background:transparent !important;
+  }
+  .data-card .table-custom tbody td:last-child{
+    border-bottom:none !important;
+    padding-bottom:0 !important;
+  }
+
+  /* label on left via data-attr */
+  .data-card .table-custom tbody td::before{
+    content:attr(data-label);
+    flex:0 0 auto;
+    font-size:.7rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#94a3b8;
+    text-align:left;
+  }
+
+  /* first cell (year) becomes a card title */
+  .data-card .table-custom tbody td:first-child{
+    justify-content:flex-start;
+    padding-bottom:12px !important;
+    margin-bottom:8px;
+    border-bottom:2px solid #eff6ff !important;
+    font-size:1rem !important;
+    background:transparent !important;
+  }
+  .data-card .table-custom tbody td:first-child::before{
+    display:none;
+  }
+
+  .data-card .table-custom .badge.bg-success{
+    padding:5px 12px !important;
+    font-size:.72rem !important;
+  }
+  .data-card .table-custom tbody td[colspan]{
+    text-align:center !important;
+    justify-content:center;
+  }
+  .data-card .table-custom tbody td[colspan]::before{
+    display:none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .data-card .year-header .badge::before,
+  .data-card .year-header .badge::after{ animation:none; }
+  .data-card .table-custom tbody tr,
+  .data-card .table-custom tbody td,
+  .data-card .badge.bg-success{ transition:none; }
+}
+</style>
 
 
+<!-- ============================================================
+     CARD MARKUP
+     ============================================================ -->
+      <div class="hg-head">
+     
+    <h2> Academic Placement Annual </h2>
+    
+  </div>
 
-          <div class="row yearspkg mx-md-5 mt-5">
+<div class="card data-card overflow-hidden rounded-3">
+  <div class="card-header year-header py-3 px-4 d-flex justify-content-between align-items-center bg-light">
+    <span><i class="bi bi-calendar3 me-2"></i>Academic Year 2019-20</span>
+    <span class="badge bg-primary px-3">New</span>
+  </div>
 
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-custom m-0">
+        <thead>
+          <tr>
+            <th scope="col">Academic Year</th>
+            <th scope="col">Students Placed</th>
+            <th scope="col">Offers</th>
+            <th scope="col">Highest (LPA)</th>
+            <th scope="col">Average (LPA)</th>
+            <th scope="col">Median (LPA)</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
 
-          </div>
+          {% for batch in all_batches %}
+          <tr>
+            <td class="fw-bold text-secondary" data-label="Academic Year">{{ batch.year }}</td>
+            <td data-label="Students Placed">
+              <span class="badge bg-success fs-6">{{ batch.total_students_placed }}</span>
+            </td>
+            <td data-label="Offers">{{ batch.total_offers }}</td>
+            <td class="fw-bold text-success" data-label="Highest (LPA)">₹{{ batch.max_highest_package }}</td>
+            <td data-label="Average (LPA)">₹{{ batch.avg_package }}</td>
+            <td data-label="Median (LPA)">₹{{ batch.median_package }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-muted py-3">कोई समरी डेटा उपलब्ध नहीं है।</td>
+          </tr>
+          {% endfor %}
 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
 
         </div>
-        <div class="containers my-5 mx-5 px-5 ">
-
-          <style>
-            /* इमेज की तरह फॉन्ट और बॉर्डर को सटीक रखने के लिए कुछ कस्टम स्टाइलिंग */
-            body {
-              font-family: Arial, sans-serif;
-            }
-
-            .table-custom {
-              border: 2px solid #333;
-            }
-
-            .table-custom th,
-            .table-custom td {
-              border: 1px solid #777;
-              vertical-align: middle;
-              text-align: center;
-            }
-
-            /* ब्रांच नाम को लेफ्ट-अलाइन रखने के लिए (जैसा कि इमेज में है) */
-            .table-custom td.branch-name {
-              text-align: left;
-              padding-left: 15px;
-            }
-          </style>
-
-
-          <!-- प्लेसमेंट सेल की गतिविधियाँ -->
-
-
-          <!-- रीयूसेबल टेबल मैक्रो फंक्शनलिटी शुरू -->
-
-          <!-- 1. ACADEMIC YEAR 2019-20 -->
-          <div class="card data-card overflow-hidden rounded-3  ">
-            <div class="card-header year-header py-3 px-4 d-flex justify-content-between align-items-center bg-light">
-              <span><i class="bi bi-calendar3 me-2"></i>Academic Year 2019-20</span>
-              <span class="badge bg-primary px-3"> New</span>
-            </div>
-            <div class="card-body p-0">
-              <div class="table-responsive">
-                <table class="table table-striped table-hover table-custom m-0">
-                  <thead>
-                    <tr>
-
-                      <th scope="col"> Academic Year</th>
-
-                      <th scope="col">Students Placed</th>
-
-
-                      <th scope="col">Offers</th>
-                      <th scope="col">Highest (LPA)</th>
-                      <th scope="col">Average (LPA)</th>
-                      <th scope="col">Median (LPA)</th>
-
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-
-                    {% for batch in all_batches %}
-                    <tr>
-                      <td class="fw-bold text-secondary">{{ batch.year }}</td>
-                      <td><span class="badge bg-success fs-6">{{ batch.total_students_placed }}</span></td>
-                      <td>{{ batch.total_offers }}</td>
-                      <td class="fw-bold text-success">₹{{ batch.max_highest_package }}</td>
-                      <td>₹{{ batch.avg_package }}</td>
-                      <td>₹{{ batch.median_package }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                      <td colspan="6" class="text-muted py-3">कोई समरी डेटा उपलब्ध नहीं है।</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-
-                </table>
-              </div>
-            </div>
-          </div>
-
-
+        
 
         </div>
       </div>
+      
 
       <div class="tab-pane fade" id="Statistics-tab-pane" role="tabpanel" aria-labelledby="Statistics-tab" tabindex="0">
         <style>
@@ -1480,197 +2250,330 @@
     </div>
 
     <div class="tab-pane fade" id="Recruiters-Companies-tab-pane" role="tabpanel"
-      aria-labelledby="Recruiters-Companies-tab" tabindex="0">
+     aria-labelledby="Recruiters-Companies-tab" tabindex="0">
 
-      <div class="card bg-transparent border-0 mt-md-5" style="height:8rem !important;">
-        <div class="text-center mb-5 my-5">
-          <h2 class="fw-bold" style="color: #0D47A1;"> Recruiters Companies</h2>
+  <style>
+    /* ========= SLIDER (sirf CSS, JS nahi) ========= */
+    #Recruiters-Companies-tab-pane .rc-marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    #Recruiters-Companies-tab-pane .rc-track {
+      display: flex;
+      width: max-content;
+      animation: rc-scroll 42s linear infinite;
+      will-change: transform;
+    }
+    #Recruiters-Companies-tab-pane .rc-marquee.rev .rc-track { animation-direction: reverse; }
+    #Recruiters-Companies-tab-pane .rc-marquee:hover .rc-track,
+    #Recruiters-Companies-tab-pane .rc-marquee:focus-within .rc-track { animation-play-state: paused; }
+    @keyframes rc-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-          <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
-        </div>
+    /* slider logo box */
+    #Recruiters-Companies-tab-pane .rc-logo-box {
+      flex: 0 0 auto;
+      width: 160px;
+      height: 110px;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .9rem;
+      background: #fff;
+      border: 1px solid #E6EAF0;
+      border-radius: 14px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    #Recruiters-Companies-tab-pane .rc-logo-box:hover {
+      border-color: rgba(13,71,161,.35);
+      box-shadow: 0 8px 22px rgba(13,71,161,.10);
+    }
+    #Recruiters-Companies-tab-pane .rc-logo-box img {
+      max-width: 100%;
+      max-height: 78px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .85;
+      transition: filter .25s, opacity .25s;
+    }
+    #Recruiters-Companies-tab-pane .rc-logo-box:hover img {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+
+    /* card logo area */
+    #Recruiters-Companies-tab-pane .rc-card-logo {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    #Recruiters-Companies-tab-pane .rc-card-logo img {
+      max-height: 82px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .88;
+      transition: filter .25s, opacity .25s;
+    }
+    #Recruiters-Companies-tab-pane .rc-card:hover {
+      border-color: rgba(13,71,161,.35) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(13,71,161,.10) !important;
+    }
+    #Recruiters-Companies-tab-pane .rc-card:hover .rc-card-logo img {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+    #Recruiters-Companies-tab-pane .rc-card { transition: all .25s ease; }
+
+    @media (prefers-reduced-motion: reduce) {
+      #Recruiters-Companies-tab-pane .rc-track { animation: none; }
+    }
+  </style>
+
+  <!-- ================= HEADING ================= -->
+  <div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width: 640px;">
+      <span class="d-inline-block text-uppercase fw-semibold small text-secondary mb-2"
+            style="letter-spacing:.14em; font-size:.72rem;">Placement Partners</span>
+      <h2 class="fw-bold mb-3" style="color:#0D47A1;">Recruiters Companies</h2>
+      <div class="rounded-pill mx-auto mb-3" style="width:56px;height:4px;background:#FFD200;"></div>
+      <p class="text-secondary mb-0">हर साल हमारे campus से hire करने वाली कंपनियाँ</p>
+    </div>
+
+    <!-- ================= SLIDER 1 : LTR ================= -->
+    <div class="rc-marquee mb-3">
+      <div class="rc-track">
+        <!-- John Deere -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Vacmet India -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Volvo Eicher -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Eicher Tractor -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- CEAT Tyre -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Krishna Maruti -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"></div>
+        <!-- Jaya Hind Industries -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Force Motors -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/force.jpg" alt="Force Motors" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+
+        <!-- DUPLICATE (loop ke liye) -->
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jd1.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/EICHER.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/ceat.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt=""></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/force.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
       </div>
+    </div>
 
-      <div class="custom-slider-container mb-md-4 mt-0 ">
-        <div class="slider-track track-ltr">
+    <!-- ================= SLIDER 2 : RTL ================= -->
+    <div class="rc-marquee rev mt-3">
+      <div class="rc-track">
+        <!-- Force Motors -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/force.jpg" alt="Force Motors" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Jaya Hind -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Krishna Maruti -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"></div>
+        <!-- CEAT -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Eicher Tractor -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Volvo Eicher -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- Vacmet -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <!-- John Deere -->
+        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
 
-          <!-- ग्रुप A -->
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-
-          <!-- ग्रुप B — ग्रुप A की हूबहू कॉपी (लूप के लिए ज़रूरी) -->
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-
-        </div>
+        <!-- DUPLICATE -->
+        
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt=""></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/ceat.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/EICHER.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
+       <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jd1.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div> <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/force.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
       </div>
+    </div>
 
-      <!-- ================= स्लाइडर 2 : RTL ================= -->
-      <div class="custom-slider-container my-md-4">
-        <div class="slider-track track-rtl">
+    <!-- ================= GRID HEADING ================= -->
+    <div class="d-flex align-items-center gap-3 mt-5 mb-4">
+      <h3 class="fw-bold mb-0 text-dark fs-5">Our Top Recruiters</h3>
+      <div class="flex-grow-1 border-top"></div>
+    </div>
 
-          <!-- ग्रुप A -->
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
+    <!-- ================= GRID (clickable cards) ================= -->
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
 
-          <!-- ग्रुप B — हूबहू कॉपी -->
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-          <div class="logo-card"><img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzR5VJLYjDzIccIzHTXv19Q1rZ3my6IpMOtGR7E0yqoQ&s"
-              alt="Logo"></div>
-          <div class="logo-card"><img src="https://www.vhv.rs/dpng/d/467-4677949_infosys-logo-png-transparent-png.png"
-              alt="Logo"></div>
-
-        </div>
-      </div>
-      <!-- end shcroll -->
-      <div class="col-lg-11 col-md-12 " style="justify-self: center;">
-        <div class="tpo-company-card-wrapper">
-          <div class="tpo-section-heading">Our Top Recruiters</div>
-
-          <!-- ग्रिड लेआउट: 2, 3 या 4 कॉलम रिस्पॉन्सिव -->
-          <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                  alt="John Deere">
-                <small>Dewas</small>
+      <!-- 1. John Deere -->
+      <div class="col">
+        <a href="https://www.deere.co.in" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';">
               </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">John Deere</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Dewas
+              </small>
             </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Vac Mate">
-                <small>Pithampur</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                  alt="Volvo Eicher">
-                <small>Dewas</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                  alt="Eicher Tractor">
-                <small>Bhopal</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                  alt="CEAT Tyre">
-                <small>Halol</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3cjXHiiG28SY5szIDcWTG1aLTh1hIoWXaAji-wD3oyg&s=10"
-                  alt="Maruti Krishna">
-                <small>Haryana</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Jay Hind">
-                <small>Aurangabad</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Force Motors">
-                <small>Pithampur</small>
-              </div>
-            </div>.
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Force Motors">
-                <small>Pithampur</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Force Motors">
-                <small>Pithampur</small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="tpo-logo-card">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png?utm_source=hi.wikipedia.org&utm_campaign=index&utm_content=original"
-                  alt="Force Motors">
-                <small>Pithampur</small>
-              </div>
-            </div>
-
           </div>
-        </div>
+        </a>
       </div>
 
+      <!-- 2. Vacmet India -->
+      <div class="col">
+        <a href="https://vpipl.co.in" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Vacmet India</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Pithampur
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
 
+      <!-- 3. Volvo Eicher Commercial Vehicle -->
+      <div class="col">
+        <a href="https://www.vecv.in" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher Commercial Vehicle"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Volvo Eicher Commercial Vehicle</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Dewas
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
 
+      <!-- 4. Eicher Tractor -->
+      <div class="col">
+        <a href="https://eichertractors.in" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Eicher Tractor</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Mandideep, Bhopal
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 5. CEAT Tyre -->
+      <div class="col">
+        <a href="https://www.ceat.com" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">CEAT Tyre</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Halol
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 6. Krishna Maruti -->
+      <div class="col">
+        <a href="https://www.marutisuzuki.com" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Krishna Maruti</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Haryana
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 7. Jaya Hind Industries -->
+      <div class="col">
+        <a href="https://www.jayahind.com" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Jaya Hind Industries</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Aurangabad
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 8. Force Motors -->
+      <div class="col">
+        <a href="https://www.forcemotors.com" target="_blank" rel="noopener" class="text-decoration-none">
+          <div class="rc-card card h-100 border rounded-4 shadow-sm">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
+              <div class="rc-card-logo mb-3">
+                <img loading="lazy" src="/static/images/force.jpg" alt="Force Motors"
+                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';">
+              </div>
+              <h6 class="fw-semibold text-dark text-center mb-2">Force Motors</h6>
+              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                Pithampur
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
 
     </div>
+  </div>
+</div>
 
 
     <div class="tab-pane fade" id="StudentsPlaced-tab-pane" role="tabpanel" aria-labelledby="StudentsPlaced-tab"
