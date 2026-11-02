@@ -102,7 +102,7 @@ INSTALLED_APPS = [
     'rest_framework', 
     'dashboard',
     
-    "cacheops",
+    
     "core.apps.YourAppConfig",
 ]
 
