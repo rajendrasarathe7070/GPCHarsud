@@ -12,8 +12,8 @@
     .brand-icon { width: 60px; height: 60px; border-radius: 1rem; background: linear-gradient(135deg, #a3f307, #10b981); display: flex; align-items: center; justify-content: center; color: #072b1e; font-size: 1.8rem; margin: 0 auto 1rem; }
     .form-control-lg { border-radius: 0.75rem; padding: 0.9rem 1.1rem; border: 1.5px solid #e5e7eb; }
     .form-control-lg:focus { border-color: #10b981; box-shadow: 0 0 0 0.25rem rgba(16,185,129,0.15); }
-    .btn-login { background: #052e20; color: #fff; border-radius: 0.75rem; padding: 0.9rem; font-weight: 600; border: none; }
-    .btn-login:hover { background: #0a4a34; color: #fff; }
+    .btn-login {    border-radius: 0.75rem; padding: 0.9rem; font-weight: 600; border: none; }
+    /* .btn-login:hover { background: #0a4a34; color: #fff; } */
     .error-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0.5rem; color: #991b1b; font-size: 0.9rem; }
   </style>
 </head>
@@ -44,7 +44,8 @@
         {{ form.password }}
         {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>{% endif %}
       </div>
-      <button type="submit" class="btn btn-login w-100"><i class="bi bi-shield-lock me-2"></i> Continue to 2FA</button>
+      <button type="submit" class="btn btn-outline-success btn-login w-100"><i class="bi bi-shield-lock me-2"></i> Continue to 2FA</button>
+        <button type="button" onclick="window.location.href='/' " class="btn btn-outline-danger  btn-login w-100 my-3"><i class="bi bi-house-fill me-2"></i> Back To Home </button>
     </form>
     <p class="text-center text-muted small mt-4 mb-0"><i class="bi bi-info-circle"></i> 2FA is mandatory for all users.</p>
   </div>

@@ -1,0 +1,293 @@
+ 
+<!DOCTYPE html>
+<!--
+  Lockout page for Government Polytechnic College, Vidyanagar.
+  Rendered by django-axes when a user exceeds AXES_FAILURE_LIMIT.
+
+  Timer strategy:
+    1. Try to read cooloff_time.total_seconds from context (server value).
+    2. Fall back to LOCK_SECONDS = 300 (5 minutes) if that fails.
+    3. Persist the target unlock timestamp in localStorage so refresh
+       does not restart the timer.
+-->
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Account Locked | Government Polytechnic College</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon"
+    href="/static/logo/gpch.ico" />
+  <style>
+    :root {
+      --brand: #102a5e;
+      --brand-2: #1c4087;
+      --accent: #f4811f;
+      --bg: #f5f8fd;
+      --surface: #fff;
+      --surface-2: #f0f5fc;
+      --text: #15233b;
+      --text-soft: #4d5d77;
+      --muted: #8294af;
+      --border: #e2e9f4;
+      --good: #16a34a;
+      --ring: 0 0 0 3px rgba(42, 91, 184, .35);
+    }
+    [data-theme="dark"] {
+      --brand: #5b8def; --brand-2: #3f6fce; --accent: #ff8a33;
+      --bg: #070d1e; --surface: #111d3c; --surface-2: #16224a;
+      --text: #e8eefb; --text-soft: #aebbd6; --muted: #7e90b4;
+      --border: #21315c; --good: #34d399;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; display: grid; place-items: center;
+      padding: 1.5rem; text-align: center;
+      -webkit-font-smoothing: antialiased;
+      transition: background .3s, color .3s;
+    }
+    a { color: inherit; text-decoration: none }
+    .wrap { max-width: 640px; width: 100% }
+
+    .code {
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      font-weight: 800; line-height: 1;
+      font-size: clamp(5rem, 24vw, 9rem);
+      letter-spacing: -.04em;
+      background: linear-gradient(145deg, var(--brand), var(--accent));
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent; margin-bottom: .5rem;
+    }
+    .code small {
+      display: block; font-size: .16em; color: var(--accent);
+      background: none; -webkit-text-fill-color: var(--accent);
+      margin-top: .5rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin: .5rem 0;
+    }
+    p {
+      color: var(--text-soft); max-width: 48ch;
+      margin: 0 auto 1.2rem; font-size: 1.02rem;
+    }
+
+    /* timer */
+    .timer-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem 1.2rem;
+      margin: 1.4rem auto 1.6rem;
+      max-width: 340px;
+      box-shadow: 0 10px 30px rgba(16, 30, 60, .08);
+    }
+    .timer-label {
+      font-size: .8rem; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--muted);
+      font-weight: 700; margin-bottom: .45rem;
+    }
+    .countdown {
+      font-family: "Poppins", ui-monospace, "SF Mono", Menlo, monospace;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 9vw, 3.4rem);
+      letter-spacing: .04em;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.05; margin-bottom: .3rem;
+      transition: color .2s, font-size .2s;
+    }
+    .countdown.done {
+      color: var(--good);
+      font-size: clamp(1.5rem, 5.5vw, 2rem);
+      letter-spacing: .02em;
+    }
+    .timer-sub { font-size: .82rem; color: var(--muted) }
+
+    .links {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      justify-content: center; margin-bottom: 1.4rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: "Poppins", sans-serif; font-weight: 600;
+      padding: .75rem 1.3rem; border-radius: 999px;
+      font-size: .95rem; border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--text);
+      transition: transform .15s, background .15s, color .15s, opacity .2s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px) }
+    .btn--accent {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+      box-shadow: 0 10px 24px rgba(244, 129, 31, .35);
+    }
+    .btn--ghost { background: transparent }
+    .btn--ghost:hover { background: var(--surface-2) }
+    :focus-visible { outline: none; box-shadow: var(--ring); border-radius: 8px }
+
+    .head-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: .6rem;
+    }
+    .toggle {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer;
+      display: grid; place-items: center;
+    }
+    .brand-mini {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: "Poppins", sans-serif; font-weight: 600;
+      font-size: .9rem; color: var(--text);
+    }
+    .brand-mini .mk {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(145deg, var(--brand), var(--brand-2));
+      display: grid; place-items: center;
+    }
+    .note { margin-top: 1.2rem; font-size: .82rem; color: var(--muted) }
+    .note a { color: var(--accent); font-weight: 600 }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="head-row">
+      <a class="brand-mini" href="/" aria-label="Back to home">
+        <span class="mk" aria-hidden="true">
+         <img src="/static/logo/gpch.ico" alt="" width="35" height="35">
+        </span>
+        Govt. Polytechnic College
+      </a>
+      <button class="toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg id="sun" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor"
+            d="M12 7a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0-5a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1Zm0 17a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1ZM5.6 4.2 4.2 5.6l1.4 1.4 1.4-1.4-1.4-1.4Zm12 12-1.4 1.4 1.4 1.4 1.4-1.4-1.4-1.4ZM4 11H2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm18 0h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Z" />
+        </svg>
+        <svg id="moon" viewBox="0 0 24 24" width="18" height="18" style="display:none">
+          <path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="code" aria-hidden="true">423<small>Account Locked</small></div>
+    <h1>Too many failed login attempts</h1>
+    <p>Your account is temporarily locked. Please wait for the timer to finish before trying again.</p>
+
+    <div class="timer-card">
+      <div class="timer-label">Unlock in</div>
+      <div class="countdown" id="countdown">05:00</div>
+      <div class="timer-sub" id="timer-sub">Please wait…</div>
+    </div>
+
+    <div class="links">
+      <a class="btn btn--accent" id="retry-btn" href="/admin-rajend-administrator/" style="display:none;">Try Again</a>
+      <a class="btn btn--ghost" href="/">⌂ Back to Home</a>
+    </div>
+
+    <p class="note">Or <a href="/">visit our homepage</a> to explore everything we offer.</p>
+  </div>
+
+  <!-- ================= THE TIMER ================= -->
+  <script>
+  (function () {
+    "use strict";
+
+    // ── 1) Decide lock duration (seconds) ────────────────────────────────
+    var LOCK_SECONDS = 300;                     // ← hard fallback: 5 minutes
+
+    // Try to read the server value. Django will substitute this line.
+    // If the variable is missing/None/weird, the string stays empty and
+    // parseFloat returns NaN — we simply ignore it.
+    try {
+      var raw = "{{ cooloff_time.total_seconds|default:'' }}";
+      var parsed = parseFloat(raw);
+      if (!isNaN(parsed) && parsed > 0) {
+        LOCK_SECONDS = Math.ceil(parsed);
+      }
+      console.log("[lockout] server cooloff raw =", JSON.stringify(raw),
+                  "→ using", LOCK_SECONDS, "s");
+    } catch (e) {
+      console.log("[lockout] using fallback", LOCK_SECONDS, "s:", e);
+    }
+
+    // ── 2) Figure out the absolute unlock moment ─────────────────────────
+    // Stored as epoch ms so refresh does not restart the timer.
+    var KEY = "gpc-lockout-until";
+    var now = Date.now();
+    var until = 0;
+    try { until = parseInt(localStorage.getItem(KEY) || "0", 10) || 0; } catch (e) {}
+
+    // Start a fresh 5-min window if: no value, expired, or absurdly far future
+    if (!until || until <= now || until > now + LOCK_SECONDS * 1000 + 5000) {
+      until = now + LOCK_SECONDS * 1000;
+      try { localStorage.setItem(KEY, String(until)); } catch (e) {}
+    }
+
+    // ── 3) Render loop ───────────────────────────────────────────────────
+    var el     = document.getElementById("countdown");
+    var sub    = document.getElementById("timer-sub");
+    var btn    = document.getElementById("retry-btn");
+    var timer  = null;
+
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+    function render() {
+      var remainMs = until - Date.now();
+      if (remainMs <= 0) {
+        el.textContent = "Unlocked ✓";
+        el.classList.add("done");
+        sub.textContent = "You can try logging in again.";
+        btn.style.display = "inline-flex";
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        if (timer) { clearInterval(timer); timer = null; }
+        return;
+      }
+      var total = Math.ceil(remainMs / 1000);
+      var h = Math.floor(total / 3600);
+      var m = Math.floor((total % 3600) / 60);
+      var s = total % 60;
+      el.textContent = (h > 0 ? pad(h) + ":" : "") + pad(m) + ":" + pad(s);
+      sub.textContent = "Please wait — timer is running.";
+    }
+
+    render();
+    timer = setInterval(render, 250); // 250ms for smooth ticking
+  })();
+  </script>
+  <!-- ============================================ -->
+
+  <script>
+  (function () {
+    "use strict";
+    try {
+      var saved = localStorage.getItem("gpc-theme");
+      var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", saved || (sysDark ? "dark" : "light"));
+    } catch (e) {}
+    function applyIcon() {
+      var dark = document.documentElement.getAttribute("data-theme") === "dark";
+      document.getElementById("sun").style.display  = dark ? "none" : "block";
+      document.getElementById("moon").style.display = dark ? "block" : "none";
+    }
+    applyIcon();
+    document.getElementById("themeToggle").addEventListener("click", function () {
+      var dark = document.documentElement.getAttribute("data-theme") === "dark";
+      var next = dark ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("gpc-theme", next); } catch (e) {}
+      applyIcon();
+    });
+  })();
+  </script>
+</body>
+</html>

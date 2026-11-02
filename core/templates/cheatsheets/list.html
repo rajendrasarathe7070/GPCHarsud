@@ -52,11 +52,20 @@
         <option value="title">Title A-Z</option>
       </select>
     </div>
-    <div class="col-md-2 text-end">
+    
+    {% if user.is_authenticated %}
+      <div class="col-md-2 text-end">
       <button class="btn btn-primary w-100" onclick="openCreate()">
         <i class="bi bi-plus-lg"></i> New
       </button>
     </div>
+
+    {% else %}
+     <div class="col-md-2 text-end">
+    <button class="btn btn-outline-danger" > Login First </button>
+    </div>
+    {% endif %}
+      
   </div>
 
   <!-- 📊 Table -->

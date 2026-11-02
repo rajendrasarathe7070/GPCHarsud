@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views, auth_views
-
+from django.conf import settings
+from django.conf.urls.static import static
 app_name = "dashboard"
 
 urlpatterns = [
@@ -25,4 +26,7 @@ urlpatterns = [
     path("model/<str:model_key>/add/", views.model_add_view, name="model_add"),
     path("model/<str:model_key>/<int:pk>/edit/", views.model_edit_view, name="model_edit"),
     path("model/<str:model_key>/<int:pk>/delete/", views.model_delete_view, name="model_delete"),
-]
+] 
+
+if True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

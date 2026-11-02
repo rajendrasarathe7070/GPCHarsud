@@ -116,551 +116,307 @@
  
   <div class="tab-content " id="myTabContent" style="margin-top: 0rem;">
 
-    <div class="card text-bg-dark campusimg" style="max-height: 350px;">
+    <!-- <div class="card text-bg-dark campusimg" style="max-height: 350px;">
 
       <img src="{% static 'images/image_df13ac79.jpg' %}" class="card-img" alt="wide image">
       <div class="card-img-overlay" style="padding: 0px;">
 
 
       </div>
+    </div> -->
+    {% include 'slide/crausal.html' %}
+
+   <div class="tab-pane fade show active container-lg" id="Campus-tab-pane" role="tabpanel" aria-labelledby="Campus-tab" tabindex="0">
+
+  <style>
+    body {
+      background-color: ghostwhite;
+    }
+
+    /* ---------- Overview Cards (No Rounded Corners) ---------- */
+    .overview {
+      height: 100%;
+      min-height: 130px;
+      border: none !important;
+      border-radius: 100px !important;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .overview:hover {
+      background-color: rgb(255, 255, 0);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 0 !important;
+    }
+
+    .overview .card-body {
+      padding: 1.25rem 0.75rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .overview .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 575px) {
+      .overview { min-height: 110px; }
+      .overview .card-title { font-size: 0.82rem; }
+      .overview .card-text small { font-size: 0.68rem; }
+    }
+
+    /* Pastel Card Colors */
+    .card-1 { background-color: #FFF3C4 !important; color: #7F5F00; }
+    .card-2 { background-color: #E3F2FD !important; color: #0D47A1; }
+    .card-3 { background-color: #F8BBD0 !important; color: #880E4F; }
+    .card-4 { background-color: #FFFFFF !important; color: #212121; border: 1px solid #E0E0E0 !important; }
+    .card-5 { background-color: #FFE0B2 !important; color: #E65100; }
+
+
+    /* =========================================
+       PERFECT GRID (No Gap, No Single Column Issue)
+       ========================================= */
+    .gallery-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .gallery-masonry {
+      column-count: 4;
+      column-gap: 0; /* गैप हटा दिया (0px) */
+      line-height: 0; /* नीचे की तरफ एक्स्ट्रा स्पेस हटाने के लिए */
+    }
+    
+    @media (max-width: 992px) { .gallery-masonry { column-count: 3; column-gap: 0; } }
+    @media (max-width: 768px) { .gallery-masonry { column-count: 2; column-gap: 0; } }
+    @media (max-width: 480px) { .gallery-masonry { column-count: 2; column-gap: 0; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin: 0; /* मार्जिन 0 */
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 !important;
+      cursor: pointer;
+      display: block; /* inline-block से block किया ताकि 1 कॉलम में न आए */
+      width: 100%;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      height: auto; /* इमेज अपनी नेचुरल हाइट लेगी */
+      vertical-align: bottom; /* इमेज के नीचे का गैप हटाने के लिए */
+      margin: 0;
+      padding: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-weight: 600;
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 25px 12px 12px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+  
+    /* =========================================
+       GLASSY TRANSPARENT MODAL (Auto Fit)
+       ========================================= */
+    .modal-glass .modal-content {
+      background: rgba(15, 15, 20, 0.75) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-radius: 0 !important;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      margin: 0 auto; /* Center the modal */
+    }
+
+    .modal-glass .modal-dialog {
+      max-width: fit-content; /* मॉडल इमेज के साइज के हिसाब से छोटा/बड़ा होगा */
+      width: auto;
+      margin: 1rem auto;
+    }
+
+    @media (min-width: 992px) {
+      .modal-glass .modal-dialog {
+        max-width: 95vw; /* बड़ी स्क्रीन पर 95% तक जा सकता है */
+      }
+    }
+
+    /* Image Auto Adjust */
+    .modal-slider-img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain; /* इमेज स्ट्रेच नहीं होगी */
+      display: block;
+      margin: 0 auto;
+      border-radius: 0 !important; 
+    }
+
+    @media (max-width: 768px) {
+      .modal-slider-img {
+        max-height: 70vh;
+      }
+    }
+
+    /* Glassy Carousel Controls */
+    .carousel-control-prev, .carousel-control-next {
+      width: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 0 !important; 
+      height: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+    }
+    
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+      background: rgba(255, 255, 255, 0.3);
+      opacity: 1;
+    }
+  </style>
+
+  <!-- ================= Overview Cards ================= -->
+  <div class="row row-cols-2 row-cols-md-5 g-3 mx-1 mx-md-4 my-4 my-md-5">
+    <div class="col"><div class="card overview card-1"><div class="card-body"><h5 class="card-title">Students 2,000+</h5><p class="card-text mb-0"><small class="text-body-secondary">Last updated 3 mins ago</small></p></div></div></div>
+    <div class="col"><div class="card overview card-2"><div class="card-body"><h5 class="card-title">Hostel 08+</h5><p class="card-text mb-0"><small class="text-body-secondary">Last updated 3 mins ago</small></p></div></div></div>
+    <div class="col"><div class="card overview card-3"><div class="card-body"><h5 class="card-title">Laboratories 15+</h5><p class="card-text mb-0"><small class="text-body-secondary">Last updated 3 mins ago</small></p></div></div></div>
+    <div class="col"><div class="card overview card-4"><div class="card-body"><h5 class="card-title">Library Books 25,000+</h5><p class="card-text mb-0"><small class="text-body-secondary">Last updated 3 mins ago</small></p></div></div></div>
+    <div class="col"><div class="card overview card-5"><div class="card-body"><h5 class="card-title">Campus Area XX Acres</h5><p class="card-text mb-0"><small class="text-body-secondary">Last updated 3 mins ago</small></p></div></div></div>
+  </div>
+
+
+  <!-- ================= Section Heading ================= -->
+  <div class="text-center mb-4 mt-5">
+    <h2 class="fw-bold" style="color: #0D47A1;">Campus Life Gallery</h2>
+    <p class="text-muted">किसी भी तस्वीर पर क्लिक करके उसकी और भी फोटोज़ देखें</p>
+    <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+  </div>
+
+
+  <!-- ================= Masonry Gallery (No Gap / 0px) ================= -->
+  <!-- px-0 का इस्तेमाल किया है ताकि साइड से भी गैप न रहे -->
+  <div class="container-fluid px-0 my-4 gallery-container">
+    <div class="gallery-masonry">
+
+      {% for category in categories %}
+      <!-- क्लिक करने पर मॉडल ओपन होगा -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-{{ category.id }}">
+        
+        {% if category.category_img %}
+          <img src="{{ category.category_img.url }}" alt="{{ category.get_name_display }}">
+        {% else %}
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg" alt="Default Image">
+        {% endif %}
+
+        <div class="gallery-overlay">
+          <i class="bi bi-images" style="font-size: 1.5rem;"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">{{ category.name  }}</div>
+      </div>
+      {% endfor %}
+
     </div>
-
-    <div class="tab-pane fade show active" id="Campus-tab-pane" role="tabpanel" aria-labelledby="Campus-tab"
-      tabindex="0">
+  </div>
 
 
-      <style>
-        body {
-          background-color: ghostwhite;
-        }
+  <!-- ================= Glassy Modals (Auto Size) ================= -->
+  {% for category in categories %}
+  <div class="modal fade modal-glass" id="modal-{{ category.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-white">
 
-        .overview {
-          max-height: 10rem;
-          height: 10rem;
-          border: none !important;
-          border-radius: 16px !important;
-          /* मॉडर्न राउंडेड कॉर्नर्स */
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-          /* हल्का सा शैडो इफेक्ट */
-          transition: all 0.3s ease;
-          min-height: 140px;
-          margin-left: 2px;
-          margin-right: 2px;
-
-        }
-
-        .overview:hover {
-          background-color: rgb(255, 255, 0);
-          transform: translateY(-8px);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-
-          border-radius: 30px;
-          transition-duration: 300ms;
-
-
-
-        }
-
-        .card-body {
-          padding: 60px;
-          text-align: center;
-        }
-
-        /* परफेक्ट मैचिंग कलर्स (पेस्टल्स) */
-        .card-1 {
-          background-color: #FFF3C4 !important;
-          color: #7F5F00;
-        }
-
-        /* सॉफ्ट बैनर येलो */
-        .card-2 {
-          background-color: #E3F2FD !important;
-          color: #0D47A1;
-        }
-
-        /* ऊपरी नेवबार जैसा ब्लू */
-        .card-3 {
-          background-color: #F8BBD0 !important;
-          color: #880E4F;
-        }
-
-        /* सबसे ऊपरी नेवबार जैसा सॉफ्ट मैरून/ब्राउन */
-        .card-4 {
-          background-color: #FFFFFF !important;
-          color: #212121;
-          border: 1px solid #E0E0E0 !important;
-        }
-
-        /* क्लासिक वाइट */
-        .card-5 {
-          background-color: #FFE0B2 !important;
-          color: #E65100;
-        }
-
-        /* सॉफ्ट ऑरेंज */
-      </style>
-
-      <div class="card-group mx-md-5 my-md-5 ">
-        <div class="card overview card-1">
-
-          <div class="card-body">
-            <h5 class="card-title">Students 2,000+ </h5>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card overview card-2">
-
-          <div class="card-body ">
-            <h5 class="card-title">Hostel 08+</h5>
-
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card overview card-3">
-
-          <div class="card-body">
-            <h5 class="card-title">Laboratories 15+</h5>
-            <small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card overview card-4">
-
-          <div class="card-body">
-            <h5 class="card-title">Library Books 25,000+</h5>
-
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card overview card-5">
-
-          <div class="card-body">
-            <h5 class="card-title">Campus Area XX Acres</h5>
-
-
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
+        <div class="modal-header border-0 pb-0" style="background: transparent;">
+          <h5 class="modal-title fw-bold" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">{{ category.get_name_display }} Photos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-      </div>
+        <div class="modal-body p-0 position-relative d-flex align-items-center" style="background: transparent;">
+          
+          <div id="carousel-{{ category.id }}" class="carousel slide w-100" data-bs-ride="carousel">
+            <div class="carousel-inner text-center">
 
+              {% for img_obj in category.images.all %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <!-- auto adjust इमेज -->
+                <img src="{{ img_obj.image.url }}" class="modal-slider-img" alt="Photo {{ forloop.counter }}">
+              </div>
+              {% empty %}
+              <div class="carousel-item active p-5 text-center">
+                <p class="mb-0 text-white-50 fs-5">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
+              </div>
+              {% endfor %}
 
-      <style>
-        /* मुख्य गैलरी कार्ड */
-        .gallery-card {
-          border: none !important;
-          border-radius: 14px !important;
-          overflow: hidden;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-          background-color: #ffffff;
-          cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        /* इमेज कंटेनर और होवर ओवरले */
-        .gallery-img-wrapper {
-          position: relative;
-          overflow: hidden;
-          height: 190px;
-          background-color: #f5f5f5;
-        }
-
-        .gallery-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        /* "View Album" ब्लैक ओवरले इफेक्ट */
-        .gallery-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          /* हाफ ट्रांसपेरेंट ब्लैक */
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          font-size: 1rem;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .gallery-card:hover .gallery-overlay {
-          opacity: 1;
-          /* माउस ले जाने पर दिखेगा */
-        }
-
-        .gallery-card:hover .gallery-img {
-          transform: scale(1.05);
-        }
-
-        /* पॉप-अप (Modal) के अंदर की इमेजेस का साइज फिक्स करना */
-        .modal-slider-img {
-          height: 450px;
-          object-fit: contain;
-          /* इमेज बिना कटे पूरी दिखेगी */
-          background-color: #111;
-          /* खाली जगह पर ब्लैक बैकग्राउंड */
-        }
-
-        @media (max-width: 768px) {
-          .modal-slider-img {
-            height: 280px;
-            /* मोबाइल के लिए परफेक्ट हाइट */
-          }
-        }
-      </style>
-      <!-- सेक्शन हेडिंग -->
-      <div class="text-center mb-5">
-        <h2 class="fw-bold" style="color: #0D47A1;">Campus Life Gallery</h2>
-        <p class="text-muted">किसी भी केटेगरी पर क्लिक करके उसकी और भी फोटोज़ देखें</p>
-        <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
-      </div>
-
-
-      <div class="container rounded-3" style="max-height: 29rem; max-width:85rem ;">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner rounded-3" style="max-height: 30rem;">
-
-            <!-- {% for img in categories %}
-             {% if img.category == 'main_entrance' %}
-             {% for img_obj in img.images.all %}
-            <div class="carousel-item active">
-             
-              <img src="{{ img.image.url }}"
-                class="d-block w-100"
-                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
             </div>
-            {% endfor %}
-            {% else %}
-       { continue }
-             <div class="carousel-item active p-5 text-center">
-                  <p class="mb-0 text-muted">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
-                </div>
+
+            <!-- Left/Right Buttons -->
+            {% if category.images.count > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ category.id }}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ category.id }}" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
             {% endif %}
-            {% endfor %} -->
 
-            <div class="carousel-item  rounded-3 active">
-              <img
-                src="https://img.magnific.com/free-vector/male-female-students-rest-study-campus-park-multiracial-teenagers-casual-clothes-watching-funny-video-laptop-reading-book-break-time-university-college_575670-2247.jpg?semt=ais_hybrid&w=740&q=80"
-                class="d-block w-100"
-                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
-            </div>
-            <div class="carousel-item  rounded-3">
-              <img
-                src="https://img.magnific.com/free-vector/male-female-students-rest-study-campus-park-multiracial-teenagers-casual-clothes-watching-funny-video-laptop-reading-book-break-time-university-college_575670-2247.jpg?semt=ais_hybrid&w=740&q=80"
-                class="d-block w-100"
-                alt="https://t3.ftcdn.net/jpg/01/85/87/74/360_F_185877428_fkTMDJ16jn7Se8E6gSXxOOJrxQLtR8nw.jpg">
-            </div>
           </div>
-
+          
         </div>
+
       </div>
-
-      <div class="container my-5">
-        <!-- फोटोज़ की मुख्य ग्रिड -->
-        <div class="row g-3">
-
-          {% for category in categories %}
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <!-- data-bs-target को डायनेमिक बनाने के लिए #modal-{{ category.id }} का इस्तेमाल किया गया है -->
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#modal-{{ category.id }}">
-              <div class="gallery-img-wrapper">
-                <!-- अगर कैटेगरी में थंबनेल इमेज है, तो वो दिखेगी, वरना default इमेज -->
-                {% if category.image %}
-                <img src="{{ category.image.url }}" class="card-img-top gallery-img"
-                  alt="{{ category.get_name_display }}">
-                {% else %}
-                <img
-                  src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg"
-                  class="card-img-top gallery-img" alt="Default Image">
-                {% endif %}
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <!-- कैटेगरी का सही नाम (जैसे Main Entrance, Classroom आदि) यहाँ दिखेगा -->
-                <h6 class="card-title fw-bold mb-0">{{ category.get_name_display }}</h6>
-              </div>
-            </div>
-          </div>
-
-          <!-- हर कैटेगरी के लिए यूनिक ID (id="modal-{{ category.id }}") -->
-          <div class="modal fade" id="modal-{{ category.id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-              <div class="modal-content bg-dark text-white">
-                <div class="modal-header border-0">
-                  <!-- डायनेमिक टाइटल -->
-                  <h5 class="modal-title fw-bold">{{ category.get_name_display }} Photos</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-
-                  <!-- कैरोसेल की ID भी डायनेमिक होनी चाहिए (id="carousel-{{ category.id }}") -->
-                  <div id="carousel-{{ category.id }}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-
-                      <!-- इस कैटेगरी से जुड़ी सभी इमेजेस का लूप -->
-                      {% for img_obj in category.images.all %}
-                      <!-- पहली इमेज के लिए 'active' क्लास जोड़ना अनिवार्य है -->
-                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ img_obj.image.url }}" class="d-block w-100 modal-slider-img"
-                          alt="Photo {{ forloop.counter }}">
-                      </div>
-                      {% empty %}
-                      <!-- अगर कोई भी फोटो न हो तो यह मैसेज दिखेगा -->
-                      <div class="carousel-item active p-5 text-center">
-                        <p class="mb-0 text-muted">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
-                      </div>
-                      {% endfor %}
-
-                    </div>
-
-                    <!-- कंट्रोल बटन केवल तभी दिखेंगे जब 1 से ज़्यादा इमेजेस हों -->
-                    {% if category.images.count > 1 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ category.id }}"
-                      data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ category.id }}"
-                      data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
-                    {% endif %}
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {% endfor %}
-          <!-- 
-        
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#entranceModal">
-              <div class="gallery-img-wrapper">
-                <img
-                  src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg"
-                  class="card-img-top gallery-img" alt="Main Entrance">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
-        
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#academicModal">
-              <div class="gallery-img-wrapper">
-                <img src="academic_main.jpg" class="card-img-top gallery-img" alt="Academic Building">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Academic Building</h6>
-              </div>
-            </div>
-          </div>
-
-         
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
- 
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#classroomModal">
-              <div class="gallery-img-wrapper">
-                <img src="classroom_main.jpg" class="card-img-top gallery-img" alt="Classroom">
-                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-              </div>
-              <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-0">Classroom</h6>
-              </div>
-            </div>
-          </div> -->
-
-        </div>
-      </div>
-
-      <!-- ==========================================
-     MODALS SECTION (क्लिक करने पर खुलने वाले एलबम)
-     ========================================== -->
-
-      <!-- 1. Main Entrance Album Modal -->
-      <div class="modal fade" id="entranceModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content bg-dark text-white">
-            <div class="modal-header border-0">
-              <h5 class="modal-title fw-bold">Main Entrance Photos</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-              <!-- फोटो स्लाइडर (Carousel) -->
-              <div id="carouselEntrance" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="entrance_1.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="entrance_2.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 2">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="entrance_3.jpg" class="d-block w-100 modal-slider-img" alt="Entrance 3">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselEntrance"
-                  data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselEntrance"
-                  data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Academic Building Album Modal -->
-      <div class="modal fade" id="academicModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content bg-dark text-white">
-            <div class="modal-header border-0">
-              <h5 class="modal-title fw-bold">Academic Building Photos</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-              <div id="carouselAcademic" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="academic_1.jpg" class="d-block w-100 modal-slider-img" alt="Academic 1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="academic_2.jpg" class="d-block w-100 modal-slider-img" alt="Academic 2">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAcademic"
-                  data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselAcademic"
-                  data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Classroom Album Modal -->
-      <div class="modal fade" id="classroomModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content bg-dark text-white">
-            <div class="modal-header border-0">
-              <h5 class="modal-title fw-bold">Classroom Photos</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-              <div id="carouselClassroom" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="classroom_1.jpg" class="d-block w-100 modal-slider-img" alt="Classroom 1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="classroom_2.jpg" class="d-block w-100 modal-slider-img" alt="Classroom 2">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselClassroom"
-                  data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselClassroom"
-                  data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
     </div>
+  </div>
+  {% endfor %}
+
+</div>
 
     <div class="tab-pane fade" id="Hostel-tab-pane" role="tabpanel" aria-labelledby="Hostel-tab" tabindex="0">
       <style>

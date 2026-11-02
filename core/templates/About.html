@@ -466,6 +466,12 @@
 
                 <div class="container ">
                     <style>
+
+                        #Messages {
+                            font-family: 'Times New Roman', Times, serif !important;
+ 
+                        }
+
                         .hding {
                             background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
                             margin-bottom: 10px;
@@ -554,71 +560,36 @@
                     <div class="row">
                         {% if principal %}
                         <div class="col-md-3"><img src="
-                                            {% if principal.photo %}
-                                                {{ principal.photo.url }}
+                                            {% if principal.message_user.photo %}
+                                                {{ principal.message_user.photo.url }}
                                             {% else %}
                                                 
                                             {% endif %}
-                                                " class="img-fluid" alt="...">
+                                                " class="img-fluid rounded-2 " alt="...">
                     
-                            <div class="text-center col">
+                            <div class="text-center col  ">
                     
-                                <h3 class="text-bg-success">Prof. {{ principal.get_full_name }}</h3>
-                                <div class="text-danger-emphasis ">
-                                    {{ principal.category }}
+                                <h4 class="text-bg-success rounded-3">  {{ principal.message_user.get_full_name }}</h4>
+                                <div class="text-danger-emphasis " >
+                                    {{ principal.message_user.category }}
                                 </div>
                                 <div class="text-danger">GOVT. POLYTECHNIC COLLEGE
-                                    HARSUD  </div>
+                                    HARSUD</div>
                             </div>
                     
                     
                            
                     
-                        </div> {% endif %}
-                        <div class="col-md-9">
-                            <h6>From the Desk of the Principal</h6>
-                            <b class="text-success">Dear Students, Faculty Members, Staff, Alumni, Industry Partners,
-                                and
-                                all
-                                Stakeholders of Government Polytechnic College,</b>
-                            <p class="my-2">It is a matter of great honour and deep responsibility for me to address you
-                                as
-                                the
-                                Principal of Government Polytechnic College. I assume this role with humility,
-                                gratitude,
-                                and a
-                                strong commitment to fostering excellence in technical and diploma education.</p>
-                            <p class="my-2">Our college is not merely an educational institution; it is a vibrant
-                                academic
-                                family, a center of skill development, and a stepping stone for thousands of students
-                                aspiring
-                                to build a successful technical career.</p>
-                            <p class="my-2">At this important stage, our responsibility is to move forward with clarity,
-                                confidence, and collective purpose. Technical education today must go beyond textbooks
-                                and
-                                traditional practicals; it must align with real-world industry requirements, promote
-                                hands-on
-                                skills, and empower students to solve practical engineering and technological
-                                challenges.
-                            </p>
-                            <p class="my-2">Our vision is to make this college a hub for skilled professionals and
-                                technicians
-                                who can drive regional growth. We are actively working toward strengthening the quality
-                                of
-                                teaching, upgrading our laboratories, enhancing campus discipline, and building strong
-                                ties
-                                with
-                                local industries to improve training and placement opportunities.</p>
-                            <p class="my-2">Students will always remain at the heart of all our efforts. Our goal is to
-                                nurture
-                                not only competent technicians and engineers but also responsible citizens and ethical
-                                professionals who can contribute meaningfully to the progress of our state and nation.
-                            </p>
-                            <p class="my-2">I seek the trust, cooperation, and active participation of all students,
-                                parents,
-                                faculty, and staff members in this journey. Together, with sincerity, discipline, and
-                                dedication, we can take Government Polytechnic College to new heights of success.</p>
                         </div>
+                        <div class="col-md-9" style="text-align: justify; ">
+                            <h6>From the Desk of the Principal</h6>
+                            <b class="text-success"> {{principal.message_hedding}}</b> <br>
+                            <p class="my-2"> {{principal.message_p1}} </p>
+                             <p class="my-2"> {{principal.message_p2}} </p>
+                              <p class="my-2"> {{principal.message_p3}} </p>
+                             
+                        </div> {% endif %}
+                        
                     </div>
 
                 </div>

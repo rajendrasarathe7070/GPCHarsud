@@ -265,4 +265,40 @@ admin.site.register(models.RulseUpdate_Campus)
 
 
 admin.site.register(models.syllabus)
- 
+
+@admin.register(models.messages)
+class MessagesAdmin(admin.ModelAdmin):
+    list_display = ('id' , 'message_user','message_hedding')
+    search_fields= ('message_user',)
+    
+@admin.register(models.HeroSlide)
+class HeroSlideAdmin(admin.ModelAdmin):
+    list_display  = ('page', 'title', 'order', 'updated_at')
+    list_filter   = ('page', 'bg_class')
+    list_editable = ('order',)
+    search_fields = ('title', 'subtitle', 'badge')
+    ordering      = ('page', 'order')
+
+    fieldsets = (
+        ('Page', {
+            'fields': ('page', 'order')
+        }),
+        ('Content', {
+            'fields': ('badge', 'title', 'subtitle')
+        }),
+        ('Media (priority: image_url → image → bg_class)', {
+            'fields': ('image_url', 'image', 'bg_class'),
+            'description': (
+                'Agar image_url diya hai to wahi use hoga. '
+                'Warna image field. Dono blank ho to bg_class gradient dikhega.'
+            ),
+        }),
+        ('Button 1', {'fields': ('button1_text', 'button1_url')}),
+        ('Button 2', {'fields': ('button2_text', 'button2_url')}),
+        ('Button 3', {'fields': ('button3_text', 'button3_url')}),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
+        }),
+    )
+    readonly_fields = ('created_at', 'updated_at')

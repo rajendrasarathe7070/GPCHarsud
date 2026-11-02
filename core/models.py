@@ -601,3 +601,82 @@ def _gdrive_preview(url: str) -> str:
     if m:
         return f"https://docs.google.com/document/d/{m.group(1)}/preview"
     return url
+
+
+class messages(models.Model):
+    id = models.AutoField(primary_key=True)
+    message_user = models.ForeignKey(CustomUser,on_delete=models.CASCADE, related_name='msg')
+    message_hedding = models.CharField(max_length=150 ,default=None )
+    message_p1 = models.TextField()
+    message_p2 = models.TextField()
+    message_p3 = models.TextField()
+    
+    def __str__(self):
+        return f"{self.id} - {self.message_user} = {self.message_hedding}"
+        
+    
+class HeroSlide(models.Model):
+   
+    PAGE_ACADEMIC        = 'academic'
+    PAGE_ADMISSION       = 'admission'
+    PAGE_CAMPUS_LIFE     = 'campus_life'
+    PAGE_STUDENT_CORNER  = 'student_corner'
+    PAGE_PLACEMENTS      = 'placements'
+
+    PAGE_CHOICES = [
+        (PAGE_ACADEMIC,       'Academic'),
+        (PAGE_ADMISSION,      'Admission'),
+        (PAGE_CAMPUS_LIFE,    'Campus Life'),
+        (PAGE_STUDENT_CORNER, 'Student Corner'),
+        (PAGE_PLACEMENTS,     'Placements'),
+    ]
+
+    # ---- Fallback gradient ----
+    BG_CHOICES = [
+        ('slide-bg-1', 'Purple'),
+        ('slide-bg-2', 'Pink'),
+        ('slide-bg-3', 'Blue'),
+        ('slide-bg-4', 'Green'),
+        ('slide-bg-5', 'Orange'),
+    ]
+
+    # ---- Core ----
+    page     = models.CharField(max_length=30, choices=PAGE_CHOICES, db_index=True)
+    badge    = models.CharField(max_length=60, blank=True)
+    title    = models.CharField(max_length=200, blank=True)
+    subtitle = models.TextField(blank=True)
+
+    # ---- Media (image_url > image > bg_class) ----
+    image = models.ImageField(
+        upload_to='hero_slides/', blank=True, null=True,
+        help_text='Local image (Django ImageField)'
+    )
+    image_url = models.URLField(
+        blank=True, null=True,
+        help_text='External image URL — ye ImageField se pehle use hoga'
+    )
+    bg_class = models.CharField(
+        max_length=30, choices=BG_CHOICES, default='slide-bg-1',
+        help_text='Image na milne par ye gradient background dikhega'
+    )
+
+    # ---- 3 Buttons ----
+    button1_text = models.CharField(max_length=40, blank=True)
+    button1_url  = models.CharField(max_length=200, blank=True, default='#')
+    button2_text = models.CharField(max_length=40, blank=True)
+    button2_url  = models.CharField(max_length=200, blank=True, default='#')
+    button3_text = models.CharField(max_length=40, blank=True)
+    button3_url  = models.CharField(max_length=200, blank=True, default='#')
+
+    # ---- Ordering ----
+    order      = models.PositiveIntegerField(default=0, help_text='Chhota number pehle dikhega')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['page', 'order', 'id']
+        verbose_name = 'Hero Slide'
+        verbose_name_plural = 'Hero Slides'
+
+    def __str__(self):
+        return f"{self.get_page_display()} — {self.title or 'Untitled'}"

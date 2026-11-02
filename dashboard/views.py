@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from django.db import transaction
 from django.db.models import Count
-
+from django.db import models  #
 from .config import DASHBOARD_CONFIG
 from .decorators import dashboard_login_required
 from .forms import get_student_profile_form_class, get_student_engagement_form_class
@@ -169,33 +169,39 @@ def student_profile_edit(request):
         logger.exception("student_profile_edit failed")
         return render(request, "dashboard/dashboard_error.html", status=500)
 
-
-# ✅ 4. Generic CRUD Operations
+ 
 @dashboard_login_required
 @require_http_methods(["GET"])
 def model_list_view(request, model_key):
     try:
         cfg = get_model_config(model_key)
-        if not cfg:
-            return render(request, "dashboard/permission_denied.html", {"reason": "Model not configured."}, status=404)
-        if not has_view_perm(request.user, model_key):
-            return render(request, "dashboard/permission_denied.html", {"reason": "No permission."}, status=403)
+        if not cfg: return render(request, "dashboard/permission_denied.html", status=404)
+        if not has_view_perm(request.user, model_key): return render(request, "dashboard/permission_denied.html", status=403)
+        
         model = get_model(model_key)
-        if not model:
-            return render(request, "dashboard/permission_denied.html", status=404)
+        if not model: return render(request, "dashboard/permission_denied.html", status=404)
+
+        has_file_fields = any(isinstance(f, (models.FileField, models.ImageField)) for f in model._meta.fields)
 
         groups = build_grouped_tables(model, cfg.get("group_by"), cfg.get("exclude_fields"))
+        
+        # ✅ SAFE CHECK: Agar kisi wajah se groups None aaye toh usko empty list bana do
+        if groups is None:
+            groups = []
+            
         return render(request, "dashboard/model_list.html", {
-            "cfg": cfg, "groups": groups, "model_key": model_key,
+            "cfg": cfg, 
+            "groups": groups, 
+            "model_key": model_key,
             "total": sum(g["count"] for g in groups),
             "can_add": has_add_perm(request.user, model_key),
             "can_change": has_change_perm(request.user, model_key),
             "can_delete": has_delete_perm(request.user, model_key),
+            "has_file_fields": has_file_fields,
         })
     except Exception:
         logger.exception("model_list_view failed")
         return render(request, "dashboard/dashboard_error.html", status=500)
-
 
 @dashboard_login_required
 @require_http_methods(["GET", "POST"])

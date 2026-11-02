@@ -3,316 +3,292 @@
     .hding {
       background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
       margin-bottom: 10px;
-
       text-transform: uppercase;
       width: 100%;
-
-      /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
       padding: 6px 15px 6px 15px;
       color: #f8f8fa;
       text-align: left;
-
       display: flex;
       align-items: center;
     }
-
-    /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
     .hding-text {
       font-weight: bold;
       white-space: nowrap;
-      /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
       font-size: 3.4vw;
     }
-
-    /* ब्रेडक्रंब आइटम स्टाइल */
     .breadcrumb-item {
       background-color: #a2cdf9;
       padding: 2px 6px;
       border-radius: 3px;
     }
-
     .custom-breadcrumb {
       font-size: 2.2vw !important;
       margin-bottom: 0 !important;
       padding: 0 !important;
     }
-
-    /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
     @media (min-width: 576px) {
-      .hding-text {
-        font-size: 1.1rem;
-        /* टैबलेट पर साइज */
-      }
-
-      .custom-breadcrumb {
-        font-size: 0.85rem !important;
-      }
+      .hding-text { font-size: 1.1rem; }
+      .custom-breadcrumb { font-size: 0.85rem !important; }
     }
-
     @media (min-width: 992px) {
-      .hding-text {
-        font-size: 1.35rem;
-        /* डेस्कटॉप पर साइज */
-      }
-
-      .hding {
-        padding-left: 30px;
-        /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
-      }
+      .hding-text { font-size: 1.35rem; }
+      .hding { padding-left: 30px; }
     }
   </style>
 
   <div class="container-fluid mt-3 mb-5 px-0">
     <nav class="hding rounded-1 py-0">
       <div class="d-flex w-100 justify-content-between align-items-center">
-
-        <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
-        <div class="hding-text">
-          Department
-        </div>
-
-        <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+        <div class="hding-text">Department</div>
         <div class="d-none d-sm-block">
           <ol class="breadcrumb custom-breadcrumb">
-            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-dark">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Department</li>
           </ol>
         </div>
-
       </div>
     </nav>
   </div>
 </div>
 
-
-
+<!-- ============================================================ -->
+<!-- CUSTOM STYLES                                                 -->
+<!-- ============================================================ -->
 <style>
-  /* Custom clean styling that real developers write - No AI bloat */
-   
-
-  .dept-tab-nav {
-    border-bottom: 2px solid #dee2e6;
-  }
-
+  .dept-tab-nav { border-bottom: 2px solid #dee2e6; }
   .dept-tab-nav .nav-link {
-    font-weight: 600;
-    color: #555;
-    border: none;
-    padding: 1rem 1.5rem;
-    position: relative;
+    font-weight: 600; color: #555; border: none;
+    padding: 1rem 1.5rem; position: relative;
     transition: color 0.3s ease;
   }
-
-  .dept-tab-nav .nav-link.active {
-    color: #0d6efd;
-    background: none;
-  }
-
-  /* Smooth underline effect instead of standard ugly tab boxes */
+  .dept-tab-nav .nav-link.active { color: #0d6efd; background: none; }
   .dept-tab-nav .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #0d6efd;
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 100%; height: 3px; background-color: #0d6efd;
   }
 
   .dept-image-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
+    position: relative; overflow: hidden; border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   }
+  .dept-image-wrapper img { transition: transform 0.5s ease; height: 320px; object-fit: cover; }
 
-  .dept-image-wrapper img {
-    transition: transform 0.5s ease;
-    height: 320px;
-    object-fit: cover;
+  .carousel-item img {
+    height: 320px; object-fit: cover;
+    border-radius: 12px;
   }
- 
 
   .faculty-card {
-    border: none;
-    border-radius: 12px;
+    border: none; border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
-    background: #fff;
+    transition: all 0.3s ease; background: #fff;
   }
-
-  .faculty-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  }
+  .faculty-card:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); }
 
   .faculty-img-container {
-    position: relative;
-    overflow: hidden;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    position: relative; overflow: hidden;
+    border-top-left-radius: 12px; border-top-right-radius: 12px;
   }
+  .faculty-img { height: 260px; object-fit: cover; width: 100%; }
 
-  .faculty-img {
-    height: 260px;
-    object-fit: cover;
-    width: 100%;
-  }
-
-  /* Distinct badge layout for HODs */
-  .hod-card {
-    border-left: 4px solid #0d6efd !important;
-  }
+  .hod-card { border-left: 4px solid #0d6efd !important; }
 
   .section-title {
-    position: relative;
-    padding-bottom: 10px;
-    font-weight: 700;
+    position: relative; padding-bottom: 10px; font-weight: 700;
   }
-
   .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: #0d6efd;
-    border-radius: 2px;
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 50px; height: 3px; background-color: #0d6efd; border-radius: 2px;
   }
 </style>
 
+<!-- ============================================================ -->
+<!-- MAIN CONTENT                                                  -->
+<!-- ============================================================ -->
 <div class="container my-5">
 
-  <!-- 1. Department Navigation Tabs (Dynamic) -->
+  <!-- 1. Department Tabs -->
   <ul class="nav nav-tabs dept-tab-nav justify-content-center mb-5" id="departmentTabs" role="tablist">
     {% for department in departments %}
     <li class="nav-item" role="presentation">
-      <button class="nav-link {% if forloop.first %}active{% endif %}" 
-              id="{{ department.Course_code }}-tab" 
-              data-bs-toggle="tab" 
-              data-bs-target="#{{ department.Course_code }}-pane" 
+      <button class="nav-link {% if forloop.first %}active{% endif %}"
+              id="dept-{{ department.id }}-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#dept-{{ department.id }}-pane"
               type="button"
-              role="tab">
+              role="tab"
+              aria-controls="dept-{{ department.id }}-pane"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
         <i class="bi bi-book me-2"></i>{{ department.Department_name }}
       </button>
     </li>
     {% endfor %}
   </ul>
 
-  <!-- 2. Tabs Content -->
+  <!-- 2. Tab Panes -->
   <div class="tab-content" id="departmentTabsContent">
     {% for department in departments %}
-    <div class="tab-pane fade {% if forloop.first %}show active{% endif %} mb-5" 
-         id="{{ department.Course_code }}-pane" 
-         role="tabpanel" 
-         aria-labelledby="{{ department.Course_code }}-tab">
-      
-      <!-- Department Detail Section -->
+    <div class="tab-pane fade {% if forloop.first %}show active{% endif %} mb-5"
+         id="dept-{{ department.id }}-pane"
+         role="tabpanel"
+         aria-labelledby="dept-{{ department.id }}-tab">
+
+      <!-- ===================================================== -->
+      <!-- DEPARTMENT DETAIL SECTION                             -->
+      <!-- ===================================================== -->
       <div class="row g-4 align-items-center mb-5">
         <div class="col-lg-6">
-          <h2 class="fw-bold mb-3">{{ department.Department_name }} ({{ department.Course_name }})</h2>
-          <p class="lead text-secondary">{{ department.Department_description }}</p>
+          <h2 class="fw-bold mb-3">
+            {{ department.Department_name }}
+            {% if department.Course_name %}({{ department.Course_name }}){% endif %}
+          </h2>
+
+          {% if department.Department_description %}
+            <p class="lead text-secondary">{{ department.Department_description }}</p>
+          {% endif %}
+
           <div class="mt-3 text-muted small">
-            <strong>Duration:</strong> {{ department.Course_duration }} | 
-            <strong>Mode:</strong> {{ department.Mode_of_study }} | 
-            <strong>Eligibility:</strong> {{ department.Course_eligibility }}
+            {% if department.Course_duration %}
+              <strong>Duration:</strong> {{ department.Course_duration }}
+            {% endif %}
+            {% if department.Mode_of_study %}
+              | <strong>Mode:</strong> {{ department.Mode_of_study }}
+            {% endif %}
+            {% if department.Course_eligibility %}
+              | <strong>Eligibility:</strong> {{ department.Course_eligibility }}
+            {% endif %}
           </div>
         </div>
-        
-        <!-- Carousel Images -->
+
+        <!-- Carousel -->
         <div class="col-lg-6">
+          {% if department.Department_crausal_image_1 or department.Department_crausal_image_2 or department.Department_crausal_image_3 %}
           <div id="carousel-{{ department.id }}" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+            <div class="carousel-indicators">
+              {% if department.Department_crausal_image_1 %}
+                <button type="button" data-bs-target="#carousel-{{ department.id }}" data-bs-slide-to="0" class="active"></button>
+              {% endif %}
+              {% if department.Department_crausal_image_2 %}
+                <button type="button" data-bs-target="#carousel-{{ department.id }}" data-bs-slide-to="1"></button>
+              {% endif %}
+              {% if department.Department_crausal_image_3 %}
+                <button type="button" data-bs-target="#carousel-{{ department.id }}" data-bs-slide-to="2"></button>
+              {% endif %}
+            </div>
+            <div class="carousel-inner rounded-3">
               {% if department.Department_crausal_image_1 %}
               <div class="carousel-item active">
-                <img src="{{ department.Department_crausal_image_1.url }}" class="d-block w-100" alt="Carousel 1">
+                <img src="{{ department.Department_crausal_image_1.url }}" class="d-block w-100" alt="Department Image 1">
               </div>
               {% endif %}
               {% if department.Department_crausal_image_2 %}
               <div class="carousel-item {% if not department.Department_crausal_image_1 %}active{% endif %}">
-                <img src="{{ department.Department_crausal_image_2.url }}" class="d-block w-100" alt="Carousel 2">
+                <img src="{{ department.Department_crausal_image_2.url }}" class="d-block w-100" alt="Department Image 2">
               </div>
               {% endif %}
               {% if department.Department_crausal_image_3 %}
               <div class="carousel-item {% if not department.Department_crausal_image_1 and not department.Department_crausal_image_2 %}active{% endif %}">
-                <img src="{{ department.Department_crausal_image_3.url }}" class="d-block w-100" alt="Carousel 3">
+                <img src="{{ department.Department_crausal_image_3.url }}" class="d-block w-100" alt="Department Image 3">
               </div>
               {% endif %}
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ department.id }}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ department.id }}" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
           </div>
+          {% endif %}
         </div>
       </div>
 
-      <!-- Faculty & Staff Grid -->
-      <h3 class="section-title mb-4">Department Leadership & Faculty</h3>
+      <!-- ===================================================== -->
+      <!-- FACULTY & STAFF GRID — SIRF USER MODEL SE             -->
+      <!-- ===================================================== -->
+      <h3 class="section-title mb-4">Department Leadership &amp; Faculty</h3>
       <div class="row g-4">
-        
-        <!-- A. HOD Card (Coming from Department Model directly) -->
-        {% if department.Department_hod %}
+
+        <!-- A. HOD Card — CustomUser se (category='HOD') -->
+        {% for hod in department.hod_users %}
         <div class="col-xl-3 col-md-6">
           <div class="card faculty-card hod-card h-100 border-primary">
             <div class="faculty-img-container text-center p-3">
-              {% if department.hod_photo %}
-                <img src="{{ department.hod_photo.url }}" class="faculty-img rounded-circle img-fluid" style="height: 150px; width: 150px; object-fit: cover;" alt="{{ department.Department_hod }}">
+              {% if hod.photo %}
+                <img src="{{ hod.photo.url }}" class="faculty-img rounded-circle img-fluid"
+                     style="height:150px;width:150px;object-fit:cover;"
+                     alt="{{ hod.get_full_name }}">
               {% else %}
-                <div class="bg-secondary text-white rounded-circle d-inline-block pt-4" style="height: 150px; width: 150px;">No Photo</div>
+                <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center"
+                     style="height:150px;width:150px;font-size:14px;">
+                  No Photo
+                </div>
               {% endif %}
             </div>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
                 <span class="badge bg-primary mb-2">Head of Department</span>
-                <h5 class="fw-bold mb-1">{{ department.Department_hod }}</h5>
-                <p class="text-primary small mb-3">{{ department.hod_qualification }}</p>
-                <p class="card-text text-muted small">Experience: {{ department.hod_experience }} Years</p>
+                <h5 class="fw-bold mb-1">{{ hod.get_full_name|default:hod.username }}</h5>
+                {% if hod.study %}
+                  <p class="text-primary small mb-3">{{ hod.study }}</p>
+                {% endif %}
+                <p class="card-text text-muted small">Experience: {{ hod.experience|default:0 }} Years</p>
+              </div>
+              {% if hod.email or hod.phone %}
+              <div class="border-top pt-3 mt-3 text-muted small">
+                {% if hod.email %}<i class="bi bi-envelope-at me-2"></i>{{ hod.email }}<br>{% endif %}
+                {% if hod.phone %}<i class="bi bi-telephone me-2"></i>{{ hod.phone }}{% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- B. Faculty & Staff — CustomUser se (TEACHING + STAFFS) -->
+        {% for u in department.faculty_users %}
+        <div class="col-xl-3 col-md-6">
+          <div class="card faculty-card h-100">
+            <div class="faculty-img-container text-center p-3">
+              {% if u.photo %}
+                <img src="{{ u.photo.url }}" class="faculty-img rounded-circle img-fluid"
+                     style="height:150px;width:150px;object-fit:cover;"
+                     alt="{{ u.get_full_name }}">
+              {% else %}
+                <div class="bg-light text-muted rounded-circle d-inline-flex align-items-center justify-content-center"
+                     style="height:150px;width:150px;font-size:14px;">
+                  No Image
+                </div>
+              {% endif %}
+            </div>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <span class="badge {% if u.category == 'TEACHING' %}bg-secondary{% else %}bg-info{% endif %} mb-2">
+                  {{ u.get_category_display }}
+                </span>
+                <h5 class="fw-bold mb-1">{{ u.get_full_name|default:u.username }}</h5>
+                {% if u.study %}
+                  <p class="text-secondary small mb-2">{{ u.study }}</p>
+                {% endif %}
+                <p class="card-text text-muted small">Experience: {{ u.experience|default:0 }} Years</p>
+              </div>
+              <div class="border-top pt-3 mt-3 text-muted small">
+                {% if u.email %}<i class="bi bi-envelope-at me-2"></i>{{ u.email }}<br>{% endif %}
+                {% if u.phone %}<i class="bi bi-telephone me-2"></i>{{ u.phone }}{% endif %}
               </div>
             </div>
           </div>
         </div>
-        {% endif %}
-
-        <!-- B. Other Faculty & Staff Members (Dynamic Loop from CustomUser) -->
-        {% for u in department.users.all %}
-          {% if u.category != 'HOD' and u.category != 'STUDENT' %} <!-- Student और HOD को यहाँ छोड़ रहे हैं -->
-          <div class="col-xl-3 col-md-6">
-            <div class="card faculty-card h-100">
-              <div class="faculty-img-container text-center p-3">
-                {% if u.photo %}
-                  <img src="{{ u.photo.url }}" class="faculty-img rounded-circle img-fluid" style="height: 150px; width: 150px; object-fit: cover;" alt="{{ u.get_full_name }}">
-                {% else %}
-                  <div class="bg-light text-muted rounded-circle d-inline-block pt-4" style="height: 150px; width: 150px;">No Image</div>
-                {% endif %}
-              </div>
-              <div class="card-body d-flex flex-column justify-content-between">
-                <div>
-                  <span class="badge {% if u.category == 'TEACHING' %}bg-secondary{% else %}bg-info{% endif %} mb-2">
-                    {{ u.get_category_display }}
-                  </span>
-                  <h5 class="fw-bold mb-1">{{ u.get_full_name|default:u.username }}</h5>
-                  <p class="text-secondary small mb-2">{{ u.study }}</p>
-                  <p class="card-text text-muted small">Experience: {{ u.experience }} Years</p>
-                </div>
-                <div class="border-top pt-3 mt-3 text-muted small">
-                  {% if u.email %}<i class="bi bi-envelope-at me-2"></i>{{ u.email }}<br>{% endif %}
-                  {% if u.phone %}<i class="bi bi-telephone me-2"></i>{{ u.phone }}{% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
         {% empty %}
-          <!-- अगर HOD के अलावा कोई दूसरा स्टाफ/टीचर नहीं है तो यह दिखेगा -->
-          {% if not department.Department_hod %}
+          <div class="col-12">
             <p class="text-muted ps-3">No faculty assigned to this department yet.</p>
-          {% endif %}
+          </div>
         {% endfor %}
 
-      </div> <!-- Grid End -->
-    </div>
+      </div><!-- Grid End -->
+
+    </div><!-- tab-pane End -->
     {% endfor %}
-  </div>  
+  </div><!-- tab-content End -->
+
 </div>
-
-
-
-{% include 'footer.html' %}

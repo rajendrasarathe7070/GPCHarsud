@@ -38,3 +38,92 @@ body { background-color: var(--bg-light); font-family: "Segoe UI", sans-serif; c
 .custom-table th { font-weight: 600; color: var(--text-muted); border-bottom: 1px solid #f3f4f6; padding: 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
 .custom-table td { padding: 1rem; vertical-align: middle; border-bottom: 1px solid #f3f4f6; color: var(--text-dark); }
 .custom-table tr:last-child td { border-bottom: none; }
+
+/* --- 🌟 HORIZONTAL CARD VIEW STYLES (Responsive) --- */
+
+.custom-card-row {
+  display: flex;
+  /* Mobile me vertical (upar-neeche) rahega */
+  flex-direction: column; 
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Desktop (sm breakpoint) me horizontal (side-by-side) ho jayega */
+@media (min-width: 576px) {
+  .custom-card-row {
+    flex-direction: row;
+    min-height: 180px;
+  }
+}
+
+.custom-card-row:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+  border-color: #a3f307 !important; /* Hover par lime green border */
+}
+
+/* Image Container */
+.card-media-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Mobile me fixed height taaki image area bada na ho */
+  height: 200px; 
+  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Desktop me height 100% aur right side border */
+@media (min-width: 576px) {
+  .card-media-container {
+    height: 100%;
+    width: 40%; /* Left side me 40% space */
+    border-bottom: none;
+    border-right: 1px solid #e5e7eb;
+  }
+}
+
+/* Image Fit */
+.card-img-left {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Image stretch nahi hogi, box me crop hokar fit hogi */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+/* Hover par image zoom effect */
+.custom-card-row:hover .card-img-left {
+  transform: scale(1.05);
+}
+
+/* Content Area */
+.card-body-custom {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .card-body-custom {
+    width: 60%; /* Right side me 60% space */
+  }
+}
+
+/* Buttons ko sundar banane ke liye */
+.card-body-custom .btn {
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+}

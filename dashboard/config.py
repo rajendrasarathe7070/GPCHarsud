@@ -24,5 +24,8 @@ DASHBOARD_CONFIG = [
     {"key": "pyq",                   "label": "Previous Year Papers", "icon": "bi-file-earmark-text", "group_by": None,           "exclude_fields": []},
     {"key": "category",              "label": "Cheatsheet Categories","icon": "bi-tags",              "group_by": None,           "exclude_fields": []},
     {"key": "cheatsheet",            "label": "Cheatsheets / Notes",  "icon": "bi-journal-code",      "group_by": None,           "exclude_fields": []},
+    {"key": "messages",              "label": "Academic Messages",    "icon": "bi-chat-quote",        "group_by": None,           "exclude_fields": []},
+    {"key": "HeroSlide",              "label": "Hero Slide",    "icon": "bi-tv",        "group_by": None,           "exclude_fields": []},
 ]
+
 MAX_ROWS_PER_GROUP = 300

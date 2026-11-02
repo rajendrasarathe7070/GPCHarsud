@@ -52,9 +52,10 @@
 <!-- ===================================================
      📦 मोडल 1: कंप्यूटर साइंस (CS) विभाग का विवरण
      =================================================== -->
-
+{% load static %}
 <style>
     @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
     /* 🎨 आपके सिग्नेचर ब्राउन ग्रेडिएंट के साथ मोडल हेडर */
     .modal-header {
         background: linear-gradient(135deg, #3d1414 0%, #a52a2a 100%);
@@ -75,7 +76,6 @@
         border-radius: 50%;
         margin: 0 4px;
     }
-
     .carousel-indicators .active {
         background-color: #a52a2a !important;
         width: 18px;
@@ -89,9 +89,10 @@
         }
     }
 </style>
+
 {% for department in departments %}
 
-
+<!-- MODAL ID SAME: hodModal{{ department.Course_code }} (trigger ke saath match) -->
 <div class="modal fade" id="hodModal{{ department.Course_code }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content rounded-1 border-0 shadow-lg">
@@ -102,61 +103,86 @@
             </div>
             <div class="modal-body p-4 bg-light-subtle">
                 <div class="row g-4">
-                    <!-- H.O.D. प्रोफाइल -->
+
+                    <!-- H.O.D. प्रोफाइल — अब CustomUser (category='HOD') से -->
                     <div class="col-lg-5 text-center text-lg-start border-end-lg border-light-subtle pe-lg-4">
-                        <img src="{% if department.hod_photo %}{{ department.hod_photo.url }}{% else %}{% static 'images/default_hod.jpg' %}{% endif %}"
-                            class="img-fluid rounded-1 mb-3 hod-avatar border shadow-sm rounded-circle" style="width: 200px; height: 200px;"
-                            alt="HOD CS">
-                        <span
-                            class="badge bg-danger rounded-1 mb-2 px-3 py-1 text-uppercase font-monospace tracking-wide">H.O.D.
-                            - {{ department.Course_name | capfirst }}</span>
-                        <h3 class="fw-bold text-dark m-0"> {{ department.Department_hod }} </h3>
-                        <p class="text-secondary small mb-3"> {{ department.hod_qualification }},  {{ department.hod_experience }} Years Experience</p>
-                        <p class="text-muted small lh-base mb-0">" {{ department.Department_description | capfirst }} "</p>
+                        {% with hod=department.hod_users.0 %}
+                        {% if hod %}
+                            <img src="{% if hod.photo %}{{ hod.photo.url }}{% else %}{% static 'images/default_hod.jpg' %}{% endif %}"
+                                class="img-fluid rounded-1 mb-3 hod-avatar border shadow-sm rounded-circle"
+                                style="width: 200px; height: 200px;"
+                                alt="{{ hod.get_full_name }}">
+
+                            <span class="badge bg-danger rounded-1 mb-2 px-3 py-1 text-uppercase font-monospace tracking-wide">
+                                H.O.D. - {{ department.Course_name|capfirst }}
+                            </span>
+                            <h3 class="fw-bold text-dark m-0">
+                                {{ hod.get_full_name|default:hod.username }}
+                            </h3>
+                            <p class="text-secondary small mb-3">
+                                {% if hod.study %}{{ hod.study }},{% endif %}
+                                {{ hod.experience|default:0 }} Years Experience
+                            </p>
+                        {% else %}
+                            <!-- Fallback: HOD assigned nahi hai -->
+                            <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                 style="width:200px;height:200px;font-size:14px;">
+                                No Photo
+                            </div>
+                            <span class="badge bg-secondary rounded-1 mb-2 px-3 py-1 text-uppercase font-monospace tracking-wide">
+                                H.O.D. - {{ department.Course_name|capfirst }}
+                            </span>
+                            <h3 class="fw-bold text-dark m-0">Not Assigned</h3>
+                            <p class="text-secondary small mb-3">—</p>
+                        {% endif %}
+                        {% endwith %}
+
+                        <p class="text-muted small lh-base mb-0">
+                            " {{ department.Department_description|capfirst }} "
+                        </p>
                     </div>
-                    <!-- कोर्सेज कैरोसेल -->
+
+                    <!-- कोर्सेज कैरोसेल — unchanged (sirf bug fix) -->
                     <div class="col-lg-7 d-flex flex-column justify-content-between">
                         <h5 class="fw-bold text-dark-emphasis mb-3">📚 Available Programs</h5>
-                        <div class="carousel-item active">
-                                    <div id="carouselExampleInterval{{ department.Course_code }}" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active" data-bs-interval="10000">
-                                                <img src="{% if department.Department_crausal_image_1 %}{{ department.Department_crausal_image_1.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
-                                                    class="d-block w-100"
-                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
-                                            </div>
-                                            <div class="carousel-item" data-bs-interval="2000">
-                                                <img src="{% if department.Department_crausal_image_2 %}{{ department.Department_crausal_image_2.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
-                                                    class="d-block w-100"
-                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img src="{% if department.Department_crausal_image_3 %}{{ department.Department_crausal_image_3.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
-                                                    class="d-block w-100"
-                                                    alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUuJ1e8tvMVfLovPIm_nM6gIcGvCL_sVTv90JAyICN_m2SNICROCI6YwB&s=10">
-                                            </div>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button"
-                                            data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                            data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
+
+                        <div id="carouselExampleInterval{{ department.Course_code }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-bs-interval="10000">
+                                    <img src="{% if department.Department_crausal_image_1 %}{{ department.Department_crausal_image_1.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                        class="d-block w-100"
+                                        alt="Department Image 1">
                                 </div>
-                         
+                                <div class="carousel-item" data-bs-interval="2000">
+                                    <img src="{% if department.Department_crausal_image_2 %}{{ department.Department_crausal_image_2.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                        class="d-block w-100"
+                                        alt="Department Image 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% if department.Department_crausal_image_3 %}{{ department.Department_crausal_image_3.url }}{% else %}{% static 'images/clg1-4.jpeg' %}{% endif %}"
+                                        class="d-block w-100"
+                                        alt="Department Image 3">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleInterval{{ department.Course_code }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
- 
 {% endfor %}
  
 

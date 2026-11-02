@@ -139,16 +139,10 @@
 
     <div class="tab-content " id="myTabContent" style="margin-top: 0rem;">
 
-      <div class="card text-bg-dark campusimg" style="max-height: 350px;">
-
-        <img src="{% static 'images\pls.png' %}  " class="card-img" alt="wide image">
-        <div class="card-img-overlay" style="padding: 0px;">
-
-
-        </div>
-      </div>
+     {% include 'slide/crausal.html' %}
 
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+ 
         <div class="card container buttons-1 ">
           <style>
             .buttons-1 {
@@ -394,21 +388,10 @@
 </div>
 
 
-
-
-
-
-
-        <!-- sddfssff -->
-        
-
-        <!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ 
 
 <style>
-/* ============================================================
-   PART 1 — HORIZONTAL GRAPH TIMELINE
-   ============================================================ */
+ 
 
    .hg-section{
   background: transparent !important;
@@ -1164,7 +1147,7 @@
 </div>
 
            
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ 
 
 <style>
 /* ============================================================
@@ -1180,7 +1163,7 @@
   max-width:1300px;
   margin:0 auto;
   padding:56px 20px 40px;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+ 
 }
 
 /* --- Section head --- */
@@ -1399,7 +1382,7 @@
 
   <div class="rc-head">
      
-    <h2>Top <span>Recruiters</span> Companies</h2>
+    <h2>Top  Recruiters  Companies</h2>
     <p>Industry leaders who consistently hire from our campus — year after year.</p>
   </div>
 
@@ -1904,7 +1887,7 @@
 <!-- ============================================================
      CARD MARKUP
      ============================================================ -->
-      <div class="hg-head">
+      <div class="hg-head mt-5">
      
     <h2> Academic Placement Annual </h2>
     
@@ -1965,19 +1948,19 @@
       <div class="tab-pane fade" id="Statistics-tab-pane" role="tabpanel" aria-labelledby="Statistics-tab" tabindex="0">
         <style>
           /* कार्ड्स को और प्रीमियम लुक देने के लिए कस्टम शैडो और होवर इफ़ेक्ट */
-          .stat-card {
+          .stat-cards {
             border: none;
             border-radius: 16px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
           }
 
-          .stat-card:hover {
+          .stat-cards:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
           }
 
-          .icon-box {
+          .icon-boxs {
             width: 60px;
             height: 60px;
             border-radius: 12px;
@@ -1993,13 +1976,13 @@
 
             <!-- कार्ड 1: Students Placed -->
             <div class="col-12 col-md-6 col-lg-3">
-              <div class="card stat-card h-100 bg-white p-3">
+              <div class="card stat-cards h-100 bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 class="text-muted text-uppercase mb-2 fw-semibold">Students Placed</h6>
                     <h3 class="fw-bold mb-0 text-dark">{{grand_students_placed}}+</h3>
                   </div>
-                  <div class="icon-box bg-success-subtle text-success">
+                  <div class="icon-boxs bg-success-subtle text-success">
                     <i class="bi bi-people-fill"></i>
                   </div>
                 </div>
@@ -2008,13 +1991,13 @@
 
             <!-- कार्ड 2: Companies Visited -->
             <div class="col-12 col-md-6 col-lg-3">
-              <div class="card stat-card h-100 bg-white p-3">
+              <div class="card stat-cards h-100 bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 class="text-muted text-uppercase mb-2 fw-semibold">Companies Visited</h6>
                     <h3 class="fw-bold mb-0 text-dark">{{grand_companies_visited}}+</h3>
                   </div>
-                  <div class="icon-box bg-primary-subtle text-primary">
+                  <div class="icon-boxs bg-primary-subtle text-primary">
                     <i class="bi bi-building-fill"></i>
                   </div>
                 </div>
@@ -2023,13 +2006,13 @@
 
             <!-- कार्ड 3: Highest Package -->
             <div class="col-12 col-md-6 col-lg-3">
-              <div class="card stat-card h-100 bg-white p-3">
+              <div class="card stat-cards h-100 bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 class="text-muted text-uppercase mb-2 fw-semibold">Highest Package</h6>
                     <h3 class="fw-bold mb-0 text-success">{{grand_highest_package}}+ LPA</h3>
                   </div>
-                  <div class="icon-box bg-warning-subtle text-warning-emphasis">
+                  <div class="icon-boxs bg-warning-subtle text-warning-emphasis">
                     <i class="bi bi-trophy-fill"></i>
                   </div>
                 </div>
@@ -2038,13 +2021,13 @@
 
             <!-- कार्ड 4: Average Package -->
             <div class="col-12 col-md-6 col-lg-3">
-              <div class="card stat-card h-100 bg-white p-3">
+              <div class="card stat-cards h-100 bg-white p-3">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 class="text-muted text-uppercase mb-2 fw-semibold">Average Package</h6>
                     <h3 class="fw-bold mb-0 text-info-emphasis">{{grand_avg_package}}+ LPA</h3>
                   </div>
-                  <div class="icon-box bg-info-subtle text-info">
+                  <div class="icon-boxs bg-info-subtle text-info">
                     <i class="bi bi-graph-up-arrow"></i>
                   </div>
                 </div>
@@ -2070,6 +2053,16 @@
 
             td {
               text-align: left;
+             
+            }
+            td {
+               transition: all 0.3s ease-in;
+            }
+            td:hover {
+              transform: translateY(-3px);
+              border: 2px solid gray;
+              background-color: white;
+              
             }
           </style>
 
@@ -2778,6 +2771,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"></script>
+      
 
   </body>
 

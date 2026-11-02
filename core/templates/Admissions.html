@@ -112,17 +112,7 @@
     }
   </style>
    
-  <div class="card text-bg-dark  " style="max-height: 455px;  ">
-
-    <img src="{% static 'images/ai5.jpg' %}" class="card-img mt-md-1 " alt="wide image" style="">
-    <div class="card-img-overlay">
-
-      <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
-    </div>
-  </div>
+        {% include 'slide/crausal.html' %}
 
 
 
@@ -285,7 +275,7 @@
               Technical Education (DTE), Madhya Pradesh centralized online counseling portal. Direct or offline
               admissions are not permissible under Department rules.
             </p>
-            <a href="https://mponline.gov.in" target="_blank" class="btn btn-sm btn-outline-dark mt-3 fw-semibold">
+            <a href="https://www.dte.mp.gov.in/" target="_blank" class="btn btn-sm btn-outline-dark mt-3 fw-semibold">
               Visit MP Online DTE Portal <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
             </a>
           </div>
@@ -321,7 +311,7 @@
               counseling, <strong> College Level Counseling (CLC) is conducted in accordance with DTE
                 guidelines.</strong>
               Admissions for these seats are granted directly based on merit.
-              <a class="btn btn-outline-dark btn-sm mx-2" href="#" role="button"> Admission Helpdesk </a>
+              <a class="btn btn-outline-dark btn-sm mx-2" href="{% url 'admission' %}#Haw-to-apply-tab-pane" role="button"> Admission Helpdesk </a>
             </p>
 
 

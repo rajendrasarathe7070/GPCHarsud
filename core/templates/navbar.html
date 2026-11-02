@@ -1,5 +1,7 @@
 {% load static %}
 <style>
+
+    
     html {
         scroll-behavior: smooth;
     }
@@ -248,7 +250,13 @@
         ms-overflow-style: none;
         scrollbar-width: none;
     }
+
+ 
+
 </style>
+<!-- Bootstrap Icons CSS CDN -->
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
@@ -256,93 +264,97 @@
 
     <!-- पूरे हेडर और नेवबार को इस यूनिक रैपर के अंदर डाल दिया है -->
     <div id="unique-main-wrapper">
-
+    
         <!-- 1. ANIMATED TOP SECTION (Top Bar और Logo) -->
         <div class="animated-top">
             <!-- Top Bar -->
-             <!-- Top Bar -->
-<div class="top-bar bg-danger d-flex align-items-center" style="height: 18px; max-height: 22px; font-family: 'Times New Roman', Times, serif; font-size: 16px; overflow: hidden;">
-    <div class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2 line-height-1">
-        
-        <!-- 1. Live Date & Time -->
-        <div id="live-clock" style="font-size: 14px; white-space: nowrap;">
-            Loading Date & Time...
-        </div>
-
-        <!-- Right Side Controls -->
-        <div class="d-flex align-items-center gap-2" style="font-size: 14px;">
-            
-            <!-- 2. Font Size Controller -->
-            <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1" style="height: 18px; line-height: 1;">
-                <span class="me-1 fw-bold" style="font-size: 11px;">FONT:</span>
-                <button onclick="changeFontSize(-1)" class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Decrease Font">A-</button>
-                <button onclick="changeFontSize(0)" class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Normal Font">A</button>
-                <button onclick="changeFontSize(1)" class="btn btn-sm btn-link text-white p-0 text-decoration-none fw-bold shadow-none" style="font-size: 13px;" title="Increase Font">A+</button>
+            <!-- Top Bar -->
+            <div class="top-bar bg-danger d-flex align-items-center"
+                style="height: 18px; max-height: 22px; font-family: 'Times New Roman', Times, serif; font-size: 16px; overflow: hidden;">
+                <div
+                    class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2 line-height-1">
+    
+                    <!-- 1. Live Date & Time -->
+                    <div id="live-clock" style="font-size: 14px; white-space: nowrap;">
+                        Loading Date & Time...
+                    </div>
+    
+                    <!-- Right Side Controls -->
+                    <div class="d-flex align-items-center gap-2" style="font-size: 14px;">
+    
+                        <!-- 2. Font Size Controller -->
+                        <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1"
+                            style="height: 18px; line-height: 1;">
+                            <span class="me-1 fw-bold" style="font-size: 11px;">FONT:</span>
+                            <button onclick="changeFontSize(-1)"
+                                class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none"
+                                style="font-size: 13px;" title="Decrease Font">A-</button>
+                            <button onclick="changeFontSize(0)"
+                                class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none"
+                                style="font-size: 13px;" title="Normal Font">A</button>
+                            <button onclick="changeFontSize(1)"
+                                class="btn btn-sm btn-link text-white p-0 text-decoration-none fw-bold shadow-none"
+                                style="font-size: 13px;" title="Increase Font">A+</button>
+                        </div>
+    
+                        <span style="opacity: 0.5;">|</span>
+    
+                        <!-- 3. Logins & Sitemap -->
+                        <div class="d-flex align-items-center gap-2" style="font-size: 13px; white-space: nowrap;">
+    
+    
+                            {% if user.is_authenticated %}
+                            <a href="#" class="text-white text-decoration-none">
+                                Welcome ! {{user.get_full_name|default:user.username}}</a>
+                            {% else %}
+                            <a href="#" class="text-white text-decoration-none">Student Login</a>
+                            <a href="#" class="text-white text-decoration-none">Institute Login</a>
+                            {% endif %}
+    
+                            <span style="opacity: 0.5;">|</span>
+                            <a href="#" class="text-white" title="Sitemap"><i class="fas fa-sitemap"
+                                    style="font-size: 13px;"></i></a>
+                        </div>
+    
+                    </div>
+                </div>
             </div>
-
-            <span style="opacity: 0.5;">|</span>
-
-            <!-- 3. Logins & Sitemap -->
-            <div class="d-flex align-items-center gap-2" style="font-size: 13px; white-space: nowrap;">
-                 
-              
-              {% if user.is_authenticated %}
-                     <a href="#" class="text-white text-decoration-none">Welcome ! {{user.get_full_name |default:user.username}}</a>
-              {% else %}
-                  <a href="#" class="text-white text-decoration-none">Student Login</a>
-                <a href="#" class="text-white text-decoration-none">Institute Login</a>
-              {% endif %}
-                
-                <span style="opacity: 0.5;">|</span>
-                <a href="#" class="text-white" title="Sitemap"><i class="fas fa-sitemap" style="font-size: 13px;"></i></a>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<!-- JavaScript for Live Clock and Global Font Size -->
+    
+            <!-- JavaScript for Live Clock and Global Font Size -->
+           <!-- JavaScript for Live Clock and Global Font Size -->
 <script>
-    // 1. Live Date and Time Script
+    // 1. Live Date and Time Script (with seconds)
     function updateClock() {
         const now = new Date();
-        const options = { 
-            weekday: 'short', 
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            hour12: true 
+        const options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',   // ✅ seconds added
+            hour12: true
         };
-        // 22px की कम जगह में फिट होने के लिए सेकंड्स हटा दिए हैं
         document.getElementById('live-clock').innerText = now.toLocaleString('en-US', options);
     }
-    setInterval(updateClock, 60000); // हर मिनट अपडेट होगा
+    setInterval(updateClock, 1000); // ✅ har second update hoga
     updateClock();
 
-    // 2. Font Size Changer Script (पूरे पेज के सभी टेक्स्ट पर असर करेगा)
-    let currentScale = 100; // Percentage
+    // 2. Font Size Changer Script (no change)
+    let currentScale = 100;
     function changeFontSize(action) {
         if (action === 1 && currentScale < 120) {
-            currentScale += 5; // Increase
+            currentScale += 5;
         } else if (action === -1 && currentScale > 85) {
-            currentScale -= 5; // Decrease
+            currentScale -= 5;
         } else if (action === 0) {
-            currentScale = 100; // Reset to Default
+            currentScale = 100;
         }
-        // पूरे HTML / Body के बेस साइज को बदलकर सारे टेक्स्ट को इफेक्ट करेगा
         document.documentElement.style.fontSize = currentScale + '%';
     }
 </script>
-
-            <!-- <div class="top-bar bg-danger">
-                <div class="container-fluid d-flex justify-content-end align-items-center">
-                    <a href="{% url 'dashboard:login' %}" class="me-3">User Login</a>
-                    <span class="me-3 text-white">|</span>
-                    <a href="#"><i class="fas fa-sitemap text-white" style="font-size: 16px;"></i></a>
-                </div>
-            </div> -->
+ 
 
             <!-- Header Section (Logo & Text) -->
             <div class="header-section py-0">
@@ -487,10 +499,11 @@
                                             href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters
                                             Companies</a></li>
                                     <li><a class="dropdown-item"
-                                            href="{% url 'placements' %}#StudentsPlaced-tab-pane">Student Placed &
-                                            Verification</a></li>
-                                    <li class="dropdown-item disabled" href="{% url 'placements' %}#dashbord-tab-pane">
-                                        Placement Dashboard</li>
+                                            href="{% url 'student_engagement_page' %}"> Student's Placed</a></li>
+                               
+                                     <li><a class="dropdown-item"
+                                            href="{% url 'company_student_verification' %}">Verify Student</a></li>
+                                        
                                 </ul>
                             </li>
 
@@ -645,10 +658,38 @@
                     <span class="opt-icon bi-grid-fill text-success"></span>
                     <div class="opt-text"><strong>Staff Dashboard</strong></div>
                 </a>
+
+                <a href="{% url 'placements' %}#Statistics-tab-pane" class="login-option student">
+                    <span class="opt-icon bi-bar-chart text-primary"></span>
+                    <div class="opt-text"><strong>Placement Static's</strong></div>
+                </a>
+               
+                  <a href="{% url 'student_engagement_page' %}" class="login-option student">
+                    <span class="opt-icon bi-person-lines-fill text-info "></span>
+                    <div class="opt-text"><strong>Placed Student's</strong></div>
+                </a>
+               
+                 <a href="{% url 'company_student_verification' %}" class="login-option student">
+                    <span class="opt-icon bi-person-exclamation text-warning"></span>
+                    <div class="opt-text"><strong>Student Varification</strong></div>
+                </a> 
             {% else %}
                 <a href="{% url 'dashboard:student_dashboard' %}" class="login-option student">
-                    <span class="opt-icon bi-mortarboard-fill text-primary"></span>
+                    <span class="opt-icon bi-mortarboard-fill text-info"></span>
                     <div class="opt-text"><strong>Student Dashboard</strong></div>
+                </a> 
+
+                <a href="{% url 'pyqs' %}" class="login-option student">
+                    <span class="opt-icon bi-file-earmark-pdf-fill text-danger"></span>
+                    <div class="opt-text"><strong> PYQ's</strong></div>
+                </a>
+                <a href="{% url 'academic' %}#Syllabus-tab-pane" class="login-option student">
+                    <span class="opt-icon bi-file-earmark-richtext text-warning-emphasis"></span>
+                    <div class="opt-text"><strong>Acadmic Syllabus</strong></div>
+                </a>
+                 <a href="{% url 'cheatsheets' %}" class="login-option student">
+                    <span class="opt-icon bi-journal-bookmark-fill text-primary "></span>
+                    <div class="opt-text"><strong> CheatSheet Note's</strong></div>
                 </a>
             {% endif %}
     
@@ -753,21 +794,21 @@
     <!-- JAVASCRIPT FOR HOVER EFFECT -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Select all the buttons
+           
             const buttons = document.querySelectorAll('.slide-btn');
 
             buttons.forEach(button => {
-                // Jab mouse enter ho (hover)
+               
                 button.addEventListener('mouseenter', function() {
-                    // Pehle sabhi buttons se 'active' class hatao
+                    
                     buttons.forEach(btn => btn.classList.remove('active'));
-                    // Sirf current button me 'active' class add karo
+                     
                     this.classList.add('active');
                 });
 
-                // Jab mouse button se bahar nikle
+               
                 button.addEventListener('mouseleave', function() {
-                    // Current button se 'active' class hata do (iski width wapas choti ho jayegi)
+                    
                     this.classList.remove('active');
                 });
             });
@@ -777,47 +818,175 @@
         
 
  <!-- End Unique Main Wrapper -->
-    <script>
-        function switchCampusTabByPane() {
-            // 1. URL से हैश (#campus-tab-pane आदि) प्राप्त करें
-            const hash = window.location.hash;
+   <script>
+function switchCampusTabByPane() {
+    const hash = window.location.hash;
+    const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
 
-            // 2. उन सभी divs को ढूंढें जिनकी ID में -tab-pane आता है
-            const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
+    if (allPanes.length > 0) {
+        // 1. पहले सभी टैब्स को छुपाएं
+        allPanes.forEach(function (pane) {
+            pane.classList.remove('show', 'active');
+            pane.style.setProperty('display', 'none', 'important');
+        });
 
-            if (allPanes.length > 0) {
-                // पहले सभी सेक्शन्स को पूरी तरह से छुपा दें
-                allPanes.forEach(function (pane) {
-                    pane.classList.remove('show', 'active');
-                    pane.style.setProperty('display', 'none', 'important');
-                });
-
-                let targetPane = null;
-
-                // 3. अगर URL में हैश है, तो उस वाले सेक्शन को चुनें
-                if (hash) {
-                    targetPane = document.querySelector(hash);
-                }
-
-                // 4. अगर कोई सीधे पेज पर आया है (बिना हैश के), तो पहले वाले (Gallery) सेक्शन को चुनें
-                if (!targetPane) {
-                    targetPane = allPanes[0];
-                }
-
-                // 5. चुने हुए सेक्शन को बूटस्ट्रैप क्लास के साथ स्क्रीन पर दिखाएं
-                if (targetPane) {
-                    targetPane.classList.add('show', 'active');
-                    targetPane.style.setProperty('display', 'block', 'important');
-
-                    // अगर ड्रॉपडाउन से क्लिक करके आए हैं, तो पेज को टॉप पर ले जाएं
-                    if (hash) {
-                        window.scrollTo({ top: 0, behavior: 'auto' });
-                    }
-                }
-            }
+        let targetPane = null;
+        if (hash) {
+            targetPane = document.querySelector(hash);
         }
 
-        // पेज लोड होने पर और लिंक बदलने पर तुरंत रन करें
-        document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
-        window.addEventListener("hashchange", switchCampusTabByPane);
-    </script>
+        if (!targetPane) {
+            targetPane = allPanes[0];
+        }
+
+        // 2. नए टैब को तुरंत शो (show) करें
+        if (targetPane) {
+            targetPane.classList.add('show', 'active');
+            targetPane.style.setProperty('display', 'block', 'important');
+
+            // 3. टैब दिखने के तुरंत बाद (100ms डिले) पेज को ऊपर स्क्रॉल करें
+            if (hash) {
+                setTimeout(function() {
+                    window.scrollTo({
+                        top: 0, // पूरे पेज के सबसे ऊपर जाने के लिए
+                        behavior: 'smooth'
+                    });
+                }, 500); // 100 मिलिसेकंड का गैप ताकि पहले div बदल जाए
+            }
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
+window.addEventListener("hashchange", switchCampusTabByPane);
+</script>
+
+<script>
+    // js lodder
+    (function() {
+    // 1. Premium Glassmorphism CSS Styles
+    const style = document.createElement('style');
+    style.textContent = `
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-loader-spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #2563eb;
+            border-right: 4px solid #2563eb;
+            border-radius: 50%;
+            animation: spinGlassLoader 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spinGlassLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. HTML Structure Injection
+    const overlay = document.createElement('div');
+    overlay.id = 'loading-overlay';
+    overlay.innerHTML = `
+        <div class="glass-card">
+            <div class="glass-loader-spinner"></div>
+            <p style="margin: 15px 0 0 0; font-weight: 600; color: #1e293b; font-size: 15px; letter-spacing: 0.5px;">Loading...</p>
+        </div>
+    `;
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.insertBefore(overlay, document.body.firstChild);
+    });
+
+    let loadingTimeout;
+
+    function showLoader() {
+        loadingTimeout = setTimeout(function() {
+            const overlayEl = document.getElementById('loading-overlay');
+            if (overlayEl) overlayEl.style.display = 'flex';
+        }, 150);
+    }
+
+    // 3. Click Event Listener (Same Page Smart Check)
+    document.addEventListener('click', function(event) {
+        const targetLink = event.target.closest('a');
+        
+        if (targetLink) {
+            const href = targetLink.getAttribute('href');
+            const target = targetLink.getAttribute('target');
+            
+            if (target === '_blank') return;
+
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                
+                // --- SAME PAGE CHECK LOGIC ---
+                try {
+                    // Link ke absolute URL ko browser ke current URL se compare karna
+                    const targetUrl = new URL(href, window.location.href);
+                    const currentUrl = new URL(window.location.href);
+
+                    // Agar protocol, host aur pathname (path) bilkul same hain, toh loader nahi chalega
+                    if (targetUrl.protocol === currentUrl.protocol && 
+                        targetUrl.host === currentUrl.host && 
+                        targetUrl.pathname === currentUrl.pathname) {
+                        
+                        // Same page par query parameters ya hash ho sakte hain, loading ki zarurat nahi h
+                        return; 
+                    }
+                } catch (e) {
+                    // Agar URL parse karne me error aaye toh fallback safty ke liye ignore karein
+                }
+                // -----------------------------
+
+                showLoader();
+            }
+        }
+    });
+
+    // 4. Submit Event Listener (Forms)
+    document.addEventListener('submit', function() {
+        showLoader();
+    });
+
+    // 5. Browser Back/Forward & Safety Reset
+    window.addEventListener('pageshow', function(event) {
+        clearTimeout(loadingTimeout);
+        const overlayEl = document.getElementById('loading-overlay');
+        if (overlayEl) overlayEl.style.display = 'none';
+    });
+
+    window.addEventListener('unload', function() {
+        clearTimeout(loadingTimeout);
+    });
+})();
+
+</script>

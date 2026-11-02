@@ -1,47 +1,289 @@
 {% extends "dashboard/base.html" %}
 {% block title %}{{ cfg.label }}{% endblock %}
+
 {% block content %}
+<!-- ========================================== -->
+<!-- 🌟 DIRECT CSS ADDED HERE (Bypasses External File Issues) -->
+<!-- ========================================== -->
+<style>
+    /* Card Container */
+    .spark-card {
+        display: flex;
+        flex-direction: column; /* Mobile: Top-Bottom */
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    .spark-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-color: #a3f307; /* Spark Lime Accent */
+    }
+
+    /* Image/File Section */
+    .spark-card-media {
+        width: 100%;
+        height: 220px; /* Mobile height */
+        position: relative;
+        background-color: #f8fafc;
+        overflow: hidden;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .spark-card-media img {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover; /* Image crops and fits perfectly */
+        transition: transform 0.5s ease;
+    }
+
+    .spark-card:hover .spark-card-media img {
+        transform: scale(1.08); /* Zoom effect on hover */
+    }
+
+    /* Content Section */
+    .spark-card-body {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .spark-card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .spark-card-text {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Max 2 lines of text */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Actions Footer */
+    .spark-card-actions {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px dashed #e2e8f0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    .spark-card-actions .btn {
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.35rem 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    /* Desktop Responsive (Side by Side) */
+    @media (min-width: 992px) {
+        .spark-card {
+            flex-direction: row; /* Left-Right */
+            height: 200px; /* Fixed height for grid alignment */
+        }
+        .spark-card-media {
+            width: 40%;
+            height: 100%;
+            border-bottom: none;
+            border-right: 1px solid #e2e8f0;
+        }
+        .spark-card-body {
+            width: 60%;
+            padding: 1.25rem;
+        }
+    }
+
+    /* Clean Table Styling */
+    .spark-table-container {
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .spark-table th {
+        background-color: #f8fafc;
+        color: #475569;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        padding: 1rem;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    .spark-table td {
+        padding: 1rem;
+        vertical-align: middle;
+        color: #334155;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+</style>
+
+<!-- Page Header -->
 <div class="d-flex justify-content-between align-items-center mb-4 mt-2 flex-wrap gap-2">
   <div>
-    <a href="{% url 'dashboard:router' %}" class="text-muted text-decoration-none small mb-2 d-inline-block"><i class="bi bi-arrow-left"></i> Back</a>
+    <a href="{% url 'dashboard:router' %}" class="text-muted text-decoration-none small mb-2 d-inline-block"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
     <h3 class="fw-bold mb-1">{{ cfg.label }}</h3>
-    <p class="text-muted mb-0 small">{{ total }} records</p>
+    <p class="text-muted mb-0 small">Total {{ total }} records found</p>
   </div>
   {% if can_add %}
-    <a href="{% url 'dashboard:model_add' model_key=model_key %}" class="btn btn-dark-green rounded-pill px-4"><i class="bi bi-plus-lg"></i> Add New</a>
+    <a href="{% url 'dashboard:model_add' model_key=model_key %}" class="btn btn-dark-green rounded-pill px-4 shadow-sm"><i class="bi bi-plus-lg"></i> Add New</a>
   {% endif %}
 </div>
 
+<!-- Main Content Loop -->
 {% for g in groups %}
-<div class="custom-table mb-4">
   {% if g.label %}
-    <h5 class="fw-bold mb-3 border-bottom pb-2">{{ g.label }} <span class="badge bg-secondary ms-2 rounded-pill">{{ g.count }}</span></h5>
+    <h5 class="fw-bold mb-3 mt-4 text-secondary border-bottom pb-2">{{ g.label }} <span class="badge bg-secondary ms-2 rounded-pill">{{ g.count }}</span></h5>
   {% endif %}
+
   {% if g.rows %}
-    <div class="table-responsive">
-      <table class="table">
-        <thead><tr>
-          {% for h in g.headers %}<th class="text-nowrap">{{ h }}</th>{% endfor %}
-          {% if can_change or can_delete %}<th class="text-end">Actions</th>{% endif %}
-        </tr></thead>
-        <tbody>
-          {% for row in g.rows %}
-          <tr>
-            {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
-            {% if can_change or can_delete %}
-              <td class="text-end text-nowrap">
-                {% if can_change %}<a href="{% url 'dashboard:model_edit' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-primary"><i class="bi bi-pencil-square"></i></a>{% endif %}
-                {% if can_delete %}<a href="{% url 'dashboard:model_delete' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-danger"><i class="bi bi-trash"></i></a>{% endif %}
-              </td>
-            {% endif %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    
+    <!-- 🌟 CARDS VIEW (Agar File/Image fields hain) -->
+    {% if has_file_fields %}
+      <div class="row g-4 mb-4">
+        {% for row in g.rows %}
+          <!-- 1 Card per row Mobile, 2 Cards per row Desktop -->
+          <div class="col-12 col-xl-6"> 
+            <div class="spark-card">
+              
+              <!-- Image / File Media Area -->
+              <div class="spark-card-media">
+                {% if row.image_url %}
+                  <img src="{{ row.image_url }}" alt="Preview" onerror="this.onerror=null; this.src='https://placehold.co/400x400/f1f5f9/64748b?text=No+Image';">
+                {% elif row.file_url %}
+                  <div class="text-center p-3">
+                    <i class="bi bi-file-earmark-pdf-fill text-danger" style="font-size: 3rem;"></i>
+                    <div class="mt-2 fw-bold text-dark small">PDF Document</div>
+                  </div>
+                {% else %}
+                  <div class="text-center text-muted">
+                    <i class="bi bi-file-earmark-image-fill text-warning " style="font-size: 3rem;"></i>
+                    <div class="mt-2 small">No Media</div>
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Text Content Area -->
+                            <!-- Text Content Area -->
+              <div class="spark-card-body">
+                <h5 class="spark-card-title" title="{{ row.cells.0 }}">{{ row.cells.0 }}</h5>
+                
+                <!-- Other fields as text -->
+                <div class="spark-card-text">
+                  {% for cell in row.cells %}
+                    {% if not forloop.first %}
+                      <div class="mb-1">{{ cell }}</div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="spark-card-actions">
+                  
+                  <!-- 🌟 NAYA: URL Link Button -->
+                  {% if row.url_link %}
+                    <a href="{{ row.url_link }}" target="_blank" class="btn btn-outline-info me-auto">
+                      <i class="bi bi-box-arrow-up-right"></i> Visit Link
+                    </a>
+                  {% endif %}
+
+                  <!-- File PDF Button -->
+                  {% if row.file_url %}
+                    <a href="{{ row.file_url }}" target="_blank" class="btn btn-light border text-dark me-auto">
+                      <i class="bi bi-file-earmark-pdf"></i> Open File
+                    </a>
+                  {% endif %}
+                  
+                  <!-- Edit / Delete Buttons -->
+                  {% if can_change %}
+                    <a href="{% url 'dashboard:model_edit' model_key=model_key pk=row.pk %}" class="btn btn-outline-primary" title="Edit">
+                      <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                  {% endif %}
+                  {% if can_delete %}
+                    <a href="{% url 'dashboard:model_delete' model_key=model_key pk=row.pk %}" class="btn btn-outline-danger" title="Delete">
+                      <i class="bi bi-trash"></i> Delete
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    <!-- 🟢 TABLE VIEW (Agar sirf Text fields hain) -->
+    {% else %}
+      <div class="spark-table-container mb-4">
+        <div class="table-responsive">
+          <table class="table spark-table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                {% for h in g.headers %}<th class="text-nowrap">{{ h }}</th>{% endfor %}
+                {% if can_change or can_delete %}<th class="text-end">Actions</th>{% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in g.rows %}
+              <tr>
+                {% for cell in row.cells %}
+                  <td class="text-nowrap">{{ cell }}</td>
+                {% endfor %}
+                {% if can_change or can_delete %}
+                  <td class="text-end text-nowrap">
+                    {% if can_change %}
+                      <a href="{% url 'dashboard:model_edit' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-primary" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                      </a>
+                    {% endif %}
+                    {% if can_delete %}
+                      <a href="{% url 'dashboard:model_delete' model_key=model_key pk=row.pk %}" class="btn btn-sm btn-light border text-danger ms-1" title="Delete">
+                        <i class="bi bi-trash"></i>
+                      </a>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endif %}
+
   {% else %}
-    <p class="text-muted text-center py-4">No records.</p>
+    <!-- Empty State -->
+    <div class="alert alert-light text-center py-5 border rounded-4 mb-4">
+      <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
+      <h5 class="text-muted">No records found</h5>
+      <p class="mb-0 small">Click on "Add New" to create the first record.</p>
+    </div>
   {% endif %}
-</div>
 {% endfor %}
 {% endblock %}

@@ -167,32 +167,23 @@ html, body {
 
 
 
-  <div class="card text-bg-dark  " style="max-height: 350px;  ">
+  
 
-    <img src="{% static 'images/ai1-1.jpg' %}" class="card-img" alt="wide image" style="margin-top: 0rem;">
-    <div class="card-img-overlay">
-
-      <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
-    </div>
-  </div>
-
-  <div class="container my-5 text-center">
+  <div class="containers  text-center">
 
 
 
     <div class="tab-content" id="myTabContent">
 
-      <div class="tab-pane fade show active" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
+{% include 'slide/crausal.html' %}
+      <div class="tab-pane fade show active container-lg" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
         tabindex="0">
         <style>
           .breadcrumb-item {
             background-color: #a2cdf9;
           }
         </style>
-        <div class="containerss mt-3 mb-5">
+        <div class="containers mt-3 mb-5">
           <style>
             .hding {
               background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
@@ -256,7 +247,7 @@ html, body {
             }
           </style>
 
-          <div class="container-fluid mt-3 mb-5 px-0">
+          <div class="containers mt-3 mb-5 px-0">
             <nav class="hding rounded-1 py-lg-0">
               <div class="d-flex w-100 justify-content-between align-items-center">
 
@@ -286,10 +277,10 @@ html, body {
         <!-- THIS IS NEW   -->
         <!-- /.col-lg-4 -->
         <!-- /.row --> <!-- START THE FEATURETTES -->
-        {% for department in departments %}
+       {% for department in departments %}
 
         <hr class="featurette-divider mt-5 mb-5">
-        <div class="row featurette ">
+        <div class="container row featurette  ">
 
           <div class="col-md-5 order-md-1 my-4"> <img aria-label="Placeholder: Computer Science & Engg."
               class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded-5" height="500"
@@ -306,74 +297,51 @@ html, body {
                 {{ department.Department_name }}</span></h2>
 
             <table class="table table-hover ">
-              <!-- <thead style="text-align: left;">
-                </thead> -->
               <tbody style="text-align: left;">
                 <tr>
-
                   <td>Course name :</td>
-
                   <td>{{ department.Course_name }}</td>
                   <td></td>
                 </tr>
                 <tr>
-
                   <td>Course code</td>
-
-
                   <td>{{ department.Course_code }}</td>
                   <td></td>
                 </tr>
                 <tr>
-
                   <td>HOD Name</td>
-
-                  <td>{{ department.Department_hod }}</td>
+                  <!-- ✅ Yahan change: User model se HOD name -->
+                  <td>{{ department.hod_users.0.get_full_name|default:"Not Assigned" }}</td>
                   <td></td>
-
                 </tr>
 
                 <tr>
-
                   <td>Duration</td>
-
                   <td>{{ department.Course_duration }}</td>
                   <td> </td>
                 </tr>
                 <tr>
-
                   <td>Eligibility</td>
-
                   <td>{{ department.Course_eligibility }}</td>
                   <td> </td>
                 </tr>
-
                 <tr>
-
                   <td> Intake / Seats</td>
-
-                  <td>60 Intake ( {{ department.Course_seats_aklavy }}-Aklavy Sheam, {{ department.Course_seats_ppt }}
+                  <td>60 Intake ( {{ department.Course_seats_eklavya }}-Aklavy Sheam, {{ department.Course_seats_ppt }}
                     -PPt Sheam ) </td>
                   <td> </td>
                 </tr>
-
                 <tr>
-
                   <td> Mode of study</td>
-
                   <td>{{ department.Mode_of_study }}</td>
                   <td> </td>
                 </tr>
                 <tr>
-
                   <td>Syllabus link</td>
-
                   <td> <a href="http://">Click me</a> </td>
                   <td> </td>
                 </tr>
-
                 <tr>
-
                   <td> Admission Process link</td>
                   <td> <a href="/admission#Process-tab-pane">Go to-</a> </td>
                   <td> </td>
@@ -409,7 +377,7 @@ html, body {
     </div>
 
     <!-- this is acadmic callender table  -->
-    <div class="tab-pane fade" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
+    <div class="tab-pane fade container-lg" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
       tabindex="0">
       <!-- As a heading -->
 

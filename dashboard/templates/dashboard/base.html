@@ -80,12 +80,14 @@
           </div>
           
           <div class="ms-auto d-flex align-items-center gap-2">
-            <button class="btn btn-icon d-none d-sm-flex"><i class="bi bi-bell"></i></button>
+             <button class="btn btn-outline-danger rounded-pill px-3 px-md-4"  onclick="window.location.href='/' ">Go to GPC Site</button>
             <form method="post" action="{% url 'dashboard:logout' %}" class="d-inline">
               {% csrf_token %}
-              <button class="btn btn-dark-green rounded-pill px-3 px-md-4">Logout</button>
+              <button class="btn btn-danger rounded-pill px-3 px-md-4" >Logout</button>
             </form>
           </div>
+
+           
         </div>
       </nav>
 

@@ -1,0 +1,318 @@
+  <style>
+    :root {
+      --hero-height: 60vh;
+      --hero-pad: clamp(20px, 6vw, 90px);
+    }
+    @supports (height: 100svh) {
+      :root { --hero-height: 60svh; }
+    }
+
+    * { box-sizing: border-box; }
+    body {  font-family: 'Times New Roman', Times, serif; }
+
+    /* ===== CAROUSEL ===== */
+    .hero-carousel { position: relative; overflow: hidden; width: 100%; }
+    .hero-carousel .carousel-item { height: var(--hero-height); position: relative; overflow: hidden; }
+
+    .hero-carousel .carousel-item img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block; transform: scale(1.06);
+      transition: transform 7s ease-out; will-change: transform;
+    }
+    .hero-carousel .carousel-item.active img { transform: scale(1); }
+
+    /* ===== FALLBACK BG ===== */
+    .slide-fallback-bg { position: absolute; inset: 0; z-index: 0; }
+    .slide-bg-1 { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
+    .slide-bg-2 { background: linear-gradient(135deg,#f093fb 0%,#f5576c 100%); }
+    .slide-bg-3 { background: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); }
+    .slide-bg-4 { background: linear-gradient(135deg,#43e97b 0%,#38f9d7 100%); }
+    .slide-bg-5 { background: linear-gradient(135deg,#fa709a 0%,#fee140 100%); }
+
+    /* ===== LOADING STATE ===== */
+    .slide-loading {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+      overflow: hidden;
+    }
+    .slide-loading::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(79,172,254,.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(160,107,255,.15) 0%, transparent 50%);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow { 0%,100% { opacity:.6; } 50% { opacity:1; } }
+
+    .loading-content {
+      position: absolute; top: 50%; left: var(--hero-pad);
+      transform: translateY(-50%);
+      width: calc(100% - var(--hero-pad) * 2);
+      max-width: 620px; z-index: 2;
+    }
+    .skeleton {
+      background: linear-gradient(90deg,
+        rgba(255,255,255,.05) 0%,
+        rgba(255,255,255,.18) 50%,
+        rgba(255,255,255,.05) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite linear;
+      border-radius: 6px;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    .skeleton-badge   { width: 100px; height: 24px; border-radius: 999px; margin-bottom: 16px; }
+    .skeleton-title   { width: 85%;   height: 42px; margin-bottom: 10px; }
+    .skeleton-title-2 { width: 60%;   height: 42px; margin-bottom: 18px; }
+    .skeleton-sub     { width: 72%;   height: 14px; margin-bottom: 8px; }
+    .skeleton-sub-2   { width: 55%;   height: 14px; margin-bottom: 24px; }
+    .skeleton-btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .skeleton-btn     { width: 150px; height: 44px; border-radius: 999px; }
+
+    .loading-footprint {
+      position: absolute; bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 3;
+    }
+    .loading-footprint span {
+      width: 30px; height: 4px; border-radius: 999px;
+      background: rgba(255,255,255,.22);
+      animation: footprint 1.4s ease-in-out infinite;
+    }
+    .loading-footprint span:nth-child(1) { animation-delay: 0s; }
+    .loading-footprint span:nth-child(2) { animation-delay: .2s; }
+    .loading-footprint span:nth-child(3) { animation-delay: .4s; }
+    @keyframes footprint {
+      0%,100% { background: rgba(255,255,255,.22); width: 30px; }
+      50%     { background: rgba(79,172,254,.95); width: 52px; }
+    }
+
+    /* ===== OVERLAY & CAPTION ===== */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 50%, rgba(0,0,0,.05) 100%),
+        linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 55%);
+    }
+    .hero-caption {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      text-align: left; padding: 0 var(--hero-pad) 40px;
+      text-shadow: 0 2px 24px rgba(0,0,0,.5);
+    }
+    .hero-caption > * { max-width: 640px; }
+
+    .hero-badge {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: #fff;
+      padding: .35rem .85rem; border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.30);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      margin-bottom: .85rem;
+    }
+    .hero-title {
+      font-size: clamp(1.5rem, 4.2vw, 3rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -.02em; color: #fff; margin: 0 0 .7rem;
+    }
+    .hero-subtitle {
+      font-size: clamp(.85rem, 1.35vw, 1.05rem);
+      line-height: 1.65; color: rgba(255,255,255,.88);
+      margin: 0 0 1.3rem; font-weight: 400;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-actions .btn {
+      border-radius: 999px; padding: .7rem 1.6rem;
+      font-size: .9rem; font-weight: 600;
+      letter-spacing: .3px; border-width: 1.5px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .hero-actions .btn-primary {
+      background: linear-gradient(90deg,#4facfe,#6a5cff);
+      border: none; box-shadow: 0 8px 22px rgba(79,172,254,.35);
+    }
+    .hero-actions .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(79,172,254,.45); }
+    .hero-actions .btn-outline-light:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,.35); }
+
+    /* ===== ENTRY ANIMATION ===== */
+    .hero-caption .hero-badge,
+    .hero-caption .hero-title,
+    .hero-caption .hero-subtitle,
+    .hero-caption .hero-actions { opacity: 0; transform: translateY(24px); }
+
+    .carousel-item.active .hero-badge    { animation: heroUp .7s .15s ease-out forwards; }
+    .carousel-item.active .hero-title    { animation: heroUp .8s .30s ease-out forwards; }
+    .carousel-item.active .hero-subtitle { animation: heroUp .8s .45s ease-out forwards; }
+    .carousel-item.active .hero-actions  { animation: heroUp .8s .60s ease-out forwards; }
+    @keyframes heroUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== INDICATORS ===== */
+    .hero-carousel .carousel-indicators {
+      bottom: 18px; left: auto; right: var(--hero-pad);
+      margin: 0; gap: 8px; z-index: 3; justify-content: flex-end;
+    }
+    .hero-carousel .carousel-indicators [data-bs-target] {
+      width: 28px; height: 3px; border-radius: 999px; border: 0;
+      background: rgba(255,255,255,.35); opacity: 1;
+      transition: width .35s ease, background .35s ease;
+    }
+    .hero-carousel .carousel-indicators .active { width: 48px; background: #fff; }
+
+    /* ===== ARROWS ===== */
+    .hero-carousel .carousel-control-prev,
+    .hero-carousel .carousel-control-next {
+      top: 50%; bottom: auto; transform: translateY(-50%);
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      opacity: 1; z-index: 3;
+      transition: background .3s ease, transform .3s ease;
+    }
+    .hero-carousel .carousel-control-prev { left: clamp(10px, 1.5vw, 22px); }
+    .hero-carousel .carousel-control-next { right: clamp(10px, 1.5vw, 22px); }
+    .hero-carousel .carousel-control-prev:hover,
+    .hero-carousel .carousel-control-next:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .hero-carousel .carousel-control-prev-icon,
+    .hero-carousel .carousel-control-next-icon { width: .95rem; height: .95rem; transition: filter .3s ease; }
+    .hero-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+    .hero-carousel .carousel-control-next:hover .carousel-control-next-icon { filter: invert(1); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 767.98px) {
+      .hero-caption { align-items: center; text-align: center; padding: 0 20px 60px; }
+      .hero-actions { justify-content: center; width: 100%; }
+      .hero-title { font-size: clamp(1.35rem, 6vw, 1.9rem); }
+      .hero-subtitle { font-size: .85rem; line-height: 1.6; margin-bottom: 1.1rem; }
+      .hero-actions .btn { padding: .6rem 1.3rem; font-size: .85rem; }
+      .hero-carousel .carousel-indicators { left: 0; right: 0; justify-content: center; bottom: 14px; }
+      .hero-carousel .carousel-control-prev,
+      .hero-carousel .carousel-control-next { display: none; }
+      .loading-content { left: 20px; right: 20px; text-align: center; }
+      .skeleton-badge, .skeleton-title, .skeleton-title-2,
+      .skeleton-sub, .skeleton-sub-2 { margin-left: auto; margin-right: auto; }
+      .skeleton-btn-row { justify-content: center; }
+      .skeleton-title, .skeleton-title-2 { height: 32px; }
+      .skeleton-sub, .skeleton-sub-2 { height: 12px; }
+      .skeleton-btn { height: 38px; width: 130px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .hero-caption .hero-badge, .hero-caption .hero-title,
+      .hero-caption .hero-subtitle, .hero-caption .hero-actions { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+ 
+
+<section class="hero-carousel">
+  <div id="heroCarousel"
+       class="carousel slide carousel-fade"
+       data-bs-ride="carousel"
+       data-bs-interval="5500"
+       data-bs-pause="hover">
+
+    {% if slides and slides|length > 1 %}
+      <div class="carousel-indicators">
+        {% for slide in slides %}
+          <button type="button" data-bs-target="#heroCarousel"
+                  data-bs-slide-to="{{ forloop.counter0 }}"
+                  {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                  aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="carousel-inner">
+      {% for slide in slides %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+          {# ---- Layer 1: Image ---- #}
+          {% if slide.image_url %}
+            <img src="{{ slide.image_url }}" alt="{{ slide.title|default:'slide' }}">
+          {% elif slide.image %}
+            <img src="{{ slide.image.url }}" alt="{{ slide.title|default:'slide' }}">
+
+          {# ---- Layer 2: No image, but text → colored bg ---- #}
+          {% elif slide.title or slide.subtitle or slide.badge %}
+            <div class="slide-fallback-bg {{ slide.bg_class|default:'slide-bg-1' }}"></div>
+
+          {# ---- Layer 3: Nothing → loading footprint ---- #}
+          {% else %}
+            <div class="slide-loading">
+              <div class="loading-content">
+                <div class="skeleton skeleton-badge"></div>
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-title-2"></div>
+                <div class="skeleton skeleton-sub"></div>
+                <div class="skeleton skeleton-sub-2"></div>
+                <div class="skeleton-btn-row">
+                  <div class="skeleton skeleton-btn"></div>
+                  <div class="skeleton skeleton-btn"></div>
+                </div>
+              </div>
+              <div class="loading-footprint"><span></span><span></span><span></span></div>
+            </div>
+          {% endif %}
+
+          {# ---- Text content ---- #}
+          {% if slide.badge or slide.title or slide.subtitle %}
+            <div class="hero-overlay"></div>
+            <div class="carousel-caption hero-caption">
+              {% if slide.badge %}<span class="hero-badge">{{ slide.badge }}</span>{% endif %}
+              {% if slide.title %}<h1 class="hero-title">{{ slide.title }}</h1>{% endif %}
+              {% if slide.subtitle %}<p class="hero-subtitle">{{ slide.subtitle }}</p>{% endif %}
+
+              {% if slide.button1_text or slide.button2_text or slide.button3_text %}
+                <div class="hero-actions">
+                  {% if slide.button1_text %}
+                    <a href="{{ slide.button1_url|default:'#' }}" class="btn btn-primary">{{ slide.button1_text }}</a>
+                  {% endif %}
+                  {% if slide.button2_text %}
+                    <a href="{{ slide.button2_url|default:'#' }}" class="btn btn-outline-light">{{ slide.button2_text }}</a>
+                  {% endif %}
+                  {% if slide.button3_text %}
+                    <a href="{{ slide.button3_url|default:'#' }}" class="btn btn-outline-light">{{ slide.button3_text }}</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+        </div>
+      {% empty %}
+        <div class="carousel-item active">
+          <div class="slide-loading">
+            <div class="loading-content">
+              <div class="skeleton skeleton-badge"></div>
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-title-2"></div>
+              <div class="skeleton skeleton-sub"></div>
+              <div class="skeleton skeleton-sub-2"></div>
+              <div class="skeleton-btn-row">
+                <div class="skeleton skeleton-btn"></div>
+                <div class="skeleton skeleton-btn"></div>
+              </div>
+            </div>
+            <div class="loading-footprint"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if slides and slides|length > 1 %}
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    {% endif %}
+
+  </div>
+</section>

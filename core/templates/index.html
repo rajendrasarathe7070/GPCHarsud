@@ -608,14 +608,7 @@
         <!-- this is messag -->
         <br><br>
         <div class="container">
-
-            <section class="py-1" style="background-color:transparent; font-family: 'Times New Roman', Times, serif;" >
-                <div class="container py-1 rounded-5" style=" backdrop-filter: blur(0px) !important;
-            -webkit-backdrop-filter: blur(5px) !important;
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;">
-
-
-                    <div class="text-center mb-1">
+             <div class="text-center mb-1">
                         <h2 class="fw-bold" style="color: #0D47A1;">Accademic Massage's</h2>
                         <!-- <p class="text-muted"> 📌 Latest from the Campus: Your daily dose of official updates and academic notices
                     <br>🔔 Stay Informed: Keep track of all important announcements, exam schedules, and campus events right
@@ -626,7 +619,57 @@
                         </div>
                     </div>
 
-                    <!-- 1. Principal Section (Big Left Image, Right Text) -->
+            <section class="py-1" style="background-color:transparent; font-family: 'Times New Roman', Times, serif;" >
+                <div class="container py-1 rounded-5" style=" backdrop-filter: blur(0.6px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;">
+
+
+                   
+{% if principals %}
+    <div class="row align-items-center g-5 mb-1 pb-4 pt-4">
+                        <!-- बड़ी फोटो (Desktop पर बाईं तरफ) -->
+                        <div class="col-12 col-lg-5 text-center">
+                            <div class="position-relative d-inline-block">
+                                <!-- बैकग्राउंड अट्रैक्टिव शेडो ब्लॉक -->
+                                <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3"
+                                    style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;">
+                                </div>
+                                <!-- मुख्य बड़ी इमेज -->
+                                <img src="{% if principals.message_user.photo %}
+                                                {{ principals.message_user.photo.url }}
+                                            {% else %}
+                                            {% endif %}"
+                                    alt="Principal"
+                                    class="img-fluid position-relative shadow border border-4 border-white"
+                                    style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
+                            </div>
+                        </div>
+
+
+    
+                        <div class="col-12 col-lg-7">
+                            <div class="ps-lg-4">
+                                <!-- <span class="badge px-3 py-2 mb-2 text-uppercase fw-bold"
+                                    style="background-color: rgb(230, 220, 195); color: brown; letter-spacing: 1px; font-size: 0.75rem;">Leader
+                                    & Guide</span> -->
+                                <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;"> {{principals.message_user.get_full_name}}</h3>
+                                <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">
+                                    Principal, Govt. Polytechnic College Harsud</p>
+
+                                <div class="position-relative pe-4">
+                                    <!-- बड़े कोट्स मार्क -->
+                                    <span class="position-absolute start-0 top-0 lh-1 opacity-25"
+                                        style="font-size: 5rem; font-family: serif; color: brown; margin-top: -2.5rem; margin-left: -1rem;">“</span>
+                                    <p class="text-secondary ps-4 position-relative"
+                                        style="font-size: 1.05rem; line-height: 1.8; text-align: justify; z-index: 3;">
+                                         {{principals.message_p1}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
                     <div class="row align-items-center g-5 mb-1 pb-4">
                         <!-- बड़ी फोटो (Desktop पर बाईं तरफ) -->
                         <div class="col-12 col-lg-5 text-center">
@@ -642,7 +685,9 @@
                                     style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
                             </div>
                         </div>
-                        <!-- संदेश (Desktop पर दाईं तरफ) -->
+
+
+    
                         <div class="col-12 col-lg-7">
                             <div class="ps-lg-4">
                                 <!-- <span class="badge px-3 py-2 mb-2 text-uppercase fw-bold"
@@ -668,17 +713,15 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
+                    <!-- 1. Principal Section (Big Left Image, Right Text) -->
+                    
 
-                    <hr class="my-1 opacity-25" style="border-color: brown;">
-
-                    <!-- 2. Vice Principal Section (Big Right Image, Left Text) -->
-                    <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
-                        <!-- संदेश (Desktop पर बाईं तरफ) -->
+                  <!--  <hr class="my-1 opacity-25" style="border-color: brown;"> 
+ 
                         <div class="col-12 col-lg-7">
                             <div class="pe-lg-4">
-                                <!-- <span class="badge px-3 py-2 mb-2 text-uppercase fw-bold"
-                                    style="background-color: rgb(230, 220, 195); color: brown; letter-spacing: 1px; font-size: 0.75rem;">Administration
-                                    Head</span> -->
+                              
                                 <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;">Prof. S. K. Verma</h3>
                                 <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">Vice
                                     Principal, Govt. Polytechnic College Harsud</p>
@@ -697,21 +740,21 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- बड़ी फोटो (Desktop पर दाईं तरफ) -->
+                       
                         <div class="col-12 col-lg-5 text-center">
                             <div class="position-relative d-inline-block">
-                                <!-- बैकग्राउंड अट्रैक्टिव शेडो ब्लॉक -->
+                              
                                 <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3"
                                     style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;">
                                 </div>
-                                <!-- मुख्य बड़ी इमेज -->
+                               
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDR8pcVqpMdiwF59dMd4fLBkcUjT1qODBG-8LYckGdQ&s=10"
                                     alt="Vice Principal"
                                     class="img-fluid position-relative shadow border border-4 border-white"
                                     style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </section>

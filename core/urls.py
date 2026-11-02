@@ -32,5 +32,7 @@ urlpatterns = [
     path("cheatsheets/", cheatsheet_page, name='cheatsheets'),
     
     path('googled61072f71b08753c.html',views.verification, name='googled61072f71b08753c'),
-    path('verify-student/', views.company_student_verification, name='company_student_verification'),
+    path('company_student_verification', views.company_student_verification, name='company_student_verification'),
+    path("student_engagement_page/",      views.student_engagement_page, name="student_engagement_page"),
+    path("student-engagement/json/", views.student_engagement_json, name="student_engagement_json"),
 ]

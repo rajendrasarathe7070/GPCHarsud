@@ -92,7 +92,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'core',
+    # 'core',
     'axes',
     'django_otp',
     'django_otp.plugins.otp_static',
@@ -101,8 +101,11 @@ INSTALLED_APPS = [
     
     'rest_framework', 
     'dashboard',
- 
+    
+    "cacheops",
+    "core.apps.YourAppConfig",
 ]
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -273,8 +276,11 @@ STUDENT_EXTRA_CARDS = [
 ]
 
 #dshboard 
- 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
+from datetime import timedelta
+
+AXES_COOLOFF_TIME = timedelta(minutes=5)    
+AXES_LOCKOUT_TEMPLATE = 'axes/lockout.html'
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 9000
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1            # hours
 AXES_RESET_ON_SUCCESS = True
@@ -291,3 +297,74 @@ DASHBOARD_TOTP_ISSUER = "Institute Admin"
 TEMPLATES[0]["OPTIONS"]["context_processors"] += [
     "dashboard.context_processors.sidebar_menus",
 ]
+
+
+
+import os
+
+# 1. Fallback to local Redis on Windows dev machine, use production URL if hosted
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1')
+
+# 2. Configure Django to use django-redis backend
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # Prevents crashing if Redis goes down temporarily
+            'IGNORE_EXCEPTIONS': True,
+        },
+        'KEY_PREFIX': 'clg'
+    }
+}
+
+# 3. Global settings to prevent dev server from filling up
+CACHE_MIDDLEWARE_SECONDS = 3600  # Default 1-hour expiry for any unspecified timeouts
+ 
+CACHEOPS_REDIS = {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "db": 1,
+     "password": "Rajendra@7354368656",
+    "socket_timeout": 3,
+}
+
+# Auto cache (agar supported hai to) + failure pe crash na ho
+CACHEOPS_DEGRADE_ON_FAILURE = True
+CACHEOPS_ENABLED = True
+# settings.py
+
+CACHEOPS = {
+    # ❌ Security
+    "auth.user": None,
+    "auth.group": None,
+    "auth.permission": None,
+    "contenttypes.contenttype": None,
+    "sessions.session": None,
+    "admin.logentry": None,
+    "core.customuser": None,          # 🔒
+
+    # ✅ Cacheable models (core.* )
+    "core.info":                    {"ops": "all", "timeout": 60 * 60},
+    "core.notice":                  {"ops": "all", "timeout": 60 * 15},
+    "core.responsibility":          {"ops": "all", "timeout": 60 * 30},
+    "core.course_department":       {"ops": "all", "timeout": 60 * 60},
+    "core.timetable":               {"ops": "all", "timeout": 60 * 30},
+    "core.academic_calendar":       {"ops": "all", "timeout": 60 * 60},
+    "core.syllabus":                {"ops": "all", "timeout": 60 * 60 * 6},
+    "core.pyq":                     {"ops": "all", "timeout": 60 * 60 * 3},
+    "core.feecategory":             {"ops": "all", "timeout": 60 * 60},
+    "core.feestructure":            {"ops": "all", "timeout": 60 * 60},
+    "core.scholarship":             {"ops": "all", "timeout": 60 * 60},
+    "core.imp_date_and_document":   {"ops": "all", "timeout": 60 * 60},
+    "core.pro_dte_clc_admission":   {"ops": "all", "timeout": 60 * 60},
+    "core.campuscategory":          {"ops": "all", "timeout": 60 * 60},
+    "core.campusimage":             {"ops": "all", "timeout": 60 * 60},
+    "core.rulseupdate_campus":      {"ops": "all", "timeout": 60 * 60},
+    "core.placementbatch":          {"ops": "all", "timeout": 60 * 30},
+    "core.branchplacement":         {"ops": "all", "timeout": 60 * 30},
+    "core.studentengagement":       {"ops": "all", "timeout": 60 * 15},
+    "core.category":                {"ops": "all", "timeout": 60 * 60},
+    "core.cheatsheet":              {"ops": "all", "timeout": 60 * 30},
+}
