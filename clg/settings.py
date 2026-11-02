@@ -300,71 +300,71 @@ TEMPLATES[0]["OPTIONS"]["context_processors"] += [
 
 
 
-import os
+# import os
 
-# 1. Fallback to local Redis on Windows dev machine, use production URL if hosted
-REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1')
+# # 1. Fallback to local Redis on Windows dev machine, use production URL if hosted
+# REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1')
 
-# 2. Configure Django to use django-redis backend
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # Prevents crashing if Redis goes down temporarily
-            'IGNORE_EXCEPTIONS': True,
-        },
-        'KEY_PREFIX': 'clg'
-    }
-}
+# # 2. Configure Django to use django-redis backend
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': REDIS_URL,
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#             # Prevents crashing if Redis goes down temporarily
+#             'IGNORE_EXCEPTIONS': True,
+#         },
+#         'KEY_PREFIX': 'clg'
+#     }
+# }
 
-# 3. Global settings to prevent dev server from filling up
-CACHE_MIDDLEWARE_SECONDS = 3600  # Default 1-hour expiry for any unspecified timeouts
+# # 3. Global settings to prevent dev server from filling up
+# CACHE_MIDDLEWARE_SECONDS = 3600  # Default 1-hour expiry for any unspecified timeouts
  
-CACHEOPS_REDIS = {
-    "host": "127.0.0.1",
-    "port": 6379,
-    "db": 1,
-     "password": "Rajendra@7354368656",
-    "socket_timeout": 3,
-}
+# CACHEOPS_REDIS = {
+#     "host": "127.0.0.1",
+#     "port": 6379,
+#     "db": 1,
+#      "password": "Rajendra@7354368656",
+#     "socket_timeout": 3,
+# }
 
-# Auto cache (agar supported hai to) + failure pe crash na ho
-CACHEOPS_DEGRADE_ON_FAILURE = True
-CACHEOPS_ENABLED = True
-# settings.py
+# # Auto cache (agar supported hai to) + failure pe crash na ho
+# CACHEOPS_DEGRADE_ON_FAILURE = True
+# CACHEOPS_ENABLED = True
+# # settings.py
 
-CACHEOPS = {
-    # ❌ Security
-    "auth.user": None,
-    "auth.group": None,
-    "auth.permission": None,
-    "contenttypes.contenttype": None,
-    "sessions.session": None,
-    "admin.logentry": None,
-    "core.customuser": None,          # 🔒
+# CACHEOPS = {
+#     # ❌ Security
+#     "auth.user": None,
+#     "auth.group": None,
+#     "auth.permission": None,
+#     "contenttypes.contenttype": None,
+#     "sessions.session": None,
+#     "admin.logentry": None,
+#     "core.customuser": None,          # 🔒
 
-    # ✅ Cacheable models (core.* )
-    "core.info":                    {"ops": "all", "timeout": 60 * 60},
-    "core.notice":                  {"ops": "all", "timeout": 60 * 15},
-    "core.responsibility":          {"ops": "all", "timeout": 60 * 30},
-    "core.course_department":       {"ops": "all", "timeout": 60 * 60},
-    "core.timetable":               {"ops": "all", "timeout": 60 * 30},
-    "core.academic_calendar":       {"ops": "all", "timeout": 60 * 60},
-    "core.syllabus":                {"ops": "all", "timeout": 60 * 60 * 6},
-    "core.pyq":                     {"ops": "all", "timeout": 60 * 60 * 3},
-    "core.feecategory":             {"ops": "all", "timeout": 60 * 60},
-    "core.feestructure":            {"ops": "all", "timeout": 60 * 60},
-    "core.scholarship":             {"ops": "all", "timeout": 60 * 60},
-    "core.imp_date_and_document":   {"ops": "all", "timeout": 60 * 60},
-    "core.pro_dte_clc_admission":   {"ops": "all", "timeout": 60 * 60},
-    "core.campuscategory":          {"ops": "all", "timeout": 60 * 60},
-    "core.campusimage":             {"ops": "all", "timeout": 60 * 60},
-    "core.rulseupdate_campus":      {"ops": "all", "timeout": 60 * 60},
-    "core.placementbatch":          {"ops": "all", "timeout": 60 * 30},
-    "core.branchplacement":         {"ops": "all", "timeout": 60 * 30},
-    "core.studentengagement":       {"ops": "all", "timeout": 60 * 15},
-    "core.category":                {"ops": "all", "timeout": 60 * 60},
-    "core.cheatsheet":              {"ops": "all", "timeout": 60 * 30},
-}
+#     # ✅ Cacheable models (core.* )
+#     "core.info":                    {"ops": "all", "timeout": 60 * 60},
+#     "core.notice":                  {"ops": "all", "timeout": 60 * 15},
+#     "core.responsibility":          {"ops": "all", "timeout": 60 * 30},
+#     "core.course_department":       {"ops": "all", "timeout": 60 * 60},
+#     "core.timetable":               {"ops": "all", "timeout": 60 * 30},
+#     "core.academic_calendar":       {"ops": "all", "timeout": 60 * 60},
+#     "core.syllabus":                {"ops": "all", "timeout": 60 * 60 * 6},
+#     "core.pyq":                     {"ops": "all", "timeout": 60 * 60 * 3},
+#     "core.feecategory":             {"ops": "all", "timeout": 60 * 60},
+#     "core.feestructure":            {"ops": "all", "timeout": 60 * 60},
+#     "core.scholarship":             {"ops": "all", "timeout": 60 * 60},
+#     "core.imp_date_and_document":   {"ops": "all", "timeout": 60 * 60},
+#     "core.pro_dte_clc_admission":   {"ops": "all", "timeout": 60 * 60},
+#     "core.campuscategory":          {"ops": "all", "timeout": 60 * 60},
+#     "core.campusimage":             {"ops": "all", "timeout": 60 * 60},
+#     "core.rulseupdate_campus":      {"ops": "all", "timeout": 60 * 60},
+#     "core.placementbatch":          {"ops": "all", "timeout": 60 * 30},
+#     "core.branchplacement":         {"ops": "all", "timeout": 60 * 30},
+#     "core.studentengagement":       {"ops": "all", "timeout": 60 * 15},
+#     "core.category":                {"ops": "all", "timeout": 60 * 60},
+#     "core.cheatsheet":              {"ops": "all", "timeout": 60 * 30},
+# }
