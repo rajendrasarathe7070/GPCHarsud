@@ -47,3 +47,4 @@ supabase-functions==2.31.0
 tzdata==2026.2
 uvicorn==0.51.0
 whitenoise==6.12.0
+pyotp==2.10.0
