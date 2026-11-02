@@ -10,8 +10,7 @@ class YourAppConfig(AppConfig):
     def ready(self):
         import cacheops
         from django.db.models.query import QuerySet
-        from cacheops.conf import model_profile
-
+        
         _orig_filter = QuerySet.filter
         _orig_all = QuerySet.all
         _orig_get = QuerySet.get
