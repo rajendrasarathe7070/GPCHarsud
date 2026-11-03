@@ -1441,6 +1441,480 @@
       </div>
     </div>
 
+<style>
+    /* ---------- Global Page Styles ---------- */
+    .events-section {
+      background-color: #f8f9fa;
+      padding-bottom: 3rem;
+    }
+    
+    .section-title {
+      color: #0D47A1;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background-color: #FFD200;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* ---------- 1. Auto-Scroll Carousel (Hero) ---------- */
+    .hero-carousel {
+      height: 450px;
+      background-color: #333;
+    }
+    
+    .hero-carousel .carousel-item {
+      height: 450px;
+    }
+    
+    .hero-carousel img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      filter: brightness(0.4); /* Darkens image for text readability */
+    }
+    
+    .carousel-caption {
+      bottom: 20%;
+      text-align: left;
+      left: 10%;
+      right: 10%;
+    }
+
+    .carousel-caption h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .carousel-caption p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---------- 2. Main Info Cards (Categories & Team) ---------- */
+    .info-card {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+
+    .info-card .card-header {
+      background-color: #0D47A1;
+      color: #fff;
+      border-radius: 0;
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      border-bottom: none;
+    }
+
+    .list-group-item {
+      border-left: none;
+      border-right: none;
+      padding: 0.75rem 1.25rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .list-group-item:hover {
+      background-color: #f1f8ff;
+      color: #0D47A1;
+    }
+
+    /* Team Profiles (Anchors) */
+    .team-profile {
+      text-align: center;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .team-profile:last-child {
+      border-bottom: none;
+    }
+
+    .team-profile h6 {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #0D47A1;
+    }
+
+    .team-profile p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ---------- 3. Past Events Masonry Grid (No Gaps) ---------- */
+    .gallery-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .gallery-masonry {
+      column-count: 4;
+      column-gap: 0; /* 0px Gap */
+      line-height: 0;
+    }
+    
+    @media (max-width: 992px) { .gallery-masonry { column-count: 3; } }
+    @media (max-width: 768px) { .gallery-masonry { column-count: 2; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 !important;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      height: auto;
+      vertical-align: bottom;
+      margin: 0;
+      padding: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-weight: 600;
+      text-align: center;
+      line-height: normal;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 25px 12px 12px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    /* ---------- Modal Styles (Auto Size) ---------- */
+    .modal-glass .modal-content {
+      background: rgba(15, 15, 20, 0.85) !important;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-radius: 0 !important;
+    }
+
+    .modal-slider-img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+      width: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 0 !important; 
+      height: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0 10px;
+    }
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+
+  <!-- ================= 1. AUTO-SCROLL CAROUSEL (Hero Section) ================= -->
+  <div id="eventsHeroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 1">
+        <div class="carousel-caption">
+          <h1>TechFest 2024</h1>
+          <p>Join us for the biggest technology and innovation summit of the year.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#register" class="btn btn-primary btn-lg">Register Now</a>
+            <a href="#schedule" class="btn btn-outline-light btn-lg">View Schedule</a>
+            <a href="#speakers" class="btn btn-outline-light btn-lg">Meet Speakers</a>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 2">
+        <div class="carousel-caption">
+          <h1>Annual Cultural Fest</h1>
+          <p>Experience the vibrant colors of dance, music, and drama.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#cultural" class="btn btn-warning text-dark btn-lg fw-bold">Book Tickets</a>
+            <a href="#performances" class="btn btn-outline-light btn-lg">Performances</a>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 3">
+        <div class="carousel-caption">
+          <h1>Sports Meet 2024</h1>
+          <p>Witness the spirit of sportsmanship and athletic excellence.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#sports" class="btn btn-success btn-lg">Team Standings</a>
+            <a href="#live" class="btn btn-outline-light btn-lg">Live Scores</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+
+
+  <!-- ================= 2. INFO SECTION (Categories, Anchors, Updates) ================= -->
+  <div class="container my-5">
+    <div class="row g-4">
+      
+      <!-- Left: Event Categories -->
+      <div class="col-lg-4">
+        <div class="card info-card">
+          <div class="card-header">Event Categories</div>
+          <div class="list-group list-group-flush">
+            <a href="#academic" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              🎓 Academic Events <span class="badge bg-primary rounded-pill">12</span>
+            </a>
+            <a href="#technical" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              💻 Technical Events <span class="badge bg-primary rounded-pill">8</span>
+            </a>
+            <a href="#cultural" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              🎭 Cultural Events <span class="badge bg-primary rounded-pill">15</span>
+            </a>
+            <a href="#sports" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              🏆 Sports Events <span class="badge bg-primary rounded-pill">5</span>
+            </a>
+            <a href="#seminars" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              🎤 Seminars & Workshops <span class="badge bg-primary rounded-pill">10</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle: Event Anchors (2 Profiles) -->
+      <div class="col-lg-4">
+        <div class="card info-card">
+          <div class="card-header">Event Coordinators (Anchors)</div>
+          <div class="card-body p-0">
+            
+            <!-- Anchor 1 -->
+            <div class="team-profile">
+              <h6>Rajendra Sarathe</h6>
+              <p class="text-muted">Head of Events (Boys)</p>
+              <p><i class="bi bi-telephone-fill text-primary"></i> +91 93027 07097</p>
+              <p><i class="bi bi-envelope-fill text-primary"></i> rajendra@campus.edu</p>
+            </div>
+            
+            <!-- Anchor 2 -->
+            <div class="team-profile">
+              <h6>Priya Sharma</h6>
+              <p class="text-muted">Head of Events (Girls)</p>
+              <p><i class="bi bi-telephone-fill text-primary"></i> +91 98765 43210</p>
+              <p><i class="bi bi-envelope-fill text-primary"></i> priya@campus.edu</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Upcoming Events (Updates) -->
+      <div class="col-lg-4">
+        <div class="card info-card">
+          <div class="card-header">Event Updates</div>
+          <div class="list-group list-group-flush">
+            <a href="#update1" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1 fw-bold text-dark">TechFest Registration Open</h6>
+                <small class="text-muted">2 days ago</small>
+              </div>
+              <small class="text-muted">Last date to register is 15th Nov.</small>
+            </a>
+            <a href="#update2" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1 fw-bold text-dark">Auditions for Cultural Night</h6>
+                <small class="text-muted">5 days ago</small>
+              </div>
+              <small class="text-muted">Auditions will be held in the main auditorium.</small>
+            </a>
+            <a href="#update3" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1 fw-bold text-dark">Guest Lecture on AI</h6>
+                <small class="text-muted">1 week ago</small>
+              </div>
+              <small class="text-muted">Dr. A. K. Singh will be joining us live.</small>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ================= 3. PAST EVENTS MASONRY GALLERY ================= -->
+  <div class="container mt-5 mb-3 text-center">
+    <h2 class="section-title">Past Events Gallery</h2>
+    <p class="text-muted">किसी भी फोटो पर क्लिक करके उस इवेंट की और तस्वीरें देखें</p>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="container-fluid px-0 gallery-container">
+    <div class="gallery-masonry">
+      
+      <!-- Loop through your Django Categories here -->
+      <!-- Example Data (Aap isko Django template tags se replace kar sakte hain) -->
+      
+      <!-- Event 1 (Landscape) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-1">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" alt="TechFest">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">TechFest 2023</div>
+      </div>
+
+      <!-- Event 2 (Portrait) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-2">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop" alt="Cultural Fest">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">Cultural Night</div>
+      </div>
+
+      <!-- Event 3 (Landscape) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-3">
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800&auto=format&fit=crop" alt="Sports Meet">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">Sports Meet 2023</div>
+      </div>
+
+      <!-- Event 4 (Portrait) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-4">
+        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop" alt="Hackathon">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">48-Hour Hackathon</div>
+      </div>
+
+      <!-- Event 5 (Landscape) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-5">
+        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop" alt="Seminar">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">AI & Robotics Seminar</div>
+      </div>
+      
+      <!-- Event 6 (Portrait) -->
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-6">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop" alt="Music Night">
+        <div class="gallery-overlay">
+          <i class="bi bi-images fs-4"></i>
+          <span>View Album</span>
+        </div>
+        <div class="gallery-caption">Battle of Bands</div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ================= 4. GLASSY MODALS ================= -->
+  <!-- Modal 1 -->
+  <div class="modal fade modal-glass" id="modal-event-1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-white">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold">TechFest 2023 Photos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-0 position-relative">
+          <!-- Carousel -->
+          <div id="carousel-event-1" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner text-center">
+              <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 1">
+              </div>
+              <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 2">
+              </div>
+              <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1515169067868-5387ec356754?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-event-1" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-event-1" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note: Aapko baaki modals (event-2, event-3, etc.) ke liye bhi yahi structure copy karna hai
+       aur usme us specific category ki images dalni hain. Maine sirf 1 modal ka example diya hai. -->
 
   </div>
 

@@ -120,5 +120,135 @@
       }
     }
   </script>
+  
+<script>
+    // js lodder
+    (function() {
+    // 1. Premium Glassmorphism CSS Styles
+    const style = document.createElement('style');
+    style.textContent = `
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-loader-spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #2563eb;
+            border-right: 4px solid #2563eb;
+            border-radius: 50%;
+            animation: spinGlassLoader 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spinGlassLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. HTML Structure Injection
+    const overlay = document.createElement('div');
+    overlay.id = 'loading-overlay';
+    overlay.innerHTML = `
+        <div class="glass-card">
+            <div class="glass-loader-spinner"></div>
+            <p style="margin: 15px 0 0 0; font-weight: 600; color: #1e293b; font-size: 15px; letter-spacing: 0.5px;">Loading...</p>
+        </div>
+    `;
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.insertBefore(overlay, document.body.firstChild);
+    });
+
+    let loadingTimeout;
+
+    function showLoader() {
+        loadingTimeout = setTimeout(function() {
+            const overlayEl = document.getElementById('loading-overlay');
+            if (overlayEl) overlayEl.style.display = 'flex';
+        }, 150);
+    }
+
+    // 3. Click Event Listener (Same Page Smart Check)
+    document.addEventListener('click', function(event) {
+        const targetLink = event.target.closest('a');
+        
+        if (targetLink) {
+            const href = targetLink.getAttribute('href');
+            const target = targetLink.getAttribute('target');
+            
+            if (target === '_blank') return;
+
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                
+                // --- SAME PAGE CHECK LOGIC ---
+                try {
+                    // Link ke absolute URL ko browser ke current URL se compare karna
+                    const targetUrl = new URL(href, window.location.href);
+                    const currentUrl = new URL(window.location.href);
+
+                    // Agar protocol, host aur pathname (path) bilkul same hain, toh loader nahi chalega
+                    if (targetUrl.protocol === currentUrl.protocol && 
+                        targetUrl.host === currentUrl.host && 
+                        targetUrl.pathname === currentUrl.pathname) {
+                        
+                        // Same page par query parameters ya hash ho sakte hain, loading ki zarurat nahi h
+                        return; 
+                    }
+                } catch (e) {
+                    // Agar URL parse karne me error aaye toh fallback safty ke liye ignore karein
+                }
+                // -----------------------------
+
+                showLoader();
+            }
+        }
+    });
+
+    // 4. Submit Event Listener (Forms)
+    document.addEventListener('submit', function() {
+        showLoader();
+    });
+
+    // 5. Browser Back/Forward & Safety Reset
+    window.addEventListener('pageshow', function(event) {
+        clearTimeout(loadingTimeout);
+        const overlayEl = document.getElementById('loading-overlay');
+        if (overlayEl) overlayEl.style.display = 'none';
+    });
+
+    window.addEventListener('unload', function() {
+        clearTimeout(loadingTimeout);
+    });
+})();
+
+</script>
 </body>
 </html>
