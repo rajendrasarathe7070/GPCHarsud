@@ -30,6 +30,10 @@ urlpatterns = [
     
     path("pyqs/", views.pyq_page, name="pyqs"),
     path("cheatsheets/", cheatsheet_page, name='cheatsheets'),
+    path('events/', views.event_page_view, name='events'),
+     path("api/team/", views.team_data_api, name="team_data_api"),
+    path('api/events-page/', views.event_page_json, name='events-json'),
+    path('api/category-images/<str:cat>/', views.category_images_json, name='cat-images'),
     
     path('googled61072f71b08753c.html',views.verification, name='googled61072f71b08753c'),
     path('company_student_verification', views.company_student_verification, name='company_student_verification'),

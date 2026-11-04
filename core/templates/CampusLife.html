@@ -66,6 +66,74 @@
         /* ड्रॉपडाउन और बटन के बीच का गैप खत्म करने के लिए */
       }
     }
+
+
+    
+ 
+
+                        .hding {
+                            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+                            margin-bottom: 10px;
+
+                            /* border: 3px solid #861414; */
+                            text-transform: uppercase;
+                            width: 100%;
+
+                            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+                            padding: 6px 15px 6px 15px;
+                            color: #f8f8fa;
+                            text-align: left;
+
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+                        .hding-text {
+                            font-weight: bold;
+                            white-space: nowrap;
+                            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+                            font-size: 3.4vw;
+                            font-family: 'Times New Roman', Times, serif;
+                        }
+
+                        /* ब्रेडक्रंब आइटम स्टाइल */
+                        .breadcrumb-item {
+                            background-color: #a2cdf9;
+                            padding: 2px 6px;
+                            border-radius: 3px;
+                        }
+
+                        .custom-breadcrumb {
+                            font-size: 2.2vw !important;
+                            margin-bottom: 0 !important;
+                            padding: 0 !important;
+                        }
+
+                        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+                        @media (min-width: 576px) {
+                            .hding-text {
+                                font-size: 1.1rem;
+                                /* टैबलेट पर साइज */
+                            }
+
+                            .custom-breadcrumb {
+                                font-size: 0.85rem !important;
+                            }
+                        }
+
+                        @media (min-width: 992px) {
+                            .hding-text {
+                                font-size: 1.35rem;
+                                /* डेस्कटॉप पर साइज */
+                            }
+
+                            .hding {
+                                padding-left: 30px;
+                                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+                            }
+                        }
+              
   </style>
 
   <nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
@@ -127,7 +195,27 @@
     {% include 'slide/crausal.html' %}
 
    <div class="tab-pane fade show active container-lg" id="Campus-tab-pane" role="tabpanel" aria-labelledby="Campus-tab" tabindex="0">
-
+<div class="container-lg mt-3 mb-5 py-2 py-md-0">
+    <nav class="hding rounded-1 py-2  py-md-0 ">
+      <div class="d-flex w-100 justify-content-between align-items-center">
+  
+        <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+        <div class="hding-text">
+         Campus Life Gallery
+        </div>
+  
+        <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+        <div class="d-none d-sm-block">
+          <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page"> Campus Life Gallery</li>
+          </ol>
+        </div>
+  
+      </div>
+    </nav>
+  </div>
   <style>
     body {
       background-color: ghostwhite;
@@ -418,231 +506,381 @@
 
 </div>
 
-    <div class="tab-pane fade" id="Hostel-tab-pane" role="tabpanel" aria-labelledby="Hostel-tab" tabindex="0">
-      <style>
-        @media (min-width:786px) {
-          .future {
-            margin-top: 0rem;
-            margin-left: 0rem;
-            margin-right: 0rem;
+    {% load static %}
 
+<div class="tab-pane fade" id="Hostel-tab-pane" role="tabpanel" aria-labelledby="Hostel-tab" tabindex="0">
+  <div class="container-lg mt-3 mb-5 py-2 py-md-0">
+    <nav class="hding rounded-1 py-2  py-md-0">
+      <div class="d-flex w-100 justify-content-between align-items-center">
+  
+        <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+        <div class="hding-text">
+          Hostel &amp; Mess
+        </div>
+  
+        <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+        <div class="d-none d-sm-block">
+          <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page"> Hostel &amp; Mess</li>
+          </ol>
+        </div>
+  
+      </div>
+    </nav>
+  </div>
+  <style>
+    /* ================= COMMON ================= */
+    .hostel-tab-wrap {
+      padding-top: 2rem;
+      padding-bottom: 2.5rem;
+    }
 
-          }
-        }
+    /* ================= LEFT SIDEBAR CARDS ================= */
+    .hostel-side-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .05);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
 
-        .future {
-          margin-top: 5rem;
+    .hostel-side-title {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #ffffff;
+      background: #9d1a27;
+      margin: 0;
+      padding: .6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
 
-        }
+    /* --- Updates (scrollable) --- */
+    .hostel-update-list {
+      list-style: none;
+      margin: 0;
+      padding: .35rem .5rem;
+      max-height: 15rem;
+      overflow-y: auto;
+    }
 
-        .hostelform {
-          max-width: 100%;
+    .hostel-update-list li {
+      font-size: .85rem;
+      color: #334155;
+      padding: .55rem .6rem;
+      line-height: 1.4;
+      border-bottom: 1px dashed #e2e8f0;
+    }
 
-          height: 50rem;
-          background-color: white;
+    .hostel-update-list li:last-child { border-bottom: none; }
 
-        }
+    .hostel-update-list::-webkit-scrollbar,
+    .hostel-rules-list::-webkit-scrollbar { width: 6px; }
 
-        .faci {
-          background-color: #9d1a27;
-          color: white;
-        }
-      </style>
+    .hostel-update-list::-webkit-scrollbar-thumb,
+    .hostel-rules-list::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
 
+    /* --- Facilities --- */
+    .hostel-facility-list {
+      list-style: none;
+      margin: 0;
+      padding: .35rem .5rem;
+    }
 
-      <!-- top notice -->
+    .hostel-facility-list li {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 1rem;
+      color: #334155;
+      padding: .5rem .6rem;
+      border-radius: 6px;
+      transition: background .2s;
+    }
 
+    .hostel-facility-list li:hover { background: #f8fafc; }
 
-      <div class="container">
-        <div class="row future ">
-          <div class="col-md-3">
-            <h2 class="h2 my-3 px-2">Hostel Updates</h2>
-            <ul class="overflow-y-scroll dropdown-menu d-block position-static mx-0 shadow w-220px"
-              data-bs-theme="light" style="max-height: 17rem;">
+    /* --- Hostel Rules (left column) --- */
+    .hostel-rules-list {
+      margin: 0;
+      padding: .7rem 1rem .7rem 2rem;
+      max-height: 16rem;
+      overflow-y: auto;
+    }
 
-              {% for hostelupdate in hostelupdates %}
-              <li> <a class="dropdown-item  gap-2 align-items-center">
-                  {{hostelupdate.text}}
-                </a> </li>
-              {% endfor %}
+    .hostel-rules-list li {
+        font-size: 1rem;
+      color: #475569;
+      line-height: 1.45;
+      margin-bottom: .55rem;
+    }
 
+    .hostel-rules-list li:last-child { margin-bottom: 0; }
 
-            </ul>
-            <h2 class="h2 mt-3 px-2">Facilities</h2>
-            <ul class="dropdown-menu d-block position-static mx-0 shadow w-220px my-4" data-bs-theme="light">
+    /* ================= RIGHT SIDE : CAROUSEL ================= */
+    .hostel-carousel {
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e293b, #9d1a27);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .12);
+    }
 
-              <li>
+    .hostel-carousel .carousel-item {
+      background: linear-gradient(135deg, #1e293b, #9d1a27);
+    }
 
+    .hostel-carousel .carousel-item img {
+      height: 380px;
+      width: 100%;
+      object-fit: cover;
+    }
 
-              </li>
+    .hostel-carousel .carousel-caption {
+      left: 1.5rem;
+      right: auto;
+      bottom: 1.5rem;
+      text-align: left;
+      background: rgba(15, 23, 42, .65);
+      border-radius: 8px;
+      padding: .6rem 1rem;
+    }
 
-              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
-                  🛏 Comfortable Accommodation
-                </a> </li>
-              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
-                  📚 Study Area
-                </a> </li>
-              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
-                  🍽 Dining / Mess Facility
-                </a> </li>
-              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
-                  🚿 Basic Amenities
-                </a> </li>
-              <li> <a class="dropdown-item d-flex gap-2 align-items-center">
-                  📶 Internet Facility
-                </a> </li>
+    .hostel-carousel .carousel-caption h5 {
+      font-size: 1.05rem;
+      margin-bottom: .15rem;
+    }
 
-              <li> <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center">
-                  🛋 Common Room
-                </a> </li>
-            </ul>
+    .hostel-carousel .carousel-caption p {
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      .hostel-carousel .carousel-item img { height: 220px; }
+      .hostel-carousel .carousel-caption { left: 1rem; bottom: 1rem; padding: .45rem .75rem; }
+      .hostel-carousel .carousel-caption h5 { font-size: .9rem; }
+    }
+
+    /* ================= RIGHT SIDE : INFO BOX ================= */
+    .hostel-content-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .05);
+    }
+
+    .hostel-heading {
+      color: #1e293b;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid #0056b3;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .hostel-content-box { padding: 1.1rem; }
+    }
+
+    .info-item {
+      background: #f8fafc;
+      padding: .8rem 1rem;
+      border-left: 4px solid #0056b3;
+      border-radius: 4px;
+      font-size: .9rem;
+      color: #475569;
+    }
+
+    .info-item strong {
+      color: #1e293b;
+      display: block;
+      margin-bottom: .15rem;
+      font-size: .85rem;
+    }
+  </style>
+
+  <div class="container hostel-tab-wrap">
+    <div class="row g-4">
+
+      <!-- ==================== LEFT COLUMN ==================== -->
+      <div class="col-12 col-md-3">
+
+        <!-- Hostel Updates -->
+        <div class="hostel-side-card">
+          <h2 class="hostel-side-title">📢 Hostel Updates</h2>
+          <ul class="hostel-update-list">
+            {% for hostelupdate in hostelupdates %}
+              <li>{{ hostelupdate.text }}</li>
+            {% empty %}
+              <li class="text-muted">No updates available.</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Facilities -->
+        <div class="hostel-side-card">
+          <h2 class="hostel-side-title">✅ Facilities</h2>
+          <ul class="hostel-facility-list">
+            <li>🛏 Comfortable Accommodation</li>
+            <li>📚 Study Area</li>
+            <li>🍽 Dining / Mess Facility</li>
+            <li>🚿 Basic Amenities</li>
+            <li>📶 Internet Facility</li>
+            <li>🛋 Common Room</li>
+          </ul>
+        </div>
+
+        <!-- Hostel Rules (yahan shift kiya gaya) -->
+        <div class="hostel-side-card">
+          <h2 class="hostel-side-title">📋 Hostel Rules</h2>
+          <ol class="hostel-rules-list">
+            {% for rulse in rulses %}
+              <li>{{ rulse.text }}</li>
+            {% empty %}
+              <li>Rules will be updated soon.</li>
+            {% endfor %}
+          </ol>
+        </div>
+
+      </div>
+
+      <!-- ==================== RIGHT COLUMN ==================== -->
+      <div class="col-12 col-md-9">
+
+        <!-- 🔽 CAROUSEL 🔽 -->
+        <div id="hostelCarousel" class="carousel slide hostel-carousel mb-4" data-bs-ride="carousel">
+
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hostelCarousel" data-bs-slide-to="0"
+                    class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hostelCarousel" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hostelCarousel" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
           </div>
-          <div class="col-md-9">
-            <style>
-              /* ⬅️ बायां साइडबार (Left Sidebar) */
-              .sidebar-menu {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 8px;
-                padding: 15px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-                align-self: start;
-              }
 
-              .menu-list {
-                list-style: none;
-              }
-
-              .menu-list li {
-                padding: 12px 15px;
-                margin-bottom: 8px;
-                background: #f8fafc;
-                border-radius: 6px;
-                color: #334155;
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                cursor: pointer;
-                transition: background 0.2s;
-              }
-
-              .menu-list:hover {
-                background: #f1f5f9;
-              }
-
-              /* ➡️ दायां मुख्य बॉक्स (Right Main Content) */
-              .hostel-content-box {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 8px;
-                padding: 30px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-              }
-
-              .h2 {
-                color: #1e293b;
-                margin-bottom: 20px;
-                padding-bottom: 8px;
-                border-bottom: 2px solid #0056b3;
-                /* आपके नेविगेशन बार से मैच करता रंग */
-                font-size: 22px;
-              }
-
-              /* हॉस्टल जानकारी के लिए अंदरूनी ग्रिड */
-              .info-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
-                margin-bottom: 35px;
-              }
-
-              @media (max-width: 600px) {
-                .info-grid {
-                  grid-template-columns: 1fr;
-                }
-              }
-
-              .info-item {
-                background: #f8fafc;
-                padding: 12px 15px;
-                border-left: 4px solid #0056b3;
-                border-radius: 4px;
-                font-size: 15px;
-              }
-
-              .info-item strong {
-                color: #1e293b;
-                display: inline-block;
-                margin-bottom: 2px;
-              }
-
-              /* नियम कानून का सेक्शन */
-              .rules-section {
-                margin-top: 25px;
-              }
-
-              .rules-list {
-                list-style-type: decimal;
-                padding-left: 20px;
-              }
-
-              .rules-list li {
-                margin-bottom: 10px;
-                color: #475569;
-                font-size: 15px;
-              }
-            </style>
-
-
-            <div class="hostel-content-box rounded-3 p-md-5 p-xs-1">
-
-              <h2 class="h2">Hostel Information</h2>
-              <div class="info-grid">
-                <div class="info-item">
-                  <strong>Hostel Type:</strong> Boys / Girls
-                </div>
-                <div class="info-item">
-                  <strong>Accommodation:</strong> Single / Double / Multiple Occupancy
-                </div>
-                <div class="info-item">
-                  <strong>Facilities:</strong> As per college hostel provisions
-                </div>
-                <div class="info-item">
-                  <strong>Hostel Timings:</strong> As per hostel rules
-                </div>
-                <div class="info-item">
-                  <strong>Warden:</strong> ________________
-                </div>
-                <div class="info-item">
-                  <strong>Contact:</strong> ________________
-                </div>
+          <div class="carousel-inner">
+ image_url
+            {% if crausal %}
+            {% for crausals in crausal %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="
+              {% if crausals.image %}
+                {{ crausals.image.url }}
+              {% elif crausals.image_url %}
+                {{ crausals.image_url }}
+              {% else %}
+                https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg
+              {% endif %}
+                 " class="d-block w-100" alt="Hostel Image">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>{{ crausals.title }}</h5>
+                <p>{{ crausals.description }}</p>
               </div>
-
-
-              <div class="rules-section">
-                <h2 class="h2">Hostel Rules</h2>
-                <ul class="rules-list">
-                  {% for rulse in rulses %}
-                  <li> {{rulse.text}} </li>
-                  {% endfor %}
-
-                </ul>
-
+            </div>
+            {% endfor %}
+            {% else %}
+             <div class="carousel-item">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg" class="d-block w-100" alt="Hostel Room">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Rooms</h5>
+                <p>Well-ventilated &amp; furnished rooms</p>
               </div>
-
             </div>
 
+            <div class="carousel-item">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg" class="d-block w-100" alt="Mess / Dining">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Mess &amp; Dining</h5>
+                <p>Hygienic and nutritious food</p>
+              </div>
+            </div>
+            {% endif %}
 
-
-
+           
 
           </div>
 
+          <button class="carousel-control-prev" type="button"
+                  data-bs-target="#hostelCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+
+          <button class="carousel-control-next" type="button"
+                  data-bs-target="#hostelCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
         </div>
+        <!-- 🔼 CAROUSEL END 🔼 -->
+
+        <!-- Hostel Information -->
+        <div class="hostel-content-box">
+          <h2 class="hostel-heading">Hostel Information</h2>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <strong>Hostel Type</strong>
+              Boys / Girls
+            </div>
+            <div class="info-item">
+              <strong>Accommodation</strong>
+              Single / Double / Multiple Occupancy
+            </div>
+            
+            <div class="info-item">
+              <strong>Hostel Timings</strong>
+              As Per College Rules & Regulations
+            </div>
+          
+
+          {% if worden %}
+          {% for wardens in worden %}
+            <div class="info-item">
+              <strong>Warden</strong>
+              {{ wardens.name }}
+            </div>
+            <div class="info-item">
+              <strong>Contact</strong>
+              {{ wardens.contact }}
+            </div>
+          {% endfor %}
+          {% else %}
+           <div class="info-item">
+              <strong>Warden</strong>
+             Not Assigned
+            </div>
+            <div class="info-item">
+              <strong>Contact</strong>
+       Not Available
+            </div>
+          {% endif %}
+          </div>
+        </div>
+
       </div>
 
     </div>
+  </div>
+
+</div>
     <style>
       .lib-1 {
         width: 100%;
@@ -687,7 +925,27 @@
       }
     </style>
     <div class="tab-pane fade" id="library-tab-pane" role="tabpanel" aria-labelledby="library-tab" tabindex="0">
-
+      <div class="container-lg mt-3 mb-5 py-2 py-md-0">
+        <nav class="hding rounded-1 py-2  py-md-0">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+      
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Library
+            </div>
+      
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> Library</li>
+              </ol>
+            </div>
+      
+          </div>
+        </nav>
+      </div>
 
       <style>
         
@@ -783,12 +1041,15 @@
           <div class="col-md-4">
             <div class="card h-100 border-1 rounded-3 shadow-sm">
               <div class="card-body text-start mx-md-5">
-                <h6 class="text-primary fw-bold mb-2">👤 Head of Library</h6>
-                <ul class="list-unstyled mb-0 small">
-                  <li>Name : <b>Rahul Paliwal</b></li>
-                  <li>Contact : <b>+91-XXXXX-XXXXX</b></li>
-                  <li>Email : <b>library@college.edu.in</b></li>
-                </ul>
+                
+                {% if library_heads %}
+                  <h6 class="text-primary fw-bold mb-2">👤 Head of Library</h6>
+                  <ul class="list-unstyled mb-0 small">
+                    <li>Name : <b>{{ library_heads.user.get_full_name }}  </b></li>
+                    <li>Contact : <b>{{ library_heads.user.phone }}</b></li>
+                    <li>Email : <b>{{ library_heads.user.email }}</b></li>
+                  </ul>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -801,33 +1062,63 @@
 
             <!-- Carousel 1 -->
             <div id="carousel1" class="carousel slide mb-3" data-bs-ride="carousel">
-              <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2"></button>
-              </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOOPTZJ7XX3BFm5n4y3hxlWfmIGdzVXqTTRF444uoXTpoRMDITbKUqzlw&s=10"
-                    class="d-block w-100" alt="Library">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://mgrcollege.ac.in/wp-content/uploads/2024/03/5-2-1-2048x1035.jpg"
-                    class="d-block w-100" alt="Library">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://mgrcollege.ac.in/wp-content/uploads/2024/03/5-2-1-2048x1035.jpg"
-                    class="d-block w-100" alt="Library">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </button>
-            </div>
+
+  <!-- Indicators (dynamic) -->
+  <div class="carousel-indicators">
+    {% for img in library_images %}
+      <button type="button"
+              data-bs-target="#carousel1"
+              data-bs-slide-to="{{ forloop.counter0 }}"
+              {% if forloop.first %}class="active" aria-current="true"{% endif %}
+              aria-label="Slide {{ forloop.counter }}"></button>
+    {% endfor %}
+  </div>
+
+  <!-- Slides (dynamic) -->
+  <div class="carousel-inner">
+    {% for img in library_images %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ img.image.url }}"
+             class="d-block w-100"
+             alt="Library Image {{ forloop.counter }}">
+      </div>
+    {% empty %}
+      <div class="carousel-item active">
+        <img src="{% static 'images/no-image.jpg' %}"
+             class="d-block w-100" alt="No library images">
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button"
+          data-bs-target="#carousel1" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button"
+          data-bs-target="#carousel1" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+  <style>
+    #carousel1 {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .12);
+}
+
+#carousel1 .carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+@media (max-width: 767.98px) {
+  #carousel1 .carousel-item img { height: 220px; }
+}
+  </style>
+</div>
 
             <!-- Photo grid -->
 
@@ -884,1083 +1175,416 @@
   </div>
 
 
-  <div class="tab-pane fade" id="labsr-tab-pane" role="tabpanel" aria-labelledby="labsr-tab" tabindex="0">
-    <style>
-      .figure {
-        max-width: 10rem;
-        margin-top: 1rem;
-        justify-content: center;
-        text-align: center;
-      }
+  
 
-      .hr1 {
-
-        color: #880E4F;
-        /* width:fit-content; */
-        max-width: 10rem;
-        padding: 0;
-        margin: 0rem;
-        margin-bottom: 8px;
-      }
-
-      .figure:hover,
-      .figure-caption:hover {
-        transform: translateY(-5PX);
-        color: #0056b3;
-
-
-      }
-
-      .libhead {
-        justify-content: center;
-
-
-      }
-    </style>
-
-
-
-
-    <div class="container">
-      <div class="row libhead gap-md-5 mt-5">
-        <div class="col-2">
-          <figure class="figure">
-            <img
-              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-              class="figure-img img-fluid rounded-circle"
-              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-            <figcaption class="figure-caption">
-              <h6><b>Mrs. Vinod Banse</b></h6>
-            </figcaption>
-          </figure>
-          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
-        </div>
-        <div class="col-2">
-          <figure class="figure">
-            <img
-              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-              class="figure-img img-fluid rounded-circle"
-              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-            <figcaption class="figure-caption">
-              <h6><b>Mrs. Vinod Banse</b></h6>
-
-            </figcaption>
-          </figure>
-          <hr class="hr1">
-          <button type="button" class="btn btn-outline-primary">Laboratorie view</button>
-        </div>
-        <div class="col-2">
-          <figure class="figure">
-            <img
-              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-              class="figure-img img-fluid rounded-circle"
-              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-            <figcaption class="figure-caption">
-              <h6><b>Mrs. Vinod Banse</b></h6>
-            </figcaption>
-          </figure>
-          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
-        </div>
-        <div class="col-2">
-          <figure class="figure">
-            <img
-              src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-              class="figure-img img-fluid rounded-circle"
-              alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-            <figcaption class="figure-caption">
-              <h6><b>Mrs. Vinod Banse</b></h6>
-            </figcaption>
-          </figure>
-          <hr class="hr1"><button type="button" class="btn btn-outline-primary">Laboratorie view</button>
-        </div>
-
-      </div>
-    </div>
-    <style>
-      .libtabs {
-        justify-content: center;
-      }
-
-      .card-body-lib {
-        padding: 1%;
-      }
-
-      .rules {
-        max-height: 15rem;
-        height: 15rem;
-        text-align: start;
-        color: #000;
-      }
-
-      .rulsetext {
-        color: #8a1313;
-      }
-
-      .card-header {
-        background: linear-gradient(rgb(157, 50, 48) 0%, rgb(126, 31, 18) 100%) !important;
-      }
-
-      .card-libtab:hover {
-        background-color: white;
-      }
-
-      .rulsetext {
-        font-size: large;
-      }
-
-      body {
-        font-family: 'Times New Roman', Times, serif;
-      }
-
-      .rulsetext:hover {
-        font-weight: bolder;
-
-        color: #000;
-        scroll-behavior: smooth;
-      }
-    </style>
-    <div class="container my-md-5">
-      <div class="row libtabs gap-md-3 ">
-        <div class="col-md-5">
-          <div class="card card-libtab">
-            <h5 class="card-header">Lab Information</h5>
-            <div class="card-body card-body-lib">
-              <div class="overflow-y-scroll rules">
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-              </div>
-
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="tab-pane fade" id="labsr-tab-pane" role="tabpanel" aria-labelledby="labsr-tab" tabindex="0">
+  <div class="container-lg mt-3 mb-3 py-2 py-md-0">
+        <nav class="hding rounded-1 py-2  py-md-0">
+          <div class="d-flex w-100 justify-content-between align-items-center">
+      
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+              Laboratory
             </div>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="card card-libtab">
-            <h5 class="card-header">Lab Rules</h5>
-            <div class="card-body card-body-lib">
-              <div class="overflow-y-scroll rules">
-                {% for labrulse in labrulses %}
-                <p class="rulsetext"> {{labrulse.text}}</p>
-                <hr>
-                {%endfor%}
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-              </div>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+      
+            <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
+            <div class="d-none d-sm-block">
+              <ol class="breadcrumb custom-breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> Laboratory</li>
+              </ol>
             </div>
+      
           </div>
-        </div>
+        </nav>
       </div>
-    </div>
-
-
-
-  </div>
-  <div class="tab-pane fade" id="events-tab-pane" role="tabpanel" aria-labelledby="events-tab" tabindex="0">
-    <style>
-      .event-head {
-        justify-content: center;
-        justify-self: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 1rem;
-        align-items: end;
-        background: transparent;
-        border: unset;
-      }
-
-      .figure-captions {
-
-        text-align: center;
-
-      }
-    </style>
-    <div class="row container event-head card">
-
-      <div class="col-md-2">
-        <figure class="figures head-1">
-          <img
-            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-            class="figure-img img-fluid rounded-circle"
-            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-          <figcaption class="figure-captions">
-            <h6><b>Mrs. Vinod Banse</b></h6>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-2">
-        <figure class="figures head-2">
-          <img
-            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-            class="figure-img img-fluid rounded-circle"
-            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-          <figcaption class="figure-captions">
-            <h6><b>Mrs. Vinod Banse</b></h6>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-3">
-        <figure class="figures head-3">
-          <img
-            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-            class="figure-img img-fluid rounded-circle"
-            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-          <figcaption class="figure-captions">
-            <h6><b>Mrs. Vinod Banse</b></h6>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-2">
-        <figure class="figures head-5">
-          <img
-            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-            class="figure-img img-fluid rounded-circle"
-            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-          <figcaption class="figure-captions">
-            <h6><b>Mrs. Vinod Banse</b></h6>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-md-2">
-        <figure class="figures head-6">
-          <img
-            src="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg"
-            class="figure-img img-fluid rounded-circle"
-            alt="https://www.gsma.com/solutions-and-impact/industries/smart-mobility/wp-content/uploads/2021/09/Supakorn-Siddhichai-1.jpg">
-          <figcaption class="figure-captions">
-            <h6><b>Mrs. Vinod Banse</b></h6>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="container my-md-5">
-      <div class="row libtabs gap-md-3 ">
-        <div class="col-md-4">
-          <div class="card card-libtab">
-            <h5 class="card-header">Event Categories</h5>
-            <div class="card-body card-body-lib">
-              <div class="overflow-y-scroll rules">
-
-
-
-
-                <p class="rulsetext"> 🎓 Academic Events </p>
-                <hr>
-                <p class="rulsetext"> 💻 Technical Events</p>
-                <hr>
-                <p class="rulsetext">🎭 Cultural Events </p>
-                <hr>
-                <p class="rulsetext"> 🏆 Sports Events </p>
-                <hr>
-                <p class="rulsetext">🎤 Seminars </p>
-                <hr>
-                <p class="rulsetext">🧑‍💻 Workshops</p>
-                <hr>
-                <p class="rulsetext">💡 Hackathons 🎉 Annual Functions 🌱 Social / Awareness Activities</p>
-                <hr>
-
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-        <style>
-          .eventhead1 {
-            padding: 0%;
-            text-align: start;
-            padding-left: 5px;
-            padding-top: 5px;
-          }
-
-          .eventhead2 {
-            padding: 0%;
-            margin-bottom: 10px;
-          }
-
-          .card-header {
-            color: #f2f1f1;
-          }
-        </style>
-        <div class="col-md-3">
-
-          <div class="col">
-            <div class="row">
-              <div class="card eventhead2">
-                <div class="card-header">
-                  Head of Event -boy's
-                </div>
-                <div class="card-body eventhead1">
-                  <figure>
-
-                    <b>Name :</b> Rajendra Sarathe <br>
-                    <b> Whatsapp:</b> 9302707097 <br>
-                    <b>Email:</b> rajendrasarathe144@gmail.com
-
-                  </figure>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="card eventhead2">
-                <div class="card-header">
-                  Head of Event-girl's
-                </div>
-                <div class="card-body eventhead1">
-                  <figure>
-                    <b>Name :</b> Rajendra Sarathe <br>
-                    <b> Whatsapp:</b> 9302707097 <br>
-                    <b>Email:</b> rajendrasarathe144@gmail.com
-                  </figure>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-libtab">
-            <h5 class="card-header">Upcoming Events</h5>
-            <div class="card-body card-body-lib">
-              <div class="overflow-y-scroll rules">
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-                <p class="rulsetext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellat asperiores
-                  animi, veritatis incidunt quis?</p>
-                <hr>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <style>
-      /* मुख्य कंटेनर जो अतिरिक्त कार्ड्स को छुपाएगा */
-      .custom-slider {
-        max-height: max-content;
-        justify-self: center;
-        overflow: hidden;
-        width: 100%;
-        background: transparent;
-        /* आप चाहें तो यहाँ अपना linear-gradient डाल सकते हैं */
-      }
-
-      @media (min-width:400px) {
-        .custom-slider {
-          max-height: max-content;
-          justify-self: center;
-          overflow: hidden;
-          width: 80%;
-          background: transparent;
-          /* आप चाहें तो यहाँ अपना linear-gradient डाल सकते हैं */
-        }
-      }
-
-      /* कार्ड्स को एक लाइन में रखने और एनिमेट करने के लिए ट्रैक */
-      .slider-track {
-        display: flex;
-        width: max-content;
-        gap: 15px;
-        /* कार्ड्स के बीच की दूरी */
-        animation: scrollContinuous 20s linear infinite;
-      }
-
-      /* माउस ले जाने पर रुकने का फीचर (HTML में inline भी लिखा है, पर यह बैकअप है) */
-      .slider-track:hover {
-        animation-play-state: paused;
-      }
-
-      /* कार्ड्स की स्टाइलिंग में थोड़ा मार्जिन */
-      .event-4 {
-        flex-shrink: 0;
-      }
-
-      /* लगातार चलने वाला एनीमेशन */
-      @keyframes scrollContinuous {
-        0% {
-          transform: translateX(0);
-        }
-
-        100% {
-          transform: translateX(-50%);
-          /* आधे कार्ड्स क्रॉस होते ही लूप रीसेट हो जाएगा */
-        }
-      }
-
-      .evcard {
-        padding: 10px;
-        text-align: left;
-      }
-    </style>
-
-    <div class="card rounded-0 mt-md-2 mt-xs-0 ev custom-slider rounded-3">
-      <div class="slider-track" onmouseover="this.style.animationPlayState='paused';"
-        onmouseout="this.style.animationPlayState='running';">
-
-        <!-- पहला सेट (Original Cards) -->
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 1</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 2</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 3</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-
-        <!-- दूसरा सेट (Duplicate Cards - लूप को बिना रुके चलाने के लिए) -->
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 1</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 2</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card event-4" style="width: 18rem;">
-          <img src="http://imsec.ac.in/images/event/1685508150Banner.jpg" class="card-img-top"
-            alt="http://imsec.ac.in/images/event/1685508150Banner.jpg">
-          <div class="card-body evcard">
-            <h5 class="card-title">Event Name 3</h5>
-            <p class="card-text">Some quick example text.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-<style>
-    /* ---------- Global Page Styles ---------- */
-    .events-section {
-      background-color: #f8f9fa;
-      padding-bottom: 3rem;
-    }
-    
-    .section-title {
-      color: #0D47A1;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .section-divider {
-      width: 60px;
-      height: 3px;
-      background-color: #FFD200;
-      margin: 0 auto 2rem auto;
-    }
-
-    /* ---------- 1. Auto-Scroll Carousel (Hero) ---------- */
-    .hero-carousel {
-      height: 450px;
-      background-color: #333;
-    }
-    
-    .hero-carousel .carousel-item {
-      height: 450px;
-    }
-    
-    .hero-carousel img {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-      filter: brightness(0.4); /* Darkens image for text readability */
-    }
-    
-    .carousel-caption {
-      bottom: 20%;
-      text-align: left;
-      left: 10%;
-      right: 10%;
-    }
-
-    .carousel-caption h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-
-    .carousel-caption p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ---------- 2. Main Info Cards (Categories & Team) ---------- */
-    .info-card {
-      border: none;
-      border-radius: 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      height: 100%;
-    }
-
-    .info-card .card-header {
-      background-color: #0D47A1;
-      color: #fff;
-      border-radius: 0;
+  <style>
+    /* ================= HOD CARDS ================= */
+    .hod-section-title {
+      color: #1e293b;
+      font-size: 1.25rem;
       font-weight: 600;
-      padding: 1rem 1.25rem;
-      border-bottom: none;
+      margin: 2rem 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid #0056b3;
+      display: inline-block;
     }
 
-    .list-group-item {
-      border-left: none;
-      border-right: none;
-      padding: 0.75rem 1.25rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-
-    .list-group-item:hover {
-      background-color: #f1f8ff;
-      color: #0D47A1;
-    }
-
-    /* Team Profiles (Anchors) */
-    .team-profile {
+    .hod-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.4rem 1rem;
       text-align: center;
-      padding: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .team-profile:last-child {
-      border-bottom: none;
-    }
-
-    .team-profile h6 {
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-      color: #0D47A1;
-    }
-
-    .team-profile p {
-      font-size: 0.85rem;
-      color: #555;
-      margin-bottom: 0.2rem;
-    }
-
-    /* ---------- 3. Past Events Masonry Grid (No Gaps) ---------- */
-    .gallery-container {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .gallery-masonry {
-      column-count: 4;
-      column-gap: 0; /* 0px Gap */
-      line-height: 0;
-    }
-    
-    @media (max-width: 992px) { .gallery-masonry { column-count: 3; } }
-    @media (max-width: 768px) { .gallery-masonry { column-count: 2; } }
-
-    .gallery-item {
-      break-inside: avoid;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-      border-radius: 0 !important;
-      cursor: pointer;
-      display: block;
-      width: 100%;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      height: auto;
-      vertical-align: bottom;
-      margin: 0;
-      padding: 0;
-      transition: transform 0.4s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .05);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    }
+
+    .hod-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, .12);
+      border-color: #9d1a27;
+    }
+
+    .hod-card-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #f1f5f9;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+      margin-bottom: .9rem;
+      transition: border-color .25s;
+    }
+
+    .hod-card:hover .hod-card-avatar { border-color: #9d1a27; }
+
+    .hod-card-name {
+      font-size: 1rem;
       font-weight: 600;
-      text-align: center;
-      line-height: normal;
+      color: #1e293b;
+      margin: 0 0 .2rem;
+      line-height: 1.3;
     }
 
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    .gallery-caption {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 25px 12px 12px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-      color: #fff;
-      font-size: 0.9rem;
+    .hod-card-dept {
+      font-size: .8rem;
+      color: #9d1a27;
       font-weight: 600;
-      pointer-events: none;
+      margin-bottom: .35rem;
+      letter-spacing: .3px;
+      text-transform: uppercase;
     }
 
-    /* ---------- Modal Styles (Auto Size) ---------- */
-    .modal-glass .modal-content {
-      background: rgba(15, 15, 20, 0.85) !important;
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
-      border-radius: 0 !important;
+    .hod-card-desc {
+      font-size: .78rem;
+      color: #64748b;
+      line-height: 1.4;
+      margin-bottom: 1rem;
     }
 
-    .modal-slider-img {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 85vh;
-      object-fit: contain;
+    .hod-card .btn {
+      font-size: .78rem;
+      padding: .35rem .9rem;
+      border-radius: 20px;
+      margin-top: auto;
+    }
+
+    .hod-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #9d1a27, #1e293b);
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+    /* ================= CAROUSEL (beech me) ================= */
+    .lab-carousel {
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e293b, #9d1a27);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .12);
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .lab-carousel .carousel-item {
+      background: linear-gradient(135deg, #1e293b, #9d1a27);
+    }
+
+    .lab-carousel .carousel-item img {
+      height: 380px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .lab-carousel .carousel-caption {
+      left: 1.5rem;
+      right: auto;
+      bottom: 1.5rem;
+      text-align: left;
+      background: rgba(15, 23, 42, .68);
+      border-radius: 8px;
+      padding: .6rem 1rem;
+    }
+
+    .lab-carousel .carousel-caption h5 {
+      font-size: 1.05rem;
+      margin-bottom: .15rem;
+    }
+
+    .lab-carousel .carousel-caption p {
+      font-size: .8rem;
+      margin: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      .lab-carousel .carousel-item img { height: 220px; }
+      .lab-carousel .carousel-caption { left: 1rem; bottom: 1rem; padding: .45rem .75rem; }
+      .lab-carousel .carousel-caption h5 { font-size: .9rem; }
+      .hod-card-avatar { width: 90px; height: 90px; }
+      .lab-carousel { margin-top: 2rem; margin-bottom: 2rem; }
+    }
+
+    /* ================= LEFT : INFO + RULES CARDS ================= */
+    .card-libtab {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .05);
+      transition: box-shadow .2s;
+      height: 100%;
+      background: #fff;
+
+    }
+
+    .card-libtab:hover { box-shadow: 0 8px 20px rgba(15, 23, 42, .1); }
+
+    .card-header {
+      background: linear-gradient(rgb(157, 50, 48) 0%, rgb(126, 31, 18) 100%) !important;
+      color: #ffffff !important;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+    }
+
+    .card-body-lib { padding: 1rem; }
+
+    .rules {
+      max-height: 14rem;
+      overflow-y: auto;
+      text-align: start;
+      color: #000;
+      padding-right: .35rem;
+     
+    }
+
+    .rules::-webkit-scrollbar { width: 6px; }
+    .rules::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    .rulsetext {
+      color: #8a1313;
+      font-size: .88rem;
+      line-height: 1.45;
+      margin-bottom: .5rem;
+     transition: all 0.5s ease;
+
+    }
+
+    .rulsetext:hover {  background-color: #0056b3; color: #fff; border-radius: 4px; padding: 0.2rem 0.5rem; }
+
+    .rules hr { margin: .5rem 0; opacity: .35; }
+
+    .card-body-lib .btn-primary { margin-top: .85rem; font-size: .85rem; }
+
+    /* ================= RIGHT : 4 LAB IMAGE CARDS ================= */
+    .lab-image-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .05);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lab-image-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, .12);
+      border-color: #9d1a27;
+    }
+
+    .lab-image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab-image-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      transition: transform .4s ease;
       display: block;
-      margin: 0 auto;
     }
-    
-    .carousel-control-prev, .carousel-control-next {
-      width: 50px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
-      border-radius: 0 !important; 
-      height: 50px;
-      top: 50%;
-      transform: translateY(-50%);
-      margin: 0 10px;
+
+    .lab-image-card:hover img {
+      transform: scale(1.06);
     }
-    .carousel-control-prev:hover, .carousel-control-next:hover {
-      background: rgba(255, 255, 255, 0.3);
+
+    .lab-image-badge {
+      position: absolute;
+      top: .6rem;
+      left: .6rem;
+      background: rgba(157, 26, 39, .92);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 600;
+      padding: .22rem .6rem;
+      border-radius: 20px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .lab-image-body {
+      padding: .85rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .lab-image-title {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0 0 .25rem;
+    }
+
+    .lab-image-desc {
+      font-size: .78rem;
+      color: #64748b;
+      line-height: 1.4;
+      margin-bottom: .75rem;
+      flex: 1;
+    }
+
+    .lab-image-body .btn {
+      font-size: .75rem;
+      padding: .3rem .85rem;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 767.98px) {
+      .lab-image-card img { height: 170px; }
     }
   </style>
 
-  <!-- ================= 1. AUTO-SCROLL CAROUSEL (Hero Section) ================= -->
-  <div id="eventsHeroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="4000">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide-to="2"></button>
+  <div class="container my-md-5">
+
+    <!-- ========== HOD CARDS (top) ========== -->
+   <!-- ========== LAB HEADS (Responsibility से) ========== -->
+ 
+
+<div class="row g-4 mt-1 justify-content-center">
+
+  {% for resp in lab_heads %}
+  <div class="col-12 col-sm-6 col-md-3">
+    <div class="hod-card">
+
+      {% if resp.user.photo %}
+        <img src="{{ resp.user.photo.url }}"
+             class="hod-card-avatar"
+             alt="{{ resp.user.get_full_name }}">
+      {% else %}
+        <div class="hod-card-avatar hod-avatar-fallback">
+          {{ resp.user.get_full_name|default:resp.user.username|first|upper }}
+        </div>
+      {% endif %}
+
+      <h6 class="hod-card-name">
+        {{ resp.user.get_full_name|default:resp.user.username }}
+      </h6>
+
+      <div class="hod-card-dept">
+        {{ resp.work_position|default:resp.get_work_name_display }}
+      </div>
+
+      <p class="hod-card-desc">
+        {% if resp.user.deprtment %}
+          {{ resp.user.deprtment }}
+        {% else %}
+          Laboratory In-Charge
+        {% endif %}
+      </p>
+
+       
     </div>
-    <div class="carousel-inner">
-      <!-- Slide 1 -->
-      <div class="carousel-item active">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 1">
-        <div class="carousel-caption">
-          <h1>TechFest 2024</h1>
-          <p>Join us for the biggest technology and innovation summit of the year.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#register" class="btn btn-primary btn-lg">Register Now</a>
-            <a href="#schedule" class="btn btn-outline-light btn-lg">View Schedule</a>
-            <a href="#speakers" class="btn btn-outline-light btn-lg">Meet Speakers</a>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 2 -->
-      <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 2">
-        <div class="carousel-caption">
-          <h1>Annual Cultural Fest</h1>
-          <p>Experience the vibrant colors of dance, music, and drama.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#cultural" class="btn btn-warning text-dark btn-lg fw-bold">Book Tickets</a>
-            <a href="#performances" class="btn btn-outline-light btn-lg">Performances</a>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 3 -->
-      <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1920&auto=format&fit=crop" alt="Event Banner 3">
-        <div class="carousel-caption">
-          <h1>Sports Meet 2024</h1>
-          <p>Witness the spirit of sportsmanship and athletic excellence.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#sports" class="btn btn-success btn-lg">Team Standings</a>
-            <a href="#live" class="btn btn-outline-light btn-lg">Live Scores</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
   </div>
+  {% empty %}
+    <p class="text-muted text-center">No lab heads assigned yet.</p>
+  {% endfor %}
 
+</div>
 
-  <!-- ================= 2. INFO SECTION (Categories, Anchors, Updates) ================= -->
-  <div class="container my-5">
-    <div class="row g-4">
-      
-      <!-- Left: Event Categories -->
-      <div class="col-lg-4">
-        <div class="card info-card">
-          <div class="card-header">Event Categories</div>
-          <div class="list-group list-group-flush">
-            <a href="#academic" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              🎓 Academic Events <span class="badge bg-primary rounded-pill">12</span>
-            </a>
-            <a href="#technical" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              💻 Technical Events <span class="badge bg-primary rounded-pill">8</span>
-            </a>
-            <a href="#cultural" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              🎭 Cultural Events <span class="badge bg-primary rounded-pill">15</span>
-            </a>
-            <a href="#sports" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              🏆 Sports Events <span class="badge bg-primary rounded-pill">5</span>
-            </a>
-            <a href="#seminars" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              🎤 Seminars & Workshops <span class="badge bg-primary rounded-pill">10</span>
-            </a>
-          </div>
-        </div>
-      </div>
+     
 
-      <!-- Middle: Event Anchors (2 Profiles) -->
-      <div class="col-lg-4">
-        <div class="card info-card">
-          <div class="card-header">Event Coordinators (Anchors)</div>
-          <div class="card-body p-0">
-            
-            <!-- Anchor 1 -->
-            <div class="team-profile">
-              <h6>Rajendra Sarathe</h6>
-              <p class="text-muted">Head of Events (Boys)</p>
-              <p><i class="bi bi-telephone-fill text-primary"></i> +91 93027 07097</p>
-              <p><i class="bi bi-envelope-fill text-primary"></i> rajendra@campus.edu</p>
+    <!-- ========== BOTTOM : LEFT info/rules + RIGHT 4 lab cards ========== -->
+    <div class="row g-4 mt-5">
+
+      <!-- 🔽 LEFT : Lab Information + Lab Rules 🔽 -->
+      <div class="col-12 col-md-4">
+
+        
+
+        <div class="card card-libtab">
+          <h5 class="card-header">Lab Rules</h5>
+          <div class="card-body card-body-lib">
+            <div class="rules">
+              {% for labrulse in labrulses %}
+                <p class="rulsetext">{{ labrulse.text }}</p>
+                <hr>
+              {% empty %}
+                <p class="rulsetext text-muted">Rules will be updated soon.</p>
+              {% endfor %}
             </div>
             
-            <!-- Anchor 2 -->
-            <div class="team-profile">
-              <h6>Priya Sharma</h6>
-              <p class="text-muted">Head of Events (Girls)</p>
-              <p><i class="bi bi-telephone-fill text-primary"></i> +91 98765 43210</p>
-              <p><i class="bi bi-envelope-fill text-primary"></i> priya@campus.edu</p>
-            </div>
-
           </div>
         </div>
+
       </div>
 
-      <!-- Right: Upcoming Events (Updates) -->
-      <div class="col-lg-4">
-        <div class="card info-card">
-          <div class="card-header">Event Updates</div>
-          <div class="list-group list-group-flush">
-            <a href="#update1" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1 fw-bold text-dark">TechFest Registration Open</h6>
-                <small class="text-muted">2 days ago</small>
-              </div>
-              <small class="text-muted">Last date to register is 15th Nov.</small>
-            </a>
-            <a href="#update2" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1 fw-bold text-dark">Auditions for Cultural Night</h6>
-                <small class="text-muted">5 days ago</small>
-              </div>
-              <small class="text-muted">Auditions will be held in the main auditorium.</small>
-            </a>
-            <a href="#update3" class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h6 class="mb-1 fw-bold text-dark">Guest Lecture on AI</h6>
-                <small class="text-muted">1 week ago</small>
-              </div>
-              <small class="text-muted">Dr. A. K. Singh will be joining us live.</small>
-            </a>
-          </div>
+      <!-- 🔼 RIGHT : 4 Lab image cards 🔼 -->
+      <!-- 🔼 RIGHT : Laboratory images (CampusCategory से) 🔼 -->
+<div class="col-12 col-md-8">
+  <div class="row g-3 h-100">
+
+    {% for img in lab_images %}
+    <div class="col-12 col-sm-6">
+      <div class="lab-image-card">
+        <div class="lab-image-wrap">
+          <img src="{{ img.image.url }}" alt="Laboratory">
+         
+          <span class="lab-image-badge  " onclick="window.location.href='{{ img.image.url }}'" target="_blank" style="cursor: pointer;">View Lab {{ forloop.counter }}</span>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ================= 3. PAST EVENTS MASONRY GALLERY ================= -->
-  <div class="container mt-5 mb-3 text-center">
-    <h2 class="section-title">Past Events Gallery</h2>
-    <p class="text-muted">किसी भी फोटो पर क्लिक करके उस इवेंट की और तस्वीरें देखें</p>
-    <div class="section-divider"></div>
-  </div>
-
-  <div class="container-fluid px-0 gallery-container">
-    <div class="gallery-masonry">
-      
-      <!-- Loop through your Django Categories here -->
-      <!-- Example Data (Aap isko Django template tags se replace kar sakte hain) -->
-      
-      <!-- Event 1 (Landscape) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-1">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" alt="TechFest">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">TechFest 2023</div>
-      </div>
-
-      <!-- Event 2 (Portrait) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-2">
-        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop" alt="Cultural Fest">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">Cultural Night</div>
-      </div>
-
-      <!-- Event 3 (Landscape) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-3">
-        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800&auto=format&fit=crop" alt="Sports Meet">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">Sports Meet 2023</div>
-      </div>
-
-      <!-- Event 4 (Portrait) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-4">
-        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop" alt="Hackathon">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">48-Hour Hackathon</div>
-      </div>
-
-      <!-- Event 5 (Landscape) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-5">
-        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop" alt="Seminar">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">AI & Robotics Seminar</div>
-      </div>
-      
-      <!-- Event 6 (Portrait) -->
-      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modal-event-6">
-        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop" alt="Music Night">
-        <div class="gallery-overlay">
-          <i class="bi bi-images fs-4"></i>
-          <span>View Album</span>
-        </div>
-        <div class="gallery-caption">Battle of Bands</div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ================= 4. GLASSY MODALS ================= -->
-  <!-- Modal 1 -->
-  <div class="modal fade modal-glass" id="modal-event-1" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header border-0 pb-0">
-          <h5 class="modal-title fw-bold">TechFest 2023 Photos</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body p-0 position-relative">
-          <!-- Carousel -->
-          <div id="carousel-event-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner text-center">
-              <div class="carousel-item active">
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 1">
-              </div>
-              <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 2">
-              </div>
-              <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1515169067868-5387ec356754?q=80&w=1200&auto=format&fit=crop" class="modal-slider-img" alt="Image 3">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-event-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-event-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-        </div>
+         
       </div>
     </div>
-  </div>
-
-  <!-- Note: Aapko baaki modals (event-2, event-3, etc.) ke liye bhi yahi structure copy karna hai
-       aur usme us specific category ki images dalni hain. Maine sirf 1 modal ka example diya hai. -->
-
-  </div>
-
+    {% empty %}
+      <div class="col-12">
+        <p class="text-muted">No laboratory images uploaded yet.</p>
+      </div>
+    {% endfor %}
 
   </div>
+</div>
 
+    </div>
 
   </div>
 
+</div>
+   
+  
+  
+  </div>
+  
+  
+  </div>
 
 
   {% include 'footer.html' %}
 
-  <div class="container my-5">
-
-    <!-- 1. गैलरी सेक्शन -->
-    <div id="campus" class="campus-tab-content">
-      <h2>Campus Life Gallery</h2>
-      <!-- गैलरी और फोटोज़ का सारा कोड यहाँ रखें -->
-    </div>
-
-    <!-- 2. हॉस्टल सेक्शन -->
-    <div id="hostel" class="campus-tab-content" style="display: none;">
-      <h2>Importance Notice`s Hostel</h2>
-      <!-- हॉस्टल के नियम और इन्फॉर्मेशन का सारा कोड यहाँ रखें -->
-    </div>
-
-    <!-- 3. लाइब्रेरी सेक्शन -->
-    <div id="library" class="campus-tab-content" style="display: none;">
-      <h4>Library Update`s</h4>
-      <!-- लाइब्रेरी बुक्स और टाइमिंग का सारा कोड यहाँ रखें -->
-    </div>
-
-    <!-- 4. लैब्स सेक्शन -->
-    <div id="labs" class="campus-tab-content" style="display: none;">
-      <h5>Lab Information</h5>
-      <!-- लैब्स और Mrs. Vinod Banse वाला सारा कोड यहाँ रखें -->
-    </div>
-
-    <!-- 5. इवेंट्स सेक्शन -->
-    <div id="events" class="campus-tab-content" style="display: none;">
-      <h5>Upcoming Events</h5>
-      <!-- इवेंट्स और Rajendra Sarathe वाला सारा कोड यहाँ रखें -->
-    </div>
-
-  </div>
+   
 
   <!-- इसे campuslife.html में सबसे नीचे पेस्ट करें -->
   <script>

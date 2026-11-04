@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ================= SEO META TAGS ================= -->
+<title>College Events & Festivals 2026 | [Your College Name]</title>
+<meta name="description" content="Explore upcoming college events, cultural fests, technical hackathons, and workshops. Meet our anchors, read guidelines, and browse the event gallery.">
+<meta name="keywords" content="college events, cultural fest, hackathon, tech events, student events, event gallery">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.yourdomain.com/events/">
+
+<!-- ================= OPEN GRAPH (Facebook/LinkedIn) ================= -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="College Events & Festivals 2026 | [Your College Name]">
+<meta property="og:description" content="Join us for the biggest college fest of the year. Discover event categories, schedules, and live galleries.">
+<meta property="og:image" content="https://www.yourdomain.com/static/images/event-cover.jpg">
+<meta property="og:url" content="https://www.yourdomain.com/events/">
+<meta property="og:site_name" content="[Your College Name]">
+
+<!-- ================= TWITTER CARD ================= -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="College Events & Festivals 2026">
+<meta name="twitter:description" content="Explore upcoming college events, cultural fests, technical hackathons, and workshops.">
+<meta name="twitter:image" content="https://www.yourdomain.com/static/images/event-cover.jpg">
+
+<!-- ================= BOOTSTRAP & ICONS ================= -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+:root{
+  --hero-height: 62vh;
+  --hero-pad: clamp(20px, 6vw, 90px);
+  
+  /* Colors extracted from your old image */
+  --maroon: #8a252c;
+  --maroon-dark: #6a1b20;
+  --bg-color: #f4f5f7;
+  --ink: #222;
+  --muted: #666;
+  --line: #e0e0e0;
+}
+@supports (height: 100svh) { :root { --hero-height: 62svh; } }
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--ink);
+}
+
+/* ======================================== */
+/* ============ HERO CAROUSEL ============= */
+/* ======================================== */
+.hero-carousel{ position:relative; overflow:hidden; width:100%; }
+.hero-carousel .carousel-item{ height:var(--hero-height); position:relative; overflow:hidden; }
+.hero-carousel .carousel-item img{
+  width:100%; height:100%; object-fit:cover; object-position:center;
+  display:block; transform:scale(1.06); transition: transform 7s ease-out; will-change: transform;
+}
+.hero-carousel .carousel-item.active img{ transform:scale(1); }
+
+/* ===== FALLBACK BG ===== */
+.slide-fallback-bg { position: absolute; inset: 0; z-index: 0; }
+.slide-bg-1 { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
+.slide-bg-2 { background: linear-gradient(135deg,#f093fb 0%,#f5576c 100%); }
+.slide-bg-3 { background: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); }
+.slide-bg-4 { background: linear-gradient(135deg,#43e97b 0%,#38f9d7 100%); }
+.slide-bg-5 { background: linear-gradient(135deg,#fa709a 0%,#fee140 100%); }
+
+/* ===== LOADING STATE ===== */
+.slide-loading {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  overflow: hidden;
+}
+.slide-loading::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(138,37,44,.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(160,107,255,.15) 0%, transparent 50%);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+@keyframes pulseGlow { 0%,100% { opacity:.6; } 50% { opacity:1; } }
+
+.loading-content {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); /* Center align loader */
+  width: calc(100% - var(--hero-pad) * 2);
+  max-width: 620px; z-index: 2; text-align: center;
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,.05) 0%,
+    rgba(255,255,255,.18) 50%,
+    rgba(255,255,255,.05) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite linear;
+  border-radius: 6px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.skeleton-badge   { width: 100px; height: 24px; border-radius: 999px; margin: 0 auto 16px; }
+.skeleton-title   { width: 85%;   height: 42px; margin: 0 auto 10px; }
+.skeleton-title-2 { width: 60%;   height: 42px; margin: 0 auto 18px; }
+.skeleton-sub     { width: 72%;   height: 14px; margin: 0 auto 8px; }
+.skeleton-sub-2   { width: 55%;   height: 14px; margin: 0 auto 24px; }
+.skeleton-btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.skeleton-btn     { width: 150px; height: 44px; border-radius: 0; /* Square button */ }
+
+.loading-footprint {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 3;
+}
+.loading-footprint span {
+  width: 30px; height: 4px; border-radius: 0;
+  background: rgba(255,255,255,.22);
+  animation: footprint 1.4s ease-in-out infinite;
+}
+.loading-footprint span:nth-child(1) { animation-delay: 0s; }
+.loading-footprint span:nth-child(2) { animation-delay: .2s; }
+.loading-footprint span:nth-child(3) { animation-delay: .4s; }
+@keyframes footprint {
+  0%,100% { background: rgba(255,255,255,.22); width: 30px; }
+  50%     { background: var(--maroon); width: 52px; }
+}
+
+/* ===== OVERLAY & CAPTION ===== */
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 50%, rgba(0,0,0,.05) 100%),
+    linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 55%);
+}
+.hero-caption {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; /* Center se Left kiya */
+  text-align: left;        /* Center se Left kiya */
+  padding: 0 var(--hero-pad) 40px;
+  text-shadow: 0 2px 24px rgba(0,0,0,.5);
+}
+.hero-caption > * { max-width: 640px; }
+
+@media (max-width: 767.98px) {
+  .hero-caption {
+    align-items: center; /* Mobile pe center */
+    text-align: center;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+.hero-badge {
+  display: inline-block; font-size: .75rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase; color: #fff;
+  padding: .4rem 1.2rem;
+  background: rgba(255,255,255,0.15); /* Halka transparent bg */
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.8); /* White border */
+  border-radius: 999px; /* Pill shape */
+  margin-bottom: 0.5rem;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 4rem); /* Image jitna bada font */
+  font-weight: 700; 
+  line-height: 1.1;
+  color: #fff; 
+  margin: 0 0 0.5rem;
+  font-family: 'Times New Roman', Times, serif; /* Serif font maintain rakha hai */
+}
+.hero-subtitle {
+  font-size: clamp(.95rem, 1.4vw, 1.1rem);
+  line-height: 1.6; color: rgba(255,255,255,.9);
+  margin: 0 0 1.5rem; font-weight: 400;
+}
+
+/* Buttons */
+.hero-actions { 
+  display: flex; flex-wrap: wrap; gap: 15px; 
+  justify-content: flex-start; /* Buttons ko left kiya */
+}
+.hero-actions .btn {
+  border-radius: 999px; /* Pill shape buttons */
+  padding: .8rem 2rem;
+  font-size: 1rem; font-weight: 600;
+  letter-spacing: .02em; 
+  transition: all .3s ease;
+  font-family: 'Times New Roman', Times, serif;
+}
+.hero-actions .btn-primary {
+  background: var(--maroon); /* Image wala Dark Blue color */
+  color: #fff; 
+  border: 1.5px solid #1e1b7a;
+}
+.hero-actions .btn-primary:hover {
+  background: #13115e; 
+  border-color: #13115e;
+  transform: translateY(-2px);
+}
+.hero-actions .btn-outline-light {
+  background: transparent; 
+  color: #fff; 
+  border: 1.5px solid #fff;
+}
+.hero-actions .btn-outline-light:hover {
+  background: rgba(255,255,255,0.2); 
+  color: #fff;
+  transform: translateY(-2px);
+}
+@media (max-width: 767.98px) {
+  .hero-caption { align-items: center; text-align: center; }
+  .hero-actions { justify-content: center; }
+}
+
+/* ===== ENTRY ANIMATION ===== */
+.hero-caption .hero-badge,
+.hero-caption .hero-title,
+.hero-caption .hero-subtitle,
+.hero-caption .hero-actions { opacity: 0; transform: translateY(24px); }
+
+.carousel-item.active .hero-badge    { animation: heroUp .7s .15s ease-out forwards; }
+.carousel-item.active .hero-title    { animation: heroUp .8s .30s ease-out forwards; }
+.carousel-item.active .hero-subtitle { animation: heroUp .8s .45s ease-out forwards; }
+.carousel-item.active .hero-actions  { animation: heroUp .8s .60s ease-out forwards; }
+@keyframes heroUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ===== INDICATORS ===== */
+.hero-carousel .carousel-indicators {
+  bottom: 20px; left: 0; right: 0; margin: 0 auto;
+  gap: 8px; z-index: 3; justify-content: center; /* Center Indicators */
+}
+.hero-carousel .carousel-indicators [data-bs-target] {
+  width: 30px; height: 3px; border-radius: 0; border: 0;
+  background: rgba(255,255,255,.4); opacity: 1;
+  transition: width .35s ease, background .35s ease;
+}
+.hero-carousel .carousel-indicators .active { width: 50px; background: #fff; }
+
+/* ===== ARROWS ===== */
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+  top: 50%; bottom: auto; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 0; /* Square Arrows */
+  background: rgba(0,0,0,.3); border: 1px solid rgba(255,255,255,.4);
+  opacity: 1; z-index: 3;
+  transition: background .3s ease;
+}
+.hero-carousel .carousel-control-prev { left: clamp(10px, 1.5vw, 22px); }
+.hero-carousel .carousel-control-next { right: clamp(10px, 1.5vw, 22px); }
+.hero-carousel .carousel-control-prev:hover,
+.hero-carousel .carousel-control-next:hover { background: var(--maroon); }
+.hero-carousel .carousel-control-prev-icon,
+.hero-carousel .carousel-control-next-icon { width: 1rem; height: 1rem; }
+
+/* ===== RESPONSIVE CAROUSEL ===== */
+@media (max-width: 767.98px) {
+  .hero-carousel .carousel-control-prev,
+  .hero-carousel .carousel-control-next { display: none; }
+  .hero-title { font-size: clamp(1.35rem, 6vw, 1.9rem); }
+  .hero-subtitle { font-size: .85rem; margin-bottom: 1.1rem; }
+  .hero-actions .btn { padding: .6rem 1.3rem; font-size: .85rem; }
+  .loading-content { left: 20px; right: 20px; transform: translateY(-50%); width: calc(100% - 40px); }
+  .skeleton-title, .skeleton-title-2 { height: 32px; }
+  .skeleton-sub, .skeleton-sub-2 { height: 12px; }
+  .skeleton-btn { height: 38px; width: 130px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .hero-caption .hero-badge, .hero-caption .hero-title,
+  .hero-caption .hero-subtitle, .hero-caption .hero-actions { opacity: 1 !important; transform: none !important; }
+}
+/* ============ END HERO CAROUSEL ============ */
+
+
+/* ============ SECTIONS & HEADINGS ============ */
+.section-pad{ padding: clamp(40px, 6vw, 40px) 0; }
+.section-head{
+  text-align: center;
+  margin-bottom: clamp(30px, 4vw, 50px);
+}
+.eyebrow{
+  display:inline-block; font-size:.75rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--maroon);
+  font-weight:700; margin-bottom:10px;
+}
+.section-title{
+  font-size:clamp(1.6rem, 3vw, 2.4rem); font-weight:600;
+  color:var(--ink); margin:0 0 10px; position:relative; display:inline-block;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--maroon);
+  margin: 15px auto 0;
+}
+.section-sub{
+  font-size:.95rem; color:var(--muted);
+  margin:0 auto; line-height:1.6; max-width: 600px;
+}
+
+/* ============ CATEGORY CIRCLES ============ */
+.cat-grid{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap: clamp(16px, 2.5vw, 30px);
+}
+.cat-item{
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  background:none; border:0; padding:0; cursor:pointer;
+  width: 180px;
+  text-align: center;
+}
+.cat-circle{
+  position:relative; width:100%; aspect-ratio:1/1;
+  border-radius:50%; overflow:hidden; display:block;
+  background:#e9ecef;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition:all .3s ease;
+}
+.cat-circle img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+.cat-item:hover .cat-circle{ 
+  border-color: var(--maroon); 
+  transform:translateY(-4px); 
+}
+.cat-item:hover .cat-circle img{ transform:scale(1.1); }
+.cat-name{
+  font-size:.88rem; font-weight:600; color:var(--ink);
+  line-height:1.3; margin:0;
+}
+.cat-count{ font-size:.7rem; color:var(--muted); margin:0; }
+
+/* ============ ANCHORS — CARD STYLE ============ */
+.anchor-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+.anchor-card{
+  background:#fff; border:1px solid var(--line);
+  border-radius: 8px;
+  padding:24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.anchor-card:hover{ 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08); 
+}
+.anchor-photo{ margin: 0 auto 16px; width: 110px; height: 110px; }
+.anchor-photo img{
+  width:110px; height:110px; border-radius:50%; object-fit:cover;
+  border: 3px solid var(--maroon);
+}
+.anchor-tag{
+  display:inline-block; font-size:.65rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:#fff; background:var(--maroon);
+  padding: 4px 10px; border-radius: 4px; margin-bottom:12px;
+}
+.anchor-name{
+  font-size:1.2rem; font-weight:700; color:var(--ink);
+  margin:0 0 6px;
+}
+.anchor-role{ font-size:.85rem; font-weight:600; color:var(--maroon); margin:0 0 12px; }
+.anchor-bio{ font-size:.9rem; line-height:1.5; color:#555; margin:0; }
+
+/* ============ RULES + UPCOMING ============ */
+.panel{
+  background:#fff; border:1px solid var(--line); border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  height: 100%;
+}
+.panel-title{
+  font-size:1.1rem; font-weight:600; color:#fff;
+  background: var(--maroon);
+  margin:0; padding:14px 20px; text-align: center;
+}
+.panel-body{ padding: 20px; }
+
+.rules-list{
+  list-style:none; counter-reset:rule; margin:0; padding:0;
+  display:grid; gap:16px;
+}
+.rules-list li{
+  counter-increment:rule; position:relative;
+  padding-left:36px; font-size:.95rem; line-height:1.5; color:#444;
+  text-align: left;
+}
+.rules-list li::before{
+  content:counter(rule, decimal-leading-zero);
+  position:absolute; left:0; top:0;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #fdf2f2; color: var(--maroon);
+  display: flex; align-items: center; justify-content: center;
+  font-size:.75rem; font-weight:700;
+}
+/* No Rules Message Fix */
+.rules-list li.no-rules {
+  counter-increment: none;
+  padding-left: 0;
+  text-align: center;
+}
+.rules-list li.no-rules::before { display: none; }
+
+.event-list{ list-style:none; margin:0; padding:0; }
+.event-list li{
+  display:flex; gap:16px; align-items:center;
+  padding:14px 0; border-bottom:1px dashed var(--line);
+}
+.event-list li:last-child{ border-bottom:0; padding-bottom:0; }
+.event-list li:first-child{ padding-top:0; }
+.event-date{
+  flex:0 0 54px; text-align:center; line-height:1;
+  background: #fdf2f2; border: 1px solid #f8d7da;
+  padding: 8px 0; border-radius: 6px;
+}
+.event-date b{ font-size:1.2rem; font-weight:700; display:block; color:var(--maroon); }
+.event-date span{ font-size:.65rem; text-transform:uppercase; color:var(--maroon); font-weight:600; }
+.event-body{ text-align: left; flex: 1; }
+.event-body h4{ font-size:.95rem; font-weight:700; color:var(--ink); margin:0 0 4px; }
+.event-body p{ font-size:.8rem; color:var(--muted); margin:0; line-height: 1.4; }
+.event-body p span{ color:var(--maroon); font-weight:600; }
+
+/* ============ COLLAGE GRID ============ */
+.collage-wrapper {
+  margin: 0 auto;
+  max-width: 1300px;
+}
+.collage-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows:clamp(150px, 18vw, 250px);
+  gap:0;
+  grid-auto-flow:dense;
+  background: var(--bg-color) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.tile{
+  position:relative; overflow:hidden;
+  border:0; padding:0; margin: 0;
+  background:#111; cursor:pointer; display:block;
+}
+.tile img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .7s ease, filter .7s ease;
+}
+.tile:hover img{ transform:scale(1.06); filter: brightness(0.85); }
+.tile::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 40%, transparent 70%);
+  transition:opacity .3s;
+}
+.tile-label{
+  position:absolute; left:20px; right:20px; bottom:16px; z-index:2;
+  text-align:center; color:#fff; pointer-events:none;
+}
+.tile-label b{
+  display:block;
+  font-size:clamp(1rem, 1.5vw, 1.25rem);
+  font-weight:600; letter-spacing:.02em;
+  line-height:1.2; margin-bottom:4px;
+}
+.tile-label span{ font-size:.75rem; opacity:.9; }
+.tile-zoom{
+  position:absolute; top:16px; right:16px; z-index:2;
+  width:32px; height:32px; border-radius:50%;
+  background:var(--maroon); border:2px solid #fff;
+  display:grid; place-items:center; color:#fff; font-size:.9rem;
+  opacity:0; transform:translateY(-5px);
+  transition:all .3s ease;
+}
+.tile:hover .tile-zoom{ opacity:1; transform:translateY(0); }
+
+.tile.big  { grid-column:span 2; grid-row:span 2; }
+.tile.tall { grid-row:span 2; }
+.tile.wide { grid-column:span 2; }
+
+/* ============ MODAL ============ */
+.gallery-modal .modal-content{
+  background:#fff; color:var(--ink); border:0; border-radius:0;
+  box-shadow:0 30px 80px rgba(0,0,0,.3);
+}
+.gallery-modal .modal-header{
+  background: var(--maroon); color: #fff;
+  padding:16px 24px; border: 0;
+}
+.gallery-modal .modal-title{ font-size:1.1rem; font-weight:600; }
+.gallery-modal .modal-title small{
+  display:block; font-size:.75rem; font-weight:400;
+  color:rgba(255,255,255,.8); margin-top:4px;
+}
+.gallery-modal .btn-close{ filter:invert(1); opacity:.8; }
+.gallery-modal .btn-close:hover{ opacity:1; }
+.gallery-modal .modal-body{ padding:24px; }
+.gallery-main{ position:relative; background:#000; }
+.gallery-main img{
+  width:100%; height:min(55vh, 480px); object-fit:contain; display:block;
+}
+.gallery-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:44px; height:44px; border-radius:50%;
+  border:0; background:var(--maroon); color:#fff;
+  display:grid; place-items:center; cursor:pointer;
+  font-size:1.5rem; line-height:1;
+  transition:background .25s;
+}
+.gallery-nav:hover{ background:var(--maroon-dark); }
+.gallery-nav.prev{ left:16px; }
+.gallery-nav.next{ right:16px; }
+.gallery-thumbs{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(80px, 1fr));
+  gap:10px; margin-top:20px;
+}
+.gallery-thumbs img{
+  width:100%; aspect-ratio:1/1; object-fit:cover; display:block;
+  cursor:pointer; opacity:.5;
+  border:3px solid transparent;
+  transition:all .2s;
+}
+.gallery-thumbs img:hover{ opacity:.8; }
+.gallery-thumbs img.active{ opacity:1; border-color:var(--maroon); }
+
+/* ============ SKELETON LOADERS ============ */
+.skeleton{
+  background:linear-gradient(90deg,#e9ecef 0%,#f8f9fa 50%,#e9ecef 100%);
+  background-size:200% 100%; animation:shimmer 1.6s infinite linear;
+}
+@keyframes shimmer{ 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+.sk-circle{ aspect-ratio:1/1; border-radius:50%; width: 110px; }
+.sk-card{ height:200px; border-radius:8px; }
+.sk-tile{ height:100%; min-height:150px; }
+.sk-text{ height:16px; margin: 10px auto; border-radius:4px; }
+
+/* ============ RESPONSIVE (GLOBAL) ============ */
+@media (max-width: 991px){
+  .collage-grid{
+    grid-template-columns:repeat(3, 1fr);
+    grid-auto-rows:clamp(140px, 20vw, 200px);
+  }
+}
+@media (max-width: 767.98px){
+  .cat-grid{ gap: 16px; }
+  .cat-item{ width: 90px; }
+  
+  .anchor-grid{ grid-template-columns: 1fr; }
+
+  .collage-grid{
+    grid-template-columns:repeat(2, 1fr);
+    grid-auto-rows:160px;
+  }
+  .collage-grid .tile{ grid-column:span 1 !important; grid-row:span 1 !important; }
+  
+  .section-title::after { margin: 10px auto 0; }
+}
+</style>
+
+<!-- ================= STRUCTURED DATA (JSON-LD) ================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "College Events & Festivals 2026",
+  "startDate": "2026-03-12T10:00:00+05:30",
+  "endDate": "2026-03-16T22:00:00+05:30",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@type": "Place",
+    "name": "College Main Campus",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "[Your College Address]",
+      "addressLocality": "[City]",
+      "addressRegion": "[State]",
+      "postalCode": "123456",
+      "addressCountry": "IN"
+    }
+  },
+  "image": [
+    "https://www.yourdomain.com/static/images/event-cover-1.jpg",
+    "https://www.yourdomain.com/static/images/event-cover-2.jpg"
+  ],
+  "description": "Explore upcoming college events, cultural fests, technical hackathons, and workshops. Meet our anchors, read guidelines, and browse the event gallery.",
+  "organizer": {
+    "@type": "Organization",
+    "name": "[Your College Name]",
+    "url": "https://www.yourdomain.com"
+  }
+}
+</script>
+</head>
+<body>
+<nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+    {% include 'navbar.html' %}
+<div class="overflow-x-scrolls  ">
+
+  <div class="notices fixed-top card rounded-0 bg-danger">
+    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+      {% include 'info.html' %}
+
+    </marquee>
+  </div>
+  <style>
+    .overflow-x-scrolls {
+      background: #800000 !important;
+    }
+
+    .notices {
+      max-width: 100%;
+      max-height: 1.7rem;
+      width: 100%;
+      height: 1.7rem;
+
+      justify-content: center;
+
+      /* background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important; */
+
+
+      color: #313871;
+    }
+  </style>
+
+</div>
+     
+
+  </nav>
+<!-- SEO Main Heading (Screen readers ke liye, normal users ko nahi dikhega) -->
+<h1 class="visually-hidden">College Events & Festivals 2026 - Official Event Page</h1>
+
+<main>
+  <!-- ================= 1. HERO CAROUSEL ================= -->
+  <header class="hero-carousel" id="heroSection">
+    <div id="heroCarousel" class="carousel slide carousel-fade"
+         data-bs-ride="carousel" data-bs-interval="5500" data-bs-pause="hover">
+      <div class="carousel-inner" id="heroInner">
+        <!-- Loading Skeleton -->
+        <div class="carousel-item active">
+          <div class="slide-loading">
+            <div class="loading-content">
+              <div class="skeleton skeleton-badge"></div>
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-sub"></div>
+            </div>
+            <div class="loading-footprint"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= 2. CATEGORY CIRCLES ================= -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Explore</span>
+        <h2 class="section-title">Event Categories</h2>
+       
+      </div>
+      
+      <div class="cat-grid" id="catGrid">
+        <!-- Skeletons -->
+        <div><div class="sk-circle skeleton"></div><div class="sk-text skeleton w-75"></div></div>
+        <div><div class="sk-circle skeleton"></div><div class="sk-text skeleton w-75"></div></div>
+        <div><div class="sk-circle skeleton"></div><div class="sk-text skeleton w-75"></div></div>
+        <div><div class="sk-circle skeleton"></div><div class="sk-text skeleton w-75"></div></div>
+        <div><div class="sk-circle skeleton"></div><div class="sk-text skeleton w-75"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. ANCHORS ================= -->
+  <section class="section-pad ">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Meet the Hosts &</span>
+        <h2 class="section-title">Our Anchors</h2>
+        
+      </div>
+      
+      <div class="anchor-grid" id="anchorGrid">
+        <!-- Skeletons -->
+        <div class="anchor-card p-4">
+          <div class="sk-circle skeleton mx-auto mb-3"></div>
+          <div class="sk-text skeleton w-50 mx-auto"></div>
+          <div class="sk-text skeleton w-75 mx-auto"></div>
+        </div>
+        <div class="anchor-card p-4">
+          <div class="sk-circle skeleton mx-auto mb-3"></div>
+          <div class="sk-text skeleton w-50 mx-auto"></div>
+          <div class="sk-text skeleton w-75 mx-auto"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. RULES + UPCOMING ================= -->
+  <section class="section-pad" id="upcoming">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Good to know</span>
+        <h2 class="section-title">Rules &amp; Upcoming Events</h2>
+        
+      </div>
+      
+      <div class="row g-4 justify-content-center">
+        <!-- Rules Panel -->
+        <div class="col-lg-6">
+          <div class="panel">
+            <h3 class="panel-title">Rules &amp; Guidelines</h3>
+            <div class="panel-body">
+              <ol class="rules-list" id="rulesList">
+                <li class="skeleton" style="height:30px; margin-bottom:10px;"></li>
+                <li class="skeleton" style="height:30px; margin-bottom:10px;"></li>
+                <li class="skeleton" style="height:30px; margin-bottom:10px;"></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Upcoming Panel -->
+        <div class="col-lg-6">
+          <div class="panel">
+            <h3 class="panel-title">Upcoming Events</h3>
+            <div class="panel-body">
+              <ul class="event-list" id="eventList">
+                <li class="skeleton" style="height:60px; margin-bottom:10px;"></li>
+                <li class="skeleton" style="height:60px;"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. COLLAGE GRID (LAST ME) ================= -->
+  <section class="section-pad  ">
+    <div class="container-fluid px-0 px-md-4">
+      <div class="section-head">
+        <span class="eyebrow">Gallery</span>
+        <h2 class="section-title">Moments From The Fest</h2>
+       
+      </div>
+
+      <div class="collage-wrapper ">
+        <div class="collage-grid bg-none" id="collageGrid">
+          <!-- Skeletons -->
+          <div class="sk-tile skeleton"></div>
+          <div class="sk-tile skeleton"></div>
+          <div class="sk-tile skeleton"></div>
+          <div class="sk-tile skeleton"></div>
+          <div class="sk-tile skeleton"></div>
+          <div class="sk-tile skeleton"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= MODAL ================= -->
+<div class="modal fade gallery-modal" id="galleryModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="galleryTitle">Category<small id="galleryCount"></small></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery-main">
+          <img id="galleryMain" src="" alt="Event Gallery Image">
+          <button class="gallery-nav prev" id="galPrev"><i class="bi bi-chevron-left"></i></button>
+          <button class="gallery-nav next" id="galNext"><i class="bi bi-chevron-right"></i></button>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  /* ---------- RENDERS ---------- */
+
+  function renderCategories(cats){
+    const grid = document.getElementById('catGrid');
+    if (!cats.length){ grid.innerHTML = ''; return; }
+    grid.innerHTML = cats.map(c => `
+      <button class="cat-item" data-cat="${esc(c.code)}">
+        <span class="cat-circle">
+          <img src="${esc(c.image)}" alt="${esc(c.name)} event category" loading="lazy">
+        </span>
+        <span class="cat-name">${esc(c.name)}</span>
+        <span class="cat-count">${c.count} photos</span>
+      </button>
+    `).join('');
+  }
+
+  function renderAnchors(list){
+    const grid = document.getElementById('anchorGrid');
+    if (!list.length){
+      grid.innerHTML = '<p class="text-center text-muted">No anchors assigned yet.</p>';
+      return;
+    }
+    grid.innerHTML = list.map(a => `
+      <article class="anchor-card">
+        <div class="anchor-photo">
+          <img src="${esc(a.photo)}" alt="${esc(a.name)} - Anchor for ${esc(a.work_code)} event" loading="lazy">
+        </div>
+        <div class="anchor-info">
+          <span class="anchor-tag">${esc(a.work_code)}</span>
+          <h3 class="anchor-name">${esc(a.name)}</h3>
+          <p class="anchor-role">${esc(a.position)}</p>
+          <p class="anchor-bio">${esc(a.work)}</p>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function renderRules(rules){
+    const ol = document.getElementById('rulesList');
+    if(!ol) return; // safety check
+    
+    // Agar rules nahi hain
+    if (!rules || rules.length === 0) {
+      ol.innerHTML = '<li class="no-rules text-muted">No rules available at the moment.</li>';
+      return;
+    }
+    
+    // Render rules
+    ol.innerHTML = rules.map(r => {
+      // Agar database se object {text: "...", date: "..."} aa raha hai
+      if (typeof r === 'object' && r !== null && r.text) {
+        return `<li>${esc(r.text)}</li>`;
+      }
+      // Agar simple string aa raha hai (jo backend se aa raha hai)
+      return `<li>${esc(r)}</li>`;
+    }).join('');
+  }
+
+  function renderUpcoming(list){
+    const ul = document.getElementById('eventList');
+    if (!list.length){
+      ul.innerHTML = '<li class="text-center text-muted" style="display:block; padding:20px 0;">No upcoming events right now.</li>';
+      return;
+    }
+    ul.innerHTML = list.map(ev => `
+      <li>
+        <div class="event-date"><b>${esc(ev.day)}</b><span>${esc(ev.month)}</span></div>
+        <div class="event-body">
+          <h4>${esc(ev.title)}</h4>
+          <p>${esc(ev.venue)} • <span>${esc(ev.time)}</span> • ${esc(ev.category_name)}</p>
+        </div>
+      </li>
+    `).join('');
+  }
+
+  function renderCollage(tiles){
+    const grid = document.getElementById('collageGrid');
+    if (!tiles.length){ grid.innerHTML = ''; return; }
+    grid.innerHTML = tiles.map(t => `
+      <button class="tile ${t.size || ''}" data-cat="${esc(t.code)}">
+        <img src="${esc(t.image)}" alt="${esc(t.name)} event photos at College Fest 2026" loading="lazy">
+        <span class="tile-zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+        <span class="tile-label">
+          <b>${esc(t.name)}</b>
+          <span>${t.count} photos</span>
+        </span>
+      </button>
+    `).join('');
+  }
+
+  function renderSlides(slides){
+    const section  = document.getElementById('heroSection');
+    const carousel = document.getElementById('heroCarousel');
+    const inner    = document.getElementById('heroInner');
+
+    if (!slides || !slides.length){ section.style.display = 'none'; return; }
+
+    inner.innerHTML = slides.map((s, i) => {
+      const active = (i === 0) ? 'active' : '';
+
+      let media = '';
+      if (s.image){
+        media = `<img src="${esc(s.image)}" alt="${esc(s.title || 'Event Slide')} - College Fest 2026"
+                      loading="${i === 0 ? 'eager' : 'lazy'}">`;
+      } else {
+        media = `<div class="slide-fallback-bg" style="background:#222;"></div>`;
+      }
+
+      const hasContent = s.badge || s.title || s.subtitle || (s.buttons && s.buttons.length);
+      const caption = hasContent ? `
+        <div class="hero-overlay"></div>
+        <div class="hero-caption">
+          ${s.badge    ? `<span class="hero-badge">${esc(s.badge)}</span>` : ''}
+          ${s.title    ? `<h2 class="hero-title">${esc(s.title)}</h2>` : ''} 
+          ${s.subtitle ? `<p class="hero-subtitle">${esc(s.subtitle)}</p>` : ''}
+          ${s.buttons && s.buttons.length ? `
+            <div class="hero-actions">
+              ${s.buttons.map((b, bi) =>
+                `<a href="${esc(b.url || '#')}"
+                    class="btn ${bi === 0 ? 'btn-primary' : 'btn-outline-light'}">
+                   ${esc(b.text)}
+                 </a>`
+              ).join('')}
+            </div>` : ''}
+        </div>` : '';
+
+      return `<div class="carousel-item ${active}">${media}${caption}</div>`;
+    }).join('');
+
+    carousel.querySelectorAll('.carousel-indicators, .carousel-control-prev, .carousel-control-next')
+            .forEach(el => el.remove());
+
+    if (slides.length > 1){
+      const ind = document.createElement('div');
+      ind.className = 'carousel-indicators';
+      ind.innerHTML = slides.map((_, i) =>
+        `<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="${i}"
+                 ${i === 0 ? 'class="active" aria-current="true"' : ''}
+                 aria-label="Slide ${i + 1}"></button>`
+      ).join('');
+      carousel.insertBefore(ind, inner);
+
+      const prev = document.createElement('button');
+      prev.type = 'button'; prev.className = 'carousel-control-prev';
+      prev.setAttribute('data-bs-target', '#heroCarousel');
+      prev.setAttribute('data-bs-slide', 'prev');
+      prev.innerHTML = '<span class="carousel-control-prev-icon"></span>';
+
+      const next = document.createElement('button');
+      next.type = 'button'; next.className = 'carousel-control-next';
+      next.setAttribute('data-bs-target', '#heroCarousel');
+      next.setAttribute('data-bs-slide', 'next');
+      next.innerHTML = '<span class="carousel-control-next-icon"></span>';
+
+      carousel.appendChild(prev);
+      carousel.appendChild(next);
+    }
+
+    const existing = bootstrap.Carousel.getInstance(carousel);
+    if (existing) existing.dispose();
+    new bootstrap.Carousel(carousel, { interval: 5500, ride: 'carousel', pause: 'hover' });
+  }
+
+  /* ---------- MASTER FETCH ---------- */
+
+  async function loadPage(){
+    try {
+      const res  = await fetch('/api/events-page/', { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+
+      // YEH LINE ADD KI HAI DEBUGGING KE LIYE (F12 Console me check karein)
+      console.log("Backend se aaya data:", data);
+
+      renderSlides(data.slides || []);
+      renderCategories(data.categories || []);
+      renderAnchors(data.anchors || []);
+      renderRules(data.rules || []);
+      renderUpcoming(data.upcoming || []);
+      renderCollage(data.collage || []);
+    } catch (err){
+      console.error('Page load failed:', err);
+      document.getElementById('catGrid').innerHTML =
+        '<p class="text-center text-danger w-100">Data load failed. Please refresh.</p>';
+    }
+  }
+
+  /* ---------- MODAL GALLERY ---------- */
+
+  const modalEl  = document.getElementById('galleryModal');
+  const modal    = new bootstrap.Modal(modalEl);
+  const elTitle  = document.getElementById('galleryTitle');
+  const elCount  = document.getElementById('galleryCount');
+  const elMain   = document.getElementById('galleryMain');
+  const elThumbs = document.getElementById('galleryThumbs');
+  let state      = { images: [], index: 0 };
+
+  function setMain(i){
+    const len = state.images.length;
+    if (!len) return;
+    state.index = (i + len) % len;
+    elMain.src = state.images[state.index].src;
+    elMain.alt = state.images[state.index].caption || 'Event Image';
+    [...elThumbs.children].forEach((th, idx) =>
+      th.classList.toggle('active', idx === state.index));
+  }
+
+  async function openGallery(cat){
+    elTitle.childNodes[0].nodeValue = 'Loading...';
+    elCount.textContent = '';
+    elMain.removeAttribute('src');
+    elThumbs.innerHTML = '';
+    modal.show();
+    try {
+      const res  = await fetch(`/api/category-images/${encodeURIComponent(cat)}/`);
+      const data = await res.json();
+      state.images = data.images || [];
+      state.index  = 0;
+      elTitle.childNodes[0].nodeValue = data.name + ' ';
+      elCount.textContent = state.images.length + ' photos in this category';
+      if (!state.images.length){
+        elMain.alt = 'No images yet';
+        elMain.src = 'https://picsum.photos/seed/empty-' + cat + '/900/600';
+        return;
+      }
+      elThumbs.innerHTML = state.images.map((img, i) => `
+        <img src="${esc(img.src)}" alt="${esc(img.caption || 'Event photo')}" data-i="${i}" loading="lazy">
+      `).join('');
+      elThumbs.querySelectorAll('img').forEach(t => {
+        t.addEventListener('click', () => setMain(parseInt(t.dataset.i, 10)));
+      });
+      setMain(0);
+    } catch (err){
+      console.error(err);
+      elTitle.childNodes[0].nodeValue = 'Error';
+      elCount.textContent = 'Images failed to load.';
+    }
+  }
+
+  document.getElementById('catGrid').addEventListener('click', e => {
+    const item = e.target.closest('.cat-item');
+    if (item) openGallery(item.dataset.cat);
+  });
+  document.getElementById('collageGrid').addEventListener('click', e => {
+    const tile = e.target.closest('.tile');
+    if (tile) openGallery(tile.dataset.cat);
+  });
+
+  document.getElementById('galPrev').addEventListener('click', () => setMain(state.index - 1));
+  document.getElementById('galNext').addEventListener('click', () => setMain(state.index + 1));
+  document.addEventListener('keydown', e => {
+    if (!modalEl.classList.contains('show')) return;
+    if (e.key === 'ArrowLeft')  setMain(state.index - 1);
+    if (e.key === 'ArrowRight') setMain(state.index + 1);
+  });
+
+  loadPage();
+})();
+</script>
+
+</body>
+</html>

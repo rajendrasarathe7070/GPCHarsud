@@ -6,8 +6,21 @@ from django.contrib import admin
 from django.utils.html import format_html
  
 from two_factor.admin import AdminSiteOTPRequired
-from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement ,pyq
+from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admission , CampusCategory , CampusImage , PlacementBatch , BranchPlacement , StudentEngagement ,pyq , Event , EventImage
 from django.contrib import admin
+
+
+class EventImageInline(admin.TabularInline):
+    model = EventImage
+    extra = 3   # 3 empty slots, jitni chahiye add kar sakte ho
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display  = ('title', 'category', 'event_date', 'venue', 'is_active')
+    list_filter   = ('category', 'is_active')
+    search_fields = ('title', 'venue')
+    inlines       = [EventImageInline]
 
 @admin.register(pyq)
 class PYQAdmin(admin.ModelAdmin):
@@ -265,6 +278,9 @@ admin.site.register(models.RulseUpdate_Campus)
 
 
 admin.site.register(models.syllabus)
+
+
+
 
 @admin.register(models.messages)
 class MessagesAdmin(admin.ModelAdmin):

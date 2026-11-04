@@ -188,12 +188,14 @@ class Responsibility(models.Model):
     WORK_CHOICES = [
        ('ADMISSION', 'Admission Desk In-Charge'),
         ('LIBRARY', 'Library Head'),
+        ('LABORATORY', 'Laboratory In-Charge'),
         ('EXAM', 'Exam Cell Coordinator'),
         ('SPORTS', 'Sports Committee Head'),
         ('PLACEMENT', 'Training & Placement Officer'),
         ('HOSTEL', 'Hostel Warden'),
         ('ANTI_RAGGING', 'Anti-Ragging Squad Leader'),
         ('WEBSITE', 'College Website In-Charge'),
+        ('CULTURAL', 'Cultural Committee Head'),
     ]
     
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='duties')
@@ -373,6 +375,7 @@ class RulseUpdate_Campus(models.Model):
                 ('LIBRARYRULSE','Library rulse'),
                 ('LABUPDATE','Lab updates practicals'),
                 ('LABRULSE','Lab rulse'),
+                 ('CULTURAL', 'Cultural Committee Rules'),
                 
                 ]
     id= models.AutoField(primary_key=True)
@@ -622,6 +625,8 @@ class HeroSlide(models.Model):
     PAGE_CAMPUS_LIFE     = 'campus_life'
     PAGE_STUDENT_CORNER  = 'student_corner'
     PAGE_PLACEMENTS      = 'placements'
+    PAGE_EVENTS          = 'events'
+    PAGE_HOSTEL          = 'Hostel'
 
     PAGE_CHOICES = [
         (PAGE_ACADEMIC,       'Academic'),
@@ -629,6 +634,8 @@ class HeroSlide(models.Model):
         (PAGE_CAMPUS_LIFE,    'Campus Life'),
         (PAGE_STUDENT_CORNER, 'Student Corner'),
         (PAGE_PLACEMENTS,     'Placements'),
+        (PAGE_EVENTS,         'Events'),
+        (PAGE_HOSTEL,         'Hostel'),
     ]
 
     # ---- Fallback gradient ----
@@ -680,3 +687,64 @@ class HeroSlide(models.Model):
 
     def __str__(self):
         return f"{self.get_page_display()} — {self.title or 'Untitled'}"
+    
+    
+ 
+
+
+class Event(models.Model):
+    CATEGORY_CHOICES = [
+        # पुरानी कैटेगरीज
+        ('dance',   'Dance'),
+        ('music',   'Music'),
+        ('drama',   'Drama'),
+        ('fashion', 'Fashion'),
+        ('comedy',  'Comedy'),
+        ('art',     'Art'),
+        ('photo',   'Photography'),
+        ('tech',    'Tech'),
+        ('sports',  'Sports'),
+        ('food',    'Food'),
+        
+        # नई इंजीनियरिंग और कॉलेज कैटेगरीज जोड़ी गईं
+        ('hackathon', 'Hackathon / Coding'),
+        ('robotics',  'Robotics'),
+        ('gaming',    'LAN Gaming / Esports'),
+        ('academic',  'Seminar / Workshop / Guest Lecture'),
+        ('career',    'Placement / Job Fair'),
+        ('social',    'Social Work / NSS / NGO'),
+        ('welcome',   'Freshers Party'),
+        ('farewell',  'Farewell Party'),
+        ('formal',    'Convocation / Alumni Meet'),
+        ('informal',  'Fun Games / Treasure Hunt'),
+        ('literary',  'Slam Poetry / Debate / Quiz'),
+    ]
+
+    title       = models.CharField(max_length=200)
+    category    = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    category_image = models.ImageField(upload_to='category_images/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    event_date  = models.DateTimeField()
+    venue       = models.CharField(max_length=200, blank=True)
+    is_active   = models.BooleanField(default=True)
+    created_at  = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-event_date']
+
+    def __str__(self):
+        return f"{self.title} ({self.get_category_display()})"
+
+
+class EventImage(models.Model):
+    event    = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='images')
+    image    = models.ImageField(upload_to='event_images/')
+    caption  = models.CharField(max_length=200, blank=True)
+    order    = models.PositiveIntegerField(default=0)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'id']
+
+    def __str__(self):
+        return f"{self.event.title} — img {self.id}"

@@ -276,19 +276,48 @@ def campuslife(request):
     hostelupdate = models.RulseUpdate_Campus.objects.filter(categorys='HOSTELUPDATE')
     libraryupdate = models.RulseUpdate_Campus.objects.filter(categorys='LIBRARYUPDATE')
     libraryrulse = models.RulseUpdate_Campus.objects.filter(categorys='LIBRARYRULSE')  
-    labupdate = models.RulseUpdate_Campus.objects.filter(categorys='LABUPDATE')
+     
     labrulse = models.RulseUpdate_Campus.objects.filter(categorys='LABRULSE')
+    worden = models.Responsibility.objects.filter(work_name='HOSTEL')
+    library_heads = models.Responsibility.objects.select_related('user', 'user__deprtment').filter(work_name='LIBRARY').first()
    
-   
+    crausal = models.HeroSlide.objects.filter(page='Hostel').order_by('order', 'id')
+    
+    lab_heads = (
+        models.Responsibility.objects
+        .filter(work_name='LABORATORY')
+        .select_related('user', 'user__deprtment')
+        .order_by('user__first_name')
+    )
+
+    # ② Laboratory category की सारी images
+    lab_category = models.CampusCategory.objects.filter(name='laboratory').first()
+    lab_images = lab_category.images.all() if lab_category else models.CampusImage.objects.none()
+
+    library_category = models.CampusCategory.objects.filter(name='library').first()
+    library_images = (
+        library_category.images.all().order_by('uploaded_at')
+        if library_category else models.CampusImage.objects.none()
+    )
+     
+       
+    
     campusdictionary = {'infomsg':info,
                         'categories':categories ,
                         'rulses': hostelrules,
                         'hostelupdates':hostelupdate,
                         'libraryupdates':libraryupdate ,
                         'libraryrulses':libraryrulse,
-                        'labupdates':labupdate ,
+                         'library_heads': library_heads,
+                         'library_images': library_images,
+                         
                         'labrulses':labrulse,
                         'slides': _get_slides('campus_life') ,
+                        'worden':worden,
+                        'crausal':  crausal ,
+                        'lab_heads': lab_heads,
+                         'lab_images': lab_images,
+                         
                         }
     return render(request,'CampusLife.html',campusdictionary)
 
@@ -624,3 +653,389 @@ def student_engagement_json(request):
             {"success": False, "error": f"{type(e).__name__}: {e}", "data": []},
             status=500,
         )
+        
+        
+        
+# event
+# events/views.py  (path apne project ke hisaab se adjust karo)
+
+import json
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.utils import timezone
+
+from .models import Event, EventImage, Responsibility , HeroSlide
+
+
+# =========================================================
+# STATIC CONFIG
+# =========================================================
+
+DEFAULT_CATEGORIES = [
+    
+    ('hackathon', 'Hackathon / Coding'),
+    ('robotics',  'Robotics'),
+    ('gaming',    'LAN Gaming / Esports'),
+    ('academic',  'Seminar / Workshop / Guest Lecture'),
+    ('career',    'Placement / Job Fair'),
+    ('social',    'Social Work / NSS / NGO'),
+    ('welcome',   'Freshers Party'),
+    ('farewell',  'Farewell Party'),
+    ('formal',    'Convocation / Alumni Meet'),
+    ('informal',  'Fun Games / Treasure Hunt'),
+    ('literary',  'Slam Poetry / Debate / Quiz'),
+]
+
+ 
+
+# =========================================================
+# HELPERS
+# =========================================================
+
+def _user_photo(user):
+    """User ka photo nikalo — CustomUser ke common fields try karta hai,
+    nahi mila to UI-Avatars fallback."""
+    for container in (user, getattr(user, 'profile', None)):
+        if container is None:
+            continue
+        for attr in ('profile_image', 'avatar', 'image', 'photo'):
+            v = getattr(container, attr, None)
+            if v:
+                try:
+                    return v.url
+                except Exception:
+                    return str(v)
+    name = (user.get_full_name() or user.username or 'A').replace(' ', '+')
+    return f'https://ui-avatars.com/api/?name={name}&background=4facfe&color=fff&size=200'
+
+
+def _category_circle(code, name, using_default):
+    """Ek category ka circle dict return karta hai, ya None agar skip karna hai."""
+
+    # ---------- Default mode ----------
+    if using_default:
+        return {
+            'code':        code,
+            'name':        name,
+            'count':       0,
+            'image':       f'https://picsum.photos/seed/cat-{code}/400/400',
+            'event_title': None,
+        }
+
+    # ---------- Us category ka SIRF PEHLA active event ----------
+    first_event = (
+        Event.objects
+        .filter(category=code, is_active=True)
+        .order_by('-event_date', '-id')
+        .first()
+    )
+
+    if not first_event:
+        return None  # khaali category → circle skip
+
+    # ---------- Image: category_image → EventImage.first() → picsum ----------
+    img_url = None
+
+    if first_event.category_image:
+        try:
+            img_url = first_event.category_image.url
+        except Exception:
+            img_url = None
+
+    if not img_url:
+        first_ev_img = first_event.images.first()
+        if first_ev_img:
+            try:
+                img_url = first_ev_img.image.url
+            except Exception:
+                img_url = None
+
+    if not img_url:
+        img_url = f'https://picsum.photos/seed/cat-{code}/400/400'
+
+    count = EventImage.objects.filter(
+        event__category=code, event__is_active=True
+    ).count()
+
+    return {
+        'code':        code,
+        'name':        name,
+        'image':       img_url,
+        'count':       count,
+        'event_title': first_event.title,
+    }
+
+
+def _collage_tile(code, name, size, using_default):
+    """Collage ke liye ek tile dict return karta hai, ya None agar skip karna hai."""
+
+    if using_default:
+        return {
+            'code':  code,
+            'name':  name,
+            'count': 0,
+            'image': f'https://picsum.photos/seed/tile-{code}/900/900',
+            'size':  size,
+        }
+
+    qs = EventImage.objects.filter(
+        event__category=code, event__is_active=True
+    )
+    count = qs.count()
+
+    if count == 0:
+        return None  # koi image nahi → tile skip
+
+    random_img = qs.order_by('?').first()
+    try:
+        img_url = random_img.image.url
+    except Exception:
+        return None
+
+    return {
+        'code':  code,
+        'name':  name,
+        'count': count,
+        'image': img_url,
+        'size':  size,
+    }
+
+def _build_hero_slides():
+    """Events page ke liye sirf HeroSlide.page == 'events' wali slides."""
+    qs = (
+         HeroSlide.objects
+        .filter(page=HeroSlide.PAGE_EVENTS)
+        .order_by('order', 'id')
+    )
+
+    slides = []
+    for s in qs:
+        # image priority: image_url → image → bg_class
+        img = None
+        if s.image_url:
+            img = s.image_url
+        elif s.image:
+            try:
+                img = s.image.url
+            except Exception:
+                img = None
+
+        buttons = []
+        for text, url in (
+            (s.button1_text, s.button1_url),
+            (s.button2_text, s.button2_url),
+            (s.button3_text, s.button3_url),
+        ):
+            if text:
+                buttons.append({'text': text, 'url': url or '#'})
+
+        slides.append({
+            'id':       s.id,
+            'badge':    s.badge or '',
+            'title':    s.title or '',
+            'subtitle': s.subtitle or '',
+            'image':    img,
+            'bg_class': s.bg_class or 'slide-bg-1',
+            'buttons':  buttons,
+        })
+
+    return slides
+# =========================================================
+# MASTER DATA BUILDER
+# =========================================================
+
+def _build_page_data():
+    rules_qs = models.RulseUpdate_Campus.objects.filter(categorys='CULTURAL').order_by('uploaded_at')
+    
+    rules = []
+    for r in rules_qs:
+        if r.text: # Agar text khali nahi hai
+            rules.append(r.text)
+            
+    # Agar database me koi rule nahi mila, toh temporary yeh dikhega
+    if not rules:
+        rules = [
+            "Registration online hi hoga. On-spot entries sirf slot available hone par.",
+            "Participant ko reporting time se 30 minutes pehle venue par pahuchna hoga.",
+            "Performance duration maximum 5 minutes."
+        ]
+    
+    total_events  = Event.objects.filter(is_active=True).count()
+    using_default = (total_events == 0)
+
+    # ---------- 1. Categories circles (unique, first event only, skip empty) ----------
+    categories = []
+    seen_cats  = set()
+
+    for code, name in Event.CATEGORY_CHOICES:
+        if code in seen_cats:
+            continue
+        seen_cats.add(code)
+
+        item = _category_circle(code, name, using_default)
+        if item is not None:
+            categories.append(item)
+
+    # ---------- 2. Collage (random image per category) ----------
+    collage = []
+    sizes   = ['big', '', 'tall', '', 'wide', 'tall', '', 'big', 'wide', '', 'tall']
+
+    seen_collage = set()
+    for code, name in Event.CATEGORY_CHOICES:
+        if code in seen_collage:
+            continue
+        seen_collage.add(code)
+
+        size = sizes[len(collage) % len(sizes)]
+        item = _collage_tile(code, name, size, using_default)
+        if item is not None:
+            collage.append(item)
+
+    # ---------- 3. Anchors — ONLY CULTURAL ----------
+    anchors = []
+    cultural_qs = (
+        Responsibility.objects
+        .filter(work_name='CULTURAL')
+        .select_related('user')
+        .order_by('assigned_date', 'id')
+    )
+
+    for resp in cultural_qs:
+        u = resp.user
+        anchors.append({
+            'name':      u.get_full_name() or u.username,
+            'work_code': resp.work_name,
+            'work':      resp.get_work_name_display(),
+            'position':  resp.work_position or resp.get_work_name_display(),
+            'photo':     _user_photo(u),
+        })
+
+    # ---------- 4. Upcoming events ----------
+    now = timezone.now()
+    upcoming_qs = (
+        Event.objects
+        .filter(is_active=True, event_date__gte=now)
+        .order_by('event_date')[:6]
+    )
+    if not upcoming_qs.exists():
+        upcoming_qs = (
+            Event.objects
+            .filter(is_active=True)
+            .order_by('event_date')[:6]
+        )
+
+    upcoming = [
+        {
+            'id':            ev.id,
+            'title':         ev.title,
+            'category':      ev.category,
+            'category_name': ev.get_category_display(),
+            'day':           ev.event_date.strftime('%d'),
+            'month':         ev.event_date.strftime('%b'),
+            'time':          ev.event_date.strftime('%I:%M %p'),
+            'venue':         ev.venue or 'TBA',
+        }
+        for ev in upcoming_qs
+    ]
+
+    # ---------- 5. Return ----------
+    return {
+        'using_default': using_default,
+        'slides':        _build_hero_slides(),   # <-- NAYA
+          'rules':         rules, 
+        'categories':    categories,
+        'collage':       collage,
+        'anchors':       anchors,
+        'upcoming':      upcoming,
+        
+    }
+
+
+# =========================================================
+# VIEWS
+# =========================================================
+
+def event_page_view(request):
+    """Page shell render — saara data JS JSON se lega."""
+    return render(request, 'event/event_page.html')
+
+
+def event_page_json(request):
+    """Master JSON endpoint — categories + collage + anchors + upcoming + rules."""
+    return JsonResponse(_build_page_data(), safe=False)
+
+
+def category_images_json(request, cat):
+    """Ek category ki saari images (modal ke liye)."""
+    qs = (
+        EventImage.objects
+        .filter(event__category=cat, event__is_active=True)
+        .select_related('event')
+        .order_by('order', 'id')
+    )
+
+    images = []
+    for img in qs:
+        try:
+            images.append({
+                'src':     img.image.url,
+                'caption': img.caption or img.event.title,
+                'event':   img.event.title,
+            })
+        except Exception:
+            continue
+
+    name_map = dict(Event.CATEGORY_CHOICES)
+    return JsonResponse({
+        'category': cat,
+        'name':     name_map.get(cat, cat.title()),
+        'count':    len(images),
+        'images':   images,
+    })
+    
+    
+    
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from .models import CustomUser  # apna path check kar lena
+def _serialize_user(u: CustomUser):
+    dept = u.deprtment  # spelling तुम्हारे model में ऐसी ही है
+    return {
+        "id": u.id,
+        "name": u.get_full_name() or u.username,
+        "qualification": u.study or "",
+        "experience": u.experience or 0,
+        "phone": u.phone or "",
+        "email": u.email or "",
+        "photo": u.photo.url if u.photo else "",
+        "department": dept.Department_name if dept else "",   # ✅ actual field
+        "department_code": dept.Course_code if dept else "",
+        "department_hod": dept.Department_hod if dept else "",
+        "category": u.get_category_display(),
+        "category_key": u.category,
+    }
+
+
+@require_GET
+def team_data_api(request):
+    category = request.GET.get("category", "").strip()
+
+    qs = CustomUser.objects.select_related("deprtment")
+    if category:
+        qs = qs.filter(category=category)
+
+    principal = qs.filter(category="PRINCIPAL").order_by("-id").first()
+    faculty_qs = (
+        qs.exclude(category="PRINCIPAL")
+          .exclude(category="STUDENT")
+          .order_by("category", "id")[:24]
+    )
+
+    faculty_list = [_serialize_user(f) for f in faculty_qs]
+
+    return JsonResponse({
+        "success": True,
+        "principal": _serialize_user(principal) if principal else None,
+        "faculty": faculty_list,
+        "count": len(faculty_list),
+    })

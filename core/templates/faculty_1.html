@@ -1,302 +1,267 @@
-<!-- 🌟 मुख्य फैकल्टी टैब पेन (Premium Light/Subtle BG) -->
- <style>
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    body {
-        overflow-x: hidden;
-
+<style>
+    body { overflow-x: hidden; 
+    font-family: 'Times New Roman', Times, serif !important;
     }
+    .shadow-sm { background: transparent; }
+    .object-fit-cover { object-fit: cover; }
+    .bg-black-20 { background-color: rgba(0,0,0,0.2); }
+    .border-white-20 { border-color: rgba(255,255,255,0.2) !important; }
 
-    .shadow-sm {
-        background: transparent;
+
+    /* principal message बॉक्स – mobile पर top dashed, desktop पर left gold line */
+    .principal-msg-box {
+        border-top: 2px dashed rgba(255,255,255,0.2);
+        padding-top: 14px;
     }
- </style>
-  <main class="container max-width-xl">
+    @media (min-width: 768px) {
+        .principal-msg-box {
+            border-top: none;
+            border-left: 3px solid #ffd700;
+            padding-top: 0;
+            padding-left: 16px;
+        }
+    }
+</style>
 
-    <!-- ==========================================
-         1. 👑 PRINCIPAL SECTION (VIP Hero Layout)
-         ========================================== -->
-    <div class="position-relative overflow-hidden p-4 p-md-5 rounded-4 shadow-lg border border-white text-white mb-5" 
-         style="background: linear-gradient(135deg, #1e0b0b 0%, #691b1b 50%, #a52a2a 100%);">
-      
-      <!-- प्रीमियम गोल्डन बैज -->
-      <div class="position-md-absolute top-0 end-0 mt-md-4 me-md-4 bg-warning text-dark fw-black px-4 py-2 rounded-pill text-uppercase shadow border border-white-50 text-center mx-auto mb-3 mb-md-0" 
-           style="font-size: 0.8rem; letter-spacing: 1px; background: linear-gradient(45deg, #ffd700, #ffa500) !important;">
-         Principal
-      </div>
+<main class="container max-width-xl">
 
-      <div class="d-flex flex-column flex-md-row align-items-center gap-4 gap-md-5 mt-2">
-        <!-- फोटो एरिया -->
-        <div class="flex-shrink-0">
-          <img class="rounded-circle img-fluid border border-5 border-white-20 shadow-lg object-fit-cover" 
-               src="https://gstatic.com" 
-               alt="Principal Dr. Vijay Kumar Sharma" 
-               style="width: 160px; height: 160px;">
+    <!-- ============ ⏳ LOADING FOOTPRINT (Skeleton) ============ -->
+    <div id="teamLoader" class="py-4">
+        <div class="text-center mb-4">
+            <div class="spinner-border text-danger" role="status" style="width:3rem;height:3rem;"></div>
+            <p class="text-muted mt-3 mb-0">टीम डेटा लोड हो रहा है…</p>
         </div>
-
-        <!-- विवरण -->
-        <div class="text-center text-md-start flex-grow-1">
-          <h2 class="display-6 fw-bold text-white mb-2">डॉ. विजय कुमार शर्मा</h2>
-          <p class="text-warning-emphasis fw-medium mb-3">Ph.D. (IIT Delhi) | M.Tech | 25+ वर्ष का प्रशासनिक अनुभव</p>
-          
-          <div class="fs-6 lh-lg text-light-emphasis opacity-90 ps-md-3 border-md-start border-warning" style="border-width: 3px !important;">
-            <p class="m-0 border-top border-dashed border-white-20 pt-3 pt-md-0 border-md-none italic">
-              "हमारा उद्देश्य केवल शिक्षा देना नहीं, बल्कि देश के भविष्य के लिए आत्मनिर्भर और कुशल लीडर्स तैयार करना है। अत्याधुनिक तकनीक और अटूट अनुशासन ही हमारी वास्तविक पहचान है।"
-            </p>
-          </div>
-
-          <!-- संपर्क सूत्र -->
-          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start text-white-50 mt-4 small">
-            <span class="bg-black-20 px-3 py-1 rounded-pill">📧 principal@college.edu</span>
-            <span class="bg-black-20 px-3 py-1 rounded-pill">📞 +91 98765 43210</span>
-          </div>
+        <div class="placeholder-glow">
+            <div class="placeholder col-12 bg-secondary bg-opacity-25 rounded-4 mb-4" style="height:220px;"></div>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="placeholder col-12 bg-secondary bg-opacity-25 rounded-4" style="height:280px;"></div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="placeholder col-12 bg-secondary bg-opacity-25 rounded-4" style="height:280px;"></div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="placeholder col-12 bg-secondary bg-opacity-25 rounded-4" style="height:280px;"></div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="placeholder col-12 bg-secondary bg-opacity-25 rounded-4" style="height:280px;"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
-
-    <!-- ==========================================
-         2. 💼 HOD SECTION (4 Cards Grid)
-         ========================================== -->
-    <div class="mb-5">
-      <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
-        <div class="bg-danger rounded-3" style="width: 8px; height: 35px;"></div>
-        <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">विभागाध्यक्ष / Heads of Departments</h3>
-      </div>
-
-      <div class="row g-4">
-        <!-- HOD 1: CS -->
-        <div class="col-12 col-sm-6 col-xl-3">
-          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden  text-center p-4 border-top border-5 border-danger">
-            <img class="rounded-circle mx-auto img-fluid mb-3 object-fit-cover shadow-sm" src="https://gstatic.com" style="width: 100px; height: 100px;">
-            <h4 class="fs-5 fw-bold text-dark mb-1">डॉ. राजेश मेहता</h4>
-            <span class="badge bg-danger-subtle text-danger px-3 py-1 rounded-pill small fw-bold mb-3 text-uppercase">HOD - कंप्यूटर साइंस</span>
-            <p class="text-muted small flex-grow-1">Ph.D. (AI & Data Science) <br> अनुभव: 15+ वर्ष</p>
-            <div class="border-top pt-2 mt-2 text-muted small font-monospace">📧 cs.hod@college.edu</div>
-          </div>
+    <!-- ============ ❌ ERROR STATE ============ -->
+    <div id="teamError" class="d-none text-center py-5">
+        <div class="alert alert-danger d-inline-block">
+            डेटा लोड नहीं हो सका।
+            <button class="btn btn-sm btn-danger ms-2" onclick="location.reload()">Retry</button>
         </div>
-
-        <!-- HOD 2: ME -->
-        <div class="col-12 col-sm-6 col-xl-3">
-          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden  text-center p-4 border-top border-5 border-primary">
-            <img class="rounded-circle mx-auto img-fluid mb-3 object-fit-cover shadow-sm" src="https://gstatic.com" style="width: 100px; height: 100px;">
-            <h4 class="fs-5 fw-bold text-dark mb-1">प्रो. अमित अवस्थी</h4>
-            <span class="badge bg-primary-subtle text-primary px-3 py-1 rounded-pill small fw-bold mb-3 text-uppercase">HOD - मैकेनिकल</span>
-            <p class="text-muted small flex-grow-1">M.Tech (IIT Roorkee) <br> अनुभव: 12+ वर्ष</p>
-            <div class="border-top pt-2 mt-2 text-muted small font-monospace">📧 me.hod@college.edu</div>
-          </div>
-        </div>
-
-        <!-- HOD 3: AS -->
-        <div class="col-12 col-sm-6 col-xl-3">
-          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden  text-center p-4 border-top border-5 border-success">
-            <img class="rounded-circle mx-auto img-fluid mb-3 object-fit-cover shadow-sm" src="https://gstatic.com" style="width: 100px; height: 100px;">
-            <h4 class="fs-5 fw-bold text-dark mb-1">डॉ. सुनीता शर्मा</h4>
-            <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill small fw-bold mb-3 text-uppercase">HOD - एप्लाइड साइंस</span>
-            <p class="text-muted small flex-grow-1">Ph.D. (Chemistry) <br> अनुभव: 18+ वर्ष</p>
-            <div class="border-top pt-2 mt-2 text-muted small font-monospace">📧 sci.hod@college.edu</div>
-          </div>
-        </div>
-
-        <!-- HOD 4: CE -->
-        <div class="col-12 col-sm-6 col-xl-3">
-          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden  text-center p-4 border-top border-5 border-warning">
-            <img class="rounded-circle mx-auto img-fluid mb-3 object-fit-cover shadow-sm" src="https://gstatic.com" style="width: 100px; height: 100px;">
-            <h4 class="fs-5 fw-bold text-dark mb-1">डॉ. विवेक सिंह</h4>
-            <span class="badge bg-warning-subtle text-warning px-3 py-1 rounded-pill small fw-bold mb-3 text-uppercase">HOD - सिविल इंजी.</span>
-            <p class="text-muted small flex-grow-1">Ph.D. (Structural) <br> अनुभव: 14+ वर्ष</p>
-            <div class="border-top pt-2 mt-2 text-muted small font-monospace">📧 civil.hod@college.edu</div>
-          </div>
-        </div>
-      </div>
     </div>
 
+    <!-- ============ 1. 👑 PRINCIPAL SECTION (JS) ============ -->
+    <div id="principalSection" class="d-none"></div>
 
-    <!-- ==========================================
-         3. 📋 ACADEMIC STAFF SECTION (10 Members List)
-         ========================================== -->
-    <div class="mb-5">
-      <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
-        <div class="bg-success rounded-3" style="width: 8px; height: 35px;"></div>
-        <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">शैक्षणिक स्टाफ / Academic Staff</h3>
-      </div>
-
-      <div class="row g-3">
-        <!-- Staff Loop (1 से 10 तक समान संरचना) -->
-        <!-- [Staff 1] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्री वर्मा आनंद कुमार</h5>
-              <p class="text-muted small mb-1 text-truncate">Assistant Professor — सीएसई</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff1@college.edu</div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff1@college.edu</div>
-          </div>
+    <!-- ============ 2. 💼 HOD SECTION (JS) ============ -->
+    <div id="hodSection" class="d-none mb-5">
+        <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
+            <div class="bg-danger rounded-3" style="width: 8px; height: 35px;"></div>
+            <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">
+                विभागाध्यक्ष / Heads of Departments
+            </h3>
         </div>
-        <!-- [Staff 2] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">डॉ. किरण सिंह</h5>
-              <p class="text-muted small mb-1 text-truncate">Senior Lecturer — मैकेनिकल</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">Ph.D.</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff2@college.edu</div>
-          </div>
+        <div class="row g-4" id="hodGrid"></div>
+    </div>
+
+    <!-- ============ 3. 📋 ACADEMIC STAFF (JS) ============ -->
+    <div id="staffSection" class="d-none mb-5">
+        <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
+            <div class="bg-success rounded-3" style="width: 8px; height: 35px;"></div>
+            <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">
+                शैक्षणिक स्टाफ / Academic Staff
+            </h3>
         </div>
-        <!-- [Staff 3] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्रीमती रेखा जोशी</h5>
-              <p class="text-muted small mb-1 text-truncate">Assistant Professor — ईसीई विभाग</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech (ECE)</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff3@college.edu</div>
-          </div>
+        <div class="row g-3" id="staffGrid"></div>
+    </div>
+
+    <!-- ============ 4. 👩‍🏫 TEACHERS GRID (JS) ============ -->
+    <div id="teachersSection" class="d-none mb-5">
+        <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
+            <div class="rounded-3" style="width: 8px; height: 35px; background-color: #ffd700;"></div>
+            <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">
+                शिक्षकों की सूची / Teachers Profiles
+            </h3>
         </div>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="teachersGrid"></div>
+    </div>
 
-        <!-- [Staff 4] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 4">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्री संजय मिश्रा</h5>
-              <p class="text-muted small mb-1 text-truncate">Lecturer — सिविल इंजीनियरिंग</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech</span>
+</main>
+
+<script>
+(function () {
+    const API_URL     = "{% url 'team_data_api' %}";
+    const DEFAULT_IMG = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqouibfLWLRLrMdB18XYkChNaB69WK0-2cAvacXuViDjf2-6V7Q-JLLDUw&s=10";
+    const HOD_COLORS  = ['danger', 'primary', 'success', 'warning', 'info', 'secondary'];
+
+    const esc = (s='') => String(s).replace(/[&<>"']/g, c => (
+        { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
+    ));
+
+    /* ---------- Principal ---------- */
+    function principalHTML(p) {
+        return `
+        <div class="position-relative overflow-hidden p-4 p-md-5 rounded-4 shadow-lg border border-white text-white mb-5"
+             style="background: linear-gradient(135deg, #1e0b0b 0%, #691b1b 50%, #a52a2a 100%);">
+
+            <div class="position-md-absolute top-0 end-0 mt-md-4 me-md-4 bg-warning text-dark fw-black px-4 py-2 rounded-pill text-uppercase shadow border border-white-50 text-center mx-auto mb-3 mb-md-0"
+                 style="font-size: 0.8rem; letter-spacing: 1px; background: linear-gradient(45deg, #ffd700, #ffa500) !important;">
+                Principal
             </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff4@college.edu</div>
-          </div>
-        </div>
 
-        <!-- [Staff 5] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 5">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">डॉ. प्रकाश अयर</h5>
-              <p class="text-muted small mb-1 text-truncate">Assistant Professor — फिजिक्स</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">Ph.D.</span>
+            <div class="d-flex flex-column flex-md-row align-items-center gap-4 gap-md-5 mt-2">
+                <div class="flex-shrink-0">
+                    <img class="rounded-circle img-fluid border border-5 border-white-20 shadow-lg object-fit-cover"
+                         src="${esc(p.photo) || DEFAULT_IMG}"
+                         alt="${esc(p.name)}"
+                         style="width: 160px; height: 160px;">
+                </div>
+
+                <div class="text-center text-md-start flex-grow-1">
+                    <h2 class="display-6 fw-bold text-white mb-2">${esc(p.name)}</h2>
+                    <p class="text-warning-emphasis fw-medium mb-3">
+                        ${esc(p.qualification) || ''}${p.experience ? ' | ' + p.experience + '+ वर्ष का अनुभव' : ''}
+                    </p>
+
+                    <div class="fs-6 lh-lg text-light-emphasis opacity-90 principal-msg-box">
+                        <p class="m-0 fst-italic">
+                            "हमारा उद्देश्य केवल शिक्षा देना नहीं, बल्कि देश के भविष्य के लिए आत्मनिर्भर और कुशल लीडर्स तैयार करना है। अत्याधुनिक तकनीक और अटूट अनुशासन ही हमारी वास्तविक पहचान है।"
+                        </p>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start text-white-50 mt-4 small">
+                        ${p.email ? `<span class="bg-black-20 px-3 py-1 rounded-pill">📧 ${esc(p.email)}</span>` : ''}
+                        ${p.phone ? `<span class="bg-black-20 px-3 py-1 rounded-pill">📞 ${esc(p.phone)}</span>` : ''}
+                    </div>
+                </div>
             </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff5@college.edu</div>
-          </div>
-        </div>
+        </div>`;
+    }
 
-        <!-- [Staff 6] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 6">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्रीमती अंजली गुप्ता</h5>
-              <p class="text-muted small mb-1 text-truncate">Lecturer — गणित विभाग</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Sc</span>
+    /* ---------- HOD card ---------- */
+    function hodCardHTML(h, idx) {
+        const c = HOD_COLORS[idx % HOD_COLORS.length];
+        const deptLabel = (h.department || 'HOD') + (h.department_code ? ` (${h.department_code})` : '');
+        return `
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center p-4 border-top border-5 border-${c}">
+                <img class="rounded-circle mx-auto img-fluid mb-3 object-fit-cover shadow-sm"
+                     src="${esc(h.photo) || DEFAULT_IMG}"
+                     style="width: 100px; height: 100px;"
+                     alt="${esc(h.name)}">
+                <h4 class="fs-5 fw-bold text-dark mb-1">${esc(h.name)}</h4>
+                <span class="badge bg-${c}-subtle text-${c} px-3 py-1 rounded-pill small fw-bold mb-3 text-uppercase">
+                    HOD - ${esc(deptLabel)}
+                </span>
+                <p class="text-muted small flex-grow-1">
+                    ${esc(h.qualification) || '—'}<br>
+                    अनुभव: ${h.experience || 0}+ वर्ष
+                </p>
+                <div class="border-top pt-2 mt-2 text-muted small font-monospace">
+                    ${h.email ? `📧 ${esc(h.email)}` : '&nbsp;'}
+                </div>
             </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff6@college.edu</div>
-          </div>
-        </div>
+        </div>`;
+    }
 
-        <!-- [Staff 7] -->
+    /* ---------- Staff card ---------- */
+    function staffCardHTML(s) {
+        const deptLine = [s.department, s.department_code].filter(Boolean).join(' — ') || '—';
+        return `
         <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 7">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्री राहुल देव</h5>
-              <p class="text-muted small mb-1 text-truncate">Assistant Professor — सीएसई</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech</span>
+            <div class="p-3 rounded-3 shadow-sm border d-flex align-items-center gap-3">
+                <img class="rounded-circle flex-shrink-0 border object-fit-cover"
+                     src="${esc(s.photo) || DEFAULT_IMG}"
+                     style="width: 60px; height: 60px;"
+                     alt="${esc(s.name)}">
+                <div class="flex-grow-1 min-w-0">
+                    <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">${esc(s.name)}</h5>
+                    <p class="text-muted small mb-1 text-truncate">${esc(deptLine)}</p>
+                    <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">
+                        ${esc(s.qualification) || '—'}
+                    </span>
+                </div>
+                ${s.email ? `<div class="text-end d-none d-sm-block text-muted small font-monospace">${esc(s.email)}</div>` : ''}
             </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff7@college.edu</div>
-          </div>
-        </div>
+        </div>`;
+    }
 
-        <!-- [Staff 8] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 8">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">डॉ. पी. के. बंसल</h5>
-              <p class="text-muted small mb-1 text-truncate">Senior Scientist — रिसर्च विंग</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">Post-Doc</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff8@college.edu</div>
-          </div>
-        </div>
-
-        <!-- [Staff 9] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 9">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्रीमती सुधा मूर्ति</h5>
-              <p class="text-muted small mb-1 text-truncate">Associate Professor — आईटी</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff9@college.edu</div>
-          </div>
-        </div>
-
-        <!-- [Staff 10] -->
-        <div class="col-12 col-md-6">
-          <div class="p-3  rounded-3 shadow-sm border d-flex align-items-center gap-3">
-            <img class="rounded-circle flex-shrink-0 border object-fit-cover" src="https://gstatic.com" style="width: 60px; height: 60px;" alt="Staff 10">
-            <div class="flex-grow-1 min-w-0">
-              <h5 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्री नितिन सक्सेना</h5>
-              <p class="text-muted small mb-1 text-truncate">Lecturer — इलेक्ट्रीकल</p>
-              <span class="badge bg-light text-secondary border font-monospace" style="font-size:0.7rem;">M.Tech</span>
-            </div>
-            <div class="text-end d-none d-sm-block text-muted small font-monospace">staff10@college.edu</div>
-          </div>
-        </div>
-      </div> <!-- Academic Staff Row End -->
-    </div> <!-- Academic Staff Container End -->
-
-
-    <!-- ==========================================
-         4. 👩‍🏫 TEACHERS SECTION (20 Columns Dynamic Grid)
-         ========================================== -->
-    <div class="mb-5">
-      <div class="d-flex align-items-center gap-3 mb-4 justify-content-center justify-content-md-start">
-        <div class="bg-warning rounded-3" style="width: 8px; height: 35px; background-color: #ffd700 !important;"></div>
-        <h3 class="fs-3 fw-bold text-dark m-0 text-uppercase tracking-wide">शिक्षकों की सूची / Teachers Profiles</h3>
-      </div>
-
-      <!-- Responsive Grid for 20 Teachers -->
-      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
-        
-        <!-- Teacher 1 -->
+    /* ---------- Teacher tile ---------- */
+    function teacherCardHTML(t, idx) {
+        const tag = t.department_code || ('T-' + String(idx + 1).padStart(2, '0'));
+        return `
         <div class="col">
-          <div class="card h-100 border-0 shadow-sm rounded-3 p-3  text-center">
-            <img class="rounded-circle mx-auto img-fluid mb-2 object-fit-cover border border-2" src="https://gstatic.com" style="width:70px; height:70px;" alt="T1">
-            <h6 class="fs-6 fw-bold text-dark mb-0 text-truncate">प्रो. आर. के. गुप्ता</h6>
-            <p class="text-secondary small mb-1 text-truncate" style="font-size:0.75rem;">कंप्यूटर विज्ञान</p>
-            <span class="badge bg-light text-dark border font-monospace mx-auto" style="font-size:0.65rem; width:fit-content;">T-01</span>
-          </div>
-        </div>
+            <div class="card h-100 border-0 shadow-sm rounded-3 p-3 text-center">
+                <img class="rounded-circle mx-auto img-fluid mb-2 object-fit-cover border border-2"
+                     src="${esc(t.photo) || DEFAULT_IMG}"
+                     style="width:70px; height:70px;"
+                     alt="${esc(t.name)}">
+                <h6 class="fs-6 fw-bold text-dark mb-0 text-truncate">${esc(t.name)}</h6>
+                <p class="text-secondary small mb-1 text-truncate" style="font-size:0.75rem;">
+                    ${esc(t.department) || '—'}
+                </p>
+                <span class="badge bg-light text-dark border font-monospace d-block mx-auto"
+                      style="font-size:0.65rem; width:fit-content;">
+                    ${esc(tag)}
+                </span>
+            </div>
+        </div>`;
+    }
 
-        <!-- Teacher 2 -->
-        <div class="col">
-          <div class="card h-100 border-0 shadow-sm rounded-3 p-3  text-center">
-            <img class="rounded-circle mx-auto img-fluid mb-2 object-fit-cover border border-2" src="https://gstatic.com" style="width:70px; height:70px;" alt="T2">
-            <h6 class="fs-6 fw-bold text-dark mb-0 text-truncate">डॉ. सीमा नाईक</h6>
-            <p class="text-secondary small mb-1 text-truncate" style="font-size:0.75rem;">मैकेनिकल इंजी.</p>
-            <span class="badge bg-light text-dark border font-monospace mx-auto" style="font-size:0.65rem; width:fit-content;">T-02</span>
-          </div>
-        </div>
+    /* ---------- Render orchestrator ---------- */
+    function render(data) {
+        // Principal
+        if (data.principal) {
+            const sec = document.getElementById('principalSection');
+            sec.innerHTML = principalHTML(data.principal);
+            sec.classList.remove('d-none');
+        }
 
-        <!-- Teacher 3 -->
-        <div class="col">
-          <div class="card h-100 border-0 shadow-sm rounded-3 p-3  text-center">
-            <img class="rounded-circle mx-auto img-fluid mb-2 object-fit-cover border border-2" src="https://gstatic.com" style="width:70px; height:70px;" alt="T3">
-            <h6 class="fs-6 fw-bold text-dark mb-0 text-truncate">श्री वरुण धवन</h6>
-            <p class="text-secondary small mb-1 text-truncate" style="font-size:0.75rem;">सिविल इंजीनियरिंग</p>
-            <span class="badge bg-light text-dark border font-monospace mx-auto" style="font-size:0.65rem; width:fit-content;">T-03</span>
-          </div>
-      </div> <!-- .row row-cols-* (Teachers Grid) यहाँ बंद होता है -->
-    </div> <!-- Teachers Section का मुख्य कंटेनर यहाँ बंद होता है -->
+        // faculty split by category
+        const list    = data.faculty || [];
+        const hods    = list.filter(f => f.category_key === 'HOD');
+        const staffs  = list.filter(f => f.category_key === 'STAFFS');
+        const teach   = list.filter(f => f.category_key === 'TEACHING');
 
-  </main> <!-- main Content Wrapper यहाँ बंद होता है -->
+        if (hods.length) {
+            document.getElementById('hodGrid').innerHTML   = hods.map(hodCardHTML).join('');
+            document.getElementById('hodSection').classList.remove('d-none');
+        }
+        if (staffs.length) {
+            document.getElementById('staffGrid').innerHTML = staffs.map(staffCardHTML).join('');
+            document.getElementById('staffSection').classList.remove('d-none');
+        }
+        if (teach.length) {
+            document.getElementById('teachersGrid').innerHTML = teach.map(teacherCardHTML).join('');
+            document.getElementById('teachersSection').classList.remove('d-none');
+        }
+    }
 
- 
+    /* ---------- Fetch ---------- */
+    fetch(API_URL, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(data => {
+            if (!data.success) throw new Error('API returned success=false');
+            render(data);
+        })
+        .catch(err => {
+            console.error('[team_data_api]', err);
+            document.getElementById('teamError').classList.remove('d-none');
+        })
+        .finally(() => {
+            document.getElementById('teamLoader').classList.add('d-none');
+        });
+})();
+</script>
