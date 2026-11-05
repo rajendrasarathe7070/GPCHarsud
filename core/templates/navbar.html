@@ -279,10 +279,10 @@
                     </div>
     
                     <!-- Right Side Controls -->
-                    <div class="d-flex align-items-center gap-2" style="font-size: 14px;">
+                    <div class="d-flex align-items-center gap-2 " style="font-size: 14px;">
     
                         <!-- 2. Font Size Controller -->
-                        <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1"
+                        <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1 d-none d-sm-block"
                             style="height: 18px; line-height: 1;">
                             <span class="me-1 fw-bold" style="font-size: 11px;">FONT:</span>
                             <button onclick="changeFontSize(-1)"
@@ -660,17 +660,17 @@
 
                 <a href="{% url 'placements' %}#Statistics-tab-pane" class="login-option student">
                     <span class="opt-icon bi-bar-chart text-primary"></span>
-                    <div class="opt-text"><strong>Placement Static's</strong></div>
+                    <div class="opt-text"><strong>Placement Statistics</strong></div>
                 </a>
                
                   <a href="{% url 'student_engagement_page' %}" class="login-option student">
                     <span class="opt-icon bi-person-lines-fill text-info "></span>
-                    <div class="opt-text"><strong>Placed Student's</strong></div>
+                    <div class="opt-text"><strong>Placed Students</strong></div>
                 </a>
                
                  <a href="{% url 'company_student_verification' %}" class="login-option student">
                     <span class="opt-icon bi-person-exclamation text-warning"></span>
-                    <div class="opt-text"><strong>Student Varification</strong></div>
+                    <div class="opt-text"><strong>Student Verification</strong></div>
                 </a> 
             {% else %}
                 <a href="{% url 'dashboard:student_dashboard' %}" class="login-option student">
@@ -704,7 +704,7 @@
 
 {% else %}
     <!-- --- NOT LOGGED IN BUTTONS --- -->
-    <div class="sidebar-login-container" id="loginContainer">
+    <div class="sidebar-login-container d-none d-sm-block" id="loginContainer">
         <style>
             .sidebar-login-container {
                 position: fixed;

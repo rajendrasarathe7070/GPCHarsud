@@ -54,15 +54,23 @@
 
 
     <div class="container my-5">
-        <!-- बूटस्ट्रैप का मुख्य टैब कंटेनर -->
+       
         <div class="tab-content" id="placementTabContent" style="margin-top: 9rem;">
 
-
+<style>
+    body {
+     
+    background-color: #f5f8ff;
+    background-image: radial-gradient(rgba(13, 71, 161, 0.18) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+}
  
-<div class="tab-pane fade" id="Offered" role="tabpanel">
+</style>
+ 
+<div class="tab-pane fade dots-bg" id="Offered" role="tabpanel">
 
    
-     <div class="container mt-3 mb-5 px-0">
+     <div class="container mt-3 mb-5 px-0 dots-bg">
                         <nav class="hding rounded-1 py-2 py-md-0">
                             <div class="d-flex w-100 justify-content-between align-items-center">
 
@@ -567,7 +575,7 @@
                                             {% endif %}
                                                 " class="img-fluid rounded-2 " alt="...">
                     
-                            <div class="text-center col  ">
+                            <div class="text-center col  "  >
                     
                                 <h4 class="text-bg-success rounded-3">  {{ principal.message_user.get_full_name }}</h4>
                                 <div class="text-danger-emphasis " >
@@ -581,7 +589,7 @@
                            
                     
                         </div>
-                        <div class="col-md-9" style="text-align: justify; ">
+                        <div class="col-md-9 bg-body rounded-4" style="text-align: justify; ">
                             <h6>From the Desk of the Principal</h6>
                             <b class="text-success"> {{principal.message_hedding}}</b> <br>
                             <p class="my-2"> {{principal.message_p1}} </p>

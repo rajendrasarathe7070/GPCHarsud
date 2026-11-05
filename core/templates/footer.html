@@ -1,72 +1,511 @@
- <!-- future section  -->
+{% load static %}
+ 
+<style>
+    #site-footer {
+        --footer-bg-1: #0b0b42;
+        --footer-bg-2: #111060;
+        --footer-bg-3: #2c2b95;
+        --footer-accent: #dc3545;
+        --footer-gold: #f0b90b;
+        --footer-text: #ffffff;
+        --footer-muted: rgba(255, 255, 255, 0.72);
+        --footer-border: rgba(255, 255, 255, 0.12);
 
+        position: relative;
+        background: linear-gradient(180deg, #0b0b42 0%, #111060 55%, #2c2b95 100%);
+        color: var(--footer-text);
+        font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        overflow: hidden;
+        margin-top: 40px;
+    }
+
+    #site-footer::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 10% 0%, rgba(44, 43, 149, 0.55) 0%, transparent 45%),
+            radial-gradient(circle at 90% 100%, rgba(220, 53, 69, 0.18) 0%, transparent 45%);
+        pointer-events: none;
+    }
+
+    .footer-accent-bar {
+        height: 4px;
+        background: linear-gradient(90deg, #dc3545 0%, #da1212 30%, #2c2b95 70%, #111060 100%);
+        position: relative;
+        z-index: 1;
+    }
+
+    .footer-main {
+        position: relative;
+        z-index: 1;
+        padding: 38px 0 26px;
+    }
+
+    /* ---------- Brand ---------- */
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .footer-logo {
+        height: 50px;
+        width: auto;
+        background: #fff;
+        padding: 4px;
+        border-radius: 8px;
+        object-fit: contain;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        flex-shrink: 0;
+    }
+
+    .footer-title {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 700;
+        font-size: 16px;
+        color: #ffffff;
+        margin: 0 0 2px;
+        letter-spacing: 0.3px;
+        line-height: 1.2;
+    }
+
+    .footer-subtitle {
+        color: var(--footer-gold);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .footer-about {
+        color: var(--footer-muted);
+        font-size: 12.5px;
+        line-height: 1.55;
+        margin-bottom: 12px;
+    }
+
+    /* ---------- Social ---------- */
+    .footer-social {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .footer-social a {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--footer-border);
+        color: #ffffff;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .footer-social a:hover {
+        background: var(--footer-accent);
+        border-color: var(--footer-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(220, 53, 69, 0.35);
+    }
+
+    /* ---------- Headings ---------- */
+    .footer-heading {
+        color: #ffffff;
+        font-size: 12.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.9px;
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        position: relative;
+    }
+
+    .footer-heading::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 30px;
+        height: 2.5px;
+        background: var(--footer-accent);
+        border-radius: 3px;
+    }
+
+    /* ---------- Links ---------- */
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 7px;
+    }
+
+    .footer-links a {
+        color: var(--footer-muted);
+        text-decoration: none;
+        font-size: 12.5px;
+        transition: all 0.25s ease;
+        display: inline-block;
+    }
+
+    .footer-links a::before {
+        content: '›';
+        font-size: 14px;
+        font-weight: 700;
+        margin-right: 5px;
+        color: rgba(255, 255, 255, 0.35);
+        transition: color 0.25s ease;
+    }
+
+    .footer-links a:hover {
+        color: #ffffff;
+        transform: translateX(3px);
+    }
+
+    .footer-links a:hover::before {
+        color: var(--footer-accent);
+    }
+
+    /* ---------- Contact ---------- */
+    .footer-contact {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-contact li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        color: var(--footer-muted);
+        font-size: 12px;
+        margin-bottom: 9px;
+        line-height: 1.45;
+    }
+
+    .footer-contact li i {
+        color: var(--footer-accent);
+        font-size: 12px;
+        margin-top: 2px;
+        min-width: 14px;
+    }
+
+    /* ---------- Developer card (compact horizontal) ---------- */
+    .dev-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--footer-border);
+        border-radius: 10px;
+        padding: 10px 11px;
+        transition: all 0.3s ease;
+    }
+
+    .dev-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(220, 53, 69, 0.55);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .dev-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--footer-accent);
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #2c2b95, #111060);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .dev-info { min-width: 0; flex: 1; }
+
+    .dev-name {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #fff;
+        margin: 0 0 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .dev-role {
+        font-size: 10.5px;
+        color: var(--footer-muted);
+        margin: 0 0 4px;
+        line-height: 1.3;
+    }
+
+    .dev-links {
+        display: flex;
+        gap: 7px;
+    }
+
+    .dev-links a {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.6);
+        transition: color 0.25s ease, transform 0.25s ease;
+        text-decoration: none;
+    }
+
+    .dev-links a:hover {
+        color: var(--footer-accent);
+        transform: translateY(-2px);
+    }
+
+    /* ---------- Bottom bar ---------- */
+    .footer-bottom {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--footer-border);
+        padding: 12px 0;
+        background: rgba(0, 0, 0, 0.18);
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        color: var(--footer-muted);
+        margin: 0;
+    }
+
+    .footer-bottom-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .footer-bottom-links a {
+        color: var(--footer-muted);
+        text-decoration: none;
+        font-size: 12px;
+        transition: color 0.25s ease;
+    }
+
+    .footer-bottom-links a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    /* ---------- Back to top ---------- */
+    #footerBackToTop {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2c2b95, #111060);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        text-decoration: none;
+        box-shadow: 0 8px 22px rgba(17, 16, 96, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(15px);
+        transition: all 0.3s ease;
+        z-index: 9998;
+    }
+
+    #footerBackToTop.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    #footerBackToTop:hover {
+        background: linear-gradient(135deg, #dc3545, #a30046);
+        transform: translateY(-4px);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 991.98px) {
+        .dev-card { margin-top: 4px; }
+    }
+
+    @media (max-width: 767.98px) {
+        .footer-main { padding: 28px 0 18px; }
+        .footer-bottom { text-align: center; }
+        .footer-bottom-links { justify-content: center; }
+        .footer-title { font-size: 15px; }
+        #footerBackToTop { right: 15px; bottom: 15px; width: 40px; height: 40px; }
+    }
+    footer {
+        font-family: 'Times New Roman', Times, serif;
+        overflow-x: hidden;
+    }
+</style>
+
+<footer id="site-footer">
+    <div class="footer-accent-bar"></div>
+
+    <div class="footer-main">
         <div class="container">
-            <footer class="py-md-5  ">
-                <div class="row rounded-3 p-md-5" style="background-color: rgb(155, 39, 39);">
-                    <div class="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
-                            </li>
-                        </ul>
+            <div class="row g-4 g-lg-3 gy-4">
+
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-brand">
+                        <img src="{% static 'logo/gpc.ico' %}" alt="GPC Logo" class="footer-logo">
+                        <div>
+                            <h5 class="footer-title">GOVT. POLYTECHNIC COLLEGE</h5>
+                            <p class="footer-subtitle">Harsud, Khandwa (M.P.)</p>
+                        </div>
                     </div>
-                    <div class="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-                            </li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-5 offset-md-1 mb-3">
-                        <form>
-                            <h5>Subscribe to our newsletter</h5>
-                            <p>Monthly digest of what's new and exciting from us.</p>
-                            <div class="d-flex flex-column flex-sm-row w-100 gap-2"> <label for="newsletter1"
-                                    class="visually-hidden">Email address</label> <input id="newsletter1" type="email"
-                                    class="form-control" placeholder="Email address" fdprocessedid="5vwz2" disabled>
-                                <button class="btn btn-primary" type="button" fdprocessedid="b4w5r9"
-                                    disabled>Subscribe</button>
-                            </div>
-                        </form>
+                    <p class="footer-about">
+                        Nurturing future engineers with quality technical education,
+                        innovation and industry-ready skills.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter / X"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
-                <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                    <p>© 2025 Company, Inc. All rights reserved.</p>
-                    <ul class="list-unstyled d-flex">
-                        <li class="ms-3"><a class="link-body-emphasis" href="#" aria-label="Instagram"><svg class="bi"
-                                    width="24" height="24">
-                                    <use xlink:href="#instagram"></use>
-                                </svg></a></li>
-                        <li class="ms-3"><a class="link-body-emphasis" href="#" aria-label="Facebook"><svg class="bi"
-                                    width="24" height="24" aria-hidden="true">
-                                    <use xlink:href="#facebook"></use>
-                                </svg></a></li>
+
+               
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="footer-heading">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'academic' %}">Academics</a></li>
+                        <li><a href="{% url 'admission' %}">Admission</a></li>
+                        <li><a href="{% url 'campuslife' %}">Campus Life</a></li>
+                        <li><a href="{% url 'contact_us' %}">Contact</a></li>
                     </ul>
                 </div>
-            </footer>
+
+               
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="footer-heading">Students</h6>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'pyqs' %}">PYQ Papers</a></li>
+                        <li><a href="{% url 'cheatsheets' %}">Cheat Sheets</a></li>
+                        <li><a href="{% url 'academic' %}#Syllabus-tab-pane">Syllabus</a></li>
+                        <li><a href="{% url 'academic' %}#AcademicCalendar-tab-pane">Calendar</a></li>
+                        <li><a href="{% url 'placements' %}">Placements</a></li>
+                        <li><a href="{% url 'company_student_verification' %}">Verify</a></li>
+                    </ul>
+                </div>
+
+         
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-heading">Contact</h6>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>Harsud, Khandwa<br>M.P. – 450116</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+91-XXXXXXXXXX</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@gpcharsud.ac.in</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Mon–Sat · 10:00–5:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+              
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">Developer's Profile</h6>
+                    <div class="dev-card">
+                   
+                        <div class="dev-avatar">RS</div>
+                        <div class="dev-info">
+                            <div class="dev-name">Rajendra Sarathe</div>
+                            <div class="dev-role">Design • Development • Maintenance</div>
+                            <div class="dev-links">
+                                 <a href="tel:+919302707097" title="call"><i class="bi bi-telephone-fill"></i></a>
+                                <a href="https://www.instagram.com/rajend_x7" title="Instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="https://github.com/rajendrasarathe7070" title="GitHub"><i class="bi bi-github"></i></a>
+                                <a href="mailto:rajendrasarathe144@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dev-card my-2">
+                     
+                        <div class="dev-avatar">CS'D</div>
+                        <div class="dev-info">
+                            <div class="dev-name">Computer Science Department</div>
+                            <div class="dev-role">Maintenanced</div>
+                            <div class="dev-links">
+                                <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" title="GitHub"><i class="bi bi-github"></i></a>
+                                <a href="mailto:you@example.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </div>
+
+     
+    <div class="footer-bottom">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+            <p class="footer-copyright">
+                &copy; <span id="footerYear"></span> Govt. Polytechnic College, Harsud. All Rights Reserved.
+            </p>
+            <ul class="footer-bottom-links">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="#" id="footerBackToTop" title="Back to Top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+</footer>
+
+<script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    (function () {
+        const btn = document.getElementById('footerBackToTop');
+        if (!btn) return;
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 400) btn.classList.add('show');
+            else btn.classList.remove('show');
+        });
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    })();
+</script>
