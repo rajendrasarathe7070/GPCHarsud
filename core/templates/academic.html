@@ -178,206 +178,153 @@ html, body {
 
   
 
-  <div class="containers  text-center">
+   
 
+<div class="tab-content" id="myTabContent">
 
+  {% include 'slide/crausal.html' %}
+  <!-- ═══════════════════════════════════════════════════════
+     OPEN: Courses-tab-pane
+     ═══════════════════════════════════════════════════════ -->
+<div class="tab-pane fade show active" id="Courses-tab-pane" role="tabpanel"
+  aria-labelledby="Courses-tab" tabindex="0">
 
-    <div class="tab-content" id="myTabContent">
+  <style>
+    .breadcrumb-item { background-color: #a2cdf9; }
+  </style>
 
-{% include 'slide/crausal.html' %}
-      <div class="tab-pane fade show active container-lg" id="Courses-tab-pane" role="tabpanel" aria-labelledby="Courses-tab"
-        tabindex="0">
-        <style>
-          .breadcrumb-item {
-            background-color: #a2cdf9;
-          }
-        </style>
-        <div class="containers mt-3 mb-5">
-          <style>
-            .hding {
-              background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-              margin-bottom: 10px;
-          
-              text-transform: uppercase;
-              width: 100%;
+  <!-- [OPEN 2] outer containers -->
+  <div class="containers mt-3 mb-5">
+    <style>
+      .hding {
+        background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        width: 100%;
+        padding: 6px 15px 6px 15px;
+        color: #f8f8fa;
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+      .hding-text {
+        font-weight: bold;
+        white-space: nowrap;
+        font-size: 3.4vw;
+      }
+      .breadcrumb-item {
+        background-color: #a2cdf9;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .custom-breadcrumb {
+        font-size: 2.2vw !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+      }
+      @media (min-width: 576px) {
+        .hding-text { font-size: 1.1rem; }
+        .custom-breadcrumb { font-size: 0.85rem !important; }
+      }
+      @media (min-width: 992px) {
+        .hding-text { font-size: 1.35rem; }
+        .hding { padding-left: 30px; }
+      }
+    </style>
 
-              /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
-              padding: 6px 15px 6px 15px;
-              color: #f8f8fa;
-              text-align: left;
+    <!-- [OPEN 3] inner containers -->
+    <div class="container mt-3 mb-5 px-0">
+      <nav class="hding rounded-1 py-lg-0">
+        <!-- [OPEN 4] flex wrapper -->
+        <div class="d-flex w-100 justify-content-between align-items-center">
 
-              display: flex;
-              align-items: center;
-            }
+          <div class="hding-text">course &amp; department</div>
 
-            /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
-            .hding-text {
-              font-weight: bold;
-              white-space: nowrap;
-              /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
-              font-size: 3.4vw;
-            }
-
-            /* ब्रेडक्रंब आइटम स्टाइल */
-            .breadcrumb-item {
-              background-color: #a2cdf9;
-              padding: 2px 6px;
-              border-radius: 3px;
-            }
-
-            .custom-breadcrumb {
-              font-size: 2.2vw !important;
-              margin-bottom: 0 !important;
-              padding: 0 !important;
-            }
-
-            /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
-            @media (min-width: 576px) {
-              .hding-text {
-                font-size: 1.1rem;
-                /* टैबलेट पर साइज */
-              }
-
-              .custom-breadcrumb {
-                font-size: 0.85rem !important;
-              }
-            }
-
-            @media (min-width: 992px) {
-              .hding-text {
-                font-size: 1.35rem;
-                /* डेस्कटॉप पर साइज */
-              }
-
-              .hding {
-                padding-left: 30px;
-                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
-              }
-            }
-          </style>
-
-          <div class="containers mt-3 mb-5 px-0">
-            <nav class="hding rounded-1 py-lg-0">
-              <div class="d-flex w-100 justify-content-between align-items-center">
-
-                <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
-                <div class="hding-text">
-                  course & department
-                </div>
-
-                <!-- ब्रेडक्रंब: मोबाइल (xs) पर छिप जाएगा, sm (576px) स्क्रीन से दिखना शुरू होगा -->
-                <div class="d-none d-sm-block">
-                  <ol class="breadcrumb custom-breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">c & d</li>
-                  </ol>
-                </div>
-
-              </div>
-            </nav>
+          <div class="d-none d-sm-block">
+            <ol class="breadcrumb custom-breadcrumb">
+              <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">c &amp; d</li>
+            </ol>
           </div>
+
         </div>
+        <!-- [CLOSE 4] -->
+      </nav>
+    </div>
+    <!-- [CLOSE 3] -->
 
-        {% include 'coursehod.html' %}
-        {% include 'models.html' %}
+  </div>
+  <!-- [CLOSE 2] -->
 
+  {% include 'coursehod.html' %}
+  {% include 'models.html' %}
 
+  <!-- ── Featurette loop ── -->
+  {% for department in departments %}
 
-        <!-- THIS IS NEW   -->
-        <!-- /.col-lg-4 -->
-        <!-- /.row --> <!-- START THE FEATURETTES -->
-       {% for department in departments %}
+  <hr class="featurette-divider mt-5 mb-5">
 
-        <hr class="featurette-divider mt-5 mb-5">
-        <div class="container row featurette  ">
+  <!-- [OPEN 5] featurette row (per iteration) -->
+  <div class="container">
+    <div class="container-lg row featurette">
 
-          <div class="col-md-5 order-md-1 my-4"> <img aria-label="Placeholder: Computer Science & Engg."
-              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded-5" height="500"
-              role="img" width="500" src="{{ department.Course_image.url }}">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%"
-              fill="var(--bs-secondary-color)" dy=".3em"> Computer Science & Enginearring</text>
-            </img>
-          </div>
-          <div
-            class='col-md-7 order-md-{% if forloop.counter == 1 %}1{% endif %}{% if forloop.counter == 2 %}0{% endif %}{% if forloop.counter == 3 %}1{% endif %}{% if forloop.counter == 4 %}0{% endif %}{% if forloop.counter == 5 %}2{% endif %} '>
-
-            <h2 class="featurette-heading fw-normal lh-1 my-3 pb-3">Dipartment : <span class="text-body-secondary">
-                {{ department.Department_name }}</span></h2>
-
-            <table class="table table-hover ">
-              <tbody style="text-align: left;">
-                <tr>
-                  <td>Course name :</td>
-                  <td>{{ department.Course_name }}</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Course code</td>
-                  <td>{{ department.Course_code }}</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>HOD Name</td>
-                  <!-- ✅ Yahan change: User model se HOD name -->
-                  <td>{{ department.hod_users.0.get_full_name|default:"Not Assigned" }}</td>
-                  <td></td>
-                </tr>
-
-                <tr>
-                  <td>Duration</td>
-                  <td>{{ department.Course_duration }}</td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td>Eligibility</td>
-                  <td>{{ department.Course_eligibility }}</td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td> Intake / Seats</td>
-                  <td>60 Intake ( {{ department.Course_seats_eklavya }}-Aklavy Sheam, {{ department.Course_seats_ppt }}
-                    -PPt Sheam ) </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td> Mode of study</td>
-                  <td>{{ department.Mode_of_study }}</td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td>Syllabus link</td>
-                  <td> <a href="http://">Click me</a> </td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td> Admission Process link</td>
-                  <td> <a href="/admission#Process-tab-pane">Go to-</a> </td>
-                  <td> </td>
-                </tr>
-              </tbody>
-            </table>
-            <button type="button" class="btn btn-outline-secondary w-100" data-bs-toggle="modal"
-              data-bs-target="#hodModal{{ department.Course_code }}">Head of department {{department.Course_name}}</button>
-          </div>
-        </div>
-
-        {% endfor %}
-
-
-        {% include 'footer.html' %}
-
-      </div>
-
+    <div class="col-md-5 order-md-1 my-4">
+      <img aria-label="Placeholder: Computer Science &amp; Engg."
+        class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded-5"
+        height="500" role="img" width="500" src="{{ department.Course_image.url }}">
     </div>
 
+    <div class='col-md-7 order-md-{% if forloop.counter == 1 %}1{% endif %}{% if forloop.counter == 2 %}0{% endif %}{% if forloop.counter == 3 %}1{% endif %}{% if forloop.counter == 4 %}0{% endif %}{% if forloop.counter == 5 %}2{% endif %}'>
 
-    <!-- thi is Departments  -->
+      <h2 class="featurette-heading fw-normal lh-1 my-3 pb-3">Dipartment :
+        <span class="text-body-secondary">{{ department.Department_name }}</span>
+      </h2>
+
+      <table class="table table-hover">
+        <tbody style="text-align: left;">
+          <tr><td>Course name :</td><td>{{ department.Course_name }}</td><td></td></tr>
+          <tr><td>Course code</td><td>{{ department.Course_code }}</td><td></td></tr>
+          <tr><td>HOD Name</td><td>{{ department.hod_users.0.get_full_name|default:"Not Assigned" }}</td><td></td></tr>
+          <tr><td>Duration</td><td>{{ department.Course_duration }}</td><td></td></tr>
+          <tr><td>Eligibility</td><td>{{ department.Course_eligibility }}</td><td></td></tr>
+          <tr>
+            <td> Intake / Seats</td>
+            <td>60 Intake ( {{ department.Course_seats_eklavya }}-Aklavy Sheam, {{ department.Course_seats_ppt }} -PPt Sheam )</td>
+            <td></td>
+          </tr>
+          <tr><td> Mode of study</td><td>{{ department.Mode_of_study }}</td><td></td></tr>
+          <tr><td>Syllabus link</td><td><a href="http://">Click me</a></td><td></td></tr>
+          <tr><td> Admission Process link</td><td><a href="/admission#Process-tab-pane">Go to-</a></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <button type="button" class="btn btn-outline-secondary w-100" data-bs-toggle="modal"
+        data-bs-target="#hodModal{{ department.Course_code }}">Head of department {{ department.Course_name }}</button>
+
+    </div>
+  </div>
+  </div>
+  <!-- [CLOSE 5] -->
+
+  {% endfor %}
+
+  <!-- ✅ Footer (100% width, inside tab-pane) -->
+  <div class="w-100">{% include 'footer.html' %}</div>
+
+</div>
+<!-- ═══════════════════════════════════════════════════════
+     CLOSE: Courses-tab-pane
+     ═══════════════════════════════════════════════════════ -->
+  
+  
+
+
+     <!-- thi is Departments  -->
 
     <div class="tab-pane fade " id="Departments-tab-pane" role="tabpanel" aria-labelledby="Departments-tab" tabindex="0">
 
       {% include 'department.html' %}
-
+      {% include 'footer.html' %}
     </div>
     <!-- this is syllabus section . -->
 
@@ -386,7 +333,7 @@ html, body {
     </div>
 
     <!-- this is acadmic callender table  -->
-    <div class="tab-pane fade container-lg" id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
+    <div class="tab-pane fade  " id="AcademicCalendar-tab-pane" role="tabpanel" aria-labelledby="AcademicCalendar-tab"
       tabindex="0">
       <!-- As a heading -->
 
@@ -395,7 +342,7 @@ html, body {
           background-color: #a2cdf9;
         }
       </style>
-      <div class="containerss mt-3 mb-5">
+      <div class="container mt-3 mb-5">
         
 
         <div class="container-fluid mt-3 mb-5 px-0">
@@ -445,7 +392,7 @@ html, body {
         }
       </style>
 
-      <div class="college-table-wrapper my-4">
+      <div class="college-table-wrapper my-4 container-lg">
         <!-- table-responsive क्लास मोबाइल पर टेबल को टूटने से बचाती है -->
         <div class="table-responsive shadow-sm rounded-3 overflow-hidden border">
           <table class="table table-striped table-hover table-bordered mb-0" style="text-align: left;">
@@ -467,7 +414,7 @@ html, body {
         </div>
       </div>
 
-
+      {% include 'footer.html' %}
     </div>
 
 
@@ -911,6 +858,7 @@ html, body {
       </div>
     </div>
     {% include 'faculty_1.html' %}
+    {% include 'footer.html' %}
   </div>
 
 
