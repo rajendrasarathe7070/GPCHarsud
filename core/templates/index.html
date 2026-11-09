@@ -289,13 +289,13 @@
        {% if not user.is_authenticated %}
               <div class="services-row  ">
              
-            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn">
-                <i class="bi bi-download"></i>
+            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn bg-primary">
+                <i class="bi bi-person "></i>
                 <span> Student Login</span>
             </a>
 
-            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn">
-                <i class="bi bi-briefcase-fill"></i>
+            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn bg-success">
+                <i class="bi bi-buildings"></i>
                 <span>Institute Login</span>
             </a>
  
@@ -465,6 +465,11 @@
     border-color: rgba(255, 255, 255, 0.6);
 }
 
+.service-btn-secondry {
+    background: rgba(30, 30, 60, 0.75);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
 .service-btn-primary:hover,
 .service-btn-primary:focus {
     background: rgba(200, 30, 45, 0.95);
@@ -493,6 +498,13 @@
 @supports not (backdrop-filter: blur(14px)) {
     .service-btn { background: rgba(30, 30, 60, 0.75); }
     .logo-glass-wrapper { background: rgba(255, 255, 255, 0.85); }
+}
+
+
+
+.service-btn-secondry {
+    text-decoration: none;
+    text-color: #000 !important;
 }
 </style>
             </div>
@@ -533,75 +545,75 @@
 
             <!-- SECOND IMAGES (Mobile view) -->
             <div class="px-4 py-2 my-2 text-center d-block d-sm-none"> 
-                <img class="d-block mx-auto mb-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNjbz0zl-0fv2c8ukAIVN9Ei3nI-vEJgCdOMZORkk2ldBvj27eB_W-wg6&s=10" alt="" width="auto" height="100px">
-                <h3 class="display-7 fw-bold text-body-emphasis">Important Service's</h3>
-                <div class="col-lg-10 mx-auto">
-                    <p class="lead mb-4">this is most usefull services for this college , they are link's for many services this container is use for gadring many usefull services.</p>
-                    <div class="d-flex flex-column flex-md-row p-2 gap-5 py-md-5 align-items-center justify-content-center">
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-md-4 mx-5">
-                                    <a href="/index/admission" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">AICTE Based OCBC 2023 CURRICULUM</h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">Academic Calendar</h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">Student Registration</h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 mx-5"> 
-                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">Time table & Result </h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">Dawnload form </h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-1 py-3" aria-current="true">
-                                        <img src="{% static 'images/logo1.jpg' %}" alt="" width="32" height="32" class="rounded-circle flex-shrink-0">
-                                        <div class="d-flex gap-1 w-100 justify-content-between">
-                                            <div>
-                                                <h6 class="mb-0">Employer Registration</h6>
-                                                <p class="mb-0 opacity-75"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="important-services-wrapper mb-5">
+
+        <!-- ===== LOGO — GLASSY background ===== -->
+         
+
+        <!-- ===== Heading — text-shadow only ===== -->
+        <h3 class="services-heading  ">
+            <i class="text-danger   "></i> Important Services
+        </h3>
+        <div class="heading-divider"></div>
+
+        <!-- ===== ROW 1 — 5 buttons ===== -->
+        <div class="services-row  ">
+            <a href="{% url 'admission' %}#Process-tab-pane" class="service-btn service-btn-primary ">
+                <i class="bi bi-mortarboard-fill"></i>
+                <span>Admission Process</span>
+            </a>
+
+            <a href="{% url 'academic' %}#Syllabus-tab-pane" class="service-btn service-btn-primary">
+                <i class="bi bi-journal-bookmark-fill"></i>
+                <span>A/O Based Curriculum</span>
+            </a>
+
+            <a href="https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx"
+               target="_blank" rel="noopener noreferrer"
+               class="service-btn service-btn-secondry">
+                <i class="bi bi-person-plus-fill"></i>
+                <span>Student Registration</span>
+            </a>
+
+            <a href="{% url 'academic' %}#AcademicCalendar-tab-pane" class="service-btn service-btn-secondry">
+                <i class="bi bi-calendar3"></i>
+                <span>Academic Calendar</span>
+            </a>
+
+            <a href="https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx"
+               target="_blank" rel="noopener noreferrer"
+               class="service-btn service-btn-secondry">
+                <i class="bi bi-award-fill"></i>
+                <span>Exam Result</span>
+            </a>
+        </div>
+
+        <!-- ===== ROW 2 — 4 buttons ===== -->
+        <div class="services-row ">
+            <a href="{% url 'academic' %}#TimeTable-tab-pane" class="service-btn service-btn-secondry">
+                <i class="bi bi-clock-history"></i>
+                <span>Time Table</span>
+            </a>
+
+            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn service-btn-secondry">
+                <i class="bi bi-download"></i>
+                <span>Download Forms</span>
+            </a>
+
+            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn service-btn-secondry">
+                <i class="bi bi-briefcase-fill"></i>
+                <span>Placements</span>
+            </a>
+
+            <a href="{% url 'pyqs' %}" class="service-btn service-btn-secondry">
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+                <span>Previous Year Papers</span>
+            </a>
+        </div>
+
+      
+
+    </div>
             </div>
 
             <!-- NOTICES HEADING -->

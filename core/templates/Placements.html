@@ -2183,6 +2183,228 @@
         </div>
 
 
+        <!-- Year-wise Placement Data Graphs -->
+<div class="container my-4">
+    <style>
+        .chart-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 24px;
+            height: 100%;
+        }
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+
+    <h3 class="mb-4 text-secondary border-bottom pb-2">
+        <i class="bi bi-graph-up"></i> Year-wise Placement Analytics
+    </h3>
+
+    <div class="row">
+        <!-- Graph 1: Students Placed -->
+        <div class="col-12 col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">Students Placed</div>
+                <div class="chart-wrapper">
+                    <canvas id="studentsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph 2: Highest Package -->
+        <div class="col-12 col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">Highest Package (LPA)</div>
+                <div class="chart-wrapper">
+                    <canvas id="highestChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph 3: Average Package -->
+        <div class="col-12 col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">Average Package (LPA)</div>
+                <div class="chart-wrapper">
+                    <canvas id="avgChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph 4: Median Package -->
+        <div class="col-12 col-md-6">
+            <div class="chart-card">
+                <div class="chart-title">Median Package (LPA)</div>
+                <div class="chart-wrapper">
+                    <canvas id="medianChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js Script (Agar head me nahi dala hai to yahan rakhein ya head me dalein) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Django Template से डेटा निकालना
+        const years = [];
+        const studentsPlaced = [];
+        const highestPkg = [];
+        const avgPkg = [];
+        const medianPkg = [];
+
+        // आपका Django Loop (बिल्कुल वैसा ही जैसा टेबल में था)
+        {% for batch in all_batches %}
+            years.push("{{ batch.year }}");
+            // |default:0 इसलिए लगाया है ताकि अगर डेटा None हो तो JS क्रैश न हो
+            studentsPlaced.push(parseFloat("{{ batch.total_students_placed|default:0 }}"));
+            highestPkg.push(parseFloat("{{ batch.max_highest_package|default:0 }}"));
+            avgPkg.push(parseFloat("{{ batch.avg_package|default:0 }}"));
+            medianPkg.push(parseFloat("{{ batch.median_package|default:0 }}"));
+        {% endfor %}
+
+     
+
+        // अगर डेटा खाली है, तो ग्राफ न बनाएं
+        if (years.length === 0) {
+            console.warn("No data available for charts.");
+            return;
+        }
+
+        // Common Settings for all charts
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    padding: 10,
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 14 }
+                }
+            },
+            scales: {
+                x: { grid: { display: false } },
+                y: { beginAtZero: true, grid: { color: '#f0f0f0' } }
+            }
+        };
+
+        var chartInstances = []; // टैब के लिए ग्राफ को सेव करने हेतु
+
+        // Graph 1: Students Placed
+        var ctx1 = document.getElementById('studentsChart').getContext('2d');
+        chartInstances.push(new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Students Placed',
+                    data: studentsPlaced,
+                    backgroundColor: 'rgba(25, 135, 84, 0.7)',
+                    borderColor: 'rgba(25, 135, 84, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: commonOptions
+        }));
+
+        // Graph 2: Highest Package
+        var ctx2 = document.getElementById('highestChart').getContext('2d');
+        chartInstances.push(new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Highest Package (LPA)',
+                    data: highestPkg,
+                    borderColor: '#ffc107',
+                    backgroundColor: 'rgba(255, 193, 7, 0.2)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ffc107',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: commonOptions
+        }));
+
+        // Graph 3: Average Package
+        var ctx3 = document.getElementById('avgChart').getContext('2d');
+        chartInstances.push(new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Average Package (LPA)',
+                    data: avgPkg,
+                    borderColor: '#0dcaf0',
+                    backgroundColor: 'rgba(13, 202, 240, 0.2)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#0dcaf0',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: commonOptions
+        }));
+
+        // Graph 4: Median Package
+        var ctx4 = document.getElementById('medianChart').getContext('2d');
+        chartInstances.push(new Chart(ctx4, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Median Package (LPA)',
+                    data: medianPkg,
+                    borderColor: '#6f42c1',
+                    backgroundColor: 'rgba(111, 66, 193, 0.2)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#6f42c1',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: commonOptions
+        }));
+
+        // ==============================================================
+        // MAGIC FIX: Bootstrap Tab Fix (ग्राफ को रीसाइज़ करने के लिए)
+        // ==============================================================
+        // जब भी 'Statistics' टैब खुले, तो ग्राफ्स को रीसाइज़ करें
+        var tabTrigger = document.querySelector('[aria-controls="Statistics-tab-pane"], #Statistics-tab');
+        if (tabTrigger) {
+            tabTrigger.addEventListener('shown.bs.tab', function (e) {
+                chartInstances.forEach(function(chart) {
+                    chart.resize();
+                });
+            });
+        }
+    });
+</script>
+
+
 
       </div>
 
