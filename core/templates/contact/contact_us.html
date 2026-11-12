@@ -51,89 +51,88 @@
     
     
 
-  <div class="container mt-3 mb-5 px-0">
-     <style>
-                        .hding {
-                            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
-                            margin-bottom: 10px;
+<div class="container mt-3 mb-5 px-0">
+    <style>
+        .hding {
+            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+            margin-bottom: 10px;
 
-                            /* border: 3px solid #861414; */
-                            text-transform: uppercase;
-                            width: 100%;
+            /* border: 3px solid #861414; */
+            text-transform: uppercase;
+            width: 100%;
 
-                            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
-                            padding: 6px 15px 6px 15px;
-                            color: #f8f8fa;
-                            text-align: left;
+            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+            padding: 6px 15px 6px 15px;
+            color: #f8f8fa;
+            text-align: left;
 
-                            display: flex;
-                            align-items: center;
-                        }
+            display: flex;
+            align-items: center;
+        }
 
-                        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
-                        .hding-text {
-                            font-weight: bold;
-                            white-space: nowrap;
-                            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
-                            font-size: 3.4vw;
-                            font-family: 'Times New Roman', Times, serif;
-                        }
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+            font-weight: bold;
+            white-space: nowrap;
+            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+            font-size: 3.4vw;
+            font-family: 'Times New Roman', Times, serif;
+        }
 
-                        /* ब्रेडक्रंब आइटम स्टाइल */
-                        .breadcrumb-item {
-                            background-color: #a2cdf9;
-                            padding: 2px 6px;
-                            border-radius: 3px;
-                        }
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+            background-color: #a2cdf9;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
 
-                        .custom-breadcrumb {
-                            font-size: 2.2vw !important;
-                            margin-bottom: 0 !important;
-                            padding: 0 !important;
-                        }
+        .custom-breadcrumb {
+            font-size: 2.2vw !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
 
-                        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
-                        @media (min-width: 576px) {
-                            .hding-text {
-                                font-size: 1.1rem;
-                                /* टैबलेट पर साइज */
-                            }
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+            .hding-text {
+                font-size: 1.1rem;
+                /* टैबलेट पर साइज */
+            }
 
-                            .custom-breadcrumb {
-                                font-size: 0.85rem !important;
-                            }
-                        }
+            .custom-breadcrumb {
+                font-size: 0.85rem !important;
+            }
+        }
 
-                        @media (min-width: 992px) {
-                            .hding-text {
-                                font-size: 1.35rem;
-                                /* डेस्कटॉप पर साइज */
-                            }
+        @media (min-width: 992px) {
+            .hding-text {
+                font-size: 1.35rem;
+                /* डेस्कटॉप पर साइज */
+            }
 
-                            .hding {
-                                padding-left: 30px;
-                                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
-                            }
-                        }
-                    </style>
-                    <nav class="hding rounded-1 py-2 py-md-0">
-                        <div class="d-flex w-100  justify-content-between align-items-center">
-                            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
-                            <div class="hding-text">
-                             CONTACT US
-                            </div>
+            .hding {
+                padding-left: 30px;
+                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+            }
+        }
+    </style>
+    <nav class="hding rounded-1 py-2 py-md-0">
+        <div class="d-flex w-100  justify-content-between align-items-center">
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+                CONTACT US
+            </div>
 
-                            <!-- ब्रेडक्रंब -->
-                            <div class="d-none d-sm-block">
-                                <ol class="breadcrumb custom-breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#"
-                                            class="text-decoration-none text-dark">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> contact us</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+            <!-- ब्रेडक्रंब -->
+            <div class="d-none d-sm-block">
+                <ol class="breadcrumb custom-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> contact us</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
+</div>
   <style>
         /* CSS कनविक्शन रोकने के लिए यूनिक नेमस्पेस 'gpc-card-' */
         .gpc-card-wrapper {
@@ -357,6 +356,7 @@
 
 </div>
 
+{% include 'footer.html' %}
 <!-- Bootstrap JS (Optional, for tooltips/dropdowns if added later) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load static %}
 
 <!doctype html>
 <html lang="en">
@@ -11,126 +12,501 @@
     <meta name="google-site-verification" content="uX9dmJO37GXV90cpuG_sA8rXjIxSiG0dXhVFDojXx2s" />
     <meta name="description" content="Welcome to Government Polytechnic College (GPC) Harsud. Explore our diploma courses, admission process, faculty details, and campus facilities in Harsud, Madhya Pradesh.">
     <meta name="keywords" content="GPC Harsud, Government Polytechnic College Harsud, Polytechnic Harsud, Diploma Engineering Harsud, GPC Harsud admission, Harsud college">
-    <link rel="canonical" href="https://gpcharsud.onrender.com"> 
+    <link rel="canonical" href="https://gpcharsud.onrender.com">
     <title>Govt. Polytechnic College Harsud</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="{% static 'logo/gpch.ico' %}">
 
     <style>
-        /* ================= BASE STYLES ================= */
+        /* ================================================================
+           BASE — traditional serif look for a government college
+           ================================================================ */
         body {
             font-family: 'Times New Roman', Times, serif;
+            background: #f8f8f6;
+            color: #222;
+            line-height: 1.65;
         }
-
         ::-webkit-scrollbar { display: none; }
         html, body { -ms-overflow-style: none; scrollbar-width: none; }
-
         hr { padding-top: 2px; padding-bottom: 2px; margin-top: 4px; margin-bottom: 4px; }
-        
         .tab-pane:not(.active) { display: none !important; }
 
-        /* ================= CAROUSEL ================= */
+        /* Colour tokens — traditional Indian college palette */
+        :root {
+            --navy: #003399;
+            --maroon: #8B0000;
+            --gold: #FFD200;
+            --ink: #222;
+            --muted: #6c757d;
+            --border: #d8d4c9;
+        }
+
+        /* ================================================================
+           HERO CAROUSEL
+           ================================================================ */
         .fixed-carousel-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1;
-            height: 70vh; /* Mobile height */
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 1; height: 70vh;
         }
-
-        @media (min-width: 768px) {
-            .fixed-carousel-bg { height: 100vh; /* Desktop height */ }
-        }
-
+        @media (min-width: 768px) { .fixed-carousel-bg { height: 100vh; } }
         .fixed-carousel-bg .carousel-item {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center;
         }
-
         .fixed-carousel-bg .carousel-item::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.1);
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(180deg,
+                rgba(0,0,0,0.15) 0%,
+                rgba(0,0,0,0.25) 55%,
+                rgba(0,0,0,0.75) 100%);
             z-index: 1;
         }
-
         .fixed-carousel-bg .carousel-caption { z-index: 2; bottom: 0; }
-        .text-shadow { text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); }
 
-        /* ================= MAIN CONTENT SECTION ================= */
+        /* ================================================================
+           CONTENT WRAPPER (scrolls over sticky canvas)
+           ================================================================ */
         .content-cover-section {
-            position: relative;
-            z-index: 2;
-            margin-top: 70vh; /* Mobile margin */
-            background: transparent; /* Background ab sticky wrapper par hai */
+            position: relative; z-index: 2;
+            margin-top: 70vh; background: transparent;
         }
+        @media (min-width: 768px) { .content-cover-section { margin-top: 100vh; } }
 
-        @media (min-width: 768px) {
-            .content-cover-section { margin-top: 100vh; /* Desktop margin */ }
-        }
-
-        /* ================= STICKY BACKGROUND (Animation Fix for Lag) ================= */
         .sticky-bg-wrapper {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 0;
-            background-color:whitesmoke;
-            background-image:  whitesmoke;
-            background-size: 24px 24px;
-            pointer-events: none; /* Clicks block nahi honge */
-            will-change: transform; /* GPU Acceleration for smooth scroll */
+            position: sticky; top: 0; width: 100%; height: 100vh; z-index: 0;
+            background-color: #faf8f4;
+            
+             
+            pointer-events: none; will-change: transform;
         }
+        #networkCanvas { width: 100%; height: 100%; display: block; }
 
-        #networkCanvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        /* Content wrapper jo sticky bg ke upar scroll hoga */
         .content-wrapper {
-            position: relative;
-            z-index: 1;
-            margin-top: -100vh; /* Sticky bg ke upar overlap karne ke liye */
-            padding-top: 2rem; /* Thoda gap shuru me */
+            position: relative; z-index: 1;
+            margin-top: -100vh; padding-top: 2rem;
         }
 
-        /* ================= OTHER CUSTOM CSS ================= */
-        .scheme-section { font-family: 'Times New Roman', Times, serif; }
-        .scheme-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: #ffffff; }
-        .scheme-card:hover { transform: translateY(0px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important; }
-        
-        .scheme-list li { margin-bottom: 10px; font-size: 1.05rem; color: #495057; list-style: none; position: relative; padding-left: 25px; }
-        .scheme-list li::before { content: "✓"; position: absolute; left: 0; color: brown; font-weight: bold; }
-        .ppt-card li::before { color: #6c757d; }
+        /* ================================================================
+           IMPORTANT SERVICES — glass buttons on carousel
+           ================================================================ */
+        .carousel-caption.important-services-caption {
+            position: absolute !important; top: auto !important; bottom: 0 !important;
+            left: 0 !important; right: 0 !important; padding: 0 !important;
+            background: transparent !important; pointer-events: none;
+        }
+        .important-services-wrapper {
+            display: flex; flex-direction: column; justify-content: flex-end;
+            align-items: center; width: 100%; height: 100%;
+            padding: 1rem 1rem 1.25rem; gap: .55rem;
+        }
+        .important-services-wrapper > * { pointer-events: auto; }
 
+        .logo-glass-wrapper {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 18px;
+            background: rgba(255,255,255,0.38);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 40px;
+            border: 1.5px solid rgba(255,255,255,0.55);
+            box-shadow: 0 6px 22px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.45);
+        }
+        .services-logo { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25)); }
+
+        .services-heading {
+            color: #fff; font-weight: 800;
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            letter-spacing: .6px; text-transform: uppercase; margin: 0;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 18px rgba(220,53,69,0.7);
+            font-family: 'Times New Roman', serif;
+        }
+        .heading-divider {
+            width: 80px; height: 3px; margin: .15rem 0 .55rem;
+            background: linear-gradient(90deg, transparent, #ec6262, transparent);
+            border-radius: 3px;
+        }
+
+        .services-row {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            align-items: center; gap: .55rem; width: 100%; max-width: 1000px;
+        }
+        .service-btn {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .7rem 1.1rem; font-size: .85rem; font-weight: 600;
+            color: #fff; text-decoration: none; white-space: nowrap;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            border: 1.5px solid rgba(255,255,255,0.45);
+            border-radius: 40px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
+            transition: all .28s cubic-bezier(.4,0,.2,1);
+        }
+        .service-btn i { font-size: 1.05rem; color: #fff; filter: drop-shadow(0 1px 2px rgba(0,0,0,.4)); }
+        .service-btn:hover, .service-btn:focus {
+            background: rgba(139,0,0,0.9); border-color: rgba(255,255,255,0.95);
+            color: #fff; text-decoration: none; transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(139,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.55);
+        }
+        .service-btn-primary { background: rgba(139,0,0,0.55); border-color: rgba(255,255,255,0.6); }
+        .service-btn-primary:hover { background: rgba(139,0,0,0.95); }
+        .service-btn-secondry { background: rgba(30,30,60,0.75); color: #fff; }
+        @supports not (backdrop-filter: blur(14px)) {
+            .service-btn { background: rgba(30,30,60,0.75); }
+            .logo-glass-wrapper { background: rgba(255,255,255,0.85); }
+        }
+        @media (max-width: 767.98px) {
+            .important-services-wrapper { padding: .75rem .75rem 1rem; gap: .4rem; }
+            .services-row { gap: .4rem; }
+            .service-btn { font-size: .78rem; padding: .55rem .85rem; white-space: normal; text-align: center; }
+            .service-btn i { font-size: .95rem; }
+            .services-heading { font-size: .95rem; }
+            .logo-glass-wrapper { padding: 5px 12px; }
+            .services-logo { height: 40px; }
+        }
+
+        /* ================================================================
+           SECTION SCAFFOLDING — matched to navbar
+           ================================================================ */
+        .section-band { padding: 3.5rem 0; }
+        .section-band-alt {  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+        .section-title {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 1.9rem;
+            margin: 0 0 .25rem;
+            letter-spacing: .2px;
+        }
+        .section-title .flag {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: var(--maroon);
+            transform: rotate(45deg);
+            margin-right: .6rem; vertical-align: middle;
+        }
+        .section-sub {
+            color: var(--muted);
+            font-size: .95rem;
+            margin-bottom: 1.75rem;
+        }
+        .section-rule {
+            height: 3px; width: 60px; background: var(--gold);
+            margin: .25rem 0 1rem; border-radius: 0;
+        }
+        .section-center { text-align: center; }
+        .section-center .section-rule { margin-left: auto; margin-right: auto; }
+
+        /* ================================================================
+           NOTICE TICKER — classic Indian college touch
+           ================================================================ */
+        .notice-ticker {
+            background: #fffbea;
+            border: 1px solid #f0d97d;
+            border-radius: 4px;
+            display: flex; align-items: stretch;
+            overflow: hidden; margin-bottom: 2rem;
+        }
+        .notice-ticker .label {
+            background: var(--maroon); color: #fff;
+            padding: .55rem 1rem; font-weight: 700; font-size: .85rem;
+            display: flex; align-items: center; gap: .4rem;
+            white-space: nowrap;
+        }
+        .notice-ticker .scroller {
+            flex: 1; overflow: hidden; position: relative;
+            display: flex; align-items: center;
+            padding: 0 1rem;
+        }
+        .notice-ticker .scroller-inner {
+            white-space: nowrap;
+            animation: tickerScroll 38s linear infinite;
+            color: #333; font-size: .9rem;
+        }
+        .notice-ticker .scroller-inner span { margin-right: 3rem; }
+        .notice-ticker .scroller-inner span::before {
+            content: "◆"; color: var(--maroon); margin-right: .5rem; font-size: .7rem;
+        }
+        @keyframes tickerScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ================================================================
+           QUICK FACTS STRIP — visible, traditional
+           ================================================================ */
+        .fact-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: var(--border);
+            border: 1px solid var(--border); border-radius: 6px;
+            overflow: hidden;
+        }
+        .fact-strip .fact {
+            background: #fff; padding: 1.1rem 1rem; text-align: center;
+        }
+        .fact-strip .fact b {
+            display: block; font-size: 1.7rem; color: var(--navy);
+            font-family: 'Times New Roman', serif; line-height: 1.1;
+        }
+        .fact-strip .fact span {
+            font-size: .82rem; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .5px;
+        }
+        @media (max-width: 576px) {
+            .fact-strip { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ================================================================
+           ABOUT / PRINCIPAL
+           ================================================================ */
+        .about-text { font-size: 1.02rem; color: #333; text-align: justify; }
+        .principal-card {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 6px; padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .principal-photo-frame {
+            border: 6px solid #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 4px; overflow: hidden;
+            background: #f3efe4;
+            aspect-ratio: 4 / 5;
+        }
+        .principal-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .principal-quote {
+            position: relative; padding-left: 1.5rem;
+            font-style: italic; color: #555; text-align: justify;
+        }
+        .principal-quote::before {
+            content: "“"; position: absolute; left: 0; top: -.5rem;
+            font-size: 3rem; color: var(--maroon); font-family: Georgia, serif;
+            opacity: .35;
+        }
+
+        /* ================================================================
+           WHY CHOOSE US — traditional icon list
+           ================================================================ */
+        .why-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (max-width: 576px) { .why-list { grid-template-columns: 1fr; } }
+        .why-item {
+            display: flex; gap: .85rem; padding: .85rem 1rem;
+            background: #fff; border: 1px solid var(--border);
+            border-left: 4px solid var(--maroon); border-radius: 4px;
+        }
+        .why-item .icon {
+            font-size: 1.4rem; color: var(--maroon);
+            flex: 0 0 auto; line-height: 1;
+        }
+        .why-item h6 { margin: 0 0 .15rem; font-weight: 700; color: var(--navy); font-size: .98rem; }
+        .why-item p { margin: 0; font-size: .85rem; color: var(--muted); }
+
+        /* ================================================================
+           DEPARTMENT CARDS — Traditional, like a syllabus page
+           ================================================================ */
+        .dept-card {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 6px; overflow: hidden;
+            transition: box-shadow .2s;
+        }
+        .dept-card:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+        .dept-card .dept-head {
+            background: var(--navy); color: #fff;
+            padding: .7rem 1rem; font-size: .95rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .dept-card .dept-head .code {
+            background: var(--gold); color: var(--navy);
+            font-size: .7rem; padding: .15rem .5rem; border-radius: 3px;
+            font-weight: 800; letter-spacing: .5px;
+        }
+        .dept-card .dept-img {
+            width: 100%; height: 160px; object-fit: cover; display: block;
+        }
+        .dept-card .dept-body { padding: 1rem 1.15rem; }
+        .dept-card .dept-body p { margin-bottom: .3rem; font-size: .88rem; color: #444; }
+        .dept-card .dept-body p strong { color: var(--navy); }
+        .dept-card a.dept-link {
+            display: inline-block; margin-top: .6rem;
+            font-size: .85rem; font-weight: 700; color: var(--maroon);
+            text-decoration: none;
+        }
+        .dept-card a.dept-link:hover { text-decoration: underline; }
+
+        /* ================================================================
+           ADMISSION — process steps (timeline style)
+           ================================================================ */
+        .steps-timeline { position: relative; padding-left: 1.5rem; }
+        .steps-timeline::before {
+            content: ""; position: absolute; left: .35rem; top: .5rem; bottom: .5rem;
+            width: 2px; background: var(--gold);
+        }
+        .step {
+            position: relative; margin-bottom: 1.25rem;
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 4px; padding: .9rem 1.15rem .9rem 1rem;
+        }
+        .step::before {
+            content: ""; position: absolute; left: -1.35rem; top: 1.1rem;
+            width: 14px; height: 14px; background: var(--maroon);
+            border: 3px solid #fff; border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--maroon);
+        }
+        .step h6 { margin: 0 0 .2rem; color: var(--navy); font-weight: 700; }
+        .step p { margin: 0; font-size: .87rem; color: var(--muted); }
+
+        .admission-cta {
+            background: linear-gradient(135deg, #003399 0%, #004aad 100%);
+            color: #fff; padding: 1.75rem; border-radius: 6px; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .admission-cta h4 { font-family: 'Times New Roman', serif; font-weight: 700; margin-bottom: .5rem; }
+        .admission-cta .btn-gold {
+            background: var(--gold); color: #003399; font-weight: 700;
+            border: none; border-radius: 4px; padding: .6rem 1.25rem;
+        }
+        .admission-cta .btn-gold:hover { background: #ffc400; }
+
+        /* ================================================================
+           CAMPUS LIFE — gallery + facilities
+           ================================================================ */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+        @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        .gallery-tile {
+            position: relative; overflow: hidden; border-radius: 4px;
+            aspect-ratio: 4 / 3;
+        }
+        .gallery-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+        .gallery-tile:hover img { transform: scale(1.06); }
+        .gallery-tile span {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: #fff; padding: 1.5rem .75rem .5rem;
+            font-size: .85rem; font-weight: 700;
+        }
+
+        .facility-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) { .facility-grid { grid-template-columns: repeat(2, 1fr); } }
+        .facility {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 4px; padding: 1.1rem 1rem; text-align: center;
+        }
+        .facility i {
+            font-size: 1.75rem; color: var(--maroon);
+            display: block; margin-bottom: .4rem;
+        }
+        .facility b { display: block; font-size: .95rem; color: var(--navy); }
+        .facility small { color: var(--muted); font-size: .8rem; }
+
+        /* ================================================================
+           STUDENT CORNER — 3‑column notices (existing template)
+           ================================================================ */
         .libtabs { justify-content: center; }
         .card-body-lib { padding-left: 10px; }
         .rules { max-height: 15rem; height: 15rem; text-align: start; color: #000; }
         .rulsetext { color: #8a1313; font-size: medium; cursor: pointer; }
-        .card-header { background: linear-gradient(rgb(17, 20, 113) 0%, rgb(56, 51, 137) 100%) !important; color: #f8f6f6; }
-        .cheader-1 { background: linear-gradient(rgb(184, 68, 57) 0%, rgb(139, 41, 19) 100%) !important; color: #f8f6f6; }
-        .card-libtab { margin-bottom: 10px; transition: all 0.5s ease; }
-        .card-libtab:hover { background-color: white; transform: translateY(-3px); }
-        .rulsetext:hover { transition: all 0.3s ease; color: #000; scroll-behavior: smooth; }
+        .rulsetext:hover { color: #000; transition: all .3s ease; }
+        .card-header {
+            background: linear-gradient(#111470 0%, #383389 100%) !important;
+            color: #f8f6f6; font-weight: 700;
+        }
+        .cheader-1 {
+            background: linear-gradient(#b84439 0%, #8b2913 100%) !important;
+            color: #f8f6f6;
+        }
+        .card-libtab { margin-bottom: 10px; transition: all .5s ease; border: 1px solid var(--border); }
+        .card-libtab:hover { background-color: #fff; transform: translateY(-3px); }
 
-        /* Gallery CSS */
-        .gallery-card { border: none !important; border-radius: 14px !important; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); background-color: #ffffff; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .gallery-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); }
-        .gallery-img-wrapper { position: relative; overflow: hidden; height: 190px; background-color: #f5f5f5; }
-        .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1rem; opacity: 0; transition: opacity 0.3s ease; }
-        .gallery-card:hover .gallery-overlay { opacity: 1; }
-        .gallery-card:hover .gallery-img { transform: scale(1.05); }
-        .modal-slider-img { height: 450px; object-fit: contain; background-color: #111; }
-        @media (max-width: 768px) { .modal-slider-img { height: 280px; } }
+        /* Schemes */
+        .scheme-card {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 4px; padding: 1.25rem 1.4rem; height: 100%;
+        }
+        .scheme-card.maroon { border-top: 4px solid var(--maroon); }
+        .scheme-card.grey { border-top: 4px solid #6c757d; }
+        .scheme-card h5 { color: var(--maroon); font-weight: 700; margin-bottom: .25rem; }
+        .scheme-card.grey h5 { color: #333; }
+        .scheme-card .sub {
+            font-size: .72rem; letter-spacing: .8px; text-transform: uppercase;
+            color: var(--muted); font-weight: 600;
+        }
+        .scheme-list { list-style: none; padding-left: 0; margin-top: .9rem; }
+        .scheme-list li {
+            position: relative; padding-left: 1.4rem;
+            margin-bottom: .5rem; font-size: .9rem; color: #444;
+        }
+        .scheme-list li::before {
+            content: "✓"; position: absolute; left: 0;
+            color: var(--maroon); font-weight: 700;
+        }
+        .scheme-card.grey .scheme-list li::before { color: #6c757d; }
+
+        /* ================================================================
+           PLACEMENTS — traditional stat boxes + chart cards
+           ================================================================ */
+        .placement-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: var(--border);
+            border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .placement-strip .stat { background: #fff; padding: 1.2rem 1rem; text-align: center; }
+        .placement-strip .stat b {
+            display: block; font-size: 1.9rem; color: var(--maroon);
+            font-family: 'Times New Roman', serif;
+        }
+        .placement-strip .stat span {
+            font-size: .8rem; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .5px;
+        }
+        @media (max-width: 576px) { .placement-strip { grid-template-columns: repeat(2, 1fr); } }
+
+        .chart-card {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 4px; padding: 1.15rem; margin-bottom: 1.5rem;
+        }
+        .chart-title {
+            font-size: .95rem; font-weight: 700; color: var(--navy);
+            margin-bottom: .75rem; text-align: center;
+            padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+            font-family: 'Times New Roman', serif;
+            letter-spacing: .3px;
+        }
+        .chart-wrapper { position: relative; height: 260px; width: 100%; }
+
+        .recruiters-strip {
+            display: flex; flex-wrap: wrap; gap: .5rem;
+            margin-top: .5rem;
+        }
+        .recruiters-strip span {
+            background: #fff; border: 1px solid var(--border);
+            padding: .4rem .9rem; border-radius: 3px;
+            font-size: .8rem; font-weight: 600; color: #444;
+        }
+
+        /* ================================================================
+           CONTACT CTA (before footer)
+           ================================================================ */
+        .contact-cta {
+            background: #fffbea; border: 1px solid #f0d97d;
+            border-radius: 6px; padding: 1.75rem; text-align: center;
+        }
+        .contact-cta h3 {
+            font-family: 'Times New Roman', serif; color: var(--maroon);
+            font-weight: 700;
+        }
+        .contact-cta a.btn-maroon {
+            background: var(--maroon); color: #fff; border-radius: 4px;
+            padding: .6rem 1.5rem; font-weight: 700; text-decoration: none;
+            display: inline-block;
+        }
+        .contact-cta a.btn-maroon:hover { background: #6b0000; color: #fff; }
     </style>
 </head>
 
@@ -138,906 +514,2490 @@
     {% include 'notices.html' %}
     {% include 'models.html' %}
 
-    <nav class="navbar fixed-top navbar-expand-lg" id="navbar" style="background:transparent; padding: 0% !important;">
+    <!-- ============================================================
+         HEADER / NAVBAR — from your existing includes
+    ============================================================ -->
+    <nav class="navbar fixed-top navbar-expand-lg" id="navbar" style="background:transparent; padding:0 !important;">
         {% include 'navbar.html' %}
     </nav>
+ 
 
-    <!-- SIGNUP MODAL -->
-    <div class="modal fade" id="singupform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="singupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/singup" method="post">{% csrf_token %}
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingFName" placeholder="First name" name="fname">
-                            <label for="floatingFirstName">First Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingLastName" placeholder="LastName" name="lname">
-                            <label for="floatingLastName">Last Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" name="email" placeholder="Enter Email" class="form-control" id="floatingInput">
-                            <label for="floatingInput" name="email">Email address</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="passwd" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="passwd2" type="password" class="form-control" id="floatingConformPassword" placeholder="ConformPassword">
-                            <label for="floatingConformPassword">Conform Password</label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-primary">SingUp</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- LOGIN MODAL -->
-    <div class="modal fade" id="loginform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/login" method="post">{% csrf_token %}
-                        <div class="form-floating mb-3">
-                            <input type="email" name="email" placeholder="Enter Email" class="form-control" id="floatingInput">
-                            <label for="floatingInput" name="email">Email address</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input name="passwd" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-primary">SingUp</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FIXED CAROUSEL -->
-    <div id="responsiveFixedCarousel" class="carousel slide carousel-fade fixed-carousel-bg" data-bs-ride="carousel" data-bs-interval="4000">
+    <!-- ============================================================
+         1. HOME — HERO CAROUSEL + IMPORTANT SERVICES
+    ============================================================ -->
+    <div id="responsiveFixedCarousel" class="carousel slide carousel-fade fixed-carousel-bg" data-bs-ride="carousel" data-bs-interval="4500">
         <div class="carousel-inner h-100">
             <div class="carousel-item active h-100" style="background-image: url({% static 'images/clg1-2.jpeg' %});">
-               <div class="carousel-caption important-services-caption mb-5">
-    <div class="important-services-wrapper mb-5">
+               <div class="carousel-caption custom-hero-caption">
+    
+    <!-- ============================================================
+         INTERNAL STYLES
+    ============================================================ -->
+    <style>
+        /* Main Container - Bottom Alignment */
+        .custom-hero-caption {
+            position: absolute !important;
+            top: 0 !important; bottom: 0 !important;
+            left: 0 !important; right: 0 !important;
+            /* Niche se gap dene ke liye padding-bottom badhaya hai */
+            padding: 0 1rem 2.5rem 1rem !important; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Content ko bottom me push karega */
+            background: transparent !important;
+            z-index: 2;
+        }
 
-        <!-- ===== LOGO — GLASSY background ===== -->
-        <div class="logo-glass-wrapper">
-            <img class="services-logo"
-                 src="{% static 'logo/redgpc.ico' %}"
-                 alt="RGPC Logo"
-                 height="100px">
+        /* The Stack Wrapper - Dono blocks ko ek hi jagah overlap karne ke liye */
+        .hero-stack-wrapper {
+            display: grid;
+            place-items: center;
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+            /* mb-3 equivalent margin added */
+            margin-bottom: 1rem; 
+        }
+
+        /* Dono blocks same grid cell me */
+        #welcomeBlock, #servicesBlock {
+            grid-area: 1 / 1; 
+            width: 100%;
+            text-align: center;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ================= 1. WELCOME STYLES ================= */
+        #welcomeBlock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #welcomeBlock.hide-welcome {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.95);
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            background: rgba(255, 210, 0, 0.95);
+            color: #111060;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: dropIn 0.8s ease forwards;
+        }
+
+        .welcome-title {
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: clamp(2rem, 4.5vw, 3.8rem);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            animation: dropIn 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .welcome-title .text-gold { color: #FFD200; }
+
+        .welcome-subtitle {
+            color: #f1f5f9;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+            animation: dropIn 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .welcome-motto {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            animation: dropIn 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        @keyframes dropIn {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= 2. IMPORTANT SERVICES STYLES ================= */
+        #servicesBlock {
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #servicesBlock.show-services {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            visibility: visible;
+            transition-delay: 0.1s;
+        }
+
+        .important-services-wrapper {
+            display: flex; flex-direction: column; align-items: center;
+            gap: .55rem; width: 100%;
+        }
+
+        /* Glass Logo */
+        .logo-glass-wrapper {
+            display: inline-flex; padding: 6px 15px;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(4px); /* Blur kam kiya */
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
+        }
+        
+        .services-heading {
+            color: #fff; font-weight: 800; font-size: clamp(1rem, 2vw, 1.35rem);
+            letter-spacing: .6px; text-transform: uppercase; margin: 0;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .heading-divider {
+            width: 80px; height: 3px; margin: .15rem 0 .55rem;
+            background: linear-gradient(90deg, transparent, #FFD200, transparent);
+            border-radius: 3px;
+        }
+
+        .services-row {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            align-items: center; gap: .6rem; width: 100%;
+        }
+
+        /* BUTTONS: Kam blur, dark transparent bg, text shadow */
+        .service-btn {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .6rem 1.1rem; font-size: .85rem; font-weight: 600;
+            color: #fff; text-decoration: none; white-space: nowrap;
+            
+            /* Blur kam (3px) aur transparent dark background */
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all .3s ease;
+            
+            /* Text shadow for readability */
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .service-btn:hover {
+            background: rgba(139,0,0,0.85); /* Hover par maroon */
+            color: #fff; 
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(0px); /* Hover par blur hat jayega */
+        }
+        
+        .service-btn-primary {
+            background: rgba(139,0,0,0.6); /* Primary buttons thode zyada maroon */
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 767.98px) {
+            .custom-hero-caption { padding-bottom: 1.5rem !important; }
+            .service-btn { font-size: .75rem; padding: .5rem .8rem; }
+            .welcome-motto { font-size: 0.75rem; padding: 0.4rem 1rem; }
+            .logo-glass-wrapper { display: none !important; }
+            .services-heading { display: none !important; }
+        }
+    </style>
+
+    <!-- ============================================================
+         HTML STACK
+    ============================================================ -->
+    <div class="hero-stack-wrapper">
+        
+        <!-- 1. WELCOME BLOCK -->
+        <div id="welcomeBlock">
+            <div class="welcome-badge">
+                <i class="bi bi-bank2 me-1"></i> Government of Madhya Pradesh
+            </div>
+            
+            <h1 class="welcome-title">
+                Welcome to <br>
+                <span class="text-gold">Govt. Polytechnic College</span>
+            </h1>
+            
+            <div class="welcome-subtitle">
+                <i class="bi bi-geo-alt-fill text-danger me-1"></i> 
+                Harsud (Dist. Khandwa) M.P. - 450116
+            </div>
+            
+            <div class="welcome-motto">
+                <i class="bi bi-patch-check-fill text-success me-2"></i>
+                Approved by AICTE & Affiliated to RGPV
+            </div>
         </div>
 
-        <!-- ===== Heading — text-shadow only ===== -->
-        <h3 class="services-heading d-none d-sm-block">
-            <i class="text-danger   "></i> Important Services
-        </h3>
-        <div class="heading-divider"></div>
+        <!-- 2. IMPORTANT SERVICES BLOCK -->
+        <div id="servicesBlock">
+            <div class="important-services-wrapper">
+                
+                <div class="logo-glass-wrapper d-none d-sm-inline-flex">
+                    <img class="services-logo" src="{% static 'logo/redgpc.ico' %}" alt="GPC Logo" height="60px">
+                </div>
 
-        <!-- ===== ROW 1 — 5 buttons ===== -->
-        <div class="services-row d-none d-sm-block">
-            <a href="{% url 'admission' %}#Process-tab-pane" class="service-btn service-btn-primary">
-                <i class="bi bi-mortarboard-fill"></i>
-                <span>Admission Process</span>
-            </a>
+                <h3 class="services-heading d-none d-sm-block">Important Services</h3>
+                <div class="heading-divider d-none d-sm-block"></div>
 
-            <a href="{% url 'academic' %}#Syllabus-tab-pane" class="service-btn service-btn-primary">
-                <i class="bi bi-journal-bookmark-fill"></i>
-                <span>A/O Based Curriculum</span>
-            </a>
+                <!-- ROW 1 -->
+                <div class="services-row d-none d-sm-block">
+                    <a href="{% url 'admission' %}#Process-tab-pane" class="service-btn service-btn-primary">
+                        <i class="bi bi-mortarboard-fill"></i><span>Admission Process</span>
+                    </a>
+                    <a href="{% url 'academic' %}#Syllabus-tab-pane" class="service-btn service-btn-primary">
+                        <i class="bi bi-journal-bookmark-fill"></i><span>A/O Based Curriculum</span>
+                    </a>
+                    <a href="https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx" target="_blank" class="service-btn">
+                        <i class="bi bi-person-plus-fill"></i><span>Student Registration</span>
+                    </a>
+                    <a href="{% url 'academic' %}#AcademicCalendar-tab-pane" class="service-btn">
+                        <i class="bi bi-calendar3"></i><span>Academic Calendar</span>
+                    </a>
+                    <a href="https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx" target="_blank" class="service-btn">
+                        <i class="bi bi-award-fill"></i><span>Exam Result</span>
+                    </a>
+                </div>
 
-            <a href="https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx"
-               target="_blank" rel="noopener noreferrer"
-               class="service-btn">
-                <i class="bi bi-person-plus-fill"></i>
-                <span>Student Registration</span>
-            </a>
+                <!-- ROW 2 -->
+                <div class="services-row d-none d-sm-block">
+                    <a href="{% url 'academic' %}#TimeTable-tab-pane" class="service-btn">
+                        <i class="bi bi-clock-history"></i><span>Time Table</span>
+                    </a>
+                    <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn">
+                        <i class="bi bi-download"></i><span>Download Forms</span>
+                    </a>
+                    <a href="{% url 'placements' %}#home-tab-pane" class="service-btn">
+                        <i class="bi bi-briefcase-fill"></i><span>Placements</span>
+                    </a>
+                    <a href="{% url 'pyqs' %}" class="service-btn">
+                        <i class="bi bi-file-earmark-pdf-fill"></i><span>Previous Year Papers</span>
+                    </a>
+                </div>
 
-            <a href="{% url 'academic' %}#AcademicCalendar-tab-pane" class="service-btn">
-                <i class="bi bi-calendar3"></i>
-                <span>Academic Calendar</span>
-            </a>
+                <!-- LOGIN ROW -->
+                {% if not user.is_authenticated %}
+                <div class="services-row mt-2">
+                    <a href="{% url 'dashboard:login' %}" class="service-btn bg-primary">
+                        <i class="bi bi-person"></i><span>Student Login</span>
+                    </a>
+                    <a href="{% url 'dashboard:login' %}" class="service-btn bg-success">
+                        <i class="bi bi-buildings"></i><span>Institute Login</span>
+                    </a>
+                </div>
+                {% endif %}
 
-            <a href="https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx"
-               target="_blank" rel="noopener noreferrer"
-               class="service-btn">
-                <i class="bi bi-award-fill"></i>
-                <span>Exam Result</span>
-            </a>
+            </div>
         </div>
 
-        <!-- ===== ROW 2 — 4 buttons ===== -->
-        <div class="services-row d-none d-sm-block">
-            <a href="{% url 'academic' %}#TimeTable-tab-pane" class="service-btn">
-                <i class="bi bi-clock-history"></i>
-                <span>Time Table</span>
-            </a>
+    </div> <!-- End Stack Wrapper -->
 
-            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn">
-                <i class="bi bi-download"></i>
-                <span>Download Forms</span>
-            </a>
+    <!-- ============================================================
+         JAVASCRIPT: The 2-Second Transition Engine
+    ============================================================ -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const welcomeBlock = document.getElementById('welcomeBlock');
+            const servicesBlock = document.getElementById('servicesBlock');
+            
+            // 2 second wait for Welcome
+            setTimeout(function() {
+                
+                // Fade out Welcome
+                if (welcomeBlock) {
+                    welcomeBlock.classList.add('hide-welcome');
+                }
 
-            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn">
-                <i class="bi bi-briefcase-fill"></i>
-                <span>Placements</span>
-            </a>
+                // Slide in Services after 200ms gap
+                setTimeout(function() {
+                    if (servicesBlock) {
+                        servicesBlock.classList.add('show-services');
+                    }
+                }, 200); 
 
-            <a href="{% url 'pyqs' %}" class="service-btn">
-                <i class="bi bi-file-earmark-pdf-fill"></i>
-                <span>Previous Year Papers</span>
-            </a>
-        </div>
+            }, 2000); 
+        });
+    </script>
 
-       {% if not user.is_authenticated %}
-              <div class="services-row  ">
-             
-            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn bg-primary">
-                <i class="bi bi-person "></i>
-                <span> Student Login</span>
-            </a>
-
-            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn bg-success">
-                <i class="bi bi-buildings"></i>
-                <span>Institute Login</span>
-            </a>
- 
-        </div>
-        {% endif %}
-
-    </div>
 </div>
-<style>
-    /* =========================================================
-  /* =========================================================
-   CAROUSEL — IMPORTANT SERVICES
-   (bottom-aligned · glassy logo · natural-width buttons · 2 rows)
-   ========================================================= */
-
-/* Pin caption to bottom, transparent background */
-.carousel-caption.important-services-caption {
-    position: absolute !important;
-    top: auto !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    pointer-events: none;
-}
-
-/* Wrapper — bottom aligned, transparent */
-.important-services-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 1rem 1rem 1.25rem;
-    gap: 0.55rem;
-    background: transparent;
-}
-
-.important-services-wrapper > * {
-    pointer-events: auto;
-}
-
-/* =========================================================
-   🧊 LOGO — GLASSY BACKGROUND (matches button style)
-   ========================================================= */
-.logo-glass-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 18px;
-
-    /* 💎 Glassmorphism */
-    background: rgba(255, 255, 255, 0.38);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-radius: 40px;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
-    box-shadow:
-        0 6px 22px rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.45);
-}
-
-.services-logo {
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
-}
-
-/* =========================================================
-   HEADING — text-shadow only
-   ========================================================= */
-.services-heading {
-    color: #ffffff;
-    font-weight: 800;
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    margin: 0;
-    text-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(220, 53, 69, 0.7);
-}
-
-.services-heading i {
-    color: #ffd54f;
-    font-size: 0.8em;
-    filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.9));
-}
-
-.heading-divider {
-    width: 80px;
-    height: 3px;
-    margin: 0.15rem 0 0.55rem;
-    background: linear-gradient(90deg, transparent, #ec6262, transparent);
-    border-radius: 3px;
-    box-shadow: 0 0 10px rgba(236, 98, 98, 0.8);
-}
-
-/* =========================================================
-   ROWS — flexbox, natural-width, centered, wraps gracefully
-   ========================================================= */
-.services-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.55rem;
-    width: 100%;
-    max-width: 1000px;
-}
-
-/* =========================================================
-   🧊 BUTTONS — glass effect · natural width (no fixed size)
-   ========================================================= */
-.service-btn {
-    display: inline-flex;               /* 👈 natural width */
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.1rem;             /* 👈 padding defines size */
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-decoration: none;
-    white-space: nowrap;                /* prevent text wrap */
-
-    /* 💎 Glassmorphism */
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(14px) saturate(180%);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    border: 1.5px solid rgba(255, 255, 255, 0.45);
-    border-radius: 40px;
-    box-shadow:
-        0 4px 18px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.35);
-
-    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.service-btn i {
-    font-size: 1.05rem;
-    color: #ffffff;
-    flex-shrink: 0;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
-    transition: transform 0.28s ease;
-}
-
-.service-btn:hover,
-.service-btn:focus {
-    background: rgba(220, 53, 69, 0.9);
-    border-color: rgba(255, 255, 255, 0.95);
-    color: #fff;
-    text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow:
-        0 10px 26px rgba(220, 53, 69, 0.55),
-        inset 0 1px 0 rgba(255, 255, 255, 0.55);
-}
-
-.service-btn:hover i,
-.service-btn:focus i {
-    transform: scale(1.18);
-}
-
-/* Primary — red-tinted glass */
-.service-btn-primary {
-    background: rgba(220, 53, 69, 0.55);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.service-btn-secondry {
-    background: rgba(30, 30, 60, 0.75);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.service-btn-primary:hover,
-.service-btn-primary:focus {
-    background: rgba(200, 30, 45, 0.95);
-    border-color: #ffffff;
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width: 767.98px) {
-    .important-services-wrapper { padding: 0.75rem 0.75rem 1rem; gap: 0.4rem; }
-    .services-row { gap: 0.4rem; }
-    .service-btn {
-        font-size: 0.78rem;
-        padding: 0.55rem 0.85rem;
-        white-space: normal;            /* allow wrap on tiny screens */
-        text-align: center;
-    }
-    .service-btn i { font-size: 0.95rem; }
-    .services-heading { font-size: 0.95rem; }
-    .logo-glass-wrapper { padding: 5px 12px; }
-    .services-logo { height: 40px; }
-}
-
-/* Safari fallback */
-@supports not (backdrop-filter: blur(14px)) {
-    .service-btn { background: rgba(30, 30, 60, 0.75); }
-    .logo-glass-wrapper { background: rgba(255, 255, 255, 0.85); }
-}
-
-
-
-.service-btn-secondry {
-    text-decoration: none;
-    text-color: #000 !important;
-}
-</style>
             </div>
         </div>
     </div>
 
-    <!-- =========================================================================
-         MAIN CONTENT SECTION
-         ========================================================================= -->
-    <div class="content-cover-section bg-white position-relative shadow-lg" id="coverSection">
-        
-        <!-- STICKY BACKGROUND WRAPPER (Sirf 100vh ka hai, isliye lag nahi karega) -->
+    <!-- ============================================================
+         MAIN CONTENT (scrolls over sticky canvas)
+    ============================================================ -->
+    <div class="content-cover-section  position-relative shadow-lg" id="coverSection">
+
         <div class="sticky-bg-wrapper">
             <canvas id="networkCanvas"></canvas>
         </div>
 
-        <!-- CONTENT WRAPPER (Sabke sab Canvas ke upar scroll honge) -->
-        <div class="content-wrapper py-5">
+        <div class="content-wrapper">
 
-            <!-- TOAST MESSAGE -->
+            <!-- TOAST MESSAGES -->
             <div aria-live="polite" aria-atomic="true" class="position-relative">
                 <div class="toast-container top-0 end-0 p-3">
                     {% for message in messages %}
                     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-header">
-                            <img src="..." class="rounded me-2" alt="...">
-                            <strong class="me-auto">{{user.username}}</strong>
+                            <strong class="me-auto">{{ user.username }}</strong>
                             <small class="text-body-secondary">just now</small>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
                         </div>
-                        <div class="toast-body">
-                            {{message}}
-                        </div>
+                        <div class="toast-body">{{ message }}</div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <!-- SECOND IMAGES (Mobile view) -->
-            <div class="px-4 py-2 my-2 text-center d-block d-sm-none"> 
+            <!-- MOBILE-ONLY IMPORTANT SERVICES -->
+            <div class="px-4 py-2 my-2 text-center d-block d-sm-none">
                 <div class="important-services-wrapper mb-5">
+                    <h3 class="services-heading">Important Services</h3>
+                    <div class="heading-divider"></div>
+                    <div class="services-row">
+                        <a href="{% url 'admission' %}#Process-tab-pane" class="service-btn service-btn-primary">
+                            <i class="bi bi-mortarboard-fill"></i><span>Admission</span>
+                        </a>
+                        <a href="{% url 'academic' %}#Syllabus-tab-pane" class="service-btn service-btn-primary">
+                            <i class="bi bi-journal-bookmark-fill"></i><span>Curriculum</span>
+                        </a>
+                        <a href="{% url 'academic' %}#AcademicCalendar-tab-pane" class="service-btn service-btn-secondry">
+                            <i class="bi bi-calendar3"></i><span>Calendar</span>
+                        </a>
+                        <a href="https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx" target="_blank" rel="noopener noreferrer" class="service-btn service-btn-secondry">
+                            <i class="bi bi-award-fill"></i><span>Result</span>
+                        </a>
+                        <a href="{% url 'academic' %}#TimeTable-tab-pane" class="service-btn service-btn-secondry">
+                            <i class="bi bi-clock-history"></i><span>Time Table</span>
+                        </a>
+                        <a href="{% url 'placements' %}#home-tab-pane" class="service-btn service-btn-secondry">
+                            <i class="bi bi-briefcase-fill"></i><span>Placements</span>
+                        </a>
+                        <a href="{% url 'pyqs' %}" class="service-btn service-btn-secondry">
+                            <i class="bi bi-file-earmark-pdf-fill"></i><span>PYQ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <!-- ===== LOGO — GLASSY background ===== -->
-         
+       
 
-        <!-- ===== Heading — text-shadow only ===== -->
-        <h3 class="services-heading  ">
-            <i class="text-danger   "></i> Important Services
-        </h3>
-        <div class="heading-divider"></div>
-
-        <!-- ===== ROW 1 — 5 buttons ===== -->
-        <div class="services-row  ">
-            <a href="{% url 'admission' %}#Process-tab-pane" class="service-btn service-btn-primary ">
-                <i class="bi bi-mortarboard-fill"></i>
-                <span>Admission Process</span>
-            </a>
-
-            <a href="{% url 'academic' %}#Syllabus-tab-pane" class="service-btn service-btn-primary">
-                <i class="bi bi-journal-bookmark-fill"></i>
-                <span>A/O Based Curriculum</span>
-            </a>
-
-            <a href="https://www.rgpvdiploma.in/StudentLife/StudentRegSubscription.aspx"
-               target="_blank" rel="noopener noreferrer"
-               class="service-btn service-btn-secondry">
-                <i class="bi bi-person-plus-fill"></i>
-                <span>Student Registration</span>
-            </a>
-
-            <a href="{% url 'academic' %}#AcademicCalendar-tab-pane" class="service-btn service-btn-secondry">
-                <i class="bi bi-calendar3"></i>
-                <span>Academic Calendar</span>
-            </a>
-
-            <a href="https://www.rgpvdiploma.in/Exam/ProgramSelect.aspx"
-               target="_blank" rel="noopener noreferrer"
-               class="service-btn service-btn-secondry">
-                <i class="bi bi-award-fill"></i>
-                <span>Exam Result</span>
-            </a>
+<!-- ============================================================
+     2. NOTICE CARDS (3 Columns)
+============================================================ -->
+<div class="container mt-4">
+    <div class="row libtabs mb-4">
+        
+        <!-- Important Notices -->
+        <div class="col-md-4 mb-3">
+            <div class="card card-libtab hover-lift">
+                <h6 class="card-header cheader-1 mb-0 py-3 px-3 d-flex justify-content-between align-items-center">
+                    <span>Important Notices</span>
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                </h6>
+                <div class="card-body p-0">
+                    <div class="overflow-y-auto custom-scrollbar rules p-3">
+                        {% for notice in impnotices %}
+                        {% if notice.notice_type == 'GRAND' %}
+                            {% if notice.notice_pdf %}
+                            <div class="notice-item" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% else %}
+                            <div class="notice-item" data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        {% empty %}
+                        <p class="text-muted text-center py-3">No important notices.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- ===== ROW 2 — 4 buttons ===== -->
-        <div class="services-row ">
-            <a href="{% url 'academic' %}#TimeTable-tab-pane" class="service-btn service-btn-secondry">
-                <i class="bi bi-clock-history"></i>
-                <span>Time Table</span>
-            </a>
-
-            <a href="{% url 'admission' %}#Required-tab-pane" class="service-btn service-btn-secondry">
-                <i class="bi bi-download"></i>
-                <span>Download Forms</span>
-            </a>
-
-            <a href="{% url 'placements' %}#home-tab-pane" class="service-btn service-btn-secondry">
-                <i class="bi bi-briefcase-fill"></i>
-                <span>Placements</span>
-            </a>
-
-            <a href="{% url 'pyqs' %}" class="service-btn service-btn-secondry">
-                <i class="bi bi-file-earmark-pdf-fill"></i>
-                <span>Previous Year Papers</span>
-            </a>
+        <!-- Event Notices -->
+        <div class="col-md-4 mb-3">
+            <div class="card card-libtab hover-lift">
+                <h6 class="card-header py-3 px-3 d-flex justify-content-between align-items-center">
+                    <span>Event Notices</span>
+                    <i class="bi bi-calendar-event-fill"></i>
+                </h6>
+                <div class="card-body p-0">
+                    <div class="overflow-y-auto custom-scrollbar rules p-3">
+                        {% for notice in impnotices %}
+                        {% if notice.notice_type == 'EVENTS' %}
+                            {% if notice.notice_pdf %}
+                            <div class="notice-item" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% else %}
+                            <div class="notice-item" data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        {% empty %}
+                        <p class="text-muted text-center py-3">No event notices.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
 
-      
+        <!-- Placement Notices -->
+        <div class="col-md-4 mb-3">
+            <div class="card card-libtab hover-lift">
+                <h6 class="card-header py-3 px-3 d-flex justify-content-between align-items-center">
+                    <span>Placement Notices</span>
+                    <i class="bi bi-briefcase-fill"></i>
+                </h6>
+                <div class="card-body p-0">
+                    <div class="overflow-y-auto custom-scrollbar rules p-3">
+                        {% for notice in impnotices %}
+                        {% if notice.notice_type == 'PLACEMENTS' %}
+                            {% if notice.notice_pdf %}
+                            <div class="notice-item" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% else %}
+                            <div class="notice-item" data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}">
+                                <span class="rulsetext">{{ notice.title }}</span>
+                                <small class="text-muted d-block mt-1"><i class="bi bi-calendar3 me-1"></i>{{ notice.created_at|date:"d M Y" }}</small>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        {% empty %}
+                        <p class="text-muted text-center py-3">No placement notices.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
-            </div>
+</div>
+<!-- ============================================================
+     ABOUT US SECTION (Premium Layout)
+============================================================ -->
+<section id="about" class="section-band section-band-alt overflow-hidden">
+    <div class="container position-relative">
+        
+        <!-- Background Decorative Element -->
+        <div class="bg-shape shape-1"></div>
 
-            <!-- NOTICES HEADING -->
-            <div class="text-center mb-5 my-2">
-                <h2 class="fw-bold" style="color: #0D47A1;">Important Notice's</h2>
-                <p class="text-muted"> 📌 Latest from the Campus: Your daily dose of official updates and academic notices
-                    <br>🔔 Stay Informed: Keep track of all important announcements, exam schedules, and campus events right here.
+        <div class="section-center mb-5">
+            <h2 class="section-title"><span class="flag"></span>About Our College</h2>
+            <p class="section-sub">Premier Government Polytechnic of Nimar Region · Estd. 2008</p>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="row g-5 align-items-center">
+            <!-- Text Content -->
+            <div class="col-lg-7 reveal-left">
+                <h3 class="fw-bold mb-3" style="color: var(--navy); font-family: 'Times New Roman', serif;">
+                    Shaping the Future of Technical Education
+                </h3>
+                <p class="about-text text-muted">
+                    <span class="drop-cap">G</span><strong>ovt. Polytechnic College, Harsud</strong> is a premier technical
+                    institution under the Department of Technical Education, Government of
+                    Madhya Pradesh. The college was established in <strong>2008</strong> with
+                    the objective of providing quality diploma-level technical education to
+                    the youth of the Nimar region — especially the rural and tribal
+                    population of Khandwa and Burhanpur districts.
                 </p>
-                <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+                <p class="about-text text-muted">
+                    Affiliated to <strong>Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV), Bhopal</strong>
+                    and approved by the <strong>All India Council for Technical Education (AICTE),
+                    New Delhi</strong>, the college offers four AICTE-approved diploma programmes.
+                </p>
+                <p class="about-text text-muted mb-4">
+                    With experienced faculty, well-equipped laboratories, and a disciplined green campus, 
+                    the college continues to uphold the Government’s vision of &ldquo;Skill India&rdquo;.
+                </p>
+                
+                <a href="{% url 'about' %}" class="btn btn-outline-primary px-4 py-2 fw-bold rounded-pill" style="border-color:var(--navy); color:var(--navy);">
+                    Discover More <i class="bi bi-arrow-right ms-1"></i>
+                </a>
             </div>
 
-            <!-- NOTICE CARDS (3 columns) -->
-            <div class="container my-md-5" style="backdrop-filter: blur(0px) !important; -webkit-backdrop-filter: blur(1px) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important;">
-                <div class="row libtabs">
-                    <div class="col-md-4">
-                        <div class="card card-libtab">
-                            <h5 class="card-header cheader-1">Important Notice's</h5>
-                            <div class="card-body card-body-lib">
-                                <div class="overflow-y-scroll rules">
-                                    {%for notice in impnotices%}
-                                    {% if notice.notice_type == 'GRAND' %}
-                                    {% if notice.notice_pdf %}
-                                    <span class="rulsetext mb-0 py-0" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">{{ notice.title }}</span> 
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% else %}
-                                    <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}" class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% endif %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
+            <!-- Interactive Stats Dashboard -->
+            <div class="col-lg-5 reveal-right">
+                <div class="stats-dashboard">
+                    
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-primary-subtle text-primary">
+                            <i class="bi bi-buildings"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="counter" data-target="2008">0</h3>
+                            <p>Established</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-libtab">
-                            <h5 class="card-header">Event Notice's</h5>
-                            <div class="card-body card-body-lib">
-                                <div class="overflow-y-scroll rules">
-                                    {% for notice in impnotices %}
-                                    {% if notice.notice_type == 'EVENTS' %}
-                                    {% if notice.notice_pdf %}
-                                    <span class="rulsetext mb-0 py-0" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">{{ notice.title }}</span> 
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% else %}
-                                    <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}" class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% endif %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-success-subtle text-success">
+                            <i class="bi bi-diagram-3-fill"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="counter" data-target="4">0</h3>
+                            <p>Departments</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-libtab">
-                            <h5 class="card-header">Placement Notice's</h5>
-                            <div class="card-body card-body-lib">
-                                <div class="overflow-y-scroll rules">
-                                    {% for notice in impnotices %}
-                                    {% if notice.notice_type == 'PLACEMENTS' %}
-                                    {% if notice.notice_pdf %}
-                                    <span class="rulsetext mb-0 py-0" onclick="window.open('{{ notice.notice_pdf.url }}', '_blank')">{{ notice.title }}</span> 
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% else %}
-                                    <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}" class="fw-bold" style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
-                                    <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-                                    <hr>
-                                    {% endif %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-warning-subtle text-warning-emphasis">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3><span class="counter" data-target="1200">0</span>+</h3>
+                            <p>Students</p>
                         </div>
                     </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-danger-subtle text-danger">
+                            <i class="bi bi-patch-check-fill"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>AICTE</h3>
+                            <p>Approved</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+        </div>
 
-            <!-- PRINCIPAL MESSAGE -->
-            <br><br>
-            <div class="container">
-                <div class="text-center mb-1">
-                    <h2 class="fw-bold" style="color: #0D47A1;">Accademic Massage's</h2>
-                    <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
-                </div>
-                <section class="py-1" style="background-color:transparent; font-family: 'Times New Roman', Times, serif;">
-                    <div class="container py-1 rounded-5" style="backdrop-filter: blur(0.6px) !important; -webkit-backdrop-filter: blur(10px) !important; border: 2px solid rgba(255, 255, 255, 0.3) !important;">
-                        {% if principals %}
-                        <div class="row align-items-center g-5 mb-1 pb-4 pt-4">
-                            <div class="col-12 col-lg-5 text-center">
-                                <div class="position-relative d-inline-block">
-                                    <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3" style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;"></div>
-                                    <img src="{% if principals.message_user.photo %}{{ principals.message_user.photo.url }}{% else %}{% endif %}" alt="Principal" class="img-fluid position-relative shadow border border-4 border-white" style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-7">
-                                <div class="ps-lg-4">
-                                    <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;"> {{principals.message_user.get_full_name}}</h3>
-                                    <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">Principal, Govt. Polytechnic College Harsud</p>
-                                    <div class="position-relative pe-4">
-                                        <span class="position-absolute start-0 top-0 lh-1 opacity-25" style="font-size: 5rem; font-family: serif; color: brown; margin-top: -2.5rem; margin-left: -1rem;">“</span>
-                                        <p class="text-secondary ps-4 position-relative" style="font-size: 1.05rem; line-height: 1.8; text-align: justify; z-index: 3;">{{principals.message_p1}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PRINCIPAL'S MESSAGE (Interactive Modern Card)
+============================================================ -->
+<section id="Principal" class="section-band   position-relative">
+    <div class="container">
+        
+        <div class="section-center mb-5">
+            <h2 class="section-title"><span class="flag"></span>Principal's Message</h2>
+            <p class="section-sub">A word from our leadership</p>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="principal-message-wrapper reveal-bottom">
+            <div class="row g-0 align-items-stretch">
+                
+                <!-- Photo Side -->
+                <div class="col-lg-4 principal-photo-side">
+                    <div class="photo-container">
+                        {% if principals and principals.message_user.photo %}
+                            <img src="{{ principals.message_user.photo.url }}" alt="Principal" class="principal-img">
                         {% else %}
-                        <div class="row align-items-center g-5 mb-1 pb-4">
-                            <div class="col-12 col-lg-5 text-center">
-                                <div class="position-relative d-inline-block">
-                                    <div class="position-absolute translate-middle-x start-50 top-0 mt-3 ms-3" style="width: 100%; max-width: 320px; height: 400px; background-color: rgb(230, 220, 195); border-radius: 20px; z-index: 1;"></div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDR8pcVqpMdiwF59dMd4fLBkcUjT1qODBG-8LYckGdQ&s=10" alt="Principal" class="img-fluid position-relative shadow border border-4 border-white" style="width: 100%; max-width: 320px; height: 400px; object-fit: cover; border-radius: 20px; z-index: 2;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDR8pcVqpMdiwF59dMd4fLBkcUjT1qODBG-8LYckGdQ&s=10" alt="Principal" class="principal-img">
+                        {% endif %}
+                        
+                        <!-- Floating Badge -->
+                        <div class="principal-badge">
+                            <i class="bi bi-patch-check-fill text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="col-lg-8">
+                    <div class="principal-text-side">
+                        <i class="bi bi-quote quote-icon"></i>
+                        
+                        <div class="quote-content">
+                            {% if principals %}
+                                <p class="message-text">{{ principals.message_p1 }}</p>
+                                <div class="principal-signature">
+                                    <h5 class="fw-bold mb-0 text-navy">{{ principals.message_user.get_full_name }}</h5>
+                                    <span class="text-muted small">Principal, GPC Harsud</span>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-7">
-                                <div class="ps-lg-4">
-                                    <h3 class="fw-bold mb-1 text-dark" style="font-size: 1.85rem;">Dr. R. K. Sharma</h3>
-                                    <p class="fst-italic fw-semibold mb-4" style="color: brown; font-size: 1.1rem;">Principal, Govt. Polytechnic College Harsud</p>
-                                    <div class="position-relative">
-                                        <span class="position-absolute start-0 top-0 lh-1 opacity-25" style="font-size: 5rem; font-family: serif; color: brown; margin-top: -2.5rem; margin-left: -1rem;">“</span>
-                                        <p class="text-secondary ps-4 position-relative" style="font-size: 1.05rem; line-height: 1.8; text-align: justify; z-index: 3;">
-                                            Welcome to Govt. Polytechnic College Harsud. Our mission is to provide high-quality technical education that empowers students to innovate and succeed. We focus deeply on practical skills and academic excellence to prepare our students for global challenges and industry requirements. We believe in building a future where engineering meets real-world solutions.
-                                        </p>
+                            {% else %}
+                                <p class="message-text">
+                                    Welcome to Govt. Polytechnic College Harsud. Our mission is to
+                                    provide high-quality technical education that empowers students
+                                    to innovate and succeed. We focus deeply on practical skills and
+                                    academic excellence to prepare our students for global challenges
+                                    and industry requirements.
+                                </p>
+                                <div class="principal-signature">
+                                    <h5 class="fw-bold mb-0 text-navy">Dr. R. K. Sharma</h5>
+                                    <span class="text-muted small">Principal, GPC Harsud</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Decorative Dots -->
+                        <div class="decorative-dots"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <style>
+        /* ================================================================
+   ABOUT US & PRINCIPAL MESSAGE - PREMIUM STYLES
+   ================================================================ */
+
+/* --- BACKGROUND DECORATIVE SHAPE --- */
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.4;
+}
+.shape-1 {
+    width: 400px; height: 400px;
+    background: rgba(0, 51, 153, 0.1);
+    top: -100px; left: -100px;
+}
+
+/* --- TYPOGRAPHY --- */
+.text-navy { color: var(--navy) !important; }
+.about-text { font-size: 1.05rem; line-height: 1.8; text-align: justify; }
+.drop-cap {
+    float: left;
+    font-size: 3.5rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+    font-family: 'Times New Roman', serif;
+    font-weight: 800;
+    color: var(--maroon);
+}
+
+/* --- STATS DASHBOARD (About Us) --- */
+.stats-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+.stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: rgba(0, 51, 153, 0.2);
+}
+.stat-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+.stat-info h3 {
+    font-family: 'Times New Roman', serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    margin: 0;
+    color: var(--navy);
+    line-height: 1.1;
+}
+.stat-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    font-weight: 600;
+}
+
+/* --- PRINCIPAL MESSAGE --- */
+.principal-message-wrapper {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Photo Side */
+.principal-photo-side {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.photo-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    aspect-ratio: 4/5;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+}
+.principal-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.principal-message-wrapper:hover .principal-img {
+    transform: scale(1.05);
+}
+.principal-badge {
+    position: absolute;
+    bottom: 15px; right: 15px;
+    background: rgba(255,255,255,0.9);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+    animation: floatBadge 3s ease-in-out infinite;
+}
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Text Side */
+.principal-text-side {
+    padding: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.quote-icon {
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    font-size: 6rem;
+    color: rgba(0, 51, 153, 0.05);
+    line-height: 1;
+    z-index: 0;
+}
+.quote-content {
+    position: relative;
+    z-index: 1;
+}
+.message-text {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #444;
+    font-style: italic;
+    margin-bottom: 2rem;
+    text-align: justify;
+}
+.principal-signature {
+    border-left: 3px solid var(--maroon);
+    padding-left: 1rem;
+}
+.decorative-dots {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    width: 80px; height: 80px;
+    background-image: radial-gradient(var(--gold) 2px, transparent 2px);
+    background-size: 12px 12px;
+    opacity: 0.3;
+}
+
+/* --- ANIMATIONS (Reveal on Scroll) --- */
+.reveal-left, .reveal-right, .reveal-bottom {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-bottom { transform: translateY(40px); }
+
+.is-visible.reveal-left, 
+.is-visible.reveal-right, 
+.is-visible.reveal-bottom {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* --- RESPONSIVE FIXES --- */
+@media (max-width: 991.98px) {
+    .principal-text-side { padding: 2rem 1.5rem; }
+    .quote-icon { font-size: 4rem; top: 1rem; right: 1rem; }
+    .stats-dashboard { margin-top: 2rem; }
+}
+@media (max-width: 575.98px) {
+    .stats-dashboard { grid-template-columns: 1fr; }
+    .message-text { font-size: 1rem; text-align: left; }
+    .drop-cap { font-size: 2.5rem; }
+}
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    
+    // 1. Scroll Reveal Animation (Intersection Observer)
+    const revealElements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target); // Ek baar dikhne ke baad observe karna band
+            }
+        });
+    }, {
+        threshold: 0.2 // 20% dikhne par trigger hoga
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 2. Number Counter Animation (About Us)
+    const counters = document.querySelectorAll('.counter');
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = +entry.target.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const start = performance.now();
+                
+                const updateCounter = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    // Ease out cubic
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    entry.target.innerText = Math.floor(easeOut * target);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        entry.target.innerText = target;
+                    }
+                };
+                
+                requestAnimationFrame(updateCounter);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+});
+    </script>
+</section>
+
+            <!-- ============================================================
+                 3 Courses & Programs (matches navbar > Academics)
+            ============================================================ -->
+           <section id="academic" class="section-band section-band-alt">
+            
+<div class="container">
+
+    <div class="section-center mb-5">
+        <h2 class="section-title"><span class="flag"></span>Courses & Programs</h2>
+        <p class="section-sub">AICTE-approved diploma programmes · Affiliated to RGPV Bhopal</p>
+        <div class="section-rule"></div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- DYNAMIC LOOP START -->
+        {% for dept in departments %}
+        {% with d_name=dept|stringformat:"s" %}
+
+        <div class="col-md-6 col-lg-3">
+            <div class="course-flip-card">
+                <div class="course-flip-inner">
+
+                    <!-- ================= FRONT SIDE ================= -->
+                    <div class="course-front">
+                        <div class="dept-head">
+                            <span class="fw-bold">{{ d_name|truncatechars:22 }}</span>
+                            <span class="code">
+                                {{ dept.code|default:"DEPT" }}
+                            </span>
+                        </div>
+
+                        <div class="dept-img-wrapper">
+                            {# 1. Model image field #}
+                            {% if dept.image and dept.image.url %}
+                                <img src="{{ dept.image.url }}"
+                                     class="dept-img"
+                                     alt="{{ d_name }}"
+                                     loading="lazy"
+                                     onerror="this.onerror=null;this.src='{% static 'images/com.png' %}';">
+
+                            {# 2. Alternate model field #}
+                            {% elif dept.course_img and dept.course_img.url %}
+                                <img src="{{ dept.course_img.url }}"
+                                     class="dept-img"
+                                     alt="{{ d_name }}"
+                                     loading="lazy"
+                                     onerror="this.onerror=null;this.src='{% static 'images/com.png' %}';">
+
+                            {# 3. Static fallback based on name match #}
+                            {% else %}
+                                {% if "Computer" in d_name or "CSE" in d_name %}
+                                    <img src="{% static 'images/com.png' %}"
+                                         class="dept-img" alt="CSE" loading="lazy">
+
+                                {% elif "Civil" in d_name or "CE" in d_name %}
+                                    <img src="{% static 'images/civil.png' %}"
+                                         class="dept-img" alt="Civil" loading="lazy">
+
+                                {% elif "Mechanical" in d_name or "ME" in d_name %}
+                                    <img src="{% static 'images/me.jpg' %}"
+                                         class="dept-img" alt="Mechanical" loading="lazy">
+
+                                {% elif "Electronics" in d_name or "Electrical" in d_name or "ET" in d_name or "TELECOMMUNICATION" in d_name %}
+                                    <img src="{% static 'images/EEE.jpg' %}"
+                                         class="dept-img" alt="ECE" loading="lazy">
+
+                                {% else %}
+                                    <div class="fallback-img">
+                                        <i class="bi bi-building"></i>
                                     </div>
-                                </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                        <div class="course-front-footer">
+                            <span class="hover-text">
+                                <i class="bi bi-person-badge"></i> View HOD
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ================= BACK SIDE ================= -->
+                    <div class="course-back">
+                        {% if dept.hod_users %}
+                        {% with hod=dept.hod_users.0 %}
+                        <div class="hod-id-card">
+                            <div class="id-card-header"></div>
+
+                            <div class="hod-photo-wrap">
+                                {% if hod.photo and hod.photo.url %}
+                                    <img src="{{ hod.photo.url }}" alt="{{ hod.get_full_name }}">
+                                {% else %}
+                                    <div class="hod-fallback-photo"><i class="bi bi-person"></i></div>
+                                {% endif %}
                             </div>
+
+                            <h5 class="hod-name">{{ hod.get_full_name|default:hod.username }}</h5>
+                            <span class="hod-designation">Head of Department</span>
+
+                            <div class="hod-details">
+                                {% if hod.study %}
+                                <p title="{{ hod.study }}">
+                                    <i class="bi bi-mortarboard-fill"></i>
+                                    {{ hod.study|truncatechars:28 }}
+                                </p>
+                                {% endif %}
+                                <p>
+                                    <i class="bi bi-briefcase-fill"></i>
+                                    {{ hod.experience }} Yrs Experience
+                                </p>
+                            </div>
+
+                            <div class="hod-contact">
+                                {% if hod.phone %}
+                                <a href="tel:{{ hod.phone }}" title="Call">
+                                    <i class="bi bi-telephone-fill"></i>
+                                </a>
+                                {% endif %}
+                                {% if hod.email %}
+                                <a href="mailto:{{ hod.email }}" title="Email">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endwith %}
+                        {% else %}
+                        <div class="hod-id-card empty">
+                            <i class="bi bi-person-x display-4 text-muted"></i>
+                            <p class="mt-3 text-muted fw-bold">HOD Not Assigned</p>
                         </div>
                         {% endif %}
                     </div>
-                </section>
-            </div>
 
-            <!-- STUDENT SERVICES -->
-            <br><br>
-            <div class="container">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bold" style="color: #0D47A1;">Student service's</h2>
-                    <p class="text-muted"> ⚡ Services & Support: Tailored assistance for your academic journey.</p>
-                    <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
                 </div>
-                <div class="container my-5 scheme-section">
-                    <div class="row g-4 justify-content-center">
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="card scheme-card h-100 p-4 rounded-4 shadow-sm border border-light d-flex flex-column justify-content-between" style="border-top: 5px solid brown !important;">
-                                <div>
-                                    <div class="d-flex align-items-center mb-4">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 50px; height: 50px; background-color: rgba(144, 37, 37, 0.1); color: brown !important;">
-                                            <span style="font-size: 1.5rem;">🏹</span>
-                                        </div>
-                                        <div class="ms-3">
-                                            <h4 class="fw-bold mb-0" style="color: brown;">Eklavya Scheme</h4>
-                                            <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.5px;">ST/SC Welfare Support</span>
-                                        </div>
+            </div>
+        </div>
+
+        {% endwith %}
+        {% endfor %}
+        <!-- DYNAMIC LOOP END -->
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'academic' %}#Departments-tab-pane"
+           class="btn btn-outline-primary rounded-0 px-4"
+           style="border-color:var(--navy);color:var(--navy); font-weight:600;">
+            View Full Academic Information &rarr;
+        </a>
+    </div>
+
+</div>
+        
+            <style>
+                /* ================================================================
+           COURSES & PROGRAMS - 3D FLIP CARD (DYNAMIC)
+           ================================================================ */
+                .course-flip-card {
+                    perspective: 1500px;
+                    height: 350px;
+                    cursor: pointer;
+                    z-index: 1;
+                    transition: z-index 0.3s;
+                }
+        
+                /* Desktop Hover Animation */
+                @media (hover: hover) and (pointer: fine) {
+                    .course-flip-card:hover {
+                        z-index: 10;
+                    }
+        
+                    .course-flip-card:hover .course-flip-inner {
+                        transform: rotateY(180deg);
+                    }
+        
+                    .course-flip-card:hover .course-front,
+                    .course-flip-card:hover .course-back {
+                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+                    }
+        
+                    .course-flip-card:hover .dept-img {
+                        transform: scale(1.45);
+                    }
+                }
+        
+                /* Mobile Tap Animation */
+                @media (hover: none) and (pointer: coarse) {
+                    .course-flip-card.flipped .course-flip-inner {
+                        transform: rotateY(180deg);
+                    }
+                }
+        
+                .course-flip-inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+                    transform-style: preserve-3d;
+                }
+        
+                .course-front,
+                .course-back {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    backface-visibility: hidden;
+                    -webkit-backface-visibility: hidden;
+                    border-radius: 8px;
+                    background: #fff;
+                    border: 1px solid var(--border);
+                    overflow: hidden;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                    transition: box-shadow 0.3s ease;
+                }
+        
+                /* --- FRONT SIDE STYLES --- */
+                .course-front {
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                .course-front .dept-head {
+                    background: var(--navy);
+                    color: #fff;
+                    padding: 0.9rem 1rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-weight: 700;
+                    font-size: 0.95rem;
+                }
+        
+                .course-front .dept-head .code {
+                    background: var(--gold);
+                    color: var(--navy);
+                    padding: 0.15rem 0.5rem;
+                    border-radius: 4px;
+                    font-size: 0.7rem;
+                    letter-spacing: 1px;
+                    font-weight: 800;
+                }
+        
+                .dept-img-wrapper {
+                    flex: 1;
+                    overflow: hidden;
+                    background: #f8f9fa;
+                    position: relative;
+                }
+        
+                .dept-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                }
+        
+                .fallback-img {
+                    width: 100%;
+                    height: 100%;
+                    display: grid;
+                    place-items: center;
+                    font-size: 4rem;
+                    color: #cbd5e1;
+                }
+        
+                .course-front-footer {
+                    padding: 1rem;
+                    text-align: center;
+                    background: #fff;
+                    border-top: 1px solid var(--border);
+                }
+        
+                .hover-text {
+                    color: var(--maroon);
+                    font-weight: 700;
+                    font-size: 0.85rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+        
+                /* --- BACK SIDE STYLES (HOD ID CARD) --- */
+                .course-back {
+                    transform: rotateY(180deg);
+                    background: linear-gradient(135deg, #fdfcf7 0%, #f4f1ea 100%);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 1rem;
+                }
+        
+                .hod-id-card {
+                    background: #fff;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 8px;
+                    border: 1px solid var(--border);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 1.5rem 1rem;
+                    position: relative;
+                    overflow: hidden;
+                }
+        
+                .id-card-header {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 6px;
+                    background: linear-gradient(90deg, var(--maroon), var(--navy));
+                }
+        
+                .hod-photo-wrap {
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    border: 3px solid var(--navy);
+                    padding: 3px;
+                    margin-bottom: 0.8rem;
+                    background: #fff;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                }
+        
+                .hod-photo-wrap img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+        
+                .hod-fallback-photo {
+                    width: 100%;
+                    height: 100%;
+                    background: #e2e8f0;
+                    border-radius: 50%;
+                    display: grid;
+                    place-items: center;
+                    font-size: 2.5rem;
+                    color: #94a3b8;
+                }
+        
+                .hod-name {
+                    font-family: 'Times New Roman', Times, serif;
+                    font-weight: 700;
+                    color: var(--navy);
+                    font-size: 1.1rem;
+                    margin-bottom: 0.2rem;
+                    text-align: center;
+                    line-height: 1.2;
+                }
+        
+                .hod-designation {
+                    font-size: 0.7rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: var(--maroon);
+                    font-weight: 700;
+                    margin-bottom: 0.8rem;
+                    background: #fff0f0;
+                    padding: 0.2rem 0.6rem;
+                    border-radius: 20px;
+                }
+        
+                .hod-details {
+                    width: 100%;
+                    font-size: 0.8rem;
+                    color: #555;
+                    text-align: center;
+                    margin-bottom: 0.8rem;
+                }
+        
+                .hod-details p {
+                    margin-bottom: 0.4rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.4rem;
+                }
+        
+                .hod-details i {
+                    color: var(--navy);
+                }
+        
+                .hod-contact {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: auto;
+                }
+        
+                .hod-contact a {
+                    width: 34px;
+                    height: 34px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 50%;
+                    background: var(--navy);
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 0.9rem;
+                    transition: all 0.2s;
+                }
+        
+                .hod-contact a:hover {
+                    background: var(--maroon);
+                    transform: translateY(-2px);
+                }
+        
+                .hod-id-card.empty {
+                    justify-content: center;
+                    text-align: center;
+                }
+            </style>
+        
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Check if device supports touch (no hover)
+                    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+                    if (isTouch) {
+                        const flipCards = document.querySelectorAll('.course-flip-card');
+                        flipCards.forEach(card => {
+                            card.addEventListener('click', function (e) {
+                                // Agar user contact button par click kare toh flip na ho
+                                if (e.target.closest('a')) return;
+
+                                // Toggle the flip class
+                                this.classList.toggle('flipped');
+                            });
+                        });
+                    }
+                });
+            </script>
+            <hr class="my-5" >
+        </section>
+
+            <!-- ============================================================
+                 COLLEGE AT A GLANCE (Screenshot Inspired Design)
+            ============================================================ -->
+            <section id="glance" class="glance-section" aria-label="College at a glance">
+            
+                <!-- Background Image & Overlay -->
+                <div class="glance-bg" style="background-image: url('{% static 'images/clg1-2.jpeg' %}');">
+                    <div class="glance-overlay"></div>
+                </div>
+            
+                <div class="container position-relative z-2">
+                    <div class="row align-items-center g-4 g-lg-5">
+            
+                        <!-- Left Side: Text & Button -->
+                        <div class="col-lg-5">
+                            <h2 class="glance-title mb-3">College at a Glance</h2>
+                            <p class="glance-desc mb-4">
+                                Govt. Polytechnic College, Harsud is one of the premier technical institutions in the Nimar region.
+                                Established in 2008 by the Government of Madhya Pradesh, the college is dedicated to providing
+                                high-quality technical education, fostering innovation, and preparing students for global
+                                challenges.
+                            </p>
+                            <a href="#about" class="btn btn-glance">
+                                About College <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+            
+                        <!-- Right Side: Interactive Borderless Table -->
+                        <div class="col-lg-7">
+                            <div class="glance-grid">
+            
+                                <!-- Item 1 -->
+                                <a href="#academic" class="glance-item">
+                                    <div class="glance-icon"><i class="bi bi-people-fill"></i></div>
+                                    <div class="glance-number counter" data-target="1200">0</div>
+                                    <div class="glance-label">Students</div>
+                                </a>
+            
+                                <!-- Item 2 -->
+                                <a href="#academic" class="glance-item">
+                                    <div class="glance-icon"><i class="bi bi-person-workspace"></i></div>
+                                    <div class="glance-number counter" data-target="45">0</div>
+                                    <div class="glance-label">Faculty Members</div>
+                                </a>
+            
+                                <!-- Item 3 -->
+                                <a href="#academic" class="glance-item">
+                                    <div class="glance-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                                    <div class="glance-number counter" data-target="4">0</div>
+                                    <div class="glance-label">Courses</div>
+                                </a>
+            
+                                <!-- Item 4 -->
+                                <a href="#academic" class="glance-item">
+                                    <div class="glance-icon"><i class="bi bi-building-fill"></i></div>
+                                    <div class="glance-number counter" data-target="4">0</div>
+                                    <div class="glance-label">Departments</div>
+                                </a>
+            
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            
+                <style>
+                    /* ================================================================
+               COLLEGE AT A GLANCE (Screenshot Inspired)
+               ================================================================ */
+                    .glance-section {
+                        position: relative;
+                        padding: 6rem 0;
+                        background: #0a0a0a;
+                        /* Fallback */
+                        overflow: hidden;
+                    }
+            
+                    /* Background Image */
+                    .glance-bg {
+                        position: absolute;
+                        inset: 0;
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-attachment: fixed;
+                        /* Parallax effect */
+                        z-index: 0;
+                    }
+            
+                    /* Dark Overlay for readability */
+                    .glance-overlay {
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.4) 100%);
+                    }
+            
+                    /* Left Side Text */
+                    .glance-title {
+                        font-family: 'Times New Roman', Times, serif;
+                        color: #ffffff;
+                        font-size: clamp(2rem, 4vw, 3rem);
+                        font-weight: 700;
+                        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+                    }
+            
+                    .glance-desc {
+                        color: rgba(255, 255, 255, 0.85);
+                        font-size: 1.05rem;
+                        line-height: 1.7;
+                        text-align: justify;
+                    }
+            
+                    .btn-glance {
+                        background-color: var(--gold);
+                        color: var(--navy);
+                        font-weight: 700;
+                        padding: 0.6rem 1.5rem;
+                        border-radius: 4px;
+                        border: 2px solid var(--gold);
+                        transition: all 0.3s ease;
+                    }
+            
+                    .btn-glance:hover {
+                        background-color: transparent;
+                        color: var(--gold);
+                        transform: translateY(-3px);
+                        box-shadow: 0 5px 15px rgba(255, 210, 0, 0.3);
+                    }
+            
+                    /* ================================================================
+               RIGHT SIDE: Borderless Table (CSS Grid)
+               ================================================================ */
+                    .glance-grid {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 1px;
+                        /* Creates the borderless table line effect */
+                        background: rgba(255, 255, 255, 0.15);
+                        /* Color of the divider lines */
+                        border: 1px solid rgba(255, 255, 255, 0.15);
+                        border-radius: 4px;
+                        overflow: hidden;
+                    }
+            
+                    /* Individual Cell */
+                    .glance-item {
+                        background: rgba(0, 0, 0, 0.4);
+                        padding: 2rem 1rem;
+                        text-align: center;
+                        text-decoration: none !important;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                        position: relative;
+                        overflow: hidden;
+                    }
+            
+                    /* Icon */
+                    .glance-icon {
+                        font-size: 1.8rem;
+                        color: rgba(255, 255, 255, 0.5);
+                        margin-bottom: 0.5rem;
+                        transition: all 0.3s ease;
+                    }
+            
+                    /* Number */
+                    .glance-number {
+                        font-family: 'Times New Roman', serif;
+                        font-size: 2.2rem;
+                        font-weight: 800;
+                        color: #ffffff;
+                        line-height: 1;
+                        margin-bottom: 0.4rem;
+                        transition: all 0.3s ease;
+                    }
+            
+                    .glance-number::after {
+                        content: "+";
+                        font-size: 0.5em;
+                        vertical-align: super;
+                        margin-left: 2px;
+                        color: var(--gold);
+                    }
+            
+                    /* Label */
+                    .glance-label {
+                        font-size: 0.9rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        color: rgba(255, 255, 255, 0.7);
+                        font-weight: 600;
+                        transition: all 0.3s ease;
+                    }
+            
+                    /* ================================================================
+               HOVER EFFECT (Screenshot Style Yellow Box)
+               ================================================================ */
+                    .glance-item:hover,
+                    .glance-item:focus {
+                        background: var(--gold);
+                        /* Yellow background */
+                        z-index: 2;
+                        transform: scale(1.02);
+                        box-shadow: 0 0 25px rgba(255, 210, 0, 0.4);
+                    }
+            
+                    .glance-item:hover .glance-icon,
+                    .glance-item:hover .glance-number,
+                    .glance-item:hover .glance-number::after,
+                    .glance-item:hover .glance-label {
+                        color: #111060;
+                        /* Dark text on yellow background */
+                    }
+            
+                    .glance-item:hover .glance-icon {
+                        transform: translateY(-5px) scale(1.1);
+                    }
+            
+                    .glance-item:hover .glance-number {
+                        transform: scale(1.05);
+                    }
+            
+                    /* ================================================================
+               MOBILE RESPONSIVENESS
+               ================================================================ */
+                    @media (max-width: 991.98px) {
+                        .glance-section {
+                            padding: 4rem 0;
+                        }
+            
+                        .glance-overlay {
+                            background: rgba(0, 0, 0, 0.75);
+                            /* Darker on mobile for text readability */
+                        }
+            
+                        .glance-bg {
+                            background-attachment: scroll;
+                            /* Fixed background lags on mobile */
+                        }
+            
+                        .glance-desc {
+                            text-align: left;
+                            font-size: 0.95rem;
+                        }
+                    }
+            
+                    @media (max-width: 575.98px) {
+                        .glance-grid {
+                            grid-template-columns: 1fr;
+                            /* Single column on very small screens */
+                        }
+            
+                        .glance-item {
+                            padding: 1.5rem 1rem;
+                            flex-direction: row;
+                            /* Make it horizontal on mobile */
+                            justify-content: flex-start;
+                            gap: 1rem;
+                        }
+            
+                        .glance-icon {
+                            margin-bottom: 0;
+                            font-size: 1.5rem;
+                        }
+            
+                        .glance-number {
+                            font-size: 1.8rem;
+                            margin-bottom: 0;
+                        }
+            
+                        .glance-label {
+                            font-size: 0.8rem;
+                            margin-left: auto;
+                            /* Push to right */
+                        }
+                    }
+                </style>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const counters = document.querySelectorAll('.glance-number.counter');
+
+                        if (counters.length > 0) {
+                            const animateCounter = (el) => {
+                                const target = parseInt(el.getAttribute('data-target'), 10);
+                                const duration = 2000; // 2 seconds
+                                const start = performance.now();
+
+                                const update = (now) => {
+                                    const progress = Math.min((now - start) / duration, 1);
+                                    // Ease-out cubic for smooth ending
+                                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                                    el.textContent = Math.floor(easeOut * target);
+
+                                    if (progress < 1) {
+                                        requestAnimationFrame(update);
+                                    } else {
+                                        el.textContent = target;
+                                    }
+                                };
+                                requestAnimationFrame(update);
+                            };
+
+                            // Intersection Observer to trigger when section comes into view
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        animateCounter(entry.target);
+                                        observer.unobserve(entry.target);
+                                    }
+                                });
+                            }, { threshold: 0.5 });
+
+                            counters.forEach(counter => observer.observe(counter));
+                        }
+                    });
+                </script>
+
+            </section>
+ <hr class="mt-5" >
+
+
+ <!-- ============================================================
+     CAMPUS FACILITIES (Dynamic Model Loop + 3D Swipe/Zoom)
+============================================================ -->
+<section id="facilities" class="section-band section-band-alt" aria-label="Campus Facilities">
+    <style>
+        /* ================================================================
+   CAMPUS FACILITIES (Django Dynamic Cards)
+   ================================================================ */
+.campus-card-link {
+    text-decoration: none !important;
+    display: block;
+    outline: none;
+}
+
+.campus-card {
+    perspective: 1200px; /* 3D depth */
+    height: 170px; /* Chota Size */
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0.4s;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover par card bada hoga */
+.campus-card:hover {
+    transform: scale(1.65); /* Hover par 15% bada hoga */
+    z-index: 10; /* Taaki baaki cards ke upar dikhe */
+}
+
+.campus-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Swipe / Flip effect */
+.campus-card:hover .campus-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Common Card Styles */
+.campus-card-front, .campus-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+}
+
+/* --- FRONT SIDE --- */
+.campus-card-front {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.campus-card-icon {
+    font-size: 2.5rem;
+    color: var(--maroon);
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.campus-card:hover .campus-card-icon {
+    transform: scale(1.1);
+}
+
+.campus-card-front h5 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+}
+
+.hover-text {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+/* --- BACK SIDE (Image) --- */
+.campus-card-back {
+    background-color: var(--navy);
+    transform: rotateY(180deg); /* Initially hidden */
+    position: relative;
+}
+
+.campus-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Image proper show hogi */
+    transition: transform 0.5s ease;
+}
+
+/* Hover par image thoda zoom hoga */
+.campus-card:hover .campus-card-back img {
+    transform: scale(1.1);
+}
+
+.no-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #f0f0f0;
+    font-size: 2rem;
+}
+
+/* Overlay for text on image */
+.campus-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.campus-card-overlay h6 {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    transition-delay: 0.1s;
+}
+
+/* Text thoda niche se slide hokar aayega */
+.campus-card:hover .campus-card-overlay h6 {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ================================================================
+   RESPONSIVE (Mobile par hover nahi hota)
+   ================================================================ */
+@media (max-width: 767.98px) {
+    .campus-card {
+        height: 150px;
+    }
+    .campus-card:hover {
+        transform: scale(1.05); /* Mobile par kam zoom taaki overflow na ho */
+    }
+    .campus-card-icon { font-size: 2rem; }
+    .campus-card-front h5 { font-size: 0.95rem; }
+    .campus-card-overlay h6 { font-size: 1rem; }
+}
+    </style>
+    <div class="container">
+        
+        <div class="section-center mb-5">
+            <h2 class="section-title">
+                <span class="flag"></span>
+                <i class="bi bi-grid-fill section-icon"></i>
+                Campus Facilities
+            </h2>
+            <div class="section-rule"></div>
+            <p class="section-sub">Hover over the cards to explore our world-class infrastructure</p>
+        </div>
+
+        <div class="row g-3 g-md-4 justify-content-center">
+            <!-- Dynamic Loop -->
+            {% for category in campus_categories %}
+            <div class="col-6 col-md-4 col-lg-3">
+                
+                <!-- Link to campuslife page, scrolling to specific tab if needed -->
+                <a href="{% url 'campuslife' %}#{{ category.name }}-tab-pane" class="campus-card-link" aria-label="{{ category.get_name_display }}">
+                    <div class="campus-card">
+                        <div class="campus-card-inner">
+                            
+                            <!-- FRONT SIDE (Small Size, Text/Icon) -->
+                            <div class="campus-card-front">
+                                <div class="campus-card-icon">
+                                    <!-- Dynamic Icon based on category -->
+                                    {% if category.name == 'library' %}<i class="bi bi-book-half"></i>
+                                    {% elif category.name == 'laboratory' %}<i class="bi bi-cpu-fill"></i>
+                                    {% elif category.name == 'classroom' %}<i class="bi bi-easel-fill"></i>
+                                    {% elif category.name == 'playground' %}<i class="bi bi-trophy-fill"></i>
+                                    {% elif category.name == 'hostel' %}<i class="bi bi-house-door-fill"></i>
+                                    {% elif category.name == 'canteen' %}<i class="bi bi-cup-hot-fill"></i>
+                                    {% else %}<i class="bi bi-building"></i>{% endif %}
+                                </div>
+                                <h5>{{ category.get_name_display }}</h5>
+                                <span class="hover-text">Hover to view</span>
+                            </div>
+
+                            <!-- BACK SIDE (Image Show) -->
+                            <div class="campus-card-back">
+                                <!-- Image Fetch Logic: Pehle category_img, phir first image -->
+                                {% if category.category_img %}
+                                    <img src="{{ category.category_img.url }}" alt="{{ category.get_name_display }}">
+                                {% elif category.images.first %}
+                                    <img src="{{ category.images.first.image.url }}" alt="{{ category.get_name_display }}">
+                                {% else %}
+                                    <!-- Fallback agar koi image na ho -->
+                                    <div class="no-image-placeholder">
+                                        <i class="bi bi-image text-muted"></i>
                                     </div>
-                                    <ul class="scheme-list p-0">
-                                        <li>Free textbooks and stationery assistance (Free Books)</li>
-                                        <li>Special scholarship and financial aid (Special Scholarships)</li>
-                                        <li>Free coaching for exams and competitive examinations</li>
-                                        <li>Skill development and additional technical training (Skill Training)</li>
-                                        <li>Special priority in hostel allotment (Hostel Priority)</li>
-                                    </ul>
+                                {% endif %}
+                                
+                                <div class="campus-card-overlay">
+                                    <h6>{{ category.get_name_display }}</h6>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-6">
-                            <div class="card scheme-card h-100 p-4 rounded-4 shadow-sm border border-light d-flex flex-column justify-content-between" style="border-top: 5px solid #6c757d !important;">
-                                <div>
-                                    <div class="d-flex align-items-center mb-4">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: rgba(108, 117, 125, 0.1); color: #6c757d;">
-                                            <span style="font-size: 1.5rem;">🎓</span>
-                                        </div>
-                                        <div class="ms-3">
-                                            <h4 class="fw-bold mb-0 text-dark">PPT Scheme</h4>
-                                            <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.5px;">Pre-Polytechnic Entry Support</span>
-                                        </div>
-                                    </div>
-                                    <ul class="scheme-list ppt-card p-0">
-                                        <li>Counseling and document verification assistance (Counseling Desk)</li>
-                                        <li>Merit-based tuition fee waiver (TFW Scheme)</li>
-                                        <li>Special foundation classes for the introductory semester</li>
-                                        <li>Branch upgradation assistance as per rules (Branch Change)</li>
-                                        <li>Industry orientation and campus tour program</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- COURSE SECTION -->
-            <div class="text-center my-5">
-                <h2 class="fw-bold" style="color: #0D47A1;">Our Program's</h2>
-                <p class="text-muted"> ⚡ Services & Support: Tailored assistance for your academic journey.</p>
-                <div style="width: 80px; height: 4px; background-color: #FFD200; margin: 0 auto; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                </a>
+                
             </div>
+            {% empty %}
+            <!-- Agar database empty hai -->
+            <div class="col-12 text-center text-muted py-4">
+                <i class="bi bi-info-circle"></i> No campus categories found. Please add from Admin.
+            </div>
+            {% endfor %}
+        </div>
 
-            <div class="container my-5">
-                <div class="row g-3">
-                    <!-- 1. Main Entrance -->
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalC04">
-                            <div class="gallery-img-wrapper">
-                                <img src="{% static 'images/com.png' %}" class="card-img-top gallery-img" alt="Main Entrance">
-                                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-                            </div>
-                            <div class="card-body text-center py-3">
-                                <h6 class="card-title fw-bold mb-0">Computer Science</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalC03">
-                            <div class="gallery-img-wrapper">
-                                <img src="{% static 'images/civil.png' %}" class="card-img-top gallery-img" alt="Main Entrance">
-                                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-                            </div>
-                            <div class="card-body text-center py-3">
-                                <h6 class="card-title fw-bold mb-0">Civil Engineering</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalM02">
-                            <div class="gallery-img-wrapper">
-                                <img src="{% static 'images/me.jpg' %}" class="card-img-top gallery-img" alt="Main Entrance">
-                                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-                            </div>
-                            <div class="card-body text-center py-3">
-                                <h6 class="card-title fw-bold mb-0">Mechanical Engineering</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card gallery-card h-100" data-bs-toggle="modal" data-bs-target="#hodModalE01">
-                            <div class="gallery-img-wrapper">
-                                <img src="{% static 'images/ee.jpg' %}" class="card-img-top gallery-img" alt="Main Entrance">
-                                <div class="gallery-overlay"><i class="bi bi-images"></i> View Album</div>
-                            </div>
-                            <div class="card-body text-center py-3">
-                                <h6 class="card-title fw-bold mb-0">Electronics and Communication Engineering</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'campuslife' %}" class="btn btn-outline-primary rounded-0 px-4 py-2" style="border-color:var(--navy);color:var(--navy); font-weight:600;">
+                Explore Campus Life <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+             
+             
+           
 
             
-            
-        </div> <!-- END CONTENT WRAPPER -->
+
+            <!-- ============================================================
+                 7. PLACEMENTS  (matches navbar > Placements)
+            ============================================================ -->
+            <section id="placements" class="section-band section-band-alt">
+                <div class="container">
+
+                    <div class="section-center mb-4">
+                        <h2 class="section-title"><span class="flag"></span>Placements</h2>
+                        <p class="section-sub">Year-on-year placement performance — students placed &amp; package trends</p>
+                        <div class="section-rule"></div>
+                    </div>
+
+                    <div class="placement-strip">
+                        <div class="stat"><b>90%</b><span>Placement Rate</span></div>
+                        <div class="stat"><b>25+</b><span>Recruiters</span></div>
+                        <div class="stat"><b>5.5 LPA</b><span>Highest Package</span></div>
+                        <div class="stat"><b>3.2 LPA</b><span>Average Package</span></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="chart-card">
+                                <div class="chart-title">Students Placed (Year-wise)</div>
+                                <div class="chart-wrapper"><canvas id="studentsChart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-card">
+                                <div class="chart-title">Highest Package (LPA)</div>
+                                <div class="chart-wrapper"><canvas id="highestChart"></canvas></div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="chart-card">
+                                <div class="chart-title">Average Package (LPA)</div>
+                                <div class="chart-wrapper"><canvas id="avgChart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-card">
+                                <div class="chart-title">Median Package (LPA)</div>
+                                <div class="chart-wrapper"><canvas id="medianChart"></canvas></div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="mt-3">
+                        <h6 class="fw-bold" style="color:var(--navy); font-family:'Times New Roman',serif;">
+                            Our Top Recruiters
+                        </h6>
+                        <div class="recruiters-strip">
+                            <span>L&amp;T</span>
+                            <span>Tata Motors</span>
+                            <span>Bajaj Auto</span>
+                            <span>Mahindra</span>
+                            <span>Wipro</span>
+                            <span>Infosys</span>
+                            <span>JSW Steel</span>
+                            <span>Ashok Leyland</span>
+                            <span>Godrej</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'placements' %}#Statistics-tab-pane" class="btn btn-outline-primary rounded-0 px-4"
+                           style="border-color:var(--navy);color:var(--navy);">
+                            View Detailed Placement Statistics &rarr;
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+
+
+            <!-- ================= CAMPUS LIFE GALLERY ================= -->
+
+<section id="campus-gallery" class="section-band section-band-alt">
+    <style>
+        /* ================================================================
+   CAMPUS GALLERY (MASONRY & GLASS MODALS)
+   ================================================================ */
+
+/* Masonry Grid */
+.gallery-container {
+    width: 100%;
+    padding: 0;
+}
+.gallery-masonry {
+    column-count: 4; /* 4 columns on desktop */
+    column-gap: 0; /* 0px gap as requested */
+    width: 100%;
+}
+@media (max-width: 991.98px) {
+    .gallery-masonry { column-count: 3; }
+}
+@media (max-width: 767.98px) {
+    .gallery-masonry { column-count: 2; }
+}
+@media (max-width: 575.98px) {
+    .gallery-masonry { column-count: 1; }
+}
+
+/* Gallery Item */
+.gallery-item {
+    break-inside: avoid;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: #000;
+}
+.gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
+}
+
+/* Hover Effects */
+.gallery-item:hover img {
+    transform: scale(1.08);
+    opacity: 0.6;
+}
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+.overlay-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+.gallery-item:hover .overlay-icon {
+    transform: translateY(0);
+}
+.gallery-overlay span {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* Caption Strip */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    color: #fff;
+    padding: 1.5rem 1rem 0.8rem;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 3;
+}
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0);
+}
+
+/* ================================================================
+   GLASSY MODAL STYLES
+   ================================================================ */
+.modal-glass .modal-content {
+    background: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.modal-slider-img {
+    max-height: 75vh; /* Image screen ke andar rahegi */
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+/* Carousel button tweak for glass look */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+        </style>
+    <div class="container">
+        
+        <!-- Section Heading -->
+        <div class="section-center mb-5">
+            <h2 class="section-title"><span class="flag"></span>Campus Life Gallery</h2>
+            <p class="section-sub">किसी भी तस्वीर पर क्लिक करके उसकी और भी फोटोज़ देखें</p>
+            <div class="section-rule"></div>
+        </div>
+
+        <!-- Masonry Gallery (No Gap) -->
+        <div class="gallery-container">
+            <div class="gallery-masonry">
+
+                {% for category in campus_categories %}
+                <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#campusModal-{{ category.id }}">
+                    
+                    <!-- ==========================================
+                         RANDOM IMAGE LOGIC:
+                         1. Pehle koshish karega category ke andar ki koi random image uthane ki.
+                         2. Agar wahan koi image nahi hai, toh category_img use karega.
+                         3. Agar wo bhi nahi hai, toh ek default placeholder aayega.
+                    =========================================== -->
+                    {% with random_img=category.images.all|random %}
+                        {% if random_img %}
+                            <img src="{{ random_img.image.url }}" alt="{{ category.get_name_display }}" loading="lazy">
+                        {% elif category.category_img %}
+                            <img src="{{ category.category_img.url }}" alt="{{ category.get_name_display }}" loading="lazy">
+                        {% else %}
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/071/062/416/small/building-facade-with-ivy-vines-and-arched-entrance-free-photo.jpg" alt="Default Image" loading="lazy">
+                        {% endif %}
+                    {% endwith %}
+
+                    <!-- Hover Overlay -->
+                    <div class="gallery-overlay">
+                        <div class="overlay-icon"><i class="bi bi-images"></i></div>
+                        <span>View Album</span>
+                    </div>
+                    
+                    <!-- Caption -->
+                    <div class="gallery-caption">
+                        {{ category.get_name_display }}
+                        <span class="badge bg-warning text-dark ms-2">{{ category.images.count }} Photos</span>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center w-100 py-5">
+                    <p class="text-muted">No campus photos uploaded yet.</p>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+            <!-- ============================================================
+                 8. CONTACT US  (footer carries the detail; CTA here)
+            ============================================================ -->
+            <section id="contact" class="section-band">
+                <div class="container">
+                    <div class="contact-cta">
+                        <h3>Contact Us</h3>
+                        <p class="mb-3" style="color:#555;">
+                            Govt. Polytechnic College, Harsud — Dist. Khandwa (M.P.) 450116<br>
+                            For admission enquiries, contact the college office on any working day (10:00 AM – 5:00 PM).
+                        </p>
+                        <a href="{% url 'contact_us' %}" class="btn-maroon">
+                            <i class="bi bi-envelope-fill me-1"></i> Visit Contact Page
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- END CONTENT WRAPPER -->
+
         {% include 'footer.html' %}
-    </div> <!-- END CONTENT COVER SECTION -->
+
+    </div><!-- END CONTENT COVER SECTION -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- =========================================
-         JAVASCRIPT NETWORK ANIMATION (Highly Optimized)
-         ========================================= -->
+    <!-- PLACEMENT CHARTS -->
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const years = [], studentsPlaced = [], highestPkg = [], avgPkg = [], medianPkg = [];
+
+        {% for batch in all_batches %}
+        years.push("{{ batch.year }}");
+        studentsPlaced.push(parseFloat("{{ batch.total_students_placed|default:0 }}"));
+        highestPkg.push(parseFloat("{{ batch.max_highest_package|default:0 }}"));
+        avgPkg.push(parseFloat("{{ batch.avg_package|default:0 }}"));
+        
+        {% endfor %}
+
+        if (years.length === 0) return;
+
+        const commonOptions = {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { grid: { display: false } },
+                    y: { beginAtZero: true, grid: { color: '#f0f0f0' } } }
+        };
+        const chartInstances = [];
+
+        chartInstances.push(new Chart(document.getElementById('studentsChart'), {
+          type: 'bar',
+          data: { labels: years, datasets: [{ label: 'Students Placed', data: studentsPlaced,
+            backgroundColor: 'rgba(0,51,153,0.75)', borderColor: 'rgba(0,51,153,1)',
+            borderWidth: 1, borderRadius: 4 }] },
+          options: commonOptions
+        }));
+
+        function lineChart(id, label, data, color, bg) {
+          chartInstances.push(new Chart(document.getElementById(id), {
+            type: 'line',
+            data: { labels: years, datasets: [{ label, data, borderColor: color,
+              backgroundColor: bg, borderWidth: 2.5, pointBackgroundColor: color,
+              pointRadius: 4, fill: true, tension: 0.3 }] },
+            options: commonOptions
+          }));
+        }
+        lineChart('highestChart', 'Highest (LPA)', highestPkg, '#8B0000', 'rgba(139,0,0,0.15)');
+     
+
+        const tabTrigger = document.querySelector('[aria-controls="Statistics-tab-pane"], #Statistics-tab');
+        if (tabTrigger) tabTrigger.addEventListener('shown.bs.tab', () =>
+          chartInstances.forEach(c => c.resize()));
+      });
+    </script>
+
+    <!-- NETWORK CANVAS ANIMATION -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById('networkCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let particles = [], width, height;
+        const dpr = window.devicePixelRatio || 1;
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('resize', () => { initCanvasSize(); initParticles(); });
+
+        function initCanvasSize() {
+          width = window.innerWidth; height = window.innerHeight;
+          canvas.width = width * dpr; canvas.height = height * dpr;
+          canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+          ctx.scale(dpr, dpr);
+        }
+
+        class Particle {
+          constructor(x, y, dx, dy, size, color) {
+            this.x = x; this.y = y; this.dx = dx; this.dy = dy;
+            this.size = size; this.color = color;
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color; ctx.fill();
+          }
+          update() {
+            if (this.x > width || this.x < 0) this.dx = -this.dx;
+            if (this.y > height || this.y < 0) this.dy = -this.dy;
+            this.x += this.dx; this.y += this.dy;
+            if (mouse.x != null && mouse.y != null) {
+              const dx = mouse.x - this.x, dy = mouse.y - this.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < mouse.radius) {
+                const force = (mouse.radius - dist) / mouse.radius;
+                this.x -= (dx / dist) * force * 2;
+                this.y -= (dy / dist) * force * 2;
+              }
+            }
+            this.draw();
+          }
+        }
+
+        function initParticles() {
+          particles = [];
+          let n = (width * height) / 9000;
+          if (n > 150) n = 150;
+          for (let i = 0; i < n; i++) {
+            const size = Math.random() * 1 + 1;
+            const x = Math.random() * width, y = Math.random() * height;
+            const dx = (Math.random() * 0.4) - 0.2, dy = (Math.random() * 0.4) - 0.2;
+            const color = Math.random() > 0.5 ? 'rgba(80,70,60,0.6)' : 'rgba(120,110,100,0.6)';
+            particles.push(new Particle(x, y, dx, dy, size, color));
+          }
+        }
+
+        function connect() {
+          for (let a = 0; a < particles.length; a++) {
+            for (let b = a + 1; b < particles.length; b++) {
+              const dx = particles[a].x - particles[b].x;
+              const dy = particles[a].y - particles[b].y;
+              const d2 = dx * dx + dy * dy;
+              if (d2 < 12000) {
+                const op = 1 - (d2 / 12000);
+                ctx.strokeStyle = `rgba(100,90,80,${op * 0.4})`;
+                ctx.lineWidth = 0.6;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.stroke();
+              }
+            }
+            if (mouse.x != null && mouse.y != null) {
+              const dx = particles[a].x - mouse.x;
+              const dy = particles[a].y - mouse.y;
+              const d2 = dx * dx + dy * dy;
+              if (d2 < 18000) {
+                const op = 1 - (d2 / 18000);
+                ctx.strokeStyle = `rgba(60,50,40,${op * 0.5})`;
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        function animate() {
+          requestAnimationFrame(animate);
+          ctx.clearRect(0, 0, width, height);
+          particles.forEach(p => p.update());
+          connect();
+        }
+
+        initCanvasSize(); initParticles(); animate();
+      });
+    </script>
+
+    <!-- KEEP YOUR EXISTING SCRIPTS (loader, campus-tab switcher) -->
+    <script>
+    function switchCampusTabByPane() {
+        const hash = window.location.hash;
+        const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
+        if (allPanes.length > 0) {
+            allPanes.forEach(function (pane) {
+                pane.classList.remove('show', 'active');
+                pane.style.setProperty('display', 'none', 'important');
+            });
+            let targetPane = hash ? document.querySelector(hash) : null;
+            if (!targetPane) targetPane = allPanes[0];
+            if (targetPane) {
+                targetPane.classList.add('show', 'active');
+                targetPane.style.setProperty('display', 'block', 'important');
+                if (hash) setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 500);
+            }
+        }
+    }
+    document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
+    window.addEventListener("hashchange", switchCampusTabByPane);
+    </script>
+
+    <script>
+    (function() {
+        const style = document.createElement('style');
+        style.textContent = `
+            #loading-overlay {
+                position: fixed; inset: 0;
+                background: rgba(255,255,255,0.35);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                z-index: 99999; display: none;
+                justify-content: center; align-items: center;
+                font-family: 'Segoe UI', Roboto, sans-serif;
+            }
+            .glass-card {
+                background: rgba(255,255,255,0.65);
+                padding: 30px 40px; border-radius: 16px;
+                box-shadow: 0 8px 32px 0 rgba(31,38,135,0.08);
+                backdrop-filter: blur(4px);
+                display: flex; flex-direction: column; align-items: center;
+            }
+            .glass-loader-spinner {
+                width: 45px; height: 45px;
+                border: 4px solid rgba(0,0,0,0.05);
+                border-top: 4px solid #2563eb;
+                border-right: 4px solid #2563eb;
+                border-radius: 50%;
+                animation: spinGlassLoader 0.8s cubic-bezier(0.4,0,0.2,1) infinite;
+            }
+            @keyframes spinGlassLoader {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loading-overlay';
+        overlay.innerHTML = `
+            <div class="glass-card">
+                <div class="glass-loader-spinner"></div>
+                <p style="margin:15px 0 0 0;font-weight:600;color:#1e293b;font-size:15px;">Loading...</p>
+            </div>`;
         document.addEventListener("DOMContentLoaded", function() {
-            const canvas = document.getElementById('networkCanvas');
-            const ctx = canvas.getContext('2d');
-
-            let particles = [];
-            let width, height;
-            
-            const dpr = window.devicePixelRatio || 1;
-
-            // Mouse tracking (Window par track kar rahe hain kyunki sticky bg fix hai)
-            let mouse = { x: null, y: null, radius: 150 };
-
-            window.addEventListener('mousemove', function(event) {
-                mouse.x = event.clientX;
-                mouse.y = event.clientY;
-            });
-
-            window.addEventListener('mouseleave', function() {
-                mouse.x = null;
-                mouse.y = null;
-            });
-
-            window.addEventListener('resize', function() {
-                initCanvasSize();
-                initParticles(); 
-            });
-
-            function initCanvasSize() {
-                // Sirf screen ke size ka canvas banayenge (Lag fix)
-                width = window.innerWidth;
-                height = window.innerHeight; 
-                
-                canvas.width = width * dpr;
-                canvas.height = height * dpr;
-                canvas.style.width = width + 'px';
-                canvas.style.height = height + 'px';
-                ctx.scale(dpr, dpr);
-            }
-
-            class Particle {
-                constructor(x, y, directionX, directionY, size, color) {
-                    this.x = x;
-                    this.y = y;
-                    this.directionX = directionX;
-                    this.directionY = directionY;
-                    this.size = size;
-                    this.color = color;
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                }
-
-                update() {
-                    if (this.x > width || this.x < 0) this.directionX = -this.directionX;
-                    if (this.y > height || this.y < 0) this.directionY = -this.directionY;
-
-                    this.x += this.directionX;
-                    this.y += this.directionY;
-
-                    // Mouse repel effect
-                    if (mouse.x != null && mouse.y != null) {
-                        let dx = mouse.x - this.x;
-                        let dy = mouse.y - this.y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < mouse.radius) {
-                            let forceDirectionX = dx / distance;
-                            let forceDirectionY = dy / distance;
-                            let force = (mouse.radius - distance) / mouse.radius;
-                            
-                            let directionX = forceDirectionX * force * 2;
-                            let directionY = forceDirectionY * force * 2;
-
-                            this.x -= directionX;
-                            this.y -= directionY;
-                        }
-                    }
-
-                    this.draw();
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                // Perfect density for smooth performance
-                let numberOfParticles = (width * height) / 9000; 
-                if(numberOfParticles > 150) numberOfParticles = 150; 
-
-                for (let i = 0; i < numberOfParticles; i++) {
-                    let size = Math.random() * 1 + 1; 
-                    let x = Math.random() * width;
-                    let y = Math.random() * height;
-                    let directionX = (Math.random() * 0.4) - 0.2;
-                    let directionY = (Math.random() * 0.4) - 0.2;
-                    
-                    // Theme color matching dots
-                    let color = Math.random() > 0.5 ? 'rgba(80, 70, 60, 0.6)' : 'rgba(120, 110, 100, 0.6)';
-
-                    particles.push(new Particle(x, y, directionX, directionY, size, color));
-                }
-            }
-
-            function connect() {
-                for (let a = 0; a < particles.length; a++) {
-                    for (let b = a + 1; b < particles.length; b++) {
-                        let dx = particles[a].x - particles[b].x;
-                        let dy = particles[a].y - particles[b].y;
-                        let distanceSq = dx * dx + dy * dy;
-                        
-                        if (distanceSq < 12000) {
-                            let opacityValue = 1 - (distanceSq / 12000);
-                            ctx.strokeStyle = `rgba(100, 90, 80, ${opacityValue * 0.4})`;
-                            ctx.lineWidth = 0.6;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(particles[b].x, particles[b].y);
-                            ctx.stroke();
-                        }
-                    }
-
-                    // Connect to mouse
-                    if (mouse.x != null && mouse.y != null) {
-                        let dx = particles[a].x - mouse.x;
-                        let dy = particles[a].y - mouse.y;
-                        let distanceSq = dx * dx + dy * dy;
-                        
-                        if (distanceSq < 18000) { 
-                            let opacityValue = 1 - (distanceSq / 18000);
-                            ctx.strokeStyle = `rgba(60, 50, 40, ${opacityValue * 0.5})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0, 0, width, height);
-                
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                }
-                connect();
-            }
-
-            // Engine Start
-            initCanvasSize();
-            initParticles();
-            animate();
+            document.body.insertBefore(overlay, document.body.firstChild);
         });
+
+        let loadingTimeout;
+        function showLoader() {
+            loadingTimeout = setTimeout(() => {
+                const el = document.getElementById('loading-overlay');
+                if (el) el.style.display = 'flex';
+            }, 150);
+        }
+
+        document.addEventListener('click', function(e) {
+            const a = e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href');
+            const target = a.getAttribute('target');
+            if (target === '_blank') return;
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:')
+                && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                try {
+                    const t = new URL(href, location.href);
+                    const c = new URL(location.href);
+                    if (t.protocol === c.protocol && t.host === c.host && t.pathname === c.pathname) return;
+                } catch (err) {}
+                showLoader();
+            }
+        });
+
+        document.addEventListener('submit', showLoader);
+        window.addEventListener('pageshow', function() {
+            clearTimeout(loadingTimeout);
+            const el = document.getElementById('loading-overlay');
+            if (el) el.style.display = 'none';
+        });
+    })();
     </script>
 </body>
-
 </html>

@@ -183,12 +183,17 @@ def index(request):
             to_attr='faculty_users',
         ),
     )
-     
+    
+    all_batches = models.PlacementBatch.objects.prefetch_related('branch_records').order_by('-year')
+    campus_categories = models.CampusCategory.objects.prefetch_related('images').all()
+    
+    
     context = {
         'principals':principal,
         'impnotices': impnotices, 
         'departments': department_model,
-        
+        'all_batches': all_batches,
+          'campus_categories': campus_categories,
     }
     
     return render(request,'index.html',context)
@@ -405,10 +410,10 @@ def company_student_verification(request):
                     messages.success(request, "छात्र का रिकॉर्ड सफलतापूर्वक सत्यापित (Verified) हो गया है!")
                 else:
                     messages.error(request, "दर्ज किया गया रोल नंबर इस ईमेल आईडी से मेल नहीं खाता है।")
-                    return redirect('placements')
+                    return redirect('company_student_verification')
             except CustomUser.DoesNotExist:
                 messages.error(request, "दिए गए विवरण (Email/Roll No) के अनुसार कोई छात्र रिकॉर्ड नहीं मिला।")
-                return redirect('placements')
+                return redirect('company_student_verification')
                 
 
     context = {

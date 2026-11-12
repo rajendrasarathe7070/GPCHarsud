@@ -1,53 +1,59 @@
 {% load static %}
 
-
-{% for notice in impnotices %}
-{% if not notice.notice_pdf %}
-<div class="modal fade" id="noticeModalLabel{{ notice.id }}" tabindex="1000"
-    aria-labelledby="noticeModalLabel{{ notice.id }}" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 text-light " id="exampleModalLabel">{{ notice.title }}</h1>
-              <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill mx-2 "> {{ notice.notice_type }}</span>
-
-            </div>
-            <div class="modal-body">
-                {{ notice.content|safe }}
-
-
-            </div>
-            <div class="flex-start px-3 py-3 mx-3 " style="text-align:center;">
-                <hr>
-                <div class="float-start ">
-                     {% if notice.created_by.photo %}
-                    <span
-                   
-                        class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
-                        <img src="{{ notice.created_by.photo.url }}" class="rounded float-start rounded-circle me-3"
-                            alt="img" width="40" height="40"> {{ notice.created_by }}
-                        <span class="vr mx-2"></span>
-                        <t class="alert-date">Posted on: {{ notice.created_at|date:"d M Y" }}</t>
  
-                    </span>
-                    {% else %}
-                    <span
-                        class="badge d-flex align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
-                        <i class="bi bi-person-circle fs-4 me-2"></i> {{ notice.created_by }}
-                        <span class="vr mx-2"></span>
-                        <t class="alert-date">Posted on: {{ notice.created_at|date:"d M Y" }}</t>
-                    </span>
-                    {% endif %}
-                </div>
-               <button type="button" class="btn bi-house-dash" data-bs-dismiss="modal" style="font-size: x-large;"></button></span>
+ 
 
+<!-- ================= GLASSY MODALS  FOR INDEX GALLERY LAST 8 TH  ================= -->
+{% for category in campus_categories %}
+<div class="modal fade modal-glass" id="campusModal-{{ category.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl"> <!-- modal-xl lagaya hai taaki image badi dikhe -->
+        <div class="modal-content text-white">
+
+            <div class="modal-header border-0 pb-0" style="background: transparent;">
+                <h5 class="modal-title fw-bold" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                    <i class="bi bi-images me-2"></i>{{ category.get_name_display }} Photos
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <div class="modal-body p-0 position-relative d-flex align-items-center" style="background: transparent;">
+                
+                <div id="carousel-{{ category.id }}" class="carousel slide w-100" data-bs-ride="carousel">
+                    <div class="carousel-inner text-center">
+
+                        {% for img_obj in category.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <!-- Auto adjust image -->
+                            <img src="{{ img_obj.image.url }}" class="modal-slider-img" alt="Photo {{ forloop.counter }}">
+                        </div>
+                        {% empty %}
+                        <div class="carousel-item active p-5 text-center">
+                            <p class="mb-0 text-white-50 fs-5">इस एल्बम में अभी कोई तस्वीरें नहीं हैं।</p>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Left/Right Buttons (Only if more than 1 image) -->
+                    {% if category.images.count > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ category.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ category.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
+
+                </div>
+                
+            </div>
+
         </div>
     </div>
 </div>
-{% endif %}
 {% endfor %}
-<!--   -->
+
+
 
 <!-- ===================================================
      📦 मोडल 1: कंप्यूटर साइंस (CS) विभाग का विवरण

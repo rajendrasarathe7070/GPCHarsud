@@ -1,148 +1,367 @@
+<!-- ============================================================
+     1. LEFT SIDE FIXED TAB (RGPV Style)
+============================================================ -->
 <style>
-  /* इमेज के अनुसार बूटस्ट्रैप मोडल को कस्टमाइज करने के लिए स्टाइल */
-  .alert-modal-header {
-    background-color: #d9383a !important;
-    /* इमेज जैसा गहरा लाल रंग */
-    color: #ffffff !important;
-    border-bottom: none;
-    padding: 3px 20px;
-  }
+    /* ---------- LEFT TAB ---------- */
+    .rgpv-side-tab {
+        position: fixed;
+        left: 0;
+        top: 60%;
+        transform: translateY(-50%);
+        background: #d32f2f; /* RGPV Red */
+        color: #fff;
+        padding: 18px 4px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-weight: 700;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1rem;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        z-index: 1040;
+        transition: background 0.2s;
+        border-left: none;
+    }
+    .rgpv-side-tab:hover {
+        background: #b71c1c;
+    }
+    .rgpv-side-tab i {
+        writing-mode: horizontal-tb;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
 
-  .alert-modal-title {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    text-transform: capitalize;
-  }
+    /* ---------- OVERLAY ---------- */
+    .rgpv-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6); /* Dark solid overlay */
+        z-index: 1050;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .rgpv-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
 
-  /* क्लोज (X) बटन को व्हाइट करने के लिए */
-  .alert-btn-close {
-    filter: invert(1) grayscale(1) brightness(2);
-    opacity: 0.8;
-  }
+    /* ---------- MAIN ALERT WINDOW ---------- */
+    .rgpv-alert-window {
+        background: #ffffff;
+        width: 90%;
+        max-width: 1000px; /* Thoda bada aur wide */
+        max-height: 90vh;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+    }
+    .rgpv-modal-overlay.active .rgpv-alert-window {
+        transform: translateY(0);
+    }
 
-  .alert-btn-close:hover {
-    opacity: 1;
-  }
+    /* ---------- HEADER ---------- */
+    .rgpv-alert-header {
+        background: #e53935; /* Exact Red */
+        color: #fff;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+    .rgpv-alert-header h4 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .rgpv-close-btn {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+    .rgpv-close-btn:hover { background: rgba(255,255,255,0.4); }
 
-  /* अंदर की अलर्ट लिस्ट का स्टाइल */
-  .alert-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-    font-family: Arial, sans-serif;
-  }
+    /* ---------- BODY AREA (Pale Yellow) ---------- */
+    .rgpv-alert-body {
+        background: #fffcf5; /* Pale Cream/Yellow */
+        padding: 15px;
+        overflow-y: auto;
+        border: 1px solid #e0d4b8;
+        border-top: none;
+    }
+    .rgpv-alert-body::-webkit-scrollbar { width: 8px; }
+    .rgpv-alert-body::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
 
-  .alert-list li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 14px;
-    font-size: clamp(0.85rem, 1.2vw, 0.98rem);
-    line-height: 1.5;
-    color: #000000;
-    text-align: left;
-    border-bottom: 1px dashed #f0f0f0;
-    padding-bottom: 8px;
-  }
+    /* ---------- TABS (Look & Feel) ---------- */
+    .rgpv-tab {
+        display: inline-block;
+        background: #fdf5e6;
+        border: 1px solid #c8b999;
+        border-bottom: 1px solid #fffcf5; /* Blends with body */
+        padding: 8px 15px;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+        border-radius: 4px 4px 0 0;
+        margin-bottom: -16px; /* Overlaps the body border */
+        position: relative;
+        top: -15px;
+        left: 10px;
+    }
 
-  /* छोटा नीला ट्राइएंगल एरो बुलेट पॉइंट (जैसा इमेज में है) */
-  .alert-list li::before {
-    content: "▶";
-    position: absolute;
-    left: 0;
-    top: 1px;
-    color: #1a5ca8;
-    /* गहरा नीला रंग */
-    font-size: 0.75rem;
-  }
+    /* ---------- NOTICE LIST ITEMS ---------- */
+    .rgpv-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 10px;
+    }
+    .rgpv-item {
+        background: #ffffff;
+        border: 1px solid #dcdcdc;
+        margin-bottom: 10px;
+        padding: 12px 15px;
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+    }
+    .rgpv-item:hover {
+        background: #f5f5f5;
+    }
+    
+    /* Red text for Click Here */
+    .rgpv-link-text {
+        color: #d32f2f;
+        font-weight: bold;
+        margin-left: 5px;
+        text-decoration: none;
+    }
+    .rgpv-item:hover .rgpv-link-text {
+        text-decoration: underline;
+    }
 
-  /* अलर्ट्स के अंदर की तारीखों को हाईलाइट करने के लिए */
-  .alert-date {
-    color: #d9383a;
-    font-weight: bold;
-  }
+    /* NEW Badge */
+    .rgpv-new-badge {
+        background: #ffeb3b; /* Yellow */
+        color: #d32f2f;      /* Red text */
+        font-size: 0.7rem;
+        font-weight: 800;
+        padding: 2px 6px;
+        border-radius: 2px;
+        border: 1px solid #d32f2f;
+        margin-left: 8px;
+        text-transform: uppercase;
+    }
 
-  .alert-success-text {
-    color: #198754;
-    font-weight: bold;
-  }
-
-  /* अंदर का स्क्रॉल बार कस्टमाइजेशन */
-  .alert-modal-body {
-    max-height: 70vh;
-    /* स्क्रीन की हाइट के हिसाब से खुद एडजस्ट होगा */
-    overflow-y: auto;
-    padding: 10px;
-  }
-
-  .alert-modal-body::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .alert-modal-body::-webkit-scrollbar-thumb {
-    background-color: rgba(217, 56, 58, 0.3);
-    border-radius: 4px;
-  }
+    /* ---------- TEXT MODAL OVERRIDES ---------- */
+    .custom-notice-modal { z-index: 1080 !important; }
+    .custom-notice-modal .modal-backdrop { z-index: 1070 !important; }
+    
+    .custom-notice-modal .modal-content {
+        border-radius: 6px; 
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+    
+    /* Modal Header (Red to match theme) */
+    .text-modal-header {
+        background: #e53935 !important; /* Same Red */
+        color: white !important;
+        border-bottom: 2px solid #b71c1c;
+    }
 </style>
 
-<!-- मोडल का मुख्य ढांचा (पेज लोड होते ही दिखने के लिए) -->
-<div class="modal fade" id="importantAlertsModal" tabindex="-1" aria-labelledby="importantAlertsModalLabel"
-  aria-hidden="true">
-  <!-- modal-dialog-centered से यह स्क्रीन के बीचो-बीच रहेगा और modal-lg से बड़ा दिखेगा -->
-  <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable mx-auto p-3"
-    style="max-width: 850px;">
-    <div class="modal-content border-0 shadow-lg rounded-2">
-
-      <!-- मोडल हेडर (लाल पट्टी) -->
-      <div class="modal-header alert-modal-header align-items-center " style="background: #d9383a !important;">
-        <h5 class="modal-title alert-modal-title mb-0" id="importantAlertsModalLabel">
-          Important Alerts
-        </h5>
-        <button type="button" class="btn-close alert-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <!-- मोडल बॉडी (स्क्रॉल होने वाली लिस्ट) -->
-      <div class="modal-body alert-modal-body bg-white">
-        <ul class="alert-list">
-          {%for notice in impnotices%}
-        {%if notice.add_to_grand == True%}
-          <li class="mb-0 pb-0">
-            
-            {% if notice.notice_pdf %}
-            <a href="{{ notice.notice_pdf.url }}" target="_blank" class="text-decoration-none fw-bold"
-              style="color: #1a5ca8;">{{ notice.title }}</a>
-            {% else %}
-            <span data-bs-toggle="modal" data-bs-target="#noticeModalLabel{{ notice.id }}" class="fw-bold"
-              style="color: #1a5ca8; cursor: pointer;">{{ notice.title }}</span>
-            
-            
-            {% endif %}
-            {% if notice.created_at %}
-            <br>
-            <small class="text-muted">Posted on: {{ notice.created_at|date:"d M Y" }}</small>
-            {% endif %}
-          </li>
-          {% endif %}
-          {% endfor %}
-          
-
-        </ul>
-      </div>
-
-    </div>
-  </div>
+<!-- 1. LEFT TAB TRIGGER -->
+<div class="rgpv-side-tab" id="rgpvTabTrigger">
+    <i class="bi bi-bell-fill"></i> Important Alert's
 </div>
 
-<!-- जावास्क्रिप्ट ट्रिक: इसके ज़रिए पेज खुलते ही यह Popup अपने आप सामने आ जाएगा -->
+<!-- 2. MAIN ALERT LIST OVERLAY -->
+<div class="rgpv-modal-overlay" id="rgpvModalOverlay">
+    <div class="rgpv-alert-window">
+        
+        <!-- Red Header -->
+        <div class="rgpv-alert-header">
+            <h4><i class="bi bi-megaphone-fill"></i> Important Alerts</h4>
+            <button type="button" class="rgpv-close-btn" id="rgpvCloseBtn" aria-label="Close">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <!-- Pale Yellow Body with Tab -->
+        <div class="rgpv-alert-body">
+            <div class="rgpv-tab">Important Alert</div>
+            
+            <ul class="rgpv-list">
+                {% for notice in impnotices %}
+                    {% if notice.add_to_grand == True %}
+                    <li>
+                        {% if notice.notice_pdf %}
+                            <!-- PDF Link -->
+                            <a href="{{ notice.notice_pdf.url }}" target="_blank" class="rgpv-item">
+                                <span>
+                                    {{ notice.title }}
+                                    <span class="rgpv-link-text">Click Here to View</span>
+                                    <!-- Show NEW badge for recent notices (Optional condition) -->
+                                    <span class="rgpv-new-badge">New</span>
+                                </span>
+                            </a>
+                        {% else %}
+                            <!-- Text Notice: Opens Modal -->
+                            <div class="rgpv-item open-notice-modal" 
+                                 data-target="#noticeModalLabel{{ notice.id }}">
+                                <span>
+                                    {{ notice.title }}
+                                    <span class="rgpv-link-text">Click Here to View</span>
+                                    <span class="rgpv-new-badge">New</span>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ============================================================
+     3. INDIVIDUAL TEXT NOTICE MODALS
+============================================================ -->
+{% for notice in impnotices %}
+{% if not notice.notice_pdf %}
+<div class="modal fade custom-notice-modal" id="noticeModalLabel{{ notice.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg">
+            
+            <!-- Modal Header (Red) -->
+            <div class="modal-header text-white border-0 py-3 px-4 text-modal-header">
+                <h5 class="modal-title fw-bold">
+                    <i class="bi bi-megaphone-fill me-2 text-warning"></i>{{ notice.title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body px-4 py-4" style="font-size: 1.05rem; line-height: 1.8; color: #333; background: #ffffff;">
+                {{ notice.content|safe }}
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 bg-light py-3 px-4 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    {% if notice.created_by.photo %}
+                        <img src="{{ notice.created_by.photo.url }}" class="rounded-circle border border-2 border-danger" alt="Author" width="45" height="45" style="object-fit: cover;">
+                    {% else %}
+                        <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center border border-2 border-danger" style="width: 45px; height: 45px;">
+                            <i class="bi bi-person-fill fs-5"></i>
+                        </div>
+                    {% endif %}
+                    <div class="ms-3">
+                        <strong class="text-dark d-block" style="font-size: 0.9rem;">
+                            {{ notice.created_by.get_full_name|default:notice.created_by.username }}
+                        </strong>
+                        <small class="text-muted">
+                            <i class="bi bi-clock me-1"></i>Posted: {{ notice.created_at|date:"d M Y" }}
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- BACK BUTTON (Red outline to match theme) -->
+                <button type="button" class="btn btn-outline-danger rounded-0 px-4 fw-bold" data-bs-dismiss="modal">
+                    <i class="bi bi-arrow-left me-1"></i> Back to Alerts
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+
+<!-- ============================================================
+     4. JAVASCRIPT LOGIC (Smooth Transition)
+============================================================ -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // बूटस्ट्रैप 5 के मोडल इंस्टेंस को कॉल करें
-    var myModal = new bootstrap.Modal(document.getElementById('importantAlertsModal'), {
-      keyboard: false
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabTrigger = document.getElementById('rgpvTabTrigger');
+        const overlay = document.getElementById('rgpvModalOverlay');
+        const closeBtn = document.getElementById('rgpvCloseBtn');
+        const noticeItems = document.querySelectorAll('.open-notice-modal');
+
+        // 1. OPEN LIST
+        tabTrigger.addEventListener('mouseenter', function () {
+            if(window.innerWidth > 768) overlay.classList.add('active');
+        });
+        tabTrigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if(window.innerWidth <= 768) overlay.classList.add('active');
+        });
+
+        // 2. CLOSE LIST
+        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+
+        // 3. OPEN TEXT MODAL FROM LIST
+        noticeItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const targetModalId = this.getAttribute('data-target');
+                const modalElement = document.querySelector(targetModalId);
+                
+                if (modalElement) {
+                    overlay.classList.remove('active'); // Hide List
+                    
+                    setTimeout(() => {
+                        const bsModal = new bootstrap.Modal(modalElement);
+                        bsModal.show();
+                    }, 250); // Wait for list to fade out
+                }
+            });
+        });
+
+        // 4. WHEN TEXT MODAL CLOSES -> RE-OPEN LIST
+        document.querySelectorAll('.custom-notice-modal').forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function () {
+                setTimeout(() => {
+                    overlay.classList.add('active'); // Show List again
+                }, 200);
+            });
+        });
     });
-    // पेज लोड होते ही 800 मिलीसेकंड के बाद पॉपअप खोलें (स्मूथ एंट्री के लिए)
-    setTimeout(function () {
-      myModal.show();
-    }, 1);
-  });
 </script>

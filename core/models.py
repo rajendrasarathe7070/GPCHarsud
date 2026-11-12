@@ -30,8 +30,8 @@ class info(models.Model):
 class Notice(models.Model):
     NOTICE_TYPES = [
         ('GRAND', 'Grand Notice'),
-        ('EVENTS', 'EVENTS Notice'),
-        ('PLACEMENTS', 'PLACEMENTS Notice'),
+        ('EVENTS', 'Event Notice'),
+        ('PLACEMENTS', 'Placement Notice'),
        
     ]
 

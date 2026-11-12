@@ -145,8 +145,90 @@
 
      {% include 'slide/crausal.html' %}
 
+
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
- 
+ <div class="container mt-3 mb-5 px-0">
+    <style>
+        .hding {
+            background: linear-gradient(rgb(55, 55, 144) 0%, rgb(17, 16, 96) 100%) !important;
+            margin-bottom: 10px;
+
+            /* border: 3px solid #861414; */
+            text-transform: uppercase;
+            width: 100%;
+
+            /* हाइट को फिक्स रखने और अंदर पैडिंग सेट करने के लिए */
+            padding: 6px 15px 6px 15px;
+            color: #f8f8fa;
+            text-align: left;
+
+            display: flex;
+            align-items: center;
+        }
+
+        /* हेडिंग का टेक्स्ट: मोबाइल से डेस्कटॉप तक 100% रिस्पॉन्सिव */
+        .hding-text {
+            font-weight: bold;
+            white-space: nowrap;
+            /* मोबाइल स्क्रीन्स (320px+) के लिए बहुत छोटा फ़ॉन्ट साइज */
+            font-size: 3.4vw;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* ब्रेडक्रंब आइटम स्टाइल */
+        .breadcrumb-item {
+            background-color: #a2cdf9;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .custom-breadcrumb {
+            font-size: 2.2vw !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* बड़ी स्क्रीन (टैबलेट और लैपटॉप) पर फ़ॉन्ट को एक स्टैंडर्ड साइज पर फिक्स करने के लिए */
+        @media (min-width: 576px) {
+            .hding-text {
+                font-size: 1.1rem;
+                /* टैबलेट पर साइज */
+            }
+
+            .custom-breadcrumb {
+                font-size: 0.85rem !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hding-text {
+                font-size: 1.35rem;
+                /* डेस्कटॉप पर साइज */
+            }
+
+            .hding {
+                padding-left: 30px;
+                /* डेस्कटॉप पर बाईं तरफ थोड़ा ज्यादा स्पेस */
+            }
+        }
+    </style>
+    <nav class="hding rounded-1 py-2 py-md-0">
+        <div class="d-flex w-100  justify-content-between align-items-center">
+            <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+            <div class="hding-text">
+                 Placement Overview's
+            </div>
+
+            <!-- ब्रेडक्रंब -->
+            <div class="d-none d-sm-block">
+                <ol class="breadcrumb custom-breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> Placement</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
+</div>
         
          
 
@@ -177,7 +259,7 @@
     min-height: 160px;
     padding: 1.3rem 1.3rem 1.1rem;
     border: none;
-    border-radius: 18px;
+    border-radius: 108px;
     background: linear-gradient(135deg, #37378f 0%, #111060 100%);
     color: #f5f3f3;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -205,7 +287,7 @@
   /* hover */
   .stat-card:hover {
     z-index: 50;                        /* hover par sabse upar */
-    transform: translateY(-10px) scale(1.03);
+    transform: translateY(-10px) scale(1.40);
     border-radius: 30px;
     background: linear-gradient(135deg, rgba(193,60,39,.99) 0%, rgba(138,42,18,.97) 100%);
     box-shadow: 0 18px 38px rgba(138, 42, 18, 0.35),
@@ -1893,6 +1975,25 @@
       
 
       <div class="tab-pane fade" id="Statistics-tab-pane" role="tabpanel" aria-labelledby="Statistics-tab" tabindex="0">
+        <div class="container mt-3 mb-5 px-3">
+        
+          <nav class="hding rounded-1 py-2 py-md-0">
+            <div class="d-flex w-100  justify-content-between align-items-center">
+              <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+              <div class="hding-text">
+                Detalied Placement Statistics
+              </div>
+        
+              <!-- ब्रेडक्रंब -->
+              <div class="d-none d-sm-block">
+                <ol class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Statistics</li>
+                </ol>
+              </div>
+            </div>
+          </nav>
+        </div>
         <style>
           /* कार्ड्स को और प्रीमियम लुक देने के लिए कस्टम शैडो और होवर इफ़ेक्ट */
           .stat-cards {
@@ -2063,7 +2164,7 @@
 
         <div class="container table-pl">
           <style>
-            body {}
+            
 
             .table-pl {
               max-width: 1300px;
@@ -2184,561 +2285,1346 @@
 
 
         <!-- Year-wise Placement Data Graphs -->
-<div class="container my-4">
-    <style>
-        .chart-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 20px;
-            margin-bottom: 24px;
-            height: 100%;
-        }
-        .chart-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .chart-wrapper {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-    </style>
-
-    <h3 class="mb-4 text-secondary border-bottom pb-2">
-        <i class="bi bi-graph-up"></i> Year-wise Placement Analytics
-    </h3>
-
-    <div class="row">
-        <!-- Graph 1: Students Placed -->
-        <div class="col-12 col-md-6">
-            <div class="chart-card">
-                <div class="chart-title">Students Placed</div>
-                <div class="chart-wrapper">
-                    <canvas id="studentsChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Graph 2: Highest Package -->
-        <div class="col-12 col-md-6">
-            <div class="chart-card">
-                <div class="chart-title">Highest Package (LPA)</div>
-                <div class="chart-wrapper">
-                    <canvas id="highestChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Graph 3: Average Package -->
-        <div class="col-12 col-md-6">
-            <div class="chart-card">
-                <div class="chart-title">Average Package (LPA)</div>
-                <div class="chart-wrapper">
-                    <canvas id="avgChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Graph 4: Median Package -->
-        <div class="col-12 col-md-6">
-            <div class="chart-card">
-                <div class="chart-title">Median Package (LPA)</div>
-                <div class="chart-wrapper">
-                    <canvas id="medianChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Chart.js Script (Agar head me nahi dala hai to yahan rakhein ya head me dalein) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Django Template से डेटा निकालना
-        const years = [];
-        const studentsPlaced = [];
-        const highestPkg = [];
-        const avgPkg = [];
-        const medianPkg = [];
-
-        // आपका Django Loop (बिल्कुल वैसा ही जैसा टेबल में था)
-        {% for batch in all_batches %}
-            years.push("{{ batch.year }}");
-            // |default:0 इसलिए लगाया है ताकि अगर डेटा None हो तो JS क्रैश न हो
-            studentsPlaced.push(parseFloat("{{ batch.total_students_placed|default:0 }}"));
-            highestPkg.push(parseFloat("{{ batch.max_highest_package|default:0 }}"));
-            avgPkg.push(parseFloat("{{ batch.avg_package|default:0 }}"));
-            medianPkg.push(parseFloat("{{ batch.median_package|default:0 }}"));
-        {% endfor %}
-
-     
-
-        // अगर डेटा खाली है, तो ग्राफ न बनाएं
-        if (years.length === 0) {
-            console.warn("No data available for charts.");
-            return;
-        }
-
-        // Common Settings for all charts
-        const commonOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: 'rgba(0,0,0,0.7)',
-                    padding: 10,
-                    titleFont: { size: 14 },
-                    bodyFont: { size: 14 }
-                }
-            },
-            scales: {
-                x: { grid: { display: false } },
-                y: { beginAtZero: true, grid: { color: '#f0f0f0' } }
-            }
-        };
-
-        var chartInstances = []; // टैब के लिए ग्राफ को सेव करने हेतु
-
-        // Graph 1: Students Placed
-        var ctx1 = document.getElementById('studentsChart').getContext('2d');
-        chartInstances.push(new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'Students Placed',
-                    data: studentsPlaced,
-                    backgroundColor: 'rgba(25, 135, 84, 0.7)',
-                    borderColor: 'rgba(25, 135, 84, 1)',
-                    borderWidth: 1,
-                    borderRadius: 6
-                }]
-            },
-            options: commonOptions
-        }));
-
-        // Graph 2: Highest Package
-        var ctx2 = document.getElementById('highestChart').getContext('2d');
-        chartInstances.push(new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'Highest Package (LPA)',
-                    data: highestPkg,
-                    borderColor: '#ffc107',
-                    backgroundColor: 'rgba(255, 193, 7, 0.2)',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#ffc107',
-                    pointRadius: 5,
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: commonOptions
-        }));
-
-        // Graph 3: Average Package
-        var ctx3 = document.getElementById('avgChart').getContext('2d');
-        chartInstances.push(new Chart(ctx3, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'Average Package (LPA)',
-                    data: avgPkg,
-                    borderColor: '#0dcaf0',
-                    backgroundColor: 'rgba(13, 202, 240, 0.2)',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#0dcaf0',
-                    pointRadius: 5,
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: commonOptions
-        }));
-
-        // Graph 4: Median Package
-        var ctx4 = document.getElementById('medianChart').getContext('2d');
-        chartInstances.push(new Chart(ctx4, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'Median Package (LPA)',
-                    data: medianPkg,
-                    borderColor: '#6f42c1',
-                    backgroundColor: 'rgba(111, 66, 193, 0.2)',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#6f42c1',
-                    pointRadius: 5,
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: commonOptions
-        }));
-
-        // ==============================================================
-        // MAGIC FIX: Bootstrap Tab Fix (ग्राफ को रीसाइज़ करने के लिए)
-        // ==============================================================
-        // जब भी 'Statistics' टैब खुले, तो ग्राफ्स को रीसाइज़ करें
-        var tabTrigger = document.querySelector('[aria-controls="Statistics-tab-pane"], #Statistics-tab');
-        if (tabTrigger) {
-            tabTrigger.addEventListener('shown.bs.tab', function (e) {
-                chartInstances.forEach(function(chart) {
-                    chart.resize();
-                });
-            });
-        }
-    });
-</script>
-
-
-
-      </div>
-
-
-    </div>
-
-    <div class="tab-pane fade" id="Recruiters-Companies-tab-pane" role="tabpanel"
-     aria-labelledby="Recruiters-Companies-tab" tabindex="0">
-
-  <style>
-    /* ========= SLIDER (sirf CSS, JS nahi) ========= */
-    #Recruiters-Companies-tab-pane .rc-marquee {
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-              mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    }
-    #Recruiters-Companies-tab-pane .rc-track {
-      display: flex;
-      width: max-content;
-      animation: rc-scroll 42s linear infinite;
-      will-change: transform;
-    }
-    #Recruiters-Companies-tab-pane .rc-marquee.rev .rc-track { animation-direction: reverse; }
-    #Recruiters-Companies-tab-pane .rc-marquee:hover .rc-track,
-    #Recruiters-Companies-tab-pane .rc-marquee:focus-within .rc-track { animation-play-state: paused; }
-    @keyframes rc-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* slider logo box */
-    #Recruiters-Companies-tab-pane .rc-logo-box {
-      flex: 0 0 auto;
-      width: 160px;
-      height: 110px;
-      margin-right: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: .9rem;
-      background: #fff;
-      border: 1px solid #E6EAF0;
-      border-radius: 14px;
-      transition: border-color .25s, box-shadow .25s;
-    }
-    #Recruiters-Companies-tab-pane .rc-logo-box:hover {
-      border-color: rgba(13,71,161,.35);
-      box-shadow: 0 8px 22px rgba(13,71,161,.10);
-    }
-    #Recruiters-Companies-tab-pane .rc-logo-box img {
-      max-width: 100%;
-      max-height: 78px;
-      object-fit: contain;
-      filter: grayscale(100%);
-      opacity: .85;
-      transition: filter .25s, opacity .25s;
-    }
-    #Recruiters-Companies-tab-pane .rc-logo-box:hover img {
-      filter: grayscale(0);
-      opacity: 1;
-    }
-
-    /* card logo area */
-    #Recruiters-Companies-tab-pane .rc-card-logo {
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-    #Recruiters-Companies-tab-pane .rc-card-logo img {
-      max-height: 82px;
-      max-width: 100%;
-      object-fit: contain;
-      filter: grayscale(100%);
-      opacity: .88;
-      transition: filter .25s, opacity .25s;
-    }
-    #Recruiters-Companies-tab-pane .rc-card:hover {
-      border-color: rgba(13,71,161,.35) !important;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(13,71,161,.10) !important;
-    }
-    #Recruiters-Companies-tab-pane .rc-card:hover .rc-card-logo img {
-      filter: grayscale(0);
-      opacity: 1;
-    }
-    #Recruiters-Companies-tab-pane .rc-card { transition: all .25s ease; }
-
-    @media (prefers-reduced-motion: reduce) {
-      #Recruiters-Companies-tab-pane .rc-track { animation: none; }
-    }
-  </style>
-
-  <!-- ================= HEADING ================= -->
-  <div class="container">
-    <div class="text-center mx-auto mb-5" style="max-width: 640px;">
-      <span class="d-inline-block text-uppercase fw-semibold small text-secondary mb-2"
-            style="letter-spacing:.14em; font-size:.72rem;">Placement Partners</span>
-      <h2 class="fw-bold mb-3" style="color:#0D47A1;">Recruiters Companies</h2>
-      <div class="rounded-pill mx-auto mb-3" style="width:56px;height:4px;background:#FFD200;"></div>
-      <p class="text-secondary mb-0">हर साल हमारे campus से hire करने वाली कंपनियाँ</p>
-    </div>
-
-    <!-- ================= SLIDER 1 : LTR ================= -->
-    <div class="rc-marquee mb-3">
-      <div class="rc-track">
-        <!-- John Deere -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Vacmet India -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Volvo Eicher -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Eicher Tractor -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- CEAT Tyre -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Krishna Maruti -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"></div>
-        <!-- Jaya Hind Industries -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Force Motors -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/force.jpg" alt="Force Motors" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-
-        <!-- DUPLICATE (loop ke liye) -->
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jd1.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/EICHER.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/ceat.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt=""></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/force.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-      </div>
-    </div>
-
-    <!-- ================= SLIDER 2 : RTL ================= -->
-    <div class="rc-marquee rev mt-3">
-      <div class="rc-track">
-        <!-- Force Motors -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/force.jpg" alt="Force Motors" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Jaya Hind -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Krishna Maruti -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"></div>
-        <!-- CEAT -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Eicher Tractor -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Volvo Eicher -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- Vacmet -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <!-- John Deere -->
-        <div class="rc-logo-box"><img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
-
-        <!-- DUPLICATE -->
         
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt=""></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/ceat.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/EICHER.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';"></div>
-        <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';"></div>
-       <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/jd1.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';"></div> <div class="rc-logo-box" aria-hidden="true"><img loading="lazy" src="/static/images/force.jpg" alt="" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';"></div>
+        
+        
+        
+        </div>
+        
+        
+        </div>
+
+    <!-- Bootstrap Icons CDN (add once in your <head> if not already present) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<div class="tab-pane fade container-lg" id="Recruiters-Companies-tab-pane" role="tabpanel"
+      aria-labelledby="Recruiters-Companies-tab" tabindex="0" style="font-family: 'Times New Roman', Times, serif;">
+<div class="container mt-3 mb-5 px-1">
+
+  <nav class="hding rounded-1 py-2 py-md-0">
+    <div class="d-flex w-100  justify-content-between align-items-center">
+      <!-- मुख्य रिस्पॉन्सिव हेडिंग टेक्स्ट -->
+      <div class="hding-text">
+        Recruiters & Companie's
+      </div>
+
+      <!-- ब्रेडक्रंब -->
+      <div class="d-none d-sm-block">
+        <ol class="breadcrumb custom-breadcrumb">
+          <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Recruiters & Companies</li>
+        </ol>
       </div>
     </div>
-
-    <!-- ================= GRID HEADING ================= -->
-    <div class="d-flex align-items-center gap-3 mt-5 mb-4">
-      <h3 class="fw-bold mb-0 text-dark fs-5">Our Top Recruiters</h3>
-      <div class="flex-grow-1 border-top"></div>
-    </div>
-
-    <!-- ================= GRID (clickable cards) ================= -->
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
-
-      <!-- 1. John Deere -->
-      <div class="col">
-        <a href="https://www.deere.co.in" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/jd1.jpg" alt="John Deere"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">John Deere</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Dewas
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 2. Vacmet India -->
-      <div class="col">
-        <a href="https://vpipl.co.in" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Vacmet India</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Pithampur
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 3. Volvo Eicher Commercial Vehicle -->
-      <div class="col">
-        <a href="https://www.vecv.in" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/720x570_mobile-version-1593005415.png" alt="Volvo Eicher Commercial Vehicle"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Volvo Eicher Commercial Vehicle</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Dewas
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 4. Eicher Tractor -->
-      <div class="col">
-        <a href="https://eichertractors.in" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/EICHER.png" alt="Eicher Tractor"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Eicher Tractor</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Mandideep, Bhopal
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 5. CEAT Tyre -->
-      <div class="col">
-        <a href="https://www.ceat.com" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/ceat.png" alt="CEAT Tyre"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">CEAT Tyre</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Halol
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 6. Krishna Maruti -->
-      <div class="col">
-        <a href="https://www.marutisuzuki.com" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Krishna Maruti</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Haryana
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 7. Jaya Hind Industries -->
-      <div class="col">
-        <a href="https://www.jayahind.com" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/jay-hind-group.jpg" alt="Jaya Hind Industries"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=JHL&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Jaya Hind Industries</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Aurangabad
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- 8. Force Motors -->
-      <div class="col">
-        <a href="https://www.forcemotors.com" target="_blank" rel="noopener" class="text-decoration-none">
-          <div class="rc-card card h-100 border rounded-4 shadow-sm">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="rc-card-logo mb-3">
-                <img loading="lazy" src="/static/images/force.jpg" alt="Force Motors"
-                     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&size=200&bold=true';">
-              </div>
-              <h6 class="fw-semibold text-dark text-center mb-2">Force Motors</h6>
-              <small class="d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill bg-light text-secondary">
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-                Pithampur
-              </small>
-            </div>
-          </div>
-        </a>
-      </div>
-
-    </div>
-  </div>
+  </nav>
 </div>
+      <!-- ============================================================
+         SECTION A : COMPANY LOGO CAROUSEL
+         ============================================================ -->
+      <style>
+        #Recruiters-Companies-tab-pane,
+        #Recruiters-Companies-tab-pane p,
+        #Recruiters-Companies-tab-pane li,
+        #Recruiters-Companies-tab-pane span,
+        #Recruiters-Companies-tab-pane div,
+        #Recruiters-Companies-tab-pane h3,
+        #Recruiters-Companies-tab-pane h4,
+        #Recruiters-Companies-tab-pane button,
+        #Recruiters-Companies-tab-pane a {
+          font-family: 'Times New Roman', Times, serif;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel {
+          background: transparent;
+          border-radius: 20px;
+          padding: 1.5rem 1rem;
+          margin-bottom: 2.5rem;
+          position: relative;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-item .row {
+          min-height: 130px;
+          align-items: center;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .rc-logo-box {
+          width: 100%;
+          max-width: 190px;
+          height: 110px;
+          margin: 0 auto;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-control-prev,
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-control-next {
+          width: 44px;
+          opacity: 1;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-control-prev-icon,
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-control-next-icon {
+          background-color: #0D47A1;
+          border-radius: 50%;
+          padding: 1.1rem;
+          background-size: 45%;
+          box-shadow: 0 6px 16px rgba(13, 71, 161, .25);
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-indicators [data-bs-target] {
+          background-color: #0D47A1;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          opacity: .3;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-logo-carousel .carousel-indicators .active {
+          opacity: 1;
+        }
+
+        /* ---- Shared tab styles (as before) ---- */
+        #Recruiters-Companies-tab-pane .rc-company-tabs {
+          flex-wrap: wrap;
+          gap: .5rem !important;
+          border: none;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-company-tabs .nav-link {
+          color: #0D47A1;
+          background: #fff;
+          border: 1px solid #E6EAF0;
+          border-radius: 999px;
+          padding: .55rem 1.1rem;
+          font-weight: 600;
+          font-size: .875rem;
+          transition: all .25s;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-company-tabs .nav-link:hover {
+          border-color: rgba(13, 71, 161, .35);
+          background: #f5f8ff;
+          color: #0D47A1;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-company-tabs .nav-link.active {
+          background: #0D47A1;
+          color: #fff;
+          border-color: #0D47A1;
+          box-shadow: 0 8px 22px rgba(13, 71, 161, .18);
+        }
+
+        #Recruiters-Companies-tab-pane .rc-detail-card {
+          border: 1px solid #E6EAF0;
+          border-radius: 8px;
+          background: transparent;
+          transition: all .3s;
+          box-shadow: 0 6px 18px rgba(13, 71, 161, .05);
+          overflow: hidden;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-detail-hero {
+          padding: 1.5rem;
+          background: linear-gradient(135deg, #f4f8ff 0%, #ffffff 100%);
+          border-bottom: 1px solid #E6EAF0;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-detail-logo {
+          width: 72px;
+          height: 72px;
+          background: #fff;
+          border: 1px solid #E6EAF0;
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: .6rem;
+          flex-shrink: 0;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-detail-logo img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-fact-box {
+          background: #f8fafc;
+          border: 1px solid #E6EAF0;
+          border-radius: 12px;
+          padding: .85rem 1rem;
+          height: 100%;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-fact-box .rc-fact-label {
+          font-size: .7rem;
+          text-transform: uppercase;
+          letter-spacing: .1em;
+          color: #64748b;
+          font-weight: 600;
+          margin-bottom: .25rem;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-fact-box .rc-fact-value {
+          font-weight: 700;
+          color: #0f172a;
+          font-size: .95rem;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-star-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: .3rem;
+          background: #fff8dc;
+          color: #a16207;
+          padding: .3rem .7rem;
+          border-radius: 999px;
+          font-weight: 700;
+          font-size: .8rem;
+          border: 1px solid #fef3c7;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-adv-list {
+          padding-left: 0;
+          list-style: none;
+          margin: 0;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-adv-list li {
+          position: relative;
+          padding-left: 1.6rem;
+          margin-bottom: .6rem;
+          color: #334155;
+          font-size: .9rem;
+          line-height: 1.5;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-adv-list li::before {
+          content: "\F26E"; /* bootstrap-icons check-lg unicode */
+          font-family: "bootstrap-icons" !important;
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: #16a34a;
+          font-weight: 800;
+          font-size: .95rem;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-mini-heading {
+          font-size: .72rem;
+          text-transform: uppercase;
+          letter-spacing: .12em;
+          font-weight: 700;
+          color: #0D47A1;
+          margin-bottom: .75rem;
+          display: flex;
+          align-items: center;
+          gap: .4rem;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-mini-heading::before {
+          content: "";
+          width: 4px;
+          height: 14px;
+          background: #FFD200;
+          border-radius: 2px;
+          display: inline-block;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-facility-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: .35rem;
+          background: #eff6ff;
+          color: #1e40af;
+          border: 1px solid #dbeafe;
+          padding: .35rem .75rem;
+          border-radius: 999px;
+          font-size: .78rem;
+          font-weight: 600;
+          margin: 0 .35rem .35rem 0;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-facility-chip i {
+          font-size: .9rem;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-highlight-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: .4rem;
+          background: #ecfdf5;
+          color: #047857;
+          border: 1px solid #a7f3d0;
+          padding: .4rem .8rem;
+          border-radius: 8px;
+          font-size: .8rem;
+          font-weight: 600;
+          margin: 0 .4rem .4rem 0;
+        }
+
+        /* ---- Gallery ---- */
+        #Recruiters-Companies-tab-pane .rc-gallery-item {
+          position: relative;
+          border-radius: 2px;
+          overflow: hidden;
+          aspect-ratio: 4 / 3;
+          cursor: pointer;
+          border: 1px solid #E6EAF0;
+          transition: transform .3s, box-shadow .3s;
+          padding: 0%;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform .4s ease;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-item:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 14px 30px rgba(13, 71, 161, .15);
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-item:hover img {
+          transform: scale(1.08);
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, transparent 40%, rgba(13, 71, 161, .85) 100%);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: .85rem;
+          color: #fff;
+          opacity: 0;
+          transition: opacity .3s;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-item:hover .rc-gallery-overlay {
+          opacity: 1;
+        }
+
+        #Recruiters-Companies-tab-pane .rc-gallery-overlay .rc-gallery-tag {
+          display: inline-block;
+          background: rgba(255, 255, 255, .2);
+          padding: .15rem .55rem;
+          border-radius: 999px;
+          font-size: .68rem;
+          font-weight: 600;
+          margin-bottom: .25rem;
+          width: fit-content;
+          backdrop-filter: blur(4px);
+        }
+      </style>
+
+      <!-- CAROUSEL -->
+      <div id="companyLogoCarousel" class="carousel slide rc-logo-carousel" data-bs-ride="carousel" data-bs-interval="3500">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#companyLogoCarousel" data-bs-slide-to="0" class="active"
+            aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#companyLogoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row g-3 justify-content-center px-4">
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/jd1.jpg" alt="John Deere" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/720x570_mobile-version-1593005415.png" alt="VE Commercial"
+                    loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/EICHER.png" alt="Eicher Tractor" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row g-3 justify-content-center px-4">
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/ceat.png" alt="CEAT Tyre" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"
+                    loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=KM&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/jay-hind-group.jpg" alt="Jaya Hind" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=JH&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rc-logo-box"><img src="/static/images/force.jpg" alt="Force Motors" loading="lazy"
+                    onerror="this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&bold=true'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#companyLogoCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#companyLogoCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
 
-     
+      <!-- ============================================================
+         SECTION B : COMPANY DETAIL TABS (only advantages)
+         ============================================================ -->
+      <div class="d-flex align-items-center gap-3 mt-4 mb-4">
+        <h3 class="fw-bold mb-0 text-dark fs-5">Company Details &amp; Work Culture</h3>
+        <div class="flex-grow-1 border-top"></div>
+      </div>
+
+      <ul class="nav rc-company-tabs mb-4" id="companyDetailTabs" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pane-jd" type="button"
+            role="tab">John Deere</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-vacmet" type="button"
+            role="tab">Vacmet India</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-vecv" type="button"
+            role="tab">VE Commercial</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-eicher" type="button"
+            role="tab">Eicher Tractor</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-ceat" type="button"
+            role="tab">CEAT Tyre</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-krishna" type="button"
+            role="tab">Krishna Maruti</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-jayahind" type="button"
+            role="tab">Jaya Hind</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#pane-force" type="button"
+            role="tab">Force Motors</button></li>
+      </ul>
+
+      <div class="tab-content" id="companyDetailTabsContent">
+
+        <!-- ========= JOHN DEERE ========= -->
+        <div class="tab-pane fade show active" id="pane-jd" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/jd1.jpg" alt="John Deere" loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=JD&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">John Deere India Pvt. Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 4.2 / 5</span>
+                  <span class="badge bg-light text-secondary border">Agriculture Machinery</span>
+                  <a href="https://www.deere.co.in" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Dewas, MP</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1837 (India: 1998)</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">4,000+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Tractors</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">Special emphasis is placed on safety, quality and teamwork.
+                    Management is supportive and there are ample opportunities to learn and grow. The Dewas plant carries
+                    out CNC machining and tractor assembly. Under the "Samruddhi" program, the company works directly with
+                    farmers.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-gear-wide-connected"></i> CNC Machining</span>
+                    <span class="rc-facility-chip"><i class="bi bi-truck"></i> Tractor Assembly</span>
+                    <span class="rc-facility-chip"><i class="bi bi-book"></i> Skill Training</span>
+                    <span class="rc-facility-chip"><i class="bi bi-shield-check"></i> Safety First</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Supportive work culture and collaborative team</li>
+                    <li>Excellent learning &amp; growth opportunities</li>
+                    <li>Strong focus on innovation and quality</li>
+                    <li>Global brand with job security</li>
+                    <li>Employee safety prioritized at every level</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= VACMET INDIA ========= -->
+        <div class="tab-pane fade" id="pane-vacmet" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/vacmetindialtd_logo.jpg" alt="Vacmet India"
+                  loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=VM&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">Vacmet India Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.7 / 5</span>
+                  <span class="badge bg-light text-secondary border">Flexible Packaging</span>
+                  <a href="https://vpipl.co.in" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Pithampur, MP</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1993</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">2,000+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Packaging Films</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">The company calls itself a "people company" and emphasizes an
+                    open, barrier-free work culture. Employees receive equal opportunities, strong team spirit and the
+                    freedom to learn without fear of failure. It is one of India's largest flexible packaging film
+                    manufacturers.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-house-door"></i> Furnished Hostel</span>
+                    <span class="rc-facility-chip"><i class="bi bi-hospital"></i> Healthcare Center</span>
+                    <span class="rc-facility-chip"><i class="bi bi-heart-pulse"></i> 24×7 Ambulance</span>
+                    <span class="rc-facility-chip"><i class="bi bi-activity"></i> Gym</span>
+                    <span class="rc-facility-chip"><i class="bi bi-controller"></i> Indoor/Outdoor Games</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Supportive colleagues and transparent management</li>
+                    <li>Good job security with salary on time</li>
+                    <li>Employee-focused HR policies</li>
+                    <li>Excellent on-campus housing &amp; healthcare</li>
+                    <li>Equal opportunity employer with open culture</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= VE COMMERCIAL ========= -->
+        <div class="tab-pane fade" id="pane-vecv" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/720x570_mobile-version-1593005415.png" alt="VECV"
+                  loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=VECV&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">VE Commercial Vehicles Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.7 / 5</span>
+                  <span class="badge bg-light text-secondary border">Commercial Vehicles</span>
+                  <a href="https://www.vecv.in" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Dewas, MP</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">2008 (JV)</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">10,000+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Trucks &amp; Buses</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">A joint venture between Volvo Group and Eicher Motors. Employees
+                    describe it as a collaborative and supportive environment where there are opportunities to work on
+                    challenging projects. The Dewas plant produces gears and line machines.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-gear"></i> Gear Manufacturing</span>
+                    <span class="rc-facility-chip"><i class="bi bi-truck"></i> Truck Assembly</span>
+                    <span class="rc-facility-chip"><i class="bi bi-p-square"></i> Parking</span>
+                    <span class="rc-facility-chip"><i class="bi bi-cup-hot"></i> Canteen</span>
+                    <span class="rc-facility-chip"><i class="bi bi-bus-front"></i> Transport</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Challenging projects with global exposure</li>
+                    <li>Collaborative and supportive environment</li>
+                    <li>Strong job security (JV of two majors)</li>
+                    <li>Great work-life balance score (4.0/5)</li>
+                    <li>Continuous learning &amp; development programs</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= EICHER TRACTOR ========= -->
+        <div class="tab-pane fade" id="pane-eicher" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/EICHER.png" alt="Eicher Tractor" loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=ET&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">Eicher Tractors (TAFE Motors &amp; Tractors Ltd.)</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.9 / 5</span>
+                  <span class="badge bg-light text-secondary border">Tractors</span>
+                  <a href="https://eichertractors.in" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Mandideep, Bhopal</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">2005</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">4,899</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Agriculture</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">Part of the TAFE Group. The Mandideep plant manufactures tractors
+                    through advanced technology and innovation. Working days run Monday to Saturday with flexible hours.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-basket"></i> Free Lunch</span>
+                    <span class="rc-facility-chip"><i class="bi bi-cup-hot"></i> Tea Time</span>
+                    <span class="rc-facility-chip"><i class="bi bi-tools"></i> Advanced Tech</span>
+                    <span class="rc-facility-chip"><i class="bi bi-clock"></i> Flexible Hours</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Very good work culture and positive environment</li>
+                    <li>Great learning opportunity for freshers</li>
+                    <li>Flexible working hours</li>
+                    <li>Free meals provided at workplace</li>
+                    <li>Part of a legacy brand (TAFE Group)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= CEAT TYRE ========= -->
+        <div class="tab-pane fade" id="pane-ceat" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/ceat.png" alt="CEAT Tyre" loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=CEAT&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">CEAT Specialty Tyres Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 4.0 / 5</span>
+                  <span class="badge bg-light text-secondary border">Tyres</span>
+                  <a href="https://www.ceat.com" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Halol, Gujarat</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1958</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">7,000+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Tyres &amp; Rubber</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">The company gives top priority to the health and safety of its
+                    employees. It works on the philosophy "People always come first" and promotes gender diversity and
+                    self-managed teams. It has received the 'Sword of Honour' from the British Safety Council (the only
+                    tyre plant in India to do so).</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-building"></i> Passenger Car Tyres</span>
+                    <span class="rc-facility-chip"><i class="bi bi-truck"></i> Truck/Bus Tyres</span>
+                    <span class="rc-facility-chip"><i class="bi bi-cup-hot"></i> Cafeteria</span>
+                    <span class="rc-facility-chip"><i class="bi bi-controller"></i> Gaming Arcade</span>
+                    <span class="rc-facility-chip"><i class="bi bi-bus-front"></i> Transport</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Excellent work environment &amp; safety culture</li>
+                    <li>Salary and bonus paid on time</li>
+                    <li>Strong job security with global brand</li>
+                    <li>British Safety Council 'Sword of Honour' winner</li>
+                    <li>Promotes gender diversity &amp; self-managed teams</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= KRISHNA MARUTI ========= -->
+        <div class="tab-pane fade" id="pane-krishna" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/Krishna-Maruti-Limited.png" alt="Krishna Maruti"
+                  loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=KM&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">Krishna Maruti Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.8 / 5</span>
+                  <span class="badge bg-light text-secondary border">Auto Components</span>
+                  <a href="https://www.marutisuzuki.com" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Haryana (Manesar)</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1994</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">2,185+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Seats &amp; Interiors</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">Employees appreciate the disciplined and open environment where
+                    every individual is respected. The company provides strong job security and stability. 76% of
+                    employees report a 6-day work week, with flexible time options available.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-basket"></i> Free Lunch</span>
+                    <span class="rc-facility-chip"><i class="bi bi-controller"></i> Gaming Arcade</span>
+                    <span class="rc-facility-chip"><i class="bi bi-clock"></i> Flexible Hours</span>
+                    <span class="rc-facility-chip"><i class="bi bi-tag"></i> Employee Discounts</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Good work environment with supportive teammates</li>
+                    <li>Transparent management &amp; open communication</li>
+                    <li>Freedom to innovate and try new ideas</li>
+                    <li>Stability and long-term job security</li>
+                    <li>Employee perks &amp; merchandise discounts</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= JAYA HIND ========= -->
+        <div class="tab-pane fade" id="pane-jayahind" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/jay-hind-group.jpg" alt="Jaya Hind" loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=JH&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">Jaya Hind Industries Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.44 / 5</span>
+                  <span class="badge bg-light text-secondary border">Auto Components</span>
+                  <a href="https://www.jayahind.com" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Aurangabad, MH</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1947</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">2,800+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">Aluminium Castings</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">A public auto components company known for its partnership with
+                    Tata Motors. Working days run Monday to Saturday with strict hours. Salary satisfaction (3.73/5) and
+                    work-life balance (3.68/5) are strong points.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-building"></i> Aluminium Casting</span>
+                    <span class="rc-facility-chip"><i class="bi bi-people"></i> Tata Motors Partner</span>
+                    <span class="rc-facility-chip"><i class="bi bi-cup-hot"></i> Canteen</span>
+                    <span class="rc-facility-chip"><i class="bi bi-bus-front"></i> Transport</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Competitive salary satisfaction (3.73/5)</li>
+                    <li>Good work-life balance (3.68/5)</li>
+                    <li>Stable public limited company since 1947</li>
+                    <li>Long-term partnership with Tata Motors</li>
+                    <li>Employee-friendly leave policies</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= FORCE MOTORS ========= -->
+        <div class="tab-pane fade" id="pane-force" role="tabpanel">
+          <div class="rc-detail-card">
+            <div class="rc-detail-hero d-flex flex-wrap align-items-center gap-3">
+              <div class="rc-detail-logo"><img src="/static/images/force.jpg" alt="Force Motors" loading="lazy"
+                  onerror="this.src='https://ui-avatars.com/api/?name=FM&background=0D47A1&color=fff&bold=true'"></div>
+              <div class="flex-grow-1">
+                <h4 class="fw-bold mb-1" style="color:#0D47A1;">Force Motors Ltd.</h4>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <span class="rc-star-badge"><i class="bi bi-star-fill"></i> 3.3 / 5</span>
+                  <span class="badge bg-light text-secondary border">Automobiles</span>
+                  <a href="https://www.forcemotors.com" target="_blank" rel="noopener"
+                    class="btn btn-sm btn-primary rounded-pill px-3">Visit Website <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Location</div>
+                    <div class="rc-fact-value">Pithampur, MP</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Established</div>
+                    <div class="rc-fact-value">1958</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Employees</div>
+                    <div class="rc-fact-value">5,000+</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="rc-fact-box">
+                    <div class="rc-fact-label">Industry</div>
+                    <div class="rc-fact-value">CV / Utility Vehicles</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Work Culture</div>
+                  <p class="text-secondary small mb-3">A fully integrated 300+ acre mother plant in Pithampur (from
+                    stamping to final assembly). ISO 14001 and IATF 16949 certified, NABL-accredited facilities. The work
+                    culture is friendly yet professional.</p>
+                  <div class="rc-mini-heading">Facilities</div>
+                  <div>
+                    <span class="rc-facility-chip"><i class="bi bi-building"></i> 300+ Acre Plant</span>
+                    <span class="rc-facility-chip"><i class="bi bi-patch-check"></i> ISO 14001</span>
+                    <span class="rc-facility-chip"><i class="bi bi-patch-check"></i> IATF 16949</span>
+                    <span class="rc-facility-chip"><i class="bi bi-cup-hot"></i> Cafeteria</span>
+                    <span class="rc-facility-chip"><i class="bi bi-controller"></i> Gaming Arcade</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="rc-mini-heading">Advantages / Why Join</div>
+                  <ul class="rc-adv-list mb-3">
+                    <li>Friendly and professional work environment</li>
+                    <li>Supportive senior colleagues &amp; mentoring</li>
+                    <li>Company open to innovation &amp; new ideas</li>
+                    <li>Fully-integrated 300+ acre mother plant</li>
+                    <li>NABL accredited with ISO &amp; IATF certifications</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ============================================================
+         SECTION C : WORK ENVIRONMENT & EVENTS GALLERY
+         ============================================================ -->
+      <div class="d-flex align-items-center gap-3 mt-5 mb-4">
+        <h3 class="fw-bold mb-0 text-dark fs-5">Work Environment</h3>
+        <div class="flex-grow-1 border-top"></div>
+      </div>
+      <p class="text-secondary small mb-4">Glimpses of our partner companies — factory floors, offices, teams and events.
+      </p>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-4">
+
+        <!-- 1. John Deere — Dewas -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselJD" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselJD" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselJD" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselJD" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmd_75sDrMtWq6S33E6rzPZzFMW5cL2tZJDukueygYI4VJizD6csKlWks&s=10"
+                    class="d-block w-100" alt="John Deere Dewas Plant Front" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4E22AQFy6I6Mfaqk3Q/feedshare-shrink_800/B4EZhPqr0fHIAg-/0/1753683247245?e=2147483647&v=beta&t=MCsKubLJFTyjtiOhvnRt1MRPmeAXbCS0rrDqnd0KWfM"
+                    class="d-block w-100" alt="John Deere Tractor Assembly" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://static.ambitionbox.com/api/v2/photo/V0VVa0lFUkJJajRwRTFaZ3JrQ1NOUT09"
+                    class="d-block w-100" alt="John Deere Work Culture" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselJD" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselJD" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2. Vacmet India — Pithampur -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselVacmet" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselVacmet" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselVacmet" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselVacmet" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://images.jdmagicbox.com/comp/dhar/i4/9999p7292.7292.180225142005.k1i4/catalogue/vacmet-india-ltd-dhar-bopp-film-manufacturers-8fWuN8ml1i.jpg"
+                    class="d-block w-100" alt="Vacmet India Plant Front" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRARkqiTKADOj5CuHhJvHq-PAygGY7TNNZHpEh4VdKeIHNPLGvkQiCf-N4F&s=10"
+                    class="d-block w-100" alt="Vacmet Production Line" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://www.labelsandlabeling.com/sites/labels/lnl/files/styles/lead_image_2_1280x720_/public/news/vacmet.jpg?itok=4yM9kaBD"
+                    class="d-block w-100" alt="Vacmet Environment" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselVacmet" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselVacmet" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. VE Commercial Vehicles — Dewas -->
+        <div class="col">
+          <div class="card shadow-sm border-0 rc-gallery-item">
+            <div id="carouselVECV" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselVECV" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselVECV" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselVECV" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://jobdesh.in/wp-content/uploads/2026/07/VE-Commercial-Vehicles-Ltd-Job-Vacancy.webp"
+                    class="d-block w-100" alt="VECV Dewas Front" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7C0wF4FTNgn--TtqfzjPufx_Ritbqf1u-dEaITcObNtKcUUT00bbxwepb&s=10"
+                    class="d-block w-100" alt="VECV Assembly Line" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuYfyr1YJi8EE1QNM2vgZXRKEsSnHbCtKYdrp5UbtJpTCcIw31grsdiTZm&s=10"
+                    class="d-block w-100" alt="VECV Work Culture" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselVECV" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselVECV" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4. Eicher Tractor (TAFE) — Mandideep -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselEicher" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselEicher" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselEicher" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselEicher" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://tmtl.in/corporate/img/eicher-tractor-plant.jpg" class="d-block w-100"
+                    alt="Eicher Tractor Mandideep Front" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrZHAkvyVBav_oZFPWE6t6gC6Tz_j_MLQ986IxymEBQtyb0eDqKwGSxkts&s=10"
+                    class="d-block w-100" alt="Eicher Tractor Line" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQhB0rGAkrW1lLOT7PgLFuGTGyiCAycLRpTSwFZ1AMjzklk5nLOhuTtcuZ&s=10"
+                    class="d-block w-100" alt="Eicher Environment" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselEicher" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselEicher" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 5. CEAT Tyre — Halol -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselCEAT" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselCEAT" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselCEAT" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselCEAT" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGrK68G4EbOfGXo8Sa0eX_-GSfV4eytYZLFeqfHsCB0g&s=10"
+                    class="d-block w-100" alt="CEAT Tyre Halol Front" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT92BbLKf0L_MJMXe9Wn_xuDnbEuE6Nf-thGXl4-ohregnwV-b6Bc6ReIM&s=10"
+                    class="d-block w-100" alt="CEAT Tyre Plant" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CNoov4QoxQttrQOcAwXO5nPfQvLe4jtM7dMXmlbpYCF09Bu7jtpB4ws&s=10"
+                    class="d-block w-100" alt="CEAT Work Environment" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselCEAT" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselCEAT" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 6. Krishna Maruti — Haryana (Manesar) -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselKrishna" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselKrishna" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselKrishna" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselKrishna" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhBkKpYhuv-xJSstwXVMjumRKWWaP4VTZTMII-59q9rv2-4xGJK5Sm32pI&s=10"
+                    class="d-block w-100" alt="Krishna Maruti Manesar Front" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://static.ambitionbox.com/api/v2/photo/Y3huT0h4TlQ0dVlmazNGa2NVOGdtUT09"
+                    class="d-block w-100" alt="Krishna Maruti Seat Unit" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4TSPEzAUU96l8jzw2Ix2KdiyQUKx4BFSXMMP14WTFIn0nDAWcqF5U9Eg&s=10"
+                    class="d-block w-100" alt="Krishna Maruti Work Culture" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselKrishna" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselKrishna" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 7. Jaya Hind Industries — Aurangabad -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselJayaHind" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselJayaHind" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselJayaHind" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselJayaHind" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnPW0LjvvbCgcvO65USg9RJFUg7-3WSXGErLvoby9IyA&s=10"
+                    class="d-block w-100" alt="Jaya Hind Aurangabad Front" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoKx6cqRY0Affi8dynBdUXTMzv-jOHIlTJSeWDKu2mA5q9vbdY9W2-j2u2&s=10"
+                    class="d-block w-100" alt="Jaya Hind Casting Unit" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://images.jdmagicbox.com/comp/pune/q2/020pxx20.xx20.180627023400.b5q2/catalogue/jaya-hind-montupet-pvt-ltd-urse-pune-56fseo49b3.jpg"
+                    class="d-block w-100" alt="Jaya Hind Environment" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselJayaHind" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselJayaHind" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 8. Force Motors — Pithampur -->
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rc-gallery-item">
+            <div id="carouselForce" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselForce" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselForce" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselForce" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#carouselForce" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#carouselForce" data-bs-slide-to="4"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyg-CSMR0UNgS7K9o6ne80XIrBI4ztAPuVIHx45wgyT-4vshAOsg3Qa9o&s=10"
+                    class="d-block w-100" alt="Force Motors Pithampur Plant" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrSfHfz92AERF6QW-wjN6Y806eS4WxpAnOw_usH27UAf0GhYmHO34tpBw&s=10"
+                    class="d-block w-100" alt="Force Motors Robotic Line" style="height: 200px; object-fit: cover;"
+                    loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://www.forcemotors.com/wp-content/uploads/2025/02/mtu.png" class="d-block w-100"
+                    alt="Force Motors Front Building" style="height: 200px; object-fit: cover;" loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselForce" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselForce" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    
+    
+    
     </div>
     <div class="tab-pane fade" id="dashbord-tab-pane" role="tabpanel" aria-labelledby="dashbord-tab" tabindex="0">
 
