@@ -1503,6 +1503,274 @@
               }
             }
           </style>
+
+
+<!-- ============================================================
+     7. PLACEMENTS  (matches navbar > Placements)
+============================================================ -->
+<section id="placements" class="section-band section-band-alt">
+  <style>
+    /* ================================================================
+       PLACEMENTS — traditional stat boxes + chart cards
+       ================================================================ */
+    .placement-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .placement-strip .stat {
+      background: #fff;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+
+    .placement-strip .stat b {
+      display: block;
+      font-size: 1.9rem;
+      color: var(--maroon);
+      font-family: 'Times New Roman', serif;
+    }
+
+    .placement-strip .stat span {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    @media (max-width: 576px) {
+      .placement-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .chart-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.15rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .chart-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .75rem;
+      text-align: center;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Times New Roman', serif;
+      letter-spacing: .3px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 260px;
+      width: 100%;
+    }
+
+    .recruiters-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .5rem;
+    }
+
+    .recruiters-strip span {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: .4rem .9rem;
+      border-radius: 3px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #444;
+    }
+  </style>
+
+  <div class="container">
+    <div class="section-center mb-4">
+      <h2 class="section-title"><span class="flag"></span>Placements</h2>
+      <p class="section-sub">Year-on-year placement performance — students placed &amp; package trends</p>
+      <div class="section-rule"></div>
+    </div>
+
+    <!-- Top Stat Boxes -->
+    <div class="placement-strip">
+      <div class="stat"><b>75%</b><span>Placement Rate</span></div>
+      <div class="stat"><b>8+</b><span>Recruiters</span></div>
+      <div class="stat"><b>1.7 LPA</b><span>Highest Package</span></div>
+      <div class="stat"><b>1.4 LPA</b><span>Average Package</span></div>
+    </div>
+
+    <!-- 4 Charts Grid -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="chart-card">
+          <div class="chart-title">Students Placed (Year-wise)</div>
+          <div class="chart-wrapper"><canvas id="studentsChart"></canvas></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="chart-card">
+          <div class="chart-title">Highest Package (LPA)</div>
+          <div class="chart-wrapper"><canvas id="highestChart"></canvas></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="chart-card">
+          <div class="chart-title">Average Package (LPA)</div>
+          <div class="chart-wrapper"><canvas id="avgChart"></canvas></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="chart-card">
+          <div class="chart-title">Median Package (LPA)</div>
+          <div class="chart-wrapper"><canvas id="medianChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Recruiters -->
+    <div class="mt-3">
+      <h6 class="fw-bold" style="color:var(--navy); font-family:'Times New Roman',serif;">
+        Our Top Recruiters
+      </h6>
+      <div class="recruiters-strip">
+        <span>L&amp;T</span>
+        <span>Tata Motors</span>
+        <span>Bajaj Auto</span>
+        <span>Mahindra</span>
+        <span>Wipro</span>
+        <span>Infosys</span>
+        <span>JSW Steel</span>
+        <span>Ashok Leyland</span>
+        <span>Godrej</span>
+      </div>
+    </div>
+
+    <!-- Detailed Link -->
+    <div class="text-center mt-4">
+      <a href="{% url 'placements' %}#Statistics-tab-pane" class="btn btn-outline-primary rounded-0 px-4"
+        style="border-color:var(--navy);color:var(--navy);">
+        View Detailed Placement Statistics &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- नोट: यदि आपने chart.js अपने static फोल्डर में सेव की है, तो नीचे CDN की जगह {% static 'js/chart.umd.min.js' %} का उपयोग करें -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // सुरक्षा जांच: यदि Chart.js लोड नहीं हुआ है तो एरर रोकें
+      if (typeof Chart === 'undefined') {
+        console.error("Chart.js library load nahi hui hai. Kripya internet ya local file path check karein.");
+        return;
+      }
+
+      const years = [], studentsPlaced = [], highestPkg = [], avgPkg = [], medianPkg = [];
+
+      {% for batch in all_batches %}
+        years.push("{{ batch.year }}");
+        studentsPlaced.push(parseFloat("{{ batch.total_students_placed|default:0 }}"));
+        highestPkg.push(parseFloat("{{ batch.max_highest_package|default:0 }}"));
+        avgPkg.push(parseFloat("{{ batch.avg_package|default:0 }}"));
+        // अपने Django model के अनुसार 'median_package' का सही नाम यहाँ रखें
+        medianPkg.push(parseFloat("{{ batch.median_package|default:0 }}"));
+      {% endfor %}
+
+      if (years.length === 0) return;
+
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, grid: { color: '#f0f0f0' } }
+        }
+      };
+
+      const chartInstances = [];
+
+      // 1. Students Placed (Bar Chart)
+      const studentsCtx = document.getElementById('studentsChart');
+      if (studentsCtx) {
+        chartInstances.push(new Chart(studentsCtx, {
+          type: 'bar',
+          data: {
+            labels: years,
+            datasets: [{
+              label: 'Students Placed',
+              data: studentsPlaced,
+              backgroundColor: 'rgba(0, 51, 153, 0.75)',
+              borderColor: 'rgba(0, 51, 153, 1)',
+              borderWidth: 1,
+              borderRadius: 4
+            }]
+          },
+          options: commonOptions
+        }));
+      }
+
+      // Line Chart Helper Function
+      function createLineChart(id, label, data, color, bg) {
+        const ctx = document.getElementById(id);
+        if (!ctx) return;
+        chartInstances.push(new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: years,
+            datasets: [{
+              label: label,
+              data: data,
+              borderColor: color,
+              backgroundColor: bg,
+              borderWidth: 2.5,
+              pointBackgroundColor: color,
+              pointRadius: 4,
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: commonOptions
+        }));
+      }
+
+      // 2. Highest Package
+      createLineChart('highestChart', 'Highest (LPA)', highestPkg, '#8B0000', 'rgba(139, 0, 0, 0.15)');
+
+      // 3. Average Package (पूरा किया गया)
+      createLineChart('avgChart', 'Average (LPA)', avgPkg, '#0d6efd', 'rgba(13, 110, 253, 0.15)');
+
+      // 4. Median Package (पूरा किया गया)
+      createLineChart('medianChart', 'Median (LPA)', medianPkg, '#198754', 'rgba(25, 135, 84, 0.15)');
+
+      // Bootstrap Tab बदलने पर चार्ट को सही से रिसाइज़ करने के लिए
+      const tabTrigger = document.querySelector('[aria-controls="Statistics-tab-pane"], #Statistics-tab');
+      if (tabTrigger) {
+        tabTrigger.addEventListener('shown.bs.tab', () => {
+          chartInstances.forEach(c => c.resize());
+        });
+      }
+    });
+  </script>
+</section>
+
+
+
+ 
 <div class="container">
   <style>
 /* ============================================================
@@ -1974,6 +2242,9 @@
       </div>
       
 
+
+
+      
       <div class="tab-pane fade" id="Statistics-tab-pane" role="tabpanel" aria-labelledby="Statistics-tab" tabindex="0">
         <div class="container mt-3 mb-5 px-3">
         

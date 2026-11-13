@@ -2472,10 +2472,10 @@
                     </div>
 
                     <div class="placement-strip">
-                        <div class="stat"><b>90%</b><span>Placement Rate</span></div>
-                        <div class="stat"><b>25+</b><span>Recruiters</span></div>
-                        <div class="stat"><b>5.5 LPA</b><span>Highest Package</span></div>
-                        <div class="stat"><b>3.2 LPA</b><span>Average Package</span></div>
+                        <div class="stat"><b>7%</b><span>Placement Rate</span></div>
+                        <div class="stat"><b>">{{grand_companies_visited}}+</b><span>Recruiters</span></div>
+                        <div class="stat"><b>{{grand_highest_package}}+ LPA</b><span>Highest Package</span></div>
+                        <div class="stat"><b>{{grand_avg_package}}+ LPA</b><span>Average Package</span></div>
                     </div>
 
                     <div class="row">
@@ -2491,36 +2491,10 @@
                                 <div class="chart-wrapper"><canvas id="highestChart"></canvas></div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <div class="chart-card">
-                                <div class="chart-title">Average Package (LPA)</div>
-                                <div class="chart-wrapper"><canvas id="avgChart"></canvas></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="chart-card">
-                                <div class="chart-title">Median Package (LPA)</div>
-                                <div class="chart-wrapper"><canvas id="medianChart"></canvas></div>
-                            </div>
-                        </div> -->
+                        
                     </div>
 
-                    <div class="mt-3">
-                        <h6 class="fw-bold" style="color:var(--navy); font-family:'Times New Roman',serif;">
-                            Our Top Recruiters
-                        </h6>
-                        <div class="recruiters-strip">
-                            <span>L&amp;T</span>
-                            <span>Tata Motors</span>
-                            <span>Bajaj Auto</span>
-                            <span>Mahindra</span>
-                            <span>Wipro</span>
-                            <span>Infosys</span>
-                            <span>JSW Steel</span>
-                            <span>Ashok Leyland</span>
-                            <span>Godrej</span>
-                        </div>
-                    </div>
+                        
 
                     <div class="text-center mt-4">
                         <a href="{% url 'placements' %}#Statistics-tab-pane" class="btn btn-outline-primary rounded-0 px-4"
@@ -2535,43 +2509,54 @@
 
 
             <!-- ================= CAMPUS LIFE GALLERY ================= -->
-
 <section id="campus-gallery" class="section-band section-band-alt">
     <style>
         /* ================================================================
-   CAMPUS GALLERY (MASONRY & GLASS MODALS)
+   CAMPUS GALLERY (UNIFORM RECTANGLE GRID)
    ================================================================ */
 
-/* Masonry Grid */
+/* ---------- Auto-arranging uniform rectangle grid ---------- */
 .gallery-container {
     width: 100%;
     padding: 0;
 }
+
 .gallery-masonry {
-    column-count: 4; /* 4 columns on desktop */
-    column-gap: 0; /* 0px gap as requested */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns on desktop */
+    gap: 2px;                              /* clean separation between tiles */
     width: 100%;
 }
+
+/* Responsive columns */
 @media (max-width: 991.98px) {
-    .gallery-masonry { column-count: 3; }
+    .gallery-masonry { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 767.98px) {
-    .gallery-masonry { column-count: 2; }
+    .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 575.98px) {
-    .gallery-masonry { column-count: 1; }
+    .gallery-masonry { grid-template-columns: 1fr; }
 }
 
-/* Gallery Item */
+/* Each tile = fixed rectangle, image fills it 100% */
 .gallery-item {
-    break-inside: avoid;
     position: relative;
     cursor: pointer;
     overflow: hidden;
     background: #000;
+    aspect-ratio: 4 / 3;       /* uniform rectangle shape (desktop + mobile) */
+    border-radius: 2px;        /* optional soft corners – remove if not wanted */
 }
+
+/* Image fills the rectangle completely (crops if needed) */
 .gallery-item img {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;         /* <<< YEH RECTANGLE KO FULL FILL KARTA HAI */
+    object-position: center;
     display: block;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
 }
@@ -2644,7 +2629,7 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 .modal-slider-img {
-    max-height: 75vh; /* Image screen ke andar rahegi */
+    max-height: 75vh;
     width: auto;
     max-width: 100%;
     object-fit: contain;
@@ -2652,15 +2637,15 @@
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-/* Carousel button tweak for glass look */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     padding: 1.5rem;
     border: 1px solid rgba(255,255,255,0.2);
 }
-        </style>
+    </style>
+
     <div class="container">
-        
+
         <!-- Section Heading -->
         <div class="section-center mb-5">
             <h2 class="section-title"><span class="flag"></span>Campus Life Gallery</h2>
@@ -2668,13 +2653,13 @@
             <div class="section-rule"></div>
         </div>
 
-        <!-- Masonry Gallery (No Gap) -->
+        <!-- Auto-arranged Uniform Rectangle Grid -->
         <div class="gallery-container">
             <div class="gallery-masonry">
 
                 {% for category in campus_categories %}
                 <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#campusModal-{{ category.id }}">
-                    
+
                     <!-- ==========================================
                          RANDOM IMAGE LOGIC:
                          1. Pehle koshish karega category ke andar ki koi random image uthane ki.
@@ -2696,7 +2681,7 @@
                         <div class="overlay-icon"><i class="bi bi-images"></i></div>
                         <span>View Album</span>
                     </div>
-                    
+
                     <!-- Caption -->
                     <div class="gallery-caption">
                         {{ category.get_name_display }}
@@ -2704,7 +2689,7 @@
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-center w-100 py-5">
+                <div class="text-center w-100 py-5" style="grid-column: 1 / -1;">
                     <p class="text-muted">No campus photos uploaded yet.</p>
                 </div>
                 {% endfor %}

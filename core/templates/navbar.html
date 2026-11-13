@@ -1,7 +1,10 @@
 {% load static %}
 <style>
 
-    
+    /* =========================================================
+       UNIQUE NAVBAR  (upnav-* prefix = zero conflict)
+       ========================================================= */
+
     html {
         scroll-behavior: smooth;
     }
@@ -13,11 +16,7 @@
         box-shadow: none !important;
     }
 
-    /* =========================================================
-       UNIQUE NAVBAR FIX (No Conflict with Parent Theme)
-       ========================================================= */
-
-    /* 1. सबसे बाहरी रैपर (यह पैरेंट के flex/row को तोड़ देगा) */
+    /* 1. सबसे बाहरी रैपर (यह पैरेंट के flex/row को तोड़ देगा) */
     #unique-main-wrapper {
         display: block !important;
         width: 100% !important;
@@ -60,7 +59,6 @@
         opacity: 0;
         transform: translateY(-20px);
         background-color: #111060;
-        /* Fallback color */
     }
 
     @keyframes slideDownFade {
@@ -72,7 +70,6 @@
 
     /* ================= TOP BAR ================= */
     .top-bar {
-        /* background-color: #333; */
         padding: 0px 0px;
         font-size: 11px;
         font-family: Arial, sans-serif;
@@ -147,36 +144,75 @@
         background-color: #444;
     }
 
-    /* Dropdown Menu Styling */
-    .dropdown-menu {
+    /* ---- Dropdown (scoped so it never touches other pages) ---- */
+    #unique-main-wrapper .dropdown-menu {
         border-radius: 0;
         margin-top: 0;
         color: #ffffff !important;
-        background-color: #111060 ;
-        
-        /* Dropdown ka background dark */
+        background-color: #111060;
     }
 
-    .dropdown-item {
+    #unique-main-wrapper .dropdown-item {
         color: #fff;
         transition: all 0.3s ease;
     }
 
-    /* Hover effect fix (Brown color hatakar white kiya hai) */
-    .dropdown-item:hover {
+    #unique-main-wrapper .dropdown-item:hover {
         background: #2c2b95 !important;
         color: #ffffff !important;
     }
 
     @media (min-width: 992px) {
-        .nav-item.dropdown:hover .dropdown-menu {
+        #unique-main-wrapper .nav-item.dropdown:hover .dropdown-menu {
             display: block !important;
             margin-top: 0;
         }
     }
 
+    /* =========================================================
+       MOBILE SIDE-DRAWER  (UNIQUE – upnav-*)
+       ========================================================= */
+
+    :root {
+        --upnav-drawer-width: 50%;
+        --upnav-drawer-max: 250px;
+    }
+
+    /* Backdrop */
+    #upnav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 8, 26, 0.62);
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s ease;
+        z-index: 100000;
+    }
+
+    #upnav-overlay.upnav-show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Drawer header (hidden on desktop) */
+    .upnav-drawer-head {
+        display: none;
+    }
+
+    /* Body lock while drawer is open */
+    body.upnav-lock {
+        overflow: hidden !important;
+    }
+
+    body.upnav-lock #unique-sticky-navbar {
+        z-index: 100000 !important;
+    }
+
     /* ================= MOBILE VIEW STYLING ================= */
     @media (max-width: 991.98px) {
+
         .header-title {
             font-size: 17px;
         }
@@ -217,6 +253,84 @@
             font-weight: 500;
         }
 
+        /* ---------- THE DRAWER PANEL ---------- */
+        #mainNavbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            height: 100vh;
+            height: 100dvh;
+            width: var(--upnav-drawer-width) !important;
+            max-width: var(--upnav-drawer-max) !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 0 28px 0 !important;
+            background: linear-gradient(180deg, #2c2b95 0%, #111060 100%);
+            border-right: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: 8px 0 30px rgba(0, 0, 0, .45);
+            transform: translateX(-105%);
+            transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+            visibility: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            z-index: 100001;
+        }
+
+        #mainNavbar.upnav-open {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        /* Drawer top bar */
+        .upnav-drawer-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, .08);
+            border-bottom: 1px solid rgba(255, 255, 255, .16);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+        }
+
+        .upnav-drawer-title {
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .upnav-close-btn {
+            background: rgba(255, 255, 255, .16);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background .25s ease, transform .25s ease;
+        }
+
+        .upnav-close-btn:hover,
+        .upnav-close-btn:focus {
+            background: #d9534f;
+            transform: rotate(90deg);
+            outline: none;
+        }
+
+        /* Nav links inside drawer */
         .custom-navbar .nav-link {
             border-right: none;
             border-bottom: 1px solid #444;
@@ -224,37 +338,76 @@
             padding: 12px 15px !important;
         }
 
-       
+        #mainNavbar .nav-link.dropdown-toggle::after {
+            float: right;
+            margin-top: 6px;
+            transition: transform .3s ease;
+        }
 
-        .dropdown-item {
-            color: #fff;
-            border-bottom: 1px solid #555;
-            padding: 10px 20px;
+        #mainNavbar .nav-item.upnav-expanded > .nav-link.dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        #mainNavbar .nav-item.upnav-expanded > .nav-link {
+            background: rgba(255, 255, 255, .08);
+        }
+
+        /* ---------- SUB-MENU (accordion) ---------- */
+        #mainNavbar .dropdown-menu {
+            position: static !important;
+            float: none !important;
+            display: none;
+            width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            background: rgba(0, 0, 0, .28) !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        #mainNavbar .dropdown-menu.upnav-sub-open {
+            display: block !important;
+            animation: upnavSubFade .25s ease;
+        }
+
+        @keyframes upnavSubFade {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        #mainNavbar .dropdown-item {
+            color: #d7ddff !important;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            padding: 10px 15px 10px 30px !important;
+            font-size: 13px;
+            line-height: 1.35;
             white-space: normal;
         }
 
-        .dropdown-item:hover {
-            background-color: #444;
-            color: #fff;
+        #mainNavbar .dropdown-item:hover,
+        #mainNavbar .dropdown-item:focus {
+            background: rgba(255, 255, 255, .12) !important;
+            color: #fff !important;
+        }
+
+        /* Slim scrollbar inside drawer only */
+        #mainNavbar::-webkit-scrollbar {
+            width: 0;
+            display: none;
+        }
+
+        #mainNavbar {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
     }
 
-    /* Scrollbar Hide */
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-    html,
-    body {
-        ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
- 
-
 </style>
+
 <!-- Bootstrap Icons CSS CDN -->
- 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
@@ -263,24 +416,24 @@
 
     <!-- पूरे हेडर और नेवबार को इस यूनिक रैपर के अंदर डाल दिया है -->
     <div id="unique-main-wrapper">
-    
+
         <!-- 1. ANIMATED TOP SECTION (Top Bar और Logo) -->
         <div class="animated-top">
-            <!-- Top Bar -->
+
             <!-- Top Bar -->
             <div class="top-bar bg-danger d-flex align-items-center"
                 style="height: 18px; max-height: 22px; font-family: 'Times New Roman', Times, serif; font-size: 16px; overflow: hidden;">
                 <div
                     class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2 line-height-1">
-    
+
                     <!-- 1. Live Date & Time -->
                     <div id="live-clock" style="font-size: 14px; white-space: nowrap;">
                         Loading Date & Time...
                     </div>
-    
+
                     <!-- Right Side Controls -->
                     <div class="d-flex align-items-center gap-2 " style="font-size: 14px;">
-    
+
                         <!-- 2. Font Size Controller -->
                         <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1 d-none d-sm-block"
                             style="height: 18px; line-height: 1;">
@@ -295,13 +448,12 @@
                                 class="btn btn-sm btn-link text-white p-0 text-decoration-none fw-bold shadow-none"
                                 style="font-size: 13px;" title="Increase Font">A+</button>
                         </div>
-    
+
                         <span style="opacity: 0.5;">|</span>
-    
+
                         <!-- 3. Logins & Sitemap -->
                         <div class="d-flex align-items-center gap-2" style="font-size: 13px; white-space: nowrap;">
-    
-    
+
                             {% if user.is_authenticated %}
                             <a href="#" class="text-white text-decoration-none">
                                 Welcome ! {{user.get_full_name|default:user.username}}</a>
@@ -309,51 +461,49 @@
                             <a href="#" class="text-white text-decoration-none">Student Login</a>
                             <a href="#" class="text-white text-decoration-none">Institute Login</a>
                             {% endif %}
-    
+
                             <span style="opacity: 0.5;">|</span>
                             <a href="#" class="text-white" title="Sitemap"><i class="fas fa-sitemap"
                                     style="font-size: 13px;"></i></a>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
-    
-            <!-- JavaScript for Live Clock and Global Font Size -->
-           <!-- JavaScript for Live Clock and Global Font Size -->
-<script>
-    // 1. Live Date and Time Script (with seconds)
-    function updateClock() {
-        const now = new Date();
-        const options = {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',   // ✅ seconds added
-            hour12: true
-        };
-        document.getElementById('live-clock').innerText = now.toLocaleString('en-US', options);
-    }
-    setInterval(updateClock, 1000); // ✅ har second update hoga
-    updateClock();
 
-    // 2. Font Size Changer Script (no change)
-    let currentScale = 100;
-    function changeFontSize(action) {
-        if (action === 1 && currentScale < 120) {
-            currentScale += 5;
-        } else if (action === -1 && currentScale > 85) {
-            currentScale -= 5;
-        } else if (action === 0) {
-            currentScale = 100;
-        }
-        document.documentElement.style.fontSize = currentScale + '%';
-    }
-</script>
- 
+            <!-- JavaScript for Live Clock and Global Font Size -->
+            <script>
+                // 1. Live Date and Time Script (with seconds)
+                function updateClock() {
+                    const now = new Date();
+                    const options = {
+                        weekday: 'short',
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                    };
+                    document.getElementById('live-clock').innerText = now.toLocaleString('en-US', options);
+                }
+                setInterval(updateClock, 1000);
+                updateClock();
+
+                // 2. Font Size Changer Script
+                let currentScale = 100;
+                function changeFontSize(action) {
+                    if (action === 1 && currentScale < 120) {
+                        currentScale += 5;
+                    } else if (action === -1 && currentScale > 85) {
+                        currentScale -= 5;
+                    } else if (action === 0) {
+                        currentScale = 100;
+                    }
+                    document.documentElement.style.fontSize = currentScale + '%';
+                }
+            </script>
 
             <!-- Header Section (Logo & Text) -->
             <div class="header-section py-0">
@@ -369,188 +519,139 @@
                         <div class="col-lg-3 d-none d-lg-flex justify-content-end">
                             <img src="/static/images/logo2.png" alt="Right Logo" class="school-logo">
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. STICKY WRAPPER (Navbar) - इसे यूनिक ID दे दी है -->
+        <!-- 2. STICKY WRAPPER (Navbar) -->
         <div id="unique-sticky-navbar">
+
+            <!-- Backdrop for mobile drawer -->
+            <div id="upnav-overlay"></div>
 
             <!-- MAIN NAVBAR -->
             <nav class="navbar navbar-expand-lg navbar-dark custom-navbar ">
                 <div class="container-fluid p-0">
+
                     <!-- Mobile Header -->
                     <div class="d-lg-none w-100 mobile-nav-header py-0">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#mainNavbar">
+                        <button class="navbar-toggler" type="button" id="upnav-toggle"
+                                aria-label="Open menu" aria-expanded="false" aria-controls="mainNavbar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <a class="mobile-home-text" href="/">Home</a>
                     </div>
 
-                    <!-- Navbar Links -->
-                    <div class="collapse navbar-collapse w-100" id="mainNavbar">
-                        <!-- लिंक्स को बराबर फैलाने के लिए justify-content-lg-around लगाया है -->
-                        <ul
-                            class="navbar-nav w-100 d-flex flex-column flex-lg-row  gap-lg-5  ms-lg-5 align-items-lg-center">
+                    <!-- ===== DRAWER / NAV COLLAPSE ===== -->
+                    <div class="navbar-collapse w-100" id="mainNavbar">
+
+                        <!-- Drawer Header (mobile only) -->
+                        <div class="upnav-drawer-head d-lg-none">
+                            <p class="upnav-drawer-title mb-0">Menu</p>
+                            <button type="button" class="upnav-close-btn" id="upnav-close" aria-label="Close menu">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- Navbar Links -->
+                        <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row gap-lg-5 ms-lg-5 align-items-lg-center">
 
                             <li class="nav-item"><a class="nav-link active text-white" href="/">Home</a></li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">About
-                                    Us</a>
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">About Us</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{% url 'about' %}#Messages">Principal's Messages</a></li>
                                     <li><a class="dropdown-item" href="{% url 'about' %}#visions">Our Vision & Mision </a></li>
                                     <li><a class="dropdown-item" href="{% url 'about' %}#calendar">College Organizational Structure</a></li>
-                                  
-                                    <li><a class="dropdown-item" href="{% url 'about' %}#Approvals"> Approvals and Affiliations</a></li> 
-                                         <li><a class="dropdown-item" href="{% url 'about' %}#Offered">Courses Offered Overview</a></li> 
-                                           
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#Approvals">Approvals and Affiliations</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#Offered">Courses Offered Overview</a></li>
                                     <li><a class="dropdown-item" href="{% url 'about' %}#campusinfo">Campus Information</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'about' %}#location">Location</a></li> 
+                                    <li><a class="dropdown-item" href="{% url 'about' %}#location">Location</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Academic</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Courses-tab-pane">Courses</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Departments-tab-pane">Department</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic Calendar</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Syllabus-tab-pane">Syllabus</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Faculty-tab-pane">Faculty & Staff</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Admission</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission Process</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Eligibility-tab-pane">Course & Eligibility</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Required-tab-pane">Important Dates & Required Documents</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees Structure & Scholarship</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission HelpDesk</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Campus Life</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus Gallery</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel Life</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'events' %}">College Events</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Student Corner</a>
+                                <ul class="dropdown-menu">
+                                     <li><a class="dropdown-item" href="{% url 'dashboard:login' %}">Student Login</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'dashboard:login' %}#calendar">My Profile</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'cheatsheets' %}">Cheat Sheet Notes</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'pyqs' %}">Previous Year Question Papers</a></li>
+                                    
                                    
                                 </ul>
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#"
-                                    data-bs-toggle="dropdown">Academic</a>
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Placements</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'academic' %}#Courses-tab-pane">Courses</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'academic' %}#Departments-tab-pane">Department</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'academic' %}#AcademicCalendar-tab-pane">Academic Calendar</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'academic' %}#Syllabus-tab-pane">Syllabus</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'academic' %}#TimeTable-tab-pane">TimeTable</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'academic' %}#Faculty-tab-pane">Faculty &
-                                            Staff</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement Overview</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'placements' %}#Statistics-tab-pane">Detiled Statistics</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters Companies</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'student_engagement_page' %}"> Student's Placed</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'company_student_verification' %}">Verify Student</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#"
-                                    data-bs-toggle="dropdown">Admission</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'admission' %}#Process-tab-pane">Admission
-                                            Process</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'admission' %}#Eligibility-tab-pane">Course & Eligibility</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'admission' %}#Required-tab-pane">Important Dates & Required
-                                            Documents</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'admission' %}#FeeStructure-tab-pane">Fees
-                                            Structure & Scholarship</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'admission' %}#Haw-to-apply-tab-pane">Admission HelpDesk</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Campus
-                                    Life</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#campus-tab-pane">Campus
-                                            Gallery</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'campuslife' %}#Hostel-tab-pane">Hostel
-                                            Life</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'campuslife' %}#library-tab-pane">Library</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'campuslife' %}#labsr-tab-pane">Laboratories</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'events' %}">College Events</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#"
-                                    data-bs-toggle="dropdown">Student Corner</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'pyqs' %}">Previous Year Question Papers
-                                           </a></li>
-                                    <li><a class="dropdown-item" href="{% url 'cheatsheets' %}">Cheat Sheet Notes
-</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'studentcorner' %}#calendar">Academic
-                                            Calendar</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#"
-                                    data-bs-toggle="dropdown">Placements</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{% url 'placements' %}#home-tab-pane ">Placement
-                                            Overview</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'placements' %}#Statistics-tab-pane">Detiled Statistics</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'placements' %}#Recruiters-Companies-tab-pane">Recruiters
-                                            Companies</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{% url 'student_engagement_page' %}"> Student's Placed</a></li>
-                               
-                                     <li><a class="dropdown-item"
-                                            href="{% url 'company_student_verification' %}">Verify Student</a></li>
-                                        
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown"><a class="nav-link  dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Contact Us</a>
+                                <a class="nav-link  dropdown-toggle text-white" href="#" role="button">Contact Us</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{% url 'contact_us' %}">Contact Page</a></li>
                                 </ul>
                             </li>
 
-                             <!-- {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown"> <span><i
-                                            class="bi bi-person-circle"></i> {{ user.get_full_name|default:user.username }}</span></a>
-                                <ul class="dropdown-menu">
-                            
-                                    <li class="dropdown-item active" onclick="window.location.href='dashboard' "> Profile
-                                    </li>
-                            
-                                    <li><a class="dropdown-item">
-                                            <form method="post" action="{% url 'dashboard:logout' %}" class="d-inline">
-                                                {% csrf_token %}
-                                                <button class="btn btn-sm btn-outline-light" type="submit">Logout</button>
-                                            </form>
-                                        </a></li>
-                            
-                                </ul>
-                            </li>
-                            
-                            {% endif %} -->
-
-                          
-
                         </ul>
-                       
-                    </div>
-                </div>
 
-              
-               
+                    </div>
+                    <!-- ===== /DRAWER ===== -->
+
+                </div>
             </nav>
-           
 
         </div> <!-- End Unique Sticky Navbar -->
 
     </div>
+    <!-- End Unique Main Wrapper -->
 
-    
-   {% if user.is_authenticated %}
+
+    {% if user.is_authenticated %}
     <div class="diary-container">
         <style>
             /* --- LOGGED IN BUTTON STYLES --- */
@@ -558,12 +659,12 @@
                 position: fixed;
                 right: 0;
                 top: 50%;
-                transform: translateY(-50%); /* Center vertically */
+                transform: translateY(-50%);
                 display: inline-block;
                 z-index: 9999;
             }
             .diary-button {
-                background: linear-gradient(135deg, #a30046, #7a0034); /* Premium Maroon Gradient */
+                background: linear-gradient(135deg, #a30046, #7a0034);
                 color: white;
                 padding: 12px 8px;
                 border: none;
@@ -578,14 +679,14 @@
                 transition: all 0.3s ease;
             }
             .diary-button:hover {
-                padding-right: 12px; /* Slight push effect */
+                padding-right: 12px;
             }
             .login-dropdown {
                 display: none;
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                right: 35px; /* Position beside the button */
+                right: 35px;
                 background-color: #ffffff;
                 width: 260px;
                 border-radius: 12px;
@@ -594,7 +695,6 @@
                 border: 1px solid #eaeaea;
                 animation: fadeIn 0.2s ease-in-out;
             }
-            /* Show dropdown on hover of the container */
             .diary-container:hover .login-dropdown {
                 display: block;
             }
@@ -637,7 +737,7 @@
         <button class="diary-button">
             <span class="icon bi-person-circle"></span> {{ user.username }}
         </button>
-    
+
         <div class="login-dropdown">
             <div class="login-header row align-items-center m-0">
                 <div class="col-3 p-0">
@@ -662,21 +762,21 @@
                     <span class="opt-icon bi-bar-chart text-primary"></span>
                     <div class="opt-text"><strong>Placement Statistics</strong></div>
                 </a>
-               
-                  <a href="{% url 'student_engagement_page' %}" class="login-option student">
+
+                <a href="{% url 'student_engagement_page' %}" class="login-option student">
                     <span class="opt-icon bi-person-lines-fill text-info "></span>
                     <div class="opt-text"><strong>Placed Students</strong></div>
                 </a>
-               
-                 <a href="{% url 'company_student_verification' %}" class="login-option student">
+
+                <a href="{% url 'company_student_verification' %}" class="login-option student">
                     <span class="opt-icon bi-person-exclamation text-warning"></span>
                     <div class="opt-text"><strong>Student Verification</strong></div>
-                </a> 
+                </a>
             {% else %}
                 <a href="{% url 'dashboard:student_dashboard' %}" class="login-option student">
                     <span class="opt-icon bi-mortarboard-fill text-info"></span>
                     <div class="opt-text"><strong>Student Dashboard</strong></div>
-                </a> 
+                </a>
 
                 <a href="{% url 'pyqs' %}" class="login-option student">
                     <span class="opt-icon bi-file-earmark-pdf-fill text-danger"></span>
@@ -686,12 +786,12 @@
                     <span class="opt-icon bi-file-earmark-richtext text-warning-emphasis"></span>
                     <div class="opt-text"><strong>Acadmic Syllabus</strong></div>
                 </a>
-                 <a href="{% url 'cheatsheets' %}" class="login-option student">
+                <a href="{% url 'cheatsheets' %}" class="login-option student">
                     <span class="opt-icon bi-journal-bookmark-fill text-primary "></span>
                     <div class="opt-text"><strong> CheatSheet Note's</strong></div>
                 </a>
             {% endif %}
-    
+
             <form method="post" action="{% url 'dashboard:logout' %}" id="logoutForm" class="m-0">
                 {% csrf_token %}
                 <a class="login-option" onclick="document.getElementById('logoutForm').submit(); return false;" style="cursor: pointer;">
@@ -702,48 +802,176 @@
         </div>
     </div>
 
-{% else %}
+    {% else %}
     <!-- --- NOT LOGGED IN BUTTONS --- -->
     <div class="sidebar-login-container d-none d-sm-block" id="loginContainer">
-         
 
-        
     </div>
 
     <!-- JAVASCRIPT FOR HOVER EFFECT -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-           
+
             const buttons = document.querySelectorAll('.slide-btn');
 
             buttons.forEach(button => {
-               
+
                 button.addEventListener('mouseenter', function() {
-                    
+
                     buttons.forEach(btn => btn.classList.remove('active'));
-                     
+
                     this.classList.add('active');
                 });
 
-               
                 button.addEventListener('mouseleave', function() {
-                    
+
                     this.classList.remove('active');
                 });
             });
         });
     </script>
-{% endif %}
-        
+    {% endif %}
 
- <!-- End Unique Main Wrapper -->
-   <script>
+
+<!-- =========================================================
+     UNIQUE MOBILE DRAWER SCRIPT  (upnav)
+     ========================================================= -->
+<script>
+(function () {
+    'use strict';
+
+    function initUpnavDrawer() {
+
+        var drawer   = document.getElementById('mainNavbar');
+        var overlay  = document.getElementById('upnav-overlay');
+        var openBtn  = document.getElementById('upnav-toggle');
+        var closeBtn = document.getElementById('upnav-close');
+
+        if (!drawer || !overlay) return;
+        if (drawer.dataset.upnavReady === '1') return;   // guard: double init na ho
+        drawer.dataset.upnavReady = '1';
+
+        var MOBILE_MAX = 991.98;
+
+        function isMobile() {
+            return window.innerWidth <= MOBILE_MAX;
+        }
+
+        function closeAllSubmenus() {
+            drawer.querySelectorAll('.dropdown-menu.upnav-sub-open').forEach(function (m) {
+                m.classList.remove('upnav-sub-open');
+            });
+            drawer.querySelectorAll('.nav-item.upnav-expanded').forEach(function (i) {
+                i.classList.remove('upnav-expanded');
+            });
+        }
+
+        function openDrawer() {
+            drawer.classList.add('upnav-open');
+            overlay.classList.add('upnav-show');
+            document.body.classList.add('upnav-lock');
+            if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('upnav-open');
+            overlay.classList.remove('upnav-show');
+            document.body.classList.remove('upnav-lock');
+            if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+            closeAllSubmenus();
+        }
+
+        /* ---- Open / Close buttons ---- */
+        if (openBtn) {
+            openBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (drawer.classList.contains('upnav-open')) {
+                    closeDrawer();
+                } else {
+                    openDrawer();
+                }
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                closeDrawer();
+            });
+        }
+
+        /* ---- Backdrop click ---- */
+        overlay.addEventListener('click', closeDrawer);
+
+        /* ---- ESC key ---- */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('upnav-open')) {
+                closeDrawer();
+            }
+        });
+
+        /* ---- Dropdown toggles: mobile = accordion, desktop = hover ---- */
+        drawer.querySelectorAll('.nav-item.dropdown > .nav-link.dropdown-toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();       // '#' jump rokne ke liye
+                e.stopPropagation();
+
+                if (!isMobile()) return;  // desktop par CSS hover hi kaam karega
+
+                var item = toggle.parentElement;
+                var menu = item.querySelector('.dropdown-menu');
+                var wasOpen = item.classList.contains('upnav-expanded');
+
+                closeAllSubmenus();
+
+                if (!wasOpen) {
+                    item.classList.add('upnav-expanded');
+                    if (menu) menu.classList.add('upnav-sub-open');
+                }
+            });
+        });
+
+        /* ---- Real link par click => drawer band ---- */
+        drawer.addEventListener('click', function (e) {
+            var link = e.target.closest('a');
+            if (!link) return;
+            if (link.classList.contains('dropdown-toggle')) return;
+
+            var href = link.getAttribute('href');
+            if (!href || href === '#' || href.indexOf('javascript:') === 0) return;
+
+            closeDrawer();
+        });
+
+        /* ---- Desktop par resize hone par drawer band kar do ---- */
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                if (!isMobile()) closeDrawer();
+            }, 150);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initUpnavDrawer);
+    } else {
+        initUpnavDrawer();
+    }
+})();
+</script>
+
+
+<!-- =========================================================
+     HASH BASED TAB SWITCHER (unchanged)
+     ========================================================= -->
+<script>
 function switchCampusTabByPane() {
     const hash = window.location.hash;
     const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
 
     if (allPanes.length > 0) {
-        // 1. पहले सभी टैब्स को छुपाएं
         allPanes.forEach(function (pane) {
             pane.classList.remove('show', 'active');
             pane.style.setProperty('display', 'none', 'important');
@@ -758,19 +986,17 @@ function switchCampusTabByPane() {
             targetPane = allPanes[0];
         }
 
-        // 2. नए टैब को तुरंत शो (show) करें
         if (targetPane) {
             targetPane.classList.add('show', 'active');
             targetPane.style.setProperty('display', 'block', 'important');
 
-            // 3. टैब दिखने के तुरंत बाद (100ms डिले) पेज को ऊपर स्क्रॉल करें
             if (hash) {
-                setTimeout(function() {
+                setTimeout(function () {
                     window.scrollTo({
-                        top: 0, // पूरे पेज के सबसे ऊपर जाने के लिए
+                        top: 0,
                         behavior: 'smooth'
                     });
-                }, 500); // 100 मिलिसेकंड का गैप ताकि पहले div बदल जाए
+                }, 500);
             }
         }
     }
@@ -780,10 +1006,11 @@ document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
 window.addEventListener("hashchange", switchCampusTabByPane);
 </script>
 
+<!-- =========================================================
+     LOADER (unchanged)
+     ========================================================= -->
 <script>
-    // js lodder
-    (function() {
-    // 1. Premium Glassmorphism CSS Styles
+(function() {
     const style = document.createElement('style');
     style.textContent = `
         #loading-overlay {
@@ -832,7 +1059,6 @@ window.addEventListener("hashchange", switchCampusTabByPane);
     `;
     document.head.appendChild(style);
 
-    // 2. HTML Structure Injection
     const overlay = document.createElement('div');
     overlay.id = 'loading-overlay';
     overlay.innerHTML = `
@@ -841,7 +1067,7 @@ window.addEventListener("hashchange", switchCampusTabByPane);
             <p style="margin: 15px 0 0 0; font-weight: 600; color: #1e293b; font-size: 15px; letter-spacing: 0.5px;">Loading...</p>
         </div>
     `;
-    
+
     document.addEventListener("DOMContentLoaded", function() {
         document.body.insertBefore(overlay, document.body.firstChild);
     });
@@ -855,57 +1081,46 @@ window.addEventListener("hashchange", switchCampusTabByPane);
         }, 150);
     }
 
-    // 3. Click Event Listener (Same Page Smart Check)
     document.addEventListener('click', function(event) {
         const targetLink = event.target.closest('a');
-        
+
         if (targetLink) {
             const href = targetLink.getAttribute('href');
             const target = targetLink.getAttribute('target');
-            
+
             if (target === '_blank') return;
 
             if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-                
-                // --- SAME PAGE CHECK LOGIC ---
+
                 try {
-                    // Link ke absolute URL ko browser ke current URL se compare karna
                     const targetUrl = new URL(href, window.location.href);
                     const currentUrl = new URL(window.location.href);
 
-                    // Agar protocol, host aur pathname (path) bilkul same hain, toh loader nahi chalega
-                    if (targetUrl.protocol === currentUrl.protocol && 
-                        targetUrl.host === currentUrl.host && 
+                    if (targetUrl.protocol === currentUrl.protocol &&
+                        targetUrl.host === currentUrl.host &&
                         targetUrl.pathname === currentUrl.pathname) {
-                        
-                        // Same page par query parameters ya hash ho sakte hain, loading ki zarurat nahi h
-                        return; 
+                        return;
                     }
                 } catch (e) {
-                    // Agar URL parse karne me error aaye toh fallback safty ke liye ignore karein
                 }
-                // -----------------------------
 
                 showLoader();
             }
         }
     });
 
-    // 4. Submit Event Listener (Forms)
     document.addEventListener('submit', function() {
         showLoader();
     });
 
-    // 5. Browser Back/Forward & Safety Reset
     window.addEventListener('pageshow', function(event) {
         clearTimeout(loadingTimeout);
         const overlayEl = document.getElementById('loading-overlay');
         if (overlayEl) overlayEl.style.display = 'none';
     });
 
-    window.addEventListener('unload', function() {
+    window.addEventListener('pagehide', function() {
         clearTimeout(loadingTimeout);
     });
 })();
-
 </script>
