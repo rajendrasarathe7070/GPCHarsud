@@ -5,5 +5,5 @@ class YourAppConfig(AppConfig):
     name = 'core'
 
     def ready(self):
-        # Cacheops और Redis का पुराना सारा लॉजिक यहाँ से हटा दिया गया है
         pass
+

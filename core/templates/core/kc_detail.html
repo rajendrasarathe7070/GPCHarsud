@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ kc.title }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h1>📄 KC Details</h1>
+        <a href="{% url 'kc_list' %}" class="btn btn-secondary">← Back to List</a>
+    </div>
+
+    <div class="detail-row">
+        <div class="label">ID</div>
+        <div class="value">#{{ kc.id }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="label">Title</div>
+        <div class="value"><strong>{{ kc.title }}</strong></div>
+    </div>
+    <div class="detail-row">
+        <div class="label">Description</div>
+        <div class="value">{{ kc.description|default:"— Koi description nahi —" }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="label">Amount</div>
+        <div class="value" style="font-weight:600; color:#27ae60;">₹{{ kc.amount }}</div>
+    </div>
+    <div class="detail-row">
+        <div class="label">Status</div>
+        <div class="value">
+            {% if kc.is_active %}
+                <span style="background:#d4edda; color:#155724; padding:3px 10px; border-radius:12px; font-size:12px; font-weight:600;">✓ Active</span>
+            {% else %}
+                <span style="background:#f8d7da; color:#721c24; padding:3px 10px; border-radius:12px; font-size:12px; font-weight:600;">✗ Inactive</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-actions" style="margin-top: 25px;">
+        <a href="{% url 'kc_update' kc.id %}" class="btn btn-warning">✏️ Edit</a>
+        <a href="{% url 'kc_delete' kc.id %}" class="btn btn-danger"
+           onclick="return confirm('Kya aap sach mein KC #{{ kc.id }} delete karna chahte hain?');">🗑️ Delete</a>
+        <a href="{% url 'kc_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+{% endblock %}

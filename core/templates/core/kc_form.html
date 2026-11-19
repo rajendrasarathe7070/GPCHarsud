@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if kc %}Edit KC{% else %}New KC{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>{% if kc %}✏️ Edit KC #{{ kc.id }}{% else %}➕ Create New KC{% endif %}</h1>
+
+    <form method="POST" style="margin-top: 20px;">
+        {% csrf_token %}
+
+        <div>
+            <label for="title">Title <span style="color:#e74c3c;">*</span></label>
+            <input type="text" name="title" id="title" required
+                   value="{{ kc.title|default:'' }}"
+                   placeholder="Enter KC title..." maxlength="200">
+        </div>
+
+        <div>
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="4"
+                      placeholder="Koi extra detail... (optional)">{{ kc.description|default:'' }}</textarea>
+        </div>
+
+        <div>
+            <label for="amount">Amount (₹)</label>
+            <input type="number" name="amount" id="amount" step="0.01" min="0"
+                   value="{{ kc.amount|default:'0' }}"
+                   placeholder="0.00">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                {% if kc %}💾 Update KC{% else %}✅ Create KC{% endif %}
+            </button>
+            <a href="{% if kc %}{% url 'kc_detail' kc.id %}{% else %}{% url 'kc_list' %}{% endif %}" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1044,3 +1044,14 @@ def team_data_api(request):
         "faculty": faculty_list,
         "count": len(faculty_list),
     })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     

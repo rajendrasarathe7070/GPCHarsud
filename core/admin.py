@@ -10,6 +10,11 @@ from .models import FeeCategory, FeeStructure, Scholarship , Pro_DTE_CLC_Admissi
 from django.contrib import admin
 
 
+
+
+
+
+
 class EventImageInline(admin.TabularInline):
     model = EventImage
     extra = 3   # 3 empty slots, jitni chahiye add kar sakte ho
@@ -318,3 +323,7 @@ class HeroSlideAdmin(admin.ModelAdmin):
         }),
     )
     readonly_fields = ('created_at', 'updated_at')
+    
+    
+ 
+ 

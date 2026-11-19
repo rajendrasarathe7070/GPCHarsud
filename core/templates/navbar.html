@@ -2,206 +2,300 @@
 <style>
 
     /* =========================================================
-       UNIQUE NAVBAR  (upnav-* prefix = zero conflict)
+       UNIQUE HEADER + NAVBAR — fully scoped, zero conflicts
+       • Custom classes:  upnav-*
+       • Custom IDs:      upnav-* / unique-*
+       • Keyframes:       upnav*
+       • CSS variables:   --upnav-*
+       • JS handlers:     data-upnav-* attributes + IIFEs
        ========================================================= */
 
-    html {
-        scroll-behavior: smooth;
-    }
-
-    .nav-link:focus,
-    .nav-link:active,
-    .tab-pane:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-
-    /* 1. सबसे बाहरी रैपर (यह पैरेंट के flex/row को तोड़ देगा) */
+    /* ---------- Root wrapper (holds variables + reset) ---------- */
     #unique-main-wrapper {
+        --upnav-drawer-width: 50%;
+        --upnav-drawer-max: 250px;
         display: block !important;
         width: 100% !important;
         clear: both !important;
         float: none !important;
-        position: relative;
-        z-index: 1050;
+        position: relative !important;
+        z-index: 1050 !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-family: inherit;
     }
 
-    /* 2. एनिमेशन वाला टॉप सेक्शन */
-    #unique-main-wrapper .animated-top {
-        animation: expandHeaderDiagonal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        position: relative;
-        z-index: 1000;
+    #unique-main-wrapper *,
+    #unique-main-wrapper *::before,
+    #unique-main-wrapper *::after {
+        box-sizing: border-box !important;
     }
 
-    @keyframes expandHeaderDiagonal {
-        0% {
-            clip-path: inset(0 100% 100% 0);
-            opacity: 0;
-            transform: translate(-30px, -30px);
-        }
-
-        100% {
-            clip-path: inset(-10px -10px -10px -10px);
-            opacity: 1;
-            transform: translate(0, 0);
-        }
+    #unique-main-wrapper img {
+        max-width: 100%;
+        height: auto;
     }
 
-    /* 3. स्टिकी रैपर (Navbar जो स्क्रॉल पर चिपकेगा) */
+    /* ---------- Animated top ---------- */
+    #unique-main-wrapper .upnav-animated-top {
+        opacity: 1;
+        transform: none;
+        animation: upnavExpandHeaderDiagonal 1s cubic-bezier(0.25, 1, 0.5, 1) both;
+        position: relative !important;
+        z-index: 1000 !important;
+        width: 100% !important;
+    }
+
+    @keyframes upnavExpandHeaderDiagonal {
+        0%   { clip-path: inset(0 100% 100% 0); opacity: 0; transform: translate(-30px, -30px); }
+        100% { clip-path: inset(-10px -10px -10px -10px); opacity: 1; transform: translate(0, 0); }
+    }
+
+    /* ---------- Sticky navbar wrapper ---------- */
     #unique-sticky-navbar {
         position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
         width: 100% !important;
-        z-index: 1040;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        animation: slideDownFade 0.8s ease-out forwards;
-        opacity: 0;
-        transform: translateY(-20px);
-        background-color: #111060;
+        z-index: 1040 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        opacity: 1;
+        transform: none;
+        background-color: #111060 !important;
+        animation: upnavSlideDownFade 0.8s ease-out both;
     }
 
-    @keyframes slideDownFade {
-        to {
-            opacity: 1;
-            transform: translateY(0);
+    @keyframes upnavSlideDownFade {
+        from { opacity: 0; transform: translateY(-20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #unique-main-wrapper .upnav-animated-top,
+        #unique-sticky-navbar {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
         }
     }
 
-    /* ================= TOP BAR ================= */
-    .top-bar {
-        padding: 0px 0px;
-        font-size: 11px;
-        font-family: Arial, sans-serif;
-    }
-
-    .top-bar a {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .top-bar a:hover {
-        text-decoration: underline;
-    }
-
-    /* ================= HEADER SECTION ================= */
-    .header-section {
-        background-color: #fff;
-        padding: 5px 0;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .header-title {
-        color: #003399;
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        font-size: 26px;
-        margin-bottom: 2px;
-    }
-
-    .header-address {
-        color: #da1212;
-        font-size: 14px;
-        margin-bottom: 2px;
-        text-transform: uppercase;
-        font-weight: 500;
-    }
-
-    .header-affiliation {
-        color: #006400;
-        font-size: 14px;
-        margin-bottom: 0;
-    }
-
-    .school-logo {
-        max-height: 75px;
-        width: auto;
-        object-fit: contain;
-    }
-
-    /* ================= CUSTOM NAVBAR ================= */
-    .custom-navbar {
-        background: linear-gradient(to bottom, #2c2b95 0%, #111060 100%) !important;
+    /* ---------- Top bar ---------- */
+    #unique-main-wrapper .upnav-top-bar {
         padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11px !important;
+        font-family: Arial, sans-serif !important;
+        line-height: 1 !important;
+        width: 100% !important;
+        height: 18px !important;
+        min-height: 18px !important;
+        max-height: 22px !important;
+        overflow: hidden !important;
+        background-color: #dc3545 !important;
+        color: #fff !important;
+    }
+
+    #unique-main-wrapper .upnav-top-bar a {
+        color: #fff !important;
+        text-decoration: none !important;
+        font-size: 14px !important;
+        line-height: 1 !important;
+    }
+
+    #unique-main-wrapper .upnav-top-bar a:hover {
+        text-decoration: underline !important;
+    }
+
+    /* ---------- Header section ---------- */
+    #unique-main-wrapper .upnav-header-section {
+        background-color: #fff !important;
+        padding: 5px 0 !important;
+        margin: 0 !important;
+        border-bottom: 1px solid #ddd !important;
         width: 100% !important;
     }
 
-    .custom-navbar .nav-link {
+    #unique-main-wrapper .upnav-header-title {
+        color: #003399 !important;
+        font-family: 'Times New Roman', Times, serif !important;
+        font-weight: bold !important;
+        font-size: 26px !important;
+        line-height: 1.2 !important;
+        margin: 0 0 2px 0 !important;
+        padding: 0 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+    }
+
+    #unique-main-wrapper .upnav-header-address {
+        color: #da1212 !important;
+        font-size: 14px !important;
+        margin: 0 0 2px 0 !important;
+        padding: 0 !important;
+        text-transform: uppercase !important;
+        font-weight: 500 !important;
+        line-height: 1.3 !important;
+    }
+
+    #unique-main-wrapper .upnav-header-affiliation {
+        color: #006400 !important;
+        font-size: 14px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.3 !important;
+    }
+
+    #unique-main-wrapper .upnav-school-logo {
+        max-height: 75px !important;
+        height: auto !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+    }
+
+    /* ---------- Custom navbar bar ---------- */
+    #unique-main-wrapper .upnav-custom-navbar {
+        background: linear-gradient(to bottom, #2c2b95 0%, #111060 100%) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+        min-height: 0 !important;
+        position: relative !important;
+    }
+
+    #unique-main-wrapper .upnav-custom-navbar .nav-link {
         color: #fff !important;
-        font-weight: 600;
-        font-size: 14px;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
         padding: 7px 10px !important;
-        border-right: 1px solid #555;
-        text-align: center;
+        margin: 0 !important;
+        border-right: 1px solid #555 !important;
+        border-bottom: none !important;
+        text-align: center !important;
         transition: all 0.3s ease;
+        background: transparent !important;
+        display: block !important;
+        text-decoration: none !important;
     }
 
-    .custom-navbar .nav-link:last-child {
-        border-right: none;
+    #unique-main-wrapper .upnav-custom-navbar .nav-link:last-child {
+        border-right: none !important;
     }
 
-    .custom-navbar .nav-link:hover {
-        background-color: #444;
+    #unique-main-wrapper .upnav-custom-navbar .nav-link:hover {
+        background-color: #444 !important;
     }
 
-    /* ---- Dropdown (scoped so it never touches other pages) ---- */
+    /* ---------- Dropdown (scoped) ---------- */
     #unique-main-wrapper .dropdown-menu {
-        border-radius: 0;
-        margin-top: 0;
+        border-radius: 0 !important;
+        margin-top: 0 !important;
         color: #ffffff !important;
-        background-color: #111060;
+        background-color: #111060 !important;
+        border: 1px solid rgba(255, 255, 255, .15) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .3) !important;
+        padding: 0 !important;
+        min-width: 240px !important;
+        font-size: 14px !important;
     }
 
     #unique-main-wrapper .dropdown-item {
-        color: #fff;
+        color: #fff !important;
         transition: all 0.3s ease;
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+        background: transparent !important;
+        text-decoration: none !important;
+        display: block !important;
     }
 
-    #unique-main-wrapper .dropdown-item:hover {
+    #unique-main-wrapper .dropdown-item:hover,
+    #unique-main-wrapper .dropdown-item:focus {
         background: #2c2b95 !important;
         color: #ffffff !important;
     }
 
     @media (min-width: 992px) {
-        #unique-main-wrapper .nav-item.dropdown:hover .dropdown-menu {
+        #unique-main-wrapper .nav-item.dropdown:hover > .dropdown-menu {
             display: block !important;
-            margin-top: 0;
+            margin-top: 0 !important;
         }
     }
 
     /* =========================================================
-       MOBILE SIDE-DRAWER  (UNIQUE – upnav-*)
+       DESKTOP GUARANTEE — navbar ALWAYS visible
        ========================================================= */
+    @media (min-width: 992px) {
+        #unique-main-wrapper #upnav-mainNavbar,
+        #unique-main-wrapper #upnav-mainNavbar.navbar-collapse {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: static !important;
+            transform: none !important;
+            inset: auto !important;
+            width: 100% !important;
+            height: auto !important;
+            max-height: none !important;
+            max-width: none !important;
+            overflow: visible !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            flex-basis: auto !important;
+        }
 
-    :root {
-        --upnav-drawer-width: 50%;
-        --upnav-drawer-max: 250px;
+        #unique-main-wrapper #upnav-mainNavbar .upnav-drawer-head {
+            display: none !important;
+        }
+
+        #unique-main-wrapper .navbar-toggler {
+            display: none !important;
+        }
+
+        #unique-main-wrapper .upnav-mobile-nav-header {
+            display: none !important;
+        }
     }
 
-    /* Backdrop */
+    /* =========================================================
+       MOBILE SIDE-DRAWER (upnav-*)
+       ========================================================= */
     #upnav-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(6, 8, 26, 0.62);
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(6, 8, 26, 0.62) !important;
         -webkit-backdrop-filter: blur(2px);
         backdrop-filter: blur(2px);
         opacity: 0;
         visibility: hidden;
         transition: opacity .3s ease, visibility .3s ease;
-        z-index: 100000;
+        z-index: 100000 !important;
     }
 
     #upnav-overlay.upnav-show {
-        opacity: 1;
-        visibility: visible;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
-    /* Drawer header (hidden on desktop) */
-    .upnav-drawer-head {
+    #unique-main-wrapper .upnav-drawer-head {
         display: none;
     }
 
-    /* Body lock while drawer is open */
     body.upnav-lock {
         overflow: hidden !important;
     }
@@ -210,150 +304,183 @@
         z-index: 100000 !important;
     }
 
-    /* ================= MOBILE VIEW STYLING ================= */
+    /* ---------- Mobile styles ---------- */
     @media (max-width: 991.98px) {
 
-        .header-title {
-            font-size: 17px;
+        #unique-main-wrapper .upnav-header-title {
+            font-size: 17px !important;
         }
 
-        .header-address,
-        .header-affiliation {
-            font-size: 10.5px;
-            line-height: 1.3;
+        #unique-main-wrapper .upnav-header-address,
+        #unique-main-wrapper .upnav-header-affiliation {
+            font-size: 10.5px !important;
+            line-height: 1.3 !important;
         }
 
-        .school-logo {
-            max-height: 55px;
-            margin-bottom: 0;
-            margin-right: 10px;
+        #unique-main-wrapper .upnav-school-logo {
+            max-height: 55px !important;
+            margin-bottom: 0 !important;
+            margin-right: 10px !important;
         }
 
-        .mobile-nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #333;
-            padding: 8px 15px;
+        #unique-main-wrapper .upnav-mobile-nav-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            background-color: #333 !important;
+            padding: 0px 15px !important;
+            width: 100% !important;
         }
 
-        .navbar-toggler {
-            border: none;
-            padding: 0;
+        #unique-main-wrapper .navbar-toggler {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: transparent !important;
+            color: #fff !important;
+            width: 30px !important;
+            height: 30px !important;
+            min-width: 30px !important;
+            min-height: 30px !important;
+            flex-shrink: 0 !important;
         }
 
-        .navbar-toggler:focus {
-            box-shadow: none;
+        #unique-main-wrapper .navbar-toggler:focus {
+            box-shadow: none !important;
+            outline: none !important;
         }
 
-        .mobile-home-text {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
+        #unique-main-wrapper .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+            width: 24px !important;
+            height: 24px !important;
+            display: inline-block !important;
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
         }
 
-        /* ---------- THE DRAWER PANEL ---------- */
-        #mainNavbar {
+        #unique-main-wrapper .upnav-mobile-home-text {
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            line-height: 1.2 !important;
+        }
+
+        /* ---------- Drawer panel ---------- */
+        #unique-main-wrapper #upnav-mainNavbar {
             position: fixed !important;
             top: 0 !important;
             left: 0 !important;
-            height: 100vh;
-            height: 100dvh;
+            height: 100vh !important;
+            height: 100dvh !important;
             width: var(--upnav-drawer-width) !important;
             max-width: var(--upnav-drawer-max) !important;
             display: block !important;
             margin: 0 !important;
             padding: 0 0 28px 0 !important;
-            background: linear-gradient(180deg, #2c2b95 0%, #111060 100%);
-            border-right: 1px solid rgba(255, 255, 255, .14);
-            box-shadow: 8px 0 30px rgba(0, 0, 0, .45);
+            background: linear-gradient(180deg, #2c2b95 0%, #111060 100%) !important;
+            border-right: 1px solid rgba(255, 255, 255, .14) !important;
+            border-radius: 0 !important;
+            box-shadow: 8px 0 30px rgba(0, 0, 0, .45) !important;
             transform: translateX(-105%);
             transition: transform .35s cubic-bezier(.4, 0, .2, 1);
             visibility: hidden;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
-            z-index: 100001;
+            z-index: 100001 !important;
+            flex-basis: auto !important;
         }
 
-        #mainNavbar.upnav-open {
-            transform: translateX(0);
-            visibility: visible;
+        #unique-main-wrapper #upnav-mainNavbar.upnav-open {
+            transform: translateX(0) !important;
+            visibility: visible !important;
         }
 
-        /* Drawer top bar */
-        .upnav-drawer-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, .08);
-            border-bottom: 1px solid rgba(255, 255, 255, .16);
-            position: sticky;
-            top: 0;
-            z-index: 5;
+        #unique-main-wrapper .upnav-drawer-head {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 14px 16px !important;
+            background: rgba(255, 255, 255, .08) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, .16) !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 5 !important;
             -webkit-backdrop-filter: blur(6px);
             backdrop-filter: blur(6px);
         }
 
-        .upnav-drawer-title {
-            color: #fff;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            font-size: 13px;
-            text-transform: uppercase;
-            margin: 0;
+        #unique-main-wrapper .upnav-drawer-title {
+            color: #fff !important;
+            font-weight: 700 !important;
+            letter-spacing: 1.5px !important;
+            font-size: 13px !important;
+            text-transform: uppercase !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
         }
 
-        .upnav-close-btn {
-            background: rgba(255, 255, 255, .16);
-            border: none;
-            color: #fff;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            line-height: 1;
+        #unique-main-wrapper .upnav-close-btn {
+            background: rgba(255, 255, 255, .16) !important;
+            border: none !important;
+            color: #fff !important;
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
             cursor: pointer;
             transition: background .25s ease, transform .25s ease;
+            padding: 0 !important;
+            flex-shrink: 0 !important;
         }
 
-        .upnav-close-btn:hover,
-        .upnav-close-btn:focus {
-            background: #d9534f;
+        #unique-main-wrapper .upnav-close-btn:hover,
+        #unique-main-wrapper .upnav-close-btn:focus {
+            background: #d9534f !important;
             transform: rotate(90deg);
-            outline: none;
+            outline: none !important;
         }
 
         /* Nav links inside drawer */
-        .custom-navbar .nav-link {
-            border-right: none;
-            border-bottom: 1px solid #444;
-            text-align: left;
+        #unique-main-wrapper .upnav-custom-navbar .nav-link {
+            border-right: none !important;
+            border-bottom: 1px solid #444 !important;
+            text-align: left !important;
             padding: 12px 15px !important;
+            display: block !important;
+            width: 100% !important;
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+            white-space: normal !important;
         }
 
-        #mainNavbar .nav-link.dropdown-toggle::after {
-            float: right;
-            margin-top: 6px;
+        #unique-main-wrapper #upnav-mainNavbar .nav-link.dropdown-toggle::after {
+            float: right !important;
+            margin-top: 6px !important;
             transition: transform .3s ease;
         }
 
-        #mainNavbar .nav-item.upnav-expanded > .nav-link.dropdown-toggle::after {
-            transform: rotate(180deg);
+        #unique-main-wrapper #upnav-mainNavbar .nav-item.upnav-expanded > .nav-link.dropdown-toggle::after {
+            transform: rotate(180deg) !important;
         }
 
-        #mainNavbar .nav-item.upnav-expanded > .nav-link {
-            background: rgba(255, 255, 255, .08);
+        #unique-main-wrapper #upnav-mainNavbar .nav-item.upnav-expanded > .nav-link {
+            background: rgba(255, 255, 255, .08) !important;
         }
 
-        /* ---------- SUB-MENU (accordion) ---------- */
-        #mainNavbar .dropdown-menu {
+        /* Submenu accordion */
+        #unique-main-wrapper #upnav-mainNavbar .dropdown-menu {
             position: static !important;
             float: none !important;
             display: none;
@@ -368,7 +495,7 @@
             transform: none !important;
         }
 
-        #mainNavbar .dropdown-menu.upnav-sub-open {
+        #unique-main-wrapper #upnav-mainNavbar .dropdown-menu.upnav-sub-open {
             display: block !important;
             animation: upnavSubFade .25s ease;
         }
@@ -378,28 +505,29 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        #mainNavbar .dropdown-item {
+        #unique-main-wrapper #upnav-mainNavbar .dropdown-item {
             color: #d7ddff !important;
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            border-bottom: 1px solid rgba(255, 255, 255, .08) !important;
             padding: 10px 15px 10px 30px !important;
-            font-size: 13px;
-            line-height: 1.35;
-            white-space: normal;
+            font-size: 13px !important;
+            line-height: 1.35 !important;
+            white-space: normal !important;
+            display: block !important;
+            width: 100% !important;
         }
 
-        #mainNavbar .dropdown-item:hover,
-        #mainNavbar .dropdown-item:focus {
+        #unique-main-wrapper #upnav-mainNavbar .dropdown-item:hover,
+        #unique-main-wrapper #upnav-mainNavbar .dropdown-item:focus {
             background: rgba(255, 255, 255, .12) !important;
             color: #fff !important;
         }
 
-        /* Slim scrollbar inside drawer only */
-        #mainNavbar::-webkit-scrollbar {
-            width: 0;
-            display: none;
+        #unique-main-wrapper #upnav-mainNavbar::-webkit-scrollbar {
+            width: 0 !important;
+            display: none !important;
         }
 
-        #mainNavbar {
+        #unique-main-wrapper #upnav-mainNavbar {
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -410,48 +538,42 @@
 <!-- Bootstrap Icons CSS CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-</head>
-
-<body>
 
     <!-- पूरे हेडर और नेवबार को इस यूनिक रैपर के अंदर डाल दिया है -->
     <div id="unique-main-wrapper">
 
-        <!-- 1. ANIMATED TOP SECTION (Top Bar और Logo) -->
-        <div class="animated-top">
+        <!-- 1. ANIMATED TOP SECTION -->
+        <div class="upnav-animated-top">
 
             <!-- Top Bar -->
-            <div class="top-bar bg-danger d-flex align-items-center"
-                style="height: 18px; max-height: 22px; font-family: 'Times New Roman', Times, serif; font-size: 16px; overflow: hidden;">
-                <div
-                    class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2 line-height-1">
+            <div class="upnav-top-bar bg-danger d-flex align-items-center">
+                <div class="container-fluid d-flex justify-content-between align-items-center text-white w-100 px-2">
 
-                    <!-- 1. Live Date & Time -->
-                    <div id="live-clock" style="font-size: 14px; white-space: nowrap;">
+                    <!-- Live Clock -->
+                    <div id="upnav-live-clock" style="font-size: 14px; white-space: nowrap;">
                         Loading Date & Time...
                     </div>
 
-                    <!-- Right Side Controls -->
-                    <div class="d-flex align-items-center gap-2 " style="font-size: 14px;">
+                    <div class="d-flex align-items-center gap-2" style="font-size: 14px;">
 
-                        <!-- 2. Font Size Controller -->
+                        <!-- Font Size Controls -->
                         <div class="d-flex align-items-center bg-white bg-opacity-25 rounded px-1 d-none d-sm-block"
                             style="height: 18px; line-height: 1;">
                             <span class="me-1 fw-bold" style="font-size: 11px;">FONT:</span>
-                            <button onclick="changeFontSize(-1)"
+                            <button type="button" data-upnav-font="-1"
                                 class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none"
                                 style="font-size: 13px;" title="Decrease Font">A-</button>
-                            <button onclick="changeFontSize(0)"
+                            <button type="button" data-upnav-font="0"
                                 class="btn btn-sm btn-link text-white p-0 me-1 text-decoration-none fw-bold shadow-none"
                                 style="font-size: 13px;" title="Normal Font">A</button>
-                            <button onclick="changeFontSize(1)"
+                            <button type="button" data-upnav-font="1"
                                 class="btn btn-sm btn-link text-white p-0 text-decoration-none fw-bold shadow-none"
                                 style="font-size: 13px;" title="Increase Font">A+</button>
                         </div>
 
                         <span style="opacity: 0.5;">|</span>
 
-                        <!-- 3. Logins & Sitemap -->
+                        <!-- Logins & Sitemap -->
                         <div class="d-flex align-items-center gap-2" style="font-size: 13px; white-space: nowrap;">
 
                             {% if user.is_authenticated %}
@@ -463,7 +585,7 @@
                             {% endif %}
 
                             <span style="opacity: 0.5;">|</span>
-                            <a href="#" class="text-white" title="Sitemap"><i class="fas fa-sitemap"
+                            <a href="#" class="text-white" title="Sitemap"><i class="bi bi-diagram-3"
                                     style="font-size: 13px;"></i></a>
                         </div>
 
@@ -471,83 +593,45 @@
                 </div>
             </div>
 
-            <!-- JavaScript for Live Clock and Global Font Size -->
-            <script>
-                // 1. Live Date and Time Script (with seconds)
-                function updateClock() {
-                    const now = new Date();
-                    const options = {
-                        weekday: 'short',
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: true
-                    };
-                    document.getElementById('live-clock').innerText = now.toLocaleString('en-US', options);
-                }
-                setInterval(updateClock, 1000);
-                updateClock();
-
-                // 2. Font Size Changer Script
-                let currentScale = 100;
-                function changeFontSize(action) {
-                    if (action === 1 && currentScale < 120) {
-                        currentScale += 5;
-                    } else if (action === -1 && currentScale > 85) {
-                        currentScale -= 5;
-                    } else if (action === 0) {
-                        currentScale = 100;
-                    }
-                    document.documentElement.style.fontSize = currentScale + '%';
-                }
-            </script>
-
-            <!-- Header Section (Logo & Text) -->
-            <div class="header-section py-0">
+            <!-- Header Section -->
+            <div class="upnav-header-section py-0">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-12 col-lg-9 d-flex flex-row align-items-center text-start">
-                            <img ondblclick="window.location.href='/admin-rajend-administrator'" src="/static/logo/gpc.ico" alt="School Logo" class="school-logo me-2 me-md-3">
+                            <img ondblclick="window.location.href='/admin-rajend-administrator'" src="/static/logo/gpc.ico" alt="School Logo" class="upnav-school-logo me-2 me-md-3">
                             <div>
-                                <h2 class="header-title">GOVT. POLYTECHNIC COLLEGE</h2>
-                                <p class="header-address mb-0">HARSUD (DIST. KHANDWA) M.P. - 450116</p>
+                                <h2 class="upnav-header-title">GOVT. POLYTECHNIC COLLEGE</h2>
+                                <p class="upnav-header-address mb-0">HARSUD (DIST. KHANDWA) M.P. - 450116</p>
                             </div>
                         </div>
                         <div class="col-lg-3 d-none d-lg-flex justify-content-end">
-                            <img src="/static/images/logo2.png" alt="Right Logo" class="school-logo">
+                            <img src="/static/images/logo2.png" alt="Right Logo" class="upnav-school-logo">
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. STICKY WRAPPER (Navbar) -->
+        <!-- 2. STICKY WRAPPER -->
         <div id="unique-sticky-navbar">
 
-            <!-- Backdrop for mobile drawer -->
             <div id="upnav-overlay"></div>
 
-            <!-- MAIN NAVBAR -->
-            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar ">
+            <nav class="navbar navbar-expand-lg navbar-dark upnav-custom-navbar">
                 <div class="container-fluid p-0">
 
                     <!-- Mobile Header -->
-                    <div class="d-lg-none w-100 mobile-nav-header py-0">
+                    <div class="d-lg-none w-100 upnav-mobile-nav-header">
                         <button class="navbar-toggler" type="button" id="upnav-toggle"
-                                aria-label="Open menu" aria-expanded="false" aria-controls="mainNavbar">
+                                aria-label="Open menu" aria-expanded="false" aria-controls="upnav-mainNavbar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <a class="mobile-home-text" href="/">Home</a>
+                        <a class="upnav-mobile-home-text" href="/">Home</a>
                     </div>
 
-                    <!-- ===== DRAWER / NAV COLLAPSE ===== -->
-                    <div class="navbar-collapse w-100" id="mainNavbar">
+                    <!-- ===== DRAWER ===== -->
+                    <div class="navbar-collapse w-100" id="upnav-mainNavbar">
 
-                        <!-- Drawer Header (mobile only) -->
                         <div class="upnav-drawer-head d-lg-none">
                             <p class="upnav-drawer-title mb-0">Menu</p>
                             <button type="button" class="upnav-close-btn" id="upnav-close" aria-label="Close menu">
@@ -555,7 +639,6 @@
                             </button>
                         </div>
 
-                        <!-- Navbar Links -->
                         <ul class="navbar-nav w-100 d-flex flex-column flex-lg-row gap-lg-5 ms-lg-5 align-items-lg-center">
 
                             <li class="nav-item"><a class="nav-link active text-white" href="/">Home</a></li>
@@ -610,12 +693,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button">Student Corner</a>
                                 <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" href="{% url 'dashboard:login' %}">Student Login</a></li>
-                                      <li><a class="dropdown-item" href="{% url 'dashboard:login' %}#calendar">My Profile</a></li>
-                                      <li><a class="dropdown-item" href="{% url 'cheatsheets' %}">Cheat Sheet Notes</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:login' %}">Student Login</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:login' %}#calendar">My Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cheatsheets' %}">Cheat Sheet Notes</a></li>
                                     <li><a class="dropdown-item" href="{% url 'pyqs' %}">Previous Year Question Papers</a></li>
-                                    
-                                   
                                 </ul>
                             </li>
 
@@ -631,7 +712,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link  dropdown-toggle text-white" href="#" role="button">Contact Us</a>
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button">Contact Us</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{% url 'contact_us' %}">Contact Page</a></li>
                                 </ul>
@@ -652,10 +733,10 @@
 
 
     {% if user.is_authenticated %}
-    <div class="diary-container">
+    <div class="upnav-diary-container">
         <style>
-            /* --- LOGGED IN BUTTON STYLES --- */
-            .diary-container {
+            /* --- LOGGED IN BUTTON STYLES (scoped) --- */
+            .upnav-diary-container {
                 position: fixed;
                 right: 0;
                 top: 50%;
@@ -663,7 +744,7 @@
                 display: inline-block;
                 z-index: 9999;
             }
-            .diary-button {
+            .upnav-diary-button {
                 background: linear-gradient(135deg, #a30046, #7a0034);
                 color: white;
                 padding: 12px 8px;
@@ -678,10 +759,10 @@
                 letter-spacing: 1px;
                 transition: all 0.3s ease;
             }
-            .diary-button:hover {
+            .upnav-diary-button:hover {
                 padding-right: 12px;
             }
-            .login-dropdown {
+            .upnav-login-dropdown {
                 display: none;
                 position: absolute;
                 top: 50%;
@@ -693,16 +774,16 @@
                 box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
                 overflow: hidden;
                 border: 1px solid #eaeaea;
-                animation: fadeIn 0.2s ease-in-out;
+                animation: upnavFadeIn 0.2s ease-in-out;
             }
-            .diary-container:hover .login-dropdown {
+            .upnav-diary-container:hover .upnav-login-dropdown {
                 display: block;
             }
-            @keyframes fadeIn {
+            @keyframes upnavFadeIn {
                 from { opacity: 0; transform: translateY(-45%); }
-                to { opacity: 1; transform: translateY(-50%); }
+                to   { opacity: 1; transform: translateY(-50%); }
             }
-            .login-header {
+            .upnav-login-header {
                 background-color: #f8f9fa;
                 padding: 12px;
                 font-weight: 600;
@@ -710,7 +791,7 @@
                 color: #333;
                 border-bottom: 1px solid #eaeaea;
             }
-            .login-option {
+            .upnav-login-option {
                 display: flex;
                 align-items: center;
                 padding: 12px 15px;
@@ -719,27 +800,27 @@
                 transition: background 0.2s;
                 border-bottom: 1px solid #f4f4f4;
             }
-            .login-option:hover {
+            .upnav-login-option:hover {
                 background-color: #f0f7ff;
             }
-            .login-option.student:hover { border-left: 4px solid #2196F3; }
-            .opt-icon {
+            .upnav-login-option.upnav-student:hover { border-left: 4px solid #2196F3; }
+            .upnav-opt-icon {
                 font-size: 22px;
                 margin-right: 12px;
             }
-            .opt-text strong {
+            .upnav-opt-text strong {
                 display: block;
                 font-size: 14px;
                 color: #222;
             }
         </style>
 
-        <button class="diary-button">
+        <button class="upnav-diary-button" type="button">
             <span class="icon bi-person-circle"></span> {{ user.username }}
         </button>
 
-        <div class="login-dropdown">
-            <div class="login-header row align-items-center m-0">
+        <div class="upnav-login-dropdown">
+            <div class="upnav-login-header row align-items-center m-0">
                 <div class="col-3 p-0">
                     {% if user.photo %}
                         <img height="35" width="35" class="rounded-circle shadow-sm" src="{{ user.photo.url }}" style="object-fit: cover;">
@@ -753,50 +834,50 @@
             </div>
 
             {% if user.is_staff or user.is_superuser %}
-                <a href="{% url 'dashboard:staff_dashboard' %}" class="login-option student">
-                    <span class="opt-icon bi-grid-fill text-success"></span>
-                    <div class="opt-text"><strong>Staff Dashboard</strong></div>
+                <a href="{% url 'dashboard:staff_dashboard' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-grid-fill text-success"></span>
+                    <div class="upnav-opt-text"><strong>Staff Dashboard</strong></div>
                 </a>
 
-                <a href="{% url 'placements' %}#Statistics-tab-pane" class="login-option student">
-                    <span class="opt-icon bi-bar-chart text-primary"></span>
-                    <div class="opt-text"><strong>Placement Statistics</strong></div>
+                <a href="{% url 'placements' %}#Statistics-tab-pane" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-bar-chart text-primary"></span>
+                    <div class="upnav-opt-text"><strong>Placement Statistics</strong></div>
                 </a>
 
-                <a href="{% url 'student_engagement_page' %}" class="login-option student">
-                    <span class="opt-icon bi-person-lines-fill text-info "></span>
-                    <div class="opt-text"><strong>Placed Students</strong></div>
+                <a href="{% url 'student_engagement_page' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-person-lines-fill text-info"></span>
+                    <div class="upnav-opt-text"><strong>Placed Students</strong></div>
                 </a>
 
-                <a href="{% url 'company_student_verification' %}" class="login-option student">
-                    <span class="opt-icon bi-person-exclamation text-warning"></span>
-                    <div class="opt-text"><strong>Student Verification</strong></div>
+                <a href="{% url 'company_student_verification' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-person-exclamation text-warning"></span>
+                    <div class="upnav-opt-text"><strong>Student Verification</strong></div>
                 </a>
             {% else %}
-                <a href="{% url 'dashboard:student_dashboard' %}" class="login-option student">
-                    <span class="opt-icon bi-mortarboard-fill text-info"></span>
-                    <div class="opt-text"><strong>Student Dashboard</strong></div>
+                <a href="{% url 'dashboard:student_dashboard' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-mortarboard-fill text-info"></span>
+                    <div class="upnav-opt-text"><strong>Student Dashboard</strong></div>
                 </a>
 
-                <a href="{% url 'pyqs' %}" class="login-option student">
-                    <span class="opt-icon bi-file-earmark-pdf-fill text-danger"></span>
-                    <div class="opt-text"><strong> PYQ's</strong></div>
+                <a href="{% url 'pyqs' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-file-earmark-pdf-fill text-danger"></span>
+                    <div class="upnav-opt-text"><strong>PYQ's</strong></div>
                 </a>
-                <a href="{% url 'academic' %}#Syllabus-tab-pane" class="login-option student">
-                    <span class="opt-icon bi-file-earmark-richtext text-warning-emphasis"></span>
-                    <div class="opt-text"><strong>Acadmic Syllabus</strong></div>
+                <a href="{% url 'academic' %}#Syllabus-tab-pane" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-file-earmark-richtext text-warning-emphasis"></span>
+                    <div class="upnav-opt-text"><strong>Acadmic Syllabus</strong></div>
                 </a>
-                <a href="{% url 'cheatsheets' %}" class="login-option student">
-                    <span class="opt-icon bi-journal-bookmark-fill text-primary "></span>
-                    <div class="opt-text"><strong> CheatSheet Note's</strong></div>
+                <a href="{% url 'cheatsheets' %}" class="upnav-login-option upnav-student">
+                    <span class="upnav-opt-icon bi-journal-bookmark-fill text-primary"></span>
+                    <div class="upnav-opt-text"><strong>CheatSheet Note's</strong></div>
                 </a>
             {% endif %}
 
-            <form method="post" action="{% url 'dashboard:logout' %}" id="logoutForm" class="m-0">
+            <form method="post" action="{% url 'dashboard:logout' %}" id="upnav-logoutForm" class="m-0">
                 {% csrf_token %}
-                <a class="login-option" onclick="document.getElementById('logoutForm').submit(); return false;" style="cursor: pointer;">
-                    <span class="opt-icon bi-box-arrow-right text-danger"></span>
-                    <div class="opt-text"><strong class="text-danger">Logout</strong></div>
+                <a class="upnav-login-option" data-upnav-submit="upnav-logoutForm" style="cursor: pointer;">
+                    <span class="upnav-opt-icon bi-box-arrow-right text-danger"></span>
+                    <div class="upnav-opt-text"><strong class="text-danger">Logout</strong></div>
                 </a>
             </form>
         </div>
@@ -804,37 +885,76 @@
 
     {% else %}
     <!-- --- NOT LOGGED IN BUTTONS --- -->
-    <div class="sidebar-login-container d-none d-sm-block" id="loginContainer">
+    <div class="d-none d-sm-block" id="upnav-loginContainer">
 
     </div>
-
-    <!-- JAVASCRIPT FOR HOVER EFFECT -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            const buttons = document.querySelectorAll('.slide-btn');
-
-            buttons.forEach(button => {
-
-                button.addEventListener('mouseenter', function() {
-
-                    buttons.forEach(btn => btn.classList.remove('active'));
-
-                    this.classList.add('active');
-                });
-
-                button.addEventListener('mouseleave', function() {
-
-                    this.classList.remove('active');
-                });
-            });
-        });
-    </script>
     {% endif %}
 
 
 <!-- =========================================================
-     UNIQUE MOBILE DRAWER SCRIPT  (upnav)
+     MASTER SCRIPT — all JS scoped in IIFEs, zero globals
+     ========================================================= -->
+<script>
+(function () {
+    'use strict';
+
+    /* ---------- 1. Live Clock ---------- */
+    function upnavUpdateClock() {
+        var el = document.getElementById('upnav-live-clock');
+        if (!el) return;
+        var now = new Date();
+        var options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        el.innerText = now.toLocaleString('en-US', options);
+    }
+    upnavUpdateClock();
+    setInterval(upnavUpdateClock, 1000);
+
+    /* ---------- 2. Font Size Changer (via data-upnav-font) ---------- */
+    var upnavCurrentScale = 100;
+
+    function upnavChangeFontSize(action) {
+        if (action === 1 && upnavCurrentScale < 120) {
+            upnavCurrentScale += 5;
+        } else if (action === -1 && upnavCurrentScale > 85) {
+            upnavCurrentScale -= 5;
+        } else if (action === 0) {
+            upnavCurrentScale = 100;
+        }
+        document.documentElement.style.fontSize = upnavCurrentScale + '%';
+    }
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-upnav-font]');
+        if (!btn) return;
+        e.preventDefault();
+        upnavChangeFontSize(parseInt(btn.getAttribute('data-upnav-font'), 10));
+    });
+
+    /* ---------- 3. Logout form submit (via data-upnav-submit) ---------- */
+    document.addEventListener('click', function (e) {
+        var link = e.target.closest('[data-upnav-submit]');
+        if (!link) return;
+        e.preventDefault();
+        var formId = link.getAttribute('data-upnav-submit');
+        var form = document.getElementById(formId);
+        if (form) form.submit();
+    });
+
+})();
+</script>
+
+
+<!-- =========================================================
+     MOBILE DRAWER SCRIPT  (upnav)
      ========================================================= -->
 <script>
 (function () {
@@ -842,13 +962,13 @@
 
     function initUpnavDrawer() {
 
-        var drawer   = document.getElementById('mainNavbar');
+        var drawer   = document.getElementById('upnav-mainNavbar');
         var overlay  = document.getElementById('upnav-overlay');
         var openBtn  = document.getElementById('upnav-toggle');
         var closeBtn = document.getElementById('upnav-close');
 
         if (!drawer || !overlay) return;
-        if (drawer.dataset.upnavReady === '1') return;   // guard: double init na ho
+        if (drawer.dataset.upnavReady === '1') return;
         drawer.dataset.upnavReady = '1';
 
         var MOBILE_MAX = 991.98;
@@ -881,7 +1001,6 @@
             closeAllSubmenus();
         }
 
-        /* ---- Open / Close buttons ---- */
         if (openBtn) {
             openBtn.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -901,23 +1020,20 @@
             });
         }
 
-        /* ---- Backdrop click ---- */
         overlay.addEventListener('click', closeDrawer);
 
-        /* ---- ESC key ---- */
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && drawer.classList.contains('upnav-open')) {
                 closeDrawer();
             }
         });
 
-        /* ---- Dropdown toggles: mobile = accordion, desktop = hover ---- */
         drawer.querySelectorAll('.nav-item.dropdown > .nav-link.dropdown-toggle').forEach(function (toggle) {
             toggle.addEventListener('click', function (e) {
-                e.preventDefault();       // '#' jump rokne ke liye
+                e.preventDefault();
                 e.stopPropagation();
 
-                if (!isMobile()) return;  // desktop par CSS hover hi kaam karega
+                if (!isMobile()) return;
 
                 var item = toggle.parentElement;
                 var menu = item.querySelector('.dropdown-menu');
@@ -932,7 +1048,6 @@
             });
         });
 
-        /* ---- Real link par click => drawer band ---- */
         drawer.addEventListener('click', function (e) {
             var link = e.target.closest('a');
             if (!link) return;
@@ -944,7 +1059,6 @@
             closeDrawer();
         });
 
-        /* ---- Desktop par resize hone par drawer band kar do ---- */
         var resizeTimer;
         window.addEventListener('resize', function () {
             clearTimeout(resizeTimer);
@@ -964,56 +1078,147 @@
 
 
 <!-- =========================================================
-     HASH BASED TAB SWITCHER (unchanged)
+     HASH BASED TAB SWITCHER — NO SCROLL (robust)
      ========================================================= -->
 <script>
-function switchCampusTabByPane() {
-    const hash = window.location.hash;
-    const allPanes = document.querySelectorAll('div[id*="-tab-pane"]');
+(function () {
+    'use strict';
 
-    if (allPanes.length > 0) {
-        allPanes.forEach(function (pane) {
-            pane.classList.remove('show', 'active');
-            pane.style.setProperty('display', 'none', 'important');
+    if ('scrollRestoration' in history && !window.__upnavScrollRestSet) {
+        window.__upnavScrollRestSet = true;
+        history.scrollRestoration = 'manual';
+    }
+
+    var PANE_SELECTOR = 'div[id*="-tab-pane"], .tab-content > .tab-pane';
+
+    function getPanes() {
+        return document.querySelectorAll(PANE_SELECTOR);
+    }
+
+    function isPaneEl(el) {
+        return !!(el && el.nodeType === 1 && el.matches && el.matches(PANE_SELECTOR));
+    }
+
+    function lockScroll(y) {
+        var html = document.documentElement;
+        var prev = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto';
+
+        window.scrollTo(0, y);
+        requestAnimationFrame(function () { window.scrollTo(0, y); });
+        setTimeout(function () { window.scrollTo(0, y); }, 0);
+        setTimeout(function () { window.scrollTo(0, y); }, 40);
+        setTimeout(function () {
+            window.scrollTo(0, y);
+            html.style.scrollBehavior = prev || '';
+        }, 150);
+    }
+
+    function switchByHash(hash) {
+        var panes = getPanes();
+        if (panes.length === 0) return false;
+
+        panes.forEach(function (p) {
+            p.classList.remove('show', 'active');
+            p.style.setProperty('display', 'none', 'important');
         });
 
-        let targetPane = null;
-        if (hash) {
-            targetPane = document.querySelector(hash);
+        var target = null;
+        if (hash && hash.length > 1) {
+            try { target = document.querySelector(hash); } catch (e) { target = null; }
+        }
+        if (!target || !isPaneEl(target)) {
+            target = panes[0];
         }
 
-        if (!targetPane) {
-            targetPane = allPanes[0];
+        target.classList.add('show', 'active');
+        target.style.setProperty('display', 'block', 'important');
+        return true;
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.defaultPrevented) return;
+
+        var link = e.target.closest && e.target.closest('a[href]');
+        if (!link) return;
+
+        var href = link.getAttribute('href');
+        if (!href || href.charAt(0) !== '#' || href.length < 2) return;
+
+        var target;
+        try { target = document.querySelector(href); } catch (err) { return; }
+        if (!target) return;
+
+        if (!isPaneEl(target)) return;
+        if (getPanes().length === 0) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var y = window.scrollY || window.pageYOffset || 0;
+
+        try {
+            history.pushState(null, '', href);
+        } catch (err) {
+            return;
         }
 
-        if (targetPane) {
-            targetPane.classList.add('show', 'active');
-            targetPane.style.setProperty('display', 'block', 'important');
+        switchByHash(href);
+        lockScroll(y);
+    }, true);
 
-            if (hash) {
-                setTimeout(function () {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }, 500);
-            }
+    function init() {
+        if (getPanes().length === 0) return;
+
+        var y = window.scrollY || window.pageYOffset || 0;
+        switchByHash(window.location.hash);
+
+        if (window.location.hash) {
+            lockScroll(y);
         }
     }
-}
 
-document.addEventListener("DOMContentLoaded", switchCampusTabByPane);
-window.addEventListener("hashchange", switchCampusTabByPane);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    window.addEventListener('load', function () {
+        if (window.location.hash && getPanes().length) {
+            var y = window.scrollY || window.pageYOffset || 0;
+            lockScroll(y);
+        }
+    });
+
+    window.addEventListener('popstate', function () {
+        if (getPanes().length === 0) return;
+        var y = window.scrollY || window.pageYOffset || 0;
+        switchByHash(window.location.hash);
+        lockScroll(y);
+    });
+
+    window.addEventListener('hashchange', function () {
+        if (getPanes().length === 0) return;
+        var y = window.scrollY || window.pageYOffset || 0;
+        switchByHash(window.location.hash);
+        lockScroll(y);
+    });
+
+})();
 </script>
 
+
 <!-- =========================================================
-     LOADER (unchanged)
+     LOADER (scoped IDs/classes)
      ========================================================= -->
 <script>
 (function() {
-    const style = document.createElement('style');
+    'use strict';
+
+    var style = document.createElement('style');
     style.textContent = `
-        #loading-overlay {
+        #upnav-loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -1030,7 +1235,7 @@ window.addEventListener("hashchange", switchCampusTabByPane);
             flex-direction: column;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        .glass-card {
+        .upnav-glass-card {
             background: rgba(255, 255, 255, 0.65);
             padding: 30px 40px;
             border-radius: 16px;
@@ -1043,27 +1248,27 @@ window.addEventListener("hashchange", switchCampusTabByPane);
             align-items: center;
             justify-content: center;
         }
-        .glass-loader-spinner {
+        .upnav-glass-loader-spinner {
             width: 45px;
             height: 45px;
             border: 4px solid rgba(0, 0, 0, 0.05);
             border-top: 4px solid #2563eb;
             border-right: 4px solid #2563eb;
             border-radius: 50%;
-            animation: spinGlassLoader 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation: upnavSpinGlassLoader 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
-        @keyframes spinGlassLoader {
+        @keyframes upnavSpinGlassLoader {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
     `;
     document.head.appendChild(style);
 
-    const overlay = document.createElement('div');
-    overlay.id = 'loading-overlay';
+    var overlay = document.createElement('div');
+    overlay.id = 'upnav-loading-overlay';
     overlay.innerHTML = `
-        <div class="glass-card">
-            <div class="glass-loader-spinner"></div>
+        <div class="upnav-glass-card">
+            <div class="upnav-glass-loader-spinner"></div>
             <p style="margin: 15px 0 0 0; font-weight: 600; color: #1e293b; font-size: 15px; letter-spacing: 0.5px;">Loading...</p>
         </div>
     `;
@@ -1072,29 +1277,29 @@ window.addEventListener("hashchange", switchCampusTabByPane);
         document.body.insertBefore(overlay, document.body.firstChild);
     });
 
-    let loadingTimeout;
+    var loadingTimeout;
 
     function showLoader() {
         loadingTimeout = setTimeout(function() {
-            const overlayEl = document.getElementById('loading-overlay');
-            if (overlayEl) overlayEl.style.display = 'flex';
+            var el = document.getElementById('upnav-loading-overlay');
+            if (el) el.style.display = 'flex';
         }, 150);
     }
 
     document.addEventListener('click', function(event) {
-        const targetLink = event.target.closest('a');
+        var targetLink = event.target.closest('a');
 
         if (targetLink) {
-            const href = targetLink.getAttribute('href');
-            const target = targetLink.getAttribute('target');
+            var href = targetLink.getAttribute('href');
+            var target = targetLink.getAttribute('target');
 
             if (target === '_blank') return;
 
             if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
 
                 try {
-                    const targetUrl = new URL(href, window.location.href);
-                    const currentUrl = new URL(window.location.href);
+                    var targetUrl = new URL(href, window.location.href);
+                    var currentUrl = new URL(window.location.href);
 
                     if (targetUrl.protocol === currentUrl.protocol &&
                         targetUrl.host === currentUrl.host &&
@@ -1113,10 +1318,10 @@ window.addEventListener("hashchange", switchCampusTabByPane);
         showLoader();
     });
 
-    window.addEventListener('pageshow', function(event) {
+    window.addEventListener('pageshow', function() {
         clearTimeout(loadingTimeout);
-        const overlayEl = document.getElementById('loading-overlay');
-        if (overlayEl) overlayEl.style.display = 'none';
+        var el = document.getElementById('upnav-loading-overlay');
+        if (el) el.style.display = 'none';
     });
 
     window.addEventListener('pagehide', function() {

@@ -748,3 +748,10 @@ class EventImage(models.Model):
 
     def __str__(self):
         return f"{self.event.title} — img {self.id}"
+
+
+# ============================================
+# REDIS CACHE CONFIGURATION
+# ============================================
+
+ 

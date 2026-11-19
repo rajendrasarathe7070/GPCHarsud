@@ -1,0 +1,35 @@
+======================================================================
+SAFE SECURITY REPORT
+======================================================================
+Target: https://gpcharsud.de5.net/
+Generated: 2026-11-14T23:50:17.183111
+Mode: Passive/safe checks only. No exploitation performed.
+
+[1] HIGH - Missing security header: Strict-Transport-Security
+Detail: HSTS header missing hai. Browser ko HTTPS use karne ke liye force nahi kiya ja raha.
+Fix: HTTPS response me Strict-Transport-Security header add karein. Example: max-age=31536000; includeSubDomains
+----------------------------------------------------------------------
+[2] MEDIUM - Missing security header: Content-Security-Policy
+Detail: Content-Security-Policy missing hai. XSS aur content injection risk badh sakta hai.
+Fix: Ek basic CSP add karein, jaise default-src 'self'; object-src 'none'; base-uri 'self'
+----------------------------------------------------------------------
+[3] LOW - Missing security header: Permissions-Policy
+Detail: Permissions-Policy missing hai. Browser features restrict nahi kiye gaye hain.
+Fix: Example: Permissions-Policy: geolocation=(), microphone=(), camera=()
+----------------------------------------------------------------------
+[4] LOW - Server/technology disclosure detect hua
+Detail: Headers: Server: nginx/1.24.0 (Ubuntu)
+Fix: Production me Server/X-Powered-By headers remove ya blank karne ka recommendation hota hai.
+----------------------------------------------------------------------
+[5] INFO - TLS 1.3 detect hua
+Detail: Achha hai: TLS 1.3 modern aur secure hai.
+Fix: Koi action required nahi.
+----------------------------------------------------------------------
+[6] INFO - SSL certificate valid hai
+Detail: Certificate abhi valid hai. Expiry: Feb 12 16:30:23 2027 GMT
+Fix: Certificate expiry monitor karte rahein.
+----------------------------------------------------------------------
+[7] INFO - HTTP response mila
+Detail: Status code: 200, Final URL: https://gpcharsud.de5.net/
+Fix: Basic connectivity OK.
+----------------------------------------------------------------------
