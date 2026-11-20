@@ -38,6 +38,7 @@ python-dotenv==1.2.2
 qrcode==8.2
 realtime==2.31.0
 redis==7.4.0
+django-cachalot==2.9.1
 Requests==2.34.2
 sqlparse==0.5.5
 storage3==2.31.0

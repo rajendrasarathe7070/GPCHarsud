@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+l9$7j#-%$$@5%j6gk*d1yj5q(o0%%=0grc!u$((kz*_%9$j%z"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*' , "://gpcharsud.us.ci","gpcharsud.us.ci" , "://gpcharsud.de5.net" , "gpcharsud.de5.net" ]
 
 
  
@@ -104,6 +104,8 @@ INSTALLED_APPS = [
     
     
     "core.apps.YourAppConfig",
+    
+    'cachalot',
 ]
 
 
@@ -303,3 +305,23 @@ TEMPLATES[0]["OPTIONS"]["context_processors"] += [
 # REDIS CACHE CONFIGURATION
 # ============================================
  
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://Rajend7070@127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "IGNORE_EXCEPTIONS": True,
+        }
+    }
+}
+
+CACHALOT_CACHE = 'default'
+CACHALOT_ENABLED = True
+# इन टेबल्स का डेटा कभी भी Redis में कैश नहीं होगा (हमेशा सीधे DB से आएगा)
+CACHALOT_UNCACHABLE_TABLES = (
+    'auth_user',
+    'django_session',
+    'django_admin_log',
+    'core_customuser',  # <-- ऊपर वाले कमांड से अपना सही यूजर टेबल नाम यहाँ डालें
+)
