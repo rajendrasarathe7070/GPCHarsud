@@ -26,7 +26,15 @@ urlpatterns = [
     path("model/<str:model_key>/add/", views.model_add_view, name="model_add"),
     path("model/<str:model_key>/<int:pk>/edit/", views.model_edit_view, name="model_edit"),
     path("model/<str:model_key>/<int:pk>/delete/", views.model_delete_view, name="model_delete"),
-] 
+]
+
+# this is bot urls 
+from . import services_bot_algo as view 
+urlpatterns+= [
+    path("api/chat/",       view.chat_api,      name="chat_api"),
+    path("api/health/",     view.health_api,    name="health_api"),
+    path("bot-dashboard/",  view.bot_dashboard, name="bot_dashboard"),
+]
 
 if True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

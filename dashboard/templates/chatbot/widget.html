@@ -1,0 +1,661 @@
+{% load static %}
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   COLLEGE HELP DESK — FLOATING WIDGET STYLES
+   ═══════════════════════════════════════════════════════ */
+.cb-widget, .cb-widget * {
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, Georgia, serif;
+}
+
+/* ── FAB (small floating button → pill on hover) ── */
+.cb-fab {
+    position: fixed;
+    bottom: 32px;                          /* ⬆️ थोड़ा ऊपर किया */
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50px;                    /* pill ready */
+    border: none;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0 12px;
+    box-shadow: 0 6px 24px rgba(30, 58, 138, 0.45);
+    z-index: 9999998;
+    overflow: hidden;
+    animation: cb-pulse 2.2s infinite;
+    /* ⬇️ width + radius animate होकर pill बनेगी */
+    transition: width 0.42s cubic-bezier(.34,1.56,.64,1),
+                transform 0.2s,
+                box-shadow 0.2s,
+                opacity 0.25s;
+    white-space: nowrap;
+    will-change: width;
+}
+.cb-fab:hover {
+    /* ⬇️ horizontal reserve: 64px → 240px pill */
+    width: 240px;
+    box-shadow: 0 8px 28px rgba(30, 58, 138, 0.6);
+    animation: none;
+}
+.cb-fab:active {
+    transform: scale(0.98);
+}
+.cb-fab.cb-hidden {
+    width: 64px;                           /* reset अगर hovered था */
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+}
+
+/* ── Logo (fixed circle, pill में left side) ── */
+.cb-fab-logo {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 2px;
+    background: #fff;
+    flex-shrink: 0;
+}
+.cb-fab-fallback {
+    display: none;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    flex-shrink: 0;
+}
+.cb-fab-nologo .cb-fab-fallback { display: block; }
+
+/* ── Pill text (hover पर दिखेगा) ── */
+.cb-fab-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    color: #fff;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.25s 0.1s ease,
+                transform 0.3s 0.1s ease;
+    pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+.cb-fab:hover .cb-fab-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@keyframes cb-pulse {
+    0%   { box-shadow: 0 6px 24px rgba(30,58,138,.45), 0 0 0 0 rgba(59,130,246,.55); }
+    70%  { box-shadow: 0 6px 24px rgba(30,58,138,.45), 0 0 0 18px rgba(59,130,246,0); }
+    100% { box-shadow: 0 6px 24px rgba(30,58,138,.45), 0 0 0 0 rgba(59,130,246,0); }
+}
+
+/* ── Chat window (slides up from bottom) ── */
+.cb-window {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    width: 380px;
+    max-width: calc(100vw - 24px);
+    height: 600px;
+    max-height: calc(100vh - 130px);
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28),
+                0 0 0 1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999999;
+    /* ⬇️ hidden below viewport */
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+    transition: transform 0.48s cubic-bezier(.22,1.2,.36,1),
+                opacity 0.3s ease;
+    will-change: transform, opacity;
+}
+.cb-window.cb-open {
+    /* ⬇️ slide up from bottom → top */
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── Header (draggable) ── */
+.cb-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: #fff;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    flex-shrink: 0;
+}
+.cb-header:active { cursor: grabbing; }
+.cb-header-logo {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 3px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.cb-header-text { flex: 1; min-width: 0; overflow: hidden; }
+.cb-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cb-subtitle {
+    font-size: 11.5px;
+    opacity: .9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+}
+.cb-subtitle::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(74,222,128,.35);
+    animation: cb-blink 2s infinite;
+}
+@keyframes cb-blink {
+    0%,100% { opacity: 1; }
+    50%     { opacity: .4; }
+}
+.cb-header-btn {
+    background: rgba(255,255,255,.18);
+    border: none;
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0;
+    transition: background .2s, transform .15s;
+}
+.cb-header-btn:hover { background: rgba(255,255,255,.3); transform: scale(1.08); }
+
+/* ── Messages area ── */
+.cb-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+.cb-watermark {
+    position: absolute;
+    inset: 0;
+    background-image: url("{% static 'logo/gpch.ico' %}");
+    background-size: 220px;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+}
+.cb-messages > *:not(.cb-watermark) { position: relative; z-index: 1; }
+.cb-messages::-webkit-scrollbar { width: 6px; }
+.cb-messages::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+.cb-messages::-webkit-scrollbar-track { background: transparent; }
+
+/* Welcome card */
+.cb-welcome {
+    text-align: center;
+    padding: 22px 14px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.cb-welcome-logo {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 4px;
+    box-shadow: 0 4px 14px rgba(30,58,138,.18);
+    margin-bottom: 12px;
+}
+.cb-welcome-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 6px;
+}
+.cb-welcome-text {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.55;
+}
+
+/* Message bubbles */
+.cb-msg {
+    max-width: 84%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    animation: cb-fadein .32s ease;
+}
+@keyframes cb-fadein {
+    from { opacity: 0; transform: translateY(10px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cb-msg.cb-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 8px rgba(220,38,38,.25);
+}
+.cb-msg.cb-bot {
+    align-self: flex-start;
+    background: #fff;
+    color: #1f2937;
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.cb-msg-meta {
+    font-size: 10px;
+    opacity: .6;
+    margin-top: 5px;
+    display: block;
+    font-style: italic;
+}
+
+/* Typing indicator — red/blue/black/white dots */
+.cb-typing {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    font-size: 12px;
+    color: #64748b;
+    font-style: italic;
+    flex-shrink: 0;
+}
+.cb-dots { display: flex; gap: 5px; }
+.cb-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    animation: cb-bounce 1.3s infinite ease-in-out;
+}
+.cb-dot-red   { background: #dc2626; animation-delay: 0s;    }
+.cb-dot-blue  { background: #1e3a8a; animation-delay: .16s;  }
+.cb-dot-black { background: #111827; animation-delay: .32s;  }
+.cb-dot-white { background: #ffffff; border: 1.5px solid #94a3b8; animation-delay: .48s; }
+@keyframes cb-bounce {
+    0%, 80%, 100% { transform: translateY(0) scale(.85); opacity: .45; }
+    40%           { transform: translateY(-7px) scale(1.15); opacity: 1; }
+}
+
+/* Input row */
+.cb-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+.cb-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    min-width: 0;
+    color: #1f2937;
+}
+.cb-input::placeholder { color: #94a3b8; }
+.cb-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+}
+.cb-send {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .18s, box-shadow .2s;
+    flex-shrink: 0;
+}
+.cb-send:hover:not(:disabled) {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(30,58,138,.4);
+}
+.cb-send:disabled { opacity: .55; cursor: not-allowed; }
+
+/* Mobile — full screen */
+@media (max-width: 640px) {
+    .cb-window {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        border-radius: 0;
+    }
+    .cb-fab { bottom: 15px; right: 10px;   }
+    /* Mobile पर hover नहीं — pill disable */
+    .cb-fab:hover { width: 58px; }
+    .cb-fab-text { display: none; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════
+     WIDGET HTML
+     ═══════════════════════════════════════════════════ -->
+<div class="cb-widget">
+
+    <!-- Floating button → pill on hover -->
+    <button id="collegeBotFab" class="cb-fab" type="button" aria-label="Open GPCH Help Desk AI">
+        <img src="{% static 'logo/help.ico' %}" alt="" class="cb-fab-logo"
+             onerror="this.style.display='none'; this.parentElement.classList.add('cb-fab-nologo');">
+        <svg class="cb-fab-fallback" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 3L1 9l11 6 9-5v8h2V9L12 3zm0 13L3 11v5c0 2 4 4 9 4s9-2 9-4v-5l-9 5z"/>
+        </svg>
+        <span class="cb-fab-text">GPCH Help Desk AI</span>
+    </button>
+
+    <!-- Chat window (slides up from bottom) -->
+    <div id="collegeBotWindow" class="cb-window" role="dialog" aria-label="College Help Desk">
+
+        <div id="collegeBotHeader" class="cb-header">
+            <img src="{% static 'logo/gpch.ico' %}" alt="" class="cb-header-logo"
+                 onerror="this.style.display='none';">
+            <div class="cb-header-text">
+                <div class="cb-title">College Help Desk</div>
+                <div class="cb-subtitle">Online — Ready to help</div>
+            </div>
+            <button id="collegeBotMinimize" class="cb-header-btn" type="button" aria-label="Minimize">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z"/></svg>
+            </button>
+        </div>
+
+        <div id="collegeBotMessages" class="cb-messages">
+            <div class="cb-watermark" aria-hidden="true"></div>
+            <div class="cb-welcome">
+                <img src="{% static 'logo/gpch.ico' %}" alt="" class="cb-welcome-logo"
+                     onerror="this.style.display='none';">
+                <div class="cb-welcome-title">Welcome to College Help Desk</div>
+                <div class="cb-welcome-text">
+                    Ask me anything about admissions, fees, courses,<br>hostel, placements, and more.
+                </div>
+            </div>
+        </div>
+
+        <div id="collegeBotTyping" class="cb-typing" style="display:none;" aria-live="polite">
+            <div class="cb-dots" aria-hidden="true">
+                <span class="cb-dot cb-dot-red"></span>
+                <span class="cb-dot cb-dot-blue"></span>
+                <span class="cb-dot cb-dot-black"></span>
+                <span class="cb-dot cb-dot-white"></span>
+            </div>
+            <span>AI is thinking…</span>
+        </div>
+
+        <div class="cb-input-row">
+            <input id="collegeBotInput" type="text" class="cb-input"
+                   placeholder="Ask anything..." autocomplete="off" maxlength="2000">
+            <button id="collegeBotSend" class="cb-send" type="button" aria-label="Send message">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WIDGET SCRIPT
+     ═══════════════════════════════════════════════════ -->
+<script>
+(function () {
+    'use strict';
+
+    var API_URL  = "{% url 'dashboard:chat_api' %}";
+    var FAB      = document.getElementById('collegeBotFab');
+    var WIN      = document.getElementById('collegeBotWindow');
+    var HEADER   = document.getElementById('collegeBotHeader');
+    var MINIMIZE = document.getElementById('collegeBotMinimize');
+    var MSGS     = document.getElementById('collegeBotMessages');
+    var INPUT    = document.getElementById('collegeBotInput');
+    var SEND     = document.getElementById('collegeBotSend');
+    var TYPING   = document.getElementById('collegeBotTyping');
+
+    var isOpen = false;
+    var isDragging = false;
+    var dragOffX = 0, dragOffY = 0;
+    var isSending = false;
+
+    // ── Session ID ──
+    var sessionId = localStorage.getItem('cb_session_id');
+    if (!sessionId) {
+        sessionId = 'web_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+        localStorage.setItem('cb_session_id', sessionId);
+    }
+
+    function getCookie(name) {
+        var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return m ? m.pop() : '';
+    }
+    function escapeHtml(s) {
+        return String(s || '')
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function nowStr() {
+        return new Date().toLocaleTimeString('en-US',
+            { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // ── Open / Close ──
+    function openChat() {
+        isOpen = true;
+        FAB.classList.add('cb-hidden');
+        // Reset position to last-saved corner
+        var savedPos = localStorage.getItem('cb_corner');
+        if (savedPos) {
+            try {
+                var pos = JSON.parse(savedPos);
+                WIN.style.left   = pos.left   || 'auto';
+                WIN.style.right  = pos.right  || 'auto';
+                WIN.style.top    = pos.top    || 'auto';
+                WIN.style.bottom = pos.bottom || 'auto';
+            } catch (e) {}
+        }
+        WIN.classList.add('cb-open');
+        setTimeout(function () { INPUT.focus(); }, 500);
+    }
+    function closeChat() {
+        isOpen = false;
+        WIN.classList.remove('cb-open');
+        FAB.classList.remove('cb-hidden');
+    }
+
+    FAB.addEventListener('click', openChat);
+    MINIMIZE.addEventListener('click', closeChat);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isOpen) closeChat();
+    });
+
+    // ── Drag (pointer events = mouse + touch) ──
+    function startDrag(e) {
+        if (e.target.closest('button')) return;
+        isDragging = true;
+        var rect = WIN.getBoundingClientRect();
+        dragOffX = e.clientX - rect.left;
+        dragOffY = e.clientY - rect.top;
+        WIN.style.left   = rect.left + 'px';
+        WIN.style.top    = rect.top + 'px';
+        WIN.style.right  = 'auto';
+        WIN.style.bottom = 'auto';
+        WIN.style.transition = 'none';
+        try { HEADER.setPointerCapture(e.pointerId); } catch (x) {}
+        e.preventDefault();
+    }
+    function onDrag(e) {
+        if (!isDragging) return;
+        var x = e.clientX - dragOffX;
+        var y = e.clientY - dragOffY;
+        x = Math.max(8, Math.min(window.innerWidth  - WIN.offsetWidth  - 8, x));
+        y = Math.max(8, Math.min(window.innerHeight - WIN.offsetHeight - 8, y));
+        WIN.style.left = x + 'px';
+        WIN.style.top  = y + 'px';
+    }
+    function endDrag(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        WIN.style.transition = '';
+        // Snap to nearest corner
+        var rect = WIN.getBoundingClientRect();
+        var midX = rect.left + rect.width / 2;
+        var midY = rect.top  + rect.height / 2;
+        var snapRight  = midX > window.innerWidth  / 2;
+        var snapBottom = midY > window.innerHeight / 2;
+
+        var pos = {
+            left:   snapRight  ? 'auto' : '24px',
+            right:  snapRight  ? '24px' : 'auto',
+            top:    snapBottom ? 'auto' : '24px',
+            bottom: snapBottom ? '24px' : 'auto'
+        };
+        WIN.style.left   = pos.left;
+        WIN.style.right  = pos.right;
+        WIN.style.top    = pos.top;
+        WIN.style.bottom = pos.bottom;
+        localStorage.setItem('cb_corner', JSON.stringify(pos));
+    }
+    HEADER.addEventListener('pointerdown', startDrag);
+    HEADER.addEventListener('pointermove', onDrag);
+    HEADER.addEventListener('pointerup', endDrag);
+    HEADER.addEventListener('pointercancel', endDrag);
+
+    // ── Messages ──
+    function addMessage(text, role, source) {
+        var el = document.createElement('div');
+        el.className = 'cb-msg cb-' + role;
+        el.textContent = text;
+        var meta = document.createElement('span');
+        meta.className = 'cb-msg-meta';
+        meta.textContent = nowStr() + (source ? '  •  ' + source : '');
+        el.appendChild(meta);
+        MSGS.appendChild(el);
+        MSGS.scrollTop = MSGS.scrollHeight;
+    }
+    function showTyping() { TYPING.style.display = 'flex'; MSGS.scrollTop = MSGS.scrollHeight; }
+    function hideTyping() { TYPING.style.display = 'none'; }
+
+    // ── Send message ──
+    async function sendMessage() {
+        var msg = INPUT.value.trim();
+        if (!msg || isSending) return;
+
+        isSending = true;
+        SEND.disabled = true;
+        INPUT.value = '';
+
+        addMessage(msg, 'user');
+        showTyping();
+
+        var t0 = performance.now();
+        try {
+            var res = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({ message: msg, session_id: sessionId })
+            });
+            var raw = await res.text();
+            var ms = Math.round(performance.now() - t0);
+            hideTyping();
+
+            var data;
+            try { data = JSON.parse(raw); }
+            catch (e) {
+                addMessage('Sorry, the server returned an unexpected response.', 'bot', 'error');
+                return;
+            }
+
+            if (data.reply) {
+                var src = data.source || '';
+                if (src === 'fast_db') src = 'fast database';
+                else if (src.indexOf('_ai') !== -1) src = src.replace('_ai', ' AI');
+                addMessage(data.reply, 'bot', src + ' • ' + ms + 'ms');
+            } else if (data.error_message) {
+                addMessage(data.error_message, 'bot', 'error');
+            } else if (data.error) {
+                addMessage('Sorry, something went wrong. Please try again.', 'bot', 'error');
+            }
+        } catch (e) {
+            hideTyping();
+            addMessage('Network error — ' + e.message + '. Please check your connection.',
+                       'bot', 'error');
+        } finally {
+            isSending = false;
+            SEND.disabled = false;
+            INPUT.focus();
+        }
+    }
+
+    SEND.addEventListener('click', sendMessage);
+    INPUT.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+})();
+</script>

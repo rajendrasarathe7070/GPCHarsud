@@ -1,36 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8"><title>2FA Enabled</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
-  <style>
-    body { background: linear-gradient(135deg, #072b1e 0%, #0f3d2b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .auth-card { background: #fff; border-radius: 1.5rem; padding: 3rem; max-width: 500px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; }
-    .success { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #a3f307); display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 2.5rem; margin-bottom: 1.5rem; }
-    .backup { background: #f9fafb; padding: 1rem 1.5rem; border-radius: 0.75rem; text-align: left; font-family: monospace; }
-    .btn-dark-green { background: #052e20; color: #fff; border-radius: 0.75rem; padding: 0.9rem; font-weight: 600; text-decoration: none; display: block; }
-    .btn-dark-green:hover { background: #0a4a34; color: #fff; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2FA Enabled Successfully</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {font-family: 'Times New Roman', Times, serif;
+            /* COLLEGE BACKGROUND IMAGE - Replace URL */
+            background: 
+                        url('/static/images/clg1-2.jpeg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+        .auth-card { background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 40px; max-width: 550px; width: 90%; box-shadow: 0 15px 35px rgba(0,0,0,0.5); backdrop-filter: blur(10px); text-align: center; }
+        .success-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        .auth-card h2 { color: #1e293b; font-size: 1.8rem; margin-bottom: 10px; }
+        .auth-card p { color: #64748b; margin-bottom: 25px; }
+        
+        .backup-container { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 20px; text-align: left; margin-bottom: 30px; }
+        .backup-container strong { color: #ef4444; display: block; margin-bottom: 15px; font-size: 0.95rem; }
+        .backup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .backup-code { font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 1.1rem; color: #1e293b; background: white; padding: 8px; border-radius: 5px; text-align: center; border: 1px solid #e2e8f0; }
+        
+        .btn-dashboard { display: block; width: 100%; padding: 15px; background: #1e3c72; color: white; text-decoration: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; transition: 0.3s; }
+        .btn-dashboard:hover { background: #2a5298; transform: translateY(-2px); }
+    </style>
 </head>
 <body>
-  <div class="auth-card">
-    <div class="success"><i class="bi bi-check-lg"></i></div>
-    <h3 class="fw-bold mb-2">2FA Enabled Successfully!</h3>
-    <p class="text-muted mb-4">Save these backup codes in a safe place.</p>
+    <div class="auth-card">
+        <div class="success-icon"><i class="bi bi-check-lg"></i></div>
+        <h2>2FA Enabled Successfully!</h2>
+        <p>Your account is now secure. Please save these backup codes in a safe place. You can use them if you lose access to your authenticator app.</p>
 
-    <div class="backup mb-4">
-      <strong class="text-danger small">⚠️ SAVE THESE BACKUP CODES:</strong>
-      <ul class="mt-2 mb-0">
-        {% for c in backup_codes %}<li><code>{{ c }}</code></li>{% endfor %}
-      </ul>
+        <div class="backup-container">
+            <strong><i class="bi bi-exclamation-triangle-fill me-1"></i> SAVE THESE BACKUP CODES:</strong>
+            <div class="backup-grid">
+                {% for c in backup_codes %}
+                    <div class="backup-code">{{ c }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <a href="{% url 'dashboard:router' %}" class="btn-dashboard">
+            <i class="bi bi-grid-fill me-2"></i> Go to Dashboard
+        </a>
     </div>
-
-    <a href="{% url 'dashboard:router' %}" class="btn-dark-green text-center">
-      <i class="bi bi-grid-fill me-2"></i> Go to Dashboard
-    </a>
-  </div>
 </body>
 </html>

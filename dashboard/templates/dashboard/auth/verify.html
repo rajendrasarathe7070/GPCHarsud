@@ -1,45 +1,124 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8"><title>Verify 2FA</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
-  <style>
-    body { background: linear-gradient(135deg, #072b1e 0%, #0f3d2b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .auth-card { background: #fff; border-radius: 1.5rem; padding: 3rem; max-width: 440px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.4); text-align: center; }
-    .lock { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #a3f307, #10b981); display: inline-flex; align-items: center; justify-content: center; color: #072b1e; font-size: 2rem; margin-bottom: 1.5rem; }
-    .form-control-lg { border-radius: 0.75rem; padding: 1rem; border: 2px solid #e5e7eb; }
-    .form-control-lg:focus { border-color: #10b981; box-shadow: 0 0 0 0.25rem rgba(16,185,129,0.15); }
-    .btn-lime { background: #a3f307; color: #052e20; border-radius: 0.75rem; padding: 1rem; font-weight: 700; border: none; }
-    .btn-lime:hover { background: #8fd604; color: #052e20; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify 2FA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Times New Roman', Times, serif;
+            /* COLLEGE BACKGROUND IMAGE - Replace URL */
+            background: 
+                        url('/static/images/clg1-2.jpeg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+        .auth-container { display: flex; width: 95%; max-width: 900px; background: rgba(255, 255, 255, 0.099); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow: hidden; backdrop-filter: blur(8px); }
+        .info-panel { flex: 0 0 40%; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+        .info-panel i { font-size: 4rem; color: #4ade80; margin-bottom: 20px; }
+        .info-panel h2 { font-size: 1.8rem; margin-bottom: 15px; }
+        .info-panel p { line-height: 1.6; opacity: 0.9; }
+        .form-panel { flex: 1; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .form-panel h1 { font-size: 1.8rem; margin-bottom: 10px; color: #1e293b; }
+        .form-panel p { color: #64748b; margin-bottom: 30px; text-align: center; }
+        .code-input { width: 100%; max-width: 320px; padding: 15px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 2rem; text-align: center; letter-spacing: 10px; transition: 0.3s; font-weight: bold; color: #1e3c72; }
+        .code-input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+        
+        /* Button Styles */
+        .btn-verify { position: relative; width: 100%; max-width: 320px; padding: 15px; background: #1e3c72; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 25px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .btn-verify:hover:not(:disabled) { background: #2a5298; }
+        .btn-verify:disabled { background: #475569; cursor: not-allowed; }
+        
+        /* Loading Spinner */
+        .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; margin-right: 10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .btn-loading .spinner { display: block; }
+        .btn-loading .btn-text { display: none; }
+        .btn-loading .loading-text { display: block; }
+        .loading-text { display: none; }
+
+        .btn-cancel-link { margin-top: 20px; color: #ef4444; text-decoration: none; font-weight: 500; font-size: 0.95rem; background: none; border: none; cursor: pointer; }
+        .btn-cancel-link:hover { text-decoration: underline; }
+        .error-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 15px; border-radius: 5px; color: #991b1b; font-size: 0.9rem; margin-bottom: 20px; width: 100%; max-width: 320px; text-align: center; }
+
+        @media (max-width: 768px) { .auth-container { flex-direction: column; } .info-panel { padding: 30px; } }
+    </style>
 </head>
 <body>
-  <div class="auth-card">
-    <div class="lock"><i class="bi bi-shield-lock-fill"></i></div>
-    <h3 class="fw-bold mb-2">Verify 2FA</h3>
-    <p class="text-muted small mb-4">Enter the 6-digit code from your authenticator app</p>
+    <div class="auth-container">
+        <div class="info-panel">
+            <i class="bi bi-shield-lock-fill"></i>
+            <h2>Two-Factor Auth</h2>
+            <p>Open your authenticator app (Google Authenticator, Authy, etc.) to view your current 6-digit verification code.</p>
+        </div>
+        <div class="form-panel">
+            <h1>Verify Access</h1>
+            <p>Enter the 6-digit code from your app</p>
 
-    {% if messages %}
-      {% for m in messages %}<div class="alert alert-{{ m.tags }} small py-2">{{ m }}</div>{% endfor %}
-    {% endif %}
-    {% if form.non_field_errors %}<div class="alert alert-danger small">{{ form.non_field_errors.0 }}</div>{% endif %}
+            {% if messages %}
+                {% for m in messages %}<div class="error-box">{{ m }}</div>{% endfor %}
+            {% endif %}
+            {% if form.non_field_errors %}
+                <div class="error-box">{{ form.non_field_errors.0 }}</div>
+            {% endif %}
 
-    <form method="post">
-      {% csrf_token %}
-      {{ form.code }}
-      {% if form.code.errors %}<div class="text-danger small mt-1">{{ form.code.errors.0 }}</div>{% endif %}
-      <button type="submit" class="btn btn-lime w-100 mt-4"><i class="bi bi-check2-circle me-2"></i> Verify & Login</button>
-    </form>
+            <form method="post" id="verifyForm">
+                {% csrf_token %}
+                <!-- Math captcha removed. Pure 6 digit input -->
+                <input type="text" name="code" id="id_code" class="code-input" placeholder="••••••" maxlength="6" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*" required>
+                {% if form.code.errors %}<div class="error-box" style="margin-top: 15px;">{{ form.code.errors.0 }}</div>{% endif %}
+                
+                <button type="submit" class="btn-verify" id="submitBtn">
+                    <span class="spinner"></span>
+                    <span class="btn-text"><i class="bi bi-box-arrow-in-right me-2"></i> Verify & Login</span>
+                    <span class="loading-text">Verifying...</span>
+                </button>
+            </form>
 
-    <div class="mt-4">
-      <form method="post" action="{% url 'dashboard:totp_cancel' %}" class="d-inline">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-link text-danger small text-decoration-none"><i class="bi bi-x-circle"></i> Cancel Login</button>
-      </form>
+            <form method="post" action="{% url 'dashboard:totp_cancel' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-cancel-link"><i class="bi bi-x-circle me-1"></i> Cancel Login</button>
+            </form>
+        </div>
     </div>
-  </div>
+
+    <script>
+        const form = document.getElementById('verifyForm');
+        const input = document.getElementById('id_code');
+        const btn = document.getElementById('submitBtn');
+        let isSubmitting = false;
+
+        // Auto focus
+        input.focus();
+
+        // Auto-Submit Logic when 6 digits are entered
+        input.addEventListener('input', function() {
+            // Allow only numbers
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            if (this.value.length === 6 && !isSubmitting) {
+                submitForm();
+            }
+        });
+
+        // Handle manual submit
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!isSubmitting && input.value.length === 6) {
+                submitForm();
+            }
+        });
+
+        function submitForm() {
+            isSubmitting = true;
+            
+            // Change button to loading state
+            btn.classList.add('btn-loading');
+            btn.disabled = true;
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
 </body>
 </html>

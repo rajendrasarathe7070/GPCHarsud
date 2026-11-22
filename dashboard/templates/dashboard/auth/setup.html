@@ -1,52 +1,72 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8"><title>Setup 2FA</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
-  <style>
-    body { background: linear-gradient(135deg, #072b1e 0%, #0f3d2b 100%); min-height: 100vh; padding: 2rem; display: flex; align-items: center; justify-content: center; }
-    .auth-card { background: #fff; border-radius: 1.5rem; padding: 2.5rem; max-width: 620px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
-    .step { display: flex; gap: 1rem; padding: 1rem; border-radius: 0.75rem; background: #f9fafb; margin-bottom: 0.75rem; }
-    .step-num { width: 32px; height: 32px; border-radius: 50%; background: #a3f307; color: #052e20; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
-    .qr-img { max-width: 220px; border-radius: 1rem; padding: 0.5rem; background: #fff; border: 2px solid #e5e7eb; }
-    .secret-box { background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 0.5rem; font-family: monospace; letter-spacing: 0.1rem; }
-    .btn-lime { background: #a3f307; color: #052e20; border-radius: 0.75rem; padding: 0.9rem; font-weight: 700; border: none; }
-    .btn-lime:hover { background: #8fd604; color: #052e20; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Authenticator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {font-family: 'Times New Roman', Times, serif;
+            /* COLLEGE BACKGROUND IMAGE - Replace URL */
+            background: 
+                        url('/static/images/clg1-2.jpeg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+        .auth-container { display: flex; width: 95%; max-width: 1000px; background: rgba(255, 255, 255, 0.95); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow: hidden; backdrop-filter: blur(10px); }
+        .info-panel { flex: 0 0 40%; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .info-panel h2 { font-size: 2rem; margin-bottom: 20px; }
+        .step-list { list-style: none; margin-top: 20px; }
+        .step-list li { display: flex; align-items: flex-start; margin-bottom: 20px; font-size: 1.05rem; }
+        .step-list li i { color: #4ade80; margin-right: 15px; font-size: 1.2rem; margin-top: 2px; }
+        .form-panel { flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .form-panel h1 { font-size: 1.8rem; margin-bottom: 10px; color: #1e293b; }
+        .qr-img { max-width: 200px; border-radius: 10px; border: 2px solid #e2e8f0; padding: 10px; margin: 20px 0; }
+        .secret-box { background: #f1f5f9; padding: 10px 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem; letter-spacing: 2px; color: #334155; border: 1px dashed #cbd5e1; margin-bottom: 20px; }
+        .form-control { width: 100%; max-width: 300px; padding: 15px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 1.5rem; text-align: center; letter-spacing: 5px; transition: 0.3s; }
+        .form-control:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+        .btn-submit { width: 100%; max-width: 300px; padding: 15px; background: #1e3c72; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .btn-submit:hover { background: #2a5298; }
+        .error-text { color: #ef4444; font-size: 0.9rem; margin-top: 10px; }
+        @media (max-width: 768px) { .auth-container { flex-direction: column; } .info-panel { padding: 30px; text-align: center; } .step-list li { justify-content: center; } }
+    </style>
 </head>
 <body>
-  <div class="auth-card">
-    <h3 class="fw-bold mb-1"><i class="bi bi-phone text-success me-2"></i> Setup 2FA</h3>
-    <p class="text-muted small mb-4">Scan the QR code with Google Authenticator, Authy, or similar.</p>
+    <div class="auth-container">
+        <div class="info-panel">
+            <h2>Setup Authenticator</h2>
+            <p>Follow these simple steps to secure your account.</p>
+            <ul class="step-list">
+                <li><i class="bi bi-1-circle-fill"></i> <div><strong>Install App:</strong> Download Google Authenticator or Authy.</div></li>
+                <li><i class="bi bi-2-circle-fill"></i> <div><strong>Scan QR:</strong> Use the app to scan the code.</div></li>
+                <li><i class="bi bi-3-circle-fill"></i> <div><strong>Enter Code:</strong> Type the 6-digit code shown in the app.</div></li>
+            </ul>
+        </div>
+        <div class="form-panel">
+            <h1>Scan QR Code</h1>
+            <p style="color: #64748b; margin-bottom: 10px;">Scan with your authenticator app</p>
+            
+            {% if qr_data_url %}
+                <img src="{{ qr_data_url }}" class="qr-img" alt="QR Code">
+            {% endif %}
+            
+            <div class="text-center">
+                <small style="color: #64748b;">Or enter manually:</small>
+                <div class="secret-box">{{ secret }}</div>
+            </div>
 
-    <div class="step"><div class="step-num">1</div><div><strong>Install</strong> an authenticator app.</div></div>
-    <div class="step"><div class="step-num">2</div><div><strong>Scan</strong> the QR code.</div></div>
-    <div class="step"><div class="step-num">3</div><div><strong>Enter</strong> the 6-digit code.</div></div>
+            {% if form.non_field_errors %}<div class="error-text">{{ form.non_field_errors.0 }}</div>{% endif %}
 
-    {% if qr_data_url %}
-      <div class="text-center my-4"><img src="{{ qr_data_url }}" class="qr-img"></div>
-    {% endif %}
-
-    <div class="text-center mb-4">
-      <small class="text-muted">Or enter manually:</small>
-      <div class="secret-box mt-1">{{ secret }}</div>
+            <form method="post" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                {% csrf_token %}
+                <input type="text" name="code" id="id_code" class="form-control" placeholder="000000" maxlength="6" autocomplete="off" required>
+                {% if form.code.errors %}<div class="error-text">{{ form.code.errors.0 }}</div>{% endif %}
+                <button type="submit" class="btn-submit"><i class="bi bi-check-circle me-2"></i> Verify & Enable</button>
+            </form>
+        </div>
     </div>
-
-    {% if messages %}
-      {% for m in messages %}<div class="alert alert-{{ m.tags }} small">{{ m }}</div>{% endfor %}
-    {% endif %}
-    {% if form.non_field_errors %}<div class="alert alert-danger small">{{ form.non_field_errors.0 }}</div>{% endif %}
-
-    <form method="post">
-      {% csrf_token %}
-      <label class="form-label small fw-semibold text-muted">ENTER 6-DIGIT CODE</label>
-      {{ form.code }}
-      {% if form.code.errors %}<div class="text-danger small mt-1">{{ form.code.errors.0 }}</div>{% endif %}
-      <button type="submit" class="btn btn-lime w-100 mt-3"><i class="bi bi-check2-circle me-1"></i> Enable 2FA</button>
-    </form>
-  </div>
+    <script>
+        // Auto focus on input
+        document.getElementById('id_code').focus();
+    </script>
 </body>
 </html>

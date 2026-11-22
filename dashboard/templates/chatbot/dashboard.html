@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>College AI Bot — Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background: #f4f6fa;
+                font-family: 'Times New Roman', Times, serif !important; }
+        .app-navbar {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,.15);
+        }
+        .nav-pills-clean { background: #fff; border-radius: 12px; padding: .5rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+        .nav-pills-clean .nav-link { color: #495057; font-weight: 500; border-radius: 8px; padding: .6rem 1rem; }
+        .nav-pills-clean .nav-link i { margin-right: .35rem; }
+        .nav-pills-clean .nav-link.active { background: #3b82f6; color: #fff; }
+        .nav-pills-clean .nav-link .count-badge {
+            background: rgba(0,0,0,.1); color: inherit; padding: .1rem .45rem;
+            border-radius: 10px; font-size: .75rem; margin-left: .35rem;
+        }
+        .nav-pills-clean .nav-link.active .count-badge { background: rgba(255,255,255,.3); }
+
+        .section-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); margin-bottom: 1.5rem; }
+        .section-header { padding: 1.1rem 1.5rem; border-bottom: 1px solid #e9ecef; background: #fafbfc; }
+        .section-header h2 { font-size: 1.1rem; font-weight: 700; margin: 0; color: #1e293b; }
+        .section-header h2 i { color: #3b82f6; margin-right: .5rem; }
+        .section-header p { color: #64748b; font-size: .85rem; margin: .15rem 0 0; }
+        .section-body { padding: 1.5rem; }
+
+        .stat-card-modern {
+            background: #fff; border-radius: 12px; padding: 1.25rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,.06); border-left: 4px solid #3b82f6;
+            transition: transform .15s, box-shadow .15s; height: 100%;
+        }
+        .stat-card-modern:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.1); }
+        .stat-card-modern.success { border-left-color: #10b981; }
+        .stat-card-modern.warning { border-left-color: #f59e0b; }
+        .stat-card-modern.info    { border-left-color: #06b6d4; }
+        .stat-label { color: #64748b; font-size: .82rem; font-weight: 500; }
+        .stat-value { font-size: 1.9rem; font-weight: 700; line-height: 1; margin: .4rem 0 .3rem; }
+        .stat-icon { font-size: 1.6rem; opacity: .7; }
+
+        .chat-container {
+            height: 500px; overflow-y: auto; background: #f8f9fa;
+            border: 1px solid #e9ecef; border-radius: 10px; padding: 1rem;
+        }
+        .bubble {
+            max-width: 75%; padding: .6rem .9rem; border-radius: 12px;
+            font-size: .92rem; word-wrap: break-word; white-space: pre-wrap;
+        }
+        .bubble.user { background: #3b82f6; color: #fff; border-bottom-right-radius: 3px; }
+        .bubble.bot { background: #fff; border: 1px solid #e5e7eb; border-bottom-left-radius: 3px; }
+        .bubble .src { font-size: .7rem; opacity: .65; margin-top: .3rem; }
+
+        .empty-state { text-align: center; padding: 3rem 1rem; color: #94a3b8; }
+        .empty-state i { font-size: 3rem; opacity: .5; margin-bottom: 1rem; }
+
+        .table-clean { margin-bottom: 0; }
+        .table-clean thead th { background: #f8f9fa; font-weight: 600; font-size: .82rem; color: #475569; text-transform: uppercase; letter-spacing: .3px; border-bottom: 2px solid #e2e8f0; }
+        .table-clean tbody td { vertical-align: middle; font-size: .9rem; }
+
+        .toast-container { z-index: 9999; }
+        .bulk-dropzone {
+            border: 2px dashed #cbd5e1; border-radius: 10px; padding: 1rem;
+            transition: border-color .2s, background .2s;
+        }
+        .bulk-dropzone:hover { border-color: #3b82f6; background: #f8fbff; }
+    </style>
+</head>
+<body>
+<nav class="navbar  navbar-expand-lg  " id="navbar" style="background:transparent; padding: 0% !important;">
+    {% include 'navbar.html' %}
+</nav>
+
+
+<!-- Top Navbar -->
+ 
+
+<!-- Toast container -->
+<div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+    <div id="toastContainer"></div>
+</div>
+
+<main class="container-xxl py-4">
+
+    <!-- Nav Pills -->
+    <ul class="nav nav-pills nav-fill nav-pills-clean mb-4" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-overview" type="button">
+            <i class="bi bi-speedometer2"></i> Overview
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-chat" type="button">
+            <i class="bi bi-chat-dots"></i> Bot Test
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-faq" type="button">
+            <i class="bi bi-book"></i> FAQs <span class="count-badge">{{ faqs|length }}</span>
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-restrict" type="button">
+            <i class="bi bi-shield-lock"></i> Restrictions <span class="count-badge">{{ restricted|length }}</span>
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-logs" type="button">
+            <i class="bi bi-clock-history"></i> Logs <span class="count-badge">{{ chat_logs|length }}</span>
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-leads" type="button">
+            <i class="bi bi-people"></i> Leads <span class="count-badge">{{ leads|length }}</span>
+        </button></li>
+         <li class="nav-item"><button class="nav-link"  type="button" onclick="window.location.href='.' ">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- ══════════ TAB 1: OVERVIEW ══════════ -->
+        <div class="tab-pane fade show active" id="tab-overview">
+             
+
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card-modern">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="stat-label">कुल सवाल</span>
+                            <i class="bi bi-chat-square-text stat-icon text-primary"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.total }}</div>
+                        <div class="small text-muted">आज: {{ stats.today }} | 7d: {{ stats.week }}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card-modern success">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="stat-label">Success Rate</span>
+                            <i class="bi bi-check-circle stat-icon text-success"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.success_pct }}%</div>
+                        <div class="small text-muted">✓ {{ stats.success }} ✗ {{ stats.failed }}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card-modern info">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="stat-label">Fast DB Hits</span>
+                            <i class="bi bi-lightning-charge stat-icon text-info"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.fast_pct }}%</div>
+                        <div class="small text-muted">{{ stats.fast_hits }} / {{ stats.total }}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card-modern warning">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <span class="stat-label">Avg Response</span>
+                            <i class="bi bi-stopwatch stat-icon text-warning"></i>
+                        </div>
+                        <div class="stat-value">{{ stats.avg_ms }}<small class="fs-6">ms</small></div>
+                        <div class="small text-muted">AI: {{ stats.ai_hits }} | Blocked: {{ stats.restricted_hits }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-7">
+                    <div class="section-card h-100 mb-0">
+                        <div class="section-header">
+                            <h2><i class="bi bi-lightning-fill"></i>Quick Actions</h2>
+                            <p>तेज़ी से काम शुरू करें</p>
+                        </div>
+                        <div class="section-body">
+                            <div class="row g-2">
+                                <div class="col-6"><button class="btn btn-outline-primary w-100 py-3" onclick="showTab('#tab-chat')"><i class="bi bi-chat-dots fs-5"></i><br><small>Bot Test</small></button></div>
+                                <div class="col-6"><button class="btn btn-outline-success w-100 py-3" onclick="showTab('#tab-faq')"><i class="bi bi-plus-circle fs-5"></i><br><small>FAQ जोड़ें</small></button></div>
+                                <div class="col-6"><button class="btn btn-outline-warning w-100 py-3" onclick="showTab('#tab-faq')"><i class="bi bi-cloud-upload fs-5"></i><br><small>Bulk Import</small></button></div>
+                                <div class="col-6"><button class="btn btn-outline-danger w-100 py-3" onclick="showTab('#tab-restrict')"><i class="bi bi-shield-lock fs-5"></i><br><small>Restrictions</small></button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="section-card h-100 mb-0">
+                        <div class="section-header">
+                            <h2><i class="bi bi-heart-pulse"></i>Health</h2>
+                            <p>सिस्टम की स्थिति</p>
+                        </div>
+                        <div class="section-body p-0">
+                            <table class="table table-clean mb-0">
+                                <tbody>
+                                    <tr><td><i class="bi bi-database text-primary"></i> Database</td><td class="text-end"><span class="badge bg-{{ health.db|yesno:'success,danger' }}">{{ health.db }}</span></td></tr>
+                                    <tr><td><i class="bi bi-cpu text-primary"></i> AI Provider</td><td class="text-end"><span class="badge bg-info">{{ ai_provider }}</span></td></tr>
+                                    <tr><td><i class="bi bi-box text-primary"></i> Model</td><td class="text-end"><code class="small">{{ ai_model }}</code></td></tr>
+                                    <tr><td><i class="bi bi-lightning-charge text-primary"></i> FAQ Cache</td><td class="text-end"><span class="badge bg-secondary">{{ stats.cache_size }}</span></td></tr>
+                                    <tr><td><i class="bi bi-book text-primary"></i> Total FAQs</td><td class="text-end"><strong>{{ faqs|length }}</strong></td></tr>
+                                    <tr><td><i class="bi bi-people text-primary"></i> Total Leads</td><td class="text-end"><strong>{{ leads|length }}</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ TAB 2: BOT TEST ══════════ -->
+        <div class="tab-pane fade" id="tab-chat">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-chat-dots"></i>लाइव बॉट टेस्टिंग</h2>
+                    <p>यहाँ से बॉट को टेस्ट करें — reply में source (fast_db / AI provider) दिखेगा</p>
+                </div>
+                <div class="section-body">
+                    <div id="chatBox" class="chat-container mb-3">
+                        <div class="empty-state">
+                            <i class="bi bi-chat-square-dots"></i>
+                            <p class="mb-0">कोई भी सवाल पूछकर शुरू करें</p>
+                            <small>जैसे: "B.Tech की फीस कितनी है?"</small>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-lg">
+                        <input id="chatInput" type="text" class="form-control" placeholder="यहाँ सवाल लिखें..." autocomplete="off">
+                        <button class="btn btn-primary px-4" onclick="sendMsg()"><i class="bi bi-send"></i> भेजें</button>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2 small text-muted">
+                        <span>Session: <code id="sidDisplay"></code></span>
+                        <button class="btn btn-sm btn-link p-0 text-muted" onclick="clearChat()"><i class="bi bi-trash"></i> Clear chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ TAB 3: FAQs ══════════ -->
+        <div class="tab-pane fade" id="tab-faq">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-book"></i>ज्ञान आधार (Knowledge Base)</h2>
+                    <p>FAQ जोड़ें, AI से bulk import करें, या edit/delete करें</p>
+                </div>
+            </div>
+
+            <!-- Add -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-plus-circle"></i>नया FAQ जोड़ें</h2>
+                </div>
+                <div class="section-body">
+                    <form method="POST" class="row g-2">{% csrf_token %}
+                        <input type="hidden" name="action" value="add">
+                        <div class="col-md-4">
+                            <input type="text" name="question" class="form-control" placeholder="सवाल" required>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="answer" class="form-control" rows="1" placeholder="जवाब" required></textarea>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success w-100"><i class="bi bi-check"></i> सेव</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bulk Import -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-cloud-upload"></i>AI Bulk Import</h2>
+                    <p>कोई भी format (paragraph, mixed, messy) — AI खुद Q&A बनाएगा</p>
+                </div>
+                <div class="section-body">
+                    <form method="POST" enctype="multipart/form-data" id="bulkForm">{% csrf_token %}
+                        <input type="hidden" name="action" value="bulk_upload">
+                        <div class="bulk-dropzone mb-3">
+                            <label class="form-label small mb-1"><i class="bi bi-file-earmark-text"></i> TXT / CSV फाइल:</label>
+                            <input type="file" name="bulk_file" class="form-control" accept=".txt,.csv">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small mb-1"><i class="bi bi-textarea-t"></i> या Raw Text:</label>
+                            <textarea name="bulk_text" class="form-control" rows="6"
+                                placeholder="यहाँ कुछ भी paste करें — paragraph, mixed, messy सब चलेगा...&#10;&#10;जैसे: Government Polytechnic Harsud, established 1985. 5 branches: CSE, Civil, Mech, EE, EC. B.Tech fees 50000/year. Hostel 20000/year."></textarea>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button name="preview" value="1" class="btn btn-outline-secondary"><i class="bi bi-eye"></i> Preview</button>
+                            <button class="btn btn-warning"><i class="bi bi-magic"></i> AI से Import</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            {% if bulk_preview %}
+            <div class="section-card border-warning">
+                <div class="section-header bg-warning-subtle">
+                    <h2><i class="bi bi-eye"></i>Preview <span class="badge bg-dark ms-2">{{ bulk_preview.method|upper }}</span></h2>
+                    <p>{{ bulk_preview.total }} pairs मिले — नीचे पहले 10 दिख रहे हैं</p>
+                </div>
+                <div class="section-body p-0">
+                    {% if bulk_preview.first_10 %}
+                    <table class="table table-clean mb-0">
+                        <thead><tr><th>#</th><th>Question</th><th>Answer</th></tr></thead>
+                        <tbody>
+                            {% for p in bulk_preview.first_10 %}
+                            <tr><td>{{ forloop.counter }}</td><td>{{ p.q|truncatechars:60 }}</td><td>{{ p.a|truncatechars:80 }}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="p-3 bg-light small">
+                        <i class="bi bi-info-circle"></i> अब ऊपर वही text दोबारा paste करके <strong>AI से Import</strong> दबाएँ।
+                    </div>
+                    {% else %}
+                    <div class="p-4 text-center text-muted"><i class="bi bi-exclamation-triangle fs-3"></i><br>कोई Q&A नहीं मिला</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- List -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-list-ul"></i>सभी FAQs <span class="badge bg-secondary">{{ faqs|length }}</span></h2>
+                </div>
+                <div class="section-body p-0" style="max-height:520px;overflow-y:auto">
+                    {% if faqs %}
+                    <table class="table table-clean table-hover mb-0">
+                        <thead class="sticky-top"><tr>
+                            <th style="width:35%">सवाल</th>
+                            <th style="width:47%">जवाब</th>
+                            <th style="width:18%">Action</th>
+                        </tr></thead>
+                        <tbody>
+                        {% for faq in faqs %}
+                        <tr>
+                            <form method="POST">{% csrf_token %}
+                                <input type="hidden" name="faq_id" value="{{ faq.id }}">
+                                <td><input name="question" value="{{ faq.question }}" class="form-control form-control-sm border-0 bg-transparent"></td>
+                                <td><textarea name="answer" class="form-control form-control-sm border-0 bg-transparent" rows="2">{{ faq.answer }}</textarea></td>
+                                <td class="text-end">
+                                    <button name="action" value="edit" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
+                                    <button name="action" value="delete" class="btn btn-sm btn-danger" onclick="return confirm('पक्का delete करें?')"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty-state"><i class="bi bi-journal-x"></i><p class="mb-0">कोई FAQ नहीं है — ऊपर से जोड़ें</p></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ TAB 4: RESTRICTIONS ══════════ -->
+        <div class="tab-pane fade" id="tab-restrict">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-shield-lock"></i>Restrictions</h2>
+                    <p>प्रतिबंधित keywords — इन वाले सवालों पर बॉट तुरंत मना कर देगा (API call नहीं होगी)</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-plus-circle"></i>नई Restriction जोड़ें</h2>
+                </div>
+                <div class="section-body">
+                    <form method="POST" class="row g-2">{% csrf_token %}
+                        <input type="hidden" name="action" value="add_restricted">
+                        <div class="col-md-5"><input name="keyword" class="form-control" placeholder="Keyword (जैसे: राजनीति)" required></div>
+                        <div class="col-md-4"><input name="category" class="form-control" placeholder="Category" value="general"></div>
+                        <div class="col-md-3"><button class="btn btn-danger w-100"><i class="bi bi-shield-plus"></i> जोड़ें</button></div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-list-ul"></i>Active Restrictions <span class="badge bg-danger">{{ restricted|length }}</span></h2>
+                </div>
+                <div class="section-body p-0">
+                    {% if restricted %}
+                    <table class="table table-clean table-hover mb-0">
+                        <thead><tr><th>Keyword</th><th>Category</th><th class="text-end">Action</th></tr></thead>
+                        <tbody>
+                        {% for r in restricted %}
+                        <tr>
+                            <td><code>{{ r.keyword }}</code></td>
+                            <td><span class="badge bg-secondary">{{ r.category }}</span></td>
+                            <td class="text-end">
+                                <form method="POST" class="d-inline">{% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_restricted">
+                                    <input type="hidden" name="rid" value="{{ r.id }}">
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty-state"><i class="bi bi-shield"></i><p class="mb-0">कोई restriction नहीं</p></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ TAB 5: LOGS ══════════ -->
+        <div class="tab-pane fade" id="tab-logs">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-clock-history"></i>Chat Logs</h2>
+                    <p>हाल के सभी सवाल-जवाब — source और response time के साथ</p>
+                </div>
+                <div class="section-body p-0" style="max-height:600px;overflow-y:auto">
+                    {% if chat_logs %}
+                    <table class="table table-clean table-hover mb-0">
+                        <thead class="sticky-top"><tr>
+                            <th>Time</th><th>Question</th><th>Answer</th><th>Source</th><th class="text-end">ms</th>
+                        </tr></thead>
+                        <tbody>
+                        {% for log in chat_logs %}
+                        <tr class="{% if not log.success %}table-danger{% endif %}">
+                            <td class="small text-nowrap text-muted">{{ log.created_at|date:"d M H:i" }}</td>
+                            <td class="small">{{ log.question|truncatechars:50 }}</td>
+                            <td class="small">{{ log.answer|truncatechars:70 }}</td>
+                            <td>
+                                {% if log.source == 'fast_db' %}<span class="badge bg-info">fast_db</span>
+                                {% elif 'gemini' in log.source %}<span class="badge bg-primary">gemini</span>
+                                {% elif 'deepseek' in log.source %}<span class="badge bg-success">deepseek</span>
+                                {% elif 'openrouter' in log.source %}<span class="badge bg-purple" style="background:#8b5cf6">openrouter</span>
+                                {% elif log.source == 'restricted' %}<span class="badge bg-danger">blocked</span>
+                                {% else %}<span class="badge bg-secondary">{{ log.source }}</span>{% endif %}
+                            </td>
+                            <td class="small text-end text-muted">{{ log.response_ms }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty-state"><i class="bi bi-clock"></i><p class="mb-0">अभी कोई log नहीं</p></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ TAB 6: LEADS ══════════ -->
+        <div class="tab-pane fade" id="tab-leads">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="bi bi-people"></i>Student Leads</h2>
+                    <p>बॉट के द्वारा collect किए गए छात्र — DB + student_leads.csv दोनों में save</p>
+                </div>
+                <div class="section-body p-0">
+                    {% if leads %}
+                    <table class="table table-clean table-hover mb-0">
+                        <thead><tr><th>नाम</th><th>मोबाइल</th><th>कोर्स</th><th>तारीख</th></tr></thead>
+                        <tbody>
+                        {% for lead in leads %}
+                        <tr>
+                            <td><strong>{{ lead.name }}</strong></td>
+                            <td><a href="tel:{{ lead.phone }}">{{ lead.phone }}</a></td>
+                            <td><span class="badge bg-primary-subtle text-primary-emphasis">{{ lead.course }}</span></td>
+                            <td class="small text-muted">{{ lead.created_at|date:"d M Y, H:i" }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty-state"><i class="bi bi-person-x"></i><p class="mb-0">अभी कोई lead नहीं</p></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+{{ toast|json_script:"server-toast" }}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+function showToast(type, title, message, delay) {
+    delay = delay || 5000;
+    const bg = {success:'text-bg-success', error:'text-bg-danger', warning:'text-bg-warning', info:'text-bg-info'}[type] || 'text-bg-secondary';
+    const icon = {success:'check-circle-fill', error:'exclamation-circle-fill', warning:'exclamation-triangle-fill', info:'info-circle-fill'}[type] || 'info-circle';
+    const id = 'toast-' + Date.now() + Math.random().toString(36).slice(2, 5);
+    const html = `
+        <div id="${id}" class="toast align-items-center ${bg} border-0 mb-2 shadow" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-${icon} me-2"></i>
+                    <strong>${escapeHtml(title || '')}</strong>
+                    ${message ? '<div class="small mt-1">' + escapeHtml(message) + '</div>' : ''}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>`;
+    document.getElementById('toastContainer').insertAdjacentHTML('beforeend', html);
+    const el = document.getElementById(id);
+    new bootstrap.Toast(el, {delay: delay}).show();
+    el.addEventListener('hidden.bs.toast', () => el.remove());
+}
+
+// Server-side toast (Django session से)
+(function() {
+    const el = document.getElementById('server-toast');
+    if (!el) return;
+    try {
+        const t = JSON.parse(el.textContent);
+        if (t && t.title) showToast(t.type || 'info', t.title, t.message || '', 6000);
+    } catch(e) {}
+})();
+
+function escapeHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ═══════════════════════════════════════════════════════
+// TAB HASH + BUTTONS
+// ═══════════════════════════════════════════════════════
+function showTab(sel) {
+    const btn = document.querySelector('[data-bs-toggle="pill"][data-bs-target="' + sel + '"]');
+    if (btn) bootstrap.Tab.getOrCreateInstance(btn).show();
+}
+document.querySelectorAll('[data-bs-toggle="pill"]').forEach(btn => {
+    btn.addEventListener('shown.bs.tab', e => history.replaceState(null, '', e.target.dataset.bsTarget));
+});
+window.addEventListener('DOMContentLoaded', () => {
+    const h = location.hash;
+    if (h && document.querySelector('[data-bs-target="' + h + '"]')) showTab(h);
+});
+
+// ═══════════════════════════════════════════════════════
+// CHAT
+// ═══════════════════════════════════════════════════════
+const CHAT_URL = "{% url 'dashboard:chat_api' %}";
+const chatBox = document.getElementById('chatBox');
+const chatInput = document.getElementById('chatInput');
+const sidDisplay = document.getElementById('sidDisplay');
+
+let sessionId = localStorage.getItem('bot_session_id');
+if (!sessionId) {
+    sessionId = 'test_' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem('bot_session_id', sessionId);
+}
+if (sidDisplay) sidDisplay.textContent = sessionId;
+
+function getCookie(name) {
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : '';
+}
+
+function addBubble(text, role, source) {
+    const hint = chatBox.querySelector('.empty-state');
+    if (hint) hint.remove();
+    const wrap = document.createElement('div');
+    wrap.className = 'd-flex mb-2 ' + (role === 'user' ? 'justify-content-end' : 'justify-content-start');
+    const b = document.createElement('div');
+    b.className = 'bubble ' + role;
+    b.innerHTML = escapeHtml(text);
+    if (source) b.innerHTML += '<div class="src"><i class="bi bi-cpu"></i> ' + escapeHtml(source) + '</div>';
+    wrap.appendChild(b);
+    chatBox.appendChild(wrap);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function addLoader() {
+    const w = document.createElement('div');
+    w.className = 'd-flex mb-2 justify-content-start';
+    w.innerHTML = '<div class="bubble bot"><span class="spinner-border spinner-border-sm me-1"></span> सोच रहा है...</div>';
+    chatBox.appendChild(w);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return w;
+}
+
+async function sendMsg() {
+    const msg = (chatInput.value || '').trim();
+    if (!msg) return;
+
+    addBubble(msg, 'user');
+    chatInput.value = '';
+    const loader = addLoader();
+    const t0 = performance.now();
+
+    try {
+        const res = await fetch(CHAT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken')},
+            credentials: 'same-origin',
+            body: JSON.stringify({message: msg, session_id: sessionId}),
+        });
+        const raw = await res.text();
+        const ms = Math.round(performance.now() - t0);
+        loader.remove();
+
+        let data;
+        try { data = JSON.parse(raw); }
+        catch (e) {
+            console.error('Non-JSON:', res.status, raw.slice(0, 500));
+            showToast('error', 'सर्वर त्रुटि', 'HTTP ' + res.status);
+            addBubble('सर्वर से गलत जवाब आया (HTTP ' + res.status + ')', 'bot', 'error');
+            return;
+        }
+
+        // Error toast for known errors
+        if (data.error_code) {
+            showToast('error', data.error_code, data.error_message || data.reply);
+        }
+
+        // Rate limit → warning
+        if (res.status === 429) {
+            showToast('warning', 'बहुत जल्दी सवाल', '1 मिनट रुकें');
+        }
+
+        addBubble(data.reply || data.error || '...', 'bot', (data.source || 'error') + ' • ' + ms + 'ms');
+    } catch (e) {
+        loader.remove();
+        showToast('error', 'नेटवर्क त्रुटि', e.message);
+        addBubble('नेटवर्क error: ' + e.message, 'bot', 'error');
+    }
+}
+
+if (chatInput) chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); sendMsg(); }
+});
+
+function clearChat() {
+    chatBox.innerHTML = '<div class="empty-state"><i class="bi bi-chat-square-dots"></i><p class="mb-0">चैट clear — नया सवाल पूछें</p></div>';
+}
+
+// ═══════════════════════════════════════════════════════
+// BULK FORM SPINNER
+// ═══════════════════════════════════════════════════════
+const bulkForm = document.getElementById('bulkForm');
+if (bulkForm) {
+    bulkForm.addEventListener('submit', function(e) {
+        const isPreview = e.submitter && e.submitter.name === 'preview';
+        showToast('info', isPreview ? 'Preview बन रहा है...' : 'AI प्रोसेस कर रहा है...', 'कृपया 10-30 सेकंड रुकें', 10000);
+        this.querySelectorAll('button').forEach(b => { b.disabled = true; });
+    });
+}
+
+// Auto-dismiss server toasts after 6s (already handled in showToast, but OK)
+</script>
+</body>
+</html>

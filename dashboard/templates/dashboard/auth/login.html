@@ -1,53 +1,310 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8"><title>Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'dashboard/css/spark-style.css' %}">
-  <style>
-    body { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .auth-card { background: #fff; border-radius: 1.5rem; padding: 3rem; width: 100%; max-width: 440px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
-    .brand-icon { width: 60px; height: 60px; border-radius: 1rem; background: linear-gradient(135deg, #a3f307, #10b981); display: flex; align-items: center; justify-content: center; color: #072b1e; font-size: 1.8rem; margin: 0 auto 1rem; }
-    .form-control-lg { border-radius: 0.75rem; padding: 0.9rem 1.1rem; border: 1.5px solid #e5e7eb; }
-    .form-control-lg:focus { border-color: #10b981; box-shadow: 0 0 0 0.25rem rgba(16,185,129,0.15); }
-    .btn-login {    border-radius: 0.75rem; padding: 0.9rem; font-weight: 600; border: none; }
-    /* .btn-login:hover { background: #0a4a34; color: #fff; } */
-    .error-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0.5rem; color: #991b1b; font-size: 0.9rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* ================= GLOBAL & BACKGROUND ================= */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+           font-family: 'Times New Roman', Times, serif;
+            /* COLLEGE BACKGROUND IMAGE - Replace URL */
+            background: 
+                        url('/static/images/clg1-2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* ================= MAIN LAYOUT ================= */
+        .auth-container {
+            display: flex;
+            width: 95%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.099);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        /* ================= SIDE INSTRUCTIONS PANEL ================= */
+        .info-panel {
+            flex: 0 0 40%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-panel h2 { font-size: 2rem; margin-bottom: 20px; font-weight: 600; }
+        .info-panel ul { list-style: none; }
+        .info-panel li { margin-bottom: 15px; font-size: 1rem; line-height: 1.5; display: flex; align-items: flex-start; }
+        .info-panel li::before { content: '✓'; margin-right: 10px; color: #4ade80; font-weight: bold; }
+
+        /* ================= FORM PANEL ================= */
+        .form-panel {
+            flex: 1;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form-panel h1 { font-size: 2rem; margin-bottom: 10px; color: #1e293b; }
+        .subtitle { color: #64748b; margin-bottom: 30px; font-size: 0.95rem; }
+
+        /* ================= FORM ELEMENTS ================= */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #334155; font-size: 0.9rem; }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+        .form-control:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+        
+        /* Error Box */
+        .error-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 15px; border-radius: 5px; color: #991b1b; font-size: 0.9rem; margin-bottom: 20px; }
+
+        /* ================= MATH CAPTCHA STYLING ================= */
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8fafc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .captcha-question { font-weight: bold; font-size: 1.1rem; color: #1e293b; letter-spacing: 1px; }
+        .captcha-box .form-control { width: 80px; text-align: center; font-weight: bold; padding: 8px; }
+
+        /* ================= HOLD TO SUBMIT BUTTON ================= */
+        .btn-hold {
+            position: relative;
+            width: 100%;
+            padding: 15px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .btn-hold:hover:not(:disabled) { background: #2a5298; }
+        
+        /* Progress bar overlay animation */
+        .btn-hold .progress-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 0%;
+            background: rgba(74, 222, 128, 0.4);
+            z-index: 1;
+            transition: width 0.1s linear;
+            pointer-events: none;
+        }
+        .btn-hold span { position: relative; z-index: 2; }
+        
+        /* State when button is disabled (during hold) */
+        .btn-hold:disabled { cursor:wait; background: #475569; }
+
+        /* Back Button */
+        .btn-back { display: block; text-align: center; margin-top: 15px; color: #64748b; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .btn-back:hover { color: #1e3c72; text-decoration: underline; }
+
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (max-width: 768px) {
+            .auth-container { flex-direction: column; width: 90%; }
+            .info-panel { flex: none; padding: 30px; text-align: center; }
+            .info-panel li { justify-content: center; }
+            .form-panel { padding: 30px 20px; }
+        }
+    </style>
 </head>
-<body   >
-  <div class="auth-card">
-    <div class="brand-icon"> <img class="rounded-3 " height="50" width="50" src="{% static 'logo/gpch.ico' %}" alt=""> </div>
-       
-    <h2 class="fw-bold text-center mb-1">GPC Harsud</h2>
-    <p class="text-muted text-center small mb-4">Sign in to continue</p>
+<body>
 
-    {% if messages %}
-      {% for m in messages %}<div class="alert alert-{{ m.tags }} small py-2">{{ m }}</div>{% endfor %}
-    {% endif %}
-    {% if form.non_field_errors %}
-      <div class="error-box mb-3"><i class="bi bi-exclamation-circle me-1"></i> {{ form.non_field_errors.0 }}</div>
-    {% endif %}
+    <div class="auth-container">
+        <!-- LEFT SIDE: INSTRUCTIONS -->
+        <div class="info-panel">
+            <h2>Welcome to GPCH </h2>
+            <p style="margin-bottom: 20px; opacity: 0.8;">Please follow these instructions to securely access your account.</p>
+            <ul>
+                <li><strong>Enter Credentials:</strong> Provide your official username and password.</li>
+                <li><strong>Solve Math Captcha:</strong> Prove you are human by solving a simple addition.</li>
+                <li><strong>Hold to Login:</strong> Press and hold the login button for 2 seconds to verify you are not a bot.</li>
+                <li><strong>2FA Ready:</strong> After this step, you will be asked for a 2FA token.</li>
+            </ul>
+        </div>
 
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}">
-      <div class="mb-3">
-        <label class="form-label small fw-semibold text-muted">USERNAME</label>
-        {{ form.username }}
-        {% if form.username.errors %}<div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>{% endif %}
-      </div>
-      <div class="mb-4">
-        <label class="form-label small fw-semibold text-muted">PASSWORD</label>
-        {{ form.password }}
-        {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>{% endif %}
-      </div>
-      <button type="submit" class="btn btn-outline-success btn-login w-100"><i class="bi bi-shield-lock me-2"></i> Continue to 2FA</button>
-        <button type="button" onclick="window.location.href='/' " class="btn btn-outline-danger  btn-login w-100 my-3"><i class="bi bi-house-fill me-2"></i> Back To Home </button>
-    </form>
-    <p class="text-center text-muted small mt-4 mb-0"><i class="bi bi-info-circle"></i> 2FA is mandatory for all users.</p>
-  </div>
+        <!-- RIGHT SIDE: LOGIN FORM -->
+        <div class="form-panel">
+            <h1> Login</h1>
+            <p class="subtitle">Please enter your credentials to continue.</p>
+
+            {% if messages %}
+                {% for m in messages %}<div class="error-box">{{ m }}</div>{% endfor %}
+            {% endif %}
+            {% if form.non_field_errors %}
+                <div class="error-box"><i class="bi bi-exclamation-circle me-1"></i> {{ form.non_field_errors.0 }}</div>
+            {% endif %}
+
+            <form method="post" id="loginForm">
+                {% csrf_token %}
+                
+                <!-- CRITICAL FOR 2FA WIZARD -->
+                {{ wizard.management_form }}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                <!-- Render standard form fields (Username, Password, etc.) -->
+                {% for field in form %}
+                    {% if field.name != 'captcha_answer' %}
+                        {% for hidden in field.hidden_fields %}{{ hidden }}{% endfor %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <input type="{{ field.field.widget.input_type|default:'text' }}" 
+                                   name="{{ field.html_name }}" 
+                                   id="{{ field.id_for_label }}" 
+                                   class="form-control" 
+                                   {% if field.value %}value="{{ field.value }}"{% endif %}
+                                   placeholder="Enter {{ field.label|lower }}"
+                                   required>
+                            {% if field.errors %}
+                                <div style="color: red; font-size: 0.85rem; margin-top: 5px;">{{ field.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- MATH CAPTCHA -->
+                <div class="captcha-box">
+                    <span class="captcha-question" id="mathQuestion"></span>
+                    <span>=</span>
+                    <input type="number" id="captchaInput" class="form-control" placeholder="?" required>
+                </div>
+                <input type="hidden" name="captcha_answer" id="hiddenCaptchaAnswer">
+                <div id="captchaError" style="color: red; font-size: 0.85rem; display: none; margin-bottom: 15px;">Incorrect answer. Please try again.</div>
+
+                <!-- HOLD TO SUBMIT BUTTON -->
+                <button type="button" class="btn-hold" id="holdBtn">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <span id="btnText">Press & Hold to Login</span>
+                </button>
+                <!-- Actual Submit Button (Hidden) -->
+                <button type="submit" id="realSubmitBtn" style="display: none;"></button>
+
+                <a href="/" class="btn-back"><i class="bi bi-house-door me-1"></i> Back to Home</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 1. GENERATE MATH CAPTCHA ---
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const correctAnswer = num1 + num2;
+            
+            document.getElementById('mathQuestion').innerText = `What is ${num1} + ${num2}?`;
+            document.getElementById('hiddenCaptchaAnswer').value = correctAnswer;
+
+            // --- 2. HOLD TO SUBMIT LOGIC ---
+            const holdBtn = document.getElementById('holdBtn');
+            const progressFill = document.getElementById('progressFill');
+            const btnText = document.getElementById('btnText');
+            const realSubmitBtn = document.getElementById('realSubmitBtn');
+            const loginForm = document.getElementById('loginForm');
+            
+            let holdTimer;
+            let holdDuration = 0;
+            const REQUIRED_HOLD_TIME = 2000; // 2000ms = 2 seconds
+            let isHolding = false;
+
+            const startHold = (e) => {
+                e.preventDefault(); 
+                if(isHolding) return;
+                isHolding = true;
+                holdBtn.disabled = true;
+                btnText.innerText = "Keep Holding...";
+                holdDuration = 0;
+                
+                holdTimer = setInterval(() => {
+                    holdDuration += 50;
+                    let percent = (holdDuration / REQUIRED_HOLD_TIME) * 100;
+                    if (percent > 100) percent = 100;
+                    progressFill.style.width = percent + '%';
+
+                    if (holdDuration >= REQUIRED_HOLD_TIME) {
+                        clearInterval(holdTimer);
+                        if (validateForm()) {
+                            btnText.innerText = "Verifying...";
+                            progressFill.style.background = "rgba(74, 222, 128, 0.8)";
+                            realSubmitBtn.click(); // Trigger submit
+                        } else {
+                            resetButton();
+                        }
+                    }
+                }, 50);
+            };
+
+            const cancelHold = () => {
+                if(!isHolding) return;
+                clearInterval(holdTimer);
+                resetButton();
+            };
+
+            const resetButton = () => {
+                isHolding = false;
+                holdBtn.disabled = false;
+                btnText.innerText = "Press & Hold to Login";
+                progressFill.style.width = "0%";
+                progressFill.style.background = "rgba(74, 222, 128, 0.4)";
+            };
+
+            const validateForm = () => {
+                const userInput = parseInt(document.getElementById('captchaInput').value);
+                const expectedAnswer = parseInt(document.getElementById('hiddenCaptchaAnswer').value);
+                
+                if (userInput !== expectedAnswer) {
+                    document.getElementById('captchaError').style.display = 'block';
+                    document.getElementById('captchaInput').value = ''; 
+                    return false;
+                }
+                document.getElementById('captchaError').style.display = 'none';
+                return true;
+            };
+
+            // Event Listeners
+            holdBtn.addEventListener('mousedown', startHold);
+            holdBtn.addEventListener('touchstart', startHold, {passive: false}); 
+            holdBtn.addEventListener('mouseup', cancelHold);
+            holdBtn.addEventListener('mouseleave', cancelHold);
+            holdBtn.addEventListener('touchend', cancelHold);
+
+            // Prevent form submission on "Enter" key before holding
+            loginForm.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') e.preventDefault();
+            });
+        });
+    </script>
 </body>
 </html>
